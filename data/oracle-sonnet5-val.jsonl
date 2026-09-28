@@ -1,0 +1,300 @@
+{"cls": "android.app.Notification", "sig": "java.lang.String toString()", "labels": [true], "cost": 0.000478}
+{"cls": "android.content.Intent", "sig": "android.content.ClipData getClipData()", "labels": [true], "cost": 0.000486}
+{"cls": "android.content.Intent", "sig": "android.content.Intent addFlags(int)", "labels": [true, true, true], "cost": 0.002352}
+{"cls": "android.content.Intent", "sig": "android.content.Intent getSelector()", "labels": [true], "cost": 0.000484}
+{"cls": "android.content.Intent", "sig": "android.content.Intent putExtra(java.lang.String,android.os.Parcelable)", "labels": [false, true, false, true, true, true, false], "cost": 0.001344}
+{"cls": "android.content.Intent", "sig": "android.content.Intent putExtra(java.lang.String,java.lang.String)", "labels": [false, true, true, true, true], "cost": 0.00101}
+{"cls": "android.content.Intent", "sig": "android.content.Intent putExtra(java.lang.String,long)", "labels": [false, true, false, true, true], "cost": 0.00092}
+{"cls": "android.content.Intent", "sig": "android.content.Intent setClassName(android.content.Context,java.lang.String)", "labels": [false, false, true, true, false, true, false], "cost": 0.001314}
+{"cls": "android.content.Intent", "sig": "android.os.Parcelable[] getParcelableArrayExtra(java.lang.String)", "labels": [false, false, true], "cost": 0.001774}
+{"cls": "android.content.Intent", "sig": "java.lang.String getAction()", "labels": [true], "cost": 0.00048}
+{"cls": "android.content.Intent", "sig": "java.lang.String getType()", "labels": [true], "cost": 0.000478}
+{"cls": "android.content.Intent", "sig": "java.lang.String resolveTypeIfNeeded(android.content.ContentResolver)", "labels": [false, false, true, false], "cost": 0.00089}
+{"cls": "android.content.Intent", "sig": "java.lang.String toUri(int)", "labels": [false, false, true], "cost": 0.000658}
+{"cls": "android.content.Intent", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000504}
+{"cls": "android.content.Intent", "sig": "void <init>(java.lang.String,android.net.Uri)", "labels": [true, false, true], "cost": 0.000738}
+{"cls": "android.database.Cursor", "sig": "void copyStringToBuffer(int,android.database.CharArrayBuffer)", "labels": [false, false, false, true], "cost": 0.000924}
+{"cls": "android.graphics.Bitmap", "sig": "android.graphics.Bitmap createBitmap(int,int,android.graphics.Bitmap$Config)", "labels": [false, false, false, false, false], "cost": 0.001124}
+{"cls": "android.graphics.Bitmap", "sig": "android.graphics.Bitmap createScaledBitmap(android.graphics.Bitmap,int,int,boolean)", "labels": [true, false, false, false, false, false, false], "cost": 0.001206}
+{"cls": "android.graphics.Bitmap", "sig": "android.graphics.ColorSpace getColorSpace()", "labels": [true], "cost": 0.000556}
+{"cls": "android.graphics.Bitmap", "sig": "void setHasMipMap(boolean)", "labels": [false], "cost": 0.000508}
+{"cls": "android.graphics.Bitmap", "sig": "void setPixels(int[],int,int,int,int,int,int)", "labels": [true, false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001934}
+{"cls": "android.graphics.Color", "sig": "android.graphics.Color valueOf(float[],android.graphics.ColorSpace)", "labels": [true, false, true, false], "cost": 0.00091}
+{"cls": "android.graphics.Color", "sig": "float alpha(long)", "labels": [true], "cost": 0.000474}
+{"cls": "android.graphics.Color", "sig": "int argb(int,int,int,int)", "labels": [true, true, true, true], "cost": 0.00078}
+{"cls": "android.graphics.Color", "sig": "int parseColor(java.lang.String)", "labels": [true], "cost": 0.000496}
+{"cls": "android.graphics.Color", "sig": "int toArgb(long)", "labels": [true], "cost": 0.000476}
+{"cls": "android.graphics.Rect", "sig": "int height()", "labels": [true], "cost": 0.00047}
+{"cls": "android.graphics.Rect", "sig": "void <init>(android.graphics.Rect)", "labels": [true], "cost": 0.00052}
+{"cls": "android.graphics.Rect", "sig": "void <init>(int,int,int,int)", "labels": [true, true, true, true], "cost": 0.000826}
+{"cls": "android.graphics.Rect", "sig": "void set(android.graphics.Rect)", "labels": [true, false], "cost": 0.000674}
+{"cls": "android.graphics.Rect", "sig": "void union(int,int,int,int)", "labels": [true, true, true, true], "cost": 0.000772}
+{"cls": "android.location.Location", "sig": "float bearingTo(android.location.Location)", "labels": [true, false, true, false], "cost": 0.001522}
+{"cls": "android.location.Location", "sig": "float getBearingAccuracyDegrees()", "labels": [true], "cost": 0.000488}
+{"cls": "android.location.Location", "sig": "float getSpeed()", "labels": [true], "cost": 0.000472}
+{"cls": "android.location.Location", "sig": "void setVerticalAccuracyMeters(float)", "labels": [true], "cost": 0.000502}
+{"cls": "android.net.Uri", "sig": "java.lang.String getFragment()", "labels": [true], "cost": 0.000482}
+{"cls": "android.net.Uri", "sig": "java.lang.String getHost()", "labels": [true], "cost": 0.00048}
+{"cls": "android.net.Uri", "sig": "java.lang.String getPath()", "labels": [true], "cost": 0.00048}
+{"cls": "android.net.Uri", "sig": "java.lang.String getQuery()", "labels": [true], "cost": 0.000482}
+{"cls": "android.net.Uri", "sig": "java.util.List getPathSegments()", "labels": [true], "cost": 0.000484}
+{"cls": "android.net.Uri$Builder", "sig": "android.net.Uri$Builder encodedPath(java.lang.String)", "labels": [true, true, true], "cost": 0.00071}
+{"cls": "android.net.Uri$Builder", "sig": "android.net.Uri$Builder fragment(java.lang.String)", "labels": [true, true, true], "cost": 0.000706}
+{"cls": "android.net.Uri$Builder", "sig": "android.net.Uri$Builder path(java.lang.String)", "labels": [true, true, true], "cost": 0.000702}
+{"cls": "android.os.BaseBundle", "sig": "int getInt(java.lang.String,int)", "labels": [false, false, true, false, true], "cost": 0.000912}
+{"cls": "android.os.BaseBundle", "sig": "void putBoolean(java.lang.String,boolean)", "labels": [true, true], "cost": 0.000618}
+{"cls": "android.os.BaseBundle", "sig": "void putStringArray(java.lang.String,java.lang.String[])", "labels": [false, false, true, false], "cost": 0.000904}
+{"cls": "android.os.Bundle", "sig": "android.os.Bundle getBundle(java.lang.String)", "labels": [false, false, true], "cost": 0.000696}
+{"cls": "android.os.Bundle", "sig": "android.util.SizeF getSizeF(java.lang.String)", "labels": [false, false, true], "cost": 0.000748}
+{"cls": "android.os.Bundle", "sig": "float getFloat(java.lang.String)", "labels": [false, false, true], "cost": 0.000732}
+{"cls": "android.os.Bundle", "sig": "float getFloat(java.lang.String,float)", "labels": [false, false, true, false, true], "cost": 0.00091}
+{"cls": "android.os.Bundle", "sig": "java.lang.CharSequence getCharSequence(java.lang.String)", "labels": [false, false, true], "cost": 0.000754}
+{"cls": "android.os.Bundle", "sig": "java.util.ArrayList getStringArrayList(java.lang.String)", "labels": [false, false, true], "cost": 0.000704}
+{"cls": "android.os.Bundle", "sig": "void putBundle(java.lang.String,android.os.Bundle)", "labels": [true, false, true, false], "cost": 0.000904}
+{"cls": "android.os.Bundle", "sig": "void putCharSequenceArrayList(java.lang.String,java.util.ArrayList)", "labels": [false, false, true, false], "cost": 0.000876}
+{"cls": "android.os.Bundle", "sig": "void putShortArray(java.lang.String,short[])", "labels": [false, false, true, false], "cost": 0.00086}
+{"cls": "android.os.Bundle", "sig": "void putSparseParcelableArray(java.lang.String,android.util.SparseArray)", "labels": [false, false, true, false], "cost": 0.000924}
+{"cls": "android.os.Message", "sig": "android.os.Message obtain(android.os.Handler,int)", "labels": [true, true, false], "cost": 0.000744}
+{"cls": "android.os.Parcel", "sig": "double readDouble()", "labels": [true], "cost": 0.000474}
+{"cls": "android.os.Parcel", "sig": "java.lang.String readString()", "labels": [true], "cost": 0.00048}
+{"cls": "android.os.Parcel", "sig": "java.util.HashMap readHashMap(java.lang.ClassLoader)", "labels": [false, false, true, false], "cost": 0.00089}
+{"cls": "android.os.Parcel", "sig": "void readIntArray(int[])", "labels": [false, true], "cost": 0.00059}
+{"cls": "android.os.Parcel", "sig": "void readTypedArray(java.lang.Object[],android.os.Parcelable$Creator)", "labels": [false, false, false, true, true, false], "cost": 0.00115}
+{"cls": "android.os.Parcel", "sig": "void unmarshall(byte[],int,int)", "labels": [true, false, false, false, false, false], "cost": 0.00103}
+{"cls": "android.os.Parcel", "sig": "void writeBundle(android.os.Bundle)", "labels": [true, false], "cost": 0.000674}
+{"cls": "android.os.Parcel", "sig": "void writeByteArray(byte[])", "labels": [true, false], "cost": 0.000648}
+{"cls": "android.os.Parcel", "sig": "void writeList(java.util.List)", "labels": [true, false], "cost": 0.000652}
+{"cls": "android.os.Parcel", "sig": "void writeTypedList(java.util.List)", "labels": [true, false], "cost": 0.000608}
+{"cls": "android.os.PersistableBundle", "sig": "void putBooleanArray(java.lang.String,boolean[])", "labels": [false, false, true, false], "cost": 0.000886}
+{"cls": "android.os.PersistableBundle", "sig": "void putDoubleArray(java.lang.String,double[])", "labels": [false, false, true, false], "cost": 0.00082}
+{"cls": "android.text.Spannable", "sig": "char charAt(int)", "labels": [false, false, true], "cost": 0.00077}
+{"cls": "android.text.TextUtils", "sig": "java.lang.String[] split(java.lang.String,java.lang.String)", "labels": [true, false], "cost": 0.000612}
+{"cls": "android.util.ArrayMap", "sig": "java.lang.Object get(java.lang.Object)", "labels": [false, false, true, false], "cost": 0.000852}
+{"cls": "android.util.ArrayMap", "sig": "java.lang.Object put(java.lang.Object,java.lang.Object)", "labels": [false, true, false, false, true, false, true, false, false], "cost": 0.003982}
+{"cls": "android.util.ArrayMap", "sig": "void putAll(java.util.Map)", "labels": [true, false], "cost": 0.000662}
+{"cls": "android.util.Base64", "sig": "byte[] decode(java.lang.String,int)", "labels": [true, false], "cost": 0.000582}
+{"cls": "android.util.Base64", "sig": "java.lang.String encodeToString(byte[],int)", "labels": [true, false, false], "cost": 0.000678}
+{"cls": "android.util.SparseArray", "sig": "void put(int,java.lang.Object)", "labels": [true, false, true, false], "cost": 0.000862}
+{"cls": "android.util.SparseBooleanArray", "sig": "void append(int,boolean)", "labels": [true, true], "cost": 0.000596}
+{"cls": "android.util.SparseIntArray", "sig": "int get(int,int)", "labels": [false, false, true, false, true], "cost": 0.00295}
+{"cls": "android.util.SparseLongArray", "sig": "long get(int,long)", "labels": [false, false, true, false, true], "cost": 0.00083}
+{"cls": "android.util.SparseLongArray", "sig": "void put(int,long)", "labels": [true, true], "cost": 0.000584}
+{"cls": "android.view.InflateException", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000506}
+{"cls": "android.widget.CheckBox", "sig": "void setText(java.lang.CharSequence)", "labels": [true, false], "cost": 0.000634}
+{"cls": "android.widget.TextView", "sig": "void setError(java.lang.CharSequence)", "labels": [true, false], "cost": 0.00063}
+{"cls": "android.widget.TextView", "sig": "void setText(char[],int,int)", "labels": [true, false, false, false, false, false], "cost": 0.000964}
+{"cls": "android.widget.TextView", "sig": "void setText(java.lang.CharSequence)", "labels": [true, false], "cost": 0.00068}
+{"cls": "java.io.BufferedWriter", "sig": "void write(int)", "labels": [true], "cost": 0.000488}
+{"cls": "java.io.ByteArrayOutputStream", "sig": "java.lang.String toString(java.lang.String)", "labels": [false, false, true], "cost": 0.000702}
+{"cls": "java.io.ByteArrayOutputStream", "sig": "void write(byte[])", "labels": [true, false], "cost": 0.000652}
+{"cls": "java.io.DataInputStream", "sig": "int readInt()", "labels": [true], "cost": 0.000476}
+{"cls": "java.io.DataInputStream", "sig": "int readUnsignedShort()", "labels": [true], "cost": 0.000486}
+{"cls": "java.io.DataOutputStream", "sig": "void writeChar(int)", "labels": [true], "cost": 0.000494}
+{"cls": "java.io.DataOutputStream", "sig": "void writeLong(long)", "labels": [true], "cost": 0.000494}
+{"cls": "java.io.DataOutputStream", "sig": "void writeUTF(java.lang.String)", "labels": [true], "cost": 0.000516}
+{"cls": "java.io.FileNotFoundException", "sig": "java.lang.String getMessage()", "labels": [true], "cost": 0.000492}
+{"cls": "java.io.FileNotFoundException", "sig": "java.lang.Throwable initCause(java.lang.Throwable)", "labels": [true, true, true, false], "cost": 0.00083}
+{"cls": "java.io.FileOutputStream", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000512}
+{"cls": "java.io.IOException", "sig": "java.lang.Throwable getCause()", "labels": [true], "cost": 0.000486}
+{"cls": "java.io.IOException", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000504}
+{"cls": "java.io.InterruptedIOException", "sig": "java.lang.Throwable initCause(java.lang.Throwable)", "labels": [true, true, true, false], "cost": 0.00088}
+{"cls": "java.io.InvalidClassException", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000512}
+{"cls": "java.io.ObjectInputStream", "sig": "java.lang.String readUTF()", "labels": [true], "cost": 0.000492}
+{"cls": "java.io.ObjectOutputStream", "sig": "void writeObject(java.lang.Object)", "labels": [true, false], "cost": 0.000676}
+{"cls": "java.io.ObjectOutputStream$PutField", "sig": "void put(java.lang.String,boolean)", "labels": [false, true], "cost": 0.000624}
+{"cls": "java.io.OutputStreamWriter", "sig": "void <init>(java.io.OutputStream,java.nio.charset.Charset)", "labels": [true, false, false, false], "cost": 0.00092}
+{"cls": "java.io.PrintStream", "sig": "void print(char)", "labels": [true], "cost": 0.000484}
+{"cls": "java.io.PrintStream", "sig": "void print(char[])", "labels": [true, false], "cost": 0.000584}
+{"cls": "java.io.PrintStream", "sig": "void print(java.lang.Object)", "labels": [false, false], "cost": 0.000612}
+{"cls": "java.io.PrintStream", "sig": "void print(java.lang.String)", "labels": [true], "cost": 0.000504}
+{"cls": "java.io.PrintWriter", "sig": "void <init>(java.io.Writer)", "labels": [true], "cost": 0.000514}
+{"cls": "java.io.StringWriter", "sig": "void write(char[],int,int)", "labels": [true, false, false, false, false, false], "cost": 0.001014}
+{"cls": "java.lang.ArrayIndexOutOfBoundsException", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000532}
+{"cls": "java.lang.Boolean", "sig": "java.lang.Boolean valueOf(boolean)", "labels": [true], "cost": 0.000502}
+{"cls": "java.lang.Boolean", "sig": "java.lang.String toString()", "labels": [true], "cost": 0.000482}
+{"cls": "java.lang.Boolean", "sig": "java.lang.String toString(boolean)", "labels": [true], "cost": 0.000492}
+{"cls": "java.lang.Character", "sig": "int toCodePoint(char,char)", "labels": [true, true], "cost": 0.000564}
+{"cls": "java.lang.Character", "sig": "java.lang.String toString(char)", "labels": [true], "cost": 0.00048}
+{"cls": "java.lang.Error", "sig": "java.lang.Throwable initCause(java.lang.Throwable)", "labels": [true, true, true, false], "cost": 0.00087}
+{"cls": "java.lang.Exception", "sig": "java.lang.Throwable getCause()", "labels": [true], "cost": 0.000488}
+{"cls": "java.lang.Float", "sig": "float floatValue()", "labels": [true], "cost": 0.000472}
+{"cls": "java.lang.IllegalArgumentException", "sig": "java.lang.String getMessage()", "labels": [true], "cost": 0.000496}
+{"cls": "java.lang.InstantiationException", "sig": "java.lang.String getMessage()", "labels": [true], "cost": 0.00049}
+{"cls": "java.lang.Integer", "sig": "int rotateLeft(int,int)", "labels": [true, false], "cost": 0.000926}
+{"cls": "java.lang.Long", "sig": "java.lang.Long valueOf(long)", "labels": [true], "cost": 0.000486}
+{"cls": "java.lang.Long", "sig": "java.lang.String toString(long,int)", "labels": [true, false], "cost": 0.000566}
+{"cls": "java.lang.Math", "sig": "double abs(double)", "labels": [true], "cost": 0.00047}
+{"cls": "java.lang.Math", "sig": "double acos(double)", "labels": [true], "cost": 0.00047}
+{"cls": "java.lang.Math", "sig": "double min(double,double)", "labels": [true, true], "cost": 0.000554}
+{"cls": "java.lang.Math", "sig": "double rint(double)", "labels": [true], "cost": 0.00047}
+{"cls": "java.lang.Math", "sig": "float min(float,float)", "labels": [true, true], "cost": 0.000554}
+{"cls": "java.lang.Math", "sig": "float nextAfter(float,double)", "labels": [true, false], "cost": 0.000562}
+{"cls": "java.lang.Math", "sig": "int abs(int)", "labels": [true], "cost": 0.00047}
+{"cls": "java.lang.Math", "sig": "int round(float)", "labels": [true], "cost": 0.000468}
+{"cls": "java.lang.Math", "sig": "long min(long,long)", "labels": [true, true], "cost": 0.000554}
+{"cls": "java.lang.NullPointerException", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000512}
+{"cls": "java.lang.Short", "sig": "java.lang.Short valueOf(short)", "labels": [true], "cost": 0.000486}
+{"cls": "java.lang.String", "sig": "boolean equals(java.lang.Object)", "labels": [false, false, false, false], "cost": 0.000838}
+{"cls": "java.lang.String", "sig": "byte[] getBytes(java.lang.String)", "labels": [false, false, true], "cost": 0.000684}
+{"cls": "java.lang.String", "sig": "byte[] getBytes(java.nio.charset.Charset)", "labels": [false, false, true, false], "cost": 0.000826}
+{"cls": "java.lang.String", "sig": "java.lang.String format(java.util.Locale,java.lang.String,java.lang.Object[])", "labels": [false, false, true, false, false, true, false], "cost": 0.00139}
+{"cls": "java.lang.String", "sig": "java.lang.String intern()", "labels": [true], "cost": 0.000476}
+{"cls": "java.lang.String", "sig": "java.lang.String replaceAll(java.lang.String,java.lang.String)", "labels": [false, false, true, false, true], "cost": 0.000948}
+{"cls": "java.lang.String", "sig": "java.lang.String valueOf(double)", "labels": [true], "cost": 0.000482}
+{"cls": "java.lang.String", "sig": "java.lang.String valueOf(float)", "labels": [true], "cost": 0.000482}
+{"cls": "java.lang.String", "sig": "void <init>(byte[])", "labels": [true], "cost": 0.000492}
+{"cls": "java.lang.String", "sig": "void <init>(char[])", "labels": [true], "cost": 0.000488}
+{"cls": "java.lang.String", "sig": "void <init>(int[],int,int)", "labels": [true, false, false, false, false], "cost": 0.000918}
+{"cls": "java.lang.StringBuffer", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000512}
+{"cls": "java.lang.StringBuffer", "sig": "void setCharAt(int,char)", "labels": [false, true], "cost": 0.000642}
+{"cls": "java.lang.StringBuilder", "sig": "java.lang.StringBuilder append(char)", "labels": [true, true, true], "cost": 0.000722}
+{"cls": "java.lang.StringBuilder", "sig": "java.lang.StringBuilder append(char[])", "labels": [true, true, true, false], "cost": 0.000826}
+{"cls": "java.lang.StringBuilder", "sig": "java.lang.StringBuilder append(java.lang.CharSequence,int,int)", "labels": [true, true, false, false, false, false, false, false, true, false], "cost": 0.001672}
+{"cls": "java.lang.Thread", "sig": "int getPriority()", "labels": [true], "cost": 0.000474}
+{"cls": "java.lang.Thread", "sig": "java.lang.String getName()", "labels": [true], "cost": 0.00048}
+{"cls": "java.lang.Thread", "sig": "void setPriority(int)", "labels": [true], "cost": 0.000488}
+{"cls": "java.lang.Throwable", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000508}
+{"cls": "java.lang.UnsupportedOperationException", "sig": "void <init>(java.lang.String,java.lang.Throwable)", "labels": [true, false, true], "cost": 0.000766}
+{"cls": "java.lang.ref.SoftReference", "sig": "void <init>(java.lang.Object)", "labels": [true], "cost": 0.00052}
+{"cls": "java.lang.reflect.Field", "sig": "void set(java.lang.Object,java.lang.Object)", "labels": [false, false, false, true, false, false], "cost": 0.001122}
+{"cls": "java.lang.reflect.Field", "sig": "void setBoolean(java.lang.Object,boolean)", "labels": [false, false, true, false], "cost": 0.000886}
+{"cls": "java.lang.reflect.InvocationTargetException", "sig": "java.lang.Throwable getCause()", "labels": [true], "cost": 0.000506}
+{"cls": "java.lang.reflect.UndeclaredThrowableException", "sig": "java.lang.Throwable getCause()", "labels": [true], "cost": 0.000512}
+{"cls": "java.math.BigDecimal", "sig": "java.math.BigDecimal add(java.math.BigDecimal)", "labels": [true, false, true], "cost": 0.000772}
+{"cls": "java.math.BigDecimal", "sig": "java.math.BigDecimal divide(java.math.BigDecimal,int,java.math.RoundingMode)", "labels": [true, false, false, false, false, false, false, false, true, false], "cost": 0.001482}
+{"cls": "java.math.BigDecimal", "sig": "java.math.BigDecimal divide(java.math.BigDecimal,java.math.RoundingMode)", "labels": [true, false, false, false, false, true, false], "cost": 0.001194}
+{"cls": "java.math.BigDecimal", "sig": "java.math.BigDecimal remainder(java.math.BigDecimal)", "labels": [true, false, true], "cost": 0.000726}
+{"cls": "java.math.BigDecimal", "sig": "java.math.BigDecimal subtract(java.math.BigDecimal)", "labels": [true, false, true], "cost": 0.000726}
+{"cls": "java.math.BigInteger", "sig": "int intValue()", "labels": [true], "cost": 0.000474}
+{"cls": "java.math.BigInteger", "sig": "java.lang.String toString(int)", "labels": [false, false, true], "cost": 0.00066}
+{"cls": "java.math.BigInteger", "sig": "java.math.BigInteger or(java.math.BigInteger)", "labels": [true, false, true], "cost": 0.000762}
+{"cls": "java.math.BigInteger", "sig": "java.math.BigInteger setBit(int)", "labels": [false, false, true], "cost": 0.000718}
+{"cls": "java.math.BigInteger", "sig": "java.math.BigInteger shiftLeft(int)", "labels": [false, false, true], "cost": 0.000724}
+{"cls": "java.math.BigInteger", "sig": "void <init>(java.lang.String,int)", "labels": [true, false], "cost": 0.000604}
+{"cls": "java.net.HttpURLConnection", "sig": "boolean getDoOutput()", "labels": [true], "cost": 0.00049}
+{"cls": "java.net.HttpURLConnection", "sig": "java.io.InputStream getInputStream()", "labels": [true], "cost": 0.000498}
+{"cls": "java.net.HttpURLConnection", "sig": "void setConnectTimeout(int)", "labels": [true], "cost": 0.000504}
+{"cls": "java.net.Inet6Address", "sig": "java.lang.String getHostAddress()", "labels": [true], "cost": 0.000492}
+{"cls": "java.net.InetAddress", "sig": "java.net.InetAddress[] getAllByName(java.lang.String)", "labels": [true], "cost": 0.00052}
+{"cls": "java.net.InetSocketAddress", "sig": "int getPort()", "labels": [true], "cost": 0.00048}
+{"cls": "java.net.InetSocketAddress", "sig": "void <init>(java.lang.String,int)", "labels": [true, true], "cost": 0.00098}
+{"cls": "java.net.URI", "sig": "java.lang.String getPath()", "labels": [true], "cost": 0.000478}
+{"cls": "java.net.URI", "sig": "java.lang.String getRawPath()", "labels": [true], "cost": 0.000482}
+{"cls": "java.net.URISyntaxException", "sig": "java.lang.String getMessage()", "labels": [true], "cost": 0.00049}
+{"cls": "java.net.URL", "sig": "int getPort()", "labels": [true], "cost": 0.000468}
+{"cls": "java.net.URL", "sig": "java.lang.String getFile()", "labels": [true], "cost": 0.000478}
+{"cls": "java.net.URL", "sig": "java.lang.String toExternalForm()", "labels": [true], "cost": 0.000484}
+{"cls": "java.net.URL", "sig": "java.lang.String toString()", "labels": [true], "cost": 0.000476}
+{"cls": "java.net.URLConnection", "sig": "java.util.Map getHeaderFields()", "labels": [true], "cost": 0.000492}
+{"cls": "java.net.URLConnection", "sig": "void setAllowUserInteraction(boolean)", "labels": [true], "cost": 0.00051}
+{"cls": "java.net.URLConnection", "sig": "void setConnectTimeout(int)", "labels": [true], "cost": 0.000498}
+{"cls": "java.net.UnknownHostException", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000512}
+{"cls": "java.nio.ByteBuffer", "sig": "double getDouble(int)", "labels": [false, false, true], "cost": 0.00066}
+{"cls": "java.nio.ByteBuffer", "sig": "java.nio.ByteBuffer put(byte)", "labels": [true, true, true], "cost": 0.000682}
+{"cls": "java.nio.ByteBuffer", "sig": "java.nio.ByteBuffer putInt(int,int)", "labels": [false, false, true, true, true], "cost": 0.000908}
+{"cls": "java.nio.ByteBuffer", "sig": "long getLong()", "labels": [true], "cost": 0.00048}
+{"cls": "java.nio.ByteBuffer", "sig": "short getShort()", "labels": [true], "cost": 0.00048}
+{"cls": "java.nio.CharBuffer", "sig": "java.nio.CharBuffer wrap(char[])", "labels": [true], "cost": 0.000506}
+{"cls": "java.nio.CharBuffer", "sig": "java.nio.CharBuffer wrap(java.lang.CharSequence)", "labels": [true], "cost": 0.000536}
+{"cls": "java.nio.file.Path", "sig": "java.nio.file.Path getFileName()", "labels": [true], "cost": 0.000492}
+{"cls": "java.nio.file.Path", "sig": "java.nio.file.Path toRealPath(java.nio.file.LinkOption[])", "labels": [false, false, true, false], "cost": 0.000914}
+{"cls": "java.security.Provider", "sig": "java.lang.Object remove(java.lang.Object)", "labels": [true, true, true, false], "cost": 0.000848}
+{"cls": "java.security.ProviderException", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000508}
+{"cls": "java.security.UnrecoverableKeyException", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.00052}
+{"cls": "java.security.cert.CertificateException", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000514}
+{"cls": "java.security.spec.InvalidKeySpecException", "sig": "void <init>(java.lang.String,java.lang.Throwable)", "labels": [true, false, true], "cost": 0.00077}
+{"cls": "java.time.ZoneOffset", "sig": "java.lang.String toString()", "labels": [true], "cost": 0.000486}
+{"cls": "java.util.AbstractList", "sig": "java.lang.Object remove(int)", "labels": [false, true, true], "cost": 0.000662}
+{"cls": "java.util.AbstractMap", "sig": "java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)", "labels": [false, false, false, true, false, false, true, false, false], "cost": 0.001512}
+{"cls": "java.util.AbstractMap", "sig": "java.lang.Object put(java.lang.Object,java.lang.Object)", "labels": [false, true, false, false, true, false, false, false, false], "cost": 0.002812}
+{"cls": "java.util.AbstractMap", "sig": "java.util.Collection values()", "labels": [true], "cost": 0.000484}
+{"cls": "java.util.AbstractMap", "sig": "void putAll(java.util.Map)", "labels": [true, false], "cost": 0.000612}
+{"cls": "java.util.ArrayDeque", "sig": "boolean addAll(java.util.Collection)", "labels": [false, true, false, false], "cost": 0.0008}
+{"cls": "java.util.ArrayDeque", "sig": "boolean offer(java.lang.Object)", "labels": [false, true, false, false], "cost": 0.000798}
+{"cls": "java.util.ArrayList", "sig": "boolean add(java.lang.Object)", "labels": [false, true, false, false], "cost": 0.000842}
+{"cls": "java.util.ArrayList", "sig": "void <init>(java.util.Collection)", "labels": [true], "cost": 0.000512}
+{"cls": "java.util.Arrays", "sig": "boolean[] copyOfRange(boolean[],int,int)", "labels": [true, false, false, false, false], "cost": 0.00087}
+{"cls": "java.util.Arrays", "sig": "byte[] copyOfRange(byte[],int,int)", "labels": [true, false, false, false, false], "cost": 0.00086}
+{"cls": "java.util.Arrays", "sig": "int[] copyOf(int[],int)", "labels": [true, false, false], "cost": 0.000666}
+{"cls": "java.util.Arrays", "sig": "java.lang.Object[] copyOf(java.lang.Object[],int,java.lang.Class)", "labels": [true, false, false, false, false], "cost": 0.000992}
+{"cls": "java.util.Arrays", "sig": "java.lang.String toString(boolean[])", "labels": [true], "cost": 0.000496}
+{"cls": "java.util.Arrays", "sig": "java.lang.String toString(long[])", "labels": [true], "cost": 0.000488}
+{"cls": "java.util.Arrays", "sig": "void fill(float[],int,int,float)", "labels": [false, false, true], "cost": 0.000686}
+{"cls": "java.util.Arrays", "sig": "void fill(java.lang.Object[],int,int,java.lang.Object)", "labels": [false, false, false, false, false, true], "cost": 0.001086}
+{"cls": "java.util.Collections", "sig": "java.lang.Object min(java.util.Collection)", "labels": [true], "cost": 0.000504}
+{"cls": "java.util.Collections", "sig": "java.util.Enumeration enumeration(java.util.Collection)", "labels": [true], "cost": 0.000514}
+{"cls": "java.util.Collections", "sig": "java.util.List singletonList(java.lang.Object)", "labels": [true], "cost": 0.000506}
+{"cls": "java.util.Collections", "sig": "java.util.Map singletonMap(java.lang.Object,java.lang.Object)", "labels": [true, false, true, false], "cost": 0.000902}
+{"cls": "java.util.Deque", "sig": "boolean add(java.lang.Object)", "labels": [false, true, false, false], "cost": 0.000838}
+{"cls": "java.util.Deque", "sig": "java.lang.Object peekFirst()", "labels": [true], "cost": 0.000486}
+{"cls": "java.util.Hashtable", "sig": "java.util.Set entrySet()", "labels": [true], "cost": 0.000486}
+{"cls": "java.util.Iterator", "sig": "java.lang.Object next()", "labels": [true], "cost": 0.00048}
+{"cls": "java.util.LinkedHashMap", "sig": "java.lang.Object get(java.lang.Object)", "labels": [false, false, true, false], "cost": 0.000806}
+{"cls": "java.util.LinkedHashSet", "sig": "boolean add(java.lang.Object)", "labels": [false, true, false, false], "cost": 0.000798}
+{"cls": "java.util.LinkedList", "sig": "java.lang.Object poll()", "labels": [true], "cost": 0.000484}
+{"cls": "java.util.Map", "sig": "java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)", "labels": [false, false, false, true, false, false, true, false, false], "cost": 0.001594}
+{"cls": "java.util.Map", "sig": "java.lang.Object remove(java.lang.Object)", "labels": [false, false, true, false], "cost": 0.003946}
+{"cls": "java.util.Map", "sig": "java.util.Set entrySet()", "labels": [true], "cost": 0.00048}
+{"cls": "java.util.NavigableMap", "sig": "java.lang.Object put(java.lang.Object,java.lang.Object)", "labels": [false, true, false, false, true, false, false, false, false], "cost": 0.001352}
+{"cls": "java.util.OptionalDouble", "sig": "java.util.OptionalDouble of(double)", "labels": [true], "cost": 0.000496}
+{"cls": "java.util.OptionalLong", "sig": "java.util.OptionalLong of(long)", "labels": [true], "cost": 0.000492}
+{"cls": "java.util.PriorityQueue", "sig": "java.lang.Object peek()", "labels": [true], "cost": 0.000488}
+{"cls": "java.util.Properties", "sig": "java.lang.Object get(java.lang.Object)", "labels": [false, false, true, false], "cost": 0.000796}
+{"cls": "java.util.Properties", "sig": "java.lang.String getProperty(java.lang.String)", "labels": [false, false, true], "cost": 0.00069}
+{"cls": "java.util.Queue", "sig": "boolean add(java.lang.Object)", "labels": [false, true, false, false], "cost": 0.000788}
+{"cls": "java.util.Queue", "sig": "boolean offer(java.lang.Object)", "labels": [false, true, false, false], "cost": 0.00079}
+{"cls": "java.util.Queue", "sig": "java.util.Iterator iterator()", "labels": [true], "cost": 0.000484}
+{"cls": "java.util.ServiceConfigurationError", "sig": "void <init>(java.lang.String,java.lang.Throwable)", "labels": [true, false, true], "cost": 0.000764}
+{"cls": "java.util.Set", "sig": "java.lang.Object[] toArray()", "labels": [true], "cost": 0.000484}
+{"cls": "java.util.SortedMap", "sig": "java.util.Set entrySet()", "labels": [true], "cost": 0.000486}
+{"cls": "java.util.SortedMap", "sig": "void putAll(java.util.Map)", "labels": [true, false], "cost": 0.00066}
+{"cls": "java.util.Spliterator$OfInt", "sig": "java.util.Spliterator trySplit()", "labels": [true], "cost": 0.000502}
+{"cls": "java.util.StringTokenizer", "sig": "void <init>(java.lang.String,java.lang.String)", "labels": [true, false], "cost": 0.001138}
+{"cls": "java.util.TreeMap", "sig": "java.util.Set keySet()", "labels": [true], "cost": 0.000484}
+{"cls": "java.util.TreeMap", "sig": "void putAll(java.util.Map)", "labels": [true, false], "cost": 0.00061}
+{"cls": "java.util.Vector", "sig": "boolean add(java.lang.Object)", "labels": [false, true, false, false], "cost": 0.000838}
+{"cls": "java.util.Vector", "sig": "java.lang.Object lastElement()", "labels": [true], "cost": 0.000534}
+{"cls": "java.util.Vector", "sig": "java.lang.Object remove(int)", "labels": [false, false, true], "cost": 0.001528}
+{"cls": "java.util.Vector", "sig": "java.lang.Object[] toArray(java.lang.Object[])", "labels": [true, false, true, true], "cost": 0.000866}
+{"cls": "java.util.Vector", "sig": "void insertElementAt(java.lang.Object,int)", "labels": [true, false, false, false], "cost": 0.000868}
+{"cls": "java.util.WeakHashMap", "sig": "java.lang.Object remove(java.lang.Object)", "labels": [false, false, true, false], "cost": 0.003556}
+{"cls": "java.util.concurrent.BlockingQueue", "sig": "boolean add(java.lang.Object)", "labels": [false, true, false, false], "cost": 0.000856}
+{"cls": "java.util.concurrent.BlockingQueue", "sig": "java.lang.Object peek()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.concurrent.CancellationException", "sig": "java.lang.Throwable initCause(java.lang.Throwable)", "labels": [true, true, true, false], "cost": 0.000884}
+{"cls": "java.util.concurrent.ConcurrentHashMap", "sig": "java.lang.Object remove(java.lang.Object)", "labels": [false, false, true, false], "cost": 0.000872}
+{"cls": "java.util.concurrent.ConcurrentHashMap", "sig": "void putAll(java.util.Map)", "labels": [true, false], "cost": 0.00063}
+{"cls": "java.util.concurrent.ConcurrentLinkedQueue", "sig": "boolean add(java.lang.Object)", "labels": [false, true, false, false], "cost": 0.000868}
+{"cls": "java.util.concurrent.ConcurrentLinkedQueue", "sig": "boolean offer(java.lang.Object)", "labels": [false, true, false, false], "cost": 0.00087}
+{"cls": "java.util.concurrent.CopyOnWriteArrayList", "sig": "boolean removeAll(java.util.Collection)", "labels": [false, false, true, false], "cost": 0.000872}
+{"cls": "java.util.concurrent.CopyOnWriteArrayList", "sig": "java.lang.Object remove(int)", "labels": [false, false, true], "cost": 0.000736}
+{"cls": "java.util.concurrent.CountDownLatch", "sig": "void <init>(int)", "labels": [true], "cost": 0.000502}
+{"cls": "java.util.concurrent.atomic.AtomicBoolean", "sig": "void <init>(boolean)", "labels": [true], "cost": 0.00052}
+{"cls": "java.util.concurrent.atomic.AtomicInteger", "sig": "int decrementAndGet()", "labels": [true], "cost": 0.000504}
+{"cls": "java.util.concurrent.atomic.AtomicInteger", "sig": "int intValue()", "labels": [true], "cost": 0.000496}
+{"cls": "java.util.concurrent.atomic.AtomicLong", "sig": "long getAndSet(long)", "labels": [true, true, true], "cost": 0.000676}
+{"cls": "java.util.concurrent.atomic.AtomicLong", "sig": "long incrementAndGet()", "labels": [true], "cost": 0.000502}
+{"cls": "java.util.concurrent.atomic.AtomicLong", "sig": "void set(long)", "labels": [true], "cost": 0.000554}
+{"cls": "java.util.regex.Matcher", "sig": "java.util.regex.Pattern pattern()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.regex.Pattern", "sig": "java.lang.String quote(java.lang.String)", "labels": [true], "cost": 0.000508}
+{"cls": "java.util.regex.PatternSyntaxException", "sig": "java.lang.String getMessage()", "labels": [true], "cost": 0.0005}
+{"cls": "java.util.stream.Stream", "sig": "java.util.stream.Stream distinct()", "labels": [true], "cost": 0.000494}
+{"cls": "java.util.stream.Stream", "sig": "java.util.stream.Stream limit(long)", "labels": [false, false, true], "cost": 0.00072}
+{"cls": "java.util.zip.DeflaterOutputStream", "sig": "void write(byte[])", "labels": [true, false], "cost": 0.000606}
+{"cls": "java.util.zip.GZIPInputStream", "sig": "void <init>(java.io.InputStream)", "labels": [true], "cost": 0.000528}
+{"cls": "java.util.zip.InflaterInputStream", "sig": "int read()", "labels": [true], "cost": 0.000482}
+{"cls": "java.util.zip.ZipInputStream", "sig": "void <init>(java.io.InputStream)", "labels": [true], "cost": 0.000526}
+{"cls": "javax.crypto.Cipher", "sig": "byte[] doFinal(byte[])", "labels": [true, false, false, false], "cost": 0.000826}
+{"cls": "javax.crypto.CipherInputStream", "sig": "int read()", "labels": [true], "cost": 0.00048}
+{"cls": "javax.net.ssl.SSLPeerUnverifiedException", "sig": "java.lang.Throwable initCause(java.lang.Throwable)", "labels": [true, true, true, false], "cost": 0.00085}
+{"cls": "javax.xml.parsers.ParserConfigurationException", "sig": "java.lang.String getMessage()", "labels": [true], "cost": 0.000506}
+{"cls": "org.apache.http.conn.ConnectTimeoutException", "sig": "java.lang.String getMessage()", "labels": [true], "cost": 0.000508}
+{"cls": "org.json.JSONArray", "sig": "double getDouble(int)", "labels": [false, false, true], "cost": 0.000654}
+{"cls": "org.json.JSONArray", "sig": "int getInt(int)", "labels": [false, false, true], "cost": 0.000702}
+{"cls": "org.json.JSONArray", "sig": "java.lang.Object get(int)", "labels": [false, false, true], "cost": 0.00071}
+{"cls": "org.json.JSONArray", "sig": "org.json.JSONArray put(int,java.lang.Object)", "labels": [false, false, false, true, true, true, false], "cost": 0.001286}
+{"cls": "org.json.JSONArray", "sig": "org.json.JSONArray put(java.lang.Object)", "labels": [true, true, true, false], "cost": 0.000854}
+{"cls": "org.json.JSONArray", "sig": "org.json.JSONObject getJSONObject(int)", "labels": [false, false, true], "cost": 0.000724}
+{"cls": "org.json.JSONArray", "sig": "org.json.JSONObject optJSONObject(int)", "labels": [false, false, true], "cost": 0.001334}
+{"cls": "org.json.JSONObject", "sig": "java.lang.String toString(int)", "labels": [false, false, true], "cost": 0.00125}
+{"cls": "org.json.JSONObject", "sig": "org.json.JSONObject put(java.lang.String,int)", "labels": [true, true, true, true, true], "cost": 0.001032}
+{"cls": "org.json.JSONObject", "sig": "org.json.JSONObject put(java.lang.String,java.lang.Object)", "labels": [true, true, false, true, true, true, false], "cost": 0.001326}

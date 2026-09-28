@@ -1,0 +1,41 @@
+# Large or regenerable: extracted facts, benchmarks, tool binaries, environments
+facts/
+facts_apk/
+facts_apk_all/
+facts_apk_all_v1/
+bench/*
+!bench/apks/
+bench/apks/*
+!bench/apks/pick*.txt
+tools/*
+!tools/bin/
+!tools/souffle.sh
+!tools/witness/
+tools/witness/*
+!tools/witness/Probe.java
+.venv/
+__pycache__/
+*.pyc
+
+# data/: allowlist. Only inputs that are small, hand-made, or cost money to recompute.
+data/*
+!data/stubdroid/
+data/stubdroid/urls*.txt
+!data/SourcesAndSinks.txt
+!data/android_classes.txt
+!data/android_supers.tsv
+!data/android_failed.txt
+!data/libflow.jsonl
+!data/holes.jsonl
+!data/holes_android_fw.jsonl
+!data/jev_*.jsonl
+!data/llm-*.jsonl
+!data/oracle-sonnet5-*.jsonl
+!data/oracle_*keys*.tsv
+!data/oracle_static.jsonl
+!data/witness_results.jsonl
+!data/leak_candidates.jsonl
+!data/leak_paths.jsonl
+
+# backups
+*.bak

@@ -1,0 +1,12 @@
+#!/bin/sh
+# javac shim: the JDK here has the jdk.compiler module but no javac binary.
+# Translates -J<jvmopt> flags (and @argfile contents) into launcher options.
+JOPTS=""; ARGS=""
+for a in "$@"; do
+  case "$a" in
+    -J*) JOPTS="$JOPTS ${a#-J}" ;;
+    @*) f="${a#@}"; grep -v '^-J' "$f" > "$f.nj"; for j in $(grep -o '^-J[^ ]*' "$f"); do JOPTS="$JOPTS ${j#-J}"; done; ARGS="$ARGS @$f.nj" ;;
+    *) ARGS="$ARGS $a" ;;
+  esac
+done
+exec java $JOPTS -m jdk.compiler/com.sun.tools.javac.Main $ARGS

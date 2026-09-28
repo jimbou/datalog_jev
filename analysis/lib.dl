@@ -1,0 +1,94 @@
+// Oracle 1: does data from an endpoint of a library method reach another endpoint?
+// Runs over facts from extract/LibFacts.java, per (root method r, source endpoint s).
+//   - values flow through moves, calls into resolved bodies (context-insensitive) and returns
+//   - heap reads are merged by field name: a load of field f sees every tainted store to f;
+//     reading any field of a tainted object taints the result
+//   - a tainted store reaches endpoint e (this, argN, or the returned object) when its base may
+//     point into e's object graph (Obj / ObjRet below)
+//   - control dependence, per method: a method that branches on a tainted value has a tainted
+//     return value and tainted stores (its other locals are not tainted by the branch)
+//   - a tainted value passed to a frontier call (no body, native, overridable, too deep) makes
+//     the answer unknown, and that call's result is treated as tainted
+
+.type Var = symbol
+.decl Move(to:Var, from:Var)
+.decl Load(to:Var, b:Var, f:symbol)
+.decl Store(b:Var, f:symbol, from:Var)
+.decl StoreC(b:Var, f:symbol)
+.decl SLoad(to:Var, f:symbol)
+.decl SStore(f:symbol, from:Var)
+.decl Call(site:symbol, m:symbol, kind:symbol, cls:symbol, sub:symbol, base:symbol, ret:symbol)
+.decl Arg(site:symbol, i:number, a:symbol)
+.decl FormalParam(m:symbol, i:number, v:Var)
+.decl ThisVar(m:symbol, v:Var)
+.decl RetVar(m:symbol, v:Var)
+.decl Root(m:symbol)
+.decl Resolved(site:symbol, callee:symbol)
+.decl Frontier(site:symbol)
+.decl Local(m:symbol, v:Var)
+.decl IfUse(m:symbol, v:Var)
+.input Move, Load, Store, StoreC, SLoad, SStore, Call, Arg, FormalParam, ThisVar, RetVar, Root, Resolved, Frontier, Local, IfUse
+
+.decl Assign(to:Var, from:Var)
+Assign(to, from) :- Move(to, from).
+Assign(f, a) :- Resolved(site, m), Arg(site, i, a), FormalParam(m, i, f).
+Assign(t, b) :- Resolved(site, m), Call(site, _, _, _, _, b, _), b != "-", ThisVar(m, t).
+Assign(r, rv) :- Resolved(site, m), Call(site, _, _, _, _, _, r), r != "-", RetVar(m, rv).
+
+// ---- endpoints of each root ----
+.decl Endpoint(r:symbol, e:symbol, v:Var)
+Endpoint(r, cat("arg", to_string(i)), v) :- Root(r), FormalParam(r, i, v).
+Endpoint(r, "this", v) :- Root(r), ThisVar(r, v).
+
+// variables that may point into endpoint e's object graph
+.decl Obj(r:symbol, e:symbol, v:Var)
+Obj(r, e, v) :- Endpoint(r, e, v).
+Obj(r, e, to) :- Obj(r, e, from), Assign(to, from).
+Obj(r, e, y) :- Obj(r, e, b), Load(y, b, _).
+Obj(r, e, x) :- Obj(r, e, b), Store(b, _, x).   // an object stored into e becomes part of it
+// variables that may alias the object the root returns (backwards from the return value, then
+// forwards, e.g. into the constructor of a freshly created result)
+.decl ObjRet(r:symbol, v:Var)
+ObjRet(r, v) :- Root(r), RetVar(r, v).
+ObjRet(r, from) :- ObjRet(r, to), Assign(to, from).
+ObjRet(r, to) :- ObjRet(r, from), Assign(to, from).
+ObjRet(r, x) :- ObjRet(r, b), Store(b, _, x).
+ObjRet(r, y) :- ObjRet(r, b), Load(y, b, _).   // e.g. a builder's parameter holder
+
+// ---- taint from source endpoint s ----
+.decl T(r:symbol, s:symbol, v:Var)
+.decl TF(r:symbol, s:symbol, f:symbol)
+.decl TS(r:symbol, s:symbol, f:symbol)
+.decl TFrontier(r:symbol, s:symbol, site:symbol)
+T(r, s, v) :- Endpoint(r, s, v).
+T(r, s, to) :- T(r, s, from), Assign(to, from).
+T(r, s, y) :- T(r, s, b), Load(y, b, _).
+TF(r, s, f) :- T(r, s, x), Store(_, f, x).
+T(r, s, y) :- TF(r, s, f), Load(y, _, f).
+TS(r, s, f) :- T(r, s, x), SStore(f, x).
+T(r, s, y) :- TS(r, s, f), SLoad(y, f).
+TFrontier(r, s, site) :- T(r, s, x), Frontier(site), Arg(site, _, x).
+TFrontier(r, s, site) :- T(r, s, x), Frontier(site), Call(site, _, _, _, _, x, _).
+T(r, s, ret) :- TFrontier(r, s, site), Call(site, _, _, _, _, _, ret), ret != "-".
+
+// a method m that branches on a tainted value: its return value and its stores are tainted
+.decl Implicit(r:symbol, s:symbol, m:symbol)
+Implicit(r, s, m) :- T(r, s, x), IfUse(m, x).
+T(r, s, rv) :- Implicit(r, s, m), RetVar(m, rv).
+// calls made by such a method receive values chosen by the branch (often constants)
+T(r, s, f) :- Implicit(r, s, m), Call(site, m, _, _, _, _, _), Resolved(site, c), FormalParam(c, _, f).
+
+// ---- answers ----
+.decl TaintedStoreBase(r:symbol, s:symbol, b:Var)
+TaintedStoreBase(r, s, b) :- T(r, s, x), Store(b, _, x).
+TaintedStoreBase(r, s, b) :- Implicit(r, s, m), Store(b, _, _), Local(m, b).
+TaintedStoreBase(r, s, b) :- Implicit(r, s, m), StoreC(b, _), Local(m, b).
+
+.decl Flow(r:symbol, s:symbol, t:symbol)
+Flow(r, s, "ret") :- Root(r), RetVar(r, v), T(r, s, v).
+Flow(r, s, "ret") :- TaintedStoreBase(r, s, b), ObjRet(r, b).
+Flow(r, s, e) :- TaintedStoreBase(r, s, b), Obj(r, e, b), e != s.
+Flow(r, s, e) :- TS(r, s, _), Endpoint(r, e, _), e != s.   // statics: conservatively any target
+.decl Unknown(r:symbol, s:symbol)
+Unknown(r, s) :- TFrontier(r, s, _).
+.output Flow, Unknown

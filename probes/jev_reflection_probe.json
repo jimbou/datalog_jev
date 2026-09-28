@@ -1,0 +1,7 @@
+{"model":"~typesafe/jev-latest",
+ "state":"Java code:\nString cls = config.get(\"handler\");\nObject h = Class.forName(cls).newInstance();\nRunnable r = (Runnable) h;\nr.run();\n\nconfig.properties contains: handler=com.app.LogHandler\nClasses implementing Runnable in the app: com.app.LogHandler, com.app.UploadTask, com.app.CacheFlusher",
+ "questions":{
+  "t_log":{"type":"noul","instructions":"Class.forName(cls) at this site can resolve to com.app.LogHandler at runtime"},
+  "t_upload":{"type":"noul","instructions":"Class.forName(cls) at this site can resolve to com.app.UploadTask at runtime"},
+  "target":{"type":"choice","instructions":"Which class does Class.forName(cls) resolve to at runtime","criteria":{"LogHandler":"com.app.LogHandler","UploadTask":"com.app.UploadTask","CacheFlusher":"com.app.CacheFlusher"}}
+ }}

@@ -1,0 +1,112 @@
+{"cls": "java.io.File", "sig": "boolean exists()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6002e-05, "p": [0.01]}
+{"cls": "java.io.File", "sig": "java.lang.String toString()", "model": "typesafe/jev-1.13-20260917", "cost": 1.617e-05, "p": [0.96]}
+{"cls": "java.io.File", "sig": "void <init>(java.io.File,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.5284e-05, "p": [0.94, 0.9, 0.09]}
+{"cls": "java.io.File", "sig": "void <init>(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.638e-05, "p": [0.95]}
+{"cls": "java.io.File", "sig": "void <init>(java.lang.String,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.0874e-05, "p": [0.93, 0.9]}
+{"cls": "java.io.File", "sig": "void <init>(java.net.URI)", "model": "typesafe/jev-1.13-20260917", "cost": 1.638e-05, "p": [0.96]}
+{"cls": "java.io.FileInputStream", "sig": "int read(byte[])", "model": "typesafe/jev-1.13-20260917", "cost": 2.8854e-05, "p": [0.12, 0.09, 0.56, 0.83]}
+{"cls": "java.io.FileInputStream", "sig": "java.io.FileDescriptor getFD()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6506e-05, "p": [0.58]}
+{"cls": "java.io.FileInputStream", "sig": "void <init>(java.io.File)", "model": "typesafe/jev-1.13-20260917", "cost": 1.659e-05, "p": [0.79]}
+{"cls": "java.io.FileInputStream", "sig": "void <init>(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.659e-05, "p": [0.67]}
+{"cls": "java.io.FileOutputStream", "sig": "void <init>(java.io.File)", "model": "typesafe/jev-1.13-20260917", "cost": 1.659e-05, "p": [0.8]}
+{"cls": "java.io.FileOutputStream", "sig": "void <init>(java.io.File,boolean)", "model": "typesafe/jev-1.13-20260917", "cost": 2.5326e-05, "p": [0.82, 0.33, 0.03]}
+{"cls": "java.io.FileOutputStream", "sig": "void <init>(java.io.FileDescriptor)", "model": "typesafe/jev-1.13-20260917", "cost": 1.6926e-05, "p": [0.9]}
+{"cls": "java.io.FileOutputStream", "sig": "void <init>(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.659e-05, "p": [0.78]}
+{"cls": "java.io.FileOutputStream", "sig": "void <init>(java.lang.String,boolean)", "model": "typesafe/jev-1.13-20260917", "cost": 2.1e-05, "p": [0.79, 0.26]}
+{"cls": "java.io.IOException", "sig": "java.lang.String getMessage()", "model": "typesafe/jev-1.13-20260917", "cost": 1.617e-05, "p": [0.82]}
+{"cls": "java.io.InputStream", "sig": "int read(byte[])", "model": "typesafe/jev-1.13-20260917", "cost": 2.877e-05, "p": [0.08, 0.18, 0.36, 0.93]}
+{"cls": "java.io.PrintStream", "sig": "void println(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.6464e-05, "p": [0.25]}
+{"cls": "java.io.PrintWriter", "sig": "java.io.PrintWriter format(java.lang.String,java.lang.Object[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.242e-05, "p": [0.5, 0.58, 0.03, 0.48, 0.67, 0.17, 0.03]}
+{"cls": "java.io.PrintWriter", "sig": "java.io.PrintWriter format(java.util.Locale,java.lang.String,java.lang.Object[])", "model": "typesafe/jev-1.13-20260917", "cost": 6.867e-05, "p": [0.15, 0.07, 0.01, 0.34, 0.78, 0, 0.02, 0.34, 0.82, 0, 0.13, 0, 0.02]}
+{"cls": "java.io.PrintWriter", "sig": "java.io.PrintWriter printf(java.lang.String,java.lang.Object[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.242e-05, "p": [0.3, 0.49, 0.02, 0.22, 0.62, 0.27, 0.02]}
+{"cls": "java.io.PrintWriter", "sig": "java.io.PrintWriter printf(java.util.Locale,java.lang.String,java.lang.Object[])", "model": "typesafe/jev-1.13-20260917", "cost": 6.867e-05, "p": [0.05, 0.04, 0.01, 0.28, 0.65, 0, 0.02, 0.18, 0.66, 0, 0.42, 0, 0.02]}
+{"cls": "java.io.PrintWriter", "sig": "void print(char[])", "model": "typesafe/jev-1.13-20260917", "cost": 2.0538e-05, "p": [0.54, 0.04]}
+{"cls": "java.io.PrintWriter", "sig": "void print(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.6464e-05, "p": [0.65]}
+{"cls": "java.io.PrintWriter", "sig": "void println(char[])", "model": "typesafe/jev-1.13-20260917", "cost": 2.0538e-05, "p": [0.4, 0.03]}
+{"cls": "java.io.PrintWriter", "sig": "void println(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.6464e-05, "p": [0.65]}
+{"cls": "java.io.PrintWriter", "sig": "void write(char[])", "model": "typesafe/jev-1.13-20260917", "cost": 2.0538e-05, "p": [0.56, 0.04]}
+{"cls": "java.io.PrintWriter", "sig": "void write(char[],int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 3.7632e-05, "p": [0.53, 0.15, 0.01, 0.13, 0.01, 0.04]}
+{"cls": "java.io.PrintWriter", "sig": "void write(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.6464e-05, "p": [0.7]}
+{"cls": "java.io.PrintWriter", "sig": "void write(java.lang.String,int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.5032e-05, "p": [0.61, 0.15, 0.11]}
+{"cls": "java.lang.Class", "sig": "java.lang.ClassLoader getClassLoader()", "model": "typesafe/jev-1.13-20260917", "cost": 1.638e-05, "p": [0.02]}
+{"cls": "java.lang.Exception", "sig": "java.lang.String getMessage()", "model": "typesafe/jev-1.13-20260917", "cost": 1.617e-05, "p": [0.89]}
+{"cls": "java.lang.Object", "sig": "java.lang.Class getClass()", "model": "typesafe/jev-1.13-20260917", "cost": 1.617e-05, "p": [0.01]}
+{"cls": "java.lang.Object", "sig": "java.lang.String toString()", "model": "typesafe/jev-1.13-20260917", "cost": 1.617e-05, "p": [0.73]}
+{"cls": "java.lang.ProcessBuilder", "sig": "java.lang.Process start()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6254e-05, "p": [0.33]}
+{"cls": "java.lang.ProcessBuilder", "sig": "java.lang.ProcessBuilder command(java.lang.String[])", "model": "typesafe/jev-1.13-20260917", "cost": 2.94e-05, "p": [0.69, 0.9, 0.47, 0.23]}
+{"cls": "java.lang.ProcessBuilder", "sig": "java.lang.ProcessBuilder command(java.util.List)", "model": "typesafe/jev-1.13-20260917", "cost": 2.94e-05, "p": [0.68, 0.86, 0.38, 0.2]}
+{"cls": "java.lang.ProcessBuilder", "sig": "void <init>(java.lang.String[])", "model": "typesafe/jev-1.13-20260917", "cost": 1.6548e-05, "p": [0.97]}
+{"cls": "java.lang.ProcessBuilder", "sig": "void <init>(java.util.List)", "model": "typesafe/jev-1.13-20260917", "cost": 1.6548e-05, "p": [0.96]}
+{"cls": "java.lang.Runtime", "sig": "java.lang.Process exec(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.4738e-05, "p": [0.28, 0.04, 0.03]}
+{"cls": "java.lang.Runtime", "sig": "java.lang.Process exec(java.lang.String,java.lang.String[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.2168e-05, "p": [0.16, 0.05, 0.04, 0.22, 0.04, 0.02, 0.02]}
+{"cls": "java.lang.Runtime", "sig": "java.lang.Process exec(java.lang.String,java.lang.String[],java.io.File)", "model": "typesafe/jev-1.13-20260917", "cost": 6.8418e-05, "p": [0.18, 0.04, 0.03, 0.01, 0.22, 0.03, 0.02, 0.12, 0.05, 0.04, 0.03, 0.02, 0.03]}
+{"cls": "java.lang.Runtime", "sig": "java.lang.Process exec(java.lang.String[])", "model": "typesafe/jev-1.13-20260917", "cost": 2.9064e-05, "p": [0.38, 0.04, 0.03, 0.03]}
+{"cls": "java.lang.Runtime", "sig": "java.lang.Process exec(java.lang.String[],java.lang.String[])", "model": "typesafe/jev-1.13-20260917", "cost": 5.0904e-05, "p": [0.24, 0.04, 0.07, 0.28, 0.04, 0.51, 0.03, 0.03, 0.02]}
+{"cls": "java.lang.Runtime", "sig": "java.lang.Process exec(java.lang.String[],java.lang.String[],java.io.File)", "model": "typesafe/jev-1.13-20260917", "cost": 8.1564e-05, "p": [0.23, 0.05, 0.09, 0.02, 0.26, 0.04, 0.59, 0.02, 0.13, 0.03, 0.02, 0.04, 0.02, 0.02, 0.02, 0.02]}
+{"cls": "java.lang.String", "sig": "boolean equals(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 2.898e-05, "p": [0.04, 0, 0.03, 0.01]}
+{"cls": "java.lang.String", "sig": "byte[] getBytes()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6128e-05, "p": [1]}
+{"cls": "java.lang.String", "sig": "char charAt(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.4444e-05, "p": [0.07, 0.01, 0.98]}
+{"cls": "java.lang.String", "sig": "char[] toCharArray()", "model": "typesafe/jev-1.13-20260917", "cost": 1.617e-05, "p": [1]}
+{"cls": "java.lang.String", "sig": "int indexOf(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.4696e-05, "p": [0.04, 0.01, 0.04]}
+{"cls": "java.lang.String", "sig": "int indexOf(java.lang.String,int)", "model": "typesafe/jev-1.13-20260917", "cost": 3.3096e-05, "p": [0.03, 0.01, 0.27, 0.01, 0.05]}
+{"cls": "java.lang.String", "sig": "int length()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6002e-05, "p": [0.05]}
+{"cls": "java.lang.String", "sig": "java.lang.String replace(char,char)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2886e-05, "p": [0.38, 0.1, 0.37, 0.13, 0.99]}
+{"cls": "java.lang.String", "sig": "java.lang.String substring(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.4486e-05, "p": [0.27, 0.08, 1]}
+{"cls": "java.lang.String", "sig": "java.lang.String substring(int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2886e-05, "p": [0.16, 0.09, 0.17, 0.08, 1]}
+{"cls": "java.lang.String", "sig": "java.lang.String valueOf(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 1.6338e-05, "p": [0.96]}
+{"cls": "java.lang.String", "sig": "java.lang.String[] split(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.478e-05, "p": [0.76, 0.25, 0.99]}
+{"cls": "java.lang.String", "sig": "void <init>(byte[])", "model": "typesafe/jev-1.13-20260917", "cost": 1.6212e-05, "p": [0.97]}
+{"cls": "java.lang.String", "sig": "void <init>(byte[],int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 3.3306e-05, "p": [0.97, 0.45, 0.03, 0.49, 0.02]}
+{"cls": "java.lang.StringBuffer", "sig": "java.lang.String toString()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6296e-05, "p": [1]}
+{"cls": "java.lang.StringBuilder", "sig": "int length()", "model": "typesafe/jev-1.13-20260917", "cost": 1.617e-05, "p": [0.02]}
+{"cls": "java.lang.StringBuilder", "sig": "java.lang.String toString()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6338e-05, "p": [1]}
+{"cls": "java.lang.StringBuilder", "sig": "java.lang.StringBuilder append(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 2.94e-05, "p": [0.99, 0.99, 0.97, 0.44]}
+{"cls": "java.lang.StringBuilder", "sig": "java.lang.StringBuilder append(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.5074e-05, "p": [0.99, 1, 0.96]}
+{"cls": "java.lang.StringBuilder", "sig": "java.lang.StringBuilder replace(int,int,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 4.1916e-05, "p": [0.06, 0.1, 0.06, 0.08, 0.96, 1, 0.9]}
+{"cls": "java.lang.StringBuilder", "sig": "void <init>(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.6548e-05, "p": [1]}
+{"cls": "java.lang.System", "sig": "java.lang.String getProperty(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.638e-05, "p": [0.1]}
+{"cls": "java.lang.Throwable", "sig": "void addSuppressed(java.lang.Throwable)", "model": "typesafe/jev-1.13-20260917", "cost": 2.1084e-05, "p": [0.93, 0.06]}
+{"cls": "java.net.URI", "sig": "void <init>(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.638e-05, "p": [0.98]}
+{"cls": "java.net.URI", "sig": "void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 3.4356e-05, "p": [0.98, 0.97, 0.97, 0.97, 0.96]}
+{"cls": "java.net.URL", "sig": "java.lang.String getHost()", "model": "typesafe/jev-1.13-20260917", "cost": 1.617e-05, "p": [0.94]}
+{"cls": "java.net.URL", "sig": "void <init>(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.638e-05, "p": [0.98]}
+{"cls": "java.net.URLDecoder", "sig": "java.lang.String decode(java.lang.String,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.0748e-05, "p": [1, 1]}
+{"cls": "java.nio.file.Files", "sig": "java.io.InputStream newInputStream(java.nio.file.Path,java.nio.file.OpenOption[])", "model": "typesafe/jev-1.13-20260917", "cost": 3.066e-05, "p": [0.25, 0, 0.03, 0.01]}
+{"cls": "java.nio.file.Paths", "sig": "java.nio.file.Path get(java.lang.String,java.lang.String[])", "model": "typesafe/jev-1.13-20260917", "cost": 2.5158e-05, "p": [0.98, 0.07, 0.84]}
+{"cls": "java.sql.CallableStatement", "sig": "java.sql.ResultSet executeQuery()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6422e-05, "p": [0.69]}
+{"cls": "java.sql.Connection", "sig": "java.sql.CallableStatement prepareCall(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.499e-05, "p": [0.5, 0.25, 0.16]}
+{"cls": "java.sql.Connection", "sig": "java.sql.CallableStatement prepareCall(java.lang.String,int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 4.179e-05, "p": [0.38, 0.27, 0.05, 0.09, 0.08, 0.09, 0.17]}
+{"cls": "java.sql.Connection", "sig": "java.sql.CallableStatement prepareCall(java.lang.String,int,int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 5.019e-05, "p": [0.48, 0.3, 0.05, 0.09, 0.08, 0.11, 0.05, 0.1, 0.17]}
+{"cls": "java.sql.Connection", "sig": "java.sql.PreparedStatement prepareStatement(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.499e-05, "p": [0.72, 0.49, 0.13]}
+{"cls": "java.sql.Connection", "sig": "java.sql.PreparedStatement prepareStatement(java.lang.String,int)", "model": "typesafe/jev-1.13-20260917", "cost": 3.339e-05, "p": [0.7, 0.49, 0.14, 0.15, 0.11]}
+{"cls": "java.sql.Connection", "sig": "java.sql.PreparedStatement prepareStatement(java.lang.String,int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 4.179e-05, "p": [0.64, 0.43, 0.16, 0.15, 0.14, 0.16, 0.14]}
+{"cls": "java.sql.Connection", "sig": "java.sql.PreparedStatement prepareStatement(java.lang.String,int,int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 5.019e-05, "p": [0.66, 0.55, 0.11, 0.14, 0.16, 0.16, 0.12, 0.12, 0.13]}
+{"cls": "java.sql.Connection", "sig": "java.sql.PreparedStatement prepareStatement(java.lang.String,int[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.1958e-05, "p": [0.66, 0.37, 0.01, 0.39, 0.25, 0.18, 0.03]}
+{"cls": "java.sql.Connection", "sig": "java.sql.PreparedStatement prepareStatement(java.lang.String,java.lang.String[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.242e-05, "p": [0.68, 0.38, 0.03, 0.53, 0.29, 0.17, 0.04]}
+{"cls": "java.sql.PreparedStatement", "sig": "boolean execute()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6128e-05, "p": [0.01]}
+{"cls": "java.sql.PreparedStatement", "sig": "void setString(int,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.0874e-05, "p": [0.07, 0.96]}
+{"cls": "java.sql.ResultSet", "sig": "java.lang.String getString(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.4906e-05, "p": [0.06, 0.04, 0.96]}
+{"cls": "java.sql.Statement", "sig": "boolean execute(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.4654e-05, "p": [0.01, 0.57, 0.01]}
+{"cls": "java.sql.Statement", "sig": "boolean execute(java.lang.String,int)", "model": "typesafe/jev-1.13-20260917", "cost": 3.3054e-05, "p": [0.01, 0.47, 0.02, 0.16, 0.01]}
+{"cls": "java.sql.Statement", "sig": "boolean execute(java.lang.String,int[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.1622e-05, "p": [0.01, 0.51, 0, 0.02, 0.35, 0.01, 0.03]}
+{"cls": "java.sql.Statement", "sig": "boolean execute(java.lang.String,java.lang.String[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.2084e-05, "p": [0.01, 0.59, 0.02, 0.02, 0.31, 0.01, 0.02]}
+{"cls": "java.sql.Statement", "sig": "int executeUpdate(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.478e-05, "p": [0.01, 0.36, 0.01]}
+{"cls": "java.sql.Statement", "sig": "int executeUpdate(java.lang.String,int)", "model": "typesafe/jev-1.13-20260917", "cost": 3.318e-05, "p": [0.01, 0.35, 0.04, 0.18, 0.01]}
+{"cls": "java.sql.Statement", "sig": "int executeUpdate(java.lang.String,int[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.1748e-05, "p": [0.01, 0.29, 0, 0.02, 0.21, 0.01, 0.03]}
+{"cls": "java.sql.Statement", "sig": "int executeUpdate(java.lang.String,java.lang.String[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.221e-05, "p": [0.01, 0.39, 0.01, 0.01, 0.28, 0.01, 0.02]}
+{"cls": "java.sql.Statement", "sig": "int[] executeBatch()", "model": "typesafe/jev-1.13-20260917", "cost": 1.617e-05, "p": [0.02]}
+{"cls": "java.sql.Statement", "sig": "java.sql.ResultSet executeQuery(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.4906e-05, "p": [0.27, 0.36, 0.22]}
+{"cls": "java.sql.Statement", "sig": "void addBatch(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 1.6422e-05, "p": [0.98]}
+{"cls": "java.util.Enumeration", "sig": "boolean hasMoreElements()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6212e-05, "p": [0.01]}
+{"cls": "java.util.Enumeration", "sig": "java.lang.Object nextElement()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6254e-05, "p": [0.93]}
+{"cls": "java.util.HashMap", "sig": "java.lang.Object get(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 2.9148e-05, "p": [0.18, 0.05, 0.96, 0.13]}
+{"cls": "java.util.HashMap", "sig": "java.lang.Object put(java.lang.Object,java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 5.0988e-05, "p": [0.13, 0.98, 0.19, 0.12, 0.98, 0.62, 0.37, 0.18, 0.1]}
+{"cls": "java.util.Iterator", "sig": "boolean hasNext()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6086e-05, "p": [0.01]}
+{"cls": "java.util.Iterator", "sig": "java.lang.Object next()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6086e-05, "p": [0.92]}
+{"cls": "java.util.List", "sig": "boolean add(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 2.898e-05, "p": [0.02, 0.98, 0.01, 0.23]}
+{"cls": "java.util.List", "sig": "java.lang.Object get(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.4486e-05, "p": [0.03, 0.01, 0.97]}
+{"cls": "java.util.List", "sig": "java.lang.Object remove(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.4486e-05, "p": [0.02, 0.04, 0.98]}
+{"cls": "java.util.List", "sig": "java.util.Iterator iterator()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6086e-05, "p": [0.93]}
+{"cls": "java.util.Map", "sig": "boolean isEmpty()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6086e-05, "p": [0]}
+{"cls": "java.util.Map", "sig": "java.lang.Object get(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 2.9064e-05, "p": [0.11, 0.03, 0.95, 0.08]}
+{"cls": "java.util.Set", "sig": "boolean contains(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 2.898e-05, "p": [0.01, 0.01, 0.02, 0.01]}
