@@ -16321,3 +16321,235 @@
 {"cls": "org.xmlpull.v1.sax2.Driver", "sig": "void setContentHandler(org.xml.sax.ContentHandler)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3226e-05, "p": [0.83, 0.13]}
 {"cls": "org.xmlpull.v1.sax2.Driver", "sig": "void setErrorHandler(org.xml.sax.ErrorHandler)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3226e-05, "p": [0.82, 0.1]}
 {"cls": "org.xmlpull.v1.sax2.Driver", "sig": "void setFeature(java.lang.String,boolean)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2596e-05, "p": [0.34, 0.29]}
+{"cls": "android.app.Activity", "sig": "android.content.res.TypedArray obtainStyledAttributes(int,int[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.7082e-05, "p": [0.27, 0.13, 0.07, 0.35, 0.12, 0.45, 0.28]}
+{"cls": "android.app.Activity", "sig": "java.util.concurrent.Executor getMainExecutor()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7052e-05, "p": [0.57]}
+{"cls": "android.app.Activity", "sig": "void startManagingCursor(android.database.Cursor)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2386e-05, "p": [0.48, 0.09]}
+{"cls": "android.app.Application", "sig": "boolean stopService(android.content.Intent)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2088e-05, "p": [0.06, 0.1, 0.35, 0.2]}
+{"cls": "android.app.Application", "sig": "void unbindService(android.content.ServiceConnection)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2932e-05, "p": [0.11, 0.14]}
+{"cls": "android.app.DatePickerDialog", "sig": "android.content.Context getContext()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7136e-05, "p": [0.93]}
+{"cls": "android.app.DownloadManager", "sig": "long addCompletedDownload(java.lang.String,java.lang.String,boolean,java.lang.String,java.lang.String,long,boolean)", "model": "typesafe/jev-1.13-20260917", "cost": 8.799e-05, "p": [0.04, 0.11, 0.05, 0.07, 0.05, 0.12, 0.06, 0.08, 0.05, 0.1, 0.12, 0.09, 0.05, 0.11, 0.4]}
+{"cls": "android.app.ProgressDialog", "sig": "android.app.ProgressDialog show(android.content.Context,java.lang.CharSequence,java.lang.CharSequence,boolean)", "model": "typesafe/jev-1.13-20260917", "cost": 8.0598e-05, "p": [0.12, 0.03, 0.02, 0.06, 0.01, 0.06, 0.09, 0.01, 0.06, 0.09, 0.01, 0.02, 0.01]}
+{"cls": "android.app.ProgressDialog", "sig": "void setContentView(android.view.View)", "model": "typesafe/jev-1.13-20260917", "cost": 2.247e-05, "p": [0.71, 0.08]}
+{"cls": "android.app.Service", "sig": "android.content.ContentResolver getContentResolver()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7262e-05, "p": [0.76]}
+{"cls": "android.app.TaskStackBuilder", "sig": "android.app.TaskStackBuilder addNextIntentWithParentStack(android.content.Intent)", "model": "typesafe/jev-1.13-20260917", "cost": 3.3012e-05, "p": [0.36, 0.6, 0.45, 0.1]}
+{"cls": "android.app.WallpaperManager", "sig": "int setBitmap(android.graphics.Bitmap,android.graphics.Rect,boolean,int)", "model": "typesafe/jev-1.13-20260917", "cost": 9.8238e-05, "p": [0.08, 0.31, 0.03, 0.08, 0.31, 0.02, 0.08, 0.18, 0.02, 0.02, 0.13, 0.17, 0.02, 0.02, 0.25, 0.19, 0.35]}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "boolean isAdminActive(android.content.ComponentName)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2928e-05, "p": [0.17, 0.05, 0.35, 0.12]}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "boolean isProfileOwnerApp(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7384e-05, "p": [0.15, 0.05, 0.21]}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "java.util.List getActiveAdmins()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7262e-05, "p": [0.71]}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "void removeActiveAdmin(android.content.ComponentName)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3016e-05, "p": [0.14, 0.23]}
+{"cls": "android.app.job.JobService", "sig": "void setNotification(android.app.job.JobParameters,int,android.app.Notification,int)", "model": "typesafe/jev-1.13-20260917", "cost": 7.476e-05, "p": [0.31, 0.04, 0.2, 0.03, 0.04, 0.34, 0.03, 0.16, 0.02, 0.07, 0.31, 0.11]}
+{"cls": "android.app.role.RoleManager", "sig": "android.content.Intent createRequestRoleIntent(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7426e-05, "p": [0.22, 0.05, 0.45]}
+{"cls": "android.appwidget.AppWidgetHostView", "sig": "int getAppWidgetId()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7262e-05, "p": [0.91]}
+{"cls": "android.appwidget.AppWidgetHostView", "sig": "void setAppWidget(int,android.appwidget.AppWidgetProviderInfo)", "model": "typesafe/jev-1.13-20260917", "cost": 3.402e-05, "p": [0.17, 0.02, 0.7, 0.06]}
+{"cls": "android.content.ClipData", "sig": "android.content.ClipData newRawUri(java.lang.CharSequence,android.net.Uri)", "model": "typesafe/jev-1.13-20260917", "cost": 3.3306e-05, "p": [0.83, 0.03, 0.94, 0.03]}
+{"cls": "android.content.Context", "sig": "android.database.sqlite.SQLiteDatabase openOrCreateDatabase(java.lang.String,int,android.database.sqlite.SQLiteDatabase$CursorFactory)", "model": "typesafe/jev-1.13-20260917", "cost": 6.573e-05, "p": [0.24, 0.16, 0.01, 0.16, 0.12, 0.02, 0.54, 0.16, 0.56, 0.13]}
+{"cls": "android.content.ContextWrapper", "sig": "boolean bindService(android.content.Intent,android.content.ServiceConnection,int)", "model": "typesafe/jev-1.13-20260917", "cost": 7.9464e-05, "p": [0.06, 0.11, 0.02, 0.06, 0.15, 0.02, 0.09, 0.1, 0.02, 0.02, 0.2, 0.11, 0.12]}
+{"cls": "android.content.ContextWrapper", "sig": "java.lang.String getString(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7006e-05, "p": [0.38, 0.11, 0.78]}
+{"cls": "android.content.Intent", "sig": "java.lang.Object clone()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6842e-05, "p": [0.87]}
+{"cls": "android.content.Intent", "sig": "long[] getLongArrayExtra(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7174e-05, "p": [0.31, 0.18, 0.88]}
+{"cls": "android.content.pm.ActivityInfo", "sig": "java.lang.String toString()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7052e-05, "p": [0.89]}
+{"cls": "android.content.pm.LauncherActivityInfo", "sig": "long getFirstInstallTime()", "model": "typesafe/jev-1.13-20260917", "cost": 1.722e-05, "p": [0.81]}
+{"cls": "android.content.pm.LauncherApps", "sig": "android.content.pm.LauncherUserInfo getLauncherUserInfo(android.os.UserHandle)", "model": "typesafe/jev-1.13-20260917", "cost": 3.318e-05, "p": [0.56, 0.09, 0.51, 0.04]}
+{"cls": "android.content.pm.LauncherApps", "sig": "void registerCallback(android.content.pm.LauncherApps$Callback)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3352e-05, "p": [0.2, 0.11]}
+{"cls": "android.content.pm.LauncherApps", "sig": "void startShortcut(android.content.pm.ShortcutInfo,android.graphics.Rect,android.os.Bundle)", "model": "typesafe/jev-1.13-20260917", "cost": 7.539e-05, "p": [0.11, 0.02, 0.05, 0.08, 0.01, 0.02, 0.07, 0.01, 0.01, 0.2, 0.12, 0.12]}
+{"cls": "android.content.pm.ResolveInfo$DisplayNameComparator", "sig": "void <init>(android.content.pm.PackageManager)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7976e-05, "p": [0.7]}
+{"cls": "android.content.res.XmlResourceParser", "sig": "java.lang.String getText()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7178e-05, "p": [0.93]}
+{"cls": "android.database.sqlite.SQLiteStatement", "sig": "void bindBlob(int,byte[])", "model": "typesafe/jev-1.13-20260917", "cost": 3.2256e-05, "p": [0.18, 0.03, 0.78, 0.13]}
+{"cls": "android.database.sqlite.SQLiteStatement", "sig": "void bindNull(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.722e-05, "p": [0.05]}
+{"cls": "android.graphics.BitmapFactory", "sig": "android.graphics.Bitmap decodeFileDescriptor(java.io.FileDescriptor)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7766e-05, "p": [0.89]}
+{"cls": "android.graphics.BitmapRegionDecoder", "sig": "android.graphics.BitmapRegionDecoder newInstance(java.lang.String,boolean)", "model": "typesafe/jev-1.13-20260917", "cost": 2.268e-05, "p": [0.56, 0.27]}
+{"cls": "android.graphics.drawable.BitmapDrawable", "sig": "void setTileModeXY(android.graphics.Shader$TileMode,android.graphics.Shader$TileMode)", "model": "typesafe/jev-1.13-20260917", "cost": 4.5402e-05, "p": [0.63, 0.06, 0.64, 0.35, 0.06, 0.06]}
+{"cls": "android.graphics.drawable.DrawableContainer", "sig": "void setEnterFadeDuration(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7388e-05, "p": [0.43]}
+{"cls": "android.graphics.drawable.LayerDrawable", "sig": "android.graphics.Rect getBounds()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7136e-05, "p": [0.77]}
+{"cls": "android.graphics.drawable.LayerDrawable", "sig": "void draw(android.graphics.Canvas)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2386e-05, "p": [0.17, 0.24]}
+{"cls": "android.graphics.drawable.StateListDrawable", "sig": "void setEnterFadeDuration(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7472e-05, "p": [0.44]}
+{"cls": "android.graphics.drawable.StateListDrawable", "sig": "void setExitFadeDuration(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7472e-05, "p": [0.39]}
+{"cls": "android.icu.util.Calendar", "sig": "boolean after(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2088e-05, "p": [0.44, 0.05, 0.38, 0.08]}
+{"cls": "android.icu.util.Calendar", "sig": "long getTimeInMillis()", "model": "typesafe/jev-1.13-20260917", "cost": 1.701e-05, "p": [0.89]}
+{"cls": "android.icu.util.Calendar", "sig": "void set(int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.205e-05, "p": [0.46, 0.31]}
+{"cls": "android.icu.util.TimeZone", "sig": "int getOffset(long)", "model": "typesafe/jev-1.13-20260917", "cost": 2.6964e-05, "p": [0.49, 0.08, 0.7]}
+{"cls": "android.media.AudioManager", "sig": "void addOnModeChangedListener(java.util.concurrent.Executor,android.media.AudioManager$OnModeChangedListener)", "model": "typesafe/jev-1.13-20260917", "cost": 4.5822e-05, "p": [0.19, 0.02, 0.43, 0.03, 0.05, 0.04]}
+{"cls": "android.media.MediaMetadata", "sig": "java.lang.String getString(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7216e-05, "p": [0.26, 0.06, 0.96]}
+{"cls": "android.media.MediaPlayer", "sig": "void <init>(android.content.Context)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7262e-05, "p": [0.58]}
+{"cls": "android.media.MediaPlayer", "sig": "void setAudioSessionId(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7304e-05, "p": [0.34]}
+{"cls": "android.media.RingtoneManager", "sig": "void setActualDefaultRingtoneUri(android.content.Context,int,android.net.Uri)", "model": "typesafe/jev-1.13-20260917", "cost": 3.3264e-05, "p": [0.02, 0.01, 0.02, 0.02]}
+{"cls": "android.media.audiofx.AudioEffect", "sig": "int setEnabled(boolean)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7006e-05, "p": [0.09, 0.17, 0.42]}
+{"cls": "android.media.audiofx.Equalizer", "sig": "int getCenterFreq(short)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7048e-05, "p": [0.27, 0.06, 0.8]}
+{"cls": "android.media.audiofx.Equalizer", "sig": "short getBandLevel(short)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7048e-05, "p": [0.11, 0.05, 0.88]}
+{"cls": "android.media.audiofx.Equalizer", "sig": "short getNumberOfBands()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7178e-05, "p": [0.6]}
+{"cls": "android.media.audiofx.Equalizer", "sig": "short[] getBandLevelRange()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7262e-05, "p": [0.79]}
+{"cls": "android.media.audiofx.Equalizer", "sig": "void <init>(int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.226e-05, "p": [0.26, 0.31]}
+{"cls": "android.media.audiofx.Equalizer", "sig": "void setBandLevel(short,short)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2428e-05, "p": [0.22, 0.14]}
+{"cls": "android.media.session.MediaSessionManager", "sig": "void addOnActiveSessionsChangedListener(android.media.session.MediaSessionManager$OnActiveSessionsChangedListener,android.content.ComponentName)", "model": "typesafe/jev-1.13-20260917", "cost": 4.8258e-05, "p": [0.34, 0.01, 0.23, 0.01, 0.12, 0.04]}
+{"cls": "android.net.NetworkCapabilities", "sig": "android.net.TransportInfo getTransportInfo()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7346e-05, "p": [0.87]}
+{"cls": "android.os.Parcel", "sig": "long[] createLongArray()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6968e-05, "p": [0.93]}
+{"cls": "android.os.Parcel", "sig": "void writeLongArray(long[])", "model": "typesafe/jev-1.13-20260917", "cost": 2.2092e-05, "p": [0.79, 0.25]}
+{"cls": "android.os.Parcelable$Creator", "sig": "java.lang.Object[] newArray(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7048e-05, "p": [0.21, 0.07, 0.19]}
+{"cls": "android.os.UserHandle", "sig": "java.lang.String toString()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7052e-05, "p": [0.79]}
+{"cls": "android.os.UserManager", "sig": "boolean isQuietModeEnabled(android.os.UserHandle)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2844e-05, "p": [0.26, 0.07, 0.52, 0.12]}
+{"cls": "android.os.UserManager", "sig": "boolean requestQuietModeEnabled(boolean,android.os.UserHandle)", "model": "typesafe/jev-1.13-20260917", "cost": 4.809e-05, "p": [0.08, 0.06, 0.01, 0.06, 0.12, 0.35, 0.17]}
+{"cls": "android.provider.MediaStore", "sig": "android.app.PendingIntent createDeleteRequest(android.content.ContentResolver,java.util.Collection)", "model": "typesafe/jev-1.13-20260917", "cost": 3.3852e-05, "p": [0.31, 0.04, 0.57, 0.02]}
+{"cls": "android.provider.MediaStore$Audio$Genres$Members", "sig": "android.net.Uri getContentUri(java.lang.String,long)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2638e-05, "p": [0.58, 0.44]}
+{"cls": "android.provider.MediaStore$Audio$Media", "sig": "android.net.Uri getContentUri(java.lang.String,long)", "model": "typesafe/jev-1.13-20260917", "cost": 2.247e-05, "p": [0.61, 0.38]}
+{"cls": "android.provider.MediaStore$Audio$Playlists$Members", "sig": "android.net.Uri getContentUri(java.lang.String,long)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2638e-05, "p": [0.54, 0.38]}
+{"cls": "android.provider.MediaStore$Audio$Playlists$Members", "sig": "boolean moveItem(android.content.ContentResolver,long,int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 4.8636e-05, "p": [0.14, 0.07, 0.01, 0.06, 0.01, 0.05, 0.01]}
+{"cls": "android.provider.Settings$Global", "sig": "boolean putString(android.content.ContentResolver,java.lang.String,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 3.8598e-05, "p": [0.15, 0.05, 0.02, 0.03, 0.02]}
+{"cls": "android.provider.Settings$Global", "sig": "float getFloat(android.content.ContentResolver,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.8098e-05, "p": [0.79, 0.34, 0.02]}
+{"cls": "android.provider.Settings$Global", "sig": "int getInt(android.content.ContentResolver,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.8056e-05, "p": [0.76, 0.42, 0.02]}
+{"cls": "android.provider.Settings$Global", "sig": "long getLong(android.content.ContentResolver,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.8056e-05, "p": [0.76, 0.37, 0.02]}
+{"cls": "android.provider.Settings$Secure", "sig": "float getFloat(android.content.ContentResolver,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.8098e-05, "p": [0.72, 0.32, 0.02]}
+{"cls": "android.provider.Settings$Secure", "sig": "long getLong(android.content.ContentResolver,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.8056e-05, "p": [0.78, 0.32, 0.02]}
+{"cls": "android.provider.Settings$System", "sig": "java.lang.String getString(android.content.ContentResolver,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.8182e-05, "p": [0.78, 0.33, 0.02]}
+{"cls": "android.provider.Settings$System", "sig": "long getLong(android.content.ContentResolver,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.8056e-05, "p": [0.73, 0.33, 0.02]}
+{"cls": "android.service.quicksettings.Tile", "sig": "void setSubtitle(java.lang.CharSequence)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2848e-05, "p": [0.89, 0.05]}
+{"cls": "android.service.quicksettings.TileService", "sig": "void requestListeningState(android.content.Context,android.content.ComponentName)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3436e-05, "p": [0.02, 0.02]}
+{"cls": "android.text.Spanned", "sig": "char charAt(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.6796e-05, "p": [0.4, 0.08, 0.85]}
+{"cls": "android.text.style.ImageSpan", "sig": "java.lang.String getSource()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7136e-05, "p": [0.88]}
+{"cls": "android.transition.Visibility", "sig": "android.transition.Transition setInterpolator(android.animation.TimeInterpolator)", "model": "typesafe/jev-1.13-20260917", "cost": 3.3222e-05, "p": [0.16, 0.8, 0.77, 0.04]}
+{"cls": "android.util.JsonWriter", "sig": "android.util.JsonWriter name(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7258e-05, "p": [0.33, 0.35, 0.42]}
+{"cls": "android.util.JsonWriter", "sig": "android.util.JsonWriter value(java.lang.Number)", "model": "typesafe/jev-1.13-20260917", "cost": 3.234e-05, "p": [0.1, 0.34, 0.18, 0.04]}
+{"cls": "android.util.JsonWriter", "sig": "android.util.JsonWriter value(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7258e-05, "p": [0.23, 0.49, 0.35]}
+{"cls": "android.util.JsonWriter", "sig": "android.util.JsonWriter value(long)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7006e-05, "p": [0.15, 0.4, 0.17]}
+{"cls": "android.util.JsonWriter", "sig": "void <init>(java.io.Writer)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7262e-05, "p": [0.63]}
+{"cls": "android.view.SubMenu", "sig": "void removeItem(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7136e-05, "p": [0.12]}
+{"cls": "android.view.ViewGroup", "sig": "android.view.View findViewWithTag(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2424e-05, "p": [0.11, 0.04, 0.64, 0.04]}
+{"cls": "android.view.accessibility.AccessibilityEvent", "sig": "void setAddedCount(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7472e-05, "p": [0.65]}
+{"cls": "android.webkit.WebView", "sig": "android.print.PrintDocumentAdapter createPrintDocumentAdapter(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7594e-05, "p": [0.16, 0.08, 0.53]}
+{"cls": "android.widget.AbsListView", "sig": "void setRecyclerListener(android.widget.AbsListView$RecyclerListener)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3982e-05, "p": [0.78, 0.09]}
+{"cls": "android.widget.ArrayAdapter", "sig": "android.widget.ArrayAdapter createFromResource(android.content.Context,int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 3.7548e-05, "p": [0.32, 0.2, 0.01, 0.2, 0.01]}
+{"cls": "android.widget.Button", "sig": "void setCompoundDrawablesRelativeWithIntrinsicBounds(android.graphics.drawable.Drawable,android.graphics.drawable.Drawable,android.graphics.drawable.Drawable,android.graphics.drawable.Drawable)", "model": "typesafe/jev-1.13-20260917", "cost": 0.00011739, "p": [0.61, 0.03, 0.02, 0.02, 0.63, 0.2, 0.02, 0.03, 0.55, 0.02, 0.03, 0.03, 0.58, 0.02, 0.02, 0.02, 0.12, 0.13, 0.12, 0.13]}
+{"cls": "android.widget.Button", "sig": "void setCompoundDrawablesWithIntrinsicBounds(android.graphics.drawable.Drawable,android.graphics.drawable.Drawable,android.graphics.drawable.Drawable,android.graphics.drawable.Drawable)", "model": "typesafe/jev-1.13-20260917", "cost": 0.000117306, "p": [0.63, 0.02, 0.02, 0.01, 0.6, 0.24, 0.02, 0.03, 0.63, 0.02, 0.03, 0.02, 0.55, 0.04, 0.03, 0.03, 0.17, 0.14, 0.11, 0.14]}
+{"cls": "android.widget.ExpandableListAdapter", "sig": "int getChildrenCount(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7132e-05, "p": [0.35, 0.09, 0.52]}
+{"cls": "android.widget.FrameLayout", "sig": "android.view.View findViewWithTag(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2424e-05, "p": [0.12, 0.04, 0.67, 0.06]}
+{"cls": "android.widget.FrameLayout", "sig": "boolean isSelected()", "model": "typesafe/jev-1.13-20260917", "cost": 1.701e-05, "p": [0.76]}
+{"cls": "android.widget.FrameLayout", "sig": "boolean postDelayed(java.lang.Runnable,long)", "model": "typesafe/jev-1.13-20260917", "cost": 4.7628e-05, "p": [0.04, 0.37, 0.07, 0.14, 0.03, 0.16, 0.11]}
+{"cls": "android.widget.FrameLayout", "sig": "int getSuggestedMinimumWidth()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7178e-05, "p": [0.7]}
+{"cls": "android.widget.FrameLayout", "sig": "void measureChild(android.view.View,int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 4.2714e-05, "p": [0.28, 0.16, 0.05, 0.12, 0.03, 0.11]}
+{"cls": "android.widget.FrameLayout", "sig": "void sendAccessibilityEventUnchecked(android.view.accessibility.AccessibilityEvent)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3856e-05, "p": [0.18, 0.17]}
+{"cls": "android.widget.FrameLayout", "sig": "void setLongClickable(boolean)", "model": "typesafe/jev-1.13-20260917", "cost": 1.722e-05, "p": [0.26]}
+{"cls": "android.widget.FrameLayout", "sig": "void setOnKeyListener(android.view.View$OnKeyListener)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3268e-05, "p": [0.78, 0.09]}
+{"cls": "android.widget.FrameLayout", "sig": "void setTranslationX(float)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7262e-05, "p": [0.31]}
+{"cls": "android.widget.FrameLayout$LayoutParams", "sig": "void setMarginEnd(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7346e-05, "p": [0.68]}
+{"cls": "android.widget.GridLayout", "sig": "int getColumnCount()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7052e-05, "p": [0.73]}
+{"cls": "android.widget.GridView", "sig": "int getCount()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6968e-05, "p": [0.7]}
+{"cls": "android.widget.GridView", "sig": "int getLastVisiblePosition()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7136e-05, "p": [0.5]}
+{"cls": "android.widget.GridView", "sig": "java.lang.Object getItemAtPosition(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7132e-05, "p": [0.25, 0.07, 0.86]}
+{"cls": "android.widget.GridView", "sig": "void setColumnWidth(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.722e-05, "p": [0.24]}
+{"cls": "android.widget.GridView", "sig": "void setOnScrollListener(android.widget.AbsListView$OnScrollListener)", "model": "typesafe/jev-1.13-20260917", "cost": 2.394e-05, "p": [0.74, 0.07]}
+{"cls": "android.widget.HeaderViewListAdapter", "sig": "void <init>(java.util.ArrayList,java.util.ArrayList,android.widget.ListAdapter)", "model": "typesafe/jev-1.13-20260917", "cost": 6.1236e-05, "p": [0.93, 0.08, 0.03, 0.94, 0.82, 0.04, 0.92, 0.03, 0.04]}
+{"cls": "android.widget.ImageButton", "sig": "float getScaleY()", "model": "typesafe/jev-1.13-20260917", "cost": 1.701e-05, "p": [0.94]}
+{"cls": "android.widget.ImageButton", "sig": "float getTranslationX()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7094e-05, "p": [0.94]}
+{"cls": "android.widget.ImageButton", "sig": "float getTranslationY()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7094e-05, "p": [0.93]}
+{"cls": "android.widget.ImageView", "sig": "void setBackgroundColor(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7346e-05, "p": [0.41]}
+{"cls": "android.widget.ImageView", "sig": "void setMinimumHeight(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.722e-05, "p": [0.39]}
+{"cls": "android.widget.ImageView", "sig": "void setMinimumWidth(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.722e-05, "p": [0.44]}
+{"cls": "android.widget.ImageView", "sig": "void setRotation(float)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7136e-05, "p": [0.39]}
+{"cls": "android.widget.LinearLayout", "sig": "void offsetDescendantRectToMyCoords(android.view.View,android.graphics.Rect)", "model": "typesafe/jev-1.13-20260917", "cost": 4.3344e-05, "p": [0.15, 0.37, 0.15, 0.04, 0.32, 0.68]}
+{"cls": "android.widget.LinearLayout", "sig": "void setOnCreateContextMenuListener(android.view.View$OnCreateContextMenuListener)", "model": "typesafe/jev-1.13-20260917", "cost": 2.394e-05, "p": [0.79, 0.1]}
+{"cls": "android.widget.ListView", "sig": "android.view.ViewGroup$LayoutParams getLayoutParams()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7388e-05, "p": [0.93]}
+{"cls": "android.widget.ListView", "sig": "void setLayoutParams(android.view.ViewGroup$LayoutParams)", "model": "typesafe/jev-1.13-20260917", "cost": 2.331e-05, "p": [0.57, 0.11]}
+{"cls": "android.widget.ProgressBar", "sig": "void onMeasure(int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2176e-05, "p": [0.22, 0.23]}
+{"cls": "android.widget.ProgressBar", "sig": "void setLayoutParams(android.view.ViewGroup$LayoutParams)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3268e-05, "p": [0.57, 0.15]}
+{"cls": "android.widget.RelativeLayout", "sig": "boolean onTouchEvent(android.view.MotionEvent)", "model": "typesafe/jev-1.13-20260917", "cost": 3.297e-05, "p": [0.19, 0.2, 0.3, 0.14]}
+{"cls": "android.widget.RelativeLayout", "sig": "void addView(android.view.View,int)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2508e-05, "p": [0.45, 0.26, 0.02, 0.12]}
+{"cls": "android.widget.RemoteViews", "sig": "void setRemoteAdapter(int,int,android.content.Intent)", "model": "typesafe/jev-1.13-20260917", "cost": 4.284e-05, "p": [0.21, 0.03, 0.24, 0.04, 0.69, 0.09]}
+{"cls": "android.widget.SearchView", "sig": "android.view.View findViewById(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.709e-05, "p": [0.22, 0.06, 0.59]}
+{"cls": "android.widget.SeekBar", "sig": "boolean isEnabled()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6926e-05, "p": [0.75]}
+{"cls": "android.widget.SeekBar", "sig": "int getVisibility()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6968e-05, "p": [0.78]}
+{"cls": "android.widget.SimpleCursorAdapter", "sig": "android.view.View getView(int,android.view.View,android.view.ViewGroup)", "model": "typesafe/jev-1.13-20260917", "cost": 7.9128e-05, "p": [0.06, 0.02, 0.03, 0.01, 0.41, 0.07, 0.03, 0.14, 0.08, 0.06, 0.56, 0.24, 0.07]}
+{"cls": "android.widget.Switch", "sig": "void setOnClickListener(android.view.View$OnClickListener)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3394e-05, "p": [0.74, 0.06]}
+{"cls": "android.widget.Switch", "sig": "void setTag(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2302e-05, "p": [0.9, 0.11]}
+{"cls": "android.widget.TextView", "sig": "android.view.ActionMode startActionMode(android.view.ActionMode$Callback)", "model": "typesafe/jev-1.13-20260917", "cost": 3.3264e-05, "p": [0.32, 0.29, 0.52, 0.09]}
+{"cls": "android.widget.TextView", "sig": "int getLineHeight()", "model": "typesafe/jev-1.13-20260917", "cost": 1.701e-05, "p": [0.7]}
+{"cls": "android.widget.TextView", "sig": "void setElevation(float)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7136e-05, "p": [0.34]}
+{"cls": "android.widget.TextView", "sig": "void setLayoutDirection(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7262e-05, "p": [0.21]}
+{"cls": "android.widget.TextView", "sig": "void setLinkTextColor(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.722e-05, "p": [0.47]}
+{"cls": "android.widget.TextView", "sig": "void setMinimumHeight(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.722e-05, "p": [0.33]}
+{"cls": "android.widget.TextView", "sig": "void setOnKeyListener(android.view.View$OnKeyListener)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3268e-05, "p": [0.78, 0.06]}
+{"cls": "android.widget.TextView", "sig": "void setSpannableFactory(android.text.Spannable$Factory)", "model": "typesafe/jev-1.13-20260917", "cost": 2.3142e-05, "p": [0.84, 0.05]}
+{"cls": "android.widget.Toast", "sig": "void setText(java.lang.CharSequence)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2596e-05, "p": [0.74, 0.07]}
+{"cls": "java.io.ByteArrayOutputStream", "sig": "java.lang.String toString(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7132e-05, "p": [0.15, 0.07, 0.95]}
+{"cls": "java.io.CharArrayWriter", "sig": "void <init>(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7178e-05, "p": [0.33]}
+{"cls": "java.io.CharArrayWriter", "sig": "void write(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7136e-05, "p": [0.78]}
+{"cls": "java.io.FilterOutputStream", "sig": "void write(byte[])", "model": "typesafe/jev-1.13-20260917", "cost": 2.2176e-05, "p": [0.44, 0.13]}
+{"cls": "java.lang.Integer", "sig": "int max(int,int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.1714e-05, "p": [0.79, 0.77]}
+{"cls": "java.lang.Runtime", "sig": "java.lang.Process exec(java.lang.String[],java.lang.String[],java.io.File)", "model": "typesafe/jev-1.13-20260917", "cost": 9.366e-05, "p": [0.3, 0.07, 0.13, 0.03, 0.28, 0.09, 0.8, 0.04, 0.37, 0.1, 0.02, 0.04, 0.37, 0.24, 0.27, 0.15]}
+{"cls": "java.lang.StringBuffer", "sig": "void ensureCapacity(int)", "model": "typesafe/jev-1.13-20260917", "cost": 1.722e-05, "p": [0.18]}
+{"cls": "java.lang.StringBuilder", "sig": "int lastIndexOf(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7216e-05, "p": [0.25, 0.08, 0.59]}
+{"cls": "java.lang.Thread", "sig": "void <init>(java.lang.ThreadGroup,java.lang.Runnable)", "model": "typesafe/jev-1.13-20260917", "cost": 3.3558e-05, "p": [0.7, 0.03, 0.73, 0.08]}
+{"cls": "java.lang.annotation.Annotation", "sig": "boolean equals(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2046e-05, "p": [0.22, 0.06, 0.27, 0.04]}
+{"cls": "java.math.BigDecimal", "sig": "void <init>(char[])", "model": "typesafe/jev-1.13-20260917", "cost": 1.7094e-05, "p": [0.95]}
+{"cls": "java.net.CookieManager", "sig": "java.util.Map get(java.net.URI,java.util.Map)", "model": "typesafe/jev-1.13-20260917", "cost": 5.7876e-05, "p": [0.34, 0.27, 0.13, 0.62, 0.51, 0.02, 0.83, 0.1, 0.25]}
+{"cls": "java.net.HttpCookie", "sig": "java.lang.String getPath()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7052e-05, "p": [0.97]}
+{"cls": "java.nio.channels.FileChannel", "sig": "java.nio.channels.FileChannel open(java.nio.file.Path,java.util.Set,java.nio.file.attribute.FileAttribute[])", "model": "typesafe/jev-1.13-20260917", "cost": 6.048e-05, "p": [0.44, 0.02, 0.02, 0.16, 0.01, 0.03, 0.08, 0.01, 0.01]}
+{"cls": "java.nio.channels.FileChannel", "sig": "java.nio.channels.FileChannel truncate(long)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7174e-05, "p": [0.12, 0.19, 0.23]}
+{"cls": "java.nio.channels.SocketChannel", "sig": "java.nio.channels.SelectionKey register(java.nio.channels.Selector,int)", "model": "typesafe/jev-1.13-20260917", "cost": 4.8132e-05, "p": [0.64, 0.45, 0.19, 0.16, 0.06, 0.6, 0.18]}
+{"cls": "java.nio.channels.SocketChannel", "sig": "java.nio.channels.SocketChannel setOption(java.net.SocketOption,java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 5.9304e-05, "p": [0.07, 0.27, 0.03, 0.08, 0.55, 0.01, 0.26, 0.14, 0.15]}
+{"cls": "java.nio.file.DirectoryStream$Filter", "sig": "boolean accept(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2382e-05, "p": [0.26, 0.07, 0.25, 0.1]}
+{"cls": "java.nio.file.FileSystem", "sig": "java.nio.file.spi.FileSystemProvider provider()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7304e-05, "p": [0.73]}
+{"cls": "java.nio.file.Files", "sig": "java.lang.String probeContentType(java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7304e-05, "p": [0.42]}
+{"cls": "java.nio.file.Path", "sig": "int compareTo(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 3.213e-05, "p": [0.33, 0.05, 0.24, 0.02]}
+{"cls": "java.nio.file.Path", "sig": "int compareTo(java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2298e-05, "p": [0.24, 0.04, 0.25, 0.03]}
+{"cls": "java.nio.file.Path", "sig": "java.io.File toFile()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6926e-05, "p": [0.85]}
+{"cls": "java.nio.file.Path", "sig": "java.lang.String toString()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6968e-05, "p": [0.88]}
+{"cls": "java.nio.file.Path", "sig": "java.nio.file.Path resolveSibling(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7258e-05, "p": [0.88, 0.23, 0.9]}
+{"cls": "java.nio.file.Path", "sig": "java.nio.file.Path resolveSibling(java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2508e-05, "p": [0.8, 0.16, 0.88, 0.12]}
+{"cls": "java.nio.file.PathMatcher", "sig": "boolean matches(java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 3.234e-05, "p": [0.4, 0.1, 0.33, 0.08]}
+{"cls": "java.nio.file.attribute.BasicFileAttributeView", "sig": "void setTimes(java.nio.file.attribute.FileTime,java.nio.file.attribute.FileTime,java.nio.file.attribute.FileTime)", "model": "typesafe/jev-1.13-20260917", "cost": 7.7784e-05, "p": [0.47, 0.04, 0.03, 0.47, 0.36, 0.03, 0.44, 0.02, 0.03, 0.15, 0.11, 0.12]}
+{"cls": "java.nio.file.attribute.FileTime", "sig": "java.nio.file.attribute.FileTime fromMillis(long)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7304e-05, "p": [0.86]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "boolean deleteIfExists(java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2634e-05, "p": [0.07, 0.12, 0.11, 0.19]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "boolean isHidden(java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2592e-05, "p": [0.32, 0.09, 0.2, 0.06]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "boolean isSameFile(java.nio.file.Path,java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 5.8506e-05, "p": [0.29, 0.07, 0.03, 0.29, 0.07, 0.79, 0.22, 0.07, 0.07]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.io.InputStream newInputStream(java.nio.file.Path,java.nio.file.OpenOption[])", "model": "typesafe/jev-1.13-20260917", "cost": 5.9556e-05, "p": [0.53, 0.07, 0.02, 0.19, 0.1, 0.01, 0.39, 0.04, 0.09]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.io.OutputStream newOutputStream(java.nio.file.Path,java.nio.file.OpenOption[])", "model": "typesafe/jev-1.13-20260917", "cost": 5.9598e-05, "p": [0.27, 0.09, 0.02, 0.09, 0.11, 0.02, 0.3, 0.07, 0.09]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.channels.AsynchronousFileChannel newAsynchronousFileChannel(java.nio.file.Path,java.util.Set,java.util.concurrent.ExecutorService,java.nio.file.attribute.FileAttribute[])", "model": "typesafe/jev-1.13-20260917", "cost": 0.00014595, "p": [0.54, 0.13, 0.02, 0, 0.02, 0.16, 0.13, 0.01, 0.01, 0.01, 0.22, 0.12, 0.01, 0.02, 0.02, 0.12, 0.11, 0.01, 0.01, 0.01, 0.44, 0.07, 0.09, 0.05, 0.09]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.channels.FileChannel newFileChannel(java.nio.file.Path,java.util.Set,java.nio.file.attribute.FileAttribute[])", "model": "typesafe/jev-1.13-20260917", "cost": 9.6684e-05, "p": [0.57, 0.09, 0.02, 0.02, 0.22, 0.08, 0.02, 0.02, 0.17, 0.06, 0.01, 0.02, 0.51, 0.08, 0.08, 0.14]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.channels.SeekableByteChannel newByteChannel(java.nio.file.Path,java.util.Set,java.nio.file.attribute.FileAttribute[])", "model": "typesafe/jev-1.13-20260917", "cost": 9.6852e-05, "p": [0.53, 0.11, 0.03, 0.02, 0.22, 0.1, 0.02, 0.02, 0.14, 0.12, 0.01, 0.01, 0.45, 0.06, 0.08, 0.11]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.DirectoryStream newDirectoryStream(java.nio.file.Path,java.nio.file.DirectoryStream$Filter)", "model": "typesafe/jev-1.13-20260917", "cost": 6.0984e-05, "p": [0.61, 0.11, 0.01, 0.38, 0.15, 0.02, 0.36, 0.05, 0.04]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.FileStore getFileStore(java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2844e-05, "p": [0.36, 0.11, 0.53, 0.06]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.FileSystem getFileSystem(java.net.URI)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2676e-05, "p": [0.35, 0.18, 0.46, 0.06]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.FileSystem newFileSystem(java.nio.file.Path,java.util.Map)", "model": "typesafe/jev-1.13-20260917", "cost": 5.8548e-05, "p": [0.49, 0.15, 0.04, 0.45, 0.13, 0.02, 0.53, 0.14, 0.11]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.Path readSymbolicLink(java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 3.276e-05, "p": [0.64, 0.06, 0.46, 0.19]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.attribute.BasicFileAttributes readAttributes(java.nio.file.Path,java.lang.Class,java.nio.file.LinkOption[])", "model": "typesafe/jev-1.13-20260917", "cost": 8.043e-05, "p": [0.51, 0.09, 0.02, 0.19, 0.05, 0.02, 0.03, 0.15, 0.08, 0.02, 0.27, 0.06, 0.08]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.attribute.FileAttributeView getFileAttributeView(java.nio.file.Path,java.lang.Class,java.nio.file.LinkOption[])", "model": "typesafe/jev-1.13-20260917", "cost": 8.0598e-05, "p": [0.36, 0.11, 0.03, 0.22, 0.09, 0.02, 0.02, 0.16, 0.11, 0.02, 0.32, 0.06, 0.11]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.util.Map readAttributes(java.nio.file.Path,java.lang.String,java.nio.file.LinkOption[])", "model": "typesafe/jev-1.13-20260917", "cost": 8.0136e-05, "p": [0.65, 0.1, 0.03, 0.28, 0.1, 0.02, 0.03, 0.2, 0.14, 0.03, 0.5, 0.08, 0.09]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void checkAccess(java.nio.file.Path,java.nio.file.AccessMode[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.41e-05, "p": [0.07, 0.02, 0.08, 0.02, 0.13, 0.04]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void copy(java.nio.file.Path,java.nio.file.Path,java.nio.file.CopyOption[])", "model": "typesafe/jev-1.13-20260917", "cost": 7.5894e-05, "p": [0.11, 0.54, 0.02, 0.11, 0.87, 0.02, 0.14, 0.02, 0.02, 0.11, 0.09, 0.1]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void createDirectory(java.nio.file.Path,java.nio.file.attribute.FileAttribute[])", "model": "typesafe/jev-1.13-20260917", "cost": 4.4772e-05, "p": [0.18, 0.02, 0.13, 0.01, 0.21, 0.17]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void createLink(java.nio.file.Path,java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 4.3638e-05, "p": [0.12, 0.06, 0.17, 0.81, 0.16, 0.18]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void createSymbolicLink(java.nio.file.Path,java.nio.file.Path,java.nio.file.attribute.FileAttribute[])", "model": "typesafe/jev-1.13-20260917", "cost": 7.6692e-05, "p": [0.09, 0.06, 0.02, 0.12, 0.87, 0.02, 0.14, 0.01, 0.02, 0.13, 0.16, 0.15]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void delete(java.nio.file.Path)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2596e-05, "p": [0.07, 0.19]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void move(java.nio.file.Path,java.nio.file.Path,java.nio.file.CopyOption[])", "model": "typesafe/jev-1.13-20260917", "cost": 7.5894e-05, "p": [0.11, 0.14, 0.02, 0.13, 0.87, 0.01, 0.18, 0.03, 0.03, 0.19, 0.22, 0.14]}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void setAttribute(java.nio.file.Path,java.lang.String,java.lang.Object,java.nio.file.LinkOption[])", "model": "typesafe/jev-1.13-20260917", "cost": 9.6684e-05, "p": [0.17, 0.02, 0.03, 0.17, 0.04, 0.04, 0.01, 0.16, 0.06, 0.01, 0.16, 0.03, 0.02, 0.21, 0.08, 0.09]}
+{"cls": "java.security.Signature", "sig": "void engineSetParameter(java.security.spec.AlgorithmParameterSpec)", "model": "typesafe/jev-1.13-20260917", "cost": 2.331e-05, "p": [0.78, 0.1]}
+{"cls": "java.sql.SQLException", "sig": "java.lang.String getSQLState()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6926e-05, "p": [0.84]}
+{"cls": "java.sql.SQLException", "sig": "java.lang.Throwable initCause(java.lang.Throwable)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2592e-05, "p": [0.63, 0.92, 0.88, 0.26]}
+{"cls": "java.sql.SQLException", "sig": "void <init>(java.lang.String,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2386e-05, "p": [0.83, 0.86]}
+{"cls": "java.sql.Timestamp", "sig": "boolean after(java.sql.Timestamp)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2004e-05, "p": [0.47, 0.07, 0.33, 0.07]}
+{"cls": "java.sql.Timestamp", "sig": "boolean after(java.util.Date)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2004e-05, "p": [0.43, 0.06, 0.41, 0.06]}
+{"cls": "java.sql.Timestamp", "sig": "int compareTo(java.sql.Timestamp)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2088e-05, "p": [0.52, 0.07, 0.47, 0.05]}
+{"cls": "java.text.SimpleDateFormat", "sig": "java.lang.Object clone()", "model": "typesafe/jev-1.13-20260917", "cost": 1.701e-05, "p": [0.84]}
+{"cls": "java.util.ArrayDeque", "sig": "boolean offerFirst(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2256e-05, "p": [0.04, 0.85, 0.16, 0.11]}
+{"cls": "java.util.Dictionary", "sig": "java.util.Enumeration keys()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6926e-05, "p": [0.89]}
+{"cls": "java.util.GregorianCalendar", "sig": "int getFirstDayOfWeek()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7178e-05, "p": [0.64]}
+{"cls": "java.util.GregorianCalendar", "sig": "int getMinimalDaysInFirstWeek()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7262e-05, "p": [0.52]}
+{"cls": "java.util.GregorianCalendar", "sig": "void <init>(java.util.Locale)", "model": "typesafe/jev-1.13-20260917", "cost": 1.7304e-05, "p": [0.87]}
+{"cls": "java.util.LinkedList", "sig": "java.util.ListIterator listIterator(int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7216e-05, "p": [0.11, 0.05, 0.86]}
+{"cls": "java.util.Locale$Builder", "sig": "java.util.Locale$Builder setExtension(char,java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 3.7422e-05, "p": [0.32, 0.46, 0.74, 0.93, 0.86]}
+{"cls": "java.util.Locale$Builder", "sig": "java.util.Locale$Builder setVariant(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7426e-05, "p": [0.72, 0.9, 0.88]}
+{"cls": "java.util.PriorityQueue", "sig": "java.lang.Object remove()", "model": "typesafe/jev-1.13-20260917", "cost": 1.701e-05, "p": [0.91]}
+{"cls": "java.util.Properties", "sig": "void load(java.io.Reader)", "model": "typesafe/jev-1.13-20260917", "cost": 2.2176e-05, "p": [0.95, 0.08]}
+{"cls": "java.util.Set", "sig": "java.util.Spliterator spliterator()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7052e-05, "p": [0.88]}
+{"cls": "java.util.Spliterators", "sig": "java.util.Spliterator spliterator(java.lang.Object[],int)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7426e-05, "p": [0.84, 0.24, 0.02]}
+{"cls": "java.util.StringTokenizer", "sig": "java.lang.String nextToken(java.lang.String)", "model": "typesafe/jev-1.13-20260917", "cost": 2.7258e-05, "p": [0.69, 0.29, 0.91]}
+{"cls": "java.util.Vector", "sig": "java.lang.Object clone()", "model": "typesafe/jev-1.13-20260917", "cost": 1.6842e-05, "p": [0.92]}
+{"cls": "java.util.concurrent.AbstractExecutorService", "sig": "java.util.concurrent.Future submit(java.lang.Runnable)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2802e-05, "p": [0.21, 0.33, 0.42, 0.07]}
+{"cls": "java.util.concurrent.ConcurrentHashMap", "sig": "java.util.Enumeration keys()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7136e-05, "p": [0.86]}
+{"cls": "java.util.concurrent.ConcurrentHashMap", "sig": "java.util.concurrent.ConcurrentHashMap$KeySetView keySet()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7514e-05, "p": [0.94]}
+{"cls": "java.util.concurrent.ConcurrentHashMap$KeySetView", "sig": "java.util.Iterator iterator()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7262e-05, "p": [0.86]}
+{"cls": "java.util.concurrent.ConcurrentLinkedQueue", "sig": "boolean contains(java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 3.2298e-05, "p": [0.13, 0.05, 0.28, 0.05]}
+{"cls": "java.util.concurrent.ConcurrentNavigableMap", "sig": "java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)", "model": "typesafe/jev-1.13-20260917", "cost": 5.8128e-05, "p": [0.28, 0.35, 0.11, 0.28, 0.36, 0.24, 0.68, 0.22, 0.21]}
+{"cls": "java.util.concurrent.ConcurrentNavigableMap", "sig": "java.util.Map$Entry lastEntry()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7346e-05, "p": [0.97]}
+{"cls": "java.util.concurrent.PriorityBlockingQueue", "sig": "java.lang.Object peek()", "model": "typesafe/jev-1.13-20260917", "cost": 1.7136e-05, "p": [0.88]}
+{"cls": "org.json.JSONArray", "sig": "org.json.JSONArray put(double)", "model": "typesafe/jev-1.13-20260917", "cost": 2.6754e-05, "p": [0.58, 0.88, 0.64]}
+{"cls": "org.json.JSONObject", "sig": "void <init>(org.json.JSONObject,java.lang.String[])", "model": "typesafe/jev-1.13-20260917", "cost": 3.2718e-05, "p": [0.94, 0.11, 0.35, 0.11]}

@@ -340,7 +340,27 @@ after the rebuild.
 - **Lesson for the paper:** the calibration layer caught the checker's errors (held-out wrong
   clearances stayed ≤ 2%); a bad oracle costs power, not validity.
 
-## 14. Next steps, in order
+## 14. Scaled corpus: 143 apps, α = 0.05 now certifiable (2026-09-30)
+
+Corpus: 216 downloaded apps; 147 build within the memory cap, 143 have hole-dependent verdicts.
+New apps are built without keeping facts (`analysis/run_android.py` extracts each APK into a
+temporary directory; `bench/scale.py` downloads in batches with a free-space guard). Many newer
+apps with large Kotlin/Jetpack bundles exceed the 8–12 GB cap (38 of 76 in the last batch; one
+measured app needed more than 12 GB): a cheaper heap model for bundled code is needed to go further.
+
+Sound baseline B2 clears 70.6% of 42,093 leak-free sinks; the hard slice is 29.4% (12,379 clean
+verdicts). App-level LTT, held-out, 200 splits:
+
+| Target | Jev (flow rule stated): cleared / apps with a wrong clearance | B7 frequency prior | B4 counting |
+| --- | --- | --- | --- |
+| α = 0.1, ε = 0.1 | 36.9% / 1.3% | 11.3% / 2.6% | 0% |
+| α = 0.05, ε = 0.1 | 30.6% / 0.6% | 6.3% / 0% | 0% |
+| α = 0.05, ε = 0.05 | **30.6% / 0.6%** | 6.3% / 0% | 0% |
+
+α = 0.05 at 95% confidence was not certifiable with 102 apps; with 143 it is. Total leak-free
+sinks cleared: 81.4% (α = 0.1) and 79.6% (α = 0.05), against 70.6% for B2.
+
+## 15. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
    bound as the score, and report realized FDR on held-out apps. Needs more apps (target 100+), so

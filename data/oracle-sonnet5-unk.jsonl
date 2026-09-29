@@ -4498,3 +4498,1110 @@
 {"cls": "org.xmlpull.v1.XmlPullParser", "sig": "void setInput(java.io.Reader)", "labels": [true, false], "cost": 0.000634}
 {"cls": "org.xmlpull.v1.XmlPullParserFactory", "sig": "org.xmlpull.v1.XmlPullParser newPullParser()", "labels": [true], "cost": 0.000536}
 {"cls": "org.xmlpull.v1.XmlPullParserFactory", "sig": "org.xmlpull.v1.XmlPullParserFactory newInstance(java.lang.String,java.lang.Class)", "labels": [false, false], "cost": 0.000672}
+{"cls": "android.accounts.AccountManager", "sig": "android.accounts.Account[] getAccounts()", "labels": [true], "cost": 0.0005}
+{"cls": "android.animation.LayoutTransition", "sig": "boolean isRunning()", "labels": [false], "cost": 0.000486}
+{"cls": "android.animation.ValueAnimator", "sig": "android.animation.ValueAnimator ofFloat(float[])", "labels": [true], "cost": 0.000514}
+{"cls": "android.animation.ValueAnimator", "sig": "boolean isPaused()", "labels": [false], "cost": 0.000486}
+{"cls": "android.app.ActionBar", "sig": "android.app.ActionBar$Tab newTab()", "labels": [true], "cost": 0.000498}
+{"cls": "android.app.ActionBar", "sig": "int getNavigationMode()", "labels": [true], "cost": 0.000482}
+{"cls": "android.app.ActionBar", "sig": "void addTab(android.app.ActionBar$Tab)", "labels": [true, false], "cost": 0.000652}
+{"cls": "android.app.ActionBar", "sig": "void setSelectedNavigationItem(int)", "labels": [true], "cost": 0.000504}
+{"cls": "android.app.ActionBar$Tab", "sig": "android.app.ActionBar$Tab setIcon(int)", "labels": [true, true, true], "cost": 0.002996}
+{"cls": "android.app.ActionBar$Tab", "sig": "android.app.ActionBar$Tab setTabListener(android.app.ActionBar$TabListener)", "labels": [false, true, true, false], "cost": 0.000884}
+{"cls": "android.app.ActionBar$Tab", "sig": "android.app.ActionBar$Tab setText(java.lang.CharSequence)", "labels": [true, true, true, false], "cost": 0.000846}
+{"cls": "android.app.Activity", "sig": "android.content.Context getBaseContext()", "labels": [true], "cost": 0.000486}
+{"cls": "android.app.Activity", "sig": "android.content.Intent registerReceiver(android.content.BroadcastReceiver,android.content.IntentFilter,int)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001918}
+{"cls": "android.app.Activity", "sig": "android.content.SharedPreferences getPreferences(int)", "labels": [false, false, false], "cost": 0.000722}
+{"cls": "android.app.Activity", "sig": "android.content.SharedPreferences getSharedPreferences(java.lang.String,int)", "labels": [false, false, false, false, false], "cost": 0.000936}
+{"cls": "android.app.Activity", "sig": "android.content.res.AssetManager getAssets()", "labels": [false], "cost": 0.000492}
+{"cls": "android.app.Activity", "sig": "android.content.res.TypedArray obtainStyledAttributes(int,int[])", "labels": [true, false, false, true, false, false, false], "cost": 0.001188}
+{"cls": "android.app.Activity", "sig": "android.os.Looper getMainLooper()", "labels": [false], "cost": 0.000488}
+{"cls": "android.app.Activity", "sig": "boolean shouldShowRequestPermissionRationale(java.lang.String)", "labels": [false, false, false], "cost": 0.000756}
+{"cls": "android.app.Activity", "sig": "java.io.File getCacheDir()", "labels": [false], "cost": 0.000484}
+{"cls": "android.app.Activity", "sig": "java.io.FileInputStream openFileInput(java.lang.String)", "labels": [false, false, false], "cost": 0.0007}
+{"cls": "android.app.Activity", "sig": "java.io.FileOutputStream openFileOutput(java.lang.String,int)", "labels": [true, false, false, false, false], "cost": 0.000932}
+{"cls": "android.app.Activity", "sig": "java.lang.ClassLoader getClassLoader()", "labels": [false], "cost": 0.000496}
+{"cls": "android.app.Activity", "sig": "java.lang.String getPackageName()", "labels": [true], "cost": 0.000484}
+{"cls": "android.app.Activity", "sig": "java.util.concurrent.Executor getMainExecutor()", "labels": [false], "cost": 0.0005}
+{"cls": "android.app.Activity", "sig": "void addContentView(android.view.View,android.view.ViewGroup$LayoutParams)", "labels": [true, false, false, false, false, false], "cost": 0.00115}
+{"cls": "android.app.Activity", "sig": "void onApplyThemeResource(android.content.res.Resources$Theme,int,boolean)", "labels": [true, false, false, false, false, false], "cost": 0.001276}
+{"cls": "android.app.Activity", "sig": "void registerComponentCallbacks(android.content.ComponentCallbacks)", "labels": [false, false], "cost": 0.000662}
+{"cls": "android.app.Activity", "sig": "void startManagingCursor(android.database.Cursor)", "labels": [false, false], "cost": 0.000676}
+{"cls": "android.app.Activity", "sig": "void unregisterReceiver(android.content.BroadcastReceiver)", "labels": [false, false], "cost": 0.000708}
+{"cls": "android.app.ActivityManager", "sig": "void getMemoryInfo(android.app.ActivityManager$MemoryInfo)", "labels": [false, true], "cost": 0.000744}
+{"cls": "android.app.ActivityOptions", "sig": "android.app.ActivityOptions setLaunchBounds(android.graphics.Rect)", "labels": [true, true, true, false], "cost": 0.000892}
+{"cls": "android.app.AlertDialog", "sig": "android.view.View findViewById(int)", "labels": [false, false, true], "cost": 0.000714}
+{"cls": "android.app.AlertDialog", "sig": "android.widget.Button getButton(int)", "labels": [false, false, true], "cost": 0.000716}
+{"cls": "android.app.AlertDialog$Builder", "sig": "android.app.AlertDialog show()", "labels": [true], "cost": 0.000498}
+{"cls": "android.app.AlertDialog$Builder", "sig": "android.app.AlertDialog$Builder setCustomTitle(android.view.View)", "labels": [true, true, true, false], "cost": 0.00087}
+{"cls": "android.app.AlertDialog$Builder", "sig": "android.app.AlertDialog$Builder setMultiChoiceItems(java.lang.CharSequence[],boolean[],android.content.DialogInterface$OnMultiChoiceClickListener)", "labels": [true, true, false, false, true, true, false, false, false, true, false, false, true, false, false, false], "cost": 0.002478}
+{"cls": "android.app.AlertDialog$Builder", "sig": "android.app.AlertDialog$Builder setNeutralButton(int,android.content.DialogInterface$OnClickListener)", "labels": [false, true, false, true, true, true, false], "cost": 0.001218}
+{"cls": "android.app.AlertDialog$Builder", "sig": "android.app.AlertDialog$Builder setOnCancelListener(android.content.DialogInterface$OnCancelListener)", "labels": [false, true, true, false], "cost": 0.001066}
+{"cls": "android.app.Application", "sig": "boolean stopService(android.content.Intent)", "labels": [false, false, false, false], "cost": 0.00079}
+{"cls": "android.app.Application", "sig": "java.lang.String getString(int,java.lang.Object[])", "labels": [false, false, false, true, false, false, false], "cost": 0.00129}
+{"cls": "android.app.Application", "sig": "void unbindService(android.content.ServiceConnection)", "labels": [false, false], "cost": 0.000636}
+{"cls": "android.app.DatePickerDialog", "sig": "android.content.Context getContext()", "labels": [true], "cost": 0.00049}
+{"cls": "android.app.Dialog", "sig": "void <init>(android.content.Context)", "labels": [true], "cost": 0.000506}
+{"cls": "android.app.Dialog", "sig": "void setTitle(int)", "labels": [false], "cost": 0.000488}
+{"cls": "android.app.DownloadManager", "sig": "android.database.Cursor query(android.app.DownloadManager$Query)", "labels": [true, false, true, false], "cost": 0.000902}
+{"cls": "android.app.DownloadManager", "sig": "int remove(long[])", "labels": [false, false, false, false], "cost": 0.000806}
+{"cls": "android.app.DownloadManager", "sig": "long addCompletedDownload(java.lang.String,java.lang.String,boolean,java.lang.String,java.lang.String,long,boolean)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002236}
+{"cls": "android.app.DownloadManager$Query", "sig": "android.app.DownloadManager$Query setFilterById(long[])", "labels": [true, true, true, false], "cost": 0.000792}
+{"cls": "android.app.DownloadManager$Request", "sig": "android.app.DownloadManager$Request setTitle(java.lang.CharSequence)", "labels": [true, true, true, false], "cost": 0.0009}
+{"cls": "android.app.DownloadManager$Request", "sig": "android.app.DownloadManager$Request setVisibleInDownloadsUi(boolean)", "labels": [false, true, true], "cost": 0.000716}
+{"cls": "android.app.Fragment", "sig": "void startActivityForResult(android.content.Intent,int,android.os.Bundle)", "labels": [false, false, false, false, false, false, false, false, false], "cost": 0.001544}
+{"cls": "android.app.IntentService", "sig": "android.content.Context getApplicationContext()", "labels": [true], "cost": 0.00049}
+{"cls": "android.app.IntentService", "sig": "java.lang.Object getSystemService(java.lang.String)", "labels": [false, false, false], "cost": 0.000746}
+{"cls": "android.app.IntentService", "sig": "void startActivity(android.content.Intent)", "labels": [false, false], "cost": 0.000666}
+{"cls": "android.app.ListActivity", "sig": "void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001968}
+{"cls": "android.app.ListFragment", "sig": "void onSaveInstanceState(android.os.Bundle)", "labels": [false, true], "cost": 0.000684}
+{"cls": "android.app.Notification$Action", "sig": "int getSemanticAction()", "labels": [true], "cost": 0.000484}
+{"cls": "android.app.Notification$Builder", "sig": "android.app.Notification$Builder addExtras(android.os.Bundle)", "labels": [true, true, true, false], "cost": 0.000966}
+{"cls": "android.app.Notification$Builder", "sig": "android.app.Notification$Builder setTicker(java.lang.CharSequence)", "labels": [true, true, true, false], "cost": 0.000892}
+{"cls": "android.app.NotificationChannel", "sig": "int getImportance()", "labels": [true], "cost": 0.00048}
+{"cls": "android.app.NotificationChannel", "sig": "void setLightColor(int)", "labels": [true], "cost": 0.000496}
+{"cls": "android.app.NotificationManager", "sig": "int getCurrentInterruptionFilter()", "labels": [false], "cost": 0.000496}
+{"cls": "android.app.ProgressDialog", "sig": "android.app.ProgressDialog show(android.content.Context,java.lang.CharSequence,java.lang.CharSequence,boolean)", "labels": [true, false, false, true, false, false, true, false, false, true, false, false, false], "cost": 0.001924}
+{"cls": "android.app.ProgressDialog", "sig": "void <init>(android.content.Context,int)", "labels": [true, true, false], "cost": 0.00071}
+{"cls": "android.app.ProgressDialog", "sig": "void setContentView(android.view.View)", "labels": [true, false], "cost": 0.00066}
+{"cls": "android.app.ProgressDialog", "sig": "void setProgress(int)", "labels": [true], "cost": 0.000494}
+{"cls": "android.app.Service", "sig": "android.app.Application getApplication()", "labels": [true], "cost": 0.00048}
+{"cls": "android.app.Service", "sig": "android.content.ContentResolver getContentResolver()", "labels": [true], "cost": 0.000492}
+{"cls": "android.app.Service", "sig": "java.lang.String getString(int,java.lang.Object[])", "labels": [false, false, false, true, false, false, false], "cost": 0.00129}
+{"cls": "android.app.TaskStackBuilder", "sig": "android.app.PendingIntent getPendingIntent(int,int)", "labels": [false, false, false, false, true], "cost": 0.000864}
+{"cls": "android.app.TaskStackBuilder", "sig": "android.app.TaskStackBuilder addNextIntentWithParentStack(android.content.Intent)", "labels": [true, true, true, false], "cost": 0.000842}
+{"cls": "android.app.UiModeManager", "sig": "float getContrast()", "labels": [false], "cost": 0.000478}
+{"cls": "android.app.UiModeManager", "sig": "int getCurrentModeType()", "labels": [false], "cost": 0.000486}
+{"cls": "android.app.WallpaperManager", "sig": "int setBitmap(android.graphics.Bitmap,android.graphics.Rect,boolean,int)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002468}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "boolean isAdminActive(android.content.ComponentName)", "labels": [false, false, false, false], "cost": 0.000972}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "boolean isProfileOwnerApp(java.lang.String)", "labels": [false, false, false], "cost": 0.000764}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "java.util.List getActiveAdmins()", "labels": [false], "cost": 0.000506}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "void removeActiveAdmin(android.content.ComponentName)", "labels": [false, false], "cost": 0.000654}
+{"cls": "android.app.job.JobService", "sig": "void setNotification(android.app.job.JobParameters,int,android.app.Notification,int)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001918}
+{"cls": "android.app.role.RoleManager", "sig": "android.content.Intent createRequestRoleIntent(java.lang.String)", "labels": [true, false, false], "cost": 0.000762}
+{"cls": "android.app.usage.UsageStatsManager", "sig": "int getAppStandbyBucket()", "labels": [false], "cost": 0.0005}
+{"cls": "android.appwidget.AppWidgetHostView", "sig": "int getAppWidgetId()", "labels": [true], "cost": 0.000498}
+{"cls": "android.appwidget.AppWidgetHostView", "sig": "void setAppWidget(int,android.appwidget.AppWidgetProviderInfo)", "labels": [true, false, true, false], "cost": 0.000982}
+{"cls": "android.appwidget.AppWidgetManager", "sig": "void updateAppWidget(android.content.ComponentName,android.widget.RemoteViews)", "labels": [false, false, false, false, false, false], "cost": 0.001332}
+{"cls": "android.appwidget.AppWidgetManager", "sig": "void updateAppWidget(int[],android.widget.RemoteViews)", "labels": [false, false, false, false, false, false], "cost": 0.001206}
+{"cls": "android.bluetooth.BluetoothAdapter", "sig": "android.bluetooth.BluetoothServerSocket listenUsingInsecureRfcommWithServiceRecord(java.lang.String,java.util.UUID)", "labels": [true, false, false, true, false, false, false], "cost": 0.0012}
+{"cls": "android.bluetooth.BluetoothAdapter", "sig": "android.bluetooth.BluetoothServerSocket listenUsingRfcommWithServiceRecord(java.lang.String,java.util.UUID)", "labels": [true, false, false, true, false, false, false], "cost": 0.001392}
+{"cls": "android.bluetooth.BluetoothAdapter", "sig": "boolean setName(java.lang.String)", "labels": [false, true, false], "cost": 0.0007}
+{"cls": "android.bluetooth.BluetoothAdapter", "sig": "java.lang.String getAddress()", "labels": [true], "cost": 0.000502}
+{"cls": "android.bluetooth.BluetoothAdapter", "sig": "java.lang.String getName()", "labels": [true], "cost": 0.000498}
+{"cls": "android.bluetooth.BluetoothDevice", "sig": "android.bluetooth.BluetoothGatt connectGatt(android.bluetooth.BluetoothGattConnectionSettings,java.util.concurrent.Executor,android.bluetooth.BluetoothGattCallback)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false], "cost": 0.003048}
+{"cls": "android.bluetooth.BluetoothGatt", "sig": "boolean writeCharacteristic(android.bluetooth.BluetoothGattCharacteristic)", "labels": [false, false, false, false], "cost": 0.000932}
+{"cls": "android.bluetooth.BluetoothGattCharacteristic", "sig": "boolean setValue(byte[])", "labels": [false, true, false, false], "cost": 0.000842}
+{"cls": "android.bluetooth.BluetoothManager", "sig": "int getConnectionState(android.bluetooth.BluetoothDevice,int)", "labels": [false, false, false, false, false, false, false], "cost": 0.001382}
+{"cls": "android.bluetooth.BluetoothServerSocket", "sig": "android.bluetooth.BluetoothSocket accept()", "labels": [true], "cost": 0.00052}
+{"cls": "android.bluetooth.BluetoothSocket", "sig": "java.io.InputStream getInputStream()", "labels": [true], "cost": 0.000506}
+{"cls": "android.content.ClipData$Item", "sig": "void <init>(java.lang.CharSequence,java.lang.String,android.content.Intent,android.net.Uri)", "labels": [true, false, false, true, false, false, false, true, false, false, true, false, false], "cost": 0.002142}
+{"cls": "android.content.ContentProviderClient", "sig": "int update(android.net.Uri,android.content.ContentValues,java.lang.String,java.lang.String[])", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.00299}
+{"cls": "android.content.ContentValues", "sig": "boolean containsKey(java.lang.String)", "labels": [false, false, false], "cost": 0.000688}
+{"cls": "android.content.ContentValues", "sig": "void remove(java.lang.String)", "labels": [false], "cost": 0.000506}
+{"cls": "android.content.Context", "sig": "android.content.Context createAttributionContext(java.lang.String)", "labels": [false, false, true], "cost": 0.000694}
+{"cls": "android.content.Context", "sig": "android.database.sqlite.SQLiteDatabase openOrCreateDatabase(java.lang.String,int,android.database.sqlite.SQLiteDatabase$CursorFactory)", "labels": [true, false, false, false, false, false, true, false, false, false], "cost": 0.001914}
+{"cls": "android.content.Context", "sig": "java.io.File getDataDir()", "labels": [false], "cost": 0.00048}
+{"cls": "android.content.Context", "sig": "void grantUriPermission(java.lang.String,android.net.Uri,int)", "labels": [false, false, false, false, false, false], "cost": 0.001048}
+{"cls": "android.content.Context", "sig": "void sendBroadcast(android.content.Intent,java.lang.String)", "labels": [false, false, false, false], "cost": 0.000898}
+{"cls": "android.content.Context", "sig": "void unregisterComponentCallbacks(android.content.ComponentCallbacks)", "labels": [false, false], "cost": 0.000664}
+{"cls": "android.content.ContextWrapper", "sig": "boolean bindService(android.content.Intent,android.content.ServiceConnection,int)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001792}
+{"cls": "android.content.ContextWrapper", "sig": "java.lang.String getString(int)", "labels": [false, false, true], "cost": 0.000664}
+{"cls": "android.content.ContextWrapper", "sig": "void setTheme(int)", "labels": [false], "cost": 0.000494}
+{"cls": "android.content.DialogInterface$OnCancelListener", "sig": "void onCancel(android.content.DialogInterface)", "labels": [false, false], "cost": 0.000654}
+{"cls": "android.content.SharedPreferences$Editor", "sig": "boolean commit()", "labels": [false], "cost": 0.000488}
+{"cls": "android.content.UriPermission", "sig": "android.net.Uri getUri()", "labels": [true], "cost": 0.000486}
+{"cls": "android.content.pm.LauncherActivityInfo", "sig": "long getFirstInstallTime()", "labels": [true], "cost": 0.000502}
+{"cls": "android.content.pm.LauncherApps", "sig": "android.content.pm.LauncherUserInfo getLauncherUserInfo(android.os.UserHandle)", "labels": [true, false, false, false], "cost": 0.00086}
+{"cls": "android.content.pm.LauncherApps", "sig": "void registerCallback(android.content.pm.LauncherApps$Callback)", "labels": [false, false], "cost": 0.000738}
+{"cls": "android.content.pm.LauncherApps", "sig": "void startShortcut(android.content.pm.ShortcutInfo,android.graphics.Rect,android.os.Bundle)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001926}
+{"cls": "android.content.pm.PackageInfo", "sig": "long getLongVersionCode()", "labels": [true], "cost": 0.000492}
+{"cls": "android.content.pm.PackageManager", "sig": "android.content.pm.PackageInfo getPackageInfo(java.lang.String,android.content.pm.PackageManager$PackageInfoFlags)", "labels": [true, false, false, false, false, false, false], "cost": 0.001302}
+{"cls": "android.content.pm.PackageManager", "sig": "android.content.pm.PermissionInfo getPermissionInfo(java.lang.String,int)", "labels": [true, false, false, false, false], "cost": 0.000902}
+{"cls": "android.content.pm.PackageManager", "sig": "android.graphics.drawable.Drawable getActivityIcon(android.content.ComponentName)", "labels": [true, false, false, false], "cost": 0.000848}
+{"cls": "android.content.pm.PackageManager", "sig": "boolean hasSigningCertificate(java.lang.String,byte[],int)", "labels": [false, false, false, false, false, false, false, false, false, false], "cost": 0.001634}
+{"cls": "android.content.pm.PackageManager", "sig": "int getComponentEnabledSetting(android.content.ComponentName)", "labels": [false, false, false, false], "cost": 0.00088}
+{"cls": "android.content.pm.PackageManager", "sig": "java.util.List queryIntentActivities(android.content.Intent,android.content.pm.PackageManager$ResolveInfoFlags)", "labels": [true, false, false, false, false, false, false, false, false], "cost": 0.001558}
+{"cls": "android.content.pm.PackageManager", "sig": "void setComponentEnabledSetting(android.content.ComponentName,int,int)", "labels": [false, false, false, false, false, false], "cost": 0.001238}
+{"cls": "android.content.pm.PackageStats", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000514}
+{"cls": "android.content.pm.ResolveInfo$DisplayNameComparator", "sig": "void <init>(android.content.pm.PackageManager)", "labels": [true], "cost": 0.000562}
+{"cls": "android.content.pm.ShortcutInfo", "sig": "java.lang.CharSequence getLongLabel()", "labels": [true], "cost": 0.00051}
+{"cls": "android.content.pm.SigningInfo", "sig": "android.content.pm.Signature[] getApkContentsSigners()", "labels": [true], "cost": 0.000516}
+{"cls": "android.content.pm.SigningInfo", "sig": "android.content.pm.Signature[] getSigningCertificateHistory()", "labels": [true], "cost": 0.00052}
+{"cls": "android.content.res.ColorStateList", "sig": "boolean isStateful()", "labels": [false], "cost": 0.000486}
+{"cls": "android.content.res.Resources", "sig": "android.content.res.XmlResourceParser getLayout(int)", "labels": [false, false, true], "cost": 0.00073}
+{"cls": "android.content.res.Resources", "sig": "java.lang.String getQuantityString(int,int)", "labels": [false, false, false, false, false], "cost": 0.000896}
+{"cls": "android.content.res.XmlResourceParser", "sig": "int getEventType()", "labels": [false], "cost": 0.000486}
+{"cls": "android.content.res.XmlResourceParser", "sig": "java.lang.String getText()", "labels": [true], "cost": 0.000492}
+{"cls": "android.database.DatabaseUtils", "sig": "java.lang.String dumpCurrentRowToString(android.database.Cursor)", "labels": [true], "cost": 0.000536}
+{"cls": "android.database.DatabaseUtils", "sig": "java.lang.String sqlEscapeString(java.lang.String)", "labels": [true], "cost": 0.000522}
+{"cls": "android.database.MatrixCursor$RowBuilder", "sig": "android.database.MatrixCursor$RowBuilder add(java.lang.String,java.lang.Object)", "labels": [false, false, false, true, true, true, false], "cost": 0.001292}
+{"cls": "android.database.sqlite.SQLiteDatabase", "sig": "int getVersion()", "labels": [true], "cost": 0.000494}
+{"cls": "android.database.sqlite.SQLiteDatabase", "sig": "long insertWithOnConflict(java.lang.String,java.lang.String,android.content.ContentValues,int)", "labels": [false, false, false, false, false, false, false, true, false, false, false, false, false], "cost": 0.001776}
+{"cls": "android.database.sqlite.SQLiteDatabase", "sig": "void beginTransactionWithListener(android.database.sqlite.SQLiteTransactionListener)", "labels": [false, false], "cost": 0.000726}
+{"cls": "android.database.sqlite.SQLiteStatement", "sig": "void bindBlob(int,byte[])", "labels": [false, false, true, false], "cost": 0.000856}
+{"cls": "android.database.sqlite.SQLiteStatement", "sig": "void bindNull(int)", "labels": [false], "cost": 0.000506}
+{"cls": "android.graphics.BitmapFactory", "sig": "android.graphics.Bitmap decodeFileDescriptor(java.io.FileDescriptor)", "labels": [true], "cost": 0.000558}
+{"cls": "android.graphics.BitmapRegionDecoder", "sig": "android.graphics.Bitmap decodeRegion(android.graphics.Rect,android.graphics.BitmapFactory$Options)", "labels": [true, false, false, true, false, false, true, false, false], "cost": 0.001516}
+{"cls": "android.graphics.BitmapRegionDecoder", "sig": "android.graphics.BitmapRegionDecoder newInstance(java.lang.String,boolean)", "labels": [true, false], "cost": 0.00064}
+{"cls": "android.graphics.Canvas", "sig": "boolean getClipBounds(android.graphics.Rect)", "labels": [false, false, false, true], "cost": 0.00082}
+{"cls": "android.graphics.Canvas", "sig": "int saveLayer(float,float,float,float,android.graphics.Paint)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002178}
+{"cls": "android.graphics.Canvas", "sig": "int saveLayer(float,float,float,float,android.graphics.Paint,int)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002494}
+{"cls": "android.graphics.Canvas", "sig": "void drawBitmap(android.graphics.Bitmap,android.graphics.Rect,android.graphics.RectF,android.graphics.Paint)", "labels": [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002868}
+{"cls": "android.graphics.Canvas", "sig": "void drawPaint(android.graphics.Paint)", "labels": [false, false], "cost": 0.000684}
+{"cls": "android.graphics.Canvas", "sig": "void drawPoints(float[],int,int,android.graphics.Paint)", "labels": [true, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001648}
+{"cls": "android.graphics.Canvas", "sig": "void drawText(char[],int,int,float,float,android.graphics.Paint)", "labels": [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.00248}
+{"cls": "android.graphics.Paint", "sig": "java.lang.String getFontVariationSettings()", "labels": [true], "cost": 0.000496}
+{"cls": "android.graphics.Paint", "sig": "void set(android.graphics.Paint)", "labels": [true, false], "cost": 0.000624}
+{"cls": "android.graphics.PorterDuffXfermode", "sig": "void <init>(android.graphics.PorterDuff$Mode)", "labels": [true], "cost": 0.000562}
+{"cls": "android.graphics.RectF", "sig": "boolean contains(float,float)", "labels": [false, false, false, false, true], "cost": 0.000882}
+{"cls": "android.graphics.drawable.BitmapDrawable", "sig": "void setTileModeXY(android.graphics.Shader$TileMode,android.graphics.Shader$TileMode)", "labels": [true, false, true, false, false, false], "cost": 0.001238}
+{"cls": "android.graphics.drawable.Drawable", "sig": "android.graphics.drawable.Drawable createFromPath(java.lang.String)", "labels": [true], "cost": 0.000536}
+{"cls": "android.graphics.drawable.DrawableContainer", "sig": "void setEnterFadeDuration(int)", "labels": [true], "cost": 0.000518}
+{"cls": "android.graphics.drawable.DrawableContainer", "sig": "void setExitFadeDuration(int)", "labels": [true], "cost": 0.000516}
+{"cls": "android.graphics.drawable.GradientDrawable", "sig": "android.graphics.drawable.Drawable$ConstantState getConstantState()", "labels": [true], "cost": 0.000532}
+{"cls": "android.graphics.drawable.GradientDrawable", "sig": "void setCornerRadii(float[])", "labels": [true, false], "cost": 0.000612}
+{"cls": "android.graphics.drawable.LayerDrawable", "sig": "android.graphics.Rect getBounds()", "labels": [true], "cost": 0.000508}
+{"cls": "android.graphics.drawable.LayerDrawable", "sig": "void draw(android.graphics.Canvas)", "labels": [false, false], "cost": 0.000648}
+{"cls": "android.graphics.drawable.RippleDrawable", "sig": "android.graphics.drawable.Drawable getDrawable(int)", "labels": [false, false, true], "cost": 0.000698}
+{"cls": "android.graphics.drawable.RippleDrawable", "sig": "void setRadius(int)", "labels": [true], "cost": 0.000506}
+{"cls": "android.graphics.drawable.StateListDrawable", "sig": "void setEnterFadeDuration(int)", "labels": [true], "cost": 0.000518}
+{"cls": "android.graphics.drawable.StateListDrawable", "sig": "void setExitFadeDuration(int)", "labels": [true], "cost": 0.000516}
+{"cls": "android.graphics.drawable.TransitionDrawable", "sig": "void setCrossFadeEnabled(boolean)", "labels": [false], "cost": 0.00053}
+{"cls": "android.graphics.drawable.TransitionDrawable", "sig": "void startTransition(int)", "labels": [true], "cost": 0.000508}
+{"cls": "android.graphics.fonts.FontStyle", "sig": "void <init>(int,int)", "labels": [true, true], "cost": 0.000596}
+{"cls": "android.graphics.fonts.FontVariationAxis", "sig": "float getStyleValue()", "labels": [true], "cost": 0.000498}
+{"cls": "android.graphics.fonts.FontVariationAxis", "sig": "java.lang.String getTag()", "labels": [true], "cost": 0.000502}
+{"cls": "android.graphics.fonts.FontVariationAxis", "sig": "java.lang.String toFontVariationSettings(android.graphics.fonts.FontVariationAxis[])", "labels": [true], "cost": 0.00059}
+{"cls": "android.graphics.fonts.FontVariationAxis", "sig": "void <init>(java.lang.String,float)", "labels": [true, true], "cost": 0.000622}
+{"cls": "android.hardware.Camera", "sig": "void autoFocus(android.hardware.Camera$AutoFocusCallback)", "labels": [false, false], "cost": 0.000692}
+{"cls": "android.hardware.Camera", "sig": "void setDisplayOrientation(int)", "labels": [true], "cost": 0.0005}
+{"cls": "android.hardware.Camera", "sig": "void setPreviewCallback(android.hardware.Camera$PreviewCallback)", "labels": [false, false], "cost": 0.000686}
+{"cls": "android.hardware.Camera", "sig": "void setPreviewDisplay(android.view.SurfaceHolder)", "labels": [false, false], "cost": 0.000658}
+{"cls": "android.hardware.Camera$Parameters", "sig": "int getExposureCompensation()", "labels": [true], "cost": 0.000494}
+{"cls": "android.hardware.Camera$Parameters", "sig": "void setFocusMode(java.lang.String)", "labels": [true], "cost": 0.000524}
+{"cls": "android.hardware.Camera$Parameters", "sig": "void setPreviewFormat(int)", "labels": [true], "cost": 0.000508}
+{"cls": "android.hardware.Camera$Parameters", "sig": "void unflatten(java.lang.String)", "labels": [true], "cost": 0.00052}
+{"cls": "android.hardware.SensorManager", "sig": "boolean getRotationMatrix(float[],float[],float[],float[])", "labels": [false, false, false, false, false, false, false, false, false, true, true, false, false, true, true, false], "cost": 0.004802}
+{"cls": "android.hardware.SensorManager", "sig": "float getInclination(float[])", "labels": [true], "cost": 0.000488}
+{"cls": "android.hardware.SensorManager", "sig": "float[] getOrientation(float[],float[])", "labels": [true, true, true, false], "cost": 0.003422}
+{"cls": "android.hardware.SensorManager", "sig": "java.util.List getSensorList(int)", "labels": [false, false, true], "cost": 0.000718}
+{"cls": "android.hardware.biometrics.BiometricPrompt$Builder", "sig": "android.hardware.biometrics.BiometricPrompt$Builder setDescription(java.lang.CharSequence)", "labels": [false, true, true, false], "cost": 0.00089}
+{"cls": "android.hardware.display.DisplayManager", "sig": "android.view.Display getDisplay(int)", "labels": [false, false, true], "cost": 0.000676}
+{"cls": "android.hardware.usb.UsbDeviceConnection", "sig": "java.lang.String getSerial()", "labels": [true], "cost": 0.000506}
+{"cls": "android.hardware.usb.UsbManager", "sig": "java.util.HashMap getDeviceList()", "labels": [true], "cost": 0.000504}
+{"cls": "android.icu.util.Calendar", "sig": "boolean after(java.lang.Object)", "labels": [false, false, false, false], "cost": 0.000846}
+{"cls": "android.icu.util.Calendar", "sig": "long getTimeInMillis()", "labels": [true], "cost": 0.000488}
+{"cls": "android.icu.util.Calendar", "sig": "void set(int,int)", "labels": [true, true], "cost": 0.000994}
+{"cls": "android.icu.util.TimeZone", "sig": "int getOffset(long)", "labels": [true, false, true], "cost": 0.00066}
+{"cls": "android.media.AudioAttributes", "sig": "int getFlags()", "labels": [true], "cost": 0.00048}
+{"cls": "android.media.AudioFocusRequest$Builder", "sig": "android.media.AudioFocusRequest$Builder setAudioAttributes(android.media.AudioAttributes)", "labels": [true, true, true, false], "cost": 0.000932}
+{"cls": "android.media.AudioFocusRequest$Builder", "sig": "android.media.AudioFocusRequest$Builder setOnAudioFocusChangeListener(android.media.AudioManager$OnAudioFocusChangeListener,android.os.Handler)", "labels": [true, true, false, true, true, false, true, false, false], "cost": 0.001844}
+{"cls": "android.media.AudioFocusRequest$Builder", "sig": "android.media.AudioFocusRequest$Builder setWillPauseWhenDucked(boolean)", "labels": [true, true, true], "cost": 0.00073}
+{"cls": "android.media.AudioManager", "sig": "boolean isBluetoothScoAvailableOffCall()", "labels": [false], "cost": 0.000504}
+{"cls": "android.media.AudioManager", "sig": "int abandonAudioFocus(android.media.AudioManager$OnAudioFocusChangeListener)", "labels": [false, false, false, false], "cost": 0.000932}
+{"cls": "android.media.AudioManager", "sig": "int getMode()", "labels": [false], "cost": 0.000474}
+{"cls": "android.media.AudioManager", "sig": "int getRingerMode()", "labels": [false], "cost": 0.00048}
+{"cls": "android.media.AudioManager", "sig": "int getStreamMaxVolume(int)", "labels": [false, false, false], "cost": 0.000716}
+{"cls": "android.media.AudioManager", "sig": "int getStreamVolume(int)", "labels": [false, false, false], "cost": 0.00203}
+{"cls": "android.media.AudioManager", "sig": "int getVibrateSetting(int)", "labels": [false, false, true], "cost": 0.000712}
+{"cls": "android.media.AudioManager", "sig": "int requestAudioFocus(android.media.AudioFocusRequest)", "labels": [false, false, false, false], "cost": 0.0009}
+{"cls": "android.media.AudioManager", "sig": "int requestAudioFocus(android.media.AudioManager$OnAudioFocusChangeListener,int,int)", "labels": [false, false, false, false, false, false, false, false, false, false], "cost": 0.001718}
+{"cls": "android.media.AudioManager", "sig": "void addOnModeChangedListener(java.util.concurrent.Executor,android.media.AudioManager$OnModeChangedListener)", "labels": [false, false, false, false, false, false], "cost": 0.001256}
+{"cls": "android.media.AudioManager", "sig": "void setStreamVolume(int,int,int)", "labels": [false, false, false], "cost": 0.000738}
+{"cls": "android.media.AudioRecord", "sig": "int getState()", "labels": [false], "cost": 0.000474}
+{"cls": "android.media.AudioRecord", "sig": "void <init>(int,int,int,int,int)", "labels": [false, false, false, false, false], "cost": 0.000924}
+{"cls": "android.media.AudioTrack", "sig": "int getAudioFormat()", "labels": [true], "cost": 0.000484}
+{"cls": "android.media.AudioTrack", "sig": "int getMinBufferSize(int,int,int)", "labels": [false, false, false], "cost": 0.00071}
+{"cls": "android.media.AudioTrack", "sig": "int setStereoVolume(float,float)", "labels": [false, false, false, false, false], "cost": 0.00089}
+{"cls": "android.media.AudioTrack", "sig": "int write(byte[],int,int)", "labels": [false, true, false, false, false, false, false, false, false, false], "cost": 0.00147}
+{"cls": "android.media.AudioTrack", "sig": "void <init>(int,int,int,int,int,int)", "labels": [true, true, true, true, true, true], "cost": 0.00115}
+{"cls": "android.media.MediaDescription", "sig": "android.net.Uri getMediaUri()", "labels": [true], "cost": 0.000494}
+{"cls": "android.media.MediaDescription", "sig": "java.lang.String getMediaId()", "labels": [true], "cost": 0.00049}
+{"cls": "android.media.MediaFormat", "sig": "android.media.MediaFormat createVideoFormat(java.lang.String,int,int)", "labels": [true, true, true], "cost": 0.000696}
+{"cls": "android.media.MediaFormat", "sig": "java.nio.ByteBuffer getByteBuffer(java.lang.String)", "labels": [false, false, true], "cost": 0.000764}
+{"cls": "android.media.MediaFormat", "sig": "void setByteBuffer(java.lang.String,java.nio.ByteBuffer)", "labels": [true, false, true, false], "cost": 0.000946}
+{"cls": "android.media.MediaMetadata", "sig": "java.lang.String getString(java.lang.String)", "labels": [false, false, true], "cost": 0.000694}
+{"cls": "android.media.MediaPlayer", "sig": "int getCurrentPosition()", "labels": [true], "cost": 0.000488}
+{"cls": "android.media.MediaPlayer", "sig": "int getDuration()", "labels": [true], "cost": 0.00048}
+{"cls": "android.media.MediaPlayer", "sig": "void <init>(android.content.Context)", "labels": [false], "cost": 0.000512}
+{"cls": "android.media.MediaPlayer", "sig": "void setAudioSessionId(int)", "labels": [true], "cost": 0.000502}
+{"cls": "android.media.MediaPlayer", "sig": "void setOnCompletionListener(android.media.MediaPlayer$OnCompletionListener)", "labels": [true, false], "cost": 0.00076}
+{"cls": "android.media.MediaPlayer", "sig": "void setOnErrorListener(android.media.MediaPlayer$OnErrorListener)", "labels": [true, false], "cost": 0.000702}
+{"cls": "android.media.MediaPlayer", "sig": "void setOnPreparedListener(android.media.MediaPlayer$OnPreparedListener)", "labels": [true, false], "cost": 0.00071}
+{"cls": "android.media.MediaRecorder", "sig": "void setCamera(android.hardware.Camera)", "labels": [true, false], "cost": 0.000684}
+{"cls": "android.media.MediaRecorder", "sig": "void setOnInfoListener(android.media.MediaRecorder$OnInfoListener)", "labels": [true, false], "cost": 0.000752}
+{"cls": "android.media.MediaRecorder", "sig": "void setOutputFile(java.io.FileDescriptor)", "labels": [true, false], "cost": 0.00065}
+{"cls": "android.media.MediaRecorder", "sig": "void setOutputFile(java.lang.String)", "labels": [true], "cost": 0.000518}
+{"cls": "android.media.MediaRecorder", "sig": "void setPreviewDisplay(android.view.Surface)", "labels": [true, false], "cost": 0.000682}
+{"cls": "android.media.MediaRecorder", "sig": "void setVideoEncoder(int)", "labels": [true], "cost": 0.000502}
+{"cls": "android.media.MediaRecorder", "sig": "void setVideoEncodingBitRate(int)", "labels": [true], "cost": 0.00051}
+{"cls": "android.media.MediaRecorder", "sig": "void setVideoFrameRate(int)", "labels": [true], "cost": 0.000504}
+{"cls": "android.media.MediaRecorder", "sig": "void setVideoSize(int,int)", "labels": [true, true], "cost": 0.000594}
+{"cls": "android.media.RingtoneManager", "sig": "void setActualDefaultRingtoneUri(android.content.Context,int,android.net.Uri)", "labels": [false, false, false, false], "cost": 0.000884}
+{"cls": "android.media.SoundPool", "sig": "int load(android.content.Context,int,int)", "labels": [false, false, false, false, false, false, false, false, false, false], "cost": 0.00139}
+{"cls": "android.media.SoundPool", "sig": "int play(int,float,float,int,int,float)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001538}
+{"cls": "android.media.SoundPool", "sig": "void <init>(int,int,int)", "labels": [false, false, false], "cost": 0.00073}
+{"cls": "android.media.ToneGenerator", "sig": "boolean startTone(int)", "labels": [false, true, false], "cost": 0.00066}
+{"cls": "android.media.ToneGenerator", "sig": "void <init>(int,int)", "labels": [true, true], "cost": 0.000588}
+{"cls": "android.media.VolumeProvider", "sig": "void <init>(int,int,int)", "labels": [true, true, true], "cost": 0.000684}
+{"cls": "android.media.VolumeProvider", "sig": "void <init>(int,int,int,java.lang.String)", "labels": [true, true, true, true], "cost": 0.00085}
+{"cls": "android.media.VolumeProvider", "sig": "void setCurrentVolume(int)", "labels": [true], "cost": 0.000502}
+{"cls": "android.media.audiofx.AudioEffect", "sig": "int setEnabled(boolean)", "labels": [false, true, true], "cost": 0.00073}
+{"cls": "android.media.audiofx.Equalizer", "sig": "int getCenterFreq(short)", "labels": [false, false, true], "cost": 0.00067}
+{"cls": "android.media.audiofx.Equalizer", "sig": "short getBandLevel(short)", "labels": [false, false, true], "cost": 0.003668}
+{"cls": "android.media.audiofx.Equalizer", "sig": "short getNumberOfBands()", "labels": [true], "cost": 0.000494}
+{"cls": "android.media.audiofx.Equalizer", "sig": "short[] getBandLevelRange()", "labels": [true], "cost": 0.000498}
+{"cls": "android.media.audiofx.Equalizer", "sig": "void <init>(int,int)", "labels": [false, false], "cost": 0.000594}
+{"cls": "android.media.audiofx.Equalizer", "sig": "void setBandLevel(short,short)", "labels": [true, true], "cost": 0.00158}
+{"cls": "android.media.browse.MediaBrowser", "sig": "void getItem(java.lang.String,android.media.browse.MediaBrowser$ItemCallback)", "labels": [false, true, false, false], "cost": 0.001018}
+{"cls": "android.media.browse.MediaBrowser", "sig": "void subscribe(java.lang.String,android.os.Bundle,android.media.browse.MediaBrowser$SubscriptionCallback)", "labels": [true, false, true, true, true, false, false, false, false], "cost": 0.001884}
+{"cls": "android.media.browse.MediaBrowser", "sig": "void unsubscribe(java.lang.String,android.media.browse.MediaBrowser$SubscriptionCallback)", "labels": [false, false, false, false], "cost": 0.001048}
+{"cls": "android.media.session.MediaController", "sig": "android.media.session.MediaController$PlaybackInfo getPlaybackInfo()", "labels": [true], "cost": 0.000524}
+{"cls": "android.media.session.MediaController", "sig": "android.media.session.MediaController$TransportControls getTransportControls()", "labels": [true], "cost": 0.000512}
+{"cls": "android.media.session.MediaController", "sig": "android.media.session.PlaybackState getPlaybackState()", "labels": [true], "cost": 0.000506}
+{"cls": "android.media.session.MediaController", "sig": "java.util.List getQueue()", "labels": [true], "cost": 0.000486}
+{"cls": "android.media.session.MediaController", "sig": "void registerCallback(android.media.session.MediaController$Callback,android.os.Handler)", "labels": [false, false, false, false, false, false], "cost": 0.001148}
+{"cls": "android.media.session.MediaSession", "sig": "void sendSessionEvent(java.lang.String,android.os.Bundle)", "labels": [false, false, false, false], "cost": 0.000918}
+{"cls": "android.media.session.MediaSession", "sig": "void setExtras(android.os.Bundle)", "labels": [true, false], "cost": 0.000678}
+{"cls": "android.media.session.MediaSession", "sig": "void setPlaybackState(android.media.session.PlaybackState)", "labels": [true, false], "cost": 0.000658}
+{"cls": "android.media.session.MediaSession", "sig": "void setPlaybackToLocal(android.media.AudioAttributes)", "labels": [true, false], "cost": 0.000658}
+{"cls": "android.media.session.MediaSession", "sig": "void setPlaybackToRemote(android.media.VolumeProvider)", "labels": [true, false], "cost": 0.000658}
+{"cls": "android.media.session.MediaSession", "sig": "void setQueueTitle(java.lang.CharSequence)", "labels": [true, false], "cost": 0.000696}
+{"cls": "android.media.session.MediaSession", "sig": "void setSessionActivity(android.app.PendingIntent)", "labels": [true, false], "cost": 0.000696}
+{"cls": "android.media.session.MediaSession$QueueItem", "sig": "android.media.MediaDescription getDescription()", "labels": [true], "cost": 0.00051}
+{"cls": "android.media.session.MediaSessionManager", "sig": "java.util.List getActiveSessions(android.content.ComponentName)", "labels": [false, false, false, false], "cost": 0.003764}
+{"cls": "android.media.session.MediaSessionManager", "sig": "void addOnActiveSessionsChangedListener(android.media.session.MediaSessionManager$OnActiveSessionsChangedListener,android.content.ComponentName)", "labels": [false, false, false, false, false, false], "cost": 0.001346}
+{"cls": "android.media.session.PlaybackState", "sig": "java.util.List getCustomActions()", "labels": [true], "cost": 0.000494}
+{"cls": "android.media.session.PlaybackState$Builder", "sig": "android.media.session.PlaybackState build()", "labels": [true], "cost": 0.000506}
+{"cls": "android.media.session.PlaybackState$Builder", "sig": "android.media.session.PlaybackState$Builder addCustomAction(android.media.session.PlaybackState$CustomAction)", "labels": [true, true, true, false], "cost": 0.00107}
+{"cls": "android.media.session.PlaybackState$Builder", "sig": "android.media.session.PlaybackState$Builder setActions(long)", "labels": [true, true, true], "cost": 0.000696}
+{"cls": "android.media.session.PlaybackState$Builder", "sig": "android.media.session.PlaybackState$Builder setActiveQueueItemId(long)", "labels": [true, true, true], "cost": 0.00071}
+{"cls": "android.media.session.PlaybackState$Builder", "sig": "android.media.session.PlaybackState$Builder setBufferedPosition(long)", "labels": [true, true, true], "cost": 0.000706}
+{"cls": "android.media.session.PlaybackState$Builder", "sig": "android.media.session.PlaybackState$Builder setErrorMessage(java.lang.CharSequence)", "labels": [true, true, true, false], "cost": 0.000868}
+{"cls": "android.media.session.PlaybackState$Builder", "sig": "android.media.session.PlaybackState$Builder setExtras(android.os.Bundle)", "labels": [true, true, true, false], "cost": 0.000846}
+{"cls": "android.media.session.PlaybackState$Builder", "sig": "android.media.session.PlaybackState$Builder setState(int,long,float,long)", "labels": [true, true, true, true, true, true, true, true, true], "cost": 0.001228}
+{"cls": "android.media.session.PlaybackState$CustomAction$Builder", "sig": "android.media.session.PlaybackState$CustomAction build()", "labels": [true], "cost": 0.00053}
+{"cls": "android.media.session.PlaybackState$CustomAction$Builder", "sig": "android.media.session.PlaybackState$CustomAction$Builder setExtras(android.os.Bundle)", "labels": [true, true, true, false], "cost": 0.00092}
+{"cls": "android.media.session.PlaybackState$CustomAction$Builder", "sig": "void <init>(java.lang.String,java.lang.CharSequence,int)", "labels": [true, false, true, true, false], "cost": 0.001042}
+{"cls": "android.net.ConnectivityManager", "sig": "android.net.NetworkInfo getNetworkInfo(int)", "labels": [false, false, false], "cost": 0.003328}
+{"cls": "android.net.ConnectivityManager", "sig": "android.net.NetworkInfo[] getAllNetworkInfo()", "labels": [false], "cost": 0.000518}
+{"cls": "android.net.ConnectivityManager", "sig": "int getRestrictBackgroundStatus()", "labels": [false], "cost": 0.0005}
+{"cls": "android.net.MailTo", "sig": "android.net.MailTo parse(java.lang.String)", "labels": [true], "cost": 0.000506}
+{"cls": "android.net.MailTo", "sig": "java.lang.String getTo()", "labels": [true], "cost": 0.000482}
+{"cls": "android.net.NetworkCapabilities", "sig": "android.net.TransportInfo getTransportInfo()", "labels": [true], "cost": 0.000508}
+{"cls": "android.net.NetworkInfo", "sig": "boolean isAvailable()", "labels": [false], "cost": 0.000486}
+{"cls": "android.net.NetworkInfo", "sig": "boolean isConnectedOrConnecting()", "labels": [true], "cost": 0.000498}
+{"cls": "android.net.NetworkInfo", "sig": "boolean isFailover()", "labels": [false], "cost": 0.000484}
+{"cls": "android.net.nsd.NsdManager", "sig": "void registerService(android.net.nsd.NsdServiceInfo,int,android.net.nsd.NsdManager$RegistrationListener)", "labels": [false, false, false, false, false, false, false, false, false], "cost": 0.001672}
+{"cls": "android.net.nsd.NsdManager", "sig": "void resolveService(android.net.nsd.NsdServiceInfo,android.net.nsd.NsdManager$ResolveListener)", "labels": [false, false, false, false, false, false], "cost": 0.001312}
+{"cls": "android.net.nsd.NsdServiceInfo", "sig": "int getPort()", "labels": [true], "cost": 0.00049}
+{"cls": "android.net.nsd.NsdServiceInfo", "sig": "java.lang.String getServiceName()", "labels": [true], "cost": 0.000504}
+{"cls": "android.net.nsd.NsdServiceInfo", "sig": "java.net.InetAddress getHost()", "labels": [true], "cost": 0.000506}
+{"cls": "android.net.nsd.NsdServiceInfo", "sig": "void setPort(int)", "labels": [true], "cost": 0.000504}
+{"cls": "android.net.nsd.NsdServiceInfo", "sig": "void setServiceName(java.lang.String)", "labels": [true], "cost": 0.000528}
+{"cls": "android.net.nsd.NsdServiceInfo", "sig": "void setServiceType(java.lang.String)", "labels": [true], "cost": 0.000528}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "int getEapMethod()", "labels": [true], "cost": 0.000502}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "int getPhase2Method()", "labels": [true], "cost": 0.000504}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "java.lang.String getAnonymousIdentity()", "labels": [true], "cost": 0.00052}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "java.lang.String getIdentity()", "labels": [true], "cost": 0.00051}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "java.lang.String getSubjectMatch()", "labels": [true], "cost": 0.000516}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "java.security.cert.X509Certificate getCaCertificate()", "labels": [true], "cost": 0.000528}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "java.security.cert.X509Certificate getClientCertificate()", "labels": [true], "cost": 0.000528}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "void setAnonymousIdentity(java.lang.String)", "labels": [true], "cost": 0.000544}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "void setCaCertificate(java.security.cert.X509Certificate)", "labels": [true, false], "cost": 0.000682}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "void setClientKeyEntry(java.security.PrivateKey,java.security.cert.X509Certificate)", "labels": [true, false, true, false, false, false], "cost": 0.001196}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "void setIdentity(java.lang.String)", "labels": [true], "cost": 0.000534}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "void setPassword(java.lang.String)", "labels": [true], "cost": 0.000532}
+{"cls": "android.net.wifi.WifiEnterpriseConfig", "sig": "void setSubjectMatch(java.lang.String)", "labels": [true], "cost": 0.00054}
+{"cls": "android.net.wifi.WifiInfo", "sig": "int getLinkSpeed()", "labels": [true], "cost": 0.000494}
+{"cls": "android.net.wifi.WifiManager", "sig": "android.net.wifi.WifiManager$MulticastLock createMulticastLock(java.lang.String)", "labels": [true, false, false], "cost": 0.000736}
+{"cls": "android.net.wifi.WifiManager", "sig": "android.net.wifi.WifiManager$WifiLock createWifiLock(int,java.lang.String)", "labels": [false, false, true, false, false], "cost": 0.00096}
+{"cls": "android.net.wifi.WifiManager", "sig": "boolean removeNetwork(int)", "labels": [false, false, false], "cost": 0.00072}
+{"cls": "android.net.wifi.WifiManager", "sig": "boolean saveConfiguration()", "labels": [false], "cost": 0.000494}
+{"cls": "android.net.wifi.WifiManager", "sig": "int addNetwork(android.net.wifi.WifiConfiguration)", "labels": [false, false, false, false], "cost": 0.000876}
+{"cls": "android.net.wifi.WifiManager", "sig": "int getWifiState()", "labels": [false], "cost": 0.000486}
+{"cls": "android.net.wifi.WifiManager", "sig": "java.util.List getScanResults()", "labels": [true], "cost": 0.000494}
+{"cls": "android.net.wifi.WifiManager$WifiLock", "sig": "boolean isHeld()", "labels": [false], "cost": 0.0005}
+{"cls": "android.nfc.NfcAdapter", "sig": "android.nfc.NfcAdapter getDefaultAdapter(android.content.Context)", "labels": [false], "cost": 0.00054}
+{"cls": "android.nfc.NfcAdapter", "sig": "void disableForegroundDispatch(android.app.Activity)", "labels": [false, false], "cost": 0.000638}
+{"cls": "android.nfc.NfcAdapter", "sig": "void setNdefPushMessageCallback(android.nfc.NfcAdapter$CreateNdefMessageCallback,android.app.Activity,android.app.Activity[])", "labels": [false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002372}
+{"cls": "android.os.AsyncTask", "sig": "void onPostExecute(java.lang.Object)", "labels": [false, false], "cost": 0.000674}
+{"cls": "android.os.CancellationSignal", "sig": "void setOnCancelListener(android.os.CancellationSignal$OnCancelListener)", "labels": [true, false], "cost": 0.000752}
+{"cls": "android.os.Handler", "sig": "boolean postAtTime(java.lang.Runnable,java.lang.Object,long)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.00208}
+{"cls": "android.os.Handler", "sig": "void <init>(android.os.Looper,android.os.Handler$Callback)", "labels": [false, false, true, false], "cost": 0.001032}
+{"cls": "android.os.IBinder", "sig": "boolean pingBinder()", "labels": [false], "cost": 0.00048}
+{"cls": "android.os.LocaleList", "sig": "java.util.Locale getFirstMatch(java.lang.String[])", "labels": [true, false, true, false], "cost": 0.000866}
+{"cls": "android.os.Looper", "sig": "java.lang.Thread getThread()", "labels": [true], "cost": 0.000484}
+{"cls": "android.os.ParcelFileDescriptor", "sig": "android.os.ParcelFileDescriptor open(java.io.File,int,android.os.Handler,android.os.ParcelFileDescriptor$OnCloseListener)", "labels": [true, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002046}
+{"cls": "android.os.ParcelFileDescriptor", "sig": "void writeToParcel(android.os.Parcel,int)", "labels": [false, false, false, true], "cost": 0.000892}
+{"cls": "android.os.Parcelable$Creator", "sig": "java.lang.Object[] newArray(int)", "labels": [false, false, false], "cost": 0.000726}
+{"cls": "android.os.RemoteCallbackList", "sig": "android.os.IInterface getBroadcastItem(int)", "labels": [false, false, true], "cost": 0.002094}
+{"cls": "android.os.RemoteCallbackList", "sig": "int beginBroadcast()", "labels": [false], "cost": 0.00049}
+{"cls": "android.os.ResultReceiver", "sig": "void writeToParcel(android.os.Parcel,int)", "labels": [false, false, false, true], "cost": 0.000974}
+{"cls": "android.os.UserHandle", "sig": "android.os.UserHandle getUserHandleForUid(int)", "labels": [true], "cost": 0.000504}
+{"cls": "android.os.UserManager", "sig": "boolean isQuietModeEnabled(android.os.UserHandle)", "labels": [false, false, false, false], "cost": 0.000874}
+{"cls": "android.os.UserManager", "sig": "boolean requestQuietModeEnabled(boolean,android.os.UserHandle)", "labels": [false, false, false, false, false, false, false], "cost": 0.001258}
+{"cls": "android.os.Vibrator", "sig": "void vibrate(long[],int)", "labels": [false, false, false, false], "cost": 0.00092}
+{"cls": "android.preference.CheckBoxPreference", "sig": "void <init>(android.content.Context)", "labels": [true], "cost": 0.000518}
+{"cls": "android.preference.CheckBoxPreference", "sig": "void setDefaultValue(java.lang.Object)", "labels": [true, false], "cost": 0.000684}
+{"cls": "android.preference.DialogPreference", "sig": "void <init>(android.content.Context,android.util.AttributeSet)", "labels": [true, false, true, false], "cost": 0.000934}
+{"cls": "android.preference.ListPreference", "sig": "java.lang.CharSequence getEntry()", "labels": [true], "cost": 0.000496}
+{"cls": "android.preference.ListPreference", "sig": "void setEnabled(boolean)", "labels": [false], "cost": 0.000502}
+{"cls": "android.preference.Preference", "sig": "android.content.Context getContext()", "labels": [true], "cost": 0.000482}
+{"cls": "android.preference.Preference", "sig": "java.lang.String getKey()", "labels": [true], "cost": 0.000482}
+{"cls": "android.preference.Preference", "sig": "void <init>(android.content.Context)", "labels": [false], "cost": 0.000506}
+{"cls": "android.preference.Preference", "sig": "void setDefaultValue(java.lang.Object)", "labels": [true, false], "cost": 0.000622}
+{"cls": "android.preference.Preference", "sig": "void setKey(java.lang.String)", "labels": [true], "cost": 0.000506}
+{"cls": "android.preference.PreferenceActivity", "sig": "android.content.SharedPreferences getSharedPreferences(java.lang.String,int)", "labels": [false, false, false, false, false], "cost": 0.000948}
+{"cls": "android.preference.PreferenceActivity", "sig": "android.preference.PreferenceManager getPreferenceManager()", "labels": [true], "cost": 0.000514}
+{"cls": "android.preference.PreferenceActivity", "sig": "android.preference.PreferenceScreen getPreferenceScreen()", "labels": [true], "cost": 0.000518}
+{"cls": "android.preference.PreferenceActivity", "sig": "java.lang.String getString(int)", "labels": [false, false, false], "cost": 0.003088}
+{"cls": "android.preference.PreferenceActivity", "sig": "void setPreferenceScreen(android.preference.PreferenceScreen)", "labels": [true, false], "cost": 0.000672}
+{"cls": "android.preference.PreferenceCategory", "sig": "boolean addPreference(android.preference.Preference)", "labels": [false, true, false, false], "cost": 0.000864}
+{"cls": "android.preference.PreferenceCategory", "sig": "int getPreferenceCount()", "labels": [true], "cost": 0.000492}
+{"cls": "android.preference.PreferenceCategory", "sig": "void <init>(android.content.Context)", "labels": [false], "cost": 0.000516}
+{"cls": "android.preference.PreferenceGroup", "sig": "boolean addPreference(android.preference.Preference)", "labels": [false, true, false, false], "cost": 0.000864}
+{"cls": "android.preference.PreferenceManager", "sig": "void setDefaultValues(android.content.Context,int,boolean)", "labels": [false, false], "cost": 0.000638}
+{"cls": "android.preference.PreferenceScreen", "sig": "android.content.Context getContext()", "labels": [true], "cost": 0.000492}
+{"cls": "android.preference.PreferenceScreen", "sig": "android.preference.Preference findPreference(java.lang.CharSequence)", "labels": [false, false, true, false], "cost": 0.00089}
+{"cls": "android.print.PrintManager", "sig": "android.print.PrintJob print(java.lang.String,android.print.PrintDocumentAdapter,android.print.PrintAttributes)", "labels": [true, false, false, false, true, false, false, true, false, false, false, false, false], "cost": 0.001958}
+{"cls": "android.provider.ContactsContract$Contacts", "sig": "java.io.InputStream openContactPhotoInputStream(android.content.ContentResolver,android.net.Uri)", "labels": [false, false, true, false], "cost": 0.00096}
+{"cls": "android.provider.ContactsContract$Contacts", "sig": "void markAsContacted(android.content.ContentResolver,long)", "labels": [false], "cost": 0.000546}
+{"cls": "android.provider.DocumentsProvider", "sig": "android.content.Context getContext()", "labels": [false], "cost": 0.000492}
+{"cls": "android.provider.MediaStore", "sig": "android.app.PendingIntent createDeleteRequest(android.content.ContentResolver,java.util.Collection)", "labels": [false, false, true, false], "cost": 0.000896}
+{"cls": "android.provider.MediaStore$Audio$Artists$Albums", "sig": "android.net.Uri getContentUri(java.lang.String,long)", "labels": [true, true], "cost": 0.001274}
+{"cls": "android.provider.MediaStore$Audio$Genres$Members", "sig": "android.net.Uri getContentUri(java.lang.String,long)", "labels": [true, true], "cost": 0.000622}
+{"cls": "android.provider.MediaStore$Audio$Media", "sig": "android.net.Uri getContentUri(java.lang.String,long)", "labels": [true, true], "cost": 0.001014}
+{"cls": "android.provider.MediaStore$Audio$Playlists$Members", "sig": "android.net.Uri getContentUri(java.lang.String,long)", "labels": [true, true], "cost": 0.000624}
+{"cls": "android.provider.MediaStore$Audio$Playlists$Members", "sig": "boolean moveItem(android.content.ContentResolver,long,int,int)", "labels": [false, false, false, false, false, false, false], "cost": 0.001132}
+{"cls": "android.provider.Settings$Global", "sig": "boolean putString(android.content.ContentResolver,java.lang.String,java.lang.String)", "labels": [false, false, false, false, false], "cost": 0.00097}
+{"cls": "android.provider.Settings$Global", "sig": "float getFloat(android.content.ContentResolver,java.lang.String)", "labels": [false, false, false], "cost": 0.000744}
+{"cls": "android.provider.Settings$Global", "sig": "int getInt(android.content.ContentResolver,java.lang.String)", "labels": [false, false, false], "cost": 0.000742}
+{"cls": "android.provider.Settings$Global", "sig": "long getLong(android.content.ContentResolver,java.lang.String)", "labels": [false, false, false], "cost": 0.000742}
+{"cls": "android.provider.Settings$Secure", "sig": "float getFloat(android.content.ContentResolver,java.lang.String)", "labels": [false, true, false], "cost": 0.000746}
+{"cls": "android.provider.Settings$Secure", "sig": "int getInt(android.content.ContentResolver,java.lang.String)", "labels": [false, false, false], "cost": 0.000744}
+{"cls": "android.provider.Settings$Secure", "sig": "long getLong(android.content.ContentResolver,java.lang.String)", "labels": [false, true, false], "cost": 0.000744}
+{"cls": "android.provider.Settings$System", "sig": "boolean putString(android.content.ContentResolver,java.lang.String,java.lang.String)", "labels": [false, false, false, false, false], "cost": 0.000968}
+{"cls": "android.provider.Settings$System", "sig": "float getFloat(android.content.ContentResolver,java.lang.String)", "labels": [false, false, false], "cost": 0.000742}
+{"cls": "android.provider.Settings$System", "sig": "float getFloat(android.content.ContentResolver,java.lang.String,float)", "labels": [false, false, false, true, false], "cost": 0.000988}
+{"cls": "android.provider.Settings$System", "sig": "int getInt(android.content.ContentResolver,java.lang.String)", "labels": [false, true, false], "cost": 0.00074}
+{"cls": "android.provider.Settings$System", "sig": "java.lang.String getString(android.content.ContentResolver,java.lang.String)", "labels": [false, false, false], "cost": 0.000748}
+{"cls": "android.provider.Settings$System", "sig": "long getLong(android.content.ContentResolver,java.lang.String)", "labels": [false, false, false], "cost": 0.00074}
+{"cls": "android.security.keystore.KeyGenParameterSpec", "sig": "int getKeySize()", "labels": [true], "cost": 0.000498}
+{"cls": "android.security.keystore.KeyGenParameterSpec", "sig": "int getPurposes()", "labels": [true], "cost": 0.000498}
+{"cls": "android.security.keystore.KeyGenParameterSpec", "sig": "int getUserAuthenticationValidityDurationSeconds()", "labels": [true], "cost": 0.000526}
+{"cls": "android.security.keystore.KeyGenParameterSpec", "sig": "java.lang.String getKeystoreAlias()", "labels": [true], "cost": 0.000516}
+{"cls": "android.security.keystore.KeyGenParameterSpec", "sig": "java.lang.String[] getBlockModes()", "labels": [true], "cost": 0.000514}
+{"cls": "android.security.keystore.KeyGenParameterSpec", "sig": "java.lang.String[] getEncryptionPaddings()", "labels": [true], "cost": 0.000522}
+{"cls": "android.security.keystore.KeyGenParameterSpec$Builder", "sig": "android.security.keystore.KeyGenParameterSpec build()", "labels": [true], "cost": 0.000534}
+{"cls": "android.security.keystore.KeyGenParameterSpec$Builder", "sig": "android.security.keystore.KeyGenParameterSpec$Builder setBlockModes(java.lang.String[])", "labels": [true, true, true, false], "cost": 0.001014}
+{"cls": "android.security.keystore.KeyGenParameterSpec$Builder", "sig": "android.security.keystore.KeyGenParameterSpec$Builder setEncryptionPaddings(java.lang.String[])", "labels": [true, true, true, false], "cost": 0.000932}
+{"cls": "android.security.keystore.KeyGenParameterSpec$Builder", "sig": "android.security.keystore.KeyGenParameterSpec$Builder setKeySize(int)", "labels": [true, true, true], "cost": 0.000778}
+{"cls": "android.security.keystore.KeyGenParameterSpec$Builder", "sig": "void <init>(java.lang.String,int)", "labels": [true, true], "cost": 0.000632}
+{"cls": "android.service.chooser.ChooserTarget", "sig": "void <init>(java.lang.CharSequence,android.graphics.drawable.Icon,float,android.content.ComponentName,android.os.Bundle)", "labels": [true, false, false, false, true, false, false, false, true, false, false, false, false, true, false, false, false, true, false, false, false], "cost": 0.003274}
+{"cls": "android.service.media.MediaBrowserService", "sig": "android.os.IBinder onBind(android.content.Intent)", "labels": [true, true, false, false], "cost": 0.000866}
+{"cls": "android.service.media.MediaBrowserService", "sig": "void notifyChildrenChanged(java.lang.String,android.os.Bundle)", "labels": [false, false, false, false], "cost": 0.000928}
+{"cls": "android.service.quicksettings.Tile", "sig": "void setSubtitle(java.lang.CharSequence)", "labels": [true, false], "cost": 0.000648}
+{"cls": "android.service.quicksettings.TileService", "sig": "android.service.quicksettings.Tile getQsTile()", "labels": [true], "cost": 0.00056}
+{"cls": "android.service.quicksettings.TileService", "sig": "void requestListeningState(android.content.Context,android.content.ComponentName)", "labels": [false, false], "cost": 0.000674}
+{"cls": "android.service.quicksettings.TileService", "sig": "void startActivityAndCollapse(android.app.PendingIntent)", "labels": [false, false], "cost": 0.000706}
+{"cls": "android.service.quicksettings.TileService", "sig": "void startActivityAndCollapse(android.content.Intent)", "labels": [false, false], "cost": 0.000688}
+{"cls": "android.telephony.CellIdentityCdma", "sig": "int getBasestationId()", "labels": [true], "cost": 0.000492}
+{"cls": "android.telephony.CellIdentityCdma", "sig": "int getLatitude()", "labels": [true], "cost": 0.00049}
+{"cls": "android.telephony.CellIdentityCdma", "sig": "int getLongitude()", "labels": [true], "cost": 0.00049}
+{"cls": "android.telephony.CellIdentityCdma", "sig": "int getNetworkId()", "labels": [true], "cost": 0.000492}
+{"cls": "android.telephony.CellIdentityGsm", "sig": "int getCid()", "labels": [true], "cost": 0.000486}
+{"cls": "android.telephony.CellIdentityGsm", "sig": "int getLac()", "labels": [true], "cost": 0.000486}
+{"cls": "android.telephony.CellIdentityGsm", "sig": "int getMnc()", "labels": [true], "cost": 0.000488}
+{"cls": "android.telephony.CellIdentityGsm", "sig": "java.lang.String getMccString()", "labels": [true], "cost": 0.000498}
+{"cls": "android.telephony.CellIdentityGsm", "sig": "java.lang.String getMncString()", "labels": [true], "cost": 0.000498}
+{"cls": "android.telephony.CellIdentityLte", "sig": "int getCi()", "labels": [true], "cost": 0.000484}
+{"cls": "android.telephony.CellIdentityLte", "sig": "int getMnc()", "labels": [true], "cost": 0.000486}
+{"cls": "android.telephony.CellIdentityLte", "sig": "int getTac()", "labels": [true], "cost": 0.000484}
+{"cls": "android.telephony.CellIdentityLte", "sig": "java.lang.String getMccString()", "labels": [true], "cost": 0.000496}
+{"cls": "android.telephony.CellIdentityLte", "sig": "java.lang.String getMncString()", "labels": [true], "cost": 0.000496}
+{"cls": "android.telephony.CellIdentityNr", "sig": "int getPci()", "labels": [true], "cost": 0.000484}
+{"cls": "android.telephony.CellIdentityNr", "sig": "int getTac()", "labels": [true], "cost": 0.000484}
+{"cls": "android.telephony.CellIdentityNr", "sig": "java.lang.String getMccString()", "labels": [true], "cost": 0.000496}
+{"cls": "android.telephony.CellIdentityNr", "sig": "java.lang.String getMncString()", "labels": [true], "cost": 0.000496}
+{"cls": "android.telephony.CellIdentityTdscdma", "sig": "int getCid()", "labels": [true], "cost": 0.00049}
+{"cls": "android.telephony.CellIdentityTdscdma", "sig": "int getLac()", "labels": [true], "cost": 0.00049}
+{"cls": "android.telephony.CellIdentityTdscdma", "sig": "java.lang.String getMccString()", "labels": [true], "cost": 0.000502}
+{"cls": "android.telephony.CellIdentityTdscdma", "sig": "java.lang.String getMncString()", "labels": [true], "cost": 0.000502}
+{"cls": "android.telephony.CellIdentityWcdma", "sig": "int getCid()", "labels": [true], "cost": 0.000488}
+{"cls": "android.telephony.CellIdentityWcdma", "sig": "int getLac()", "labels": [true], "cost": 0.000488}
+{"cls": "android.telephony.CellIdentityWcdma", "sig": "int getMnc()", "labels": [true], "cost": 0.00049}
+{"cls": "android.telephony.CellIdentityWcdma", "sig": "java.lang.String getMccString()", "labels": [true], "cost": 0.0005}
+{"cls": "android.telephony.CellIdentityWcdma", "sig": "java.lang.String getMncString()", "labels": [true], "cost": 0.0005}
+{"cls": "android.telephony.CellInfo", "sig": "long getTimeStamp()", "labels": [true], "cost": 0.000486}
+{"cls": "android.telephony.CellInfoNr", "sig": "android.telephony.CellIdentity getCellIdentity()", "labels": [true], "cost": 0.000512}
+{"cls": "android.telephony.CellInfoNr", "sig": "android.telephony.CellSignalStrength getCellSignalStrength()", "labels": [true], "cost": 0.00052}
+{"cls": "android.telephony.CellInfoTdscdma", "sig": "android.telephony.CellIdentityTdscdma getCellIdentity()", "labels": [true], "cost": 0.000528}
+{"cls": "android.telephony.CellInfoTdscdma", "sig": "android.telephony.CellSignalStrengthTdscdma getCellSignalStrength()", "labels": [true], "cost": 0.000538}
+{"cls": "android.telephony.CellSignalStrength", "sig": "int getDbm()", "labels": [true], "cost": 0.000486}
+{"cls": "android.telephony.CellSignalStrengthTdscdma", "sig": "int getDbm()", "labels": [true], "cost": 0.000498}
+{"cls": "android.telephony.NeighboringCellInfo", "sig": "int getCid()", "labels": [true], "cost": 0.000488}
+{"cls": "android.telephony.NeighboringCellInfo", "sig": "int getLac()", "labels": [true], "cost": 0.000488}
+{"cls": "android.telephony.ServiceState", "sig": "java.lang.String getOperatorNumeric()", "labels": [true], "cost": 0.0005}
+{"cls": "android.telephony.TelephonyManager", "sig": "android.telephony.CellLocation getCellLocation()", "labels": [false], "cost": 0.000508}
+{"cls": "android.telephony.TelephonyManager", "sig": "java.lang.String getLine1Number()", "labels": [true], "cost": 0.000498}
+{"cls": "android.telephony.TelephonyManager", "sig": "java.lang.String getSimOperator()", "labels": [true], "cost": 0.000498}
+{"cls": "android.telephony.TelephonyManager", "sig": "java.lang.String getSimOperatorName()", "labels": [true], "cost": 0.000502}
+{"cls": "android.telephony.TelephonyManager", "sig": "java.lang.String getSimSerialNumber()", "labels": [true], "cost": 0.000504}
+{"cls": "android.telephony.gsm.GsmCellLocation", "sig": "int getCid()", "labels": [true], "cost": 0.000492}
+{"cls": "android.telephony.gsm.GsmCellLocation", "sig": "int getLac()", "labels": [true], "cost": 0.000492}
+{"cls": "android.text.Html", "sig": "android.text.Spanned fromHtml(java.lang.String,android.text.Html$ImageGetter,android.text.Html$TagHandler)", "labels": [true, false, false, false, false, false, false], "cost": 0.001298}
+{"cls": "android.text.Html", "sig": "android.text.Spanned fromHtml(java.lang.String,int,android.text.Html$ImageGetter,android.text.Html$TagHandler)", "labels": [true, false, false, false, false, false, true, false, true, false], "cost": 0.001614}
+{"cls": "android.text.Html", "sig": "java.lang.String escapeHtml(java.lang.CharSequence)", "labels": [true], "cost": 0.000522}
+{"cls": "android.text.Html", "sig": "java.lang.String toHtml(android.text.Spanned)", "labels": [true], "cost": 0.00051}
+{"cls": "android.text.Html", "sig": "java.lang.String toHtml(android.text.Spanned,int)", "labels": [true, false, false], "cost": 0.000702}
+{"cls": "android.text.Layout", "sig": "float getLineWidth(int)", "labels": [false, false, true], "cost": 0.000654}
+{"cls": "android.text.Layout", "sig": "int getLineForOffset(int)", "labels": [true, false, true], "cost": 0.001516}
+{"cls": "android.text.Layout", "sig": "int getLineForVertical(int)", "labels": [false, false, true], "cost": 0.000656}
+{"cls": "android.text.Layout", "sig": "int getLineStart(int)", "labels": [false, false, true], "cost": 0.000652}
+{"cls": "android.text.Layout", "sig": "int getOffsetForHorizontal(int,float)", "labels": [true, false, true, false, true], "cost": 0.000892}
+{"cls": "android.text.TextPaint", "sig": "android.graphics.Typeface getTypeface()", "labels": [true], "cost": 0.000496}
+{"cls": "android.text.TextPaint", "sig": "float getLetterSpacing()", "labels": [true], "cost": 0.000484}
+{"cls": "android.text.TextPaint", "sig": "int getAlpha()", "labels": [true], "cost": 0.000478}
+{"cls": "android.text.TextPaint", "sig": "void getTextPath(java.lang.String,int,int,float,float,android.graphics.Path)", "labels": [false, true, false, true, false, true, false, false, false, false, false, false], "cost": 0.001966}
+{"cls": "android.text.TextPaint", "sig": "void setAlpha(int)", "labels": [false], "cost": 0.000492}
+{"cls": "android.text.TextUtils$StringSplitter", "sig": "java.util.Iterator iterator()", "labels": [true], "cost": 0.000502}
+{"cls": "android.text.TextUtils$StringSplitter", "sig": "void setString(java.lang.String)", "labels": [true], "cost": 0.00052}
+{"cls": "android.text.format.DateFormat", "sig": "java.lang.CharSequence format(java.lang.CharSequence,long)", "labels": [true, true, false], "cost": 0.000776}
+{"cls": "android.text.format.DateFormat", "sig": "java.text.DateFormat getLongDateFormat(android.content.Context)", "labels": [false], "cost": 0.000526}
+{"cls": "android.text.format.DateUtils", "sig": "java.lang.CharSequence getRelativeTimeSpanString(android.content.Context,long)", "labels": [false, true, false], "cost": 0.000774}
+{"cls": "android.text.style.CharacterStyle", "sig": "android.text.style.CharacterStyle wrap(android.text.style.CharacterStyle)", "labels": [true], "cost": 0.000556}
+{"cls": "android.text.style.ImageSpan", "sig": "java.lang.String getSource()", "labels": [true], "cost": 0.00049}
+{"cls": "android.text.style.ImageSpan", "sig": "void <init>(android.content.Context,android.net.Uri,int)", "labels": [false, false, true, false, false, false, false], "cost": 0.001164}
+{"cls": "android.text.style.TextAppearanceSpan", "sig": "void <init>(android.content.Context,int)", "labels": [false, false, false], "cost": 0.00072}
+{"cls": "android.text.style.URLSpan", "sig": "void <init>(java.lang.String)", "labels": [true], "cost": 0.000512}
+{"cls": "android.text.util.Linkify", "sig": "boolean addLinks(android.text.Spannable,int)", "labels": [false, false, false], "cost": 0.000754}
+{"cls": "android.text.util.Linkify", "sig": "void addLinks(android.widget.TextView,java.util.regex.Pattern,java.lang.String,android.text.util.Linkify$MatchFilter,android.text.util.Linkify$TransformFilter)", "labels": [false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false], "cost": 0.00294}
+{"cls": "android.text.util.Linkify$MatchFilter", "sig": "boolean acceptMatch(java.lang.CharSequence,int,int)", "labels": [false, false, false, false, false, false, false, false, false, false], "cost": 0.001578}
+{"cls": "android.text.util.Linkify$TransformFilter", "sig": "java.lang.String transformUrl(java.util.regex.Matcher,java.lang.String)", "labels": [true, false, true, false, false, false, false], "cost": 0.001384}
+{"cls": "android.transition.Transition", "sig": "android.transition.Transition setInterpolator(android.animation.TimeInterpolator)", "labels": [false, true, true, false], "cost": 0.000908}
+{"cls": "android.transition.Visibility", "sig": "android.transition.Transition setInterpolator(android.animation.TimeInterpolator)", "labels": [false, true, true, false], "cost": 0.00086}
+{"cls": "android.util.FloatMath", "sig": "float sin(float)", "labels": [true], "cost": 0.000474}
+{"cls": "android.util.Log", "sig": "int wtf(java.lang.String,java.lang.String,java.lang.Throwable)", "labels": [false, false, false, false, false], "cost": 0.001}
+{"cls": "android.util.LongSparseArray", "sig": "android.util.LongSparseArray clone()", "labels": [true], "cost": 0.000496}
+{"cls": "android.util.LongSparseArray", "sig": "int indexOfKey(long)", "labels": [false, false, false], "cost": 0.000662}
+{"cls": "android.util.LongSparseArray", "sig": "int size()", "labels": [false], "cost": 0.000474}
+{"cls": "android.util.LongSparseArray", "sig": "java.lang.Object get(long)", "labels": [false, false, true], "cost": 0.002794}
+{"cls": "android.util.LongSparseArray", "sig": "java.lang.Object get(long,java.lang.Object)", "labels": [false, false, false, true, false, true, false], "cost": 0.001286}
+{"cls": "android.util.LongSparseArray", "sig": "long keyAt(int)", "labels": [false, false, true], "cost": 0.001078}
+{"cls": "android.util.LongSparseArray", "sig": "void put(long,java.lang.Object)", "labels": [true, false, true, false], "cost": 0.000816}
+{"cls": "android.view.ActionMode", "sig": "void setTitle(java.lang.CharSequence)", "labels": [true, false], "cost": 0.000636}
+{"cls": "android.view.ContextMenu", "sig": "android.view.MenuItem add(int,int,int,int)", "labels": [false, false, false, false, false, false, true, true, true], "cost": 0.00144}
+{"cls": "android.view.ContextMenu", "sig": "android.view.MenuItem add(int,int,int,java.lang.CharSequence)", "labels": [false, false, false, false, false, false, false, false, false, true, true, true, false], "cost": 0.001884}
+{"cls": "android.view.DisplayCutout", "sig": "android.graphics.Insets getWaterfallInsets()", "labels": [true], "cost": 0.000506}
+{"cls": "android.view.DisplayCutout", "sig": "void <init>(android.graphics.Rect,java.util.List)", "labels": [true, false, true, false], "cost": 0.000868}
+{"cls": "android.view.FocusFinder", "sig": "android.view.View findNextFocusFromRect(android.view.ViewGroup,android.graphics.Rect,int)", "labels": [true, false, false, true, false, false, false, false, false, false, false, false, false], "cost": 0.001822}
+{"cls": "android.view.GestureDetector$OnGestureListener", "sig": "void onLongPress(android.view.MotionEvent)", "labels": [false, false], "cost": 0.000656}
+{"cls": "android.view.GestureDetector$OnGestureListener", "sig": "void onShowPress(android.view.MotionEvent)", "labels": [true, false], "cost": 0.000706}
+{"cls": "android.view.LayoutInflater", "sig": "android.view.View createView(java.lang.String,java.lang.String,android.util.AttributeSet)", "labels": [true, false, false, true, false, false, true, false, false, false], "cost": 0.001642}
+{"cls": "android.view.LayoutInflater", "sig": "android.view.View onCreateView(android.view.View,java.lang.String,android.util.AttributeSet)", "labels": [true, false, false, true, false, false, false, true, false, false, false, false, false], "cost": 0.001998}
+{"cls": "android.view.Menu", "sig": "android.view.SubMenu addSubMenu(int,int,int,int)", "labels": [false, false, false, false, false, false, true, false, false], "cost": 0.001254}
+{"cls": "android.view.MenuItem", "sig": "android.graphics.drawable.Drawable getIcon()", "labels": [true], "cost": 0.000502}
+{"cls": "android.view.MenuItem", "sig": "android.view.MenuItem setTitle(int)", "labels": [true, true, true], "cost": 0.0024}
+{"cls": "android.view.MenuItem", "sig": "int getGroupId()", "labels": [true], "cost": 0.000478}
+{"cls": "android.view.MotionEvent", "sig": "float getRawX()", "labels": [true], "cost": 0.000478}
+{"cls": "android.view.MotionEvent", "sig": "float getRawY()", "labels": [true], "cost": 0.000478}
+{"cls": "android.view.MotionEvent", "sig": "int getButtonState()", "labels": [true], "cost": 0.00048}
+{"cls": "android.view.MotionEvent", "sig": "int getMetaState()", "labels": [true], "cost": 0.00048}
+{"cls": "android.view.MotionEvent", "sig": "int getToolType(int)", "labels": [false, false, true], "cost": 0.000656}
+{"cls": "android.view.SubMenu", "sig": "android.view.SubMenu setIcon(int)", "labels": [true, true, true], "cost": 0.00208}
+{"cls": "android.view.SubMenu", "sig": "void removeItem(int)", "labels": [false], "cost": 0.00049}
+{"cls": "android.view.SubMenu", "sig": "void setGroupCheckable(int,boolean,boolean)", "labels": [false, false, false], "cost": 0.000756}
+{"cls": "android.view.View", "sig": "android.view.View requireViewById(int)", "labels": [false, false, true], "cost": 0.002416}
+{"cls": "android.view.View", "sig": "boolean hasFocusable()", "labels": [false], "cost": 0.000476}
+{"cls": "android.view.View", "sig": "boolean performAccessibilityAction(int,android.os.Bundle)", "labels": [false, false, false, false, true, true, false], "cost": 0.001222}
+{"cls": "android.view.View", "sig": "boolean requestFocus(int)", "labels": [false, false, false], "cost": 0.001452}
+{"cls": "android.view.View", "sig": "boolean requestRectangleOnScreen(android.graphics.Rect)", "labels": [false, false, false, false], "cost": 0.00087}
+{"cls": "android.view.View", "sig": "int getImportantForAutofill()", "labels": [false], "cost": 0.000478}
+{"cls": "android.view.View", "sig": "void dispatchConfigurationChanged(android.content.res.Configuration)", "labels": [false, false], "cost": 0.000694}
+{"cls": "android.view.View", "sig": "void setAnimation(android.view.animation.Animation)", "labels": [true, false], "cost": 0.00068}
+{"cls": "android.view.View", "sig": "void setKeyboardNavigationCluster(boolean)", "labels": [false], "cost": 0.000508}
+{"cls": "android.view.View", "sig": "void setLayoutDirection(int)", "labels": [true], "cost": 0.00049}
+{"cls": "android.view.View", "sig": "void setX(float)", "labels": [true], "cost": 0.000478}
+{"cls": "android.view.View", "sig": "void setY(float)", "labels": [true], "cost": 0.000478}
+{"cls": "android.view.View", "sig": "void setZ(float)", "labels": [true], "cost": 0.00048}
+{"cls": "android.view.ViewConfiguration", "sig": "int getScaledPagingTouchSlop()", "labels": [false], "cost": 0.0005}
+{"cls": "android.view.ViewGroup", "sig": "android.view.View findViewWithTag(java.lang.Object)", "labels": [false, false, true, false], "cost": 0.00086}
+{"cls": "android.view.ViewGroup", "sig": "boolean isInEditMode()", "labels": [false], "cost": 0.000486}
+{"cls": "android.view.ViewGroup", "sig": "float getAlpha()", "labels": [true], "cost": 0.00048}
+{"cls": "android.view.ViewGroup", "sig": "int getBottom()", "labels": [false], "cost": 0.000478}
+{"cls": "android.view.ViewGroup", "sig": "int getPaddingEnd()", "labels": [true], "cost": 0.000486}
+{"cls": "android.view.ViewGroup", "sig": "int getPaddingStart()", "labels": [false], "cost": 0.000484}
+{"cls": "android.view.ViewGroup", "sig": "int getTop()", "labels": [true], "cost": 0.000476}
+{"cls": "android.view.ViewGroup", "sig": "void layout(int,int,int,int)", "labels": [true, true, true, true], "cost": 0.000776}
+{"cls": "android.view.ViewGroup", "sig": "void setBackgroundDrawable(android.graphics.drawable.Drawable)", "labels": [true, false], "cost": 0.000674}
+{"cls": "android.view.ViewGroup", "sig": "void setLayoutAnimation(android.view.animation.LayoutAnimationController)", "labels": [true, false], "cost": 0.000684}
+{"cls": "android.view.ViewGroup", "sig": "void suppressLayout(boolean)", "labels": [true], "cost": 0.000504}
+{"cls": "android.view.ViewGroup$MarginLayoutParams", "sig": "int getLayoutDirection()", "labels": [false], "cost": 0.000506}
+{"cls": "android.view.ViewGroup$MarginLayoutParams", "sig": "void resolveLayoutDirection(int)", "labels": [true], "cost": 0.000524}
+{"cls": "android.view.ViewGroup$OnHierarchyChangeListener", "sig": "void onChildViewAdded(android.view.View,android.view.View)", "labels": [false, false, false, false, false, false], "cost": 0.00112}
+{"cls": "android.view.Window", "sig": "android.view.WindowInsetsController getInsetsController()", "labels": [true], "cost": 0.000496}
+{"cls": "android.view.Window", "sig": "void setLayout(int,int)", "labels": [true, true], "cost": 0.00058}
+{"cls": "android.view.Window", "sig": "void setTitle(java.lang.CharSequence)", "labels": [true, false], "cost": 0.00063}
+{"cls": "android.view.WindowInsets$Builder", "sig": "android.view.WindowInsets$Builder setDisplayCutout(android.view.DisplayCutout)", "labels": [true, true, true, false], "cost": 0.00092}
+{"cls": "android.view.accessibility.AccessibilityEvent", "sig": "void setAddedCount(int)", "labels": [true], "cost": 0.000512}
+{"cls": "android.view.animation.AnimationUtils", "sig": "android.view.animation.LayoutAnimationController loadLayoutAnimation(android.content.Context,int)", "labels": [false, false, false], "cost": 0.000738}
+{"cls": "android.view.inspector.PropertyReader", "sig": "void readInt(int,int)", "labels": [false, true], "cost": 0.000594}
+{"cls": "android.view.inspector.PropertyReader", "sig": "void readIntEnum(int,int)", "labels": [false, false], "cost": 0.0006}
+{"cls": "android.view.inspector.PropertyReader", "sig": "void readResourceId(int,int)", "labels": [false, true], "cost": 0.002938}
+{"cls": "android.webkit.CookieManager", "sig": "void removeAllCookies(android.webkit.ValueCallback)", "labels": [false, false], "cost": 0.000658}
+{"cls": "android.webkit.MimeTypeMap", "sig": "boolean hasExtension(java.lang.String)", "labels": [false, false, false], "cost": 0.00075}
+{"cls": "android.webkit.ValueCallback", "sig": "void onReceiveValue(java.lang.Object)", "labels": [false, false], "cost": 0.00063}
+{"cls": "android.webkit.WebResourceResponse", "sig": "java.io.InputStream getData()", "labels": [true], "cost": 0.000496}
+{"cls": "android.webkit.WebSettings", "sig": "java.lang.String getUserAgentString()", "labels": [false], "cost": 0.000496}
+{"cls": "android.webkit.WebSettings", "sig": "void setUserAgentString(java.lang.String)", "labels": [true], "cost": 0.00052}
+{"cls": "android.webkit.WebView", "sig": "android.print.PrintDocumentAdapter createPrintDocumentAdapter(java.lang.String)", "labels": [false, false, true], "cost": 0.000778}
+{"cls": "android.webkit.WebView", "sig": "void loadData(java.lang.String,java.lang.String,java.lang.String)", "labels": [true, false, false], "cost": 0.00079}
+{"cls": "android.webkit.WebView", "sig": "void scrollTo(int,int)", "labels": [false, false], "cost": 0.000588}
+{"cls": "android.webkit.WebView", "sig": "void setLayoutParams(android.view.ViewGroup$LayoutParams)", "labels": [true, false], "cost": 0.000734}
+{"cls": "android.webkit.WebView", "sig": "void setOnScrollChangeListener(android.view.View$OnScrollChangeListener)", "labels": [true, false], "cost": 0.000686}
+{"cls": "android.webkit.WebViewClient", "sig": "android.webkit.WebResourceResponse shouldInterceptRequest(android.webkit.WebView,java.lang.String)", "labels": [false, false, false, false, false, false, false], "cost": 0.00118}
+{"cls": "android.widget.AbsListView", "sig": "int getCheckedItemPosition()", "labels": [true], "cost": 0.00049}
+{"cls": "android.widget.AbsListView", "sig": "void setRecyclerListener(android.widget.AbsListView$RecyclerListener)", "labels": [true, false], "cost": 0.000694}
+{"cls": "android.widget.AbsSpinner", "sig": "void setSelection(int,boolean)", "labels": [true, false], "cost": 0.0006}
+{"cls": "android.widget.Adapter", "sig": "long getItemId(int)", "labels": [false, false, true], "cost": 0.000654}
+{"cls": "android.widget.AdapterView", "sig": "android.view.View getSelectedView()", "labels": [true], "cost": 0.00049}
+{"cls": "android.widget.AdapterView", "sig": "android.widget.AdapterView$OnItemClickListener getOnItemClickListener()", "labels": [true], "cost": 0.000524}
+{"cls": "android.widget.AdapterView", "sig": "long getSelectedItemId()", "labels": [true], "cost": 0.000486}
+{"cls": "android.widget.ArrayAdapter", "sig": "android.widget.ArrayAdapter createFromResource(android.content.Context,int,int)", "labels": [true, false, false, false, false], "cost": 0.000958}
+{"cls": "android.widget.ArrayAdapter", "sig": "int getCount()", "labels": [true], "cost": 0.000482}
+{"cls": "android.widget.ArrayAdapter", "sig": "void addAll(java.lang.Object[])", "labels": [true, false], "cost": 0.000682}
+{"cls": "android.widget.ArrayAdapter", "sig": "void insert(java.lang.Object,int)", "labels": [true, false, false, false], "cost": 0.000822}
+{"cls": "android.widget.ArrayAdapter", "sig": "void remove(java.lang.Object)", "labels": [true, false], "cost": 0.000622}
+{"cls": "android.widget.ExpandableListAdapter", "sig": "int getChildrenCount(int)", "labels": [false, false, true], "cost": 0.000672}
+{"cls": "android.widget.FrameLayout", "sig": "android.view.View findFocus()", "labels": [true], "cost": 0.000488}
+{"cls": "android.widget.FrameLayout", "sig": "android.view.View findViewWithTag(java.lang.Object)", "labels": [false, false, true, false], "cost": 0.000862}
+{"cls": "android.widget.FrameLayout", "sig": "boolean isClickable()", "labels": [false], "cost": 0.000484}
+{"cls": "android.widget.FrameLayout", "sig": "boolean isSelected()", "labels": [false], "cost": 0.000484}
+{"cls": "android.widget.FrameLayout", "sig": "boolean post(java.lang.Runnable)", "labels": [false, false, false, false], "cost": 0.000862}
+{"cls": "android.widget.FrameLayout", "sig": "boolean postDelayed(java.lang.Runnable,long)", "labels": [false, false, false, false, false, false, false], "cost": 0.001106}
+{"cls": "android.widget.FrameLayout", "sig": "boolean removeCallbacks(java.lang.Runnable)", "labels": [false, false, false, false], "cost": 0.000824}
+{"cls": "android.widget.FrameLayout", "sig": "int getBottom()", "labels": [false], "cost": 0.00048}
+{"cls": "android.widget.FrameLayout", "sig": "int getDescendantFocusability()", "labels": [true], "cost": 0.00049}
+{"cls": "android.widget.FrameLayout", "sig": "int getSuggestedMinimumWidth()", "labels": [true], "cost": 0.000498}
+{"cls": "android.widget.FrameLayout", "sig": "int getVerticalFadingEdgeLength()", "labels": [false], "cost": 0.0005}
+{"cls": "android.widget.FrameLayout", "sig": "void measureChild(android.view.View,int,int)", "labels": [false, false, false, false, false, false], "cost": 0.001182}
+{"cls": "android.widget.FrameLayout", "sig": "void offsetDescendantRectToMyCoords(android.view.View,android.graphics.Rect)", "labels": [false, true, false, false, false, true], "cost": 0.00115}
+{"cls": "android.widget.FrameLayout", "sig": "void sendAccessibilityEventUnchecked(android.view.accessibility.AccessibilityEvent)", "labels": [false, false], "cost": 0.00076}
+{"cls": "android.widget.FrameLayout", "sig": "void setBackgroundResource(int)", "labels": [false], "cost": 0.000502}
+{"cls": "android.widget.FrameLayout", "sig": "void setDefaultFocusHighlightEnabled(boolean)", "labels": [false], "cost": 0.000526}
+{"cls": "android.widget.FrameLayout", "sig": "void setDescendantFocusability(int)", "labels": [true], "cost": 0.000504}
+{"cls": "android.widget.FrameLayout", "sig": "void setLongClickable(boolean)", "labels": [false], "cost": 0.000506}
+{"cls": "android.widget.FrameLayout", "sig": "void setMinimumWidth(int)", "labels": [true], "cost": 0.000502}
+{"cls": "android.widget.FrameLayout", "sig": "void setOnKeyListener(android.view.View$OnKeyListener)", "labels": [true, false], "cost": 0.000666}
+{"cls": "android.widget.FrameLayout", "sig": "void setTranslationX(float)", "labels": [true], "cost": 0.000498}
+{"cls": "android.widget.FrameLayout$LayoutParams", "sig": "void setMarginEnd(int)", "labels": [true], "cost": 0.000514}
+{"cls": "android.widget.GridLayout", "sig": "int getColumnCount()", "labels": [true], "cost": 0.000482}
+{"cls": "android.widget.GridLayout", "sig": "void addView(android.view.View,android.view.ViewGroup$LayoutParams)", "labels": [true, false, true, false, false, false], "cost": 0.001152}
+{"cls": "android.widget.GridView", "sig": "int getCount()", "labels": [true], "cost": 0.000472}
+{"cls": "android.widget.GridView", "sig": "int getLastVisiblePosition()", "labels": [true], "cost": 0.000486}
+{"cls": "android.widget.GridView", "sig": "java.lang.Object getItemAtPosition(int)", "labels": [false, false, true], "cost": 0.000672}
+{"cls": "android.widget.GridView", "sig": "void setColumnWidth(int)", "labels": [true], "cost": 0.000494}
+{"cls": "android.widget.GridView", "sig": "void setOnScrollListener(android.widget.AbsListView$OnScrollListener)", "labels": [true, false], "cost": 0.00069}
+{"cls": "android.widget.HeaderViewListAdapter", "sig": "void <init>(java.util.ArrayList,java.util.ArrayList,android.widget.ListAdapter)", "labels": [true, false, false, true, false, false, true, false, false], "cost": 0.001558}
+{"cls": "android.widget.HorizontalScrollView", "sig": "boolean post(java.lang.Runnable)", "labels": [false, false, false, false], "cost": 0.000818}
+{"cls": "android.widget.ImageButton", "sig": "float getScaleY()", "labels": [false], "cost": 0.00048}
+{"cls": "android.widget.ImageButton", "sig": "float getTranslationX()", "labels": [false], "cost": 0.000482}
+{"cls": "android.widget.ImageButton", "sig": "float getTranslationY()", "labels": [false], "cost": 0.000482}
+{"cls": "android.widget.ImageButton", "sig": "void setAlpha(float)", "labels": [true], "cost": 0.000494}
+{"cls": "android.widget.ImageButton", "sig": "void setEnabled(boolean)", "labels": [false], "cost": 0.000502}
+{"cls": "android.widget.ImageView", "sig": "android.content.res.Resources getResources()", "labels": [false], "cost": 0.00049}
+{"cls": "android.widget.ImageView", "sig": "int getPaddingBottom()", "labels": [true], "cost": 0.000484}
+{"cls": "android.widget.ImageView", "sig": "int getPaddingLeft()", "labels": [false], "cost": 0.000484}
+{"cls": "android.widget.ImageView", "sig": "int getPaddingRight()", "labels": [false], "cost": 0.000482}
+{"cls": "android.widget.ImageView", "sig": "int getPaddingTop()", "labels": [true], "cost": 0.000482}
+{"cls": "android.widget.ImageView", "sig": "void setBackgroundColor(int)", "labels": [true], "cost": 0.000498}
+{"cls": "android.widget.ImageView", "sig": "void setBackgroundDrawable(android.graphics.drawable.Drawable)", "labels": [true, false], "cost": 0.000722}
+{"cls": "android.widget.ImageView", "sig": "void setMinimumHeight(int)", "labels": [true], "cost": 0.000498}
+{"cls": "android.widget.ImageView", "sig": "void setMinimumWidth(int)", "labels": [true], "cost": 0.000498}
+{"cls": "android.widget.ImageView", "sig": "void setPaddingRelative(int,int,int,int)", "labels": [true, true, true, true], "cost": 0.000836}
+{"cls": "android.widget.ImageView", "sig": "void setRotation(float)", "labels": [true], "cost": 0.00049}
+{"cls": "android.widget.LinearLayout", "sig": "android.view.ViewParent getParent()", "labels": [true], "cost": 0.000494}
+{"cls": "android.widget.LinearLayout", "sig": "int getBottom()", "labels": [false], "cost": 0.00048}
+{"cls": "android.widget.LinearLayout", "sig": "int getLeft()", "labels": [true], "cost": 0.00048}
+{"cls": "android.widget.LinearLayout", "sig": "int getTop()", "labels": [false], "cost": 0.000478}
+{"cls": "android.widget.LinearLayout", "sig": "void offsetDescendantRectToMyCoords(android.view.View,android.graphics.Rect)", "labels": [false, true, false, false, false, true], "cost": 0.00128}
+{"cls": "android.widget.LinearLayout", "sig": "void setBackgroundColor(int)", "labels": [false], "cost": 0.000502}
+{"cls": "android.widget.LinearLayout", "sig": "void setBackgroundResource(int)", "labels": [false], "cost": 0.000502}
+{"cls": "android.widget.LinearLayout", "sig": "void setId(int)", "labels": [true], "cost": 0.00049}
+{"cls": "android.widget.LinearLayout", "sig": "void setOnCreateContextMenuListener(android.view.View$OnCreateContextMenuListener)", "labels": [true, false], "cost": 0.000756}
+{"cls": "android.widget.LinearLayout", "sig": "void setWillNotDraw(boolean)", "labels": [false], "cost": 0.00051}
+{"cls": "android.widget.LinearLayout$LayoutParams", "sig": "void <init>(android.view.ViewGroup$MarginLayoutParams)", "labels": [true], "cost": 0.000582}
+{"cls": "android.widget.LinearLayout$LayoutParams", "sig": "void <init>(int,int,float)", "labels": [true, true, true], "cost": 0.000698}
+{"cls": "android.widget.ListView", "sig": "android.os.Parcelable onSaveInstanceState()", "labels": [true], "cost": 0.0005}
+{"cls": "android.widget.ListView", "sig": "android.view.ViewGroup$LayoutParams getLayoutParams()", "labels": [true], "cost": 0.000512}
+{"cls": "android.widget.ListView", "sig": "int getCount()", "labels": [true], "cost": 0.000472}
+{"cls": "android.widget.ListView", "sig": "void onRestoreInstanceState(android.os.Parcelable)", "labels": [true, false], "cost": 0.00069}
+{"cls": "android.widget.ListView", "sig": "void setLayoutParams(android.view.ViewGroup$LayoutParams)", "labels": [true, false], "cost": 0.000732}
+{"cls": "android.widget.MediaController", "sig": "void <init>(android.content.Context)", "labels": [true], "cost": 0.000508}
+{"cls": "android.widget.MediaController", "sig": "void setAnchorView(android.view.View)", "labels": [true, false], "cost": 0.00061}
+{"cls": "android.widget.PopupMenu", "sig": "android.view.MenuInflater getMenuInflater()", "labels": [true], "cost": 0.000504}
+{"cls": "android.widget.PopupWindow", "sig": "int getHeight()", "labels": [true], "cost": 0.00048}
+{"cls": "android.widget.PopupWindow", "sig": "void setAnimationStyle(int)", "labels": [true], "cost": 0.000502}
+{"cls": "android.widget.PopupWindow", "sig": "void setExitTransition(android.transition.Transition)", "labels": [true, false], "cost": 0.000682}
+{"cls": "android.widget.ProgressBar", "sig": "void onLayout(boolean,int,int,int,int)", "labels": [false, false, false, false, false], "cost": 0.000936}
+{"cls": "android.widget.ProgressBar", "sig": "void onMeasure(int,int)", "labels": [false, false], "cost": 0.000592}
+{"cls": "android.widget.ProgressBar", "sig": "void setLayoutParams(android.view.ViewGroup$LayoutParams)", "labels": [true, false], "cost": 0.000738}
+{"cls": "android.widget.RadioGroup", "sig": "void check(int)", "labels": [false], "cost": 0.000488}
+{"cls": "android.widget.RadioGroup", "sig": "void setOnCheckedChangeListener(android.widget.RadioGroup$OnCheckedChangeListener)", "labels": [false, false], "cost": 0.000734}
+{"cls": "android.widget.RatingBar", "sig": "float getRating()", "labels": [true], "cost": 0.000476}
+{"cls": "android.widget.RatingBar", "sig": "int getMeasuredHeight()", "labels": [true], "cost": 0.000488}
+{"cls": "android.widget.RatingBar", "sig": "int getNumStars()", "labels": [true], "cost": 0.00048}
+{"cls": "android.widget.RatingBar", "sig": "void setMeasuredDimension(int,int)", "labels": [false, false], "cost": 0.000598}
+{"cls": "android.widget.RatingBar", "sig": "void setRating(float)", "labels": [true], "cost": 0.00049}
+{"cls": "android.widget.RelativeLayout", "sig": "android.content.Context getContext()", "labels": [false], "cost": 0.00049}
+{"cls": "android.widget.RelativeLayout", "sig": "android.view.ViewGroup$LayoutParams getLayoutParams()", "labels": [true], "cost": 0.00052}
+{"cls": "android.widget.RelativeLayout", "sig": "boolean onTouchEvent(android.view.MotionEvent)", "labels": [false, false, false, false], "cost": 0.000934}
+{"cls": "android.widget.RelativeLayout", "sig": "void <init>(android.content.Context,android.util.AttributeSet,int)", "labels": [true, false, true, false, true, false, false], "cost": 0.001394}
+{"cls": "android.widget.RelativeLayout", "sig": "void addView(android.view.View,android.view.ViewGroup$LayoutParams)", "labels": [true, false, true, false, false, false], "cost": 0.001336}
+{"cls": "android.widget.RelativeLayout", "sig": "void addView(android.view.View,int)", "labels": [true, false, false, false], "cost": 0.000854}
+{"cls": "android.widget.RelativeLayout", "sig": "void addView(android.view.View,int,android.view.ViewGroup$LayoutParams)", "labels": [true, false, false, false, false, true, false, false, false], "cost": 0.001476}
+{"cls": "android.widget.RelativeLayout", "sig": "void addView(android.view.View,int,int)", "labels": [true, false, false, false, false, false], "cost": 0.00105}
+{"cls": "android.widget.RelativeLayout", "sig": "void setBackgroundColor(int)", "labels": [false], "cost": 0.000504}
+{"cls": "android.widget.RelativeLayout", "sig": "void setBackgroundDrawable(android.graphics.drawable.Drawable)", "labels": [true, false], "cost": 0.000678}
+{"cls": "android.widget.RelativeLayout", "sig": "void setId(int)", "labels": [true], "cost": 0.000492}
+{"cls": "android.widget.RelativeLayout", "sig": "void setLayoutParams(android.view.ViewGroup$LayoutParams)", "labels": [true, false], "cost": 0.00069}
+{"cls": "android.widget.RelativeLayout", "sig": "void setTag(java.lang.Object)", "labels": [true, false], "cost": 0.000622}
+{"cls": "android.widget.RemoteViews", "sig": "void setChronometer(int,long,java.lang.String,boolean)", "labels": [false, true, true, false], "cost": 0.000862}
+{"cls": "android.widget.RemoteViews", "sig": "void setRemoteAdapter(int,int,android.content.Intent)", "labels": [false, false, false, false, true, false], "cost": 0.001212}
+{"cls": "android.widget.ScrollView", "sig": "void scrollTo(int,int)", "labels": [true, true], "cost": 0.00059}
+{"cls": "android.widget.SearchView", "sig": "android.view.View findViewById(int)", "labels": [false, false, true], "cost": 0.000662}
+{"cls": "android.widget.SearchView", "sig": "java.lang.CharSequence getQuery()", "labels": [true], "cost": 0.000494}
+{"cls": "android.widget.SearchView", "sig": "void setQuery(java.lang.CharSequence,boolean)", "labels": [true, false, false, false], "cost": 0.000854}
+{"cls": "android.widget.SearchView", "sig": "void setSearchableInfo(android.app.SearchableInfo)", "labels": [true, false], "cost": 0.0007}
+{"cls": "android.widget.SeekBar", "sig": "boolean isEnabled()", "labels": [false], "cost": 0.000484}
+{"cls": "android.widget.SeekBar", "sig": "int getMax()", "labels": [true], "cost": 0.000476}
+{"cls": "android.widget.SeekBar", "sig": "int getVisibility()", "labels": [false], "cost": 0.00048}
+{"cls": "android.widget.SimpleCursorAdapter", "sig": "android.view.View getView(int,android.view.View,android.view.ViewGroup)", "labels": [false, false, false, false, true, false, false, false, false, false, true, true, false], "cost": 0.001952}
+{"cls": "android.widget.SimpleCursorAdapter", "sig": "void setViewBinder(android.widget.SimpleCursorAdapter$ViewBinder)", "labels": [true, false], "cost": 0.000732}
+{"cls": "android.widget.Spinner", "sig": "void setEnabled(boolean)", "labels": [false], "cost": 0.0005}
+{"cls": "android.widget.SpinnerAdapter", "sig": "java.lang.Object getItem(int)", "labels": [false, false, true], "cost": 0.000724}
+{"cls": "android.widget.Toolbar", "sig": "java.lang.CharSequence getSubtitle()", "labels": [true], "cost": 0.0005}
+{"cls": "android.widget.Toolbar", "sig": "java.lang.CharSequence getTitle()", "labels": [true], "cost": 0.000496}
+{"cls": "android.widget.VideoView", "sig": "void setMediaController(android.widget.MediaController)", "labels": [true, false], "cost": 0.000632}
+{"cls": "android.window.SplashScreenView", "sig": "android.view.View getRootView()", "labels": [true], "cost": 0.000488}
+{"cls": "java.beans.PropertyChangeSupport", "sig": "void <init>(java.lang.Object)", "labels": [true], "cost": 0.000524}
+{"cls": "java.beans.PropertyChangeSupport", "sig": "void addPropertyChangeListener(java.beans.PropertyChangeListener)", "labels": [true, false], "cost": 0.000684}
+{"cls": "java.beans.PropertyChangeSupport", "sig": "void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)", "labels": [false, false, false, false, false, false, false, false, false], "cost": 0.001436}
+{"cls": "java.beans.PropertyChangeSupport", "sig": "void removePropertyChangeListener(java.beans.PropertyChangeListener)", "labels": [false, false], "cost": 0.000734}
+{"cls": "java.io.DataInput", "sig": "int readInt()", "labels": [true], "cost": 0.000472}
+{"cls": "java.io.DataInput", "sig": "void readFully(byte[])", "labels": [false, true], "cost": 0.001222}
+{"cls": "java.io.PushbackReader", "sig": "void <init>(java.io.Reader,int)", "labels": [true, false, false], "cost": 0.000714}
+{"cls": "java.io.RandomAccessFile", "sig": "byte readByte()", "labels": [true], "cost": 0.000482}
+{"cls": "java.io.RandomAccessFile", "sig": "int skipBytes(int)", "labels": [false, false, false], "cost": 0.003312}
+{"cls": "java.io.RandomAccessFile", "sig": "java.io.FileDescriptor getFD()", "labels": [true], "cost": 0.0005}
+{"cls": "java.io.RandomAccessFile", "sig": "java.lang.String readLine()", "labels": [true], "cost": 0.00054}
+{"cls": "java.io.RandomAccessFile", "sig": "long getFilePointer()", "labels": [true], "cost": 0.000486}
+{"cls": "java.io.RandomAccessFile", "sig": "void <init>(java.lang.String,java.lang.String)", "labels": [true, false], "cost": 0.00063}
+{"cls": "java.io.RandomAccessFile", "sig": "void readFully(byte[])", "labels": [false, true], "cost": 0.0006}
+{"cls": "java.io.StreamTokenizer", "sig": "int lineno()", "labels": [false], "cost": 0.00048}
+{"cls": "java.lang.Enum", "sig": "java.lang.Class getDeclaringClass()", "labels": [true], "cost": 0.000494}
+{"cls": "java.lang.Process", "sig": "int waitFor()", "labels": [false], "cost": 0.000472}
+{"cls": "java.lang.Process", "sig": "java.io.OutputStream getOutputStream()", "labels": [true], "cost": 0.000492}
+{"cls": "java.lang.Runtime", "sig": "java.lang.Process exec(java.lang.String[],java.lang.String[],java.io.File)", "labels": [true, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002118}
+{"cls": "java.lang.annotation.Annotation", "sig": "boolean equals(java.lang.Object)", "labels": [false, false, false, false], "cost": 0.000852}
+{"cls": "java.lang.annotation.Annotation", "sig": "java.lang.Class annotationType()", "labels": [false], "cost": 0.000496}
+{"cls": "java.lang.reflect.AnnotatedElement", "sig": "java.lang.'annotation'.Annotation[] getDeclaredAnnotations()", "labels": [true], "cost": 0.000538}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.'annotation'.Annotation[] getDeclaredAnnotations()", "labels": [true], "cost": 0.00053}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.'annotation'.Annotation[][] getParameterAnnotations()", "labels": [true], "cost": 0.000528}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.reflect.TypeVariable[] getTypeParameters()", "labels": [true], "cost": 0.000522}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.reflect.Type[] getGenericParameterTypes()", "labels": [true], "cost": 0.00052}
+{"cls": "java.lang.reflect.Member", "sig": "java.lang.Class getDeclaringClass()", "labels": [true], "cost": 0.0005}
+{"cls": "java.lang.reflect.Member", "sig": "java.lang.String getName()", "labels": [true], "cost": 0.000486}
+{"cls": "java.lang.reflect.Method", "sig": "boolean isAccessible()", "labels": [false], "cost": 0.000486}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.'annotation'.Annotation[] getAnnotations()", "labels": [true], "cost": 0.000516}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.'annotation'.Annotation[] getDeclaredAnnotations()", "labels": [true], "cost": 0.000526}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.'annotation'.Annotation[][] getParameterAnnotations()", "labels": [true], "cost": 0.000524}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.reflect.TypeVariable[] getTypeParameters()", "labels": [true], "cost": 0.000518}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.reflect.Type[] getGenericParameterTypes()", "labels": [true], "cost": 0.000516}
+{"cls": "java.net.CookieManager", "sig": "java.net.CookieStore getCookieStore()", "labels": [true], "cost": 0.000496}
+{"cls": "java.net.CookieManager", "sig": "java.util.Map get(java.net.URI,java.util.Map)", "labels": [false, false, false, true, false, false, true, false, false], "cost": 0.001324}
+{"cls": "java.net.CookieManager", "sig": "void <init>(java.net.CookieStore,java.net.CookiePolicy)", "labels": [true, false, true, false], "cost": 0.000912}
+{"cls": "java.net.DatagramPacket", "sig": "int getOffset()", "labels": [true], "cost": 0.00048}
+{"cls": "java.net.DatagramPacket", "sig": "int getPort()", "labels": [true], "cost": 0.000478}
+{"cls": "java.net.DatagramPacket", "sig": "void <init>(byte[],int,int,java.net.InetAddress,int)", "labels": [true, false, true, false, false, true, false, false, true, false, true, false, false], "cost": 0.001756}
+{"cls": "java.net.DatagramPacket", "sig": "void setPort(int)", "labels": [true], "cost": 0.000492}
+{"cls": "java.net.DatagramSocket", "sig": "int getLocalPort()", "labels": [false], "cost": 0.000484}
+{"cls": "java.net.DatagramSocket", "sig": "java.net.InetAddress getLocalAddress()", "labels": [true], "cost": 0.000502}
+{"cls": "java.net.DatagramSocket", "sig": "void <init>(int)", "labels": [true], "cost": 0.000492}
+{"cls": "java.net.DatagramSocket", "sig": "void <init>(int,java.net.InetAddress)", "labels": [true, false, true], "cost": 0.001748}
+{"cls": "java.net.DatagramSocket", "sig": "void connect(java.net.InetAddress,int)", "labels": [true, true, false, false], "cost": 0.000974}
+{"cls": "java.net.InterfaceAddress", "sig": "java.net.InetAddress getBroadcast()", "labels": [true], "cost": 0.000502}
+{"cls": "java.net.MulticastSocket", "sig": "int getLocalPort()", "labels": [false], "cost": 0.000484}
+{"cls": "java.net.MulticastSocket", "sig": "void <init>(int)", "labels": [true], "cost": 0.000492}
+{"cls": "java.net.MulticastSocket", "sig": "void joinGroup(java.net.SocketAddress,java.net.NetworkInterface)", "labels": [true, false, false, false, false, false], "cost": 0.00133}
+{"cls": "java.net.MulticastSocket", "sig": "void leaveGroup(java.net.SocketAddress,java.net.NetworkInterface)", "labels": [false, false, false, false, false, false], "cost": 0.001152}
+{"cls": "java.net.MulticastSocket", "sig": "void receive(java.net.DatagramPacket)", "labels": [false, true], "cost": 0.000642}
+{"cls": "java.net.MulticastSocket", "sig": "void setNetworkInterface(java.net.NetworkInterface)", "labels": [true, false], "cost": 0.000654}
+{"cls": "java.net.MulticastSocket", "sig": "void setTimeToLive(int)", "labels": [true], "cost": 0.0005}
+{"cls": "java.net.NetworkInterface", "sig": "java.lang.String getDisplayName()", "labels": [true], "cost": 0.000494}
+{"cls": "java.net.ServerSocket", "sig": "boolean isClosed()", "labels": [false], "cost": 0.000482}
+{"cls": "java.net.ServerSocket", "sig": "int getLocalPort()", "labels": [true], "cost": 0.000482}
+{"cls": "java.net.ServerSocket", "sig": "void <init>(int)", "labels": [true], "cost": 0.00049}
+{"cls": "java.net.ServerSocket", "sig": "void <init>(int,int)", "labels": [true, true], "cost": 0.000586}
+{"cls": "java.net.ServerSocket", "sig": "void <init>(int,int,java.net.InetAddress)", "labels": [true, false, true, false, true], "cost": 0.00109}
+{"cls": "java.net.ServerSocket", "sig": "void bind(java.net.SocketAddress)", "labels": [true, false], "cost": 0.000634}
+{"cls": "java.net.ServerSocket", "sig": "void bind(java.net.SocketAddress,int)", "labels": [true, false, false, false], "cost": 0.00084}
+{"cls": "java.net.ServerSocket", "sig": "void setReuseAddress(boolean)", "labels": [false], "cost": 0.000506}
+{"cls": "java.net.Socket", "sig": "boolean isClosed()", "labels": [false], "cost": 0.000476}
+{"cls": "java.net.Socket", "sig": "boolean isInputShutdown()", "labels": [false], "cost": 0.000482}
+{"cls": "java.net.Socket", "sig": "boolean isOutputShutdown()", "labels": [false], "cost": 0.000484}
+{"cls": "java.net.Socket", "sig": "int getPort()", "labels": [true], "cost": 0.00047}
+{"cls": "java.net.Socket", "sig": "java.net.InetAddress getInetAddress()", "labels": [true], "cost": 0.000492}
+{"cls": "java.net.Socket", "sig": "java.net.InetAddress getLocalAddress()", "labels": [true], "cost": 0.000494}
+{"cls": "java.net.Socket", "sig": "java.net.SocketAddress getRemoteSocketAddress()", "labels": [true], "cost": 0.000504}
+{"cls": "java.net.URLClassLoader", "sig": "java.net.URL[] getURLs()", "labels": [true], "cost": 0.000494}
+{"cls": "java.nio.channels.ByteChannel", "sig": "boolean isOpen()", "labels": [false], "cost": 0.00049}
+{"cls": "java.nio.channels.Channels", "sig": "java.nio.channels.WritableByteChannel newChannel(java.io.OutputStream)", "labels": [true], "cost": 0.000544}
+{"cls": "java.nio.channels.DatagramChannel", "sig": "java.net.SocketAddress receive(java.nio.ByteBuffer)", "labels": [false, false, true, true], "cost": 0.001}
+{"cls": "java.nio.channels.DatagramChannel", "sig": "java.nio.channels.DatagramChannel bind(java.net.SocketAddress)", "labels": [false, true, true, false], "cost": 0.000854}
+{"cls": "java.nio.channels.DatagramChannel", "sig": "java.nio.channels.DatagramChannel setOption(java.net.SocketOption,java.lang.Object)", "labels": [true, true, false, true, true, false, true, false, false], "cost": 0.001406}
+{"cls": "java.nio.channels.DatagramChannel", "sig": "java.nio.channels.MembershipKey join(java.net.InetAddress,java.net.NetworkInterface)", "labels": [true, false, false, true, false, false, true, false, false], "cost": 0.001688}
+{"cls": "java.nio.channels.FileChannel", "sig": "java.nio.channels.FileChannel open(java.nio.file.Path,java.util.Set,java.nio.file.attribute.FileAttribute[])", "labels": [true, false, false, false, false, false, false, false, false], "cost": 0.001594}
+{"cls": "java.nio.channels.FileChannel", "sig": "java.nio.channels.FileChannel truncate(long)", "labels": [false, false, true], "cost": 0.000684}
+{"cls": "java.nio.channels.GatheringByteChannel", "sig": "long write(java.nio.ByteBuffer[])", "labels": [false, false, false, false], "cost": 0.000906}
+{"cls": "java.nio.channels.SelectionKey", "sig": "boolean isAcceptable()", "labels": [false], "cost": 0.000494}
+{"cls": "java.nio.channels.SelectionKey", "sig": "boolean isValid()", "labels": [false], "cost": 0.000488}
+{"cls": "java.nio.channels.Selector", "sig": "int select()", "labels": [false], "cost": 0.000474}
+{"cls": "java.nio.channels.ServerSocketChannel", "sig": "java.net.ServerSocket socket()", "labels": [true], "cost": 0.000506}
+{"cls": "java.nio.channels.SocketChannel", "sig": "boolean finishConnect()", "labels": [false], "cost": 0.000492}
+{"cls": "java.nio.channels.SocketChannel", "sig": "java.nio.channels.SelectionKey register(java.nio.channels.Selector,int)", "labels": [false, false, true, false, false, true, true], "cost": 0.001346}
+{"cls": "java.nio.channels.SocketChannel", "sig": "java.nio.channels.SocketChannel setOption(java.net.SocketOption,java.lang.Object)", "labels": [false, false, false, true, true, false, true, false, false], "cost": 0.001402}
+{"cls": "java.nio.channels.SocketChannel", "sig": "long read(java.nio.ByteBuffer[],int,int)", "labels": [false, false, false, false, false, false, false, false, false, true], "cost": 0.001438}
+{"cls": "java.nio.channels.SocketChannel", "sig": "long write(java.nio.ByteBuffer[],int,int)", "labels": [false, false, false, false, false, false, false, false, false, false], "cost": 0.001438}
+{"cls": "java.nio.charset.Charset", "sig": "java.nio.ByteBuffer encode(java.lang.String)", "labels": [true, false, false], "cost": 0.000706}
+{"cls": "java.nio.file.DirectoryStream$Filter", "sig": "boolean accept(java.lang.Object)", "labels": [false, false, false, false], "cost": 0.000812}
+{"cls": "java.nio.file.FileSystem", "sig": "java.nio.file.spi.FileSystemProvider provider()", "labels": [false], "cost": 0.000512}
+{"cls": "java.nio.file.Files", "sig": "java.lang.String probeContentType(java.nio.file.Path)", "labels": [false], "cost": 0.000522}
+{"cls": "java.nio.file.Files", "sig": "java.nio.file.Path createSymbolicLink(java.nio.file.Path,java.nio.file.Path,java.nio.file.attribute.FileAttribute[])", "labels": [true, false, false, false, false, false, false, false, false], "cost": 0.001628}
+{"cls": "java.nio.file.PathMatcher", "sig": "boolean matches(java.nio.file.Path)", "labels": [false, false, false, false], "cost": 0.000868}
+{"cls": "java.nio.file.attribute.BasicFileAttributeView", "sig": "void setTimes(java.nio.file.attribute.FileTime,java.nio.file.attribute.FileTime,java.nio.file.attribute.FileTime)", "labels": [false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002302}
+{"cls": "java.nio.file.attribute.BasicFileAttributes", "sig": "boolean isDirectory()", "labels": [false], "cost": 0.000504}
+{"cls": "java.nio.file.attribute.BasicFileAttributes", "sig": "java.nio.file.attribute.FileTime creationTime()", "labels": [true], "cost": 0.000526}
+{"cls": "java.nio.file.attribute.BasicFileAttributes", "sig": "java.nio.file.attribute.FileTime lastAccessTime()", "labels": [true], "cost": 0.000532}
+{"cls": "java.nio.file.attribute.BasicFileAttributes", "sig": "java.nio.file.attribute.FileTime lastModifiedTime()", "labels": [true], "cost": 0.000534}
+{"cls": "java.nio.file.attribute.FileTime", "sig": "java.nio.file.attribute.FileTime fromMillis(long)", "labels": [true], "cost": 0.00052}
+{"cls": "java.nio.file.attribute.FileTime", "sig": "long toMillis()", "labels": [true], "cost": 0.000488}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "boolean deleteIfExists(java.nio.file.Path)", "labels": [false, false, false, false], "cost": 0.000888}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "boolean isHidden(java.nio.file.Path)", "labels": [true, false, false, false], "cost": 0.000882}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "boolean isSameFile(java.nio.file.Path,java.nio.file.Path)", "labels": [false, false, false, false, false, false, false, false, false], "cost": 0.001656}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.io.InputStream newInputStream(java.nio.file.Path,java.nio.file.OpenOption[])", "labels": [true, false, false, false, false, false, false, false, false], "cost": 0.00148}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.io.OutputStream newOutputStream(java.nio.file.Path,java.nio.file.OpenOption[])", "labels": [true, false, false, false, false, false, false, false, false], "cost": 0.001484}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.channels.AsynchronousFileChannel newAsynchronousFileChannel(java.nio.file.Path,java.util.Set,java.util.concurrent.ExecutorService,java.nio.file.attribute.FileAttribute[])", "labels": [true, false, false, false, false, true, false, false, false, false, true, false, false, false, false, true, false, false, false, false, false, false, false, false, false], "cost": 0.00362}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.channels.FileChannel newFileChannel(java.nio.file.Path,java.util.Set,java.nio.file.attribute.FileAttribute[])", "labels": [true, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002752}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.channels.SeekableByteChannel newByteChannel(java.nio.file.Path,java.util.Set,java.nio.file.attribute.FileAttribute[])", "labels": [true, false, false, false, true, false, false, false, true, false, false, false, false, false, false, false], "cost": 0.0026}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.DirectoryStream newDirectoryStream(java.nio.file.Path,java.nio.file.DirectoryStream$Filter)", "labels": [true, false, false, false, false, false, false, false, false], "cost": 0.001552}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.FileStore getFileStore(java.nio.file.Path)", "labels": [true, false, false, false], "cost": 0.0009}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.FileSystem getFileSystem(java.net.URI)", "labels": [true, false, false, false], "cost": 0.00083}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.FileSystem newFileSystem(java.nio.file.Path,java.util.Map)", "labels": [true, false, false, true, false, false, false, false, false], "cost": 0.00164}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.Path readSymbolicLink(java.nio.file.Path)", "labels": [true, false, false, false], "cost": 0.000852}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.attribute.BasicFileAttributes readAttributes(java.nio.file.Path,java.lang.Class,java.nio.file.LinkOption[])", "labels": [true, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001966}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.nio.file.attribute.FileAttributeView getFileAttributeView(java.nio.file.Path,java.lang.Class,java.nio.file.LinkOption[])", "labels": [true, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001968}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "java.util.Map readAttributes(java.nio.file.Path,java.lang.String,java.nio.file.LinkOption[])", "labels": [true, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.001928}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void checkAccess(java.nio.file.Path,java.nio.file.AccessMode[])", "labels": [false, false, false, false, false, false], "cost": 0.001178}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void copy(java.nio.file.Path,java.nio.file.Path,java.nio.file.CopyOption[])", "labels": [false, true, false, false, false, false, false, false, false, false, false, false], "cost": 0.001922}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void createDirectory(java.nio.file.Path,java.nio.file.attribute.FileAttribute[])", "labels": [false, false, false, false, false, false], "cost": 0.001228}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void createLink(java.nio.file.Path,java.nio.file.Path)", "labels": [false, false, false, false, false, false], "cost": 0.00113}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void createSymbolicLink(java.nio.file.Path,java.nio.file.Path,java.nio.file.attribute.FileAttribute[])", "labels": [false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002004}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void delete(java.nio.file.Path)", "labels": [false, false], "cost": 0.000694}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void move(java.nio.file.Path,java.nio.file.Path,java.nio.file.CopyOption[])", "labels": [false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.00192}
+{"cls": "java.nio.file.spi.FileSystemProvider", "sig": "void setAttribute(java.nio.file.Path,java.lang.String,java.lang.Object,java.nio.file.LinkOption[])", "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002374}
+{"cls": "java.security.KeyFactory", "sig": "java.security.PrivateKey generatePrivate(java.security.spec.KeySpec)", "labels": [true, false, false, false], "cost": 0.000858}
+{"cls": "java.security.KeyFactory", "sig": "java.security.PublicKey generatePublic(java.security.spec.KeySpec)", "labels": [true, false, false, false], "cost": 0.000854}
+{"cls": "java.security.KeyPair", "sig": "java.security.PrivateKey getPrivate()", "labels": [true], "cost": 0.000496}
+{"cls": "java.security.KeyPair", "sig": "java.security.PublicKey getPublic()", "labels": [true], "cost": 0.000492}
+{"cls": "java.security.KeyPair", "sig": "void <init>(java.security.PublicKey,java.security.PrivateKey)", "labels": [true, false, true, false], "cost": 0.000904}
+{"cls": "java.security.KeyPairGenerator", "sig": "java.security.KeyPair generateKeyPair()", "labels": [true], "cost": 0.000506}
+{"cls": "java.security.KeyPairGenerator", "sig": "void initialize(int)", "labels": [true], "cost": 0.000496}
+{"cls": "java.security.KeyPairGenerator", "sig": "void initialize(java.security.spec.AlgorithmParameterSpec)", "labels": [true, false], "cost": 0.000696}
+{"cls": "java.security.KeyStore", "sig": "boolean isKeyEntry(java.lang.String)", "labels": [false, false, false], "cost": 0.000744}
+{"cls": "java.security.KeyStore", "sig": "int size()", "labels": [false], "cost": 0.00047}
+{"cls": "java.security.KeyStore", "sig": "java.security.KeyStore getInstance(java.lang.String,java.lang.String)", "labels": [false, false], "cost": 0.00062}
+{"cls": "java.security.KeyStore", "sig": "java.security.KeyStore$Entry getEntry(java.lang.String,java.security.KeyStore$ProtectionParameter)", "labels": [true, false, false, true, false, true, false], "cost": 0.00145}
+{"cls": "java.security.KeyStore", "sig": "java.security.cert.Certificate getCertificate(java.lang.String)", "labels": [false, false, true], "cost": 0.000756}
+{"cls": "java.security.KeyStore", "sig": "java.security.cert.Certificate[] getCertificateChain(java.lang.String)", "labels": [false, false, true], "cost": 0.000714}
+{"cls": "java.security.KeyStore", "sig": "java.util.Enumeration aliases()", "labels": [true], "cost": 0.00049}
+{"cls": "java.security.KeyStore$SecretKeyEntry", "sig": "javax.crypto.SecretKey getSecretKey()", "labels": [true], "cost": 0.000522}
+{"cls": "java.security.MessageDigest", "sig": "int digest(byte[],int,int)", "labels": [false, false, false, false, false, false, false, false, true, true], "cost": 0.001312}
+{"cls": "java.security.MessageDigest", "sig": "int getDigestLength()", "labels": [true], "cost": 0.000482}
+{"cls": "java.security.MessageDigest", "sig": "java.lang.Object clone()", "labels": [true], "cost": 0.000486}
+{"cls": "java.security.MessageDigest", "sig": "void update(byte)", "labels": [true], "cost": 0.00049}
+{"cls": "java.security.Permission", "sig": "java.lang.String getName()", "labels": [true], "cost": 0.000478}
+{"cls": "java.security.PrivateKey", "sig": "byte[] getEncoded()", "labels": [true], "cost": 0.000486}
+{"cls": "java.security.PublicKey", "sig": "java.lang.String getAlgorithm()", "labels": [true], "cost": 0.000492}
+{"cls": "java.security.Security", "sig": "java.lang.String getProperty(java.lang.String)", "labels": [false], "cost": 0.000502}
+{"cls": "java.security.Signature", "sig": "boolean verify(byte[])", "labels": [true, false, true, false], "cost": 0.000812}
+{"cls": "java.security.Signature", "sig": "byte[] sign()", "labels": [true], "cost": 0.000474}
+{"cls": "java.security.Signature", "sig": "void engineSetParameter(java.security.spec.AlgorithmParameterSpec)", "labels": [true, false], "cost": 0.000742}
+{"cls": "java.security.Signature", "sig": "void initSign(java.security.PrivateKey)", "labels": [true, false], "cost": 0.00068}
+{"cls": "java.security.Signature", "sig": "void initVerify(java.security.PublicKey)", "labels": [true, false], "cost": 0.000626}
+{"cls": "java.security.Signature", "sig": "void setParameter(java.security.spec.AlgorithmParameterSpec)", "labels": [true, false], "cost": 0.000686}
+{"cls": "java.security.Signature", "sig": "void update(byte[])", "labels": [true, false], "cost": 0.000586}
+{"cls": "java.security.cert.CertStore", "sig": "java.security.cert.CertStore getInstance(java.lang.String,java.security.cert.CertStoreParameters)", "labels": [false, false, true], "cost": 0.000844}
+{"cls": "java.security.cert.CertificateFactory", "sig": "java.util.Collection generateCRLs(java.io.InputStream)", "labels": [true, false, false, false], "cost": 0.000828}
+{"cls": "java.security.cert.CollectionCertStoreParameters", "sig": "void <init>(java.util.Collection)", "labels": [true], "cost": 0.000532}
+{"cls": "java.security.cert.PKIXBuilderParameters", "sig": "void <init>(java.security.KeyStore,java.security.cert.CertSelector)", "labels": [true, false, true, false], "cost": 0.000938}
+{"cls": "java.security.cert.PKIXBuilderParameters", "sig": "void addCertStore(java.security.cert.CertStore)", "labels": [true, false], "cost": 0.000712}
+{"cls": "java.security.cert.PKIXBuilderParameters", "sig": "void setMaxPathLength(int)", "labels": [true], "cost": 0.000516}
+{"cls": "java.security.cert.X509Certificate", "sig": "java.util.Date getNotAfter()", "labels": [true], "cost": 0.000498}
+{"cls": "java.security.interfaces.DSAParams", "sig": "java.math.BigInteger getG()", "labels": [true], "cost": 0.000498}
+{"cls": "java.security.interfaces.DSAParams", "sig": "java.math.BigInteger getP()", "labels": [true], "cost": 0.000498}
+{"cls": "java.security.interfaces.DSAParams", "sig": "java.math.BigInteger getQ()", "labels": [true], "cost": 0.0005}
+{"cls": "java.security.interfaces.DSAPublicKey", "sig": "java.math.BigInteger getY()", "labels": [true], "cost": 0.000504}
+{"cls": "java.security.interfaces.DSAPublicKey", "sig": "java.security.interfaces.DSAParams getParams()", "labels": [true], "cost": 0.000516}
+{"cls": "java.security.interfaces.ECPrivateKey", "sig": "java.security.spec.ECParameterSpec getParams()", "labels": [true], "cost": 0.000518}
+{"cls": "java.security.interfaces.ECPublicKey", "sig": "java.security.spec.ECParameterSpec getParams()", "labels": [true], "cost": 0.000516}
+{"cls": "java.security.interfaces.ECPublicKey", "sig": "java.security.spec.ECPoint getW()", "labels": [true], "cost": 0.000508}
+{"cls": "java.security.interfaces.RSAPublicKey", "sig": "java.math.BigInteger getModulus()", "labels": [true], "cost": 0.000508}
+{"cls": "java.security.interfaces.RSAPublicKey", "sig": "java.math.BigInteger getPublicExponent()", "labels": [true], "cost": 0.000514}
+{"cls": "java.security.spec.DSAPrivateKeySpec", "sig": "void <init>(java.math.BigInteger,java.math.BigInteger,java.math.BigInteger,java.math.BigInteger)", "labels": [true, true, true, true], "cost": 0.000924}
+{"cls": "java.security.spec.DSAPublicKeySpec", "sig": "void <init>(java.math.BigInteger,java.math.BigInteger,java.math.BigInteger,java.math.BigInteger)", "labels": [true, true, true, true], "cost": 0.000922}
+{"cls": "java.security.spec.ECField", "sig": "int getFieldSize()", "labels": [true], "cost": 0.000482}
+{"cls": "java.security.spec.ECParameterSpec", "sig": "java.security.spec.EllipticCurve getCurve()", "labels": [true], "cost": 0.000514}
+{"cls": "java.security.spec.ECPoint", "sig": "java.math.BigInteger getAffineX()", "labels": [true], "cost": 0.0005}
+{"cls": "java.security.spec.ECPoint", "sig": "java.math.BigInteger getAffineY()", "labels": [true], "cost": 0.0005}
+{"cls": "java.security.spec.ECPoint", "sig": "void <init>(java.math.BigInteger,java.math.BigInteger)", "labels": [true, true], "cost": 0.000654}
+{"cls": "java.security.spec.ECPrivateKeySpec", "sig": "void <init>(java.math.BigInteger,java.security.spec.ECParameterSpec)", "labels": [true, false, true], "cost": 0.000826}
+{"cls": "java.security.spec.ECPublicKeySpec", "sig": "void <init>(java.security.spec.ECPoint,java.security.spec.ECParameterSpec)", "labels": [true, false, true, false], "cost": 0.000984}
+{"cls": "java.security.spec.EllipticCurve", "sig": "java.security.spec.ECField getField()", "labels": [true], "cost": 0.0005}
+{"cls": "java.security.spec.PKCS8EncodedKeySpec", "sig": "void <init>(byte[])", "labels": [true], "cost": 0.000522}
+{"cls": "java.security.spec.RSAPrivateCrtKeySpec", "sig": "void <init>(java.math.BigInteger,java.math.BigInteger,java.math.BigInteger,java.math.BigInteger,java.math.BigInteger,java.math.BigInteger,java.math.BigInteger,java.math.BigInteger)", "labels": [true, true, true, true, true, true, true, true], "cost": 0.001662}
+{"cls": "java.security.spec.RSAPublicKeySpec", "sig": "void <init>(java.math.BigInteger,java.math.BigInteger)", "labels": [true, true], "cost": 0.000716}
+{"cls": "java.security.spec.X509EncodedKeySpec", "sig": "byte[] getEncoded()", "labels": [true], "cost": 0.000502}
+{"cls": "java.security.spec.X509EncodedKeySpec", "sig": "void <init>(byte[])", "labels": [true], "cost": 0.000516}
+{"cls": "java.sql.Connection", "sig": "java.sql.DatabaseMetaData getMetaData()", "labels": [false], "cost": 0.000502}
+{"cls": "java.sql.Connection", "sig": "java.sql.PreparedStatement prepareStatement(java.lang.String)", "labels": [true, false, true], "cost": 0.000708}
+{"cls": "java.sql.Connection", "sig": "java.sql.Statement createStatement()", "labels": [true], "cost": 0.000488}
+{"cls": "java.sql.DatabaseMetaData", "sig": "java.lang.String getDatabaseProductName()", "labels": [true], "cost": 0.000506}
+{"cls": "java.sql.DatabaseMetaData", "sig": "java.sql.ResultSet getIndexInfo(java.lang.String,java.lang.String,java.lang.String,boolean,boolean)", "labels": [true, false, true, false, true, false, false, false, false, false, true], "cost": 0.001794}
+{"cls": "java.sql.DatabaseMetaData", "sig": "java.sql.ResultSet getTables(java.lang.String,java.lang.String,java.lang.String,java.lang.String[])", "labels": [true, false, false, true, false, false, true, false, false, true, false, true, false], "cost": 0.00211}
+{"cls": "java.sql.Date", "sig": "long getTime()", "labels": [true], "cost": 0.00047}
+{"cls": "java.sql.DriverManager", "sig": "java.sql.Connection getConnection(java.lang.String)", "labels": [true], "cost": 0.000514}
+{"cls": "java.sql.DriverManager", "sig": "java.sql.Connection getConnection(java.lang.String,java.lang.String,java.lang.String)", "labels": [true, true, true], "cost": 0.000726}
+{"cls": "java.sql.PreparedStatement", "sig": "int executeUpdate()", "labels": [false], "cost": 0.000486}
+{"cls": "java.sql.PreparedStatement", "sig": "java.sql.ResultSet executeQuery()", "labels": [true], "cost": 0.000502}
+{"cls": "java.sql.PreparedStatement", "sig": "void setInt(int,int)", "labels": [false, true], "cost": 0.00059}
+{"cls": "java.sql.PreparedStatement", "sig": "void setObject(int,java.lang.Object)", "labels": [false, false, true, false], "cost": 0.000872}
+{"cls": "java.sql.PreparedStatement", "sig": "void setString(int,java.lang.String)", "labels": [false, true], "cost": 0.000608}
+{"cls": "java.sql.Statement", "sig": "int executeUpdate(java.lang.String)", "labels": [false, false, false], "cost": 0.000686}
+{"cls": "java.sql.Timestamp", "sig": "boolean after(java.sql.Timestamp)", "labels": [false, false, false, false], "cost": 0.000868}
+{"cls": "java.sql.Timestamp", "sig": "boolean after(java.util.Date)", "labels": [false, false, false, false], "cost": 0.000926}
+{"cls": "java.sql.Timestamp", "sig": "int compareTo(java.sql.Timestamp)", "labels": [true, false, true, false], "cost": 0.00087}
+{"cls": "java.text.DateFormat", "sig": "java.lang.Object clone()", "labels": [true], "cost": 0.000484}
+{"cls": "java.text.DateFormat", "sig": "java.lang.StringBuffer format(java.util.Date,java.lang.StringBuffer,java.text.FieldPosition)", "labels": [true, false, true, false, true, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002236}
+{"cls": "java.text.DateFormatSymbols", "sig": "java.text.DateFormatSymbols getInstance(java.util.Locale)", "labels": [true], "cost": 0.000534}
+{"cls": "java.text.ParsePosition", "sig": "void setErrorIndex(int)", "labels": [true], "cost": 0.000498}
+{"cls": "java.time.Duration", "sig": "int getNano()", "labels": [true], "cost": 0.00047}
+{"cls": "java.time.Duration", "sig": "long getSeconds()", "labels": [true], "cost": 0.000474}
+{"cls": "java.time.Instant", "sig": "int getNano()", "labels": [true], "cost": 0.00047}
+{"cls": "java.time.Instant", "sig": "long getEpochSecond()", "labels": [true], "cost": 0.000478}
+{"cls": "java.time.LocalDate", "sig": "int getDayOfMonth()", "labels": [true], "cost": 0.000484}
+{"cls": "java.time.LocalDate", "sig": "int getMonthValue()", "labels": [true], "cost": 0.00048}
+{"cls": "java.time.LocalDate", "sig": "int getYear()", "labels": [true], "cost": 0.000474}
+{"cls": "java.time.LocalDateTime", "sig": "java.time.LocalDate toLocalDate()", "labels": [true], "cost": 0.0005}
+{"cls": "java.time.LocalDateTime", "sig": "java.time.LocalTime toLocalTime()", "labels": [true], "cost": 0.0005}
+{"cls": "java.time.LocalTime", "sig": "int getHour()", "labels": [true], "cost": 0.000474}
+{"cls": "java.time.LocalTime", "sig": "int getMinute()", "labels": [true], "cost": 0.000476}
+{"cls": "java.time.LocalTime", "sig": "int getNano()", "labels": [true], "cost": 0.000474}
+{"cls": "java.time.LocalTime", "sig": "int getSecond()", "labels": [true], "cost": 0.000476}
+{"cls": "java.time.MonthDay", "sig": "int getDayOfMonth()", "labels": [true], "cost": 0.000484}
+{"cls": "java.time.MonthDay", "sig": "int getMonthValue()", "labels": [true], "cost": 0.00048}
+{"cls": "java.time.OffsetDateTime", "sig": "java.time.LocalDateTime toLocalDateTime()", "labels": [true], "cost": 0.00051}
+{"cls": "java.time.OffsetDateTime", "sig": "java.time.ZoneOffset getOffset()", "labels": [true], "cost": 0.000502}
+{"cls": "java.time.OffsetTime", "sig": "java.time.LocalTime toLocalTime()", "labels": [true], "cost": 0.000498}
+{"cls": "java.time.OffsetTime", "sig": "java.time.ZoneOffset getOffset()", "labels": [true], "cost": 0.000498}
+{"cls": "java.time.Period", "sig": "int getDays()", "labels": [true], "cost": 0.000518}
+{"cls": "java.time.Period", "sig": "int getMonths()", "labels": [true], "cost": 0.00047}
+{"cls": "java.time.Period", "sig": "int getYears()", "labels": [true], "cost": 0.000468}
+{"cls": "java.time.Year", "sig": "int getValue()", "labels": [true], "cost": 0.000468}
+{"cls": "java.time.YearMonth", "sig": "int getMonthValue()", "labels": [true], "cost": 0.00048}
+{"cls": "java.time.YearMonth", "sig": "int getYear()", "labels": [true], "cost": 0.000474}
+{"cls": "java.time.ZoneId", "sig": "java.lang.String getId()", "labels": [true], "cost": 0.000482}
+{"cls": "java.time.ZoneOffset", "sig": "int getTotalSeconds()", "labels": [true], "cost": 0.000488}
+{"cls": "java.time.ZonedDateTime", "sig": "java.time.LocalDateTime toLocalDateTime()", "labels": [true], "cost": 0.00051}
+{"cls": "java.time.ZonedDateTime", "sig": "java.time.ZoneId getZone()", "labels": [true], "cost": 0.000496}
+{"cls": "java.time.ZonedDateTime", "sig": "java.time.ZoneOffset getOffset()", "labels": [true], "cost": 0.000502}
+{"cls": "java.util.Base64$Encoder", "sig": "byte[] encode(byte[])", "labels": [true, false, false, false], "cost": 0.000774}
+{"cls": "java.util.Calendar", "sig": "void setFirstDayOfWeek(int)", "labels": [true], "cost": 0.000502}
+{"cls": "java.util.Calendar", "sig": "void setLenient(boolean)", "labels": [true], "cost": 0.000496}
+{"cls": "java.util.Date", "sig": "java.lang.Object clone()", "labels": [true], "cost": 0.000478}
+{"cls": "java.util.Dictionary", "sig": "java.util.Enumeration elements()", "labels": [true], "cost": 0.000488}
+{"cls": "java.util.Dictionary", "sig": "java.util.Enumeration keys()", "labels": [true], "cost": 0.000488}
+{"cls": "java.util.GregorianCalendar", "sig": "int get(int)", "labels": [false, false, true], "cost": 0.000654}
+{"cls": "java.util.GregorianCalendar", "sig": "int getFirstDayOfWeek()", "labels": [true], "cost": 0.000496}
+{"cls": "java.util.GregorianCalendar", "sig": "int getMinimalDaysInFirstWeek()", "labels": [true], "cost": 0.000504}
+{"cls": "java.util.GregorianCalendar", "sig": "void <init>(int,int,int,int,int)", "labels": [true, true, true, true, true], "cost": 0.000928}
+{"cls": "java.util.GregorianCalendar", "sig": "void <init>(java.util.Locale)", "labels": [false], "cost": 0.000518}
+{"cls": "java.util.GregorianCalendar", "sig": "void setTimeZone(java.util.TimeZone)", "labels": [true, false], "cost": 0.00069}
+{"cls": "java.util.Locale", "sig": "java.lang.String getVariant()", "labels": [true], "cost": 0.000482}
+{"cls": "java.util.Locale$Builder", "sig": "java.util.Locale$Builder setExtension(char,java.lang.String)", "labels": [true, true, true, true, true], "cost": 0.000886}
+{"cls": "java.util.Locale$Builder", "sig": "java.util.Locale$Builder setVariant(java.lang.String)", "labels": [true, true, true], "cost": 0.000708}
+{"cls": "java.util.Spliterators", "sig": "java.util.Spliterator spliterator(java.lang.Object[],int)", "labels": [true, false, false], "cost": 0.000716}
+{"cls": "java.util.Spliterators", "sig": "java.util.Spliterator spliterator(java.util.Collection,int)", "labels": [true, false, false], "cost": 0.000708}
+{"cls": "java.util.TimeZone", "sig": "java.lang.String getDisplayName(boolean,int,java.util.Locale)", "labels": [false, false, false, false, false, false, true, false, true, false], "cost": 0.001548}
+{"cls": "java.util.TimeZone", "sig": "void setID(java.lang.String)", "labels": [true], "cost": 0.000506}
+{"cls": "java.util.UUID", "sig": "int compareTo(java.util.UUID)", "labels": [true, false, true, false], "cost": 0.00079}
+{"cls": "java.util.UUID", "sig": "long getLeastSignificantBits()", "labels": [true], "cost": 0.000484}
+{"cls": "java.util.UUID", "sig": "long getMostSignificantBits()", "labels": [true], "cost": 0.000482}
+{"cls": "java.util.concurrent.AbstractExecutorService", "sig": "java.util.concurrent.Future submit(java.lang.Runnable)", "labels": [true, false, false, false], "cost": 0.000844}
+{"cls": "java.util.concurrent.Delayed", "sig": "long getDelay(java.util.concurrent.TimeUnit)", "labels": [false, false, true, false], "cost": 0.000916}
+{"cls": "java.util.concurrent.ScheduledExecutorService", "sig": "java.util.concurrent.Future submit(java.lang.Runnable)", "labels": [true, false, false, false], "cost": 0.000896}
+{"cls": "java.util.concurrent.ScheduledExecutorService", "sig": "java.util.concurrent.ScheduledFuture scheduleWithFixedDelay(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit)", "labels": [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.002344}
+{"cls": "java.util.concurrent.ThreadPoolExecutor", "sig": "void afterExecute(java.lang.Runnable,java.lang.Throwable)", "labels": [false, false, false, false, false, false], "cost": 0.001318}
+{"cls": "java.util.concurrent.atomic.AtomicIntegerFieldUpdater", "sig": "int getAndSet(java.lang.Object,int)", "labels": [true, false, false, false, true, false, false], "cost": 0.001316}
+{"cls": "java.util.concurrent.atomic.AtomicIntegerFieldUpdater", "sig": "void lazySet(java.lang.Object,int)", "labels": [false, false, true, false], "cost": 0.000856}
+{"cls": "java.util.concurrent.locks.Lock", "sig": "boolean tryLock(long,java.util.concurrent.TimeUnit)", "labels": [false, false, false, false, false, false, false], "cost": 0.001172}
+{"cls": "java.util.concurrent.locks.ReentrantLock", "sig": "boolean tryLock()", "labels": [false], "cost": 0.0005}
+{"cls": "java.util.function.BiPredicate", "sig": "boolean test(java.lang.Object,java.lang.Object)", "labels": [true, false, false, true, false, false, false, false, false], "cost": 0.001498}
+{"cls": "java.util.function.DoubleConsumer", "sig": "void accept(double)", "labels": [true], "cost": 0.000496}
+{"cls": "java.util.function.IntConsumer", "sig": "void accept(int)", "labels": [false], "cost": 0.000492}
+{"cls": "java.util.function.LongConsumer", "sig": "void accept(long)", "labels": [false], "cost": 0.000492}
+{"cls": "java.util.jar.JarEntry", "sig": "java.lang.String getName()", "labels": [true], "cost": 0.000488}
+{"cls": "java.util.jar.JarEntry", "sig": "long getSize()", "labels": [true], "cost": 0.00048}
+{"cls": "java.util.jar.JarEntry", "sig": "long getTime()", "labels": [true], "cost": 0.00048}
+{"cls": "java.util.jar.JarFile", "sig": "java.lang.String getName()", "labels": [true], "cost": 0.000486}
+{"cls": "java.util.jar.JarFile", "sig": "java.util.Enumeration entries()", "labels": [true], "cost": 0.000492}
+{"cls": "java.util.logging.Logger", "sig": "java.lang.String getName()", "labels": [true], "cost": 0.000484}
+{"cls": "java.util.logging.Logger", "sig": "void finest(java.lang.String)", "labels": [false], "cost": 0.000508}
+{"cls": "java.util.logging.Logger", "sig": "void log(java.util.logging.Level,java.lang.String,java.lang.Object[])", "labels": [false, false, false, false, false, false, false, false, false], "cost": 0.001694}
+{"cls": "java.util.regex.MatchResult", "sig": "java.lang.String group()", "labels": [true], "cost": 0.000486}
+{"cls": "java.util.stream.BaseStream", "sig": "java.util.Spliterator spliterator()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.stream.BaseStream", "sig": "java.util.stream.BaseStream onClose(java.lang.Runnable)", "labels": [false, false, true, false], "cost": 0.000886}
+{"cls": "java.util.stream.BaseStream", "sig": "java.util.stream.BaseStream parallel()", "labels": [true], "cost": 0.000502}
+{"cls": "java.util.stream.BaseStream", "sig": "java.util.stream.BaseStream sequential()", "labels": [true], "cost": 0.000502}
+{"cls": "java.util.stream.BaseStream", "sig": "java.util.stream.BaseStream unordered()", "labels": [true], "cost": 0.000502}
+{"cls": "java.util.stream.Collector", "sig": "java.util.function.Function finisher()", "labels": [true], "cost": 0.00049}
+{"cls": "java.util.stream.Collector", "sig": "java.util.function.Supplier supplier()", "labels": [true], "cost": 0.000494}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.Spliterator spliterator()", "labels": [true], "cost": 0.0005}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.Spliterator$OfDouble spliterator()", "labels": [true], "cost": 0.000512}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.BaseStream parallel()", "labels": [true], "cost": 0.000504}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.BaseStream sequential()", "labels": [true], "cost": 0.000504}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream distinct()", "labels": [true], "cost": 0.000506}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream dropWhile(java.util.function.DoublePredicate)", "labels": [false, false, true, false], "cost": 0.000876}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream filter(java.util.function.DoublePredicate)", "labels": [false, false, true, false], "cost": 0.00092}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream flatMap(java.util.function.DoubleFunction)", "labels": [true, false, true, false], "cost": 0.001014}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream limit(long)", "labels": [false, false, true], "cost": 0.000682}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream map(java.util.function.DoubleUnaryOperator)", "labels": [true, false, true, false], "cost": 0.0009}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream parallel()", "labels": [true], "cost": 0.000506}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream peek(java.util.function.DoubleConsumer)", "labels": [false, false, true, true], "cost": 0.000878}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream sequential()", "labels": [true], "cost": 0.000506}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream skip(long)", "labels": [false, false, true], "cost": 0.000732}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream sorted()", "labels": [true], "cost": 0.000506}
+{"cls": "java.util.stream.DoubleStream", "sig": "java.util.stream.DoubleStream takeWhile(java.util.function.DoublePredicate)", "labels": [false, false, true, false], "cost": 0.000876}
+{"cls": "java.util.stream.DoubleStream", "sig": "void forEach(java.util.function.DoubleConsumer)", "labels": [false, true], "cost": 0.000666}
+{"cls": "java.util.stream.IntStream", "sig": "boolean anyMatch(java.util.function.IntPredicate)", "labels": [false, false, true, false], "cost": 0.000844}
+{"cls": "java.util.stream.IntStream", "sig": "int reduce(int,java.util.function.IntBinaryOperator)", "labels": [true, false, false, true, false, true, false], "cost": 0.001358}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.Spliterator spliterator()", "labels": [true], "cost": 0.000496}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.Spliterator$OfInt spliterator()", "labels": [true], "cost": 0.000506}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.BaseStream parallel()", "labels": [true], "cost": 0.0005}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.BaseStream sequential()", "labels": [true], "cost": 0.0005}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream distinct()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream dropWhile(java.util.function.IntPredicate)", "labels": [false, false, true, false], "cost": 0.00086}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream filter(java.util.function.IntPredicate)", "labels": [false, false, true, false], "cost": 0.000854}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream flatMap(java.util.function.IntFunction)", "labels": [true, false, true, false], "cost": 0.00085}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream limit(long)", "labels": [false, false, true], "cost": 0.000724}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream map(java.util.function.IntUnaryOperator)", "labels": [true, false, true, false], "cost": 0.000926}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream parallel()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream peek(java.util.function.IntConsumer)", "labels": [false, false, true, true], "cost": 0.000854}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream sequential()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream skip(long)", "labels": [false, false, true], "cost": 0.000724}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream sorted()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream takeWhile(java.util.function.IntPredicate)", "labels": [false, false, true, false], "cost": 0.001}
+{"cls": "java.util.stream.IntStream", "sig": "void forEach(java.util.function.IntConsumer)", "labels": [false, true], "cost": 0.0007}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.Spliterator spliterator()", "labels": [true], "cost": 0.000496}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.Spliterator$OfLong spliterator()", "labels": [true], "cost": 0.000506}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.BaseStream parallel()", "labels": [true], "cost": 0.0005}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.BaseStream sequential()", "labels": [true], "cost": 0.0005}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream distinct()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream dropWhile(java.util.function.LongPredicate)", "labels": [false, false, true, false], "cost": 0.00086}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream filter(java.util.function.LongPredicate)", "labels": [false, false, true, false], "cost": 0.000854}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream flatMap(java.util.function.LongFunction)", "labels": [true, false, true, false], "cost": 0.00085}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream limit(long)", "labels": [false, false, true], "cost": 0.000724}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream map(java.util.function.LongUnaryOperator)", "labels": [true, false, true, false], "cost": 0.000876}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream parallel()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream peek(java.util.function.LongConsumer)", "labels": [false, false, true, true], "cost": 0.000854}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream sequential()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream skip(long)", "labels": [false, false, true], "cost": 0.000674}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream sorted()", "labels": [true], "cost": 0.000498}
+{"cls": "java.util.stream.LongStream", "sig": "java.util.stream.LongStream takeWhile(java.util.function.LongPredicate)", "labels": [false, false, true, false], "cost": 0.00086}
+{"cls": "java.util.stream.LongStream", "sig": "long reduce(long,java.util.function.LongBinaryOperator)", "labels": [true, false, false, true, false, true, false], "cost": 0.001288}
+{"cls": "java.util.stream.LongStream", "sig": "void forEach(java.util.function.LongConsumer)", "labels": [false, true], "cost": 0.00065}
+{"cls": "javax.crypto.KeyAgreement", "sig": "byte[] generateSecret()", "labels": [true], "cost": 0.000494}
+{"cls": "javax.crypto.KeyAgreement", "sig": "java.security.Key doPhase(java.security.Key,boolean)", "labels": [true, true, false, false, false, true, false], "cost": 0.001152}
+{"cls": "javax.crypto.KeyAgreement", "sig": "void init(java.security.Key)", "labels": [true, false], "cost": 0.000616}
+{"cls": "javax.crypto.KeyGenerator", "sig": "void init(java.security.spec.AlgorithmParameterSpec)", "labels": [true, false], "cost": 0.000694}
+{"cls": "javax.crypto.Mac", "sig": "int getMacLength()", "labels": [true], "cost": 0.00048}
+{"cls": "javax.crypto.Mac", "sig": "void doFinal(byte[],int)", "labels": [false, false, false, true], "cost": 0.00093}
+{"cls": "javax.crypto.SecretKey", "sig": "byte[] getEncoded()", "labels": [true], "cost": 0.00049}
+{"cls": "javax.crypto.SecretKeyFactory", "sig": "javax.crypto.SecretKey generateSecret(java.security.spec.KeySpec)", "labels": [true, false, false, false], "cost": 0.000922}
+{"cls": "javax.crypto.spec.IvParameterSpec", "sig": "byte[] getIV()", "labels": [true], "cost": 0.000498}
+{"cls": "javax.crypto.spec.PBEKeySpec", "sig": "void <init>(char[],byte[],int,int)", "labels": [true, false, true, false, true, false, false, true, false, false], "cost": 0.00139}
+{"cls": "javax.crypto.spec.RC2ParameterSpec", "sig": "byte[] getIV()", "labels": [true], "cost": 0.000552}
+{"cls": "javax.net.ssl.CertPathTrustManagerParameters", "sig": "void <init>(java.security.cert.CertPathParameters)", "labels": [true], "cost": 0.000566}
+{"cls": "javax.net.ssl.KeyManagerFactory", "sig": "javax.net.ssl.KeyManagerFactory getInstance(java.lang.String)", "labels": [false], "cost": 0.00055}
+{"cls": "javax.net.ssl.SSLContext", "sig": "javax.net.ssl.SSLContext getInstance(java.lang.String)", "labels": [false], "cost": 0.000534}
+{"cls": "javax.net.ssl.SSLContext", "sig": "javax.net.ssl.SSLContext getInstance(java.lang.String,java.lang.String)", "labels": [false, false], "cost": 0.00064}
+{"cls": "javax.net.ssl.SSLContext", "sig": "javax.net.ssl.SSLContext getInstance(java.lang.String,java.security.Provider)", "labels": [false, false, false], "cost": 0.000758}
+{"cls": "javax.net.ssl.SSLContext", "sig": "javax.net.ssl.SSLEngine createSSLEngine()", "labels": [true], "cost": 0.00052}
+{"cls": "javax.net.ssl.SSLContext", "sig": "javax.net.ssl.SSLServerSocketFactory getServerSocketFactory()", "labels": [true], "cost": 0.000534}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "boolean isOutboundDone()", "labels": [false], "cost": 0.000498}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "java.lang.String[] getEnabledCipherSuites()", "labels": [true], "cost": 0.000516}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "java.lang.String[] getEnabledProtocols()", "labels": [true], "cost": 0.000512}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "java.lang.String[] getSupportedCipherSuites()", "labels": [false], "cost": 0.000516}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "java.lang.String[] getSupportedProtocols()", "labels": [false], "cost": 0.000512}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "javax.net.ssl.SSLEngineResult$HandshakeStatus getHandshakeStatus()", "labels": [true], "cost": 0.000548}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "void setEnabledCipherSuites(java.lang.String[])", "labels": [true, false], "cost": 0.000696}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "void setEnabledProtocols(java.lang.String[])", "labels": [true, false], "cost": 0.000642}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "void setNeedClientAuth(boolean)", "labels": [true], "cost": 0.00052}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "void setWantClientAuth(boolean)", "labels": [true], "cost": 0.000518}
+{"cls": "javax.net.ssl.SSLEngineResult", "sig": "int bytesConsumed()", "labels": [true], "cost": 0.000498}
+{"cls": "javax.net.ssl.SSLEngineResult", "sig": "int bytesProduced()", "labels": [true], "cost": 0.000496}
+{"cls": "javax.net.ssl.SSLEngineResult", "sig": "javax.net.ssl.SSLEngineResult$HandshakeStatus getHandshakeStatus()", "labels": [true], "cost": 0.000552}
+{"cls": "javax.net.ssl.SSLEngineResult", "sig": "javax.net.ssl.SSLEngineResult$Status getStatus()", "labels": [true], "cost": 0.00053}
+{"cls": "javax.net.ssl.SSLEngineResult$HandshakeStatus", "sig": "int ordinal()", "labels": [true], "cost": 0.00051}
+{"cls": "javax.net.ssl.SSLEngineResult$Status", "sig": "int ordinal()", "labels": [true], "cost": 0.000498}
+{"cls": "javax.net.ssl.SSLServerSocket", "sig": "java.lang.String[] getEnabledCipherSuites()", "labels": [true], "cost": 0.00052}
+{"cls": "javax.net.ssl.SSLServerSocket", "sig": "java.lang.String[] getEnabledProtocols()", "labels": [true], "cost": 0.000516}
+{"cls": "javax.net.ssl.SSLServerSocket", "sig": "java.lang.String[] getSupportedCipherSuites()", "labels": [false], "cost": 0.00052}
+{"cls": "javax.net.ssl.SSLServerSocket", "sig": "java.lang.String[] getSupportedProtocols()", "labels": [true], "cost": 0.000516}
+{"cls": "javax.net.ssl.SSLServerSocket", "sig": "void setEnabledCipherSuites(java.lang.String[])", "labels": [true, false], "cost": 0.00065}
+{"cls": "javax.net.ssl.SSLServerSocket", "sig": "void setEnabledProtocols(java.lang.String[])", "labels": [true, false], "cost": 0.000646}
+{"cls": "javax.net.ssl.SSLServerSocket", "sig": "void setNeedClientAuth(boolean)", "labels": [true], "cost": 0.000524}
+{"cls": "javax.net.ssl.SSLServerSocket", "sig": "void setWantClientAuth(boolean)", "labels": [false], "cost": 0.000522}
+{"cls": "javax.net.ssl.SSLServerSocketFactory", "sig": "java.net.ServerSocket createServerSocket(int,int)", "labels": [false, false, false, false, false], "cost": 0.000926}
+{"cls": "javax.net.ssl.SSLServerSocketFactory", "sig": "java.net.ServerSocket createServerSocket(int,int,java.net.InetAddress)", "labels": [true, false, false, false, false, false, true, false, true, false], "cost": 0.001426}
+{"cls": "javax.net.ssl.SSLSession", "sig": "byte[] getId()", "labels": [true], "cost": 0.000488}
+{"cls": "javax.net.ssl.SSLSession", "sig": "int getPeerPort()", "labels": [false], "cost": 0.00049}
+{"cls": "javax.net.ssl.SSLSession", "sig": "java.lang.Object getValue(java.lang.String)", "labels": [false, false, true], "cost": 0.000754}
+{"cls": "javax.net.ssl.SSLSession", "sig": "java.lang.String getPeerHost()", "labels": [true], "cost": 0.0005}
+{"cls": "javax.net.ssl.SSLSession", "sig": "javax.security.cert.X509Certificate[] getPeerCertificateChain()", "labels": [true], "cost": 0.000528}
+{"cls": "javax.net.ssl.SSLSession", "sig": "void putValue(java.lang.String,java.lang.Object)", "labels": [true, false, true, false], "cost": 0.000906}
+{"cls": "javax.net.ssl.SSLSocket", "sig": "java.lang.String[] getSupportedProtocols()", "labels": [false], "cost": 0.000512}
+{"cls": "javax.net.ssl.SSLSocket", "sig": "void setNeedClientAuth(boolean)", "labels": [true], "cost": 0.00052}
+{"cls": "javax.net.ssl.SSLSocket", "sig": "void setWantClientAuth(boolean)", "labels": [false], "cost": 0.000518}
+{"cls": "javax.net.ssl.SSLSocketFactory", "sig": "java.net.Socket createSocket()", "labels": [false], "cost": 0.000506}
+{"cls": "javax.net.ssl.TrustManagerFactory", "sig": "javax.net.ssl.TrustManagerFactory getInstance(java.lang.String,java.security.Provider)", "labels": [false, false, false], "cost": 0.000774}
+{"cls": "javax.net.ssl.TrustManagerFactory", "sig": "void init(javax.net.ssl.ManagerFactoryParameters)", "labels": [true, false], "cost": 0.000758}
+{"cls": "javax.security.cert.X509Certificate", "sig": "byte[] getEncoded()", "labels": [true], "cost": 0.000494}
+{"cls": "javax.sql.DataSource", "sig": "java.sql.Connection getConnection()", "labels": [true], "cost": 0.000492}
+{"cls": "javax.xml.datatype.DatatypeFactory", "sig": "javax.xml.datatype.Duration newDuration(java.lang.String)", "labels": [true, false, false], "cost": 0.000776}
+{"cls": "javax.xml.datatype.DatatypeFactory", "sig": "javax.xml.datatype.XMLGregorianCalendar newXMLGregorianCalendar(java.util.GregorianCalendar)", "labels": [true, false, false, false], "cost": 0.000908}
+{"cls": "javax.xml.datatype.XMLGregorianCalendar", "sig": "java.util.GregorianCalendar toGregorianCalendar()", "labels": [true], "cost": 0.000532}
+{"cls": "javax.xml.namespace.QName", "sig": "boolean equals(java.lang.Object)", "labels": [false, false, false, false], "cost": 0.00085}
+{"cls": "javax.xml.namespace.QName", "sig": "java.lang.String getLocalPart()", "labels": [true], "cost": 0.000496}
+{"cls": "javax.xml.namespace.QName", "sig": "java.lang.String getNamespaceURI()", "labels": [true], "cost": 0.0005}
+{"cls": "javax.xml.namespace.QName", "sig": "javax.xml.namespace.QName valueOf(java.lang.String)", "labels": [true], "cost": 0.000526}
+{"cls": "javax.xml.namespace.QName", "sig": "void <init>(java.lang.String,java.lang.String)", "labels": [true, true], "cost": 0.00063}
+{"cls": "javax.xml.parsers.SAXParser", "sig": "void parse(java.io.InputStream,org.xml.sax.helpers.DefaultHandler)", "labels": [false, true, false, false, false, false], "cost": 0.001212}
+{"cls": "org.w3c.dom.ls.DOMImplementationLS", "sig": "org.w3c.dom.ls.LSSerializer createLSSerializer()", "labels": [false], "cost": 0.00054}
+{"cls": "org.w3c.dom.ls.LSSerializer", "sig": "java.lang.String writeToString(org.w3c.dom.Node)", "labels": [true, false, false, false], "cost": 0.000854}
+{"cls": "org.xmlpull.v1.XmlPullParser", "sig": "char[] getTextCharacters(int[])", "labels": [false, false, true, true], "cost": 0.000836}
+{"cls": "org.xmlpull.v1.XmlPullParser", "sig": "int nextToken()", "labels": [true], "cost": 0.000494}
+{"cls": "org.xmlpull.v1.XmlPullParser", "sig": "java.lang.String getNamespace()", "labels": [true], "cost": 0.000506}
+{"cls": "org.xmlpull.v1.XmlPullParser", "sig": "java.lang.String getPrefix()", "labels": [true], "cost": 0.000506}
