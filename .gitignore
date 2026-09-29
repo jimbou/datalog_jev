@@ -5,6 +5,7 @@ facts_apk_all/
 facts_apk_all_v1/
 bench/*
 !bench/apks/
+!bench/scale.py
 bench/apks/*
 !bench/apks/pick*.txt
 tools/*
