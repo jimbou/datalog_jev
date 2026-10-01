@@ -7,6 +7,7 @@ bench/*
 !bench/apks/
 !bench/scale.py
 !bench/SERVER_RUNBOOK.md
+!bench/receipts-build.service
 bench/apks/*
 !bench/apks/pick*.txt
 tools/*

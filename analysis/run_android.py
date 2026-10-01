@@ -28,6 +28,8 @@ VALUE_TYPES = {"void", "int", "long", "short", "byte", "boolean", "char", "doubl
                "java.lang.Integer", "java.lang.Long", "java.lang.Short", "java.lang.Byte", "java.lang.Boolean",
                "java.lang.Character", "java.lang.Double", "java.lang.Float", "java.lang.CharSequence"}
 SOUFFLE_TIMEOUT = 900
+EXTRACT_TIMEOUT = 1200
+MAX_ATTEMPTS = 3  # an app that has crashed the run this many times is skipped
 SOUFFLE_MEM = int(os.environ.get("SOUFFLE_MEM_GB", "12")) << 30
 JOBS = int(os.environ.get("JOBS", "2"))
 
@@ -111,9 +113,19 @@ def graph_path(app):
     return os.path.join(GRAPHS, app + ".npz")
 
 
+def graph_ok(p):
+    """The file is a complete graph (a zip cut short by a crash or reboot fails to open)."""
+    try:
+        z = np.load(p)
+        return "n" in z.files and "sink_nodes" in z.files and int(z["n"]) > 0
+    except Exception:
+        return False
+
+
 def graph_fresh(app):
     p = graph_path(app)
-    return os.path.exists(p) and os.path.getmtime(p) > os.path.getmtime(os.path.join(ROOT, "analysis/taint.dl"))
+    return (os.path.exists(p) and os.path.getmtime(p) > os.path.getmtime(os.path.join(ROOT, "analysis/taint.dl"))
+            and graph_ok(p))
 
 
 def rows(out, rel):
@@ -177,8 +189,10 @@ def save_graph(out, app, kinds=None, n_sink_calls=0):
     hk = sorted(hole_id, key=hole_id.get)
     c = np.array(cand, dtype=np.int64).reshape(-1, 4)
     e = np.array(code, dtype=np.int32).reshape(-1, 2)
-    np.savez_compressed(
-        graph_path(app), n=len(idx),
+    tmp = graph_path(app) + ".tmp"  # write, sync, then rename: a crash never leaves a partial graph
+    with open(tmp, "wb") as fh:
+        np.savez_compressed(
+        fh, n=len(idx),
         code_u=e[:, 0], code_v=e[:, 1],
         cand_u=c[:, 0].astype(np.int32), cand_mid=c[:, 1].astype(np.int32),
         cand_hole=c[:, 2].astype(np.int32), cand_k=c[:, 3].astype(np.int16),
@@ -187,6 +201,9 @@ def save_graph(out, app, kinds=None, n_sink_calls=0):
         sink_site=np.array(sites), sink_ptr=ptr.astype(np.int64),
         sink_nodes=np.array([n for s in sites for n in sinks[s]], dtype=np.int32),
         stats=json.dumps(dict((k, int(v)) for k, v in rows(out, "Stats"))))
+        fh.flush()
+        os.fsync(fh.fileno())
+    os.replace(tmp, graph_path(app))
 
 
 CTX = None
@@ -196,7 +213,7 @@ def extract(apk, out):
     """Soot facts for one APK (all code shipped in it); returns True on success."""
     p = subprocess.run(["java", "-Xmx6g", "-cp", os.path.join(ROOT, "tools/soot-4.6.0-jar-with-dependencies.jar"),
                         os.path.join(ROOT, "extract/Facts.java"), apk, os.path.join(ROOT, "tools/android/android.jar"),
-                        "", out], capture_output=True, text=True)
+                        "", out], capture_output=True, text=True, timeout=EXTRACT_TIMEOUT)
     return p.returncode == 0 and os.path.exists(os.path.join(out, "Call.facts"))
 
 
@@ -212,14 +229,22 @@ def analyse(app, app_dir):
 
 def process(item):
     """Worker: analyse one app. Apps without stored facts are extracted into a temporary
-    directory that is deleted afterwards, so only the graph is kept."""
+    directory that is deleted afterwards, so only the graph is kept. Returns (app, stats dict),
+    (app, None) when the analysis ran out of memory / time, or (app, "error: ...") on a bug."""
     app, src_path = item
-    if os.path.isdir(src_path):
-        return analyse(app, src_path)
-    with tempfile.TemporaryDirectory(prefix="facts-", dir=SCRATCH) as d:
-        if not extract(src_path, d):
-            return app, None
-        return analyse(app, d)
+    with open(os.path.join(ROOT, "data/android_attempts.txt"), "a") as f:
+        f.write(app + "\n")  # lets a restarted run skip an app that keeps killing it
+    try:
+        if os.path.isdir(src_path):
+            return analyse(app, src_path)
+        with tempfile.TemporaryDirectory(prefix="facts-", dir=SCRATCH) as d:
+            if not extract(src_path, d):
+                return app, None
+            return analyse(app, d)
+    except subprocess.TimeoutExpired:
+        return app, None
+    except Exception as e:
+        return app, "error: %r" % (e,)
 
 
 def apps_to_build(app_glob):
@@ -227,7 +252,7 @@ def apps_to_build(app_glob):
     items = {os.path.basename(d): d for d in glob.glob(os.path.join(ROOT, "facts_apk_all", app_glob))}
     for pick in glob.glob(os.path.join(ROOT, "bench/apks/pick*.txt")):
         for line in open(pick).read().split("\n"):
-            if "\t" in line:
+            if line.count("\t") == 1 and "\x00" not in line:  # skip lines damaged by an interrupted write
                 pkg, apk = line.split("\t")
                 path = os.path.join(ROOT, "bench/apks", apk)
                 if pkg not in items and fnmatch.fnmatch(pkg, app_glob) and os.path.exists(path):
@@ -243,15 +268,29 @@ def main():
     CTX = (fw, framework_supers(), sources_sinks())
     failed_path = os.path.join(ROOT, "data/android_failed.txt")
     failed = set(open(failed_path).read().split()) if os.path.exists(failed_path) else set()
-    apps = [(a, p) for a, p in apps_to_build(app_glob) if a not in failed and not graph_fresh(a)]
-    print("building %d apps" % len(apps), flush=True)
+    attempts_path = os.path.join(ROOT, "data/android_attempts.txt")
+    tries = {}
+    if os.path.exists(attempts_path):
+        for a in open(attempts_path, errors="replace").read().split():
+            tries[a] = tries.get(a, 0) + 1
+    todo = [(a, p) for a, p in apps_to_build(app_glob) if a not in failed and not graph_fresh(a)]
+    apps = [(a, p) for a, p in todo if tries.get(a, 0) < MAX_ATTEMPTS]
+    print("building %d apps (%d skipped after %d attempts)" % (len(apps), len(todo) - len(apps), MAX_ATTEMPTS), flush=True)
     import multiprocessing
-    with multiprocessing.get_context("fork").Pool(JOBS) as pool:
-        for app, stats in pool.imap_unordered(process, apps):
+    from concurrent.futures import ProcessPoolExecutor, as_completed
+    # a worker killed from outside (e.g. by the kernel) raises BrokenProcessPool instead of hanging;
+    # the run then exits non-zero and a supervisor can restart it
+    with ProcessPoolExecutor(JOBS, mp_context=multiprocessing.get_context("fork")) as ex:
+        for fut in as_completed([ex.submit(process, item) for item in apps]):
+            app, stats = fut.result()
             if stats is None:
                 with open(failed_path, "a") as ff:
                     ff.write(app + "\n")
                 print(app, "souffle failed", flush=True)
+            elif isinstance(stats, str):
+                with open(os.path.join(ROOT, "data/android_errors.txt"), "a") as ff:
+                    ff.write("%s\t%s\n" % (app, stats))
+                print(app, stats, flush=True)
             else:
                 print(app, stats, flush=True)
 

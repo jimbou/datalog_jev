@@ -35,3 +35,15 @@ OpenRouter key and, from China, the local proxy; pass keys per command, never in
 
 `rsync -a pku:receipts/data/graphs/ data/graphs/` (about 1 MB per app). Result files
 (`data/android_*.jsonl`) are regenerable and not tracked.
+
+## Unattended runs
+
+`bench/receipts-build.service` is a systemd *user* unit (install to `~/.config/systemd/user/`, then
+`systemctl --user daemon-reload && systemctl --user enable --now receipts-build.service`; needs
+`loginctl enable-linger`). It restarts the build after a crash or reboot. The driver is safe to
+restart at any time: graphs are written atomically and re-checked on start, apps that ran out of
+memory are listed in `data/android_failed.txt`, apps that hit a bug in `data/android_errors.txt`, and
+an app that has crashed the run three times (`data/android_attempts.txt`) is skipped.
+
+Status: `systemctl --user status receipts-build.service`; progress: `tail data/build_server.log`.
+Stop: `systemctl --user stop receipts-build.service` (disable it to keep it from starting at boot).

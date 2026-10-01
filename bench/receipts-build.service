@@ -1,0 +1,18 @@
+[Unit]
+Description=Receipts graph build (restarts itself after a crash or reboot)
+
+[Service]
+Type=simple
+WorkingDirectory=%h/receipts
+Environment=JOBS=2 SOUFFLE_MEM_GB=16 SCRATCH_DIR=/tmp PYTHONUNBUFFERED=1
+Environment=JAVA_HOME=%h/jdk/jdk-21.0.12.1+1
+Environment=PATH=%h/jdk/jdk-21.0.12.1+1/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/python3 analysis/run_android.py
+StandardOutput=append:%h/receipts/data/build_server.log
+StandardError=append:%h/receipts/data/build_server.log
+Nice=10
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=default.target
