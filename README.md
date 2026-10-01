@@ -28,6 +28,10 @@ Not in the repo (large or downloadable); fetch into `tools/` and `bench/`:
 - The JDK here has no `javac` binary; `tools/bin/javac` runs the compiler module instead.
 - API keys: `OPENROUTERS_MINE` (OpenRouter) for Jev and the LLM scripts.
 
+## Running on a remote machine
+
+See `bench/SERVER_RUNBOOK.md` (no-root setup, download-only mode, memory settings).
+
 ## Rebuild
 
 ```

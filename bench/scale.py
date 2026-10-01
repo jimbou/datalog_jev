@@ -5,7 +5,7 @@ yet in bench/apks/pick*.txt, and for each batch: downloads the APKs, appends the
 builds their graphs with analysis/run_android.py (facts are extracted into a temporary directory
 and deleted). Stops early when free disk space falls below MIN_FREE_GB.
 
-Usage: scale.py TOTAL [BATCH] [PICK]      (env: SCRATCH_DIR, JOBS, MIN_FREE_GB)
+Usage: scale.py TOTAL [BATCH] [PICK]      (env: SCRATCH_DIR, JOBS, MIN_FREE_GB, FDROID_BASE, DOWNLOAD_ONLY)
 """
 import json, os, random, shutil, subprocess, sys, tempfile
 
@@ -13,6 +13,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APKS = os.path.join(ROOT, "bench/apks")
 SCRATCH = os.environ.get("SCRATCH_DIR", tempfile.gettempdir())
 MIN_FREE_GB = float(os.environ.get("MIN_FREE_GB", "20"))
+DOWNLOAD_ONLY = os.environ.get("DOWNLOAD_ONLY") == "1"  # fetch APKs and record them, skip the graph build
+FDROID = os.environ.get("FDROID_BASE", "https://f-droid.org/repo")  # e.g. a mirror's .../fdroid/repo
 SENS = {"ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION", "READ_PHONE_STATE", "READ_CONTACTS", "READ_SMS",
         "READ_CALL_LOG", "GET_ACCOUNTS", "RECORD_AUDIO", "ACCESS_WIFI_STATE", "READ_CALENDAR", "CAMERA",
         "READ_EXTERNAL_STORAGE", "BLUETOOTH", "ACCESS_NETWORK_STATE"}
@@ -34,7 +36,7 @@ def fetch(url, path):
 
 def candidates():
     index = os.path.join(SCRATCH, "fdroid-index-v1.json")
-    if not os.path.exists(index) and not fetch("https://f-droid.org/repo/index-v1.json", index):
+    if not os.path.exists(index) and not fetch(FDROID + "/index-v1.json", index):
         sys.exit("could not download the F-Droid index")
     have = set()
     for f in os.listdir(APKS):
@@ -65,14 +67,15 @@ def main():
             break
         got = []
         for pkg, apk in todo[i:i + batch]:
-            if fetch("https://f-droid.org/repo/" + apk, os.path.join(APKS, apk)):
+            if fetch(FDROID + "/" + apk, os.path.join(APKS, apk)):
                 got.append((pkg, apk))
             else:
                 print("download failed:", pkg, flush=True)
         with open(pick, "a") as f:
             for pkg, apk in got:
                 f.write("%s\t%s\n" % (pkg, apk))
-        subprocess.run([sys.executable, os.path.join(ROOT, "analysis/run_android.py")], check=False)
+        if not DOWNLOAD_ONLY:
+            subprocess.run([sys.executable, os.path.join(ROOT, "analysis/run_android.py")], check=False)
         print("batch %d done: %d apps, %.1f GB free" % (i // batch + 1, len(got), free_gb()), flush=True)
 
 
