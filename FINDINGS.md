@@ -454,7 +454,46 @@ audit covers facts in receipts at δ = 0.3 only, and checks them, it does not re
 Files: `data/audit/audit_facts.csv` (first pass), `data/audit/audit_recheck.csv` (strict), key in
 `data/audit_private/audit_key.csv`; instructions `AUDIT_TASK.md` and `AUDIT_RECHECK.md`.
 
-## 17. Next steps, in order
+## 17. Sound baseline on 324 apps, bound-combination ablation, faster evaluation (2026-10-02)
+
+**B2 on the full corpus.** Over the 324 apps with hole-dependent verdicts there are 169,700 sink calls with a
+non-constant argument; 96,945 are reachable with every hole on. B2 clears the other 72,755: **72.0% of the 101,090
+leak-free sinks**; the hard slice is the remaining 28.0% (28,335 clean sinks). Adding Jev at the certified
+threshold: total cleared 73.5% (δ ≤ 0.05), 76.2% (0.10), 81.0% (0.20), **83.2% (0.30)**, against 72.0% for B2
+(§14 on 143 apps: 70.6% and 79.6%). The sink-call counts of the 104 older graphs come from their kept facts
+(`data/sink_calls_old.json`), the other 228 from the graphs.
+
+**A1: how receipt prices are combined** (`analysis/ablation_a1.py`, 324 apps, ε = 0.1, 200 splits, same cut):
+
+| Bound | α = 0.05: chosen δ | held-out apps with a wrong clearance | clean hard-slice verdicts cleared | uncalibrated at δ = α: apps wrong / cleared |
+| --- | --- | --- | --- | --- |
+| sum over cut edges (ours) | 0.3 | 1.0% | 40.0% | 0 of 324 / 5.5% |
+| sum over distinct facts | 0.3 | 1.0% | **43.0%** | 0 of 324 / 6.0% |
+| largest single price | 0.2 | 0.6% | **46.8%** | 0 of 324 / 6.3% |
+| independence product | 0.3 (0.2 in 16 splits) | 1.9% | 45.3% | 0 of 324 / 4.9% |
+
+Three consequences. (1) Validity comes from the program-level calibration, not from the union bound: every
+combination meets α once calibrated. The plan expected the independence product to break the α target; it does not,
+neither calibrated nor at the nominal threshold (no wrong clearance in any app at δ = α), because the prices are
+conservative at the low end. The paper must not claim that the sum is needed for validity. (2) The sum is not the
+most powerful score: the largest single price clears 46.8% against 40.0%. What the sum buys is a reading that holds
+without calibration if the prices are calibrated, and receipts a person can add up. (3) Counting each fact once
+(a fact used at several call sites) is valid and gives +3 points for free; it should be the default bound.
+
+**Evaluation speed.** Evaluating the 332 graphs took 3.5 to 7 hours per pricing, dominated by the heaviest apps
+(e.g. 18.2M code edges, 10.9 s per sink, 84% in `maximum_flow`). Code edges have infinite capacity, so a finite cut
+never separates a strongly connected group of them: contracting each group once per app leaves bounds and cuts
+unchanged and makes max-flow about 25x faster on those apps (0.35 s per sink). The new `evaluate.py` returns identical
+records to the old one on real graphs in Jev, uniform and deletion modes and on the first 25 sinks of two heavy apps;
+the full-scale regression (332 apps) is the first job of the overnight queue.
+
+**B6 (feature classifier).** Logistic regression on signature features (name tokens, package, types, flow kind),
+trained on FlowDroid-modeled atoms and cross-fitted by method, ranks held-out modeled atoms better than Jev
+(AUROC 0.98 against 0.875 for Jev's object-convention prices and 0.81 for B7 on the same 13,915 atoms). It learns
+FlowDroid's own conventions from sibling methods, so it is expected to be strong on the deletion benchmark (K1) and
+weaker on methods FlowDroid never modeled; both keys must be reported. Results of its calibrated evaluation follow.
+
+## 18. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
    bound as the score, and report realized FDR on held-out apps. Needs more apps (target 100+), so
