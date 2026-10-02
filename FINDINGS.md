@@ -471,6 +471,16 @@ does not show that either pass is right, since both are AI-assisted and used the
 two passes is still unnamed. For the paper this is a second-model audit; the human check the plan calls for (a person
 reading the source for a sample) is still open.
 
+**Working definition of a flow (2026-10-03, drafted by the reviewer; to be confirmed by the authors).** We evaluate
+documented API-level data transfer under ordinary executions with standard arguments. A flow occurs when source data, a
+computed representation of it, or a reference to it reaches the target through copying, storage or readout, including
+documented properties. Mere selection or control, incidental bookkeeping, and custom callback or override behavior are
+excluded. Cases that cannot be determined from the API contract remain unknown. A negative label therefore denotes no
+transfer within this scope, not absence of every possible information flow. FlowDroid has optional implicit-flow
+tracking (its default, used here, is explicit flows only), so the paper must state this scope as a choice and not claim
+that no tool supports implicit flows. The 60-row sample was built to contain every disputed row, so its agreement
+figures describe those rows and are not an estimate of the error rate of all 446.
+
 Files: `data/audit/audit_facts.csv` (first pass), `data/audit/audit_recheck.csv` (strict), `audit_unsure.csv`,
 `audit_human_sample.csv`, key in `data/audit_private/audit_key.csv`; instructions `AUDIT_TASK.md` and `AUDIT_RECHECK.md`.
 
