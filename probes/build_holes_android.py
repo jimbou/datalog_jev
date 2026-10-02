@@ -12,6 +12,25 @@ from build_libflow import ROOT, menu
 from build_holes import summaries
 
 
+def record(cls, sig, kind, calls, napps, summ, supers):
+    """Hole record for one method: FlowDroid label source plus candidate atoms with labels."""
+    chain = [c for c in supers.get(cls, "").split(",") if c] or [cls]
+    source, flows = "none", None
+    for c in chain:
+        if c in summ and sig in summ[c]:
+            source, flows = ("gap", None) if summ[c][sig] == "gap" else ("summary", summ[c][sig])
+            break
+    else:
+        # a summary file on a real supertype means FlowDroid modeled the class and
+        # omitted this method; java.lang.Object's file says nothing about subclasses
+        if any(c in summ and c != "java.lang.Object" for c in chain):
+            source, flows = "implicit-neg", set()
+    r = {"cls": cls, "sig": sig, "kind": kind, "source": source, "calls": calls, "apps": napps}
+    r["atoms"] = [{"src": s, "tgt": t, "label": None if flows is None else (s, t) in flows}
+                  for s, t in menu(r)]
+    return r
+
+
 def main():
     summ = summaries("*.xml")
     called, kinds = collections.Counter(), {}
@@ -47,25 +66,11 @@ def main():
     stats = collections.Counter()
     with open(os.path.join(ROOT, "data/holes_android.jsonl"), "w") as f:
         for (cls, sig), n in sorted(called.items()):
-            chain = [c for c in supers.get(cls, "").split(",") if c] or [cls]
-            source, flows = "none", None
-            for c in chain:
-                if c in summ and sig in summ[c]:
-                    source, flows = ("gap", None) if summ[c][sig] == "gap" else ("summary", summ[c][sig])
-                    break
-            else:
-                # a summary file on a real supertype means FlowDroid modeled the class and
-                # omitted this method; java.lang.Object's file says nothing about subclasses
-                if any(c in summ and c != "java.lang.Object" for c in chain):
-                    source, flows = "implicit-neg", set()
-            r = {"cls": cls, "sig": sig, "kind": kinds[(cls, sig)], "source": source, "calls": n,
-                 "apps": len(apps[(cls, sig)])}
-            r["atoms"] = [{"src": s, "tgt": t, "label": None if flows is None else (s, t) in flows}
-                          for s, t in menu(r)]
+            r = record(cls, sig, kinds[(cls, sig)], n, len(apps[(cls, sig)]), summ, supers)
             if r["atoms"]:
-                stats[source] += n
-                stats[source + "-methods"] += 1
-                stats[source + "-atoms"] += len(r["atoms"])
+                stats[r["source"]] += n
+                stats[r["source"] + "-methods"] += 1
+                stats[r["source"] + "-atoms"] += len(r["atoms"])
             f.write(json.dumps(r) + "\n")
     print(dict(stats))
 

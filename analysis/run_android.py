@@ -35,7 +35,12 @@ JOBS = int(os.environ.get("JOBS", "2"))
 
 
 def framework_holes():
-    """Framework methods with candidate atoms, keyed by (class, subsignature)."""
+    """Framework methods with candidate atoms, keyed by (class, subsignature). Read from
+    data/holes_android_fw.jsonl (the framework slice of holes_android.jsonl, extended by
+    probes/extend_holes_fw.py) when it exists."""
+    fw_path = os.path.join(ROOT, "data/holes_android_fw.jsonl")
+    if os.path.exists(fw_path):
+        return {(r["cls"], r["sig"]): r for r in map(json.loads, open(fw_path))}
     fw = {l.strip() for l in open(os.path.join(ROOT, "data/android_classes.txt"))}
     return {(r["cls"], r["sig"]): r for r in map(json.loads, open(os.path.join(ROOT, "data/holes_android.jsonl")))
             if r["atoms"] and r["cls"] in fw}
