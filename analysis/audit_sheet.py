@@ -33,13 +33,13 @@ def main():
     with open(os.path.join(ROOT, "data/audit/audit_facts.csv"), "w", newline="") as fa, \
             open(os.path.join(ROOT, "data/audit/audit_key.csv"), "w", newline="") as fk:
         wa, wk = csv.writer(fa), csv.writer(fk)
-        wa.writerow(["id", "class", "signature", "kind", "question", "your_answer_yes_no", "notes"])
+        wa.writerow(["id", "class", "signature", "kind", "from", "to", "question", "your_answer_yes_no", "notes"])
         wk.writerow(["id", "key_label", "key_source", "jev_price", "accepted_clean_sinks", "accepted_real_sinks", "apps"])
         for i, ((cls, sub, src, tgt), d) in enumerate(rows, 1):
             r = {"cls": cls, "sig": sub, "kind": kinds.get((cls, sub), "instance")}
             _, params = state(r)
             q = WORDINGS["choice-obj"].format(src=endpoint(src, params), tgt=endpoint(tgt, params))
-            wa.writerow([i, cls, sub, r["kind"], q, "", ""])
+            wa.writerow([i, cls, sub, r["kind"], endpoint(src, params), endpoint(tgt, params), q, "", ""])
             wk.writerow([i, d["label"], d["source"], d["p"], d["clean"], d["real"], len(d["apps"])])
     n_wrong = sum(1 for _, d in rows if d["real"])
     print("accepted at delta <= %s: %d distinct facts; %d appear in a receipt of an accepted sink that the key calls real"
