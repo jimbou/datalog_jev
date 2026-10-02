@@ -451,8 +451,28 @@ answers were not rechecked. (4) The identity of the reviewer (human or model) an
 labels' model must be stated before this is called an audit; if it was a model, call it a second-model audit. (5) The
 audit covers facts in receipts at δ = 0.3 only, and checks them, it does not re-derive truth for rejected verdicts.
 
-Files: `data/audit/audit_facts.csv` (first pass), `data/audit/audit_recheck.csv` (strict), key in
-`data/audit_private/audit_key.csv`; instructions `AUDIT_TASK.md` and `AUDIT_RECHECK.md`.
+**Follow-up (2026-10-03): the 48 unsure rows and an independent sample.** Under the same strict rule 30 of the 48
+unsure rows became no and 18 stay unsure (all 48 had the key label no). A 60-row sample drawn from the 446 (all 9 strict
+yes rows, the 4 rows where the key says yes and the audit says no, and 47 random others, shuffled, without any earlier
+answers shown) was answered again; the `answered_by` column of both files says "AI-assisted" on every row. It agrees
+with the strict reviewer on all 60 rows (51 no, 9 yes) and with the key on 50 of 59 labeled rows (84.7%; the 9
+disagreements are the 5 candidate key errors and the 4 key-yes rows already listed, which were forced into the sample).
+Final audited answers: 419 no, 9 yes, 18 unsure. Accepted sinks by the audit status of their receipt:
+
+| Threshold | Accepted sinks | All facts no | Some fact unsure | Some fact yes (upper bound on wrong clearances) |
+| --- | --- | --- | --- | --- |
+| δ ≤ 0.05 | 1,563 | 100.0% | 0 | 0 |
+| δ ≤ 0.10 | 4,287 | 99.9% | 0 | 3 (0.1%), 2 of 296 apps |
+| δ ≤ 0.20 | 9,107 | 97.7% | 205 (2.3%) | 3 (0.0%), 2 of 316 apps |
+| δ ≤ 0.30 | 11,324 | **97.6%** | 246 (2.2%) | 31 (0.3%), 11 of 316 apps |
+
+The agreement of the two later passes with each other shows that the written rule can be applied consistently; it
+does not show that either pass is right, since both are AI-assisted and used the same rule. The reviewer of the first
+two passes is still unnamed. For the paper this is a second-model audit; the human check the plan calls for (a person
+reading the source for a sample) is still open.
+
+Files: `data/audit/audit_facts.csv` (first pass), `data/audit/audit_recheck.csv` (strict), `audit_unsure.csv`,
+`audit_human_sample.csv`, key in `data/audit_private/audit_key.csv`; instructions `AUDIT_TASK.md` and `AUDIT_RECHECK.md`.
 
 ## 17. Sound baseline on 324 apps, bound-combination ablation, faster evaluation (2026-10-02)
 
