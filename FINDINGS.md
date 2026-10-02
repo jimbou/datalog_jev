@@ -360,7 +360,50 @@ verdicts). App-level LTT, held-out, 200 splits:
 α = 0.05 at 95% confidence was not certifiable with 102 apps; with 143 it is. Total leak-free
 sinks cleared: 81.4% (α = 0.1) and 79.6% (α = 0.05), against 70.6% for B2.
 
-## 15. Next steps, in order
+## 15. Scaled again: 332 apps, α = 0.02 now certifiable (2026-10-02)
+
+**Build.** A restart-safe graph build on an 8-core / 62 GB server added 183 graphs from 367 new APKs
+(184 failed in Soufflé, 50%, the same rate as the last batch; 14 h 7 min), for 332 graphs in total.
+The survivors are larger than before (6.1 MB per graph against 0.9 MB), so evaluating them is slow: the
+Jev-priced run took 6 h 57 min, `uniform` 3 h 25 min and `freq` 4 h 41 min. The slowest three or four
+apps cost 1.5 to 3 h per run.
+
+**Pricing and answer key.** 1,275 framework methods (3,892 candidate flows) on the new graphs were not in
+the old hole file (`probes/extend_holes_fw.py`). All were priced with Jev (same model version as every
+earlier price, `jev-1.13-20260917`, object convention stated) and the 865 that FlowDroid does not model
+were labeled by Sonnet 5 ($0.70). Old records and labels are unchanged.
+
+**Result.** 324 of the 332 apps have hole-dependent verdicts: 84,793 sinks, of which 28,335 are
+clean, 56,418 real flows and 40 undetermined. App-level LTT, held-out, 200 splits, ε = 0.1:
+
+| Pricer | Cleared, α = 0.1 | Cleared, α = 0.05 | Held-out apps with a wrong clearance (α = 0.1 / 0.05) |
+| --- | --- | --- | --- |
+| B4 counting guesses (uniform price) | 0% | 0% | 0% |
+| B7 frequency prior | 9.2% | 6.6% | 4.9% / 0.8% |
+| Jev, flow rule stated | **40.0%** | **40.0%** | 1.0% / 1.0% |
+
+Jev also certifies α = 0.02 (ε = 0.1): 33.4% cleared, 0.3% of held-out apps with a wrong clearance;
+α = 0.05 at ε = 0.05 gives the same 40.0% / 1.0% as at ε = 0.1. Counting clears nothing, and clearing
+receipts of size 1 is already unsafe: a wrong clearance in 302 of 324 apps (93%).
+Against 143 apps (36.9% / 30.6%, §14) the clearance is higher and the guarantee still holds.
+
+**The threshold sits on a cliff.** Jev chooses δ = 0.3 in all 200 splits for α ≥ 0.05; apps with a wrong
+clearance jump from 3 of 324 at δ = 0.3 to 135 of 324 at δ = 0.5. The three apps at δ = 0.3 have three
+different causes, not one widely bundled fact: `Boolean.valueOf(boolean)` arg0→ret (FlowDroid summary,
+priced 0.29, a genuine Jev underestimate), `BitmapFactory.decodeStream` arg0→arg2 (Sonnet label, priced
+0.13, nine sinks in one app) and `View.setVisibility(int)` arg0→this (Sonnet label, priced 0.15). Two of
+the three depend on a silver label that is arguable under the object convention, so they may be label
+noise and not Jev errors; the planned hand audit of cut facts should settle them.
+
+**Caveats.** (1) The new apps are larger and half the new ones fail to build, so the step from 143 to 324
+apps is not a clean replication. (2) The answer key is still FlowDroid plus Claude labels. (3) The
+share of all leak-free sinks cleared (B2 plus the hard slice) was not recomputed for this corpus.
+(4) The deletion benchmark K1 was not rerun. (5) Bundled libraries shared across apps are not
+deduplicated. (6) The three or four largest apps were included in every run; none timed out.
+
+Results: `data/scale332/android_{choice-obj,uniform,freq}.jsonl` (the 143-app files in `data/` are unchanged).
+
+## 16. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
    bound as the score, and report realized FDR on held-out apps. Needs more apps (target 100+), so
