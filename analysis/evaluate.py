@@ -7,6 +7,9 @@ Usage: evaluate.py PRICING [APP_GLOB]      (env: JOBS)
                       receipt (B4, Bastani-style counting; any flat price gives the same ranking)
              freq     frequency prior (B7): share of FlowDroid-modeled atoms with the same package
                       and endpoint kinds that are true, the method itself left out
+             b6       feature classifier (B6): logistic regression on signature features (name tokens,
+                      package, types, flow kind) trained on FlowDroid-modeled atoms; each method is priced
+                      by a model that never saw it (5 folds by method)
            or a deletion-benchmark run (K1, no LLM in the answer key):
              k1-<RATE>-<SEED>-<PRICING>  truth = FlowDroid's models; a random RATE share of the
                       modeled methods (fixed by SEED) is deleted and becomes priced holes, the rest
@@ -15,10 +18,11 @@ Reads data/graphs/*.npz (analysis/run_android.py), writes data/android_<PRICING>
 record per reachable sink site: truth_lo / truth_hi (answer key with unknown facts off / on),
 rep (reported at each tau), bound (min cut, None if reachable through code alone) and the cut.
 """
-import collections, glob, hashlib, json, math, os, sys
+import collections, glob, hashlib, json, math, os, re, sys, zlib
 import numpy as np
+from scipy.optimize import minimize
 from scipy.sparse import csr_matrix
-from scipy.sparse.csgraph import breadth_first_order, maximum_flow
+from scipy.sparse.csgraph import breadth_first_order, connected_components, maximum_flow
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from run_android import GRAPHS, ROOT, framework_holes
@@ -91,6 +95,81 @@ def freq_prices(holes):
 
 
 MODELED = ("summary", "implicit-neg")
+PRIMS = {"int", "long", "short", "byte", "boolean", "char", "float", "double", "void"}
+
+
+def b6_features(cls, sig, a):
+    """Signature features of one candidate flow, as strings (no labels, no LLM)."""
+    ret = sig.split(" ", 1)[0]
+    name = sig[sig.index(" ") + 1:sig.index("(")]
+    ps = sig[sig.index("(") + 1:-1]
+    params = ps.split(",") if ps else []
+
+    def typ(e):
+        return cls if e == "this" else ret if e == "ret" else params[int(e[3:])] if int(e[3:]) < len(params) else "?"
+
+    def knd(e):
+        return "arg" if e.startswith("arg") else e
+
+    s, t = a["src"], a["tgt"]
+    ts, tt = typ(s), typ(t)
+    toks = [x.lower() for x in re.findall(r"[A-Z]?[a-z]+|[A-Z]+(?![a-z])|\d+", name)] or [name]
+    flow = "%s>%s" % (knd(s), knd(t))
+    pkg3 = ".".join(cls.split(".")[:3])
+    f = ["bias", "flow=" + flow, "name=" + name, "prefix=" + toks[0], "cls=" + cls, "pkg2=" + ".".join(cls.split(".")[:2]),
+         "pkg3=" + pkg3, "srcT=" + ts, "tgtT=" + tt, "T=%s>%s" % (ts, tt), "ret=" + ret, "nparams=%d" % len(params),
+         "srcidx=" + s, "tgtidx=" + t, "prefix|flow=%s|%s" % (toks[0], flow), "flow|tgtT=%s|%s" % (flow, tt),
+         "flow|srcT=%s|%s" % (flow, ts), "name|flow=%s|%s" % (name, flow), "cls|flow=%s|%s" % (cls, flow),
+         "pkg3|flow=%s|%s" % (pkg3, flow), "prefix|srcT|tgtT=%s|%s|%s" % (toks[0], ts, tt)]
+    f += ["tok=" + x for x in toks]
+    f += ["tok|flow=%s|%s" % (x, flow) for x in toks]
+    if ts == tt:
+        f.append("same_type")
+    if ts in PRIMS:
+        f.append("src_prim")
+    if tt in PRIMS:
+        f.append("tgt_prim")
+    return f
+
+
+def b6_prices(holes, dim=1 << 16, lam=1.0, folds=5, exclude=None):
+    """B6: logistic regression on signature features, trained on FlowDroid-modeled atoms with labels,
+    cross-fitted by method (a method is priced by a model that did not see it). exclude(key) removes
+    methods from training (deletion benchmark: deleted models are unknown to the pricer too)."""
+    keys, rows, fold_of = [], [], []
+    for (cls, sub), h in holes.items():
+        fo = int.from_bytes(hashlib.md5(("%s|%s" % (cls, sub)).encode()).digest()[:8], "big") % folds
+        for k, a in enumerate(h["atoms"]):
+            keys.append((cls, sub, k, h["source"] in MODELED and a["label"] is not None and not (exclude and exclude((cls, sub))),
+                         bool(a["label"])))
+            fold_of.append(fo)
+            cols = sorted({zlib.crc32(x.encode()) % dim for x in b6_features(cls, sub, a)})
+            rows.append(cols)
+    n = len(rows)
+    indptr = np.zeros(n + 1, dtype=np.int64)
+    indptr[1:] = np.cumsum([len(r) for r in rows])
+    X = csr_matrix((np.ones(indptr[-1]), np.concatenate([np.array(r, dtype=np.int64) for r in rows]), indptr), shape=(n, dim))
+    train = np.array([k[3] for k in keys])
+    y = np.array([k[4] for k in keys], dtype=float)
+    fold_of = np.array(fold_of)
+    pred = np.zeros(n)
+    for f in range(folds):
+        tr = train & (fold_of != f)
+        Xt, yt = X[tr], y[tr]
+
+        def fun(w):
+            pz = 1 / (1 + np.exp(-(Xt @ w)))
+            loss = -(yt * np.log(pz + 1e-12) + (1 - yt) * np.log(1 - pz + 1e-12)).sum() + 0.5 * lam * (w @ w)
+            return loss, Xt.T @ (pz - yt) + lam * w
+
+        w = minimize(fun, np.zeros(dim), jac=True, method="L-BFGS-B", options={"maxiter": 200}).x
+        te = fold_of == f
+        pred[te] = 1 / (1 + np.exp(-(X[te] @ w)))
+    prices = {}
+    for (cls, sub, k, _, _), pz in zip(keys, np.clip(pred, 0.005, 0.995)):
+        prices.setdefault((cls, sub), []).append(float(pz))
+    return prices
+
 
 
 def deleted(key, rate, seed):
@@ -149,8 +228,36 @@ def evaluate(path):
     code_reach = reach(on_cand(np.zeros(len(cu), dtype=bool)))
     truth_lo, truth_hi = reach(on_cand(lab_true)), reach(on_cand(lab_true | lab_unk))
     rep = {} if uniform else {t: reach(on_cand(p >= t)) for t in TAUS}
-    rev = csr_matrix((np.ones(len(us)), (vs, us)), shape=(N, N))
+    # Exact speed-up: code edges have infinite capacity, so a finite cut never separates the nodes of a
+    # strongly connected group of them. Contract each group once per app; bounds and cuts are unchanged.
+    ncode = len(code_u)
+    nc, lab = connected_components(csr_matrix((np.ones(ncode, dtype=np.int8), (us[:ncode], vs[:ncode])), shape=(N, N)),
+                                   directed=True, connection="strong")
+    lab = lab.astype(np.int32)
+    a_, b_ = lab[us[:ncode]], lab[vs[:ncode]]
+    differ = a_ != b_
+    code_pairs = np.unique(a_[differ].astype(np.int64) * nc + b_[differ])
+    ccu, ccm = lab[cu], lab[cm]  # candidate edges in contracted space
+    T = nc
+    cu_pair = (code_pairs // nc).astype(np.int32)
+    cv_pair = (code_pairs % nc).astype(np.int32)
     ptr, nodes = g["sink_ptr"], g["sink_nodes"]
+    sink_comps = np.unique(lab[nodes])
+    # one preallocated zero-capacity edge from every sink-holding group to the super sink T; a sink turns its own on
+    eu = np.concatenate([cu_pair, ccu, sink_comps]).astype(np.int32)
+    ev = np.concatenate([cv_pair, ccm, np.full(len(sink_comps), T)]).astype(np.int32)
+    ec = np.concatenate([np.full(len(cu_pair), BIG, dtype=np.int64), caps_c, np.zeros(len(sink_comps), dtype=np.int64)])
+    ok = eu != ev
+    C0 = csr_matrix((ec[ok].astype(np.int32), (eu[ok], ev[ok])), shape=(nc + 1, nc + 1))
+    C0.sum_duplicates()
+    pos = C0.indptr[sink_comps + 1] - 1  # column T is the largest, so it is last in its row
+    assert (C0.indices[pos] == T).all()
+    pos_of = np.full(nc + 1, -1, dtype=np.int64)
+    pos_of[sink_comps] = pos
+    n_real = ok & (ev != T)
+    revc = csr_matrix((np.ones(int(n_real.sum()), dtype=np.int8), (ev[n_real], eu[n_real])), shape=(nc + 1, nc + 1))
+    anyreach = reach(on_cand(np.ones(len(cu), dtype=bool)))
+    src_c = int(lab[src])
     recs = []
     for i, site in enumerate(g["sink_site"].tolist()):
         ns = nodes[ptr[i]:ptr[i + 1]]
@@ -159,25 +266,24 @@ def evaluate(path):
         if code_reach[ns].any():
             recs.append(dict(info, bound=None, cut=[]))
             continue
-        keep = np.zeros(N, dtype=bool)
-        for n in ns:
-            keep[breadth_first_order(rev, n, directed=True, return_predecessors=False)] = True
-        if not keep[src]:
+        if not anyreach[ns].any():
             continue
-        m = keep[us] & keep[vs]
-        eu = np.concatenate([us[m], ns.astype(np.int32)])
-        ev = np.concatenate([vs[m], np.full(len(ns), snk, dtype=np.int32)])
-        ec = np.concatenate([caps[m], np.full(len(ns), BIG)])
-        C = csr_matrix((ec.astype(np.int32), (eu, ev)), shape=(N, N))
-        C.sum_duplicates()
-        res = maximum_flow(C, src, snk)
+        nsc = np.unique(lab[ns])
+        keep = np.zeros(nc + 1, dtype=bool)
+        for n in nsc:
+            if not keep[n]:
+                keep[breadth_first_order(revc, n, directed=True, return_predecessors=False)] = True
+        data = C0.data.copy()
+        data[pos_of[nsc]] = BIG
+        C = csr_matrix((data, C0.indices, C0.indptr), shape=C0.shape)
+        res = maximum_flow(C, src_c, T)
         R = (C - res.flow).tocsr()
         R.data = (R.data > 0).astype(np.int8)
         R.eliminate_zeros()
-        S = np.zeros(N, dtype=bool)
-        S[breadth_first_order(R, src, directed=True, return_predecessors=False)] = True
+        S = np.zeros(nc + 1, dtype=bool)
+        S[breadth_first_order(R, src_c, directed=True, return_predecessors=False)] = True
         cut = []
-        for j in np.nonzero(keep[cm] & S[cu] & ~S[cm])[0]:
+        for j in np.nonzero(keep[ccm] & S[ccu] & ~S[ccm])[0]:
             cls, sub = keys[ch[j]]
             a = atoms[ch[j]][ck[j]]
             cut.append({"cls": cls, "sub": sub, "k": int(ck[j]), "src": a["src"], "tgt": a["tgt"],
@@ -197,7 +303,7 @@ def main():
         k1 = (float(rate), int(seed))
     holes = framework_holes() if k1 else labelled_holes()
     uniform = base == "uniform"
-    prices = None if uniform else freq_prices(holes) if base == "freq" else jev_prices(base)
+    prices = None if uniform else freq_prices(holes) if base == "freq" else b6_prices(holes, exclude=(lambda key: deleted(key, *k1)) if k1 else None) if base == "b6" else jev_prices(base)
     global CTX
     CTX = (holes, prices, uniform, k1)
     paths = sorted(glob.glob(os.path.join(GRAPHS, app_glob + ".npz")))
