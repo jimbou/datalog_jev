@@ -1,53 +1,68 @@
-# Recheck the "yes" answers
+# Recheck the "yes" answers: strict instructions
 
 **File:** `/home/jim/datalog_jev/data/audit/audit_recheck.csv` (95 rows, the ones answered `yes` in the first pass).
-Fill `new_answer` with `yes`, `no` or `unsure`. The first-pass file is untouched.
+Fill three columns on every row: `new_answer`, `reason_code`, `mechanism`. The first-pass file is untouched.
 
-## Definition of a flow
+The first pass answered `yes` too easily. The main fault was counting things that **could** happen in unusual
+cases. This pass answers only for the **ordinary, documented behavior**.
 
-There is a flow from **X** to **Y** if, when the method runs, X's **data can end up in Y**. That means one of:
+## The question
 
-1. **Copied or transformed into Y.** Anything computed from X's contents (concatenated, parsed, encoded, cut, counted,
-   converted) and put into Y.
-2. **Stored in Y.** Y keeps X itself, or a reference to X, so that something read from Y later can reach X
-   (for example X is added to a list, set as a field, queued, or attached as a tag).
-3. **Read out of X into Y.** Y is something you can get out of X: its contents, its fields, its size, whether it is empty,
-   its metadata. The tool treats a whole object as secret, so anything read out of a secret object is secret.
+Method M is called with **X** holding a secret. After the call, is a piece of the secret now in **Y**?
 
-It is **not** a flow when X only decides **what happens** and none of X's data goes into Y:
+## Judge the ordinary case only
 
-- X chooses **which** existing thing is returned or used: an index, a key, a resource ID, a locale or charset, a flag.
-- X controls **how much, when or whether**: a count, a delay, a length limit, a boolean switch.
-- Y changes only through **bookkeeping that holds nothing from X**: caches or counters that are updated, but not with
-  X's value or a reference to X.
-- A **status result** (success, true or false) that does not depend on X's contents.
+1. Assume **plain, standard arguments**: ordinary objects of the library's own classes. Ignore what a **custom
+   subclass, override, listener or callback** passed in could do. (The tool handles callbacks separately.)
+2. Use the method's **documented purpose and its normal code path**. Ignore **older or newer OS versions**, special
+   builds and anything you can only know from reading internals.
+3. Ignore **side effects that keep nothing from X**: caches, counters, timestamps, hash or identity values, the
+   method updating its own bookkeeping, parent or owner pointers, listener registration done as plumbing.
+4. Do **not** answer `yes` because the secret *influences* what happens (which element, when, how many, whether).
+   Influence is not a flow. Only the **data itself** (or a reference to it) in Y is a flow.
 
-Ask: *is a piece of X, its value or a reference to it, now sitting in Y?* If yes, it is a flow. If X only picked or
-steered, it is not.
+## Answer `yes` only if you can name the mechanism
+
+Write the mechanism in one short sentence in `mechanism`, in the form
+**"X goes into Y by (what the method does)"**. If you cannot write that sentence from the method's ordinary
+behavior, the answer is not `yes`.
+
+## `reason_code` (required on every row)
+
+Use exactly one letter. The letters decide the answer, so they must match `new_answer`.
+
+| Code | Meaning | `new_answer` |
+| --- | --- | --- |
+| `C` | **Copy or compute**: Y gets X's value, or something computed from it (concatenated, parsed, encoded, cut, converted) | `yes` |
+| `S` | **Store**: the method's purpose is to keep X, or a reference to X, in Y (add, put, set, append, attach, enqueue) | `yes` |
+| `R` | **Read out**: Y is read out of X: its contents, a field, its size, its emptiness | `yes` |
+| `P` | **Pick**: X only chooses which existing thing is used or returned (index, key, resource ID, locale, charset, flag) | `no` |
+| `K` | **Control**: X only controls how much, when or whether (count, delay, length limit, switch) | `no` |
+| `I` | **Incidental**: caches, counters, back-pointers, registration, identity, version- or implementation-specific detail; nothing from X is meant to be kept in Y | `no` |
+| `H` | **Hypothetical**: only possible through a custom subclass, callback, override, older or newer OS version, or an unusual argument | `no` |
+| `N` | **None**: no connection | `no` |
+| `U` | **Unsure**: you cannot tell from the documented behavior | `unsure` |
+
+`unsure` is the honest answer when you cannot decide. It is better than a guess in either direction.
+Do not choose `no` just to be safe, and do not choose `yes` just because something might happen.
 
 ## Examples (not in your file)
 
-| Method | secret starts in | ends up in | Answer | Why |
-| --- | --- | --- | --- | --- |
-| `String substring(int,int)` | the receiver | the return value | `yes` | the result is cut from the receiver |
-| `String substring(int,int)` | argument 0 (start index) | the return value | `no` | the index only picks where to cut |
-| `Map get(Object key)` | argument 0 (the key) | the return value | `no` | the key only picks which value comes back |
-| `Map get(Object key)` | the receiver | the return value | `yes` | the value is read out of the map |
-| `Map put(Object key, Object value)` | argument 0 (the key) | the receiver | `yes` | the key is stored in the map |
-| `View void setTag(Object)` | argument 0 | the receiver | `yes` | the receiver keeps a reference to it |
-| `StringBuilder void setLength(int)` | argument 0 | the receiver | `no` | the number only controls truncation |
-| `String length()` | the receiver | the return value | `yes` | the length is read out of the receiver |
+| Method | X | Y | Answer | Code | Mechanism / reason |
+| --- | --- | --- | --- | --- | --- |
+| `String substring(int,int)` | receiver | return value | `yes` | `C` | the result is cut from the receiver |
+| `String substring(int,int)` | argument 0 (start index) | return value | `no` | `P` | the index only picks where to cut |
+| `Map get(Object key)` | argument 0 (the key) | return value | `no` | `P` | the key only picks which value comes back |
+| `Map get(Object key)` | receiver | return value | `yes` | `R` | the value is read out of the map |
+| `Map put(Object key, Object value)` | argument 0 (the key) | receiver | `yes` | `S` | the key is stored in the map |
+| `View void setTag(Object)` | argument 0 | receiver | `yes` | `S` | the view keeps the object as its tag |
+| `StringBuilder void setLength(int)` | argument 0 | receiver | `no` | `K` | the number only controls truncation |
+| `Handler boolean post(Runnable)` | receiver (the handler) | argument 0 (the runnable) | `no` | `I` | the handler sets itself as an internal target, not something to be kept as data |
+| `Resources InputStream openRawResource(int)` | argument 0 (resource ID) | return value | `no` | `P` | the ID only picks which file is opened |
+| `Context String getString(int)` | argument 0 (resource ID) | receiver | `no` | `I` | the context may update internal resource caches, nothing from the ID is meant to be kept |
 
-## Cases to mark `unsure`
+## What I will do with it
 
-Mark `unsure` (with a one-line note) when the answer depends on private implementation details you cannot confirm,
-or on a result that might or might not come from the contents, such as a success flag. I would rather have an honest
-`unsure` than a guess.
-
-## Note on how this changes things
-
-Under this definition many of your first-pass `yes` answers may well stay `yes`. If so, that means the original labels
-(FlowDroid and the AI model) were too narrow, and the result moves. That is a real finding, not a mistake in your answers.
-Please judge each row by the definition above, not by what you expect the result to be.
-
-When you are done, tell me. I will compare the new answers with the key and with the first pass.
+The codes let me compute the result two ways without asking again: **strict** (answers `C`, `S`, `R` count as flows)
+and **liberal** (also counting `I` and `H`). I will report both, and the rows where you chose `U`.
+Please do not look at other files in `data/`. When you are done, tell me.
