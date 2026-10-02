@@ -491,7 +491,43 @@ the full-scale regression (332 apps) is the first job of the overnight queue.
 trained on FlowDroid-modeled atoms and cross-fitted by method, ranks held-out modeled atoms better than Jev
 (AUROC 0.98 against 0.875 for Jev's object-convention prices and 0.81 for B7 on the same 13,915 atoms). It learns
 FlowDroid's own conventions from sibling methods, so it is expected to be strong on the deletion benchmark (K1) and
-weaker on methods FlowDroid never modeled; both keys must be reported. Results of its calibrated evaluation follow.
+weaker on methods FlowDroid never modeled; both keys must be reported.
+
+**B6 against Jev on both keys** (324 apps, program-level LTT, ε = 0.1, 200 splits, held-out).
+
+Main key (FlowDroid plus Sonnet labels for unmodeled methods; hard slice 28,335 clean verdicts). B6 needs a finer
+threshold grid than the default (its prices are low: 15 of 324 apps already have a wrong clearance at δ = 0.01), so it
+was given δ ∈ {0.001 … 0.02}; with the default grid it cannot be certified at α = 0.05.
+
+| Pricer | Cleared, α = 0.10 | Cleared, α = 0.05 | Apps with a wrong clearance (0.10 / 0.05) |
+| --- | --- | --- | --- |
+| counting (uniform) | 0% | 0% | 0% |
+| B7 frequency prior | 9.2% | 6.6% | 4.9% / 0.8% |
+| B6 feature classifier (finer grid) | 33.2% | 22.0% | 5.4% / 0.7% |
+| Jev | **40.0%** | **40.0%** | 1.0% / 1.0% |
+
+Deletion benchmark K1 (truth = FlowDroid's models, no LLM in the key; 5 seeds, mean; deleted methods are also
+removed from B6's training data; `analysis/k1_summary.py`):
+
+| Deleted | Pricer | Cleared α = 0.1 | Wrong clearances α = 0.1 (worst seed) | Cleared α = 0.05 | Wrong clearances α = 0.05 (worst seed) |
+| --- | --- | --- | --- | --- | --- |
+| 10% | B6 | **87.8%** | 2.4% (4.0%) | **85.9%** | 0.7% (1.9%) |
+| 10% | Jev | 62.9% | 1.0% (4.3%) | 60.1% | 0.2% (0.8%) |
+| 25% | B6 | **88.1%** | 2.8% (5.5%) | **87.5%** | 0.2% (0.7%) |
+| 25% | Jev | 59.5% | 0.9% (3.4%) | 56.8% | 0.4% (0.9%) |
+| 50% | B6 | **82.8%** | 2.3% (6.0%) | **81.5%** | 0.3% (1.2%) |
+| 50% | Jev | 63.7% | 0.6% (0.7%) | 63.7% | 0.6% (0.7%) |
+| any | counting | 0.0% | 0.0% | 0.0% | 0.0% |
+
+The ranking flips with the key. On K1 the classifier clears 20 to 30 points more than Jev, within the risk target
+in every run (worst seed 6.0% against 10%); on the main key Jev clears 7 to 18 points more. This is expected: K1
+holes are methods FlowDroid chose to model, and B6 is trained on FlowDroid's labels of sibling methods (same name,
+other class), so K1 is close to in-distribution for it. The real holes are methods FlowDroid never modeled, which is
+what the main key contains, and there B6 has no siblings to copy. Consequences for the paper: do not claim that Jev
+beats simple pricers in general; the claims that hold are (1) receipts are only certifiable with calibrated prices
+(counting 0%, frequency prior 6 to 9%, classifier and Jev 20 to 90%), (2) which pricer is best depends on whether the
+holes resemble what FlowDroid already models, and (3) Jev needs no labeled corpus. Report both keys side by side.
+The K2 key (StubDroid on the real code) would be a third, independent view.
 
 ## 18. Next steps, in order
 
