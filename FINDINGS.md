@@ -403,7 +403,58 @@ deduplicated. (6) The three or four largest apps were included in every run; non
 
 Results: `data/scale332/android_{choice-obj,uniform,freq}.jsonl` (the 143-app files in `data/` are unchanged).
 
-## 16. Next steps, in order
+## 16. Audit of the answer key behind accepted receipts (2026-10-02)
+
+**Population.** The 11,324 accepted sinks (bound ≤ 0.3, determined truth) rest on only 446 distinct library
+facts (`analysis/audit_sheet.py`; the top 50 carry 81% of fact-uses). The key labels them: 143 FlowDroid summary,
+52 FlowDroid omission, 246 Sonnet silver, 5 unlabeled. A reviewer answered all 446 blind (no key, no price): "if
+X holds a secret before the call, does Y hold it or anything built from it afterwards?"
+
+**First pass (instruction: the object-granularity rule, loosely stated).** 303 no, 95 yes, 48 unsure; agreement
+with the key on decided rows 78.1% (summary 88%, omission 76%, silver 72%). It was almost one-sided: key no and
+reviewer yes in 85 rows. Taken at face value, 12.1% of accepted sinks at δ ≤ 0.3 (72% of apps) would have a
+fact in the receipt that the reviewer says exists, which would have pulled the safe threshold down to δ ≈ 0.05–0.1.
+The notes show why: many yes answers counted things that could happen in unusual cases (custom subclasses,
+callbacks, older OS versions) or influence on a result (an index picks an element, a delay is stored).
+
+**Strict recheck of the 95 yes rows.** The reviewer was given a precise rule (`AUDIT_RECHECK.md`): ordinary
+documented behavior only, no custom overrides or callbacks, no OS-version details, no caches or bookkeeping that keep
+nothing from X, influence is not a flow, and a yes needs a named mechanism and a reason code. Result: 86 of the 95
+flipped to no (codes: incidental 40, control 20, pick 15, hypothetical 10, none 1) and 9 stay yes (copy 2, store 3,
+read 4). Combined with the first pass: 389 no, 9 yes, 48 unsure; **agreement with the key 97.7%** (384 of 393
+decided: summary 132/133, omission 39/42, silver 213/218).
+
+| Accepted sinks whose receipt holds a fact answered yes | strict | first pass |
+| --- | --- | --- |
+| δ ≤ 0.05 | 0 of 1,563 (0 apps) | 19 (1.2%), 8 of 198 apps |
+| δ ≤ 0.10 | 3 (0.1%), 2 of 296 apps | 101 (2.4%), 49 apps |
+| δ ≤ 0.20 | 3 (0.0%), 2 of 316 apps | 731 (8.0%), 185 apps |
+| δ ≤ 0.30 | 31 (0.3%), 11 of 316 apps | 1,370 (12.1%), 229 apps |
+
+These are upper bounds: a receipt fact that exists does not by itself make the sink a real flow. Under the strict
+rule the audit supports the certified threshold: even if all 11 apps were genuinely wrong, 3.5% of apps is below α = 0.05.
+
+**What the strict audit says about the key.** (a) All three wrong clearances of §15 are confirmed as real flows
+(`Boolean.valueOf`, `BitmapFactory.decodeStream` into Options, `View.setVisibility`), so they are not label noise.
+(b) Five facts the key calls absent are still yes (`View.setImportantForAccessibility`, `Bundle.isEmpty`,
+`BitmapFactory.decodeByteArray` into Options, `Cursor.getColumnIndex`, `File.createTempFile`): candidate key errors, 13
+accepted sinks in at most 8 apps. (c) Four facts the key calls present are no under the strict rule, three of them name
+lookups the reviewer treats as picks (`Charset.forName`, `Class.forName`, `Enum.valueOf`): there the key is more cautious
+than the rule, which can only lower the number of wrong clearances.
+
+**Caveats (these must be stated with the result).** (1) The strict instruction was written after seeing that the
+first pass disagreed with the key by 78%, so it was not fixed in advance; the 97.7% is agreement under a rule chosen
+with that knowledge, and the 78% under the looser reading is equally real. The guarantee is about one definition of
+"flow", and the paper has to state it precisely. (2) The 48 unsure rows were never resolved (336 accepted sinks, 3%,
+depend on one) and the recheck used no unsure at all, although it was encouraged. (3) Only the 303 first-pass no
+answers were not rechecked. (4) The identity of the reviewer (human or model) and whether it was independent of the
+labels' model must be stated before this is called an audit; if it was a model, call it a second-model audit. (5) The
+audit covers facts in receipts at δ = 0.3 only, and checks them, it does not re-derive truth for rejected verdicts.
+
+Files: `data/audit/audit_facts.csv` (first pass), `data/audit/audit_recheck.csv` (strict), key in
+`data/audit_private/audit_key.csv`; instructions `AUDIT_TASK.md` and `AUDIT_RECHECK.md`.
+
+## 17. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
    bound as the score, and report realized FDR on held-out apps. Needs more apps (target 100+), so
