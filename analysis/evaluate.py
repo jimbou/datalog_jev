@@ -16,6 +16,11 @@ Usage: evaluate.py PRICING [APP_GLOB]      (env: JOBS)
              k1-<RATE>-<SEED>-<PRICING>  truth = FlowDroid's models; a random RATE share of the
                       modeled methods (fixed by SEED) is deleted and becomes priced holes, the rest
                       become fixed code edges, unmodeled methods mean no flow (as in FlowDroid)
+           or a pricing under another answer key (truth only; prices and training data stay the same):
+             k2-<PRICING>   K2: StubDroid summaries generated from the Android 13 implementation (data/k2_labels.json,
+                            probes/k2_labels_all.py); unknown flows leave a verdict undetermined (excluded)
+             k2s-<PRICING>  K2, strict reading of "no" (class logs without exceptions)
+             au-<PRICING>   the main key with the audit's answers (data/audit_override.json) on the receipt facts
 Reads data/graphs/*.npz (analysis/run_android.py), writes data/android_<PRICING>.jsonl with one
 record per reachable sink site: truth_lo / truth_hi (answer key with unknown facts off / on),
 rep (reported at each tau), bound (min cut, None if reachable through code alone) and the cut.
@@ -46,6 +51,31 @@ def labelled_holes():
                 h["source"] = "silver"
                 for a, l in zip(h["atoms"], d["labels"]):
                     a["label"] = l
+    return holes
+
+
+def key_holes(key):
+    """Holes with the labels of an answer key: k3 (default: FlowDroid plus Sonnet), k2 / k2s (StubDroid on the
+    real code), au (k3 with the audit's answers on the receipt facts)."""
+    if key == "k3":
+        return labelled_holes()
+    if key in ("k2", "k2s"):
+        holes = framework_holes()
+        lab = json.load(open(os.path.join(ROOT, "data/k2_labels.json")))
+        for (cls, sub), h in holes.items():
+            e = lab.get(cls + "\t" + sub)
+            for i, a in enumerate(h["atoms"]):
+                a["label"] = e["lenient" if key == "k2" else "strict"][i] if e else None
+            h["source"] = key
+        return holes
+    holes = labelled_holes()
+    ov = json.load(open(os.path.join(ROOT, "data/audit_override.json")))
+    for (cls, sub), h in holes.items():
+        for a in h["atoms"]:
+            k = "\t".join((cls, sub, a["src"], a["tgt"]))
+            if k in ov:
+                a["label"] = ov[k]
+                h["source"] = "audit"
     return holes
 
 
@@ -330,12 +360,17 @@ def main():
     app_glob = sys.argv[2] if len(sys.argv) > 2 else "*"
     k1 = None
     base = pricing
+    key = "k3"
+    for pre, kname in (("k2s-", "k2s"), ("k2-", "k2"), ("au-", "au")):
+        if pricing.startswith(pre):
+            key, base = kname, pricing[len(pre):]
     if pricing.startswith("k1-") or pricing.startswith("k1c-"):
         tag, rate, seed, base = pricing.split("-", 3)
         k1 = (float(rate), int(seed), tag == "k1c")
-    holes = framework_holes() if k1 else labelled_holes()
+    price_holes = framework_holes() if k1 else labelled_holes()  # prices and training data never use the tested key
+    holes = price_holes if key == "k3" else key_holes(key)
     uniform = base == "uniform"
-    prices = None if uniform else freq_prices(holes) if base == "freq" else b3_prices(holes) if base == "b3" else b6_variant(base, holes, k1) if base in ("b6", "b6c", "b6j", "b6jc") else jev_prices(base)
+    prices = None if uniform else freq_prices(price_holes) if base == "freq" else b3_prices(price_holes) if base == "b3" else b6_variant(base, price_holes, k1) if base in ("b6", "b6c", "b6j", "b6jc") else jev_prices(base)
     global CTX
     CTX = (holes, prices, uniform, k1)
     paths = sorted(glob.glob(os.path.join(GRAPHS, app_glob + ".npz")))

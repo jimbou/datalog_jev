@@ -33,44 +33,49 @@ def log_info(cls):
     return done, bool(re.search(r"Exception|OutOfMemory|timed out", t))
 
 
-def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "data/audit/audit_facts.csv")
+def verdicts(cls, method, src, tgt, summ, sup, cache):
+    """(lenient, strict) K2 answer for one candidate flow: yes / no / gap / unknown (see the module docstring)."""
+    chain = [c for c in sup.get(cls, []) if c] or [cls]
+    verdict, strict, found = None, None, None
+    for c in chain:
+        if c in SKIP:
+            continue
+        if c in summ and method in summ[c]:
+            f = summ[c][method]
+            found = "gap" if f == "gap" else ("yes" if (src, tgt) in f else "no")
+            if found != "no":
+                return found, found
+            break
+    # a method with no flow is only "no" if the generator finished it (in this class's or a subclass's log)
+    ok = bad = False
+    for lc in [cls] + [c for c in chain if c not in SKIP]:
+        if lc not in cache:
+            cache[lc] = log_info(lc)
+        done, exc = cache[lc]
+        if any(sig == method for _, sig in done):
+            ok, bad = True, bad or exc
+    if found == "no" or ok:
+        return "no", ("unknown" if bad else "no")
+    return "unknown", "unknown"
+
+
+def load_context():
     summ = summaries("*.xml", subdir="stubdroid_gen")
     sup = {c: s.split(",") for c, s in (l.split("\t") for l in open(os.path.join(ROOT, "data/android_supers.tsv")).read().splitlines())}
+    return summ, sup, {}
+
+
+def main():
+    path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "data/audit/audit_facts.csv")
+    summ, sup, cache = load_context()
     rows = list(csv.DictReader(open(path, newline="", encoding="utf-8-sig")))
     ENDP = {"the receiver object (this)": "this", "the return value": "ret"}
     out = []
-    cache = {}
     for r in rows:
         def ep(e):
             return ENDP.get(e) or "arg" + re.match(r"argument (\d+)", e).group(1)
-        src, tgt = ep(r["secret_starts_in"]), ep(r["does_it_end_up_in"])
-        chain = [c for c in sup.get(r["class"], []) if c] or [r["class"]]
-        verdict, strict, found = None, None, None
-        for c in chain:
-            if c in SKIP:
-                continue
-            if c in summ and r["method"] in summ[c]:
-                f = summ[c][r["method"]]
-                found = "gap" if f == "gap" else ("yes" if (src, tgt) in f else "no")
-                if found != "no":
-                    verdict = strict = found
-                break
-        if verdict is None:
-            # a method with no flow is only "no" if the generator finished it (in this class's or a subclass's log)
-            ok = bad = False
-            for lc in [r["class"]] + [c for c in chain if c not in SKIP]:
-                if lc not in cache:
-                    cache[lc] = log_info(lc)
-                done, exc = cache[lc]
-                if any(sig == r["method"] for _, sig in done):
-                    ok, bad = True, bad or exc
-            if found == "no" or ok:
-                verdict = "no"
-                strict = "unknown" if bad else "no"
-            else:
-                verdict = strict = "unknown"
-        out.append((r["id"], verdict, strict))
+        v, st = verdicts(r["class"], r["method"], ep(r["secret_starts_in"]), ep(r["does_it_end_up_in"]), summ, sup, cache)
+        out.append((r["id"], v, st))
     os.makedirs(os.path.join(ROOT, "data/audit_private"), exist_ok=True)
     with open(os.path.join(ROOT, "data/audit_private/k2_for_facts.csv"), "w", newline="") as f:
         w = csv.writer(f)
