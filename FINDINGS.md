@@ -559,7 +559,76 @@ beats simple pricers in general; the claims that hold are (1) receipts are only 
 holes resemble what FlowDroid already models, and (3) Jev needs no labeled corpus. Report both keys side by side.
 The K2 key (StubDroid on the real code) would be a third, independent view.
 
-## 18. Next steps, in order
+## 18. Whole-class deletion, IRIS-style and Praline-style baselines (2026-10-03)
+
+**Why a class-level deletion benchmark.** The method-level K1 deletes single methods, so a deleted method almost
+always keeps modeled siblings (same name, other class) that B6 learns from. 86% of the real unmodeled methods that
+matter (12,274 methods with candidate flows) belong to classes with no modeled method at all. In the class-level run
+(`k1c-`), whole classes are deleted, and B6 is also cross-fitted and trained without them. With classes held out, B6's
+ranking quality on modeled atoms falls from 0.980 to 0.942 AUROC (Jev 0.875), and its low-end error rises: 2.4% of
+atoms it prices below 0.05 are real flows, against 0.1% for Jev.
+
+Class-level deletion, 3 seeds, mean (held-out apps with a wrong clearance in the worst seed in brackets; hard-slice
+clean / real verdicts 681 / 1,201 at 10%, 5,087 / 8,773 at 25%, 11,650 / 20,153 at 50%):
+
+| Classes deleted | Pricer | Cleared α = 0.10 | Wrong clearances α = 0.10 | Cleared α = 0.05 | Wrong clearances α = 0.05 |
+| --- | --- | --- | --- | --- | --- |
+| 10% | B6 (class folds) | 99.1% | 3.7% (4.2%) | 87.0% | 1.5% (1.9%) |
+| 10% | B6 + Jev price | 98.9% | 3.3% (4.5%) | 98.8% | 0.7% (1.4%) |
+| 10% | Jev | 62.6% | 0.4% (1.3%) | 62.2% | 0.3% (1.0%) |
+| 25% | B6 (class folds) | 81.8% | 3.1% (4.3%) | 71.4% | 1.6% (2.1%) |
+| 25% | B6 + Jev price | **89.7%** | 2.8% (3.3%) | **86.3%** | 1.5% (2.0%) |
+| 25% | Jev | 60.8% | 1.9% (3.2%) | 52.2% | 0.8% (1.3%) |
+| 50% | B6 (class folds) | 39.7% | 0.3% (0.9%) | 39.7% | 0.3% (0.9%) |
+| 50% | B6 + Jev price | **79.5%** | 2.1% (5.6%) | **60.7%** | 0.3% (0.7%) |
+| 50% | Jev | 56.1% | 1.4% (1.9%) | 53.8% | 1.3% (1.6%) |
+| any | counting | 0.0% | 0.0% | 0.0% | 0.0% |
+
+B6's lead disappears as more classes are removed (it has less to learn from: 39.7% against Jev's 56.1% at 50%), and
+the hybrid that adds Jev's price as a feature is the strongest in the heavier settings. The real hole population is
+more extreme than 50% of classes (FlowDroid models roughly a third of the methods); runs at 75% and 90% follow.
+
+**IRIS-style baseline (B3): the LLM's yes/no taken as fact.** Sonnet 5 (same model and prompt as the silver key)
+labeled all 5,556 FlowDroid-modeled methods ($4.10); price 1.0 for yes, 0.0 for no; a verdict is cleared when no path
+exists using only the yes answers. It has one operating point and no risk knob. Over the 18 deletion runs
+(`analysis/b3_summary.py`):
+
+| Deletion | Seeds | Clean verdicts cleared | Apps with a wrong clearance (mean / worst seed) |
+| --- | --- | --- | --- |
+| methods 10% | 3 | 80.8% | 5.0% / 7.7% |
+| methods 25% | 3 | 88.2% | 6.3% / 6.4% |
+| methods 50% | 3 | 90.5% | 6.3% / 7.0% |
+| classes 10% | 3 | 86.3% | 0.0% / 0.0% |
+| classes 25% | 3 | 79.9% | 0.8% / 2.5% |
+| classes 50% | 3 | 88.0% | 2.7% / 6.0% |
+
+On these keys the baseline is strong: it clears about 86% of the clean hard-slice verdicts with 3.5% of apps holding a
+wrong clearance on average, above the 5% target in 9 of 18 runs, never above 10%. It is lumpy: the same 19 apps and
+about 35 sinks recur in many runs (one wrong answer about a fact bundled in many apps), so its error is either near
+zero or about 6 to 8% of apps, depending on whether that fact was deleted. That correlated error across apps is what
+the per-app calibration is built for, and a risk level cannot be chosen or certified for B3. Caveats: (1) the deleted
+methods are well-known APIs that the model probably memorized, so these keys favor it; (2) on the main key it is
+circular (its answers are the key's labels for unmodeled methods) and that run was stopped (27 apps, excluded);
+(3) Sonnet agrees with FlowDroid on 94% of atoms (§8), so K1 truth and B3 share information.
+
+**Praline-style comparison (no Praline code is available; this is its optimum, not its tool).** Praline (OOPSLA 2025,
+"Probabilistic Inference for Datalog with Correlated Inputs") bounds the probability of an output fact given input
+marginals and partly known correlations, by constrained optimization with an SMT-based refinement. With only the
+marginal p_e of each fact known and arbitrary correlation allowed, the largest possible probability that the sink is
+derivable is min(1, min-cut with capacities p_e): any path needs an edge of each cut (union bound), and a maximum
+flow of value F ≤ 1 decomposes into paths f_k; the world "exactly the edges of path k" has probability f_k, which
+meets every marginal (conservation) and reaches the sink with probability ≥ F. Numerical check
+(`analysis/praline_check.py`): the exact optimum, solved as a linear program over all 2^m worlds, equals
+min(1, max-flow) on 190 random graphs with 5 to 11 edges (largest difference 2e-15). The mean gap to the
+exact probability under independence was 0.08 to 0.17, so an independence-based bound understates the risk
+(consistent with the A1 ablation, where the independence product needed calibration to meet the target). The
+world-enumerating LP takes 0.04 s at 5 edges and 0.27 s at 10, against 0.01 s for max-flow. Limits: the claim holds
+for the information we have (marginals only); Praline can exploit known correlations that we do not have, and its own
+algorithm avoids enumerating worlds, so the comparison is on the optimum and not on its speed. The honest conclusion is
+that on the reachability fragment the cut is not a weaker bound than Praline's; the contribution is the program-level
+calibration, the receipts and the pricing.
+
+## 19. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
    bound as the score, and report realized FDR on held-out apps. Needs more apps (target 100+), so
