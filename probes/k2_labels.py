@@ -6,7 +6,11 @@ superclass chain in data/stubdroid_gen/*.xml (written by tools/k2_one.sh) and an
   yes     the generated summary has the flow (after the same closure of builder-style flows as the FlowDroid labels)
   no      the method's declaring class was summarized and the summary has no such flow
   gap     the summary contains a flow through a callee the generator could not resolve (unknown)
-  unknown the declaring class has no generated summary (generation failed or was skipped)
+  unknown the class was not summarized cleanly (no log, exceptions, timeouts or out of memory in its log), so a
+          missing flow is not evidence of absence; a found flow stays valid even then
+A class counts as cleanly summarized when its log in data/stubdroid_gen_logs/ ends with "Done." and shows no
+exception, timeout or out-of-memory error. A class with no summary file but a clean log (an abstract class, an
+interface) has nothing to summarize.
 Writes data/audit_private/k2_for_facts.csv with columns id, k2.
 """
 import csv, os, re, sys
@@ -15,6 +19,16 @@ from build_holes import summaries
 from build_libflow import ROOT, menu
 
 SKIP = {"java.lang.Object"}
+LOGS = os.path.join(ROOT, "data/stubdroid_gen_logs")
+
+
+def clean(cls):
+    """True when the generator finished this class without errors."""
+    p = os.path.join(LOGS, cls + ".log")
+    if not os.path.exists(p):
+        return False
+    t = open(p, errors="replace").read()
+    return "Done." in t and not re.search(r"Exception|OutOfMemory|timed out|timeout|Timeout", t)
 
 
 def main():
@@ -37,9 +51,11 @@ def main():
                 f = summ[c][r["method"]]
                 verdict = "gap" if f == "gap" else ("yes" if (src, tgt) in f else "no")
                 break
+        if verdict == "no" and not clean(c):
+            verdict = "unknown"  # the declaring class may have lost flows to an error
         if verdict is None:
             have = [c for c in chain if c not in SKIP]
-            verdict = "no" if have and all(c in summ for c in have) else "unknown"
+            verdict = "no" if have and all(clean(c) for c in have) else "unknown"
         out.append((r["id"], verdict))
     os.makedirs(os.path.join(ROOT, "data/audit_private"), exist_ok=True)
     with open(os.path.join(ROOT, "data/audit_private/k2_for_facts.csv"), "w", newline="") as f:
