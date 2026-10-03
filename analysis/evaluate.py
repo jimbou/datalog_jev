@@ -7,6 +7,8 @@ Usage: evaluate.py PRICING [APP_GLOB]      (env: JOBS)
                       receipt (B4, Bastani-style counting; any flat price gives the same ranking)
              freq     frequency prior (B7): share of FlowDroid-modeled atoms with the same package
                       and endpoint kinds that are true, the method itself left out
+             b3       IRIS-style (B3): Sonnet 5's yes/no per candidate flow taken as fact (price 1 or 0, no
+                      uncertainty); read the verdict from rep["0.5"] with analysis/b3_summary.py
              b6       feature classifier (B6): logistic regression on signature features (name tokens,
                       package, types, flow kind) trained on FlowDroid-modeled atoms; each method is priced
                       by a model that never saw it (5 folds by method)
@@ -132,13 +134,15 @@ def b6_features(cls, sig, a):
     return f
 
 
-def b6_prices(holes, dim=1 << 16, lam=1.0, folds=5, exclude=None):
+def b6_prices(holes, dim=1 << 16, lam=1.0, folds=5, exclude=None, fold_by="method", extra=None):
     """B6: logistic regression on signature features, trained on FlowDroid-modeled atoms with labels,
     cross-fitted by method (a method is priced by a model that did not see it). exclude(key) removes
-    methods from training (deletion benchmark: deleted models are unknown to the pricer too)."""
+    methods from training (deletion benchmark: deleted models are unknown to the pricer too). fold_by="class"
+    keeps all methods of a class in one fold; extra maps (cls, sub) to one more per-atom score (for example a Jev
+    price) that is added as a feature in logit form."""
     keys, rows, fold_of = [], [], []
     for (cls, sub), h in holes.items():
-        fo = int.from_bytes(hashlib.md5(("%s|%s" % (cls, sub)).encode()).digest()[:8], "big") % folds
+        fo = int.from_bytes(hashlib.md5(((cls if fold_by == "class" else "%s|%s" % (cls, sub))).encode()).digest()[:8], "big") % folds
         for k, a in enumerate(h["atoms"]):
             keys.append((cls, sub, k, h["source"] in MODELED and a["label"] is not None and not (exclude and exclude((cls, sub))),
                          bool(a["label"])))
@@ -149,6 +153,11 @@ def b6_prices(holes, dim=1 << 16, lam=1.0, folds=5, exclude=None):
     indptr = np.zeros(n + 1, dtype=np.int64)
     indptr[1:] = np.cumsum([len(r) for r in rows])
     X = csr_matrix((np.ones(indptr[-1]), np.concatenate([np.array(r, dtype=np.int64) for r in rows]), indptr), shape=(n, dim))
+    if extra is not None:
+        from scipy.sparse import hstack
+        ev = np.array([min(max(extra[(c, sb)][k], 1e-3), 1 - 1e-3) for c, sb, k, _, _ in keys])
+        X = hstack([X, csr_matrix((np.log(ev / (1 - ev)) / 3.0).reshape(-1, 1))], format="csr")
+        dim += 1
     train = np.array([k[3] for k in keys])
     y = np.array([k[4] for k in keys], dtype=float)
     fold_of = np.array(fold_of)
@@ -172,9 +181,31 @@ def b6_prices(holes, dim=1 << 16, lam=1.0, folds=5, exclude=None):
 
 
 
-def deleted(key, rate, seed):
-    """Stable pseudo-random choice of the modeled methods removed in deletion run (rate, seed)."""
-    h = hashlib.md5(("%s|%s|%s" % (seed, key[0], key[1])).encode()).digest()
+def b3_prices(holes):
+    """B3: an LLM's yes/no per candidate flow taken as fact (price 1.0 or 0.0). Labels come from
+    data/oracle-sonnet5-{unk,mod,val}.jsonl; a method nobody labeled gets 0.0 (no flow, as in FlowDroid)."""
+    lab = {}
+    for name in ("unk", "mod", "val"):
+        path = os.path.join(ROOT, "data/oracle-sonnet5-%s.jsonl" % name)
+        if os.path.exists(path):
+            for d in map(json.loads, open(path)):
+                if "labels" in d:
+                    lab[(d["cls"], d["sig"])] = d["labels"]
+    return {k: [1.0 if (k in lab and i < len(lab[k]) and lab[k][i]) else 0.0 for i in range(len(h["atoms"]))]
+            for k, h in holes.items()}
+
+
+def b6_variant(name, holes, k1):
+    """b6 = signature classifier; c = folds by class; j = Jev price (choice-obj) as an extra feature."""
+    excl = (lambda key: deleted(key, *k1)) if k1 else None
+    return b6_prices(holes, exclude=excl, fold_by="class" if "c" in name[2:] else "method",
+                     extra=jev_prices("choice-obj") if "j" in name[2:] else None)
+
+
+def deleted(key, rate, seed, by_class=False):
+    """Stable pseudo-random choice of the modeled methods removed in deletion run (rate, seed); with by_class
+    a class is removed with all its methods, so no sibling method of a deleted one stays modeled."""
+    h = hashlib.md5(("%s|%s|%s" % (seed, key[0], "" if by_class else key[1])).encode()).digest()
     return int.from_bytes(h[:8], "big") / 2 ** 64 < rate
 
 
@@ -193,9 +224,10 @@ def evaluate(path):
     atoms = [holes.get(keys[h], {"atoms": []})["atoms"] for h in range(len(keys))]
     label = np.array([atoms[h][k]["label"] if k < len(atoms[h]) else None for h, k in zip(ch, ck)], dtype=object)
     if k1:
-        rate, seed = k1
+        rate, seed = k1[:2]
+        by_class = len(k1) > 2 and k1[2]
         modeled_h = np.array([holes.get(k, {}).get("source") in MODELED for k in keys], dtype=bool)
-        deleted_h = modeled_h & np.array([deleted(k, rate, seed) for k in keys], dtype=bool)
+        deleted_h = modeled_h & np.array([deleted(k, rate, seed, by_class) for k in keys], dtype=bool)
         modeled, gone = modeled_h[ch], deleted_h[ch]
         fixed = modeled & ~gone & np.array([l is True for l in label], dtype=bool)
         code_u, code_v = np.concatenate([code_u, cu[fixed]]), np.concatenate([code_v, cm[fixed]])
@@ -298,12 +330,12 @@ def main():
     app_glob = sys.argv[2] if len(sys.argv) > 2 else "*"
     k1 = None
     base = pricing
-    if pricing.startswith("k1-"):
-        _, rate, seed, base = pricing.split("-", 3)
-        k1 = (float(rate), int(seed))
+    if pricing.startswith("k1-") or pricing.startswith("k1c-"):
+        tag, rate, seed, base = pricing.split("-", 3)
+        k1 = (float(rate), int(seed), tag == "k1c")
     holes = framework_holes() if k1 else labelled_holes()
     uniform = base == "uniform"
-    prices = None if uniform else freq_prices(holes) if base == "freq" else b6_prices(holes, exclude=(lambda key: deleted(key, *k1)) if k1 else None) if base == "b6" else jev_prices(base)
+    prices = None if uniform else freq_prices(holes) if base == "freq" else b3_prices(holes) if base == "b3" else b6_variant(base, holes, k1) if base in ("b6", "b6c", "b6j", "b6jc") else jev_prices(base)
     global CTX
     CTX = (holes, prices, uniform, k1)
     paths = sorted(glob.glob(os.path.join(GRAPHS, app_glob + ".npz")))

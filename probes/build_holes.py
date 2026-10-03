@@ -14,10 +14,10 @@ from build_libflow import ROOT, base, close_flows, menu
 TAINT_CATS = {"cmdi", "pathtraver", "sqli", "xss", "ldapi", "xpathi", "trustbound"}
 
 
-def summaries(pattern="java.*.xml"):
-    """class -> {subsig: flows or 'gap'}"""
+def summaries(pattern="java.*.xml", subdir="stubdroid"):
+    """class -> {subsig: flows or 'gap'}; subdir picks the summary set (FlowDroid manual or StubDroid generated)"""
     out = collections.defaultdict(dict)
-    for f in glob.glob(os.path.join(ROOT, "data/stubdroid", pattern)):
+    for f in glob.glob(os.path.join(ROOT, "data", subdir, pattern)):
         cls = os.path.basename(f)[:-4].replace("%24", "$")
         out[cls]  # a file exists even if it only declares hierarchy
         for m in ET.parse(f).getroot().iter("method"):

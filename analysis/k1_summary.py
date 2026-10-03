@@ -11,12 +11,13 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from app_ltt import DELTAS, calibrate, load, loss, ROOT
 
 UNIFORM_DELTAS = [0.5, 1, 2, 3]
+FINE_DELTAS = [0.001, 0.002, 0.003, 0.004, 0.005, 0.0075] + DELTAS  # classifier prices are low
 
 
 def run(pricing, alpha, eps, splits):
     by_app = load(pricing)
     apps = sorted(by_app)
-    deltas = UNIFORM_DELTAS if pricing.endswith("uniform") else DELTAS
+    deltas = UNIFORM_DELTAS if pricing.endswith("uniform") else FINE_DELTAS if re.search(r"-b6", pricing) else DELTAS
     clean = {x: sum(not r for _, r in by_app[x]) for x in apps}
     rng = random.Random(0)
     viol = pw = k = 0
@@ -39,12 +40,14 @@ def main():
     ap.add_argument("--alpha", type=float, default=0.1)
     ap.add_argument("--eps", type=float, default=0.1)
     ap.add_argument("--splits", type=int, default=200)
+    ap.add_argument("--class-level", action="store_true", help="read the class-level deletion runs (k1c-...)")
     a = ap.parse_args()
+    tag = "k1c" if a.class_level else "k1"
     res = collections.defaultdict(list)
-    for p in sorted(glob.glob(os.path.join(ROOT, "data/android_k1-*.jsonl"))):
-        m = re.match(r"android_(k1-([0-9.]+)-(\d+)-(.+))\.jsonl", os.path.basename(p))
+    for p in sorted(glob.glob(os.path.join(ROOT, "data/android_%s-*.jsonl" % tag))):
+        m = re.match(r"android_(%s-([0-9.]+)-(\d+)-(.+))\.jsonl" % tag, os.path.basename(p))
         res[(float(m.group(2)), m.group(4))].append(run(m.group(1), a.alpha, a.eps, a.splits))
-    print("K1 deletion benchmark, alpha=%.2f eps=%.2f (mean over seeds)" % (a.alpha, a.eps))
+    print("K1%s deletion benchmark, alpha=%.2f eps=%.2f (mean over seeds)" % (" (whole classes deleted)" if a.class_level else "", a.alpha, a.eps))
     print("| Deleted | Pricer | Seeds | Hard-slice clean / real | Held-out apps with wrong clearance | Cleared |")
     print("| --- | --- | --- | --- | --- | --- |")
     for (rate, pricing), rs in sorted(res.items()):
