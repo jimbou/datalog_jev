@@ -19,7 +19,17 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def main():
     results = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "data/android_choice-obj.jsonl")
-    fd, state = {}, {}
+    fd, state, failed = {}, {}, []
+    # FlowDroid writes its result file only when it finds a leak; "Found 0 leaks" in the log is a real, empty answer
+    prog = os.path.join(ROOT, "data/flowdroid/progress.log")
+    for line in (open(prog).read().splitlines() if os.path.exists(prog) else []):
+        w = line.split()
+        if len(w) >= 3 and w[2] == "xml=no":
+            log = os.path.join(ROOT, "data/flowdroid/logs", w[0] + ".log")
+            if os.path.exists(log) and "Found 0 leaks" in open(log, errors="replace").read():
+                fd[w[0]], state[w[0]] = set(), "NoLeaks"
+            else:
+                failed.append(w[0])
     for p in sorted(glob.glob(os.path.join(ROOT, "data/flowdroid/xml/*.xml"))):
         app = os.path.basename(p)[:-4]
         try:
@@ -44,7 +54,8 @@ def main():
         tF += len(F); tA += len(F & A); tR += len(F & R); tREAL += len(R); tRF += len(R & F)
         print("%-44s %-12s %4d %4d %5d | %5s    %5s      %5s" % (app[:44], state[app][:12], len(F), len(A), len(R),
               "%d/%d" % (len(F & A), len(F)), "%d/%d" % (len(F & R), len(F)), "%d/%d" % (len(R & F), len(R))))
-    print("\napps with a FlowDroid result: %d | FlowDroid termination states: %s" % (len(fd), dict(collections.Counter(state.values()))))
+    print("\napps with a FlowDroid answer: %d | states: %s | failed (timeout or error, excluded): %d %s" % (
+        len(fd), dict(collections.Counter(state.values())), len(failed), failed[:5]))
     print("overall: FlowDroid's leaking sink methods %d; contained in our all-holes-on set %d (%.0f%%), in our key-true set %d (%.0f%%); "
           "our key-true sink methods %d, of which FlowDroid also reports %d (%.0f%%)" % (
               tF, tA, 100 * tA / max(1, tF), tR, 100 * tR / max(1, tF), tREAL, tRF, 100 * tRF / max(1, tREAL)))

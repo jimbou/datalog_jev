@@ -686,7 +686,56 @@ larger grid would give. The ranking is Jev above B6 at α = 0.05 under the code-
 the uncalibrated LLM baseline clears more with a risk that cannot be chosen. Caveat: the K2 hard slice is a selected
 subset (verdicts whose paths K2 can decide), dominated by well-covered high-use classes, so it is not the whole corpus.
 
-## 20. Next steps, in order
+## 20. Human-checked key, Sonnet as a pricer, FlowDroid validation (2026-10-04)
+
+**Headline under the human-checked key** (`ah-choice-obj`: the audit's answers with the person's source check on 27 facts):
+α = 0.05 chooses δ = 0.3 (154 of 200 splits) or 0.2 (46); held-out wrong clearances 2.0%, clearance 39.4%. α = 0.10: δ = 0.3,
+2.2% and 41.3%. Identical to the AI-audited key (§19) and within a point of the main key (40.0%, 1.0%).
+
+**B5: Sonnet 5 as a stated-confidence pricer** (`probes/run_sonnet_price.py`): one call per method returns a probability for each candidate
+flow (same flow rule and model as the silver key's question); all 17,830 methods, about $16.4, against about $0.4 for Jev's 51k questions.
+The same program-level calibration, ε = 0.1, 200 splits:
+
+| Key | Pricer | Cleared α = 0.05 | Wrong clearances α = 0.05 | Cleared α = 0.10 | Wrong clearances α = 0.10 |
+| --- | --- | --- | --- | --- | --- |
+| main (324 apps) | Jev | **40.0%** | 1.0% | 40.0% | 1.0% |
+| main | Sonnet | 29.6% | 2.5% | **53.0%** | 5.6% |
+| K2 (322 apps) | Jev | 25.7% | 1.7% | 26.2% | 1.8% |
+| K2 | Sonnet | **33.6%** | 2.3% | **36.5%** | 3.7% |
+
+Deletion benchmark, whole classes removed, 3 seeds, α = 0.05 (cleared; held-out apps with a wrong clearance in brackets; the 90% row is 1 seed):
+
+| Classes deleted | Jev | B6 + Jev price | Sonnet | IRIS-style (no knob) |
+| --- | --- | --- | --- | --- |
+| 10% | 62.2% (0.3%) | 98.8% (0.7%) | 88.4% (0.2%) | 85.9% (0.0%) |
+| 25% | 52.2% (0.8%) | 86.3% (1.5%) | 81.9% (0.5%) | 79.8% (1.2%) |
+| 50% | 53.8% (1.3%) | 60.7% (0.3%) | **85.0%** (1.1%) | 57.3% (1.3%) |
+| 75% | 50.9% (1.3%) | 75.5% (0.6%) | **79.1%** (1.0%) | not run |
+| 90% | 45.5% (1.5%) | 33.9% (1.3%) | not run | not run |
+
+Method-level deletion, 3 seeds, α = 0.05: Sonnet 85.0 / 86.0 / 79.8% at 10 / 25 / 50% (wrong clearances at most 1.9%), Jev 60.1 / 56.8 / 63.7%,
+B6 85.9 / 87.5 / 81.5%. So a strong general LLM, calibrated by the same procedure, is the best or tied pricer on the deletion
+keys and under K2, and Jev leads only on the main key at α = 0.05 (a key whose labels for unmodeled methods come from Sonnet, which
+favors Sonnet if anything). Jev's advantage is cost, about 40 times lower, and it needs no labeled corpus; it is not accuracy. The
+claims that hold: receipts are certifiable only with calibrated prices (counting 0%), the guarantee holds for every pricer tried
+(held-out wrong clearances 0 to 6%), and which pricer is best depends on the key.
+
+**FlowDroid validation** (`bench/flowdroid_*`; FlowDroid 2.15.1, the same default sources and sinks, its default library summaries via
+`-tw STUBDROID`, 55 minute limit; 40 apps drawn at random from the 181 small-APK apps our evaluation covers). 37 apps gave an answer:
+17 found no leak, 10 finished, 8 stopped at FlowDroid's own memory limit (partial result), 2 ended in an unknown state; 3 failed (two
+timeouts, one error) and are excluded. Compared at the level of sink-containing methods: FlowDroid reports 84 leaking sink methods;
+56 (67%) are among the sink methods our analysis reaches when every library hole is a flow, and 50 (60%) among those it reaches
+under the answer key. Excluding 7 sinks in FlowDroid's synthetic `dummyMainClass`, which has no counterpart in the app, 56 of 77
+(73%) and 50 of 77 (65%). The 28 misses are mostly inter-component sinks (`startActivityForResult`, `bindService`, `sendBroadcast`: 17),
+file and network calls (6) and logging (2), and 17 of the 28 are in bundled library classes. In the other direction our analysis is
+far less precise: it flags 4,514 key-true sink methods in these apps and FlowDroid also reports 50 of them (1%); in the 17 apps where
+FlowDroid finds no leak we still flag between 1 and 236 methods per app. Reasons: our analysis is whole-program and
+context-insensitive, treats all shipped code as live (FlowDroid analyzes only what is reachable from the entry points it builds) and
+does not model the component lifecycle. Consequences: the guarantee is about the library holes relative to our own completed
+analysis, not relative to FlowDroid, and a reviewer can fairly say that our analysis finds about two thirds of FlowDroid's leaks and
+over-reports heavily; the paper must say so and not describe the analysis as a drop-in replacement.
+
+## 21. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
    bound as the score, and report realized FDR on held-out apps. Needs more apps (target 100+), so
