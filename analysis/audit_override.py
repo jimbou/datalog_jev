@@ -22,17 +22,24 @@ def main():
         final[r["id"]] = r["new_answer"]
     for r in rd("audit_unsure.csv"):
         final[r["id"]] = r["answer"]
-    human = "--human" in sys.argv
+    human = "--human" in sys.argv or "--sample2" in sys.argv
     if human:
         for r in rd("human_source_check.csv"):
             if r["answer"].strip():
                 final[r["id"]] = r["answer"].strip()
+    sample2 = "--sample2" in sys.argv
+    if sample2:  # the second human check (40 facts the AI called no); row -> fact id comes from the private metadata
+        meta = {r["row"]: r["fact_id"] for r in csv.DictReader(open(os.path.join(ROOT, "data/audit_private/human_sample2_meta.csv"), newline=""))}
+        for r in rd("human_sample2.csv"):
+            if r["answer"].strip():
+                final[meta[r["row"]]] = r["answer"].strip()
     ENDP = {"the receiver object (this)": "this", "the return value": "ret"}
     ep = lambda e: ENDP.get(e) or "arg" + re.match(r"argument (\d+)", e).group(1)
     out = {}
     for i, r in A.items():
         out["\t".join((r["class"], r["method"], ep(r["secret_starts_in"]), ep(r["does_it_end_up_in"])))] = {"yes": True, "no": False}.get(final[i])
-    json.dump(out, open(os.path.join(ROOT, "data/audit_override_human.json" if human else "data/audit_override.json"), "w"))
+    name = "data/audit_override_human2.json" if sample2 else "data/audit_override_human.json" if human else "data/audit_override.json"
+    json.dump(out, open(os.path.join(ROOT, name), "w"))
     import collections
     print("audit override:", dict(collections.Counter(str(v) for v in out.values())))
 

@@ -735,7 +735,35 @@ does not model the component lifecycle. Consequences: the guarantee is about the
 analysis, not relative to FlowDroid, and a reviewer can fairly say that our analysis finds about two thirds of FlowDroid's leaks and
 over-reports heavily; the paper must say so and not describe the analysis as a drop-in replacement.
 
-## 21. Next steps, in order
+## 21. FlowDroid with and without its library model; the second human check (2026-10-04)
+
+**FlowDroid with and without library summaries** (`bench/flowdroid_none_compare.py`; the same 40 apps, sources, sinks and limits; `-tw NONE`
+removes every library model, so taint stops at each library call with no body). 36 apps have an answer in both modes. In the 29 apps
+where neither run was cut short, FlowDroid reports 20 leaking sink methods with its summaries and 2 without: 18 (90%) disappear. In 7
+apps where one run stopped at FlowDroid's own memory limit (partial results) 36 of 43 (84%) disappear. In total 54 of 63 (86%) leaking
+sink methods are found only with the library model, and none is found only without it. This is the motivating effect on a tool that is
+not ours: a missing library model hides most of what the analysis would otherwise find. Limits: `NONE` is the extreme; real runs use
+FlowDroid's summaries, which cover 349 classes, so this bounds how much library modeling matters and does not measure what FlowDroid
+misses with its default summaries; it is the same kind of unmodeled-library gap that our receipts bound.
+
+**Second human check: 40 facts the AI passes called no** (`AUDIT_SAMPLE_NO.md`, `data/audit/human_sample2.csv`; a person read the source
+without seeing any earlier answer). The 419 AI-no facts that nobody had read were sampled in two strata: the 12 facts that most
+verdicts depend on (taken for sure; 53% of their fact-uses) and 28 at random from the other 407. Result: 36 no, 4 yes. One yes is
+in the certain stratum and three in the random one (10.7%, 95% interval 2.3% to 28.2%). Estimated number of facts among the 419 that
+a person would call a flow: about 45 (10.6%, range 2% to 28%). All four are cases of keeping a reference: `Messenger.send(Message)`
+queues the message in the handler (the fact that 481 accepted verdicts in 85 apps depend on, the highest in the audit),
+`Context.sendOrderedBroadcast` copies the intent flags into the pending result, `FingerprintManager.authenticate` retains a listener that
+holds the manager, and `ViewGroup.removeView` keeps the child in `mDisappearingChildren` during an animation. By our written rule these are
+a store of X in Y (code S); the strict AI recheck had read them as incidental bookkeeping (code I), so this is the old question of where
+a stored reference stops being data transfer and must be fixed in the paper's definition. K2 says gap for `Messenger.send`, no for
+`FingerprintManager.authenticate` and has no answer for the other two. The 36 no answers agree with the AI on 36 of 36, so the AI's flags and
+the human's differ only on this reference-keeping class. Effect on the accepted verdicts, as an upper bound on wrong clearances (a
+present fact in a receipt does not by itself make the verdict a real flow): the verdicts with a present fact in their receipt go from 31
+(0.3%, 11 of 316 apps) to 537 (4.7%, 101 of 316 apps) at δ ≤ 0.3, 424 (4.7%, 91 apps) at δ ≤ 0.2, 6 (0.1%, 5 apps) at δ ≤ 0.1 and 0 at
+δ ≤ 0.05. So the headline threshold of 0.3 is only as safe as the decision about reference-keeping; the calibration under this key
+(pricing `ah2-choice-obj`) shows what changes (below).
+
+## 22. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
    bound as the score, and report realized FDR on held-out apps. Needs more apps (target 100+), so
