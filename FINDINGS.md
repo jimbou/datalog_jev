@@ -481,6 +481,21 @@ tracking (its default, used here, is explicit flows only), so the paper must sta
 that no tool supports implicit flows. The 60-row sample was built to contain every disputed row, so its agreement
 figures describe those rows and are not an estimate of the error rate of all 446.
 
+**Human source check (2026-10-04).** A person (`checked_by: jim`) read the Android 13 source (`android-13.0.0_r1`, and Android's
+own `libcore` for `java.*`) for the 27 facts the AI passes had marked yes (9) or unsure (18), using the written definition,
+without the earlier answers (`AUDIT_HUMAN.md`, `data/audit/human_source_check.csv`). Result: all 9 yes are confirmed
+(`BitmapFactory.decodeStream` and `decodeByteArray` into Options, `Boolean.valueOf`, `View.setImportantForAccessibility` and
+`setVisibility`, `Bundle.isEmpty`, `Cursor.getColumnIndex`, `File.createTempFile`, `Drawable.setLayoutDirection`); of the 18 unsure,
+11 become no (code H: callback or interface methods whose only route for data is a custom override) and 7 stay unsure
+(`Method.invoke`, which is native, and six `ViewParent.onNested*` facts where the contract permits reacting to the supplied
+values but `ViewGroup` only forwards them). Final audited answers: 430 no, 9 yes, 7 unsure. Accepted sinks at δ ≤ 0.3: 97.7%
+have every receipt fact audited absent, 2.0% (228) depend on an unsure fact and 0.3% (31 sinks, 11 of 316 apps) on a present one,
+unchanged. The human check confirms the AI's yes answers on these facts and removes 11 of the 18 unknowns; it does not check the
+419 facts both AI passes called no, so it does not estimate the false-negative rate of those. One case is borderline:
+`Boolean.valueOf(boolean)` is a yes (value preserved by boxing), but the real code returns one of two cached objects selected
+by the argument, which is why K2 (§19) says no; the choice of "selection or copy" for such cases should be stated in the
+paper. The headline rerun under this key (pricing `ah-choice-obj`) is queued on the server.
+
 Files: `data/audit/audit_facts.csv` (first pass), `data/audit/audit_recheck.csv` (strict), `audit_unsure.csv`,
 `audit_human_sample.csv`, key in `data/audit_private/audit_key.csv`; instructions `AUDIT_TASK.md` and `AUDIT_RECHECK.md`.
 

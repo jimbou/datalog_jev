@@ -1,10 +1,12 @@
-"""Write data/audit_override.json: the audit's final answers as labels for evaluate.py (pricing au-...).
+"""Write data/audit_override.json (pricing au-...) or, with --human, data/audit_override_human.json (pricing ah-...):
+the audit's final answers as labels for evaluate.py. --human lets the person's answers in
+data/audit/human_source_check.csv replace the AI answers on those facts.
 
 Reads data/audit/audit_facts.csv (first pass), audit_recheck.csv (strict recheck of the yes rows) and audit_unsure.csv.
 yes -> true, no -> false, unsure -> null (the flow is unknown, so verdicts that depend on it become undetermined).
 Keys are "cls<TAB>sig<TAB>src<TAB>tgt" with src / tgt as this, ret, argN.
 """
-import csv, json, os, re
+import csv, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,12 +22,17 @@ def main():
         final[r["id"]] = r["new_answer"]
     for r in rd("audit_unsure.csv"):
         final[r["id"]] = r["answer"]
+    human = "--human" in sys.argv
+    if human:
+        for r in rd("human_source_check.csv"):
+            if r["answer"].strip():
+                final[r["id"]] = r["answer"].strip()
     ENDP = {"the receiver object (this)": "this", "the return value": "ret"}
     ep = lambda e: ENDP.get(e) or "arg" + re.match(r"argument (\d+)", e).group(1)
     out = {}
     for i, r in A.items():
         out["\t".join((r["class"], r["method"], ep(r["secret_starts_in"]), ep(r["does_it_end_up_in"])))] = {"yes": True, "no": False}.get(final[i])
-    json.dump(out, open(os.path.join(ROOT, "data/audit_override.json"), "w"))
+    json.dump(out, open(os.path.join(ROOT, "data/audit_override_human.json" if human else "data/audit_override.json"), "w"))
     import collections
     print("audit override:", dict(collections.Counter(str(v) for v in out.values())))
 

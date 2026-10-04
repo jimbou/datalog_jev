@@ -21,6 +21,7 @@ Usage: evaluate.py PRICING [APP_GLOB]      (env: JOBS)
                             probes/k2_labels_all.py); unknown flows leave a verdict undetermined (excluded)
              k2s-<PRICING>  K2, strict reading of "no" (class logs without exceptions)
              au-<PRICING>   the main key with the audit's answers (data/audit_override.json) on the receipt facts
+             ah-<PRICING>   the same with the person's source check on 27 facts (data/audit_override_human.json)
 Reads data/graphs/*.npz (analysis/run_android.py), writes data/android_<PRICING>.jsonl with one
 record per reachable sink site: truth_lo / truth_hi (answer key with unknown facts off / on),
 rep (reported at each tau), bound (min cut, None if reachable through code alone) and the cut.
@@ -69,7 +70,7 @@ def key_holes(key):
             h["source"] = key
         return holes
     holes = labelled_holes()
-    ov = json.load(open(os.path.join(ROOT, "data/audit_override.json")))
+    ov = json.load(open(os.path.join(ROOT, "data/audit_override_human.json" if key == "ah" else "data/audit_override.json")))
     for (cls, sub), h in holes.items():
         for a in h["atoms"]:
             k = "\t".join((cls, sub, a["src"], a["tgt"]))
@@ -361,7 +362,7 @@ def main():
     k1 = None
     base = pricing
     key = "k3"
-    for pre, kname in (("k2s-", "k2s"), ("k2-", "k2"), ("au-", "au")):
+    for pre, kname in (("k2s-", "k2s"), ("k2-", "k2"), ("au-", "au"), ("ah-", "ah")):
         if pricing.startswith(pre):
             key, base = kname, pricing[len(pre):]
     if pricing.startswith("k1-") or pricing.startswith("k1c-"):
