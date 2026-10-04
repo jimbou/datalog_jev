@@ -760,8 +760,14 @@ a stored reference stops being data transfer and must be fixed in the paper's de
 the human's differ only on this reference-keeping class. Effect on the accepted verdicts, as an upper bound on wrong clearances (a
 present fact in a receipt does not by itself make the verdict a real flow): the verdicts with a present fact in their receipt go from 31
 (0.3%, 11 of 316 apps) to 537 (4.7%, 101 of 316 apps) at δ ≤ 0.3, 424 (4.7%, 91 apps) at δ ≤ 0.2, 6 (0.1%, 5 apps) at δ ≤ 0.1 and 0 at
-δ ≤ 0.05. So the headline threshold of 0.3 is only as safe as the decision about reference-keeping; the calibration under this key
-(pricing `ah2-choice-obj`) shows what changes (below).
+δ ≤ 0.05. These are upper bounds and they overstate the effect: the calibration under this key (pricing `ah2-choice-obj`, the audit's
+answers with both human checks, reference-keeping counted as a flow) is identical to the one without the four facts (`ah-choice-obj`) to the last
+digit: α = 0.05 chooses δ = 0.3 (154 of 200 splits) or 0.2 (46), held-out wrong clearances 2.0%, clearance 39.4%; α = 0.10 chooses δ = 0.3,
+2.2% and 41.3%; 84,701 hard-slice verdicts and 27,442 clean in both. No verdict changes truth, because every source-to-sink path
+through those four facts also needs a candidate flow that the key keeps as absent (for example the callback that would have to take the
+queued message out of the handler, which is not modeled), so a present fact in a receipt does not make the verdict a real flow. The
+choice of definition therefore changes how clean the audit looks (all-absent receipts 97.7% against 93.2%) and not the certified
+clearance on this corpus; the absent facts that block those paths are themselves only AI-labeled, so this holds as far as they do.
 
 ## 22. Next steps, in order
 
