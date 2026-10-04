@@ -628,7 +628,50 @@ algorithm avoids enumerating worlds, so the comparison is on the optimum and not
 that on the reachability fragment the cut is not a weaker bound than Praline's; the contribution is the program-level
 calibration, the receipts and the pricing.
 
-## 19. Next steps, in order
+## 19. Audited key and K2 key (2026-10-04)
+
+**Headline under the audited key.** The audit's final answers (419 absent, 9 present, 18 unknown) override the main key
+on the 446 receipt facts (`pricing au-choice-obj`, `analysis/audit_override.py`); prices are unchanged. App-level LTT,
+324 apps, ε = 0.1: α = 0.05 chooses δ = 0.3 (154 of 200 splits) or 0.2 (46); held-out wrong clearances 2.0%, clearance
+39.4%. α = 0.10 chooses δ = 0.3 in every split; 2.2% and 41.2%. At δ = 0.3, 7 of 324 apps have a wrong clearance
+(3 under the main key). So the headline (40% cleared, wrong clearances in 1 to 2% of apps) survives replacing the key's
+labels by the audit's.
+
+**K2: a key from the real code.** StubDroid (`soot-infoflow-summaries` 2.15.1, Soot 4.7.1) was run on the Android 13
+implementation (Robolectric `android-all`), and on an OpenJDK 8 `rt.jar` for `java.*` classes (the Android jar has none),
+for the 145 classes of the receipt facts and then, until a 7 hour deadline, for the other framework classes of the hole
+file, heaviest use first (`extract/k2`, `probes/k2_labels_all.py`; a class summary includes its inherited methods).
+Summaries exist for 126 classes; abstract classes and interfaces have nothing to summarize, some classes ran out of
+memory or time, and the 7 hour extension reached only 91 of its 1,917 classes (53 finished cleanly), so K2 coverage is limited by compute. Of the 51,159 candidate flows, 5,919
+are labeled absent (the method was analyzed, no such flow), 1,964 present, 811 gap (a flow through a callee the generator
+could not resolve) and 42,465 unknown. "Strict" additionally distrusts a "no" from a class whose log shows exceptions.
+K2 has no LLM in it, but it uses FlowDroid's manual summaries for JDK leaf methods and it is not sound.
+
+*K2 against the receipt facts.* K2 decides 176 of the 446 facts (45% of the fact-uses; strict: 94, 22%), all as no flow, and agrees with
+the key on 173 of 176 (98.3%; strict 92 of 94) and with the audit on the same. The three disagreements are facts the key
+calls present: `Boolean.valueOf(boolean)` (the real code returns one of two cached objects selected by the argument, so by
+our definition this is selection and FlowDroid's yes is conservative; it is one of the three wrong clearances of §15),
+`Class.forName` and `PendingIntent.send`. K2 is not a perfect witness: it also answers no for `File.createTempFile` (prefix
+into the returned File), which the audit calls a flow, and it returns gap for `BitmapFactory.decodeStream` into Options. A K2
+"no" is evidence, not proof.
+
+*Evaluation under the K2 key* (truth only; prices unchanged; 322 apps; the hard slice is the 39,958 verdicts that K2's labels
+decide: 34,746 clean, 5,212 real):
+
+| Pricer | Cleared, α = 0.05 | Wrong clearances, α = 0.05 | Cleared, α = 0.10 | Wrong clearances, α = 0.10 |
+| --- | --- | --- | --- | --- |
+| counting (uniform) | 0% | 0% | 0% | 0% |
+| B6 classifier (finer grid) | 20.4% | 2.3% | 27.9% | 5.5% |
+| Jev | 25.7% | 1.7% | 26.2% | 1.8% |
+| IRIS-style (LLM yes/no as fact) | 38.5% of clean cleared, one operating point | 2.5% of apps (8 of 322) | | |
+
+Jev's calibrated threshold sits at the top of the grid (δ = 0.5 in 174 of 200 splits at α = 0.05; at δ = 0.5, 6 of 322
+apps have a wrong clearance and 26.2% of clean verdicts are cleared), so its clearance under K2 is a lower bound on what a
+larger grid would give. The ranking is Jev above B6 at α = 0.05 under the code-derived key, B6 slightly above at α = 0.10, and
+the uncalibrated LLM baseline clears more with a risk that cannot be chosen. Caveat: the K2 hard slice is a selected
+subset (verdicts whose paths K2 can decide), dominated by well-covered high-use classes, so it is not the whole corpus.
+
+## 20. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
    bound as the score, and report realized FDR on held-out apps. Needs more apps (target 100+), so

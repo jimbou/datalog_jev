@@ -21,10 +21,25 @@ SYSTEM = ("You are an expert on the Java and Android framework APIs and on stati
 
 
 def ask(model, r):
+    """A method with more than 20 candidate flows is asked in chunks of 15 (one long answer can be cut off)."""
+    if len(r["atoms"]) > 20:
+        ps, cost = [], 0.0
+        for i in range(0, len(r["atoms"]), 15):
+            sub = dict(r, atoms=r["atoms"][i:i + 15])
+            res = ask1(model, sub)
+            if "error" in res:
+                return {"cls": r["cls"], "sig": r["sig"], "error": res["error"]}
+            ps += res["p"]
+            cost += res["cost"]
+        return {"cls": r["cls"], "sig": r["sig"], "p": ps, "cost": cost}
+    return ask1(model, r)
+
+
+def ask1(model, r):
     st, params = state(r)
     qs = "\n".join("%d: %s -> %s" % (k, endpoint(a["src"], params), endpoint(a["tgt"], params))
                    for k, a in enumerate(r["atoms"]))
-    body = json.dumps({"model": model, "temperature": 0, "max_tokens": 400,
+    body = json.dumps({"model": model, "temperature": 0, "max_tokens": 400 + 25 * len(r["atoms"]),
                        "messages": [{"role": "system", "content": SYSTEM},
                                     {"role": "user", "content": st + "\n\nCandidate flows:\n" + qs}]}).encode()
     for attempt in range(5):
