@@ -51,6 +51,24 @@ Review criteria of the call: Importance, Originality, Soundness, Verifiability a
 2. Wording ablation: Jev with the "taint" and "choice" wordings on the current method list, main key.
 3. FlowDroid on 40 more apps, with and without its library summaries (80 in total).
 
+## Novelty plan (decided 2026-10-05)
+
+Order: (1) write the quantitative definition, "(alpha, eps)-soundy analysis", as the framing of the approach section;
+(2) budgeted verification, RUNNING (`bench/queues/verify_chain.sh`, `analysis/verify_select.py`, `VERIFY_FILE` in
+`evaluate.py`): rank receipt facts without labels (policies unlock/value/count/random), let the key verify the top K
+(10..400), recompute and recertify; main key and K2; (3) TaintBench real leaks + transfer of the F-Droid calibration to
+malware, START WHEN (2) FINISHES; (4) a second kind of hole, inter-component (Intent) edges, with explicit intents as the
+key, TO TRY after (3).
+
+Experiment 3 sketch: TaintBench release `TaintBenchSuite` (`TaintBench.zip`, 35 MB, 39 apps; `findings.zip` with documented
+flows, TAF schema); build graphs with our pipeline, price new framework methods (Jev, Sonnet), match documented flows to our
+sink sites; report per flow: found with holes closed, needs holes (receipt + price), missed; cleared at the F-Droid-certified
+threshold? Then calibrate on F-Droid and test the per-app risk on TaintBench (exchangeability stress test).
+
+Experiment 4 sketch: candidate edges from Intent-sending sinks (startActivity, startService, sendBroadcast, ...) to
+getIntent/onReceive sources of components in the same app; key from explicit intents (target class constant) and manifest
+intent filters; pricer asked "can this intent reach this component"; same min-cut and calibration.
+
 ## To build next
 
 - RQ10 TaintBench: download the 39 apps and the documented findings; build graphs; price new methods; compare, per documented flow,

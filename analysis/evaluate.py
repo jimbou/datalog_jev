@@ -242,6 +242,9 @@ def deleted(key, rate, seed, by_class=False):
 
 
 CTX = None
+VERIFIED = set()
+if os.environ.get("VERIFY_FILE"):  # list of [cls, sub, atom index] whose truth (in the tested key) a checker has established
+    VERIFIED = {(c, sub, int(k)) for c, sub, k in json.load(open(os.environ["VERIFY_FILE"]))}
 
 
 def evaluate(path):
@@ -264,6 +267,12 @@ def evaluate(path):
         fixed = modeled & ~gone & np.array([l is True for l in label], dtype=bool)
         code_u, code_v = np.concatenate([code_u, cu[fixed]]), np.concatenate([code_v, cm[fixed]])
         cu, cm, ch, ck, label = cu[gone], cm[gone], ch[gone], ck[gone], label[gone]
+    if VERIFIED:  # facts a checker has verified: a "no" removes the candidate, a "yes" becomes a code edge (see verify_select.py)
+        vk = np.array([(keys[h][0], keys[h][1], int(k)) in VERIFIED for h, k in zip(ch, ck)], dtype=bool)
+        vyes = vk & np.array([l is True for l in label], dtype=bool)
+        vdone = vk & np.array([l is not None for l in label], dtype=bool)  # a fact the key cannot decide stays a hole
+        code_u, code_v = np.concatenate([code_u, cu[vyes]]), np.concatenate([code_v, cm[vyes]])
+        cu, cm, ch, ck, label = cu[~vdone], cm[~vdone], ch[~vdone], ck[~vdone], label[~vdone]
     if uniform:
         p = np.ones(len(cu))
         caps_c = np.ones(len(cu), dtype=np.int64)
