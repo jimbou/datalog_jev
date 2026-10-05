@@ -4,7 +4,7 @@ Graphs built without keeping facts store the framework methods on their relevant
 (hole_cls / hole_sub / hole_kind). Methods not yet in the framework hole file get a record with the
 same labeling as build_holes_android.py; existing records are never changed, so prices and silver
 labels already keyed by (class, signature) stay valid. Safe to re-run.
-Usage: extend_holes_fw.py [--dry-run]
+Usage: extend_holes_fw.py [--dry-run]   (env GRAPHS_DIRS: colon-separated graph directories, default data/graphs)
 """
 import collections, glob, json, os, shutil, sys
 import numpy as np
@@ -20,7 +20,8 @@ def main():
     fw = {l.strip() for l in open(os.path.join(ROOT, "data/android_classes.txt"))}
     have = {(r["cls"], r["sig"]) for r in map(json.loads, open(FW_FILE))}
     calls, apps, kinds = collections.Counter(), collections.defaultdict(set), {}
-    for g in sorted(glob.glob(os.path.join(ROOT, "data/graphs/*.npz"))):
+    dirs = os.environ.get("GRAPHS_DIRS", "data/graphs").split(":")
+    for g in sorted(p for d in dirs for p in glob.glob(os.path.join(ROOT, d, "*.npz"))):
         z = np.load(g)
         if "hole_kind" not in z.files:
             continue
