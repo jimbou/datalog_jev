@@ -810,6 +810,18 @@ real leaks. Our "unlock" score (assumes the answer is no) is not the best: the p
 better at 100 (about 64%), because confirmed real flows also help (they move verdicts into reported leaks and out of the
 hard slice). K2 runs pending.
 
+**TaintBench (real malware, experiment 3).** 39 apps, 203 documented leaks; graphs built for 33 apps with FlowDroid's
+default list and with TaintBench's own list (`bench/queues/tb_build.sh`). 108 new framework methods; Sonnet 5 labels (60
+unmodeled) and prices (108) through Claude Code. Matched at the sink-containing method (`analysis/taintbench_compare.py`).
+With TaintBench's list: 44 documented leaks reported without holes, **48 reachable only through library holes**, 83 not
+reached, 28 out of scope (no graph or sink not in list): of the 92 our analysis reaches, 52% depend on library holes. Key
+says real for 30 of the 48. Sonnet with the threshold certified on all 324 F-Droid apps (delta 0.03 at alpha 0.05): 3
+documented leaks cleared, all in one app and all resting on one receipt fact, `WebView.addJavascriptInterface` this ->
+arg0 (key: no; the leak goes through JavaScript calling the injected object's methods, a callback our flow definition
+excludes). Transfer: apps with a wrong clearance (our key) 1/31 (3.2%) at delta 0.03, 2/31 (6.5%) at delta 0.1 (alpha 0.1),
+clearing 30% / 59% of the leak-free hole-dependent verdicts. Counting (receipts of one fact): 22 documented leaks cleared,
+21/31 apps wrong. Jev not yet run on the 108 new methods (OpenRouter; waiting for approval).
+
 ## 23. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
