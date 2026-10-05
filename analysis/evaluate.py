@@ -1,6 +1,6 @@
 """Evaluate stage: price the stored flow graphs and compute per-sink verdicts.
 
-Usage: evaluate.py PRICING [APP_GLOB]      (env: JOBS)
+Usage: evaluate.py PRICING [APP_GLOB]      (env: JOBS, GRAPHS_DIR for another graph folder, OUT_SUFFIX for another output name)
   PRICING  a Jev wording with prices in data/jev_holes_android_fw_<PRICING>_r*.jsonl
            (taint, choice, choice-obj, ...), or a baseline:
              uniform  every candidate edge costs 1, so the bound is the size of the smallest
@@ -377,7 +377,7 @@ def main():
     CTX = (holes, prices, uniform, k1)
     paths = sorted(glob.glob(os.path.join(GRAPHS, app_glob + ".npz")))
     import multiprocessing
-    with open(os.path.join(ROOT, "data/android_%s.jsonl" % pricing), "w") as f, \
+    with open(os.path.join(ROOT, "data/android_%s%s.jsonl" % (pricing, os.environ.get("OUT_SUFFIX", ""))), "w") as f, \
             multiprocessing.get_context("fork").Pool(JOBS) as pool:
         for app, recs in pool.imap_unordered(evaluate, paths):
             for r in recs:

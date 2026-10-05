@@ -22,7 +22,9 @@ from build_libflow import menu
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SOUFFLE = os.path.join(ROOT, "tools/souffle.sh")
-GRAPHS = os.path.join(ROOT, "data/graphs")
+GRAPHS = os.environ.get("GRAPHS_DIR") or os.path.join(ROOT, "data/graphs")
+TAINT_DL = os.environ.get("TAINT_DL") or os.path.join(ROOT, "analysis/taint.dl")  # e.g. analysis/taint_entry.dl
+APPS_FILE = os.environ.get("APPS_FILE")  # optional: only the packages listed (first column) in this file
 SCRATCH = os.environ.get("SCRATCH_DIR", tempfile.gettempdir())
 VALUE_TYPES = {"void", "int", "long", "short", "byte", "boolean", "char", "double", "float", "java.lang.String",
                "java.lang.Integer", "java.lang.Long", "java.lang.Short", "java.lang.Byte", "java.lang.Boolean",
@@ -129,7 +131,7 @@ def graph_ok(p):
 
 def graph_fresh(app):
     p = graph_path(app)
-    return (os.path.exists(p) and os.path.getmtime(p) > os.path.getmtime(os.path.join(ROOT, "analysis/taint.dl"))
+    return (os.path.exists(p) and os.path.getmtime(p) > os.path.getmtime(TAINT_DL)
             and graph_ok(p))
 
 
@@ -150,7 +152,7 @@ def run_souffle(app_dir, out):
     def limit():
         resource.setrlimit(resource.RLIMIT_AS, (SOUFFLE_MEM, SOUFFLE_MEM))
     try:
-        subprocess.run([SOUFFLE, "-j", "8", "-F", app_dir, "-D", out, os.path.join(ROOT, "analysis/taint.dl")],
+        subprocess.run([SOUFFLE, "-j", "8", "-F", app_dir, "-D", out, TAINT_DL],
                        check=True, capture_output=True, text=True, timeout=SOUFFLE_TIMEOUT, preexec_fn=limit)
     except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
         return False
@@ -237,7 +239,7 @@ def process(item):
     directory that is deleted afterwards, so only the graph is kept. Returns (app, stats dict),
     (app, None) when the analysis ran out of memory / time, or (app, "error: ...") on a bug."""
     app, src_path = item
-    with open(os.path.join(ROOT, "data/android_attempts.txt"), "a") as f:
+    with open(os.environ.get("ATTEMPTS_FILE") or os.path.join(ROOT, "data/android_attempts.txt"), "a") as f:
         f.write(app + "\n")  # lets a restarted run skip an app that keeps killing it
     try:
         if os.path.isdir(src_path):
@@ -262,6 +264,9 @@ def apps_to_build(app_glob):
                 path = os.path.join(ROOT, "bench/apks", apk)
                 if pkg not in items and fnmatch.fnmatch(pkg, app_glob) and os.path.exists(path):
                     items[pkg] = path
+    if APPS_FILE:
+        keep = {l.split("\t")[0] for l in open(APPS_FILE).read().splitlines() if l.strip()}
+        items = {k: v for k, v in items.items() if k in keep}
     return sorted(items.items())
 
 
@@ -271,9 +276,9 @@ def main():
     global CTX
     fw = {l.strip() for l in open(os.path.join(ROOT, "data/android_classes.txt"))}
     CTX = (fw, framework_supers(), sources_sinks())
-    failed_path = os.path.join(ROOT, "data/android_failed.txt")
+    failed_path = os.environ.get("FAILED_FILE") or os.path.join(ROOT, "data/android_failed.txt")
     failed = set(open(failed_path).read().split()) if os.path.exists(failed_path) else set()
-    attempts_path = os.path.join(ROOT, "data/android_attempts.txt")
+    attempts_path = os.environ.get("ATTEMPTS_FILE") or os.path.join(ROOT, "data/android_attempts.txt")
     tries = {}
     if os.path.exists(attempts_path):
         for a in open(attempts_path, errors="replace").read().split():

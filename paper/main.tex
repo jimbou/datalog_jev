@@ -1,0 +1,270 @@
+\documentclass[sigconf,review,anonymous]{acmart}
+\settopmatter{printacmref=false}
+\setcopyright{none}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+\usepackage{booktabs}
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+\title{Soundiness with Receipts: Certified Miss-Risk for Unsound Static Analyses}
+\author{Anonymous Author(s)}
+\begin{abstract}
+Static taint analyses skip library code they cannot read and silently assume that no data flows through it.
+A ``no leak'' verdict may therefore be wrong, and nobody says how likely that is.
+We make the assumption visible and bound its cost.
+We list every way data could pass through each skipped library method, the \emph{holes}.
+For every clean verdict a min-cut finds its \emph{receipt}: the cheapest set of assumed-absent flows the verdict depends on.
+A pricer gives each flow a probability of being real, and the receipt's prices add up to a bound on the chance that the verdict is wrong, without assuming that the flows are independent.
+The threshold on that bound is calibrated on whole apps, with a fixed-sequence exact test, and checked on held-out apps.
+On 324 Android apps, a sound over-approximation clears 72.0\% of the leak-free sinks; receipts clear 40\% of the remaining verdicts that depend on library holes at a 5\% target, with wrong clearances in 1.0\% of held-out apps.
+Counting the assumptions without prices clears nothing.
+The guarantee holds for every pricer we tried, which differ widely in power, and it survives replacing the answer key by the code-derived StubDroid summaries and by a human audit of the facts the clearances rest on.
+On FlowDroid itself, removing its library model loses 86\% of the leaks it reports, which is the effect this work bounds.
+We also report where the approach is weak: our analysis finds only two thirds of FlowDroid's leaks and over-reports heavily.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+Practical static analyses are \emph{soundy}~\cite{soundiness}: sound apart from a list of features they deliberately do not model.
+For taint analysis on Android the largest such feature is library code.
+FlowDroid~\cite{flowdroid} models 349 hand-written library summaries; in our corpus, 12{,}274 of the 17{,}830 framework methods that apps call on a source-to-sink path have no model at all, and the analysis treats them as passing no data.
+A verdict ``this sink never receives sensitive data'' is then conditional on all of those assumptions, and the tool reports it without qualification.
+We measure the size of the effect on FlowDroid itself: with no library model, 54 of its 63 reported leaking sink methods (86\%) in 36 apps disappear.
+
+The simplest remedy is to treat every unmodeled flow as real.
+That is sound but clears only the verdicts whose derivation does not depend on a hole, 72.0\% of the leak-free sinks in our corpus, and gives no way to rank the rest.
+The remedy of asking a language model for the missing summaries and using the answers as fact~\cite{iris,semtaint} gives no statement about how often it is wrong.
+We take a third path.
+We keep the unsound analysis but attach to each clean verdict (i) a \emph{receipt}, the minimal set of library flows it assumes absent, (ii) a bound on the probability that any of them is real, and (iii) an acceptance rule whose observed error on held-out apps is certified.
+
+\paragraph{Contributions.}
+We claim no novelty for receipts as minimal assumption sets~\cite{bastani-oopsla15,zhu-aplas13}, for union bounds, or for the calibration procedure~\cite{lt}; the contribution is their combination for the unsoundness of an analysis, and the evidence:
+\begin{itemize}
+\item A formulation in which a clean verdict carries a checkable receipt and a distribution-free bound, and in which the guarantee is stated per program and certified by an exact test on held-out programs (Section~\ref{sec:approach}).
+Verdict-level conformal selection does not hold here (realized false-discovery rate 7.9\% against 5\%, Section~\ref{sec:eval}); verdicts within an app share facts, and apps differ.
+\item A proof that the min-cut is the tightest bound derivable from marginal probabilities when facts may be arbitrarily correlated, and a check that this is also the optimum of an LP over all worlds, which is what a Praline-style solver computes~\cite{praline}; and the observation that validity of the certified threshold does not depend on the bound being a union bound or on the prices being calibrated; they set power, not validity.
+\item An evaluation on 324 F-Droid apps against four answer keys, including a code-derived key (StubDroid~\cite{stubdroid} on the Android implementation), a deletion benchmark with no language model in it, and an audit of the 446 library facts that all accepted verdicts rest on, partly by a person reading the source.
+\item Negative and cautionary results: a general language model prices as well as or better than the specialized pricer we started with; our analysis is far less precise than FlowDroid and misses a third of its leaks.
+\end{itemize}
+
+\section{An example}
+\label{sec:example}
+Figure~\ref{fig:receipt} shows a verdict of the analysis on an Android app.
+\begin{figure}[t]
+\small
+\begin{tabular}{@{}p{0.97\columnwidth}@{}}
+\toprule
+\textbf{Sink:} \texttt{Prefs.putBoolean(String,boolean)} in \texttt{com.gianlu.dnshero}\\
+\textbf{Sources:} sensitive values returned by framework calls in the same app\\
+\textbf{Without library flows:} no source reaches the sink argument $\Rightarrow$ clean\\
+\textbf{With every library flow on:} a source reaches it $\Rightarrow$ the verdict depends on holes\\
+\textbf{Receipt:} one fact, \texttt{Boolean.valueOf(boolean)}: argument~0 $\to$ return value\\
+\textbf{Price:} 0.29 \quad \textbf{Bound:} 0.29 \quad \textbf{Threshold:} 0.3 $\Rightarrow$ cleared\\
+\bottomrule
+\end{tabular}
+\caption{A clean verdict, its receipt and its price. This verdict is one of three wrong clearances in the corpus (Section~\ref{sec:eval}).}
+\label{fig:receipt}
+\end{figure}
+Whether the receipt fact is real depends on the definition of a flow.
+FlowDroid's summary says that boxing a boolean passes data; the real code returns one of two cached objects selected by the argument, so a code-derived key says no (Section~\ref{sec:eval}).
+That is why the paper states a definition (Section~\ref{sec:flow}) and reports results under keys that differ on exactly such cases.
+
+\section{Approach}
+\label{sec:approach}
+\subsection{Setting}
+\label{sec:setting}
+An analysis $A$ is given as a flow graph.
+Nodes are program values and heap locations, a source node $s$, and sink nodes.
+\emph{Code edges} $E_c$ are derived from code that is present.
+\emph{Hole edges} $H$ are candidate library flows $x\to y$ between the arguments, receiver and return value of a framework method that has no body: for a call site of a library method $m$ with arguments $a_i$, receiver $r$ and return value $v$, one candidate for every pair of endpoints that could carry data.
+The unsound analysis $A_0$ uses $E_c$ only.
+A sink $t$ is \emph{clean} in $A_0$ if it is not reachable from $s$ in $E_c$; it is \emph{hole-dependent} if it is reachable in $E_c\cup H$.
+Let $T\subseteq H$ be the true library flows, unknown to the analysis; the \emph{completed analysis} $A^*$ uses $E_c\cup T$.
+A clean hole-dependent verdict is a \emph{miss} if $t$ is reachable in $E_c\cup T$.
+Throughout, ``wrong clearance'' means a miss relative to the answer key's $T$.
+
+\subsection{What counts as a flow}
+\label{sec:flow}
+A library flow from $X$ to $Y$ exists if, in ordinary executions with standard arguments, $X$'s data, a computed representation of it, or a reference to it reaches $Y$ through copying, storage or readout, including documented properties.
+Mere selection or control (an index picks an element), incidental bookkeeping, and behavior that only a custom override or callback would produce do not count.
+Cases that cannot be decided from the API contract remain unknown.
+A negative label therefore means no transfer in this scope, not absence of every information flow; FlowDroid also has optional implicit-flow modes, which we do not use.
+Keeping a reference to the argument (a queue, a retained listener) counts as a flow.
+
+\subsection{Receipts}
+A \emph{receipt} for a hole-dependent clean sink $t$ is a set $C\subseteq H$ such that every path from $s$ to $t$ in $E_c\cup H$ uses an edge of $C$ (a cut).
+\begin{lemma}\label{lem:cut}
+If no edge of $C$ is in $T$, then $t$ is not reachable in $E_c\cup T$, so the verdict is not a miss.
+\end{lemma}
+\noindent The proof is immediate: any path in $E_c\cup T$ is a path in $E_c\cup H$ and would use an edge of $C$.
+Receipts are small in practice: in our corpus, about 45\% of the clean hole-dependent sinks have a receipt of one fact and about 20\% of two.
+They are checkable: each fact is a statement about a named library method (``argument~0 flows into the return value of \texttt{Boolean.valueOf}'') that a person or a test can judge.
+
+\subsection{Pricing and the bound}
+A \emph{pricer} assigns each hole edge $h$ a price $p(h)\in[0,1]$, intended as $\Pr[h\in T]$.
+We use language models (Section~\ref{sec:impl}) and, as baselines, a frequency prior, a feature classifier and no pricing at all.
+By Lemma~\ref{lem:cut} and the union bound, $\Pr[\text{miss}]\le\min(1,\sum_{h\in C}p(h))$, without any independence assumption.
+Because several cuts may exist, we take the one of least total price, which is a minimum cut with capacities $p$, computed by max-flow on the code edges (infinite capacity) and hole edges (capacity $p$).
+\begin{proposition}\label{prop:tight}
+Among all joint distributions of $T$ with marginals $\Pr[h\in T]=p(h)$, the largest probability that $t$ is reachable in $E_c\cup T$ equals $\min(1,\mathrm{mincut}_p(t))$.
+\end{proposition}
+\noindent\emph{Proof.}
+For any cut $C$, reachability needs an edge of $C$, so the probability is at most $\sum_{C}p$; hence at most the minimum.
+Conversely, decompose a maximum flow of value $F\le 1$ into paths with flows $f_k$, and let world $k$, of probability $f_k$, contain exactly the hole edges of path $k$ (padding with further edges up to the marginals, which flow conservation allows).
+Every marginal is met and $t$ is reachable with probability at least $F$.\hfill$\square$
+
+\noindent The min-cut is therefore the best bound that can be derived from marginals alone; a tighter bound needs knowledge of correlations, which the inference of Praline~\cite{praline} can use when it exists and which we do not have.
+We checked the proposition numerically: solving the exact problem as a linear program over all $2^m$ worlds on 190 random graphs with 5 to 11 hole edges gives the max-flow value to within $2\cdot10^{-15}$, while the probability under independence is lower by 0.08 to 0.17 on average.
+
+\subsection{Calibrating the acceptance threshold on whole programs}
+A bound is only as good as the prices.
+Instead of trusting them, we certify a threshold on the bound.
+A verdict is \emph{accepted} at threshold $\delta$ if its bound is at most $\delta$.
+For a program $P$ let $L(P,\delta)=1$ if some accepted verdict of $P$ is a miss, and $R(\delta)=\mathbb{E}\,L$, the probability that a new program has a wrong clearance.
+$L$ is non-decreasing in $\delta$.
+\begin{proposition}[Certified threshold]\label{prop:ltt}
+Let $P_1,\dots,P_n$ be exchangeable with a new program, let $\delta_1<\dots<\delta_K$, and test $H_k:R(\delta_k)>\alpha$ in order with the exact binomial test of $\sum_i L(P_i,\delta_k)\sim\mathrm{Bin}(n,\alpha)$ at level $\varepsilon$.
+Let $\hat\delta$ be the largest $\delta_k$ such that $H_1,\dots,H_k$ are all rejected (and abstain if $H_1$ is not).
+Then $\Pr[R(\hat\delta)\le\alpha]\ge 1-\varepsilon$.
+\end{proposition}
+\noindent This is fixed-sequence testing in the Learn-then-Test framework~\cite{lt}: the $L(P_i,\delta_k)$ are independent Bernoulli$(R(\delta_k))$, each test is exact, and a fixed sequence controls the family-wise error.
+Two remarks matter for the claims.
+First, \emph{validity does not depend on how the bounds were computed}: any score, a union bound, a max, a product, would be valid after calibration; prices and the min-cut determine power and give each verdict an explanation, not validity (Section~\ref{sec:eval}, ablation).
+Second, the unit must be the program.
+Verdicts within one app share facts, and apps differ; conformal selection over verdicts with leave-one-app-out p-values~\cite{conformalselection} gave a realized false-discovery rate of 7.9\% at a 5\% target and 14.3\% at 10\%.
+
+\subsection{What the guarantee says}
+For a new app drawn like the calibration apps, with probability at least $1-\varepsilon$ over the calibration sample, the probability that an accepted clean verdict is a miss is at most $\alpha$, relative to the answer key and to the analysis $A_0$.
+It does not say that $A_0$ finds the leaks FlowDroid finds, that the key is right, or that apps are exchangeable with apps of another kind (Section~\ref{sec:threats}).
+
+\section{Implementation}
+\label{sec:impl}
+\paragraph{Analysis.}
+Soot~\cite{soot} extracts facts from each APK (all shipped code, including bundled libraries); a Souffl\'e~\cite{souffle} program computes a whole-app, context-insensitive, type-filtered Andersen points-to analysis with field sensitivity and propagates taint from FlowDroid's default source list (84 sources, 193 sinks) with every hole on, restricted to the part that can still reach a sink.
+Hole atoms at framework call sites come from a menu of endpoint pairs per method.
+The relevant graph is stored compressed (a few MB per app), so every pricing, ablation and answer key is post-processing.
+A min-cut is computed per sink site with max-flow on a graph in which each strongly connected group of infinite-capacity code edges is contracted once per app; the contraction leaves bounds and receipts unchanged (identical output on all 332 apps) and makes the evaluation about 25 times faster on the largest apps.
+
+\paragraph{Pricers.}
+Our main pricer is Jev, a model that returns calibrated probabilities for yes/no questions, asked once per candidate flow with the flow rule stated (``a tainted object taints everything read or obtained from it'').
+Stating the rule matters: without it, getters on a tainted receiver are priced low and wrong clearances concentrate on a few widely bundled facts.
+Baselines: counting (a flat price); a frequency prior over the package and endpoint kinds; a logistic classifier on method-signature features cross-fitted by method or by class; the language model's own yes/no taken as fact; and Sonnet~5 asked for a probability per flow.
+
+\section{Evaluation}
+\label{sec:eval}
+\paragraph{Corpus and keys.}
+We built graphs for 332 of roughly 580 downloaded F-Droid apps that fit our memory and time limits (large Kotlin and Jetpack apps do not), of which 324 have hole-dependent verdicts: 84{,}753 sinks whose truth the key decides, 28{,}335 of them clean.
+The \emph{main key} is FlowDroid's summaries, with Sonnet~5 labels for methods FlowDroid does not model.
+Because that key contains language-model labels, we add: the \emph{deletion benchmark} (truth is FlowDroid's own models; a random share of modeled methods, or of whole classes, is deleted and becomes priced holes); \emph{K2}, StubDroid summaries generated from the Android~13 implementation (and OpenJDK~8 for \texttt{java.*}); and an \emph{audit} of the 446 library facts that all verdicts accepted at the chosen threshold rest on (AI-assisted passes, then a person reading the Android source for 67 facts).
+Calibration uses 200 random half splits, $\varepsilon=0.1$; we report the share of held-out apps with a wrong clearance and the share of clean hole-dependent verdicts cleared.
+
+\paragraph{RQ1: Is unsoundness pervasive?}
+Of the 17{,}830 framework methods on source-to-sink paths, 12{,}274 are not modeled by FlowDroid.
+Run on 40 apps with and without its library summaries (\texttt{-tw NONE}), FlowDroid reports 20 leaking sink methods in the 29 apps where neither run was cut short with summaries and 2 without; over 36 apps 54 of 63 (86\%) leaks vanish, and none appears only without the summaries.
+This is the extreme case and measures how much a library model matters, not what FlowDroid misses with its default summaries.
+
+\paragraph{RQ2: Does it clear more than a sound analysis, and does the guarantee hold?}
+A sound over-approximation (every hole is a flow) clears 72.0\% of the 101{,}090 leak-free sinks with a non-constant argument; the remaining 28.0\% are the hard slice.
+Table~\ref{tab:main} shows what priced receipts clear of it.
+\begin{table}[t]
+\caption{Main key, 324 apps. Cleared share of the 28{,}335 clean hole-dependent verdicts, and held-out apps with a wrong clearance (in brackets).}
+\label{tab:main}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Pricer & $\alpha{=}0.10$ & $\alpha{=}0.05$ & $\alpha{=}0.02$\\
+\midrule
+Counting (flat price) & 0\% & 0\% & --\\
+Frequency prior & 9.2\% (4.9\%) & 6.6\% (0.8\%) & --\\
+Feature classifier & 33.2\% (5.4\%) & 22.0\% (0.7\%) & --\\
+Sonnet~5 probabilities & 53.0\% (5.6\%) & 29.6\% (2.5\%) & --\\
+Jev & 40.0\% (1.0\%) & 40.0\% (1.0\%) & 33.4\% (0.3\%)\\
+\bottomrule
+\end{tabular}
+\end{table}
+At the certified thresholds, receipts clear 40\% of the hard slice at $\alpha=0.05$ with 1.0\% of held-out apps wrong (83.2\% of all leak-free sinks with the sound part, against 72.0\%).
+The observed error stays below $\alpha$ for every pricer, as the theory predicts, while the power differs by a factor of six (0\% to 40\% at $\alpha=0.05$).
+Counting the assumptions is unsafe even at one fact: clearing every receipt of size one gives a wrong clearance in 93\% of the apps.
+
+\paragraph{RQ3: Does the answer key matter?}
+Table~\ref{tab:keys} repeats the main pricers under the other keys.
+\begin{table}[t]
+\caption{Other keys. Cleared share at $\alpha=0.05$ (held-out apps with a wrong clearance). Deletion: whole classes removed, 3 seeds.}
+\label{tab:keys}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Key & Jev & Sonnet & Classifier & LLM as fact\\
+\midrule
+Audited (324 apps) & 39.4\% (2.0\%) & -- & -- & --\\
+K2, code-derived (322 apps) & 25.7\% (1.7\%) & 33.6\% (2.3\%) & 20.4\% (2.3\%) & 38.5\% (2.5\%)\\
+Deletion, 25\% of classes & 52.2\% (0.8\%) & 81.9\% (0.5\%) & 71.4\% (1.6\%) & 79.8\% (1.2\%)\\
+Deletion, 75\% of classes & 50.9\% (1.3\%) & 79.1\% (1.0\%) & 33.1\% (0.5\%) & --\\
+\bottomrule
+\end{tabular}
+\end{table}
+The guarantee holds under every key (wrong clearances at most 2.5\%); the ranking of pricers does not.
+On the deletion benchmark the feature classifier is strong when single methods are deleted (82--88\%, because it learns FlowDroid's conventions from sibling methods) and collapses when whole classes are removed (33\% at 75\%), the realistic case, since 86\% of the unmodeled methods that matter sit in classes with no modeled method.
+A general language model asked for probabilities is the best or tied pricer under K2 and on the deletion keys; Jev leads only on the main key at $\alpha=0.05$ and is about 40 times cheaper (about \$0.4 against \$16 for the corpus).
+Taking the language model's yes/no as fact has no knob: it clears 38--90\% depending on the key, with wrong clearances in 0 to 8\% of apps and a risk that cannot be chosen.
+
+\paragraph{RQ4: How good is the answer key behind the clearances?}
+All verdicts accepted at the chosen threshold rest on 446 distinct library facts.
+A first, loosely worded AI pass disagreed with the key on 85 facts; a written, stricter rule (ordinary documented behavior, no custom overrides, influence is not a flow) resolved 86 of its 95 positives, and agreement with the key rose from 78\% to 97.7\%.
+Because that rule was written after seeing the first pass, we state both.
+A person then read the Android source for the 9 positives and the 18 undecided facts (all 9 confirmed; 11 of 18 became negative) and for 40 facts the AI called negative (12 chosen for impact, 28 at random): 4 were flows, all of the kind where the method keeps a reference to its argument, which we count as a flow; the estimated miss rate among the AI's negatives is about 11\% (95\% interval 2--28\%).
+Calibrating under the key with all of these answers is identical to the main key to the last digit (39.4\% cleared, 2.0\% wrong), because every path through those facts also needs another candidate flow the key keeps absent.
+K2 decides 176 of the 446 facts (45\% of their use), all as no flow, and agrees with the key on 173; it is not a perfect witness (it misses the prefix flow in \texttt{File.createTempFile}).
+
+\paragraph{RQ5: How faithful is our analysis to FlowDroid?}
+On 37 of 40 apps where FlowDroid gave an answer (17 found no leak, 8 stopped at its own memory limit), it reports 84 leaking sink methods; our analysis reaches 56 (67\%) with every hole on and 50 (60\%) under the key; excluding 7 sinks in FlowDroid's synthetic entry method, 73\%.
+The misses are mostly inter-component sinks (\texttt{startActivityForResult}, \texttt{bindService}), file and network calls, and code in bundled libraries.
+In the other direction we are far less precise: we flag 4{,}514 key-true sink methods and FlowDroid also reports 50 (1\%).
+Our analysis treats all shipped code as live and does not model the component lifecycle.
+\todo{Entry-point-restricted variant on the same 40 apps: recall and precision against FlowDroid (running).}
+
+\paragraph{Ablation: how the receipt's prices are combined.}
+With the same cuts and the same calibration, the sum over cut edges clears 40.0\%, the sum over distinct facts 43.0\%, the largest single price 46.8\%, and the independence product 45.3\%, all with at most 1.9\% of held-out apps wrong.
+Validity comes from the calibration, not from the union bound; the union bound buys an interpretation, and counting each fact once is valid and free.
+
+\section{Threats to validity}
+\label{sec:threats}
+\emph{Answer key.}
+The main key contains language-model labels; K2 is code-derived but partial, uses FlowDroid's summaries for JDK leaf methods, and is not sound; the audit is AI-assisted except for 67 facts read by one person, and it checks the facts behind the clearances, not the rejected verdicts.
+\emph{Exchangeability.}
+Apps that bundle the same library are not independent; we have not yet calibrated per cluster of apps.
+\emph{Corpus.}
+Small F-Droid apps with half of the large ones failing to build; no Play Store apps.
+\emph{The analysis.}
+Section~\ref{sec:eval} shows it differs from FlowDroid in both directions; the guarantee is about library holes relative to our analysis.
+\emph{Pricers.}
+The pricers are language models or a classifier trained on FlowDroid's labels; Jev is proprietary and an open-weight configuration is not yet evaluated.
+\emph{Definition.}
+Results depend on the flow definition; we report the one choice that mattered (reference keeping) under both readings.
+
+\section{Related work}
+\paragraph{Minimal assumptions behind a verdict.}
+Bastani et al.~\cite{bastani-oopsla15} compute min-cuts in a source-sink flow graph, each cut a set of statements assumed unreachable, and ask a developer to confirm them with tests; Zhu et al.~\cite{zhu-aplas13} abduce the library specifications needed to verify a source-sink property; Dillig et al.~\cite{dillig-pldi12} and Elrond~\cite{elrond} abduce proof obligations or specifications.
+Our receipt is their cut with prices, and the human is replaced by a calibrated prior whose error is certified.
+\paragraph{Library specification inference.}
+Merlin~\cite{merlin} infers specifications with probabilities but thresholds them into facts; Seldon~\cite{seldon}, StubDroid~\cite{stubdroid}, Atlas~\cite{atlas} and Bastani et al.~\cite{bastani-popl15} produce specifications without a verdict-level error; LLM-based extraction~\cite{iris,semtaint} takes the model's answers as fact.
+We use StubDroid as an independent key and the model-as-fact baseline in our evaluation.
+\paragraph{Probabilistic inference.}
+Praline~\cite{praline} computes sound probability bounds for Datalog outputs under partly known input correlations; on a reachability fragment with only marginals known, its optimum equals the min-cut (Proposition~\ref{prop:tight}), which we use because it is a max-flow.
+\paragraph{Neuro-symbolic analysis.}
+NeuroLog~\cite{neurolog} feeds model-extracted facts to Datalog to find bugs; we use the same kind of stack to certify the absence of missed flows.
+\paragraph{Risk control.}
+The calibration is Learn-then-Test~\cite{lt}; conformal selection~\cite{conformalselection} is the verdict-level alternative that fails here for lack of exchangeability.
+
+\section{Conclusion}
+Unsound static analyses can report not only that a sink looks clean, but on which library assumptions the verdict rests and, with a certified error rate over programs, how often clearing such verdicts is wrong.
+The certificate holds for every pricer we tried; what a good pricer buys is power, and which pricer is best depends on how the answer key relates to the library code.
+The honest limits are that our analysis is a weaker tool than FlowDroid and that the key is only partly independent.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+\end{document}
