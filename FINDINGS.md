@@ -769,7 +769,48 @@ queued message out of the handler, which is not modeled), so a present fact in a
 choice of definition therefore changes how clean the audit looks (all-absent receipts 97.7% against 93.2%) and not the certified
 clearance on this corpus; the absent facts that block those paths are themselves only AI-labeled, so this holds as far as they do.
 
-## 22. Next steps, in order
+## 22. Pricer panel, calibration unit, budgeted verification (2026-10-05)
+
+**Calibration unit (324 apps, Jev, main key).** Verdict-level conformal selection (leave-one-app-out p-values, BH) now meets
+its target (2.6% of selected verdicts wrong at FDR 5%; on the first corpus it did not, 7.9%) and clears 55.6%, but 166 of
+324 apps (51%) contain a wrong clearance (62 apps, 19%, at FDR 1%). Per-program LTT: 40.0% cleared, 1.0% of held-out apps
+wrong. Sensitivity (`analysis/sensitivity.py`): eps 0.05/0.1/0.2 and calibration share 30/50/70% move the result by at most
+1.3 points; grouped splits (apps sharing >= 3 third-party package prefixes kept together, 196 clusters) give 39.7% / 0.9%.
+Calibration floor: certification first possible at n = 40 / 60 / 120 calibration apps for alpha 0.1 / 0.05 / 0.02, as
+(1 - alpha)^n <= eps predicts (22 / 45 / 114).
+
+**Ranking is not what certification rewards.** AUROC of the bound: Sonnet 0.942, classifier 0.933, Jev 0.855; certified
+clearance at alpha 0.05: 29.6%, 22.0%, 40.0%. Only the low end of the ranking matters.
+
+**Pricer panel.** Priced 17,830 methods each with Qwen3.8-27B, Qwen3.7-Flash, DeepSeek-V4-Flash, Gemini-3.5-Flash-Lite,
+gpt-5.6-luna (verbalized probabilities; $10.5 on OpenRouter in total; luna's last 152 methods via Codex). Qwen3.8-27B answers
+almost only 0.02 or 0.95; at delta 0.02, 265/324 apps would be wrong, so calibration clears nothing (valid, no power).
+Other panel results pending.
+
+**Budgeted verification** (`analysis/verify_select.py`, `VERIFY_FILE` in `evaluate.py`, `analysis/verify_summary.py`).
+Rank receipt facts without labels, let the key answer the top K, recompute, recertify. A "no" can clear sinks soundly (they
+stop depending on any hole); a "yes" makes the flow code, so real leaks become reported and other receipts may get pricier.
+Cleared share measured against the baseline leak-free slice (28,335), held-out over 200 half splits, alpha 0.05:
+
+| Facts checked (policy) | Soundly cleared | Reported real leaks | Cleared | Apps wrong |
+| --- | --- | --- | --- | --- |
+| 0 | 0 | 12,152 | 39.9% | 0.9% |
+| 10 (unlock) | 4,106 | 12,517 | 49.7% | 1.4% |
+| 25 (unlock) | 8,058 | 26,743 | 53.2% | 1.3% |
+| 50 (unlock) | 9,239 | 31,247 | 55.2% | 1.5% |
+| 100 (unlock) | 10,308 | 33,059 | 58.0% | 2.0% |
+| 200 (unlock) | 12,138 | 34,766 | 59.0% | 1.6% |
+| 400 (unlock) | 13,359 | 39,472 | 66.2% | 1.2% |
+| 100 (value: price-weighted) | 6,664 | 38,646 | 64.3% | 2.0% |
+| 100 (count: verdicts in uncleared receipts) | 13,658 | 34,788 | 64.2% | 2.0% |
+| 100 (random) | 25 | 12,255 | 40.0% | 0.9% |
+
+The ranking is what matters: 100 random facts change nothing, 100 ranked facts add 18 to 24 points and triple the reported
+real leaks. Our "unlock" score (assumes the answer is no) is not the best: the plain count and the price-weighted score do
+better at 100 (about 64%), because confirmed real flows also help (they move verdicts into reported leaks and out of the
+hard slice). K2 runs pending.
+
+## 23. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
    bound as the score, and report realized FDR on held-out apps. Needs more apps (target 100+), so
