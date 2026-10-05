@@ -822,6 +822,12 @@ excludes). Transfer: apps with a wrong clearance (our key) 1/31 (3.2%) at delta 
 clearing 30% / 59% of the leak-free hole-dependent verdicts. Counting (receipts of one fact): 22 documented leaks cleared,
 21/31 apps wrong. Jev not yet run on the 108 new methods (OpenRouter; waiting for approval).
 
+**FlowDroid validation extended to 80 apps** (40 more from the same shuffled list, no overlap). Without its library model
+FlowDroid loses 127 of 154 leaking sink methods (82%) over the 69 apps with both answers, none appears only without
+(complete runs: 40 of 46, 87%). Our analysis against FlowDroid with summaries (70 apps with an answer, 10 failed): 102 of
+175 FlowDroid leaks (58%) are in our all-holes-on set and 80 (46%) under the key; we flag 8,184 key-true sink methods, of
+which FlowDroid reports 80 (1%). Recall is lower than on the first 40 (67% / 60%), so the earlier figure was optimistic.
+
 ## 23. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
