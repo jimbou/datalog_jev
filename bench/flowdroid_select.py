@@ -1,6 +1,6 @@
 """Pick the apps for the FlowDroid validation and write data/flowdroid/apps.tsv (package TAB apk file).
 
-Usage: flowdroid_select.py [N] [MAX_APK_MB]      (default 40 apps, APKs up to 8 MB)
+Usage: flowdroid_select.py [N] [MAX_APK_MB] [OFFSET] [OUTFILE]   (default 40 apps, APKs up to 8 MB, from the start of the shuffled list)
 Candidates are the apps that have an APK in bench/apks (listed in bench/apks/pick*.txt), that our evaluation covers with at least one
 hole-dependent sink (data/android_choice-obj.jsonl), and whose APK is small enough for FlowDroid to finish in reasonable time.
 A fixed seed makes the choice reproducible.
@@ -27,9 +27,11 @@ def main():
             covered.add(r["app"])
     cands = sorted(p for p in apk if p in covered and os.path.getsize(os.path.join(ROOT, "bench/apks", apk[p])) <= mb * 1e6)
     random.Random(20261004).shuffle(cands)
-    pick = cands[:n]
+    off = int(sys.argv[3]) if len(sys.argv) > 3 else 0
+    out = sys.argv[4] if len(sys.argv) > 4 else "data/flowdroid/apps.tsv"
+    pick = cands[off:off + n]
     os.makedirs(os.path.join(ROOT, "data/flowdroid"), exist_ok=True)
-    with open(os.path.join(ROOT, "data/flowdroid/apps.tsv"), "w") as f:
+    with open(os.path.join(ROOT, out), "w") as f:
         for p in pick:
             f.write("%s\t%s\n" % (p, apk[p]))
     print("candidates:", len(cands), "| with an APK:", len(apk), "| covered by the evaluation:", len(covered & set(apk)), "| picked:", len(pick))

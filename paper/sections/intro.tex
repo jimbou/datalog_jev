@@ -1,0 +1,32 @@
+\section{Introduction}
+\label{sec:intro}
+Practical static analyses are \emph{soundy}~\cite{soundiness}: sound apart from a list of features they deliberately do not model.
+For taint analysis on Android, the largest such feature is library code.
+FlowDroid~\cite{flowdroid} ships about 350 hand-written library summaries; in our corpus, 12{,}274 of the 17{,}830 framework methods that apps call on a source-to-sink path have no model at all, and the analysis treats them as passing no data.
+A verdict ``this sink never receives sensitive data'' is then conditional on all of those assumptions, and the tool reports it without qualification.
+The effect is large: with no library model, 54 of the 63 leaking sink methods FlowDroid reports in 36 apps (86\%) disappear (Section~\ref{sec:rq1}).
+
+The simplest remedy is to treat every unmodeled flow as real.
+That is sound but clears only the verdicts whose derivation does not depend on a hole (72.0\% of the leak-free sinks in our corpus) and gives no way to rank the rest.
+The remedy of asking a language model for the missing summaries and using the answers as fact~\cite{iris,semtaint} says nothing about how often it is wrong.
+We take a third path: keep the unsound analysis, but attach to each clean verdict (i) a \emph{receipt}, the minimal set of library flows it assumes absent, (ii) a bound on the probability that any of them is real, and (iii) an acceptance rule whose error on held-out apps is certified.
+
+\figph{5.2cm}{fig:pipeline}{Overview. The analysis runs with library holes closed (unsound) and open (sound). The min-cut between the two is the receipt of a clean verdict; a pricer prices it; the acceptance threshold is calibrated on whole apps.}{TikZ pipeline diagram: APK $\rightarrow$ facts $\rightarrow$ Datalog analysis with hole edges $\rightarrow$ per-sink flow graph $\rightarrow$ min-cut (receipt) $\rightarrow$ price (pricer) $\rightarrow$ bound $\rightarrow$ app-level calibration $\rightarrow$ cleared / not cleared. Source: to be drawn (no data).}
+
+\paragraph{Contributions.}
+We claim no novelty for receipts as minimal assumption sets~\cite{bastani-oopsla15,zhu-aplas13}, for union bounds, or for the calibration procedure~\cite{lt}.
+The contribution is their combination for the unsoundness of an analysis, and the evidence for it:
+\begin{itemize}
+\item \emph{A formulation} in which a clean verdict carries a checkable receipt and a distribution-free bound, and in which the guarantee is stated per program and certified by an exact test on held-out programs (Section~\ref{sec:approach}).
+Verdict-level conformal selection does not hold here (Section~\ref{sec:rq7}); verdicts within an app share facts, and apps differ.
+\item \emph{Two formal observations.}
+The min-cut is the tightest bound derivable from marginal probabilities when facts may be arbitrarily correlated, which is also the optimum a Praline-style solver~\cite{praline} computes on the reachability fragment (Proposition~\ref{prop:tight}).
+And the validity of the certified threshold does not depend on the bound being a union bound or on the prices being calibrated; they set power, not validity (Proposition~\ref{prop:ltt}).
+\item \emph{An evaluation} on 324 F-Droid apps against four answer keys: the main key, a deletion benchmark with no language model in it, a code-derived key (StubDroid~\cite{stubdroid} on the Android implementation), and an audit of the 446 library facts that all accepted verdicts rest on, partly by a person reading the source (Section~\ref{sec:eval}).
+\item \emph{Cautionary results.}
+Counting assumptions without prices clears nothing; a general language model prices as well as or better than the specialized pricer we started with; and our analysis is far less precise than FlowDroid and finds only two thirds of its leaks.
+\end{itemize}
+
+\paragraph{What we do not claim.}
+The guarantee is about missed flows through library holes, relative to our analysis and to an answer key; it is not a guarantee that the analysis finds every leak.
+We do not claim that any pricer, including the one we used first, is best in general: the ranking depends on how the key relates to the library code.

@@ -1,0 +1,47 @@
+\section{Approach}
+\label{sec:approach}
+\subsection{Receipts}
+A \emph{receipt} for a hole-dependent clean sink $t$ is a set $C\subseteq H$ such that every path from a source to $t$ in $E_c\cup H$ uses an edge of $C$ (a cut).
+\begin{lemma}\label{lem:cut}
+If no edge of $C$ is in $T$, then no source reaches $t$ in $E_c\cup T$, so the verdict is not a miss.
+\end{lemma}
+\noindent The proof is immediate: any path in $E_c\cup T$ is a path in $E_c\cup H$ and would use an edge of $C$.
+Receipts of the verdicts that get accepted are small: of the 11{,}312 leak-free sinks cleared at the main threshold, 63.8\% rest on one fact, 26.6\% on two and 1.8\% on five or more (over all 84{,}753 hole-dependent sinks: 28.7\%, 18.3\% and 38.3\%).
+They are checkable: each fact is a statement about a named library method (``argument~0 flows into the return value of \texttt{Boolean.valueOf}'') that a person or a test can judge.
+
+\subsection{Pricing and the bound}
+A \emph{pricer} assigns each hole edge $h$ a price $p(h)\in[0,1]$, intended as $\Pr[h\in T]$.
+Section~\ref{sec:impl} lists the pricers.
+By Lemma~\ref{lem:cut} and the union bound, $\Pr[\text{miss}]\le\min(1,\sum_{h\in C}p(h))$ without any independence assumption.
+Because several cuts may exist, we take the one of least total price, a minimum cut with capacities $p$ (code edges have infinite capacity), computed by max-flow.
+\begin{proposition}\label{prop:tight}
+Among all joint distributions of $T$ with marginals $\Pr[h\in T]=p(h)$, the largest probability that a source reaches $t$ in $E_c\cup T$ equals $\min(1,\mathrm{mincut}_p(t))$.
+\end{proposition}
+\noindent\emph{Proof.}
+For any cut $C$, reachability needs an edge of $C$, so the probability is at most $\sum_{C}p$, hence at most the minimum.
+Conversely, decompose a maximum flow of value $F\le 1$ into paths with flows $f_k$, and let world $k$, of probability $f_k$, contain exactly the hole edges of path $k$, padded with further edges up to the marginals, which flow conservation allows.
+Every marginal is met and $t$ is reachable with probability at least $F$.\hfill$\square$
+
+\noindent The min-cut is therefore the best bound derivable from marginals alone; a tighter bound needs knowledge of correlations, which the inference of Praline~\cite{praline} can use when it exists and which we do not have.
+Section~\ref{sec:rq7} checks the proposition numerically.
+
+\subsection{Calibrating the acceptance threshold on whole programs}
+A bound is only as good as the prices; we therefore certify a threshold on the bound instead of trusting it.
+A verdict is \emph{accepted} at threshold $\delta$ if its bound is at most $\delta$.
+For a program $P$ let $L(P,\delta)=1$ if some accepted verdict of $P$ is a miss, and let $R(\delta)=\mathbb{E}\,L$, the probability that a new program has a wrong clearance.
+$L$ is non-decreasing in $\delta$.
+\begin{proposition}[Certified threshold]\label{prop:ltt}
+Let $P_1,\dots,P_n$ be exchangeable with a new program, let $\delta_1<\dots<\delta_K$, and test $H_k:R(\delta_k)>\alpha$ in order with the exact binomial test of $\sum_i L(P_i,\delta_k)\sim\mathrm{Bin}(n,\alpha)$ at level $\varepsilon$.
+Let $\hat\delta$ be the largest $\delta_k$ such that $H_1,\dots,H_k$ are all rejected (abstain if $H_1$ is not).
+Then $\Pr[R(\hat\delta)\le\alpha]\ge 1-\varepsilon$.
+\end{proposition}
+\noindent This is fixed-sequence testing in the Learn-then-Test framework~\cite{lt}: the $L(P_i,\delta_k)$ are independent Bernoulli$(R(\delta_k))$, each test is exact, and a fixed sequence controls the family-wise error.
+Two remarks matter for the claims.
+First, \emph{validity does not depend on how the bounds were computed}: any score (a union bound, a maximum, a product) is valid after calibration; prices and the min-cut determine power and give each verdict an explanation (Section~\ref{sec:rq8}).
+Second, the unit must be the program: verdicts within one app share facts and apps differ, so verdict-level selection is not valid (Section~\ref{sec:rq7}).
+
+\subsection{What the guarantee says}
+For a new app drawn like the calibration apps, with probability at least $1-\varepsilon$ over the calibration sample, the probability that an accepted clean verdict is a miss is at most $\alpha$, relative to the answer key and to the analysis $A_0$.
+It does not say that $A_0$ finds the leaks FlowDroid finds, that the key is right, or that apps are exchangeable with apps of another kind (Section~\ref{sec:threats}).
+
+\figph{6.2cm}{fig:curve}{Coverage against risk for the main pricer. Share of clean hole-dependent verdicts cleared and share of apps with at least one wrong clearance, as the threshold $\delta$ grows; the certified threshold sits before the cliff.}{Line plot over $\delta\in\{0.01,\dots,0.5\}$: cleared share (left axis) and apps with a wrong clearance (right axis), main key, Jev. Source: per-$\delta$ lines of \texttt{app\_ltt.py} (\textbf{have}: e.g.\ 3/324 apps at $\delta{=}0.3$, 135/324 at $0.5$). Also draw the same curve for the other pricers.}

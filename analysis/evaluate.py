@@ -373,6 +373,12 @@ def main():
     holes = price_holes if key == "k3" else key_holes(key)
     uniform = base == "uniform"
     prices = None if uniform else freq_prices(price_holes) if base == "freq" else b3_prices(price_holes) if base == "b3" else b6_variant(base, price_holes, k1) if base in ("b6", "b6c", "b6j", "b6jc") else jev_prices(base)
+    if prices is not None:  # a pricer that left some methods unpriced: they get the uninformative 0.5 (costs power, not validity)
+        miss = [k for k, h in price_holes.items() if k not in prices or len(prices[k]) != len(h["atoms"])]
+        for k in miss:
+            prices[k] = [0.5] * len(price_holes[k]["atoms"])
+        if miss:
+            print("WARNING: %d methods have no price from %r and were priced 0.5" % (len(miss), base), file=sys.stderr, flush=True)
     global CTX
     CTX = (holes, prices, uniform, k1)
     paths = sorted(glob.glob(os.path.join(GRAPHS, app_glob + ".npz")))

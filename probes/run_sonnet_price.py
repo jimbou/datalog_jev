@@ -1,6 +1,6 @@
 """Stated-confidence pricer: Sonnet 5 gives a probability for every candidate flow of a method (baseline B5).
 
-Usage: run_sonnet_price.py MODEL TAG DATASET [LIMIT]
+Usage: run_sonnet_price.py MODEL TAG DATASET [LIMIT]   (env NO_REASONING=1 turns hidden reasoning off for models that have it; PRICE_THREADS sets the number of parallel requests)
   DATASET data/<DATASET>.jsonl hole records (cls, sig, kind, atoms)
 Writes data/jev_<DATASET>_<TAG>_r0.jsonl rows {cls, sig, p: [prob, ...], cost}; priced methods are skipped, so it
 can be restarted. evaluate.py reads it like a Jev price file (pricing name TAG). The question and the flow rule
@@ -39,7 +39,8 @@ def ask1(model, r):
     st, params = state(r)
     qs = "\n".join("%d: %s -> %s" % (k, endpoint(a["src"], params), endpoint(a["tgt"], params))
                    for k, a in enumerate(r["atoms"]))
-    body = json.dumps({"model": model, "temperature": 0, "max_tokens": 400 + 25 * len(r["atoms"]),
+    extra = {"reasoning": {"enabled": False}} if os.environ.get("NO_REASONING") else {}
+    body = json.dumps({**extra, "model": model, "temperature": 0, "max_tokens": 400 + 25 * len(r["atoms"]),
                        "messages": [{"role": "system", "content": SYSTEM},
                                     {"role": "user", "content": st + "\n\nCandidate flows:\n" + qs}]}).encode()
     for attempt in range(5):
@@ -63,7 +64,7 @@ def main():
     done = {(d["cls"], d["sig"]) for d in map(json.loads, open(out))} if os.path.exists(out) else set()
     todo = [r for r in rows if (r["cls"], r["sig"]) not in done]
     errs = cost = 0
-    with open(out, "a") as f, ThreadPoolExecutor(12) as ex:
+    with open(out, "a") as f, ThreadPoolExecutor(int(os.environ.get("PRICE_THREADS", "12"))) as ex:
         for res in ex.map(lambda r: ask(model, r), todo):
             if "error" in res:
                 errs += 1

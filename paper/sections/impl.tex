@@ -1,0 +1,20 @@
+\section{Implementation}
+\label{sec:impl}
+\paragraph{Analysis.}
+Soot~\cite{soot} extracts facts from each APK (all shipped code, including bundled libraries).
+A Souffl\'e~\cite{souffle} program computes a whole-app, context-insensitive, type-filtered Andersen points-to analysis with field sensitivity, and propagates taint from FlowDroid's default source list (84 sources, 193 sinks) with every hole on, restricted to the part that can still reach a sink.
+Hole atoms at framework call sites come from a menu of endpoint pairs per method (argument or receiver to return value, receiver or mutable argument).
+FlowDroid's manual summaries (about 350 files) give the library model of the completed analysis and one of the answer keys.
+The relevant graph is stored compressed (a few MB per app), so every pricing, ablation and answer key is post-processing.
+
+\paragraph{Min-cut.}
+A min-cut is computed per sink site with max-flow.
+Strongly connected groups of infinite-capacity code edges are contracted once per app; the contraction leaves bounds and receipts unchanged (identical output on all 332 apps) and makes evaluation about 25 times faster on the largest apps.
+
+\paragraph{Pricers.}
+\emph{Jev}, our first pricer, returns calibrated probabilities for yes/no questions, asked once per candidate flow with the flow rule stated (``a tainted object taints everything read or obtained from it'').
+Stating the rule matters: without it, getters on a tainted receiver are priced low and wrong clearances concentrate on a few widely bundled facts (Section~\ref{sec:rq8}).
+\emph{General language models} are asked for one probability per candidate flow of a method (verbalized, temperature 0): Sonnet~5 and a panel of other models (Section~\ref{sec:rq3}).
+Baselines: \emph{counting} (a flat price); a \emph{frequency prior} over the package and endpoint kinds; a \emph{feature classifier} (logistic regression on method-signature features, cross-fitted by method or by class and, in deletion runs, trained without the deleted methods); and the \emph{language model's yes/no taken as fact}, the model-as-specification approach~\cite{iris,semtaint}.
+
+\tabph{4.0cm}{tab:cost}{Cost of each step on the 8-core, 62\,GB server: graph build, evaluation, pricing (time and dollars per pricer), calibration.}{Rows: graph build (183 new graphs from 367 APKs in 14\,h), evaluation of 332 apps (3.5--7\,h before contraction; after: to measure), pricing time and cost per pricer (Jev about \$0.4; Sonnet~5 \$16.4; panel: pending), LTT 200 splits (seconds), FlowDroid per app. Source: server logs (\textbf{partly have}; panel costs pending).}

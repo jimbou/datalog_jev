@@ -1,0 +1,23 @@
+\section{A Worked Example}
+\label{sec:example}
+Figure~\ref{fig:receipt} shows a verdict of the analysis on an Android app.
+\begin{figure}[t]
+\small
+\begin{tabular}{@{}p{0.95\linewidth}@{}}
+\toprule
+\textbf{Sink:} \texttt{Prefs.putBoolean(String,boolean)} in \texttt{com.gianlu.dnshero}\\
+\textbf{Sources:} sensitive values returned by framework calls in the same app\\
+\textbf{Without library flows:} no source reaches the sink argument $\Rightarrow$ clean\\
+\textbf{With every library flow on:} a source reaches it $\Rightarrow$ the verdict depends on holes\\
+\textbf{Receipt:} one fact, \texttt{Boolean.valueOf(boolean)}: argument~0 $\to$ return value\\
+\textbf{Price:} 0.29 \quad \textbf{Bound:} 0.29 \quad \textbf{Threshold:} 0.3 $\Rightarrow$ cleared\\
+\bottomrule
+\end{tabular}
+\caption{A clean verdict, its receipt and its price. This verdict is one of three wrong clearances in the corpus (Section~\ref{sec:rq2}).}
+\label{fig:receipt}
+\end{figure}
+Whether the receipt fact is real depends on the definition of a flow.
+FlowDroid's summary says that boxing a boolean passes data; the real code returns one of two cached objects selected by the argument, so a code-derived key says no.
+That is why the paper states a definition (Section~\ref{sec:flow}) and reports results under keys that differ on exactly such cases.
+
+\tabph{4.2cm}{tab:facts}{The facts most accepted verdicts rest on, with their prices and what the key, the code-derived key and a person say.}{Top 10--12 facts by number of accepted verdicts (e.g.\ \texttt{Messenger.send}: 481 verdicts in 85 apps; \texttt{Bundle.putString}; \texttt{Toast.makeText}): price, key label, K2 label, human label, number of verdicts and apps. Source: \texttt{data/audit/*.csv}, \texttt{data/audit\_private/audit\_key.csv} (\textbf{have}).}

@@ -1,0 +1,17 @@
+\section{Flow Definition and Labeling Rubric}
+\label{app:flow}
+Labelers were given the following question for every fact: method $M$ is called with $X$ holding a secret; after the call, is a piece of the secret in $Y$?
+A flow exists if $X$'s data is copied or computed into $Y$ (code C), stored in $Y$ as the method's purpose, including a reference to it (S), or $Y$ is read out of $X$, including its size, emptiness or metadata (R).
+It is not a flow if $X$ only picks which existing thing is used (P), only controls how much, when or whether (K), changes only incidental state such as caches or back-pointers (I), matters only through a custom override, callback, other OS version or unusual argument (H), or has no connection (N); an undecidable case is U.
+Every answer carried a one-sentence mechanism and, for the person's pass, the evidence (line or called method).
+\tabph{4.0cm}{tab:rubric}{The reason codes and a worked example for each.}{Nine codes C, S, R, P, K, I, H, N, U with one real example each (e.g.\ \texttt{String.substring} receiver $\to$ return: C; start index $\to$ return: P). Source: \texttt{AUDIT\_RECHECK.md} (\textbf{have}).}
+
+\section{Proof Details}
+\label{app:proofs}
+\todo{Write out Proposition~\ref{prop:tight} with the flow-decomposition and padding construction for graphs with parallel edges and edges of probability one, and Proposition~\ref{prop:ltt} with the exact binomial p-value and the fixed-sequence argument, including why monotonicity of $L$ is needed only for the choice of order.}
+
+\section{Additional Results}
+\label{app:results}
+\tabph{6cm}{tab:app-deletion}{Method-level and class-level deletion at all rates, both targets, every pricer, with the worst seed.}{Full tables behind Figure~\ref{fig:deletion}. Source: \texttt{k1\_summary\_final\_*.log}, \texttt{k1c\_summary\_final\_*.log} (\textbf{have}).}
+\tabph{6cm}{tab:app-fd}{Per-app FlowDroid comparison (leaks found, missed, states).}{One row per app. Source: \texttt{bench/flowdroid\_compare.py}, \texttt{bench/flowdroid\_none\_compare.py} (\textbf{have}).}
+\tabph{5cm}{tab:app-keys}{Calibration per key at $\alpha\in\{0.02,0.05,0.10\}$, with the chosen threshold in each split.}{Source: \texttt{ltt\_*.log} (\textbf{have}; panel pending).}

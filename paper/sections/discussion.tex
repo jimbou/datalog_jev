@@ -1,0 +1,29 @@
+\section{Discussion}
+\label{sec:discussion}
+\paragraph{Lessons.}
+(1)~Calibrate on programs, not on verdicts: the shared facts inside an app make verdict-level selection invalid, and per-app calibration is what makes the guarantee honest.
+(2)~State the flow rule in the question: a pricer that reads ``derived data'' narrowly under-prices getters and concentrates wrong clearances on a few widely bundled facts.
+(3)~Validity and power separate cleanly: every pricer and every way of combining prices met the target; what a better pricer buys is a larger cleared share.
+(4)~A key must be tested against the library code: a learned pricer looks excellent on a key built from the same conventions and fails when the classes it learned from are removed.
+(5)~Counting assumptions is not a substitute for pricing them: with no prices, even receipts of one fact are unsafe in 93\% of the apps.
+
+\paragraph{What the results mean for practice.}
+An analysis designer who ships an unsound taint analysis can ship with it a list of the library assumptions behind each clean verdict and a threshold whose risk was measured on held-out apps, at a price of about \$0.4 to \$16 per corpus.
+The honest limit is that the certificate speaks about library holes, not about the rest of the analysis (Section~\ref{sec:rq5}).
+
+\section{Threats to Validity}
+\label{sec:threats}
+\emph{Answer key.}
+The main key contains language-model labels; K2 is code-derived but partial, uses FlowDroid's summaries for JDK leaf methods, and is not sound; the audit is AI-assisted except for 67 facts read by one person, and it checks the facts behind the clearances, not the rejected verdicts.
+\emph{Exchangeability.}
+Apps that bundle the same library are not independent; Section~\ref{sec:rq7} reports grouped splits.
+\emph{Corpus.}
+Small F-Droid apps, with half of the large ones failing to build; no Play Store apps, so transfer is untested.
+\emph{The analysis.}
+Section~\ref{sec:rq5} shows it differs from FlowDroid in both directions; the guarantee is about library holes relative to our analysis.
+\emph{Pricers.}
+Every pricer is a language model or a classifier trained on FlowDroid's labels; the main pricer is proprietary, and the panel (Section~\ref{sec:rq3}) includes open-weight models.
+\emph{Definition.}
+Results depend on the flow definition; the one choice that mattered (reference keeping) is reported under both readings.
+\emph{Construct.}
+A ``wrong clearance'' is relative to the key; no key is ground truth.

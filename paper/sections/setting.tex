@@ -1,0 +1,23 @@
+\section{Problem Setting}
+\label{sec:setting}
+\subsection{Holes, clean verdicts and misses}
+An analysis is given as a flow graph.
+Nodes are program values and heap locations, a set of source nodes, and sink nodes.
+\emph{Code edges} $E_c$ are derived from code that is present.
+\emph{Hole edges} $H$ are candidate library flows $x\to y$ between the arguments, receiver and return value of a framework method that has no body: for a call to a library method $m$ with arguments $a_i$, receiver $r$ and return value $v$, one candidate for every pair of endpoints that could carry data.
+The \emph{unsound analysis} $A_0$ uses $E_c$ only.
+A sink $t$ is \emph{clean} in $A_0$ if no source reaches it in $E_c$, and \emph{hole-dependent} if some source reaches it in $E_c\cup H$.
+Let $T\subseteq H$ be the library flows that are real, unknown to the analysis; the \emph{completed analysis} $A^*$ uses $E_c\cup T$.
+A clean hole-dependent verdict is a \emph{miss} if a source reaches $t$ in $E_c\cup T$.
+``Wrong clearance'' means a miss relative to the answer key's $T$.
+A sound over-approximation clears the sinks that are unreachable in $E_c\cup H$; the hard slice is the clean hole-dependent sinks.
+
+\subsection{What counts as a flow}
+\label{sec:flow}
+A library flow from $X$ to $Y$ exists if, in ordinary executions with standard arguments, $X$'s data, a computed representation of it, or a reference to it reaches $Y$ through copying, storage or readout, including documented properties.
+Mere selection or control (an index picks an element), incidental bookkeeping, and behavior that only a custom override or callback would produce do not count.
+Cases that cannot be decided from the API contract remain unknown.
+A negative label therefore means no transfer in this scope, not absence of every information flow; FlowDroid also has optional implicit-flow modes, which we do not use.
+Keeping a reference to the argument (a queue, a retained listener) counts as a flow.
+The choice matters for the audit (Section~\ref{sec:rq4}) and not for the certified clearance on this corpus.
+Appendix~\ref{app:flow} gives the rubric used by the people and models that labeled facts.

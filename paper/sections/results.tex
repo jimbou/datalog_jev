@@ -1,0 +1,111 @@
+\section{Evaluation}
+\label{sec:eval}
+We ask: is unsoundness pervasive (RQ1); does priced-receipt clearing beat a sound over-approximation, and does the guarantee hold (RQ2); how do pricers compare, and does the key matter (RQ3); how good is the key behind the clearances (RQ4); how faithful is our analysis to FlowDroid (RQ5); what does it cost (RQ6); do the validity checks hold up (RQ7); which design choices matter (RQ8); does the pricer hold up on code it knows less well (RQ9); and does it matter for real leaks (RQ10).
+
+\subsection{RQ1: Is unsoundness pervasive?}
+\label{sec:rq1}
+Of the 17{,}830 framework methods on source-to-sink paths, 12{,}274 are not modeled by FlowDroid.
+We ran FlowDroid on 40 random small apps with and without its library summaries (\texttt{-tw NONE}).
+In the 29 apps where neither run was cut short, FlowDroid reports 20 leaking sink methods with summaries and 2 without; over 36 apps 54 of 63 (86\%) leaks vanish, and none appears only without the summaries (Table~\ref{tab:fd-none}).
+This is the extreme case: it measures how much a library model matters, not what FlowDroid misses with its default summaries.
+\tabph{4.4cm}{tab:fd-none}{FlowDroid with and without its library summaries on the same apps.}{Per-app table or summary rows: leaking sink methods with summaries, without, only-with, only-without; complete versus partial runs. \textbf{Have} for 40 apps (36 with both answers); \textbf{scheduled}: 40 more apps to reach 80 (tighter interval).}
+
+\subsection{RQ2: Does it clear more than a sound analysis, and does the guarantee hold?}
+\label{sec:rq2}
+A sound over-approximation (every hole is a flow) clears 72.0\% of the 101{,}090 leak-free sinks with a non-constant argument; the remaining 28.0\% are the hard slice.
+Table~\ref{tab:main} shows what priced receipts clear of it.
+\begin{table}[t]
+\caption{Main key, 324 apps. Share of the 28{,}335 clean hole-dependent verdicts cleared, and held-out apps with a wrong clearance (in brackets), by target $\alpha$.}
+\label{tab:main}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Pricer & $\alpha{=}0.10$ & $\alpha{=}0.05$ & $\alpha{=}0.02$\\
+\midrule
+Counting (flat price) & 0\% & 0\% & --\\
+Frequency prior & 9.2\% (4.9\%) & 6.6\% (0.8\%) & --\\
+Feature classifier & 33.2\% (5.4\%) & 22.0\% (0.7\%) & --\\
+Sonnet~5 probabilities & 53.0\% (5.6\%) & 29.6\% (2.5\%) & --\\
+Jev & 40.0\% (1.0\%) & 40.0\% (1.0\%) & 33.4\% (0.3\%)\\
+\bottomrule
+\end{tabular}
+\end{table}
+At the certified thresholds, receipts clear 40\% of the hard slice at $\alpha=0.05$ with 1.0\% of held-out apps wrong; with the sound part, 83.2\% of all leak-free sinks against 72.0\%.
+The observed error stays below $\alpha$ for every pricer, as the theory predicts, while the power differs by a factor of six (0\% to 40\% at $\alpha=0.05$).
+Counting the assumptions is unsafe even at one fact: clearing every receipt of size one gives a wrong clearance in 93\% of the apps.
+The three wrong clearances at the chosen threshold come from three different facts and apps, not from one widely bundled fact (Figure~\ref{fig:receipt}).
+
+\subsection{RQ3: How do pricers compare, and does the key matter?}
+\label{sec:rq3}
+Table~\ref{tab:keys} repeats the main pricers under the other keys, and Figure~\ref{fig:deletion} shows the deletion benchmark as more classes are removed.
+\begin{table}[t]
+\caption{Other keys. Share cleared at $\alpha=0.05$ (held-out apps with a wrong clearance). Deletion: whole classes removed, 3 seeds.}
+\label{tab:keys}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Key & Jev & Sonnet~5 & Classifier & LLM as fact\\
+\midrule
+Audited (324 apps) & 39.4\% (2.0\%) & -- & -- & --\\
+K2, code-derived (322 apps) & 25.7\% (1.7\%) & 33.6\% (2.3\%) & 20.4\% (2.3\%) & 38.5\% (2.5\%)\\
+Deletion, 25\% of classes & 52.2\% (0.8\%) & 81.9\% (0.5\%) & 71.4\% (1.6\%) & 79.8\% (1.2\%)\\
+Deletion, 75\% of classes & 50.9\% (1.3\%) & 79.1\% (1.0\%) & 33.1\% (0.5\%) & --\\
+\bottomrule
+\end{tabular}
+\end{table}
+The guarantee holds under every key (wrong clearances at most 2.5\%); the ranking of pricers does not.
+The classifier is strong when single methods are deleted (82--88\%, because it learns FlowDroid's conventions from sibling methods) and collapses when whole classes are removed (33\% at 75\%), the realistic case, since 86\% of the unmodeled methods that matter sit in classes with no modeled method.
+A general language model asked for probabilities is the best or tied pricer under K2 and on the deletion keys; Jev leads only on the main key at $\alpha=0.05$ and is about 40 times cheaper (about \$0.4 against \$16 for the corpus).
+The model's yes/no taken as fact has no knob: it clears 38--90\% depending on the key, with wrong clearances in 0 to 8\% of apps and a risk that cannot be chosen.
+
+\figph{6.0cm}{fig:deletion}{Whole-class deletion: share cleared at $\alpha=0.05$ against the share of classes deleted, per pricer.}{Line plot, 10/25/50/75\% of classes: Jev (62/52/54/51), classifier (87/71/40/33), classifier + Jev price (99/86/61/76), Sonnet (88/82/85/79), LLM-as-fact (86/80/57/--), counting (0); add the panel models. Source: \texttt{k1c\_summary\_*.log} (\textbf{have}; panel pending).}
+
+\tabph{6.5cm}{tab:panel}{Pricer panel: other model families under the same procedure.}{Rows: Jev, Sonnet~5, Qwen3.8-27B, Qwen3.7-Flash, DeepSeek-V4-Flash, GPT-5.6-luna, Gemini-3.5-Flash-Lite; columns: price (\$ per corpus), main key at $\alpha{=}0.05/0.10$, K2, deletion 50\%/75\%, AUROC against FlowDroid labels. Source: \texttt{bench/queues/panel\_*.sh} (\textbf{scheduled, running}).}
+
+\subsection{RQ4: How good is the answer key behind the clearances?}
+\label{sec:rq4}
+All verdicts accepted at the chosen threshold rest on 446 distinct library facts (Table~\ref{tab:facts}).
+A first, loosely worded AI pass disagreed with the key on 85 facts; a written, stricter rule (ordinary documented behavior, no custom overrides, influence is not a flow) resolved 86 of its 95 positives, and agreement with the key rose from 78\% to 97.7\%.
+Because that rule was written after seeing the first pass, we report both.
+A person read the Android source for the 9 positives and the 18 undecided facts (all 9 confirmed; 11 of 18 became negative) and for 40 facts the AI called negative (12 chosen for impact, 28 at random): 4 were flows, all of the kind where the method keeps a reference to its argument; the estimated miss rate among the AI's negatives is about 11\% (95\% interval 2--28\%).
+Calibrating under the key with all of these answers is identical to the main key to the last digit (39.4\% cleared, 2.0\% wrong), because every path through those facts also needs another candidate flow the key keeps absent.
+K2 decides 176 of the 446 facts (45\% of their use), all as no flow, and agrees with the key on 173; it is not a perfect witness (it misses the prefix flow in \texttt{File.createTempFile}).
+\tabph{4.8cm}{tab:audit}{The audit in numbers: passes, answers and agreement.}{Rows: first pass, strict recheck, unsure rows resolved, person's 27 flagged facts, person's 40-fact sample, K2; columns: yes/no/unsure counts, agreement with the key, effect on the accepted verdicts. Source: \texttt{FINDINGS.md} \S16, \S19, \S21 (\textbf{have}). \textbf{Missing}: a second person on 20 facts for an agreement statistic.}
+
+\subsection{RQ5: How faithful is our analysis to FlowDroid?}
+\label{sec:rq5}
+On the 37 of 40 apps where FlowDroid gave an answer (17 found no leak, 8 stopped at its own memory limit), it reports 84 leaking sink methods; our analysis reaches 56 (67\%) with every hole on and 50 (60\%) under the key; excluding 7 sinks in FlowDroid's synthetic entry method, 73\%.
+The misses are mostly inter-component sinks (\texttt{startActivityForResult}, \texttt{bindService}), file and network calls, and code in bundled libraries.
+In the other direction we are far less precise: we flag 4{,}514 key-true sink methods, and FlowDroid also reports 50 (1\%).
+Restricting the analysis to code reachable from entry points removes only 11.5\% of these (3{,}994 remain) and does not change the recall, so dead code is not the cause; the whole-program, context-insensitive design is.
+\tabph{3.8cm}{tab:fd}{Our analysis against FlowDroid at the level of sink-containing methods.}{Rows: original analysis, entry-restricted analysis (and, if built, a more precise variant); columns: FlowDroid's leaks found with all holes on, found under the key, our key-true sink methods, share FlowDroid also reports; 40 apps now, 80 apps scheduled. Source: \texttt{bench/flowdroid\_compare.py} (\textbf{have}; extension \textbf{scheduled}).}
+
+\subsection{RQ6: What does it cost?}
+\label{sec:rq6}
+See Table~\ref{tab:cost}.
+Building the graphs dominates (14\,h for 183 apps on 8 cores); evaluation of all 332 apps took 3.5 to 7 hours per pricing before the min-cut contraction, which is about 25 times faster on the heaviest apps \todo{measured time of a full run after contraction}; calibration takes seconds; pricing costs between \$0.2 and \$16 per corpus depending on the model.
+
+\subsection{RQ7: Do the validity checks hold up?}
+\label{sec:rq7}
+\paragraph{Verdict-level selection.}
+Conformal selection over verdicts with leave-one-app-out p-values~\cite{conformalselection} gave a realized false-discovery rate of 7.9\% at a 5\% target and 14.3\% at 10\% (first corpus); verdicts within an app share facts, and apps differ.
+\paragraph{Min-cut optimality.}
+Solving the exact ``any correlation'' problem as a linear program over all $2^m$ worlds on 190 random graphs with 5 to 11 hole edges gives the max-flow value to within $2\cdot10^{-15}$, while the probability under independence is lower by 0.08 to 0.17 on average, so an independence-based bound understates the risk.
+\tabph{4.6cm}{tab:unit}{Calibration unit and sensitivity.}{Rows: no calibration (nominal $\delta{=}\alpha$), per-verdict conformal, per-app (ours), per-cluster of apps that share libraries (grouped splits); and $\varepsilon\in\{0.05,0.1,0.2\}$, calibration share $\{30,50,70\}\%$; columns: cleared share and held-out wrong-clearance share with the spread over splits. Source: \texttt{app\_ltt.py} variants and \texttt{conformal.py} on 324 apps (\textbf{to compute locally}).}
+
+\subsection{RQ8: Which design choices matter?}
+\label{sec:rq8}
+\paragraph{How prices combine.}
+With the same cuts and the same calibration, the sum over cut edges clears 40.0\%, the sum over distinct facts 43.0\%, the largest single price 46.8\%, and the independence product 45.3\%, all with at most 1.9\% of held-out apps wrong.
+Validity comes from the calibration, not from the union bound; the union bound buys an interpretation, and counting each fact once is valid and free.
+\paragraph{Question wording.}
+Stating the flow rule in the pricer's question lifted clearance on the first corpus from 15.9\% to 41.1\% at $\alpha=0.10$.
+\tabph{3.6cm}{tab:wording}{Question wording: Jev with three wordings.}{Rows: ``taint'' (no-answer type), ``choice'', ``choice with the object convention''; columns: AUROC/ECE on FlowDroid-modeled atoms, main key at $\alpha{=}0.05/0.10$. Source: \texttt{bench/queues/panel\_*.sh} (\textbf{scheduled}).}
+
+\subsection{RQ9: Does the pricer hold up on code it knows less well?}
+\label{sec:rq9}
+\tabph{4.4cm}{tab:thirdparty}{Pricer quality on third-party libraries (less likely memorized).}{StubDroid summaries generated for OkHttp, Gson, Guava, Commons-Lang/IO, Jsoup, Retrofit; columns: AUROC, ECE, share priced below 0.05 that are real, per library and per pricer. \textbf{Missing}: build the question set (about 1{,}500 questions) with the K2 machinery and price it with Jev and the panel.}
+
+\subsection{RQ10: Does it matter for real leaks?}
+\label{sec:rq10}
+\tabph{4.4cm}{tab:taintbench}{Documented leaks through library code in a real-malware benchmark.}{TaintBench apps with documented flows: how many documented flows our analysis finds with holes closed and open, how many pass through unmodeled library methods, the receipt price of those that need holes, and what FlowDroid finds. \textbf{Missing}: download the benchmark, run extraction and analysis.}
