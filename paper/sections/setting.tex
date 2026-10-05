@@ -12,6 +12,23 @@ A clean hole-dependent verdict is a \emph{miss} if a source reaches $t$ in $E_c\
 ``Wrong clearance'' means a miss relative to the answer key's $T$.
 A sound over-approximation clears the sinks that are unreachable in $E_c\cup H$; the hard slice is the clean hole-dependent sinks.
 
+\subsection{Quantified soundiness}
+\label{sec:def}
+A soundy analysis lists what it leaves out but says nothing about how often leaving it out matters.
+We make that a property of the analysis together with a rule that decides which clean verdicts to trust.
+Let $\mathcal{D}$ be a distribution of programs, and let an \emph{acceptance rule} $\rho$ mark a subset of the clean verdicts of a program as accepted; for a calibrated rule, $\rho$ is itself computed from a sample $P_1,\dots,P_n\sim\mathcal{D}$.
+\begin{definition}[$(\alpha,\varepsilon)$-soundiness]\label{def:soundy}
+An analysis $A_0$ with acceptance rule $\rho$ is \emph{$(\alpha,\varepsilon)$-soundy} for $\mathcal{D}$ and the library truth $T$ if, with probability at least $1-\varepsilon$ over the sample that $\rho$ is computed from,
+\[\Pr_{P\sim\mathcal{D}}\bigl[\text{some verdict of $P$ accepted by $\rho$ is a miss}\bigr]\le\alpha.\]
+\end{definition}
+\noindent A sound analysis that accepts only the verdicts that hold with every hole open is $(0,0)$-soundy, and so is any analysis that accepts nothing.
+The definition therefore asks for two things at once: a bound that is honest at the level of a whole program, which is what a user who reads one app's report relies on, and as many accepted verdicts as possible under that bound.
+Three choices in it are deliberate.
+The unit is the program, not the verdict: a false-discovery rate over verdicts is a weaker promise, and Section~\ref{sec:rq7} shows that it leaves wrong clearances in most apps.
+The guarantee is relative to $T$, so it is only as good as the key it is measured against, which is why we use several.
+And it is distribution-free: nothing is assumed about how facts are correlated or about how good the prices are.
+Section~\ref{sec:approach} gives a rule that achieves the definition for any pricer (Proposition~\ref{prop:ltt}), a bound that is the tightest possible from marginal prices (Proposition~\ref{prop:tight}), and, through receipts, a statement of which facts each accepted verdict depends on.
+
 \subsection{What counts as a flow}
 \label{sec:flow}
 A library flow from $X$ to $Y$ exists if, in ordinary executions with standard arguments, $X$'s data, a computed representation of it, or a reference to it reaches $Y$ through copying, storage or readout, including documented properties.

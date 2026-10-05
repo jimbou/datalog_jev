@@ -63,7 +63,7 @@ def sources_sinks():
     """FlowDroid's default SourcesAndSinks.txt: one entry per line; lines starting with % are
     disabled alternatives (e.g. the inter-component sources) and are skipped."""
     src, snk = set(), set()
-    for line in open(os.path.join(ROOT, "data/SourcesAndSinks.txt")):
+    for line in open(os.environ.get("SOURCES_SINKS") or os.path.join(ROOT, "data/SourcesAndSinks.txt")):
         line = line.strip()
         if not line or line.startswith("%"):
             continue
@@ -264,6 +264,12 @@ def apps_to_build(app_glob):
                 path = os.path.join(ROOT, "bench/apks", apk)
                 if pkg not in items and fnmatch.fnmatch(pkg, app_glob) and os.path.exists(path):
                     items[pkg] = path
+    if os.environ.get("APK_LIST"):  # extra apps outside the F-Droid corpus: lines "name TAB apk path relative to the repository"
+        for line in open(os.environ["APK_LIST"]).read().splitlines():
+            if line.count("\t") == 1:
+                pkg, apk = line.split("\t")
+                if fnmatch.fnmatch(pkg, app_glob) and os.path.exists(os.path.join(ROOT, apk)):
+                    items[pkg] = os.path.join(ROOT, apk)
     if APPS_FILE:
         keep = {l.split("\t")[0] for l in open(APPS_FILE).read().splitlines() if l.strip()}
         items = {k: v for k, v in items.items() if k in keep}

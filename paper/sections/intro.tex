@@ -17,7 +17,7 @@ We take a third path: keep the unsound analysis, but attach to each clean verdic
 We claim no novelty for receipts as minimal assumption sets~\cite{bastani-oopsla15,zhu-aplas13}, for union bounds, or for the calibration procedure~\cite{lt}.
 The contribution is their combination for the unsoundness of an analysis, and the evidence for it:
 \begin{itemize}
-\item \emph{A formulation} in which a clean verdict carries a checkable receipt and a distribution-free bound, and in which the guarantee is stated per program and certified by an exact test on held-out programs (Section~\ref{sec:approach}).
+\item \emph{A quantitative notion of soundiness}: an analysis with an acceptance rule is $(\alpha,\varepsilon)$-soundy if, with confidence $1-\varepsilon$, a new program gets a wrong clean verdict with probability at most $\alpha$ (Definition~\ref{def:soundy}); we achieve it with receipts, a distribution-free bound and a threshold certified by an exact test on held-out programs (Section~\ref{sec:approach}).
 The unit matters: verdict-level conformal selection at a 5\% false-discovery rate leaves a wrong clearance in half of the apps, against 1\% with per-program calibration (Section~\ref{sec:rq7}).
 \item \emph{Two formal observations.}
 The min-cut is the tightest bound derivable from marginal probabilities when facts may be arbitrarily correlated, which is also the optimum a Praline-style solver~\cite{praline} computes on the reachability fragment (Proposition~\ref{prop:tight}).
