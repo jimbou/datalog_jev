@@ -200,8 +200,21 @@ Figure~\ref{fig:learning} shows that the certified clearance jumps from nothing 
 With the same cuts and the same calibration, the sum over cut edges clears 40.0\%, the sum over distinct facts 43.0\%, the largest single price 46.8\%, and the independence product 45.3\%, all with at most 1.9\% of held-out apps wrong.
 Validity comes from the calibration, not from the union bound; the union bound buys an interpretation, and counting each fact once is valid and free.
 \paragraph{Question wording.}
-Stating the flow rule in the pricer's question lifted clearance on the first corpus from 15.9\% to 41.1\% at $\alpha=0.10$.
-\tabph{3.6cm}{tab:wording}{Question wording: Jev with three wordings.}{Rows: ``taint'' (no-answer type), ``choice'', ``choice with the object convention''; columns: AUROC/ECE on FlowDroid-modeled atoms, main key at $\alpha{=}0.05/0.10$. Source: \texttt{bench/queues/panel\_*.sh} (\textbf{scheduled}).}
+Stating the object convention (a tainted object taints everything read from it) in the question nearly triples the certified clearance on the full corpus, from 14.2\% to 40.0\% at $\alpha=0.05$ (Table~\ref{tab:wording}); every wording stays within the target.
+\begin{table}[t]
+\caption{Question wording: Jev with three wordings of the same question (main key, 324 apps, 200 half splits). Cleared (held-out apps with a wrong clearance).}
+\label{tab:wording}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Wording & $\alpha=0.05$ & $\alpha=0.10$\\
+\midrule
+``taint'' (does taint propagate?) & 25.4\% (1.3\%) & 35.3\% (3.8\%)\\
+``choice'' (yes / no) & 14.2\% (1.8\%) & 24.3\% (6.2\%)\\
+``choice'' with the object convention & 40.0\% (1.0\%) & 40.1\% (0.9\%)\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{RQ9: Which assumptions should a person check?}
 \label{sec:rq9}
