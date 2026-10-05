@@ -13,7 +13,7 @@ This is the extreme case: it measures how much a library model matters, not what
 \subsection{RQ2: Does it clear more than a sound analysis, and does the guarantee hold?}
 \label{sec:rq2}
 A sound over-approximation (every hole is a flow) clears 72.0\% of the 101{,}090 leak-free sinks with a non-constant argument; the remaining 28.0\% are the hard slice.
-Table~\ref{tab:main} shows what priced receipts clear of it.
+Table~\ref{tab:main} shows what priced receipts clear of it, and Figure~\ref{fig:curve} the whole trade-off.
 \begin{table}[t]
 \caption{Main key, 324 apps. Share of the 28{,}335 clean hole-dependent verdicts cleared, and held-out apps with a wrong clearance (in brackets), by target $\alpha$.}
 \label{tab:main}
@@ -30,6 +30,11 @@ Jev & 40.0\% (1.0\%) & 40.0\% (1.0\%) & 33.4\% (0.3\%)\\
 \bottomrule
 \end{tabular}
 \end{table}
+\begin{figure}[t]
+\input{figs/curve_main}
+\caption{Risk against coverage on all 324 apps (main key) as the threshold grows. Dots: mean certified operating point at $\alpha=0.05$ over 200 half splits. Counting stays on the vertical axis: any threshold that clears something puts a wrong clearance in most apps.}
+\label{fig:curve}
+\end{figure}
 At the certified thresholds, receipts clear 40\% of the hard slice at $\alpha=0.05$ with 1.0\% of held-out apps wrong; with the sound part, 83.2\% of all leak-free sinks against 72.0\%.
 The observed error stays below $\alpha$ for every pricer, as the theory predicts, while the power differs by a factor of six (0\% to 40\% at $\alpha=0.05$).
 Counting the assumptions is unsafe even at one fact: clearing every receipt of size one gives a wrong clearance in 93\% of the apps.
@@ -53,13 +58,31 @@ Deletion, 75\% of classes & 50.9\% (1.3\%) & 79.1\% (1.0\%) & 33.1\% (0.5\%) & -
 \bottomrule
 \end{tabular}
 \end{table}
-The guarantee holds under every key (wrong clearances at most 2.5\%); the ranking of pricers does not.
+\begin{figure}[t]
+\input{figs/curve_k2}
+\caption{Risk against coverage under the code-derived key K2 (322 apps). The language model's yes/no taken as fact is a single operating point (clear when the model says no to every receipt fact); priced pricers give a curve on which the risk can be chosen.}
+\label{fig:curve-k2}
+\end{figure}
+The guarantee holds under every key (wrong clearances at most 2.5\%); the ranking of pricers does not. (Figure~\ref{fig:curve-k2})
 The classifier is strong when single methods are deleted (82--88\%, because it learns FlowDroid's conventions from sibling methods) and collapses when whole classes are removed (33\% at 75\%), the realistic case, since 86\% of the unmodeled methods that matter sit in classes with no modeled method.
 A general language model asked for probabilities is the best or tied pricer under K2 and on the deletion keys; Jev leads only on the main key at $\alpha=0.05$ and is about 40 times cheaper (about \$0.4 against \$16 for the corpus).
 The model's yes/no taken as fact has no knob: it clears 38--90\% depending on the key, with wrong clearances in 0 to 8\% of apps and a risk that cannot be chosen.
 
-\figph{6.0cm}{fig:deletion}{Whole-class deletion: share cleared at $\alpha=0.05$ against the share of classes deleted, per pricer.}{Line plot, 10/25/50/75\% of classes: Jev (62/52/54/51), classifier (87/71/40/33), classifier + Jev price (99/86/61/76), Sonnet (88/82/85/79), LLM-as-fact (86/80/57/--), counting (0); add the panel models. Source: \texttt{k1c\_summary\_*.log} (\textbf{have}; panel pending).}
+\begin{figure}[t]
+\input{figs/deletion}
+\caption{Whole-class deletion: share of the leak-free hard slice cleared at $\alpha=0.05$ against the share of FlowDroid-modeled classes deleted (mean over three seeds; one seed at 90\%). Held-out apps with a wrong clearance stay at or below 1.6\% in every cell.}
+\label{fig:deletion}
+\end{figure}
 
+\begin{table}[t]
+\caption{Ranking quality is not what certification rewards. AUROC of the bound (real flows against leak-free sinks, all verdicts), and the certified result over 200 half splits.}
+\label{tab:rank}
+\small
+\input{figs/rank_table}
+\end{table}
+Table~\ref{tab:rank} explains why pricers trade places.
+Sonnet~5 ranks verdicts better than Jev on average (AUROC 0.942 against 0.855) yet clears less at $\alpha=0.05$: certification rewards only the low-bound end of the ranking, where a single real flow priced low in an app is enough to make the app wrong.
+A pricer for receipts must therefore be judged by its risk-coverage curve near the origin, not by an average ranking score.
 \tabph{6.5cm}{tab:panel}{Pricer panel: other model families under the same procedure.}{Rows: Jev, Sonnet~5, Qwen3.8-27B, Qwen3.7-Flash, DeepSeek-V4-Flash, GPT-5.6-luna, Gemini-3.5-Flash-Lite; columns: price (\$ per corpus), main key at $\alpha{=}0.05/0.10$, K2, deletion 50\%/75\%, AUROC against FlowDroid labels. Source: \texttt{bench/queues/panel\_*.sh} (\textbf{scheduled, running}).}
 
 \subsection{RQ4: How good is the answer key behind the clearances?}
@@ -87,11 +110,43 @@ Building the graphs dominates (14\,h for 183 apps on 8 cores); evaluation of all
 
 \subsection{RQ7: Do the validity checks hold up?}
 \label{sec:rq7}
-\paragraph{Verdict-level selection.}
-Conformal selection over verdicts with leave-one-app-out p-values~\cite{conformalselection} gave a realized false-discovery rate of 7.9\% at a 5\% target and 14.3\% at 10\% (first corpus); verdicts within an app share facts, and apps differ.
+\paragraph{The unit of the guarantee.}
+Table~\ref{tab:unit} compares calibration units on the same bounds.
+Conformal selection over verdicts with leave-one-app-out p-values and Benjamini--Hochberg~\cite{conformalselection} meets its target on this corpus (2.6\% of selected verdicts wrong at a 5\% target; on our first, smaller corpus it did not: 7.9\%) and clears more (55.6\%).
+But its wrong verdicts are spread out: 166 of the 324 apps (51\%) contain at least one wrong clearance, and 62 (19\%) even at a 1\% target.
+Per-program calibration leaves a wrong clearance in 1.0\% of held-out apps.
+Using the bound at face value ($\delta=\alpha$, no calibration) is safe here but clears only 5.5\%: Jev's prices are conservative, and calibration recovers what they leave on the table.
+\begin{table}[t]
+\caption{Calibration unit and sensitivity (Jev, main key, $\alpha=0.05$). Cleared: share of the leak-free hard slice; wrong: share of (held-out) apps with at least one wrong clearance. Brackets: 5th--95th percentile over 200 splits.}
+\label{tab:unit}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Procedure & Cleared & Apps wrong\\
+\midrule
+Bound at face value, $\delta=\alpha$ (all apps) & 5.5\% & 0 of 324\\
+Verdict-level conformal selection, FDR 1\% & 47.4\% & 62 of 324 (19\%)\\
+Verdict-level conformal selection, FDR 5\% & 55.6\% & 166 of 324 (51\%)\\
+Verdict-level conformal selection, FDR 10\% & 59.2\% & 196 of 324 (60\%)\\
+\midrule
+Per program (ours), $\varepsilon=0.1$, 50\% calibration & 40.0\% [37.4, 42.9] & 1.0\% [0.0, 1.9]\\
+\quad $\varepsilon=0.05$ / $0.2$ & 40.0\% / 40.0\% & 1.0\% / 1.0\%\\
+\quad 30\% / 70\% calibration & 38.7\% / 39.9\% & 0.9\% / 0.9\%\\
+\quad apps sharing libraries kept together & 39.7\% [37.0, 42.4] & 0.9\% [0.0, 1.9]\\
+\bottomrule
+\end{tabular}
+\end{table}
+The grouped splits link apps that share at least three third-party package prefixes and keep each cluster on one side (196 clusters, the largest with 57 apps); the result does not change, so shared libraries do not inflate it.
 \paragraph{Min-cut optimality.}
 Solving the exact ``any correlation'' problem as a linear program over all $2^m$ worlds on 190 random graphs with 5 to 11 hole edges gives the max-flow value to within $2\cdot10^{-15}$, while the probability under independence is lower by 0.08 to 0.17 on average, so an independence-based bound understates the risk.
-\tabph{4.6cm}{tab:unit}{Calibration unit and sensitivity.}{Rows: no calibration (nominal $\delta{=}\alpha$), per-verdict conformal, per-app (ours), per-cluster of apps that share libraries (grouped splits); and $\varepsilon\in\{0.05,0.1,0.2\}$, calibration share $\{30,50,70\}\%$; columns: cleared share and held-out wrong-clearance share with the spread over splits. Source: \texttt{app\_ltt.py} variants and \texttt{conformal.py} on 324 apps (\textbf{to compute locally}).}
+\paragraph{How many calibration apps are needed.}
+With no wrong app among $n$ calibration apps, the exact test certifies $\alpha$ only if $(1-\alpha)^n\le\varepsilon$, so $n\ge\ln\varepsilon/\ln(1-\alpha)$: 22 apps for $\alpha=0.1$, 45 for $0.05$ and 114 for $0.02$ (Corollary~\ref{cor:n}).
+Figure~\ref{fig:learning} shows that the certified clearance jumps from nothing to its full value exactly at these sizes and is flat afterwards: beyond the floor, more calibration apps do not buy more clearance, they only tighten the spread.
+\begin{figure}[t]
+\input{figs/learning}
+\caption{Certified clearance (Jev, main key) against the number of calibration apps, tested on the remaining apps (mean of 200 draws). Dotted lines: the smallest $n$ at which the exact test can certify each $\alpha$.}
+\label{fig:learning}
+\end{figure}
 
 \subsection{RQ8: Which design choices matter?}
 \label{sec:rq8}

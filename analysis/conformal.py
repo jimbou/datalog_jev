@@ -37,6 +37,7 @@ def main():
     for alpha in (0.01, 0.05, 0.1):
         sel = fd = clean_tot = 0
         per_app_fdp = []
+        apps_wrong = 0
         for app in apps:
             cal = [r for r in U if r["app"] != app]
             test = [r for r in U if r["app"] == app]
@@ -49,8 +50,9 @@ def main():
             fd += f
             clean_tot += sum(not r["truth_lo"] for r in test)
             per_app_fdp.append(f / len(S) if S else 0.0)
-        print("  conformal alpha=%.2f selected=%d false=%d FDR(pooled)=%.4f mean per-app FDP=%.4f power=%.3f"
-              % (alpha, sel, fd, fd / max(1, sel), sum(per_app_fdp) / max(1, len(apps)), (sel - fd) / max(1, clean_tot)))
+            apps_wrong += f > 0
+        print("  conformal alpha=%.2f selected=%d false=%d FDR(pooled)=%.4f mean per-app FDP=%.4f power=%.3f apps with a wrong clearance=%d/%d"
+              % (alpha, sel, fd, fd / max(1, sel), sum(per_app_fdp) / max(1, len(apps)), (sel - fd) / max(1, clean_tot), apps_wrong, len(apps)))
     clean = sum(not r["truth_lo"] for r in U)
     for d in (0.05, 0.1, 0.2):
         acc = [r for r in U if r["bound"] <= d]

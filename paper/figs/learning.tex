@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+\begin{axis}[width=0.98\linewidth, height=4.8cm, xmin=0, xmax=290, ymin=0, ymax=0.5,
+  xlabel={Calibration apps $n$}, ylabel={Share cleared (held out)},
+  legend style={font=\scriptsize, at={(0.98,0.04)}, anchor=south east}, legend cell align=left,
+  tick label style={font=\scriptsize}, label style={font=\small}, grid=major, grid style={gray!20}]
+\addplot[blue, thick, mark=*, mark size=1.5pt] coordinates {(20,0.0000) (40,0.3959) (60,0.3990) (80,0.3999) (120,0.3999) (160,0.3979) (200,0.3989) (240,0.3999) (280,0.3922)};
+\addlegendentry{$\alpha=0.1$}
+\addplot[blue, densely dotted, thin, forget plot] coordinates {(22,0) (22,0.5)};
+\addplot[red, thick, mark=square*, mark size=1.5pt] coordinates {(20,0.0000) (40,0.0000) (60,0.3669) (80,0.3863) (120,0.3959) (160,0.3997) (200,0.4005) (240,0.3968) (280,0.4035)};
+\addlegendentry{$\alpha=0.05$}
+\addplot[red, densely dotted, thin, forget plot] coordinates {(45,0) (45,0.5)};
+\addplot[teal, thick, mark=triangle*, mark size=1.5pt] coordinates {(20,0.0000) (40,0.0000) (60,0.0000) (80,0.0000) (120,0.3457) (160,0.3286) (200,0.3481) (240,0.3403) (280,0.3518)};
+\addlegendentry{$\alpha=0.02$}
+\addplot[teal, densely dotted, thin, forget plot] coordinates {(114,0) (114,0.5)};
+\end{axis}
+\end{tikzpicture}

@@ -11,7 +11,7 @@ Praline~\cite{praline} computes sound probability bounds for Datalog outputs und
 \paragraph{Neuro-symbolic analysis.}
 NeuroLog~\cite{neurolog} feeds model-extracted facts to Datalog to find bugs; we use the same kind of stack to bound missed flows rather than to find them.
 \paragraph{Risk control.}
-The calibration is Learn-then-Test~\cite{lt}; conformal selection~\cite{conformalselection} is the verdict-level alternative that fails here for lack of exchangeability.
+The calibration is Learn-then-Test~\cite{lt}; conformal selection~\cite{conformalselection} is the verdict-level alternative; it controls the false-discovery rate among selected verdicts, which here leaves wrong clearances in most apps.
 \paragraph{Soundiness.}
 The soundiness manifesto~\cite{soundiness} asks analyses to list what they leave out; receipts make one such list checkable per verdict and attach a risk to it.
 

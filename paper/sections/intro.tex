@@ -18,7 +18,7 @@ We claim no novelty for receipts as minimal assumption sets~\cite{bastani-oopsla
 The contribution is their combination for the unsoundness of an analysis, and the evidence for it:
 \begin{itemize}
 \item \emph{A formulation} in which a clean verdict carries a checkable receipt and a distribution-free bound, and in which the guarantee is stated per program and certified by an exact test on held-out programs (Section~\ref{sec:approach}).
-Verdict-level conformal selection does not hold here (Section~\ref{sec:rq7}); verdicts within an app share facts, and apps differ.
+The unit matters: verdict-level conformal selection at a 5\% false-discovery rate leaves a wrong clearance in half of the apps, against 1\% with per-program calibration (Section~\ref{sec:rq7}).
 \item \emph{Two formal observations.}
 The min-cut is the tightest bound derivable from marginal probabilities when facts may be arbitrarily correlated, which is also the optimum a Praline-style solver~\cite{praline} computes on the reachability fragment (Proposition~\ref{prop:tight}).
 And the validity of the certified threshold does not depend on the bound being a union bound or on the prices being calibrated; they set power, not validity (Proposition~\ref{prop:ltt}).

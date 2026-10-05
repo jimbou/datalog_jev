@@ -38,10 +38,29 @@ Then $\Pr[R(\hat\delta)\le\alpha]\ge 1-\varepsilon$.
 \noindent This is fixed-sequence testing in the Learn-then-Test framework~\cite{lt}: the $L(P_i,\delta_k)$ are independent Bernoulli$(R(\delta_k))$, each test is exact, and a fixed sequence controls the family-wise error.
 Two remarks matter for the claims.
 First, \emph{validity does not depend on how the bounds were computed}: any score (a union bound, a maximum, a product) is valid after calibration; prices and the min-cut determine power and give each verdict an explanation (Section~\ref{sec:rq8}).
-Second, the unit must be the program: verdicts within one app share facts and apps differ, so verdict-level selection is not valid (Section~\ref{sec:rq7}).
+Second, the unit of the guarantee is the program. Controlling the share of wrong verdicts among the selected ones (a false-discovery rate) is a different and, for a user who reads one app's report, much weaker promise: verdicts within an app share facts, so the few wrong ones spread over many apps (Section~\ref{sec:rq7}).
+
+\begin{corollary}[Calibration floor]\label{cor:n}
+If none of the $n$ calibration programs has a wrong clearance at $\delta_1$, $H_1$ is rejected if and only if $(1-\alpha)^n\le\varepsilon$.
+Hence no threshold can be certified for $\alpha<1-\varepsilon^{1/n}$, whatever the pricer.
+\end{corollary}
+\noindent The p-value of $k=0$ failures is $\Pr[\mathrm{Bin}(n,\alpha)=0]=(1-\alpha)^n$.
+With $\varepsilon=0.1$, certifying $\alpha=0.05$ needs at least 45 programs and $\alpha=0.02$ at least 114; this is why the target $\alpha=0.02$ became certifiable only with the full corpus: with the earlier 149 apps, a half split left 74 calibration apps, below the floor.
+
+\begin{proposition}[Only the order matters]\label{prop:order}
+Let $g$ be strictly increasing and apply the procedure of Proposition~\ref{prop:ltt} to the scores $g(b)$ with the grid $g(\delta_1)<\dots<g(\delta_K)$.
+The accepted verdicts in every program are the same as for $b$ with $\delta_1<\dots<\delta_K$.
+\end{proposition}
+\noindent Acceptance $g(b)\le g(\delta)$ is equivalent to $b\le\delta$, so every loss $L(P,\delta_k)$ and hence every test is unchanged.
+Recalibrating the prices by any monotone map therefore changes nothing; what can change the result is a pricer, or a way of combining prices, that reorders the verdicts.
+This is why the pricers in Section~\ref{sec:rq3} differ in power but not in validity, and why their ranking near the low end, not their average calibration, decides the cleared share.
 
 \subsection{What the guarantee says}
 For a new app drawn like the calibration apps, with probability at least $1-\varepsilon$ over the calibration sample, the probability that an accepted clean verdict is a miss is at most $\alpha$, relative to the answer key and to the analysis $A_0$.
 It does not say that $A_0$ finds the leaks FlowDroid finds, that the key is right, or that apps are exchangeable with apps of another kind (Section~\ref{sec:threats}).
 
-\figph{6.2cm}{fig:curve}{Coverage against risk for the main pricer. Share of clean hole-dependent verdicts cleared and share of apps with at least one wrong clearance, as the threshold $\delta$ grows; the certified threshold sits before the cliff.}{Line plot over $\delta\in\{0.01,\dots,0.5\}$: cleared share (left axis) and apps with a wrong clearance (right axis), main key, Jev. Source: per-$\delta$ lines of \texttt{app\_ltt.py} (\textbf{have}: e.g.\ 3/324 apps at $\delta{=}0.3$, 135/324 at $0.5$). Also draw the same curve for the other pricers.}
+\begin{figure}[t]
+\input{figs/sizes}
+\caption{Receipt sizes of the 11{,}312 leak-free sinks that Jev's bound clears at the threshold certified on all apps ($\alpha=0.05$).}
+\label{fig:sizes}
+\end{figure}
