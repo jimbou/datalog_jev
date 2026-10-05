@@ -820,7 +820,7 @@ documented leaks cleared, all in one app and all resting on one receipt fact, `W
 arg0 (key: no; the leak goes through JavaScript calling the injected object's methods, a callback our flow definition
 excludes). Transfer: apps with a wrong clearance (our key) 1/31 (3.2%) at delta 0.03, 2/31 (6.5%) at delta 0.1 (alpha 0.1),
 clearing 30% / 59% of the leak-free hole-dependent verdicts. Counting (receipts of one fact): 22 documented leaks cleared,
-21/31 apps wrong. Jev not yet run on the 108 new methods (OpenRouter; waiting for approval).
+21/31 apps wrong. Jev (108 new methods priced with approval, 260 calls) at its F-Droid threshold 0.3: 0/31 apps with a wrong clearance, 35.6% of leak-free hole-dependent verdicts cleared (default list: 0/30, 37.7%); the same 3 documented leaks are cleared, again resting only on `addJavascriptInterface` this -> arg0 (Jev price 0.18).
 
 **FlowDroid validation extended to 80 apps** (40 more from the same shuffled list, no overlap). Without its library model
 FlowDroid loses 127 of 154 leaking sink methods (82%) over the 69 apps with both answers, none appears only without
