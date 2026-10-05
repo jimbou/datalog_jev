@@ -1,0 +1,19 @@
+% Data: data/verify_summary_main.log, data/verify_summary_k2.log (analysis/verify_summary.py), alpha = 0.05
+\begin{tikzpicture}
+\begin{axis}[width=0.98\linewidth, height=5cm, xmode=log, log basis x=10, xmin=4, xmax=500, ymin=0, ymax=1,
+  xtick={5,10,25,50,100,200,400}, xticklabels={0,10,25,50,100,200,400},
+  xlabel={Facts checked}, ylabel={Share cleared at $\alpha=0.05$},
+  legend style={font=\scriptsize, at={(0.98,0.03)}, anchor=south east}, legend cell align=left,
+  tick label style={font=\scriptsize}, label style={font=\small}, grid=major, grid style={gray!20}]
+\addplot[blue, thick, mark=*, mark size=1.5pt] coordinates {(5,0.399) (10,0.497) (25,0.532) (50,0.552) (100,0.580) (200,0.590) (400,0.662)};
+\addlegendentry{Main key, unlock rule}
+\addplot[teal, thick, mark=square*, mark size=1.5pt] coordinates {(5,0.255) (50,0.787) (200,0.835)};
+\addlegendentry{K2, unlock rule}
+\addplot[only marks, red, mark=triangle*, mark size=2.5pt] coordinates {(100,0.642)};
+\addlegendentry{Main key, count rule}
+\addplot[only marks, orange, mark=diamond*, mark size=2.5pt] coordinates {(100,0.643)};
+\addlegendentry{Main key, price rule}
+\addplot[only marks, gray, mark=x, mark size=3pt, thick] coordinates {(100,0.400)};
+\addlegendentry{Main key, random}
+\end{axis}
+\end{tikzpicture}

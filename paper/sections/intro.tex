@@ -23,8 +23,10 @@ The unit matters: verdict-level conformal selection at a 5\% false-discovery rat
 The min-cut is the tightest bound derivable from marginal probabilities when facts may be arbitrarily correlated, which is also the optimum a Praline-style solver~\cite{praline} computes on the reachability fragment (Proposition~\ref{prop:tight}).
 And the validity of the certified threshold does not depend on the bound being a union bound or on the prices being calibrated; they set power, not validity (Proposition~\ref{prop:ltt}).
 \item \emph{An evaluation} on 324 F-Droid apps against four answer keys: the main key, a deletion benchmark with no language model in it, a code-derived key (StubDroid~\cite{stubdroid} on the Android implementation), and an audit of the 446 library facts that all accepted verdicts rest on, partly by a person reading the source (Section~\ref{sec:eval}).
+\item \emph{Budgeted checking of assumptions}: ranking receipt facts without labels and checking 25 of them lifts the certified clearance from 40\% to 53\% and doubles the leaks the analysis reports, while random checks do nothing (Section~\ref{sec:rq9}).
+\item \emph{Real leaks}: on TaintBench malware, half of the documented leaks our analysis reaches depend on library holes, and the threshold certified on F-Droid apps transfers (Section~\ref{sec:rq10}).
 \item \emph{Cautionary results.}
-Counting assumptions without prices clears nothing; a general language model prices as well as or better than the specialized pricer we started with; and our analysis is far less precise than FlowDroid and finds only two thirds of its leaks.
+Counting assumptions without prices clears nothing; a general language model prices as well as or better than the specialized pricer we started with; cheap models price too confidently to certify anything; and our analysis is far less precise than FlowDroid and finds only 58\% of its leaks.
 \end{itemize}
 
 \paragraph{What we do not claim.}

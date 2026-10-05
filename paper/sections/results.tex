@@ -1,14 +1,27 @@
 \section{Evaluation}
 \label{sec:eval}
-We ask: is unsoundness pervasive (RQ1); does priced-receipt clearing beat a sound over-approximation, and does the guarantee hold (RQ2); how do pricers compare, and does the key matter (RQ3); how good is the key behind the clearances (RQ4); how faithful is our analysis to FlowDroid (RQ5); what does it cost (RQ6); do the validity checks hold up (RQ7); which design choices matter (RQ8); does the pricer hold up on code it knows less well (RQ9); and does it matter for real leaks (RQ10).
+We ask: is unsoundness pervasive (RQ1); does priced-receipt clearing beat a sound over-approximation, and does the guarantee hold (RQ2); how do pricers compare, and does the key matter (RQ3); how good is the key behind the clearances (RQ4); how faithful is our analysis to FlowDroid (RQ5); what does it cost (RQ6); do the validity checks hold up (RQ7); which design choices matter (RQ8); which assumptions a person should check (RQ9); and whether it matters for real leaks in malware (RQ10).
 
 \subsection{RQ1: Is unsoundness pervasive?}
 \label{sec:rq1}
 Of the 17{,}830 framework methods on source-to-sink paths, 12{,}274 are not modeled by FlowDroid.
-We ran FlowDroid on 40 random small apps with and without its library summaries (\texttt{-tw NONE}).
-In the 29 apps where neither run was cut short, FlowDroid reports 20 leaking sink methods with summaries and 2 without; over 36 apps 54 of 63 (86\%) leaks vanish, and none appears only without the summaries (Table~\ref{tab:fd-none}).
+We ran FlowDroid on 80 random small apps with and without its library summaries (\texttt{-tw NONE}).
+Over the 69 apps with both answers, 127 of the 154 leaking sink methods FlowDroid reports with its summaries (82\%) disappear without them, and none appears only without them (Table~\ref{tab:fd-none}).
 This is the extreme case: it measures how much a library model matters, not what FlowDroid misses with its default summaries.
-\tabph{4.4cm}{tab:fd-none}{FlowDroid with and without its library summaries on the same apps.}{Per-app table or summary rows: leaking sink methods with summaries, without, only-with, only-without; complete versus partial runs. \textbf{Have} for 40 apps (36 with both answers); \textbf{scheduled}: 40 more apps to reach 80 (tighter interval).}
+\begin{table}[t]
+\caption{FlowDroid on 80 F-Droid apps with and without its library summaries: leaking sink methods.}
+\label{tab:fd-none}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Runs & Apps & With summaries & Without & Lost without\\
+\midrule
+Both runs complete & 52 & 46 & 6 & 40 (87\%)\\
+At least one run stopped at its memory limit & 17 & 108 & 21 & 87 (81\%)\\
+All apps with both answers & 69 & 154 & 27 & 127 (82\%)\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{RQ2: Does it clear more than a sound analysis, and does the guarantee hold?}
 \label{sec:rq2}
@@ -83,7 +96,26 @@ The model's yes/no taken as fact has no knob: it clears 38--90\% depending on th
 Table~\ref{tab:rank} explains why pricers trade places.
 Sonnet~5 ranks verdicts better than Jev on average (AUROC 0.942 against 0.855) yet clears less at $\alpha=0.05$: certification rewards only the low-bound end of the ranking, where a single real flow priced low in an app is enough to make the app wrong.
 A pricer for receipts must therefore be judged by its risk-coverage curve near the origin, not by an average ranking score.
-\tabph{6.5cm}{tab:panel}{Pricer panel: other model families under the same procedure.}{Rows: Jev, Sonnet~5, Qwen3.8-27B, Qwen3.7-Flash, DeepSeek-V4-Flash, GPT-5.6-luna, Gemini-3.5-Flash-Lite; columns: price (\$ per corpus), main key at $\alpha{=}0.05/0.10$, K2, deletion 50\%/75\%, AUROC against FlowDroid labels. Source: \texttt{bench/queues/panel\_*.sh} (\textbf{scheduled, running}).}
+\begin{table}[t]
+\caption{Pricer panel (main key, 200 half splits). Certified: splits in which some threshold was certified; cleared and wrong are means over those splits. Price: OpenRouter, whole corpus.}
+\label{tab:panel}
+\small
+\begin{tabular}{@{}lrlll@{}}
+\toprule
+Pricer & Price & $\alpha=0.05$: certified, cleared & $\alpha=0.10$: certified, cleared & $\alpha=0.10$: wrong\\
+\midrule
+Jev & \$0.4 & 200, 40.0\% & 200, 40.1\% & 0.9\%\\
+Sonnet~5 & \$16.4 & 200, 29.6\% & 200, 53.0\% & 5.6\%\\
+Qwen3.7-Flash & \$0.19 & 1, 21.5\% & 134, 21.5\% & 6.6\%\\
+Gemini-3.5-Flash-Lite & \$2.82 & 0 & 6, 13.6\% & 12.8\%\\
+DeepSeek-V4-Flash & \$0.37 & 0 & 1, 12.3\% & 16.7\%\\
+Qwen3.8-27B & \$1.96 & 200, 0\% & 200, 0\% & 0\%\\
+GPT-5.6-luna & \$5.13 & \todo{} & \todo{} & \todo{}\\
+\bottomrule
+\end{tabular}
+\end{table}
+The cheaper models answer almost only with extreme values (Qwen3.8-27B gives 0.02 or 0.95 to 97\% of the candidate flows) and put some real flows at the lowest price, so the lowest certifiable threshold already makes too many apps wrong and calibration refuses, or certifies only in a few splits; Proposition~\ref{prop:ltt} still bounds the probability of such a split by $\varepsilon$.
+An overconfident pricer therefore costs clearance, not validity.
 
 \subsection{RQ4: How good is the answer key behind the clearances?}
 \label{sec:rq4}
@@ -97,11 +129,25 @@ K2 decides 176 of the 446 facts (45\% of their use), all as no flow, and agrees 
 
 \subsection{RQ5: How faithful is our analysis to FlowDroid?}
 \label{sec:rq5}
-On the 37 of 40 apps where FlowDroid gave an answer (17 found no leak, 8 stopped at its own memory limit), it reports 84 leaking sink methods; our analysis reaches 56 (67\%) with every hole on and 50 (60\%) under the key; excluding 7 sinks in FlowDroid's synthetic entry method, 73\%.
+On the 70 of 80 apps where FlowDroid gave an answer (30 found no leak, 18 stopped at its own memory limit), it reports 175 leaking sink methods; our analysis reaches 102 (58\%) with every hole on and 80 (46\%) under the key.
 The misses are mostly inter-component sinks (\texttt{startActivityForResult}, \texttt{bindService}), file and network calls, and code in bundled libraries.
-In the other direction we are far less precise: we flag 4{,}514 key-true sink methods, and FlowDroid also reports 50 (1\%).
-Restricting the analysis to code reachable from entry points removes only 11.5\% of these (3{,}994 remain) and does not change the recall, so dead code is not the cause; the whole-program, context-insensitive design is.
-\tabph{3.8cm}{tab:fd}{Our analysis against FlowDroid at the level of sink-containing methods.}{Rows: original analysis, entry-restricted analysis (and, if built, a more precise variant); columns: FlowDroid's leaks found with all holes on, found under the key, our key-true sink methods, share FlowDroid also reports; 40 apps now, 80 apps scheduled. Source: \texttt{bench/flowdroid\_compare.py} (\textbf{have}; extension \textbf{scheduled}).}
+In the other direction we are far less precise: we flag 8{,}184 key-true sink methods, and FlowDroid also reports 80 (1\%).
+On the first 40 apps, restricting the analysis to code reachable from entry points removed only 11.5\% of these and did not change the recall, so dead code is not the cause; the whole-program, context-insensitive design is.
+Our analysis is therefore a weaker tool than FlowDroid; the guarantee is about flows missed through library holes relative to it, which is why RQ10 measures it on documented leaks.
+\begin{table}[t]
+\caption{Our analysis against FlowDroid (with its summaries) at the level of sink-containing methods.}
+\label{tab:fd}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Apps & FlowDroid leaks & Ours, holes open & Ours, under the key & Our key-true sinks also in FlowDroid\\
+\midrule
+First 40 (37 answered) & 84 & 56 (67\%) & 50 (60\%) & 50 of 4{,}514 (1\%)\\
+\quad entry-restricted & 84 & 56 (67\%) & 50 (60\%) & 50 of 3{,}994 (1\%)\\
+All 80 (70 answered) & 175 & 102 (58\%) & 80 (46\%) & 80 of 8{,}184 (1\%)\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{RQ6: What does it cost?}
 \label{sec:rq6}
@@ -157,10 +203,69 @@ Validity comes from the calibration, not from the union bound; the union bound b
 Stating the flow rule in the pricer's question lifted clearance on the first corpus from 15.9\% to 41.1\% at $\alpha=0.10$.
 \tabph{3.6cm}{tab:wording}{Question wording: Jev with three wordings.}{Rows: ``taint'' (no-answer type), ``choice'', ``choice with the object convention''; columns: AUROC/ECE on FlowDroid-modeled atoms, main key at $\alpha{=}0.05/0.10$. Source: \texttt{bench/queues/panel\_*.sh} (\textbf{scheduled}).}
 
-\subsection{RQ9: Does the pricer hold up on code it knows less well?}
+\subsection{RQ9: Which assumptions should a person check?}
 \label{sec:rq9}
-\tabph{4.4cm}{tab:thirdparty}{Pricer quality on third-party libraries (less likely memorized).}{StubDroid summaries generated for OkHttp, Gson, Guava, Commons-Lang/IO, Jsoup, Retrofit; columns: AUROC, ECE, share priced below 0.05 that are real, per library and per pricer. \textbf{Missing}: build the question set (about 1{,}500 questions) with the K2 machinery and price it with Jev and the panel.}
+Receipts name the facts that block clearance, so a person (or a test) can check a few of them.
+We rank facts without looking at any answer, let the key answer the top $K$, and recompute and recertify (Section~\ref{sec:verify}).
+Table~\ref{tab:verify} and Figure~\ref{fig:verify} show the effect, measured against the original leak-free hard slice.
+\begin{table}[t]
+\caption{Budgeted checking of receipt facts (Jev, $\alpha=0.05$, 200 half splits). Soundly cleared: leak-free sinks that no longer depend on any hole; cleared: soundly cleared plus accepted, as a share of the original leak-free hard slice (main key 28{,}335, K2 34{,}746); reported leaks: real flows the analysis now reports without holes.}
+\label{tab:verify}
+\small
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Key & Facts checked & Soundly cleared & Reported real leaks & Cleared & Apps wrong\\
+\midrule
+Main & 0 & 0 & 12{,}152 & 39.9\% & 0.9\%\\
+ & 25 & 8{,}058 & 26{,}743 & 53.2\% & 1.3\%\\
+ & 100 & 10{,}308 & 33{,}059 & 58.0\% & 2.0\%\\
+ & 400 & 13{,}359 & 39{,}472 & 66.2\% & 1.2\%\\
+ & 100, by count & 13{,}658 & 34{,}788 & 64.2\% & 2.0\%\\
+ & 100, by price & 6{,}664 & 38{,}646 & 64.3\% & 2.0\%\\
+ & 100, at random & 25 & 12{,}255 & 40.0\% & 0.9\%\\
+\midrule
+K2 & 0 & 0 & 12{,}152 & 25.5\% & 1.7\%\\
+ & 50 & 22{,}840 & 13{,}441 & 78.7\% & 1.8\%\\
+ & 200 & 25{,}107 & 13{,}963 & 83.5\% & 0.9\%\\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{figure}[t]
+\input{figs/verify}
+\caption{Share of the original leak-free hard slice cleared at $\alpha=0.05$ against the number of receipt facts checked (log scale; 0 drawn at the left). Held-out apps with a wrong clearance stay at or below 2.0\%.}
+\label{fig:verify}
+\end{figure}
+Twenty-five checked facts lift the certified clearance from 40\% to 53\% and more than double the real leaks the analysis reports; one hundred random facts change nothing, so the ranking is what matters.
+Checks work both ways: a ``no'' removes a hole and can clear sinks outright, a ``yes'' turns a library flow into code, so real leaks become reported and leave the hard slice.
+Our first rule, which assumes the answer is ``no'', is beaten at 100 facts by simply counting the uncleared verdicts whose receipt contains the fact (64.2\% against 58.0\%).
+Under K2, which answers ``no'' to most facts, 50 checks lift clearance from 25.5\% to 78.7\%.
+Held-out error stays within the target throughout.
 
 \subsection{RQ10: Does it matter for real leaks?}
 \label{sec:rq10}
-\tabph{4.4cm}{tab:taintbench}{Documented leaks through library code in a real-malware benchmark.}{TaintBench apps with documented flows: how many documented flows our analysis finds with holes closed and open, how many pass through unmodeled library methods, the receipt price of those that need holes, and what FlowDroid finds. \textbf{Missing}: download the benchmark, run extraction and analysis.}
+TaintBench~\cite{taintbench} documents 203 leaks in 39 Android malware apps.
+We built graphs for 33 of them with TaintBench's source and sink list, priced the 108 framework methods they add with the same pricers, and matched each documented leak to our verdicts at the method that contains its sink (Table~\ref{tab:taintbench}).
+\begin{table}[t]
+\caption{TaintBench: documented leaks against our verdicts, and the threshold certified on the 324 F-Droid apps applied to the 31 malware apps with hole-dependent verdicts.}
+\label{tab:taintbench}
+\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+Documented leaks & 203\\
+\quad out of scope (no graph: 24; sink not in the list: 4) & 28\\
+\quad reported without any library hole & 44\\
+\quad reachable only through library holes & 48\\
+\quad not reached & 83\\
+\midrule
+Cleared at the F-Droid threshold, Jev ($\delta=0.3$) / Sonnet~5 ($\delta=0.03$) & 3 / 3\\
+Apps with a wrong clearance (key), Jev / Sonnet~5 & 0 / 1 of 31\\
+Leak-free hole-dependent verdicts cleared, Jev / Sonnet~5 & 35.6\% / 30.2\%\\
+Counting, receipts of one fact: leaks cleared; apps wrong & 22; 21 of 31\\
+\bottomrule
+\end{tabular}
+\end{table}
+Of the 92 documented leaks our analysis reaches, 48 (52\%) need a library flow it does not model: on real malware, half of what the unsound analysis can see is assumed away.
+The threshold certified on F-Droid apps transfers: no malware app has a wrong clearance by our key with Jev, and one of 31 with Sonnet~5.
+Three documented leaks are cleared by both pricers, all in one app and all resting on one receipt fact, \texttt{WebView.addJavascriptInterface} (receiver $\to$ argument): the app injects an object whose methods return the device identifier, and the leak happens when JavaScript calls them, a callback our flow definition excludes and our key labels ``no''.
+The receipt is what makes this miss explainable: one checkable fact, shared by all three.
+Clearing every receipt of one fact without prices would clear 22 documented leaks.
