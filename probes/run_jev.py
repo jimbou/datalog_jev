@@ -9,7 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 URL = "https://openrouter.ai/api/alpha/decisions"
-KEY = os.environ["OPENROUTERS_MINE"]
+KEY = os.environ.get("OPENROUTERS_MINE", "")
 
 WORDINGS = {
     "taint": "Taint-tracking semantics: if {src} holds sensitive (tainted) data before the call, "

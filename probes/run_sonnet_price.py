@@ -1,6 +1,7 @@
 """Stated-confidence pricer: Sonnet 5 gives a probability for every candidate flow of a method (baseline B5).
 
-Usage: run_sonnet_price.py MODEL TAG DATASET [LIMIT]   (env NO_REASONING=1 turns hidden reasoning off for models that have it; PRICE_THREADS sets the number of parallel requests)
+Usage: run_sonnet_price.py MODEL TAG DATASET [LIMIT]   (env NO_REASONING=1 turns hidden reasoning off for models that have it; PRICE_THREADS sets the number of parallel requests;
+  BACKEND=claude or codex asks through a logged-in Claude Code / Codex CLI instead of OpenRouter, see cli_llm.py)
   DATASET data/<DATASET>.jsonl hole records (cls, sig, kind, atoms)
 Writes data/jev_<DATASET>_<TAG>_r0.jsonl rows {cls, sig, p: [prob, ...], cost}; priced methods are skipped, so it
 can be restarted. evaluate.py reads it like a Jev price file (pricing name TAG). The question and the flow rule
@@ -9,9 +10,11 @@ are the same as the silver labels' (run_oracle.py); only the answer is a probabi
 import json, os, re, sys, time, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from run_jev import ROOT, endpoint, state
+import cli_llm
 
 URL = "https://openrouter.ai/api/v1/chat/completions"
-KEY = os.environ["OPENROUTERS_MINE"]
+KEY = os.environ.get("OPENROUTERS_MINE", "")
+BACKEND = os.environ.get("BACKEND", "openrouter")
 SYSTEM = ("You are an expert on the Java and Android framework APIs and on static taint analysis. "
           "For a library method, estimate for each candidate flow the probability that taint propagates under the "
           "usual taint-wrapper semantics: if the source holds sensitive data before the call, the target may hold "
@@ -45,8 +48,12 @@ def ask1(model, r):
                                     {"role": "user", "content": st + "\n\nCandidate flows:\n" + qs}]}).encode()
     for attempt in range(5):
         try:
-            req = urllib.request.Request(URL, body, {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"})
-            d = json.load(urllib.request.urlopen(req, timeout=120))
+            if BACKEND != "openrouter":
+                text = cli_llm.chat(BACKEND, model, SYSTEM, st + "\n\nCandidate flows:\n" + qs)
+                d = {"choices": [{"message": {"content": text}}], "usage": {"cost": 0}}  # subscription: no per-call price
+            else:
+                req = urllib.request.Request(URL, body, {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"})
+                d = json.load(urllib.request.urlopen(req, timeout=120))
             obj = json.loads(re.search(r"\{.*\}", d["choices"][0]["message"]["content"], re.S).group(0))
             p = [min(0.99, max(0.01, float(obj.get(str(k), obj.get(k, 0.5))))) for k in range(len(r["atoms"]))]
             return {"cls": r["cls"], "sig": r["sig"], "p": p, "cost": d["usage"].get("cost", 0)}
