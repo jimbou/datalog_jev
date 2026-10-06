@@ -77,6 +77,27 @@ Deletion, 75\% of classes & 50.9\% (1.3\%) & 79.1\% (1.0\%) & 33.1\% (0.5\%) & -
 \label{fig:curve-k2}
 \end{figure}
 The guarantee holds under every key (wrong clearances at most 2.5\%); the ranking of pricers does not. (Figure~\ref{fig:curve-k2})
+\paragraph{Is the key independent of the pricer?}
+The main key labels the methods FlowDroid does not model with Sonnet~5, which is also a pricer, so a good Sonnet result under that key could reflect agreement between a model and itself.
+Table~\ref{tab:indep} marks which pairs share a model and reports each pricer under the keys that do not.
+\begin{table}[t]
+\caption{Keys that share no language model with the pricer (share cleared at $\alpha=0.05$, held-out apps wrong). ``Shared'' marks a pair in which the key's labels for unmodeled methods come from the pricing model.}
+\label{tab:indep}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+Key & Labels for unmodeled methods & Sonnet~5 & Jev\\
+\midrule
+Main & Sonnet~5 & shared: 29.6\% (2.5\%) & 40.0\% (1.0\%)\\
+Deletion, 50\% of classes & none (FlowDroid's models) & 85.0\% (1.1\%) & 53.8\% (1.3\%)\\
+Deletion, 75\% of classes & none (FlowDroid's models) & 79.1\% (1.0\%) & 50.9\% (1.3\%)\\
+K2 & StubDroid on the Android code & 33.6\% (2.3\%) & 25.7\% (1.7\%)\\
+GPT key & GPT-6.1 & \todo{running} & \todo{running}\\
+\bottomrule
+\end{tabular}
+\end{table}
+Under the keys with no language model in them, Sonnet~5 is the strongest pricer, so its result does not come from agreeing with itself; Jev's underlying model is not disclosed, which is why we report it under every key.
+
 The classifier is strong when single methods are deleted (82--88\%, because it learns FlowDroid's conventions from sibling methods) and collapses when whole classes are removed (33\% at 75\%), the realistic case, since 86\% of the unmodeled methods that matter sit in classes with no modeled method.
 A general language model asked for probabilities is the best or tied pricer under K2 and on the deletion keys; Jev leads only on the main key at $\alpha=0.05$ and is about 40 times cheaper (about \$0.4 against \$16 for the corpus).
 Of the panel, only Qwen3.7-Flash keeps some power under deletion (20.5\% at 50\%, 23.5\% at 75\%); the others clear 0 to 28\%. A mean held-out error over only the splits that certify can exceed $\alpha$ for such weak pricers (they certify in a few lucky splits); what the guarantee bounds, the share of calibrations whose threshold is too loose, stays within $\varepsilon$.
