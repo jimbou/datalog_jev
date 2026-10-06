@@ -61,6 +61,17 @@ def key_holes(key):
     real code), au (k3 with the audit's answers on the receipt facts)."""
     if key == "k3":
         return labelled_holes()
+    if key.startswith("kn"):  # label-noise sensitivity: each language-model "no" becomes "yes" with probability 0.11 (seeded)
+        seed, holes = key[2:], labelled_holes()
+        for (cls, sub), h in holes.items():
+            if h["source"] != "silver":
+                continue
+            for i, a in enumerate(h["atoms"]):
+                if a["label"] is False:
+                    d = hashlib.md5(("%s|%s|%s|%d" % (seed, cls, sub, i)).encode()).digest()
+                    if int.from_bytes(d[:4], "big") / 2 ** 32 < 0.11:
+                        a["label"] = True
+        return holes
     if key in ("k2", "k2s"):
         holes = framework_holes()
         lab = json.load(open(os.path.join(ROOT, "data/k2_labels.json")))
@@ -383,6 +394,9 @@ def main():
     for pre, kname in (("k2s-", "k2s"), ("k2-", "k2"), ("au-", "au"), ("ah2-", "ah2"), ("ah-", "ah")):
         if pricing.startswith(pre):
             key, base = kname, pricing[len(pre):]
+    m = re.match(r"(kn\d+)-(.+)$", pricing)  # label-noise keys kn1-, kn2-, ...
+    if m:
+        key, base = m.group(1), m.group(2)
     if pricing.startswith("k1-") or pricing.startswith("k1c-"):
         tag, rate, seed, base = pricing.split("-", 3)
         k1 = (float(rate), int(seed), tag == "k1c")
