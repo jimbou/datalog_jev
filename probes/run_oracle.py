@@ -1,6 +1,7 @@
 """Silver labels for hole atoms from a strong LLM (one JSON answer per method).
 
-Usage: run_oracle.py MODEL TAG DATASET [KEYS_FILE]
+Usage: run_oracle.py MODEL TAG DATASET [KEYS_FILE]     (env PROMPT=rubric: the written flow definition with reason codes;
+       rows then carry "codes" and labels true / false / null for unknown)
   DATASET   data/<DATASET>.jsonl hole records (cls, sig, kind, atoms)
   KEYS_FILE optional file of "cls<TAB>sig" lines restricting which methods to label
 Writes data/oracle-<TAG>.jsonl: {cls, sig, labels: [bool...], cost}
@@ -20,6 +21,22 @@ SYSTEM = ("You are an expert on the Java and Android framework APIs and on stati
           "Answer only with a JSON object mapping each question id to true or false.")
 
 
+RUBRIC = ("You are an expert on the Java and Android framework APIs. For a library method, decide for each candidate flow "
+          "whether data flows from X to Y under this definition. Method M is called with X holding a secret; after the call, "
+          "is a piece of the secret in Y, in ordinary executions with standard arguments? Classify each candidate with one code:\n"
+          "C = X's data is copied or computed into Y (a flow)\n"
+          "S = X is stored in Y as the method's purpose, including keeping a reference to X (a flow)\n"
+          "R = Y is read out of X, including its size, emptiness or metadata (a flow)\n"
+          "P = X only picks which existing thing is used or returned, e.g. an index or a key used for lookup (not a flow)\n"
+          "K = X only controls how much, when or whether, e.g. a flag, a timeout, a boolean test result (not a flow)\n"
+          "I = X changes only incidental state such as caches, listeners' bookkeeping or back-pointers (not a flow)\n"
+          "H = it would matter only through a custom override, callback, other OS version or unusual argument (not a flow)\n"
+          "N = no connection (not a flow)\n"
+          "U = cannot be decided from the API contract\n"
+          "Answer only with a JSON object mapping each question id to its code letter.")
+FLOW_CODES = {"C": True, "S": True, "R": True, "P": False, "K": False, "I": False, "H": False, "N": False, "U": None}
+
+
 def ask(model, r):
     st, params = state(r)
     qs = "\n".join("%d: %s -> %s" % (k, endpoint(a["src"], params), endpoint(a["tgt"], params))
@@ -29,6 +46,11 @@ def ask(model, r):
                                     {"role": "user", "content": st + "\n\nCandidate flows:\n" + qs}]}).encode()
     for attempt in range(5):
         try:
+            if os.environ.get("PROMPT") == "rubric":  # the written flow definition with reason codes (CLI backends only)
+                text = cli_llm.chat(BACKEND, model, RUBRIC, st + "\n\nCandidate flows:\n" + qs)
+                obj = json.loads(re.search(r"\{.*\}", text, re.S).group(0))
+                codes = [str(obj.get(str(k), obj.get(k, "U"))).strip().upper()[:1] for k in range(len(r["atoms"]))]
+                return {"cls": r["cls"], "sig": r["sig"], "codes": codes, "labels": [FLOW_CODES.get(c) for c in codes], "cost": 0}
             if BACKEND != "openrouter":
                 text, d = cli_llm.chat(BACKEND, model, SYSTEM, st + "\n\nCandidate flows:\n" + qs), {"usage": {"cost": 0}}
             else:
