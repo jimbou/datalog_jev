@@ -109,6 +109,8 @@ def prepare(app_dir, fw, supers, src, snk):
     with open(os.path.join(app_dir, "ValueSub.facts"), "w") as f:
         for sub in sorted({sub for _, sub in called if sub.split(" ")[0] in VALUE_TYPES}):
             f.write(sub + "\n")
+    for name in ("Component", "IntentFilter"):
+        open(os.path.join(app_dir, name + ".facts"), "a").close()
     for name, table in (("SourceMethod", src), ("SinkMethod", snk)):
         with open(os.path.join(app_dir, name + ".facts"), "w") as f:
             for cls, sub in called:
@@ -207,6 +209,8 @@ def save_graph(out, app, kinds=None, n_sink_calls=0):
         hole_kind=np.array([(kinds or {}).get(k, "") for k in hk]), n_sink_calls=n_sink_calls,
         sink_site=np.array(sites), sink_ptr=ptr.astype(np.int64),
         sink_nodes=np.array([n for s in sites for n in sinks[s]], dtype=np.int32),
+        icc_sub=np.array([r[0] for r in rows(out, "IccLabel")]), icc_label=np.array([r[1] for r in rows(out, "IccLabel")]),
+        icc_info=json.dumps([r for r in rows(out, "IccInfo")]),
         stats=json.dumps(dict((k, int(v)) for k, v in rows(out, "Stats"))))
         fh.flush()
         os.fsync(fh.fileno())
@@ -221,7 +225,12 @@ def extract(apk, out):
     p = subprocess.run(["java", "-Xmx6g", "-cp", os.path.join(ROOT, "tools/soot-4.6.0-jar-with-dependencies.jar"),
                         os.path.join(ROOT, "extract/Facts.java"), apk, os.path.join(ROOT, "tools/android/android.jar"),
                         "", out], capture_output=True, text=True, timeout=EXTRACT_TIMEOUT)
-    return p.returncode == 0 and os.path.exists(os.path.join(out, "Call.facts"))
+    ok = p.returncode == 0 and os.path.exists(os.path.join(out, "Call.facts"))
+    if ok and "icc" in os.path.basename(TAINT_DL):  # components and intent filters for the inter-component holes
+        cp = ":".join(glob.glob(os.path.join(ROOT, "tools/flowdroid/lib/*.jar")))
+        subprocess.run(["java", "-cp", cp, os.path.join(ROOT, "extract/Manifest.java"), apk, out],
+                       capture_output=True, text=True, timeout=EXTRACT_TIMEOUT)
+    return ok
 
 
 def analyse(app, app_dir):
@@ -256,7 +265,7 @@ def process(item):
 
 def apps_to_build(app_glob):
     """(app, facts dir or APK path): stored facts where present, otherwise the APK."""
-    items = {os.path.basename(d): d for d in glob.glob(os.path.join(ROOT, "facts_apk_all", app_glob))}
+    items = {} if os.environ.get("FROM_APK") else {os.path.basename(d): d for d in glob.glob(os.path.join(ROOT, "facts_apk_all", app_glob))}
     for pick in glob.glob(os.path.join(ROOT, "bench/apks/pick*.txt")):
         for line in open(pick).read().split("\n"):
             if line.count("\t") == 1 and "\x00" not in line:  # skip lines damaged by an interrupted write

@@ -154,6 +154,7 @@ public class Facts {
             emit("Arg", site, String.valueOf(i),
                  arg instanceof Local ? v(m, arg)
                  : arg instanceof StringConstant ? "str:" + ((StringConstant) arg).value.replace("\t", " ").replace("\n", " ")
+                 : arg instanceof ClassConstant ? "cls:" + ((ClassConstant) arg).toSootType().toString()  // e.g. new Intent(ctx, Foo.class)
                  : "-");
         }
     }

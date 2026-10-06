@@ -123,7 +123,7 @@ Pts(to, h2) :- SLoad(to, f), HPts("static", f, h2), !HasVarType(to).
 
 // ---- candidate hole atoms at library call sites ----
 .decl End(site:symbol, e:symbol, v:Var)
-End(site, cat("arg", to_string(i)), a) :- LibCall(site, _, _, _, _), Arg(site, i, a), !match("str:.*", a), a != "-".
+End(site, cat("arg", to_string(i)), a) :- LibCall(site, _, _, _, _), Arg(site, i, a), !match("str:.*", a), !match("cls:.*", a), a != "-".
 End(site, "this", b) :- LibCall(site, _, _, b, _), b != "-".
 End(site, "ret", r) :- LibCall(site, _, _, _, r), r != "-".
 .decl CandSrc(site:symbol, k:number, v:Var)
@@ -154,7 +154,7 @@ TH(h) :- TM(site, k), CandTgtH(site, k, h).
 
 // ---- sinks and backward relevance ----
 .decl SinkArg(site:symbol, v:Var)
-SinkArg(site, a) :- LibCall(site, c, sub, _, _), SinkMethod(c, sub), Arg(site, _, a), !match("str:.*", a), a != "-".
+SinkArg(site, a) :- LibCall(site, c, sub, _, _), SinkMethod(c, sub), Arg(site, _, a), !match("str:.*", a), !match("cls:.*", a), a != "-".
 .decl BV(v:Var)
 .decl BH(h:symbol)
 .decl BF(h:symbol, f:symbol)

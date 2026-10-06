@@ -69,6 +69,25 @@ Experiment 4 sketch: candidate edges from Intent-sending sinks (startActivity, s
 getIntent/onReceive sources of components in the same app; key from explicit intents (target class constant) and manifest
 intent filters; pricer asked "can this intent reach this component"; same min-cut and calibration.
 
+### Experiment 4 design (inter-component holes), 2026-10-06
+
+1. Extractor: record class constants as `cls:<name>` arguments (`new Intent(ctx, Foo.class)`, `setClass`), and dump each
+   app's manifest components with their intent-filter actions (FlowDroid's `ProcessManifest`, already in tools/flowdroid/lib).
+   `taint.dl` must skip `cls:` arguments like `str:` ones.
+2. Datalog (`analysis/taint_icc.dl`, generated from taint.dl): send sites = calls to startActivity(ForResult), startService,
+   bindService, sendBroadcast (and variants) with Intent argument I; receive vars in app component C = return of getIntent()
+   in C's methods and the Intent parameter of onReceive / onStartCommand / onBind / onNewIntent / onHandleIntent /
+   onActivityResult. Candidate atom (send site, C) with CandSrc = I and CandTgtV = receive vars of C, for components of the
+   kind the call targets. Hole identity: cls "#icc", sub "<send site> -> <C>". Everything else (taint, relevance, RelCand,
+   graph, min-cut) unchanged; the library holes stay as they are.
+3. Key: explicit target (class constant or class-name string) -> true iff it is C; implicit with constant action -> true
+   iff C's manifest filter lists the action; otherwise unknown.
+4. Pricer: Sonnet through Claude Code, asked per candidate with the intent's construction (target class / action / extras
+   keys) and C's name, kind and filter actions.
+5. Apps: rebuild the 80 FlowDroid-validation apps and the 33 TaintBench apps (hours, not days); evaluate with library + ICC
+   holes; RQ: TaintBench's 49 documented inter-component leaks reached through ICC holes, receipts mixing both hole kinds,
+   calibration on the F-Droid 80.
+
 ## To build next
 
 - RQ10 TaintBench: download the 39 apps and the documented findings; build graphs; price new methods; compare, per documented flow,
