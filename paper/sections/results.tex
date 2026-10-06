@@ -92,11 +92,12 @@ Main & Sonnet~5 & shared: 29.6\% (2.5\%) & 40.0\% (1.0\%)\\
 Deletion, 50\% of classes & none (FlowDroid's models) & 85.0\% (1.1\%) & 53.8\% (1.3\%)\\
 Deletion, 75\% of classes & none (FlowDroid's models) & 79.1\% (1.0\%) & 50.9\% (1.3\%)\\
 K2 & StubDroid on the Android code & 33.6\% (2.3\%) & 25.7\% (1.7\%)\\
-GPT key & GPT-6.1 & \todo{running} & \todo{running}\\
+GPT key & GPT-6.1 & 24.0\% (0.9\%) & 22.9\% (1.8\%)\\
 \bottomrule
 \end{tabular}
 \end{table}
-Under the keys with no language model in them, Sonnet~5 is the strongest pricer, so its result does not come from agreeing with itself; Jev's underlying model is not disclosed, which is why we report it under every key.
+Under the keys with no language model in them, Sonnet~5 is the strongest pricer, and under the GPT key it matches Jev, so its result does not come from agreeing with itself; Jev's underlying model is not disclosed, which is why we report it under every key.
+The two models' labels agree on 81\% of the candidate flows (Cohen's $\kappa=0.62$); GPT-6.1 calls more flows real (53\% against 35\%), so its key leaves fewer leak-free sinks to clear, and Jev's clearance falls from 40.0\% to 22.9\%: the guarantee holds under every key, but how much is cleared depends on how strict the key is.
 
 The classifier is strong when single methods are deleted (82--88\%, because it learns FlowDroid's conventions from sibling methods) and collapses when whole classes are removed (33\% at 75\%), the realistic case, since 86\% of the unmodeled methods that matter sit in classes with no modeled method.
 A general language model asked for probabilities is the best or tied pricer under K2 and on the deletion keys; Jev leads only on the main key at $\alpha=0.05$ and is about 40 times cheaper (about \$0.4 against \$16 for the corpus).
