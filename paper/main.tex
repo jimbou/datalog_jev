@@ -35,16 +35,15 @@
 \begin{abstract}
 Static taint analyses skip library code they cannot read and silently assume that no data flows through it.
 A ``no leak'' verdict may therefore be wrong, and nobody says how likely that is.
-We make the assumption visible and bound its cost.
-We list every way data could pass through each skipped library method, the \emph{holes}.
-For every clean verdict a min-cut finds its \emph{receipt}: the cheapest set of assumed-absent flows the verdict depends on.
-A pricer gives each flow a probability of being real, and the receipt's prices add up to a bound on the chance that the verdict is wrong, without assuming that the flows are independent.
-The threshold on that bound is calibrated on whole apps, with a fixed-sequence exact test, and checked on held-out apps.
-On 324 Android apps, a sound over-approximation clears 72.0\% of the leak-free sinks; receipts clear 40\% of the remaining verdicts that depend on library holes at a 5\% target, with wrong clearances in 1.0\% of held-out apps.
-Counting the assumptions without prices clears nothing.
-The guarantee holds for every pricer we tried, which differ widely in power, and it survives replacing the answer key by code-derived StubDroid summaries and by a human audit of the facts the clearances rest on.
-On FlowDroid itself, removing its library model loses 86\% of the leaks it reports, which is the effect this work bounds.
-We also report where the approach is weak: our analysis finds only two thirds of FlowDroid's leaks and over-reports heavily.
+We define when an analysis with a rule for trusting its clean verdicts is \emph{$(\alpha,\varepsilon)$-soundy}: with confidence $1-\varepsilon$, a new program gets a wrong clean verdict with probability at most $\alpha$.
+We achieve it with receipts.
+Every way data could pass through a skipped library method is a \emph{hole}; for every clean verdict a min-cut finds its \emph{receipt}, the cheapest set of assumed-absent flows it depends on; a pricer gives each flow a probability of being real, and the receipt's prices bound the chance that the verdict is wrong, the tightest such bound when only marginal probabilities are known.
+The threshold on that bound is certified on whole programs with an exact test, and stays valid whatever the pricer.
+On 324 Android apps, a sound over-approximation clears 72.0\% of the leak-free sinks; receipts clear 40\% of the remaining verdicts at a 5\% target, with wrong clearances in 1.0\% of held-out apps, while verdict-level conformal selection at the same target leaves a wrong clearance in half of the apps.
+Because receipts name their facts, a small budget of checks pays off: verifying the 25 highest-ranked facts lifts the certified clearance to 53\% and doubles the leaks the analysis reports, while random checks do nothing.
+On TaintBench malware, half of the documented leaks our analysis reaches depend on library holes, and the threshold certified on F-Droid apps transfers.
+The guarantee holds for eleven pricers and four answer keys, including code-derived StubDroid summaries and a human audit; the pricers differ only in how much they clear.
+We also report where the approach is weak: our analysis finds 58\% of FlowDroid's leaks and over-reports heavily, and cheap language models price too confidently to clear much.
 \end{abstract}
 
 \begin{CCSXML}

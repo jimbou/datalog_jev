@@ -2,7 +2,7 @@
 \label{sec:related}
 \paragraph{Minimal assumptions behind a verdict.}
 Bastani et al.~\cite{bastani-oopsla15} compute min-cuts in a source-sink flow graph, each cut a set of statements assumed unreachable, and ask a developer to confirm them with tests; Zhu et al.~\cite{zhu-aplas13} abduce the library specifications needed to verify a source-sink property; Dillig et al.~\cite{dillig-pldi12} and Elrond~\cite{elrond} abduce proof obligations or specifications.
-Our receipt is their cut with prices, and the human is replaced by a calibrated prior whose error is certified.
+Our receipt is their cut with prices; the human becomes optional, a calibrated prior carries the rest with a certified error, and when a person does check facts, receipts tell which few facts unlock the most verdicts (RQ9).
 \paragraph{Library specification inference.}
 Merlin~\cite{merlin} infers specifications with probabilities but thresholds them into facts; Seldon~\cite{seldon}, StubDroid~\cite{stubdroid}, Atlas~\cite{atlas} and Bastani et al.~\cite{bastani-popl15} produce specifications without a verdict-level error; LLM-based extraction~\cite{iris,semtaint} takes the model's answers as fact.
 We use StubDroid as an independent key and the model-as-fact approach as a baseline.
@@ -12,11 +12,13 @@ Praline~\cite{praline} computes sound probability bounds for Datalog outputs und
 NeuroLog~\cite{neurolog} feeds model-extracted facts to Datalog to find bugs; we use the same kind of stack to bound missed flows rather than to find them.
 \paragraph{Risk control.}
 The calibration is Learn-then-Test~\cite{lt}; conformal selection~\cite{conformalselection} is the verdict-level alternative; it controls the false-discovery rate among selected verdicts, which here leaves wrong clearances in most apps.
+\paragraph{Benchmarks.}
+TaintBench~\cite{taintbench} documents real malware leaks with their paths; we use it to ask how many of them depend on library holes and whether a threshold certified on benign apps transfers.
 \paragraph{Soundiness.}
 The soundiness manifesto~\cite{soundiness} asks analyses to list what they leave out; receipts make one such list checkable per verdict and attach a risk to it.
 
 \section{Conclusion}
 \label{sec:conclusion}
-Unsound static analyses can report not only that a sink looks clean, but on which library assumptions the verdict rests and, with a certified error rate over programs, how often clearing such verdicts is wrong.
-The certificate holds for every pricer we tried; a good pricer buys power, and which pricer is best depends on how the answer key relates to the library code.
-The honest limits are that our analysis is a weaker tool than FlowDroid and that the key is only partly independent of language models.
+An unsound static analysis can be $(\alpha,\varepsilon)$-soundy: it can say on which library assumptions each clean verdict rests, and clear verdicts with an error rate over programs that is certified, not hoped for.
+The certificate holds for every pricer we tried; a good pricer buys clearance, a few well-chosen checks of receipt facts buy more, and on real malware the threshold certified on benign apps transferred.
+The limits are as clear: our analysis is a weaker tool than FlowDroid, the key is only partly independent of language models, and cheap models price too confidently to help.

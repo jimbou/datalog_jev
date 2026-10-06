@@ -5,10 +5,12 @@
 (2)~State the flow rule in the question: a pricer that reads ``derived data'' narrowly under-prices getters and concentrates wrong clearances on a few widely bundled facts.
 (3)~Validity and power separate cleanly: every pricer and every way of combining prices met the target; what a better pricer buys is a larger cleared share.
 (4)~A key must be tested against the library code: a learned pricer looks excellent on a key built from the same conventions and fails when the classes it learned from are removed.
-(5)~Counting assumptions is not a substitute for pricing them: with no prices, even receipts of one fact are unsafe in 93\% of the apps.
+(5)~Counting assumptions is not a substitute for pricing them: with no prices, even receipts of one fact are unsafe in 93\% of the apps, and on malware they would clear 22 documented leaks.
+(6)~Receipts are worth checking: a handful of facts sits under thousands of verdicts, so a few checks chosen by how many uncleared verdicts they block buy more than a better pricer would, and they also turn priced assumptions into reported leaks.
+(7)~A pricer must be judged at the low end: models that answer almost only 0.02 or 0.95 rank well on average but put some real flows at the lowest price, and calibration then refuses them.
 
 \paragraph{What the results mean for practice.}
-An analysis designer who ships an unsound taint analysis can ship with it a list of the library assumptions behind each clean verdict and a threshold whose risk was measured on held-out apps, at a price of about \$0.4 to \$16 per corpus.
+An analysis designer who ships an unsound taint analysis can ship with it a list of the library assumptions behind each clean verdict and a threshold whose risk was measured on held-out apps, at a price of about \$0.4 to \$16 per corpus, and a short list of facts whose checking would clear the most.
 The honest limit is that the certificate speaks about library holes, not about the rest of the analysis (Section~\ref{sec:rq5}).
 
 \section{Threats to Validity}
@@ -18,11 +20,13 @@ The main key contains language-model labels; K2 is code-derived but partial, use
 \emph{Exchangeability.}
 Apps that bundle the same library are not independent; Section~\ref{sec:rq7} reports grouped splits.
 \emph{Corpus.}
-Small F-Droid apps, with half of the large ones failing to build; no Play Store apps, so transfer is untested.
+Small F-Droid apps, with half of the large ones failing to build, and 33 TaintBench malware apps; no Play Store apps. The transfer to malware rests on 31 apps, too few to estimate a risk near 5\% precisely; it shows no sign of failure, not a second guarantee.
 \emph{The analysis.}
 Section~\ref{sec:rq5} shows it differs from FlowDroid in both directions; the guarantee is about library holes relative to our analysis.
 \emph{Pricers.}
-Every pricer is a language model or a classifier trained on FlowDroid's labels; the main pricer is proprietary, and the panel (Section~\ref{sec:rq3}) includes open-weight models.
+Every pricer is a language model or a classifier trained on FlowDroid's labels; the main pricer is proprietary, and the panel (Section~\ref{sec:rq3}) includes open-weight models. Language-model answers obtained through hosted services may change over time; all prices are stored in the artifact. A few methods were priced through a different access path to the same model (152 of 17{,}830 for one panel model).
+\emph{Checks.}
+In RQ9 the key plays the person who checks facts, so the gain assumes checks that agree with the key; a person disagrees with it on some facts (Section~\ref{sec:rq4}).
 \emph{Definition.}
 Results depend on the flow definition; the one choice that mattered (reference keeping) is reported under both readings.
 \emph{Construct.}
