@@ -1,7 +1,9 @@
 """Case study (which library models should FlowDroid's maintainers write next?): rank unmodeled framework methods and write
 FlowDroid summaries for the top K of each ranking.
 
-Usage: make_summaries.py K [RESULTS]     (RESULTS default data/android_choice-obj.jsonl, threshold 0.3)
+Usage: make_summaries.py K [RESULTS [TAG]]     (RESULTS default data/android_choice-obj.jsonl, threshold 0.3; TAG names the
+       output directories data/summaries_<ranking>_<K><TAG>; with TAG, "receipts" counts every hole-dependent verdict of the
+       results file and "frequency" counts the apps of that file calling the method, so both rankings use the same apps)
 Rankings of the methods FlowDroid does not model (hole source "none"):
   receipts   number of hole-dependent verdicts not cleared at the threshold whose receipt contains one of the method's facts
   frequency  number of apps that call the method (what a maintainer without receipts might use)
@@ -64,17 +66,27 @@ def write_dir(name, chosen):
 def main():
     k = int(sys.argv[1])
     res = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "data/android_choice-obj.jsonl")
+    tag = sys.argv[3] if len(sys.argv) > 3 else ""
     main_key, k2 = labelled_holes(), key_holes("k2")
     unmodeled = {key for key, h in main_key.items() if h["source"] in ("none", "silver") and h["atoms"]}
     blocked = collections.Counter()
     for l in open(res):
         r = json.loads(l)
-        if r["bound"] is None or r["bound"] <= 0.3:
+        if r["bound"] is None or (not tag and r["bound"] <= 0.3):
             continue
         for m in {(c["cls"], c["sub"]) for c in r["cut"]}:
             if m in unmodeled:
                 blocked[m] += 1
     hf = {(r["cls"], r["sig"]): r.get("apps", 0) for r in map(json.loads, open(os.path.join(ROOT, "data/holes_android_fw.jsonl")))}
+    if tag:  # frequency over the same apps: number of their graphs (env FREQ_GRAPHS) in which the method is a hole
+        import glob
+        import numpy as np
+        apps_of = collections.Counter()
+        for g in glob.glob(os.path.join(ROOT, os.environ["FREQ_GRAPHS"], "*.npz")):
+            z = np.load(g)
+            for m in set(zip(z["hole_cls"].tolist(), z["hole_sub"].tolist())):
+                apps_of[m] += 1
+        hf = dict(apps_of)
     rankings = {"receipts": sorted(unmodeled, key=lambda m: (-blocked[m], m)),
                 "frequency": sorted(unmodeled, key=lambda m: (-hf.get(m, 0), m))}
     rnd = sorted(unmodeled)
@@ -90,7 +102,7 @@ def main():
                 out.append((a["src"], a["tgt"]))
         return out
     for name, order in rankings.items():
-        write_dir("summaries_%s_%d" % (name, k), [(c, g, flows((c, g))) for c, g in order[:k]])
+        write_dir("summaries_%s_%d%s" % (name, k, tag), [(c, g, flows((c, g))) for c, g in order[:k]])
         print("  top 5:", [(c.split(".")[-1], g.split("(")[0].split(" ")[-1], blocked[(c, g)], hf.get((c, g))) for c, g in order[:5]])
 
 
