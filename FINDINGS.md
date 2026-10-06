@@ -828,6 +828,33 @@ FlowDroid loses 127 of 154 leaking sink methods (82%) over the 69 apps with both
 175 FlowDroid leaks (58%) are in our all-holes-on set and 80 (46%) under the key; we flag 8,184 key-true sink methods, of
 which FlowDroid reports 80 (1%). Recall is lower than on the first 40 (67% / 60%), so the earlier figure was optimistic.
 
+## 22b. Case study, inter-component holes, key independence (2026-10-06)
+
+**Library-model case study (null).** 50 (and 20) extra FlowDroid summaries written from the key (K2 where it decides) for
+methods ranked by receipts, by app frequency and at random; FlowDroid on the 39 TaintBench apps with TaintBench's list. Base:
+51/203 documented leaks, 20 documented negatives reported. Ranked by receipts on F-Droid: 51 (+0); frequency: 53 (+2, +6
+negatives); random: 53. Ranked by receipts on the TaintBench apps themselves: 20 methods: receipts 53, frequency 54, random 53;
+50 methods: receipts 48 (lost 5, likely a summary-file artifact shared with random), frequency 54, random 48. Receipt
+ranking does not beat simple baselines for choosing FlowDroid models. Not a paper claim.
+
+**Inter-component (Intent) holes (experiment 4).** `analysis/taint_icc.dl`: class constants and manifest components in the
+facts; candidate (send site, component) holes; key from explicit targets and manifest actions (local Intent objects
+preferred); Sonnet prices through Claude Code (4,460 candidates). 72 of 80 F-Droid apps: 17,761 hole-dependent verdicts,
+1,467 receipts contain an Intent hole (44 apps); certified at alpha 0.1: Jev 40.2% cleared, 1.4% held-out apps wrong;
+Sonnet 37.8%, 1.8% (alpha 0.05 not certifiable with 36 calibration apps). TaintBench: Intent holes reach no additional
+documented inter-component leak (9 reported, 9 need holes, with or without them): most such leaks go through databases,
+files or static fields, which the whole-program analysis already connects. Shows the method extends to a second hole kind;
+no gain on real leaks.
+
+**Key independence.** GPT-6.1 (Codex) labeled all 12,334 unmodeled methods with the same (loose) prompt as Sonnet. On
+20,729 shared atoms: agreement 80.8%, kappa 0.62; GPT says yes to 53% against Sonnet's 35% (3,835 Sonnet-no/GPT-yes, 149 the
+other way). Against the person's source checks (31 facts both labeled): Sonnet 25/31, GPT 28/31; on the 5 disagreements GPT
+matches the person 4 times (all Sonnet "no" on a real flow). The disagreements are mostly definition questions the loose
+prompt does not settle (containsKey, waitFor timeout, onTouchEvent: control or selection; getChildCount, setEnabled:
+readout or storage). Label noise (11% of Sonnet "no" flipped, seed 1): Jev 7.6% cleared (1.2% wrong) against 40.0%;
+Sonnet 23.1% (1.1%) against 29.6%: validity holds, Jev's clearance depends on the key's "no" labels. Next (queued): relabel
+with the written definition and reason codes by both models (`PROMPT=rubric`, `bench/queues/rubric_chain.sh`).
+
 ## 23. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
