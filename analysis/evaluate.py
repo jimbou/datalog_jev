@@ -61,6 +61,16 @@ def key_holes(key):
     real code), au (k3 with the audit's answers on the receipt facts)."""
     if key == "k3":
         return labelled_holes()
+    if key == "gk":  # GPT key: the main key with GPT-6.1's labels instead of Sonnet's for the methods FlowDroid does not model
+        holes = labelled_holes()
+        gpt = {(d["cls"], d["sig"]): d["labels"] for d in map(json.loads, open(os.path.join(ROOT, "data/oracle-gpt61-unk.jsonl")))}
+        for k, h in holes.items():
+            if h["source"] == "silver":
+                lab = gpt.get(k)
+                for i, a in enumerate(h["atoms"]):
+                    a["label"] = bool(lab[i]) if lab is not None and i < len(lab) else None
+                h["source"] = "gpt"
+        return holes
     if key.startswith("kn"):  # label-noise sensitivity: each language-model "no" becomes "yes" with probability 0.11 (seeded)
         seed, holes = key[2:], labelled_holes()
         for (cls, sub), h in holes.items():
@@ -391,7 +401,7 @@ def main():
     k1 = None
     base = pricing
     key = "k3"
-    for pre, kname in (("k2s-", "k2s"), ("k2-", "k2"), ("au-", "au"), ("ah2-", "ah2"), ("ah-", "ah")):
+    for pre, kname in (("k2s-", "k2s"), ("k2-", "k2"), ("au-", "au"), ("ah2-", "ah2"), ("ah-", "ah"), ("gk-", "gk")):
         if pricing.startswith(pre):
             key, base = kname, pricing[len(pre):]
     m = re.match(r"(kn\d+)-(.+)$", pricing)  # label-noise keys kn1-, kn2-, ...
