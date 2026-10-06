@@ -9,9 +9,9 @@ import json, math, os, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "paper/figs")
 S = json.load(open(os.path.join(ROOT, "data/paper_stats.json")))
-NAMES = {"choice-obj": "Jev", "sonnetp": "Sonnet~5", "b6": "Classifier", "b6c": "Classifier",
+NAMES = {"qflash": "Qwen3.7-Flash", "choice-obj": "Jev", "sonnetp": "Sonnet~5", "b6": "Classifier", "b6c": "Classifier",
          "freq": "Frequency prior", "uniform": "Counting", "b3": "LLM as fact", "b6jc": "Classifier + Jev price"}
-STYLE = {"choice-obj": "blue, thick", "sonnetp": "red, thick, dashed", "b6": "teal, thick, dotted", "b6c": "teal, thick, dotted",
+STYLE = {"qflash": "olive, thick, densely dotted", "choice-obj": "blue, thick", "sonnetp": "red, thick, dashed", "b6": "teal, thick, dotted", "b6c": "teal, thick, dotted",
          "freq": "orange, thick, dashdotted", "uniform": "gray, thick", "b3": "violet, thick, densely dashed",
          "b6jc": "brown, thick, loosely dashed"}
 EPS = 0.1
@@ -83,7 +83,7 @@ def learning():
 
 def deletion():
     rows = {}
-    for l in open(os.path.join(ROOT, "data/k1c_summary_final_a05.log")):
+    for l in open(os.path.join(ROOT, "data/k1c_summary_v2_a05.log")):  # last column: cleared, mean over all splits
         m = re.match(r"\| (\d+)% \| (\S+) \| (\d+) \|.*\| ([\d.]+)% \|\s*$", l)
         if m:
             rows.setdefault(m.group(2), []).append((int(m.group(1)), float(m.group(4)) / 100))
@@ -92,7 +92,7 @@ def deletion():
              r"  xlabel={Classes deleted (\%)}, ylabel={Share cleared at $\alpha=0.05$}, xtick={10,25,50,75,90},",
              r"  legend style={font=\scriptsize, at={(0.5,-0.32)}, anchor=north}, legend cell align=left, legend columns=3,",
              r"  tick label style={font=\scriptsize}, label style={font=\small}, grid=major, grid style={gray!20}]"]
-    for p in ("choice-obj", "sonnetp", "b6c", "b6jc", "b3", "uniform"):
+    for p in ("choice-obj", "sonnetp", "b6c", "b6jc", "b3", "qflash", "uniform"):
         if p in rows:
             lines.append(r"\addplot[%s, mark=*, mark size=1.3pt] coordinates {%s};" % (STYLE[p], " ".join("(%d,%.4f)" % q for q in sorted(rows[p]))))
             lines.append(r"\addlegendentry{%s}" % NAMES[p])

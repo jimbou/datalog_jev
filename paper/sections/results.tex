@@ -79,11 +79,12 @@ Deletion, 75\% of classes & 50.9\% (1.3\%) & 79.1\% (1.0\%) & 33.1\% (0.5\%) & -
 The guarantee holds under every key (wrong clearances at most 2.5\%); the ranking of pricers does not. (Figure~\ref{fig:curve-k2})
 The classifier is strong when single methods are deleted (82--88\%, because it learns FlowDroid's conventions from sibling methods) and collapses when whole classes are removed (33\% at 75\%), the realistic case, since 86\% of the unmodeled methods that matter sit in classes with no modeled method.
 A general language model asked for probabilities is the best or tied pricer under K2 and on the deletion keys; Jev leads only on the main key at $\alpha=0.05$ and is about 40 times cheaper (about \$0.4 against \$16 for the corpus).
+Of the panel, only Qwen3.7-Flash keeps some power under deletion (20.5\% at 50\%, 23.5\% at 75\%); the others clear 0 to 28\%. A mean held-out error over only the splits that certify can exceed $\alpha$ for such weak pricers (they certify in a few lucky splits); what the guarantee bounds, the share of calibrations whose threshold is too loose, stays within $\varepsilon$.
 The model's yes/no taken as fact has no knob: it clears 38--90\% depending on the key, with wrong clearances in 0 to 8\% of apps and a risk that cannot be chosen.
 
 \begin{figure}[t]
 \input{figs/deletion}
-\caption{Whole-class deletion: share of the leak-free hard slice cleared at $\alpha=0.05$ against the share of FlowDroid-modeled classes deleted (mean over three seeds; one seed at 90\%). Held-out apps with a wrong clearance stay at or below 1.6\% in every cell.}
+\caption{Whole-class deletion: share of the leak-free hard slice cleared at $\alpha=0.05$ against the share of FlowDroid-modeled classes deleted (mean over three seeds and all 200 splits, a split without a certified threshold counting as nothing cleared; one seed at 90\%). In every cell, the share of splits whose held-out apps exceed $\alpha$ is at most 4.0\% on average over seeds (worst seed 10.5\%), within $\varepsilon=0.1$.}
 \label{fig:deletion}
 \end{figure}
 
