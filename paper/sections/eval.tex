@@ -172,7 +172,7 @@ Under the keys that contain no Sonnet labels, the deletion keys, K2 and the GPT 
 \emph{Does the key follow the definition?}
 The disagreement between Sonnet and GPT comes from the question, not from the models.
 Asked the short question, the two models agree on 81\% of the candidate flows (Cohen's $\kappa=0.62$), and they agree with a person's source-code checks on 81\% and 90\% of the facts.
-Asked again with the written definition and one reason code per answer (Appendix~\ref{app:flow}), they agree on 90\% ($\kappa=0.80$), both call about 40\% of the flows real, and both agree with the person on 93\% of the facts.
+Asked again with the written definition and one reason code per answer (Appendix~\ref{app:flow}), they agree on 90\% of 37{,}160 candidate flows ($\kappa=0.80$), both call about 41\% of the flows real, and they agree with the person on 92\% and 93\% of the 60 facts; on the 57 facts where both models give the same answer, the person agrees with that answer 54 times (95\%).
 The rubric key, built from the answers on which both models agree, is therefore the most faithful key we have.
 
 \emph{The deletion keys test pricers on code they have not seen.}
@@ -186,7 +186,7 @@ Language-model pricers do not depend on siblings and keep their clearance.
 \label{fig:deletion}
 \end{figure}
 
-\answer{\textbf{RQ3:} The guarantee holds under all eight keys, including keys with no language-model labels and a key with random label noise. The cleared share depends on how many flows the key calls real; with the written definition, two model families agree with each other ($\kappa=0.80$) and with a person's source checks (93\%).}
+\answer{\textbf{RQ3:} The guarantee holds under all eight keys, including keys with no language-model labels and a key with random label noise. The cleared share depends on how many flows the key calls real; with the written definition, two model families agree with each other ($\kappa=0.80$), and where they agree, with a person's source checks (95\%).}
 
 \subsection{RQ4: What Makes a Pricer Useful?}
 \label{sec:rq4}
