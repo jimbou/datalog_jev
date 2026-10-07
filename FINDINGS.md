@@ -855,6 +855,25 @@ readout or storage). Label noise (11% of Sonnet "no" flipped, seed 1): Jev 7.6% 
 Sonnet 23.1% (1.1%) against 29.6%: validity holds, Jev's clearance depends on the key's "no" labels. Next (queued): relabel
 with the written definition and reason codes by both models (`PROMPT=rubric`, `bench/queues/rubric_chain.sh`).
 
+**GPT key results.** Under the key with GPT-6.1's (loose-prompt) labels: Jev 22.9% cleared at alpha 0.05 (1.8% held-out
+apps wrong), 32.7% at 0.10 (4.5%); Sonnet 24.0% (0.9%) at both. Leak-free hard slice 19,986 (main key 28,335). Label noise,
+3 seeds (11% of Sonnet "no" flipped): Jev 7.6 / 11.4 / 13.9% at 0.05, Sonnet 23.1 / 17.0 / 18.8%; held-out wrong at most
+2.6% (alpha 0.05) and 6.0% (alpha 0.1). Validity holds under every key; clearance depends on how strict the key is.
+
+**The written definition fixes the key disagreement.** Relabeling with the rubric prompt (`PROMPT=rubric`: the flow
+definition with reason codes C/S/R flow, P/K/I/H/N no flow, U unknown) by both models: Sonnet vs GPT agreement 90.2%, kappa
+0.80 (16,201 atoms; loose prompt: 80.8%, 0.62); yes-rates 40% / 39% (loose: 35% / 53%). Against the person's 60 source-checked
+facts: GPT-rubric 56/60 (93%), Sonnet-rubric 41/44 so far (93%); loose: Sonnet 25/31, GPT 28/31. GPT rubric codes over all
+atoms: N 12,536, S 6,267, R 5,205, C 3,753, K 2,903, H 2,806, P 2,488, I 1,207, U 118. Sonnet's relabeling hit Claude Code
+rate limits at 12 parallel requests (8,107 failures); restarted at 4. Next: rubric key `rk` (agreement; K2 or unknown on
+disagreement), main results rerun queued (`bench/queues/rk_chain.sh`).
+
+**Receipts on FlowDroid itself** (`bench/fd_receipts.py`, holes as summary files, receipts confirmed by FlowDroid reruns).
+181 small F-Droid apps: 87 failed (58 because FlowDroid's own run exceeded 20 minutes, 19 with holes on), 90 complete; holes
+add 16 hole-dependent sinks in 5 apps, all 16 receipts confirmed, 9 truly leaking under the key. 39 TaintBench apps: 30
+complete, holes add 42 sinks in 14 apps, 27 receipts confirmed, 12 truly leaking. Too few apps with hole-dependent sinks to
+calibrate; usable as validation that receipts are cuts FlowDroid confirms, not as a second certified corpus.
+
 ## 23. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
