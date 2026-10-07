@@ -61,6 +61,24 @@ def key_holes(key):
     real code), au (k3 with the audit's answers on the receipt facts)."""
     if key == "k3":
         return labelled_holes()
+    if key == "rk":  # rubric key: Sonnet and GPT labels under the written definition; where they disagree, K2 if it decides, else unknown
+        holes = labelled_holes()
+        def rub(name):
+            return {(d["cls"], d["sig"]): d["labels"] for d in map(json.loads, open(os.path.join(ROOT, "data/oracle-rubric-%s.jsonl" % name))) if "labels" in d}
+        son, gpt = rub("sonnet5"), rub("gpt61")
+        k2 = json.load(open(os.path.join(ROOT, "data/k2_labels.json")))
+        for k, h in holes.items():
+            if h["source"] != "silver" and h["source"] != "none":
+                continue
+            s_, g_ = son.get(k), gpt.get(k)
+            e = k2.get(k[0] + "\t" + k[1])
+            for i, a in enumerate(h["atoms"]):
+                sv = s_[i] if s_ is not None and i < len(s_) else None
+                gv = g_[i] if g_ is not None and i < len(g_) else None
+                kv = e["lenient"][i] if e and i < len(e["lenient"]) else None
+                a["label"] = sv if (sv is not None and sv == gv) else kv
+            h["source"] = "rubric"
+        return holes
     if key == "gk":  # GPT key: the main key with GPT-6.1's labels instead of Sonnet's for the methods FlowDroid does not model
         holes = labelled_holes()
         gpt = {(d["cls"], d["sig"]): d["labels"] for d in map(json.loads, open(os.path.join(ROOT, "data/oracle-gpt61-unk.jsonl")))}
@@ -401,7 +419,7 @@ def main():
     k1 = None
     base = pricing
     key = "k3"
-    for pre, kname in (("k2s-", "k2s"), ("k2-", "k2"), ("au-", "au"), ("ah2-", "ah2"), ("ah-", "ah"), ("gk-", "gk")):
+    for pre, kname in (("k2s-", "k2s"), ("k2-", "k2"), ("au-", "au"), ("ah2-", "ah2"), ("ah-", "ah"), ("gk-", "gk"), ("rk-", "rk")):
         if pricing.startswith(pre):
             key, base = kname, pricing[len(pre):]
     m = re.match(r"(kn\d+)-(.+)$", pricing)  # label-noise keys kn1-, kn2-, ...

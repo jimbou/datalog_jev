@@ -76,7 +76,7 @@ def main():
     done = {(d["cls"], d["sig"]) for d in map(json.loads, open(out))} if os.path.exists(out) else set()
     todo = [r for r in rows if (r["cls"], r["sig"]) not in done]
     errs = cost = 0
-    with open(out, "a") as f, ThreadPoolExecutor(12) as ex:
+    with open(out, "a") as f, ThreadPoolExecutor(int(os.environ.get("ORACLE_THREADS", "12"))) as ex:
         for res in ex.map(lambda r: ask(model, r), todo):
             if "error" in res:
                 errs += 1
