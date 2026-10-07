@@ -148,6 +148,12 @@ Because that rule was written after seeing the first pass, we report both.
 A person read the Android source for the 9 positives and the 18 undecided facts (all 9 confirmed; 11 of 18 became negative) and for 40 facts the AI called negative (12 chosen for impact, 28 at random): 4 were flows, all of the kind where the method keeps a reference to its argument; the estimated miss rate among the AI's negatives is about 11\% (95\% interval 2--28\%).
 Calibrating under the key with all of these answers is identical to the main key to the last digit (39.4\% cleared, 2.0\% wrong), because every path through those facts also needs another candidate flow the key keeps absent.
 K2 decides 176 of the 446 facts (45\% of their use), all as no flow, and agrees with the key on 173; it is not a perfect witness (it misses the prefix flow in \texttt{File.createTempFile}).
+\paragraph{Does the key follow the definition?}
+The main key's labels for unmodeled methods were written by Sonnet~5 from a short question (``may the target hold the data or data derived from it''), which leaves open exactly the cases our definition settles: an index or a key used for lookup, a timeout or a flag, a size read out of a collection.
+A second model given the same question, GPT-6.1, agrees on 81\% of the candidate flows ($\kappa=0.62$) but calls many more flows real (53\% against 35\%).
+Asking both models again with the written definition and reason codes (Appendix~\ref{app:flow}) raises their agreement to 90\% ($\kappa=0.80$), brings their shares of real flows together (40\% and 39\%), and raises their agreement with the person's source checks from 81\% and 90\% to 93\% for both.
+The disagreement was in the question, not in the models; Table~\ref{tab:rubric} repeats the main results under the key built from both models' answers to the written definition, with the code-derived K2 or ``unknown'' where they disagree.
+\tabph{4cm}{tab:rubric}{Main results under the rubric key.}{Rows: pricers; columns: cleared and held-out apps wrong at $\alpha=0.05/0.10$, under the main key and under the rubric key. Source: \texttt{bench/queues/rk\_chain.sh} (\textbf{running}).}
 \tabph{4.8cm}{tab:audit}{The audit in numbers: passes, answers and agreement.}{Rows: first pass, strict recheck, unsure rows resolved, person's 27 flagged facts, person's 40-fact sample, K2; columns: yes/no/unsure counts, agreement with the key, effect on the accepted verdicts. Source: \texttt{FINDINGS.md} \S16, \S19, \S21 (\textbf{have}). \textbf{Missing}: a second person on 20 facts for an agreement statistic.}
 
 \subsection{RQ5: How faithful is our analysis to FlowDroid?}
@@ -157,6 +163,11 @@ The misses are mostly inter-component sinks (\texttt{startActivityForResult}, \t
 In the other direction we are far less precise: we flag 8{,}184 key-true sink methods, and FlowDroid also reports 80 (1\%).
 On the first 40 apps, restricting the analysis to code reachable from entry points removed only 11.5\% of these and did not change the recall, so dead code is not the cause; the whole-program, context-insensitive design is.
 Our analysis is therefore a weaker tool than FlowDroid; the guarantee is about flows missed through library holes relative to it, which is why RQ10 measures it on documented leaks.
+\paragraph{Receipts on FlowDroid itself.}
+Holes need no change to FlowDroid: its library model is a set of summary files, so ``every hole open'' is FlowDroid's summaries plus every candidate flow of every method it does not model, and switching holes off is leaving their summaries out.
+For each sink FlowDroid reports only with the holes open, we switch off the hole methods on its reported paths and rerun FlowDroid until the sink disappears; the result is a cut that FlowDroid itself has confirmed.
+On the 120 apps where all of FlowDroid's runs finished within 20 minutes (90 of 181 small F-Droid apps, 30 of 39 TaintBench apps), the holes add 58 sinks in 19 apps, 43 of which receive a confirmed receipt; FlowDroid with the key's real flows reports 21 of the 58.
+These are too few apps with hole-dependent verdicts to certify a threshold on FlowDroid, but they show that receipts transfer to a production analysis and that it, too, depends on library holes.
 \begin{table}[t]
 \caption{Our analysis against FlowDroid (with its summaries) at the level of sink-containing methods.}
 \label{tab:fd}
@@ -206,6 +217,8 @@ Per program (ours), $\varepsilon=0.1$, 50\% calibration & 40.0\% [37.4, 42.9] & 
 \end{tabular}
 \end{table}
 The grouped splits link apps that share at least three third-party package prefixes and keep each cluster on one side (196 clusters, the largest with 57 apps); the result does not change, so shared libraries do not inflate it.
+\paragraph{Noisy key.}
+Flipping 11\% of the key's ``no'' labels for unmodeled methods to ``yes'' (the miss rate the person's check estimated) in three random draws leaves the guarantee intact (held-out apps wrong at most 2.6\% at $\alpha=0.05$) and lowers clearance, Jev's most (from 40.0\% to 7.6--13.9\%, Sonnet~5 to 17.0--23.1\%): validity is robust to label noise, the cleared share is not.
 \paragraph{Min-cut optimality.}
 Solving the exact ``any correlation'' problem as a linear program over all $2^m$ worlds on 190 random graphs with 5 to 11 hole edges gives the max-flow value to within $2\cdot10^{-15}$, while the probability under independence is lower by 0.08 to 0.17 on average, so an independence-based bound understates the risk.
 \paragraph{How many calibration apps are needed.}
