@@ -70,6 +70,12 @@ Check: `ssh pku 'cd ~/receipts/data; wc -l < oracle-rubric-sonnet5.jsonl; cat rk
 5. Optional strengtheners: second human rater (kappa) on ~20 facts; FlowDroid receipts with longer timeouts (most F-Droid
    failures were FlowDroid's own 20-minute limit).
 
+## 4b. After that: the reviewer fixes
+`paper/REVIEW_FIXES.md` plans three fixes from a mock review (current chance about 25-30%): (1) holes only where
+FlowDroid has no model, with a new motivating example on unmodeled methods and a serious sink; (3) certify a threshold
+on FlowDroid itself with more apps and longer timeouts; (4) show what clearing saves an analyst. Start them after
+`RK-DONE`.
+
 ## 5. Rules the user set (also in agent memory)
 - **Do not spend OpenRouter credit.** Use Claude Code (`BACKEND=claude`) and Codex (`BACKEND=codex`) on the server
   (`probes/cli_llm.py`). Jev exists only on OpenRouter: ask before any Jev call, with the expected cost (it is ~$0.00002 per
