@@ -1,74 +1,105 @@
-\section{Approach}
+\section{Receipts with Certified Risk}
 \label{sec:approach}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=4mm and 6mm, font=\small,
+  box/.style={draw, rounded corners=2pt, align=center, minimum height=9mm, inner sep=3pt},
+  arr/.style={-{Stealth[length=2mm]}, thick}]
+\node[box] (app) {App};
+\node[box, right=of app] (graph) {Flow graph\\code edges + holes};
+\node[box, right=of graph] (cut) {Receipt\\(min-cut)};
+\node[box, right=of cut] (bound) {Bound\\$\sum$ prices};
+\node[box, right=of bound] (dec) {Clear if\\bound $\le\hat\delta$};
+\node[box, below=of cut] (pricer) {Pricer\\(LLM)};
+\node[box, below=of dec] (cal) {Certify $\hat\delta$ on\\other apps};
+\draw[arr] (app) -- (graph);
+\draw[arr] (graph) -- (cut);
+\draw[arr] (cut) -- (bound);
+\draw[arr] (bound) -- (dec);
+\draw[arr] (pricer) -- (cut);
+\draw[arr] (cal) -- (dec);
+\end{tikzpicture}
+\caption{Overview. The analysis runs with every library flow open; for each clean sink that depends on library flows, a min-cut over the prices gives its receipt and bound; a threshold certified on other apps decides which verdicts to clear.}
+\label{fig:pipeline}
+\end{figure}
+
+Figure~\ref{fig:pipeline} shows the approach.
+For each app, the analysis builds the flow graph with every hole open.
+For each clean, hole-dependent sink, it computes a receipt and its price, the bound.
+A threshold certified on other apps decides which verdicts to clear.
+This section defines each step and states what it guarantees.
+
 \subsection{Receipts}
-A \emph{receipt} for a hole-dependent clean sink $t$ is a set $C\subseteq H$ such that every path from a source to $t$ in $E_c\cup H$ uses an edge of $C$ (a cut).
+A \emph{receipt} for a clean, hole-dependent sink $t$ is a set $C\subseteq H$ of hole edges such that every path from a source to $t$ in $E_c\cup H$ uses an edge of $C$, that is, a cut.
 \begin{lemma}\label{lem:cut}
 If no edge of $C$ is in $T$, then no source reaches $t$ in $E_c\cup T$, so the verdict is not a miss.
 \end{lemma}
-\noindent The proof is immediate: any path in $E_c\cup T$ is a path in $E_c\cup H$ and would use an edge of $C$.
-Receipts of the verdicts that get accepted are small: of the 11{,}312 leak-free sinks cleared at the main threshold, 63.8\% rest on one fact, 26.6\% on two and 1.8\% on five or more (over all 84{,}753 hole-dependent sinks: 28.7\%, 18.3\% and 38.3\%).
-They are checkable: each fact is a statement about a named library method (``argument~0 flows into the return value of \texttt{Boolean.valueOf}'') that a person or a test can judge.
+\noindent Any path in $E_c\cup T$ is also a path in $E_c\cup H$ and would use an edge of $C$.
+A receipt is therefore a list of library facts that, if all false, make the verdict correct.
+Each fact names a method and two of its values (``the receiver of \texttt{CharBuffer.toString()} flows into its return value''), so a person or a test can check it.
+Most receipts are short: of the leak-free sinks that our approach clears in the evaluation, 64\% rest on a single fact and 98\% on at most four.
 
-\subsection{Pricing and the bound}
-A \emph{pricer} assigns each hole edge $h$ a price $p(h)\in[0,1]$, intended as $\Pr[h\in T]$.
-Section~\ref{sec:impl} lists the pricers.
-By Lemma~\ref{lem:cut} and the union bound, $\Pr[\text{miss}]\le\min(1,\sum_{h\in C}p(h))$ without any independence assumption.
-Because several cuts may exist, we take the one of least total price, a minimum cut with capacities $p$ (code edges have infinite capacity), computed by max-flow.
-\begin{proposition}\label{prop:tight}
-Among all joint distributions of $T$ with marginals $\Pr[h\in T]=p(h)$, the largest probability that a source reaches $t$ in $E_c\cup T$ equals $\min(1,\mathrm{mincut}_p(t))$.
+\subsection{Prices and the Bound}
+A \emph{pricer} gives each hole edge $h$ a price $p(h)\in[0,1]$, meant as the probability that $h$ is real.
+By Lemma~\ref{lem:cut}, a verdict can be a miss only if some edge of its receipt is real, so by the union bound
+\[\Pr[\text{miss}]\le\min\Bigl(1,\sum_{h\in C}p(h)\Bigr),\]
+whatever the correlation between library flows.
+A sink usually has many receipts, and we use the cheapest one: a minimum cut in the flow graph where hole edges have capacity $p(h)$ and code edges infinite capacity, computed by max-flow.
+One might hope for a smaller bound by using the structure of the graph more cleverly.
+The next result shows that this is impossible without information beyond the individual prices.
+\begin{proposition}[Tightness]\label{prop:tight}
+Among all joint distributions of $T$ with $\Pr[h\in T]=p(h)$ for every $h$, the largest probability that a source reaches $t$ in $E_c\cup T$ is $\min(1,\mathrm{mincut}_p(t))$.
 \end{proposition}
 \noindent\emph{Proof.}
-For any cut $C$, reachability needs an edge of $C$, so the probability is at most $\sum_{C}p$, hence at most the minimum.
-Conversely, decompose a maximum flow of value $F\le 1$ into paths with flows $f_k$, and let world $k$, of probability $f_k$, contain exactly the hole edges of path $k$, padded with further edges up to the marginals, which flow conservation allows.
-Every marginal is met and $t$ is reachable with probability at least $F$.\hfill$\square$
+For any cut $C$, reaching $t$ needs an edge of $C$, so the probability is at most $\sum_{h\in C}p(h)$, and hence at most the minimum over cuts.
+Conversely, decompose a maximum flow of value $F\le 1$ into paths with flows $f_k$.
+Let world $k$, with probability $f_k$, contain the hole edges of path $k$, and add further edges to the worlds until every edge $h$ has total probability $p(h)$; flow conservation leaves enough room for this.
+Every marginal is then met, and $t$ is reachable with probability at least $F$, the min-cut value.\hfill$\square$
 
-\noindent The min-cut is therefore the best bound derivable from marginals alone; a tighter bound needs knowledge of correlations, which the inference of Praline~\cite{praline} can use when it exists and which we do not have.
-Section~\ref{sec:rq7} checks the proposition numerically.
+\noindent A tighter bound would need knowledge of how library flows depend on each other.
+Probabilistic Datalog engines such as Praline~\cite{praline} can use such knowledge when it is available; with marginals only, their optimum on reachability is the min-cut.
 
-\subsection{Calibrating the acceptance threshold on whole programs}
-A bound is only as good as the prices; we therefore certify a threshold on the bound instead of trusting it.
-A verdict is \emph{accepted} at threshold $\delta$ if its bound is at most $\delta$.
-For a program $P$ let $L(P,\delta)=1$ if some accepted verdict of $P$ is a miss, and let $R(\delta)=\mathbb{E}\,L$, the probability that a new program has a wrong clearance.
-$L$ is non-decreasing in $\delta$.
+\subsection{Certifying the Threshold}
+A bound is only as good as the prices, and a language model's prices can be wrong.
+We therefore do not compare the bound with $\alpha$ directly; we choose the threshold so that the definition of Section~\ref{sec:def} holds.
+A verdict is accepted at threshold $\delta$ if its bound is at most $\delta$.
+For a program $P$, let $L(P,\delta)=1$ if some verdict of $P$ accepted at $\delta$ is a miss, and $0$ otherwise.
+Then $R(\delta)=\mathbb{E}_{P\sim\mathcal{D}}L(P,\delta)$ is the probability that a new program receives a wrong clearance, and it grows with $\delta$.
+
 \begin{proposition}[Certified threshold]\label{prop:ltt}
-Let $P_1,\dots,P_n$ be exchangeable with a new program, let $\delta_1<\dots<\delta_K$, and test $H_k:R(\delta_k)>\alpha$ in order with the exact binomial test of $\sum_i L(P_i,\delta_k)\sim\mathrm{Bin}(n,\alpha)$ at level $\varepsilon$.
-Let $\hat\delta$ be the largest $\delta_k$ such that $H_1,\dots,H_k$ are all rejected (abstain if $H_1$ is not).
-Then $\Pr[R(\hat\delta)\le\alpha]\ge 1-\varepsilon$.
+Let $P_1,\dots,P_n$ and a new program be drawn independently from $\mathcal{D}$, and let $\delta_1<\dots<\delta_K$ be candidate thresholds.
+For $k=1,2,\dots$, test the hypothesis $R(\delta_k)>\alpha$ with the exact binomial test of $\sum_i L(P_i,\delta_k)$ against $\mathrm{Bin}(n,\alpha)$ at level $\varepsilon$, and stop at the first hypothesis that is not rejected.
+Let $\hat\delta$ be the last threshold whose hypothesis was rejected (accept nothing if the first is not rejected).
+Then $\Pr[R(\hat\delta)\le\alpha]\ge 1-\varepsilon$, so $A_0$ with this rule is $(\alpha,\varepsilon)$-soundy.
 \end{proposition}
-\noindent This is fixed-sequence testing in the Learn-then-Test framework~\cite{lt}: the $L(P_i,\delta_k)$ are independent Bernoulli$(R(\delta_k))$, each test is exact, and a fixed sequence controls the family-wise error.
-Two remarks matter for the claims.
-First, \emph{validity does not depend on how the bounds were computed}: any score (a union bound, a maximum, a product) is valid after calibration; prices and the min-cut determine power and give each verdict an explanation (Section~\ref{sec:rq8}).
-Second, the unit of the guarantee is the program. Controlling the share of wrong verdicts among the selected ones (a false-discovery rate) is a different and, for a user who reads one app's report, much weaker promise: verdicts within an app share facts, so the few wrong ones spread over many apps (Section~\ref{sec:rq7}).
+\noindent This is fixed-sequence testing in the Learn-then-Test framework~\cite{lt}.
+The losses $L(P_i,\delta_k)$ are independent Bernoulli variables with mean $R(\delta_k)$, each test is exact, and testing in a fixed order controls the probability of any false rejection at $\varepsilon$.
+Two consequences matter for the rest of the paper.
 
+\emph{The guarantee does not depend on the pricer.}
+The proof uses nothing about how bounds are computed: a poor pricer, or a score other than the union bound, still yields a valid threshold.
+What the pricer decides is how much is cleared.
+In fact, only the order of the bounds matters:
+\begin{proposition}[Only the order matters]\label{prop:order}
+If $g$ is strictly increasing, running the procedure on scores $g(b)$ with thresholds $g(\delta_1)<\dots<g(\delta_K)$ accepts exactly the same verdicts as running it on $b$ with $\delta_1<\dots<\delta_K$.
+\end{proposition}
+\noindent Since $g(b)\le g(\delta)$ holds exactly when $b\le\delta$, every loss and every test is the same.
+Rescaling prices therefore changes nothing; a better pricer helps only by ordering verdicts better, and only at the low end of the order, where clearing happens (Section~\ref{sec:rq4}).
+
+\emph{The guarantee needs enough programs.}
 \begin{corollary}[Calibration floor]\label{cor:n}
-If none of the $n$ calibration programs has a wrong clearance at $\delta_1$, $H_1$ is rejected if and only if $(1-\alpha)^n\le\varepsilon$.
+Even if no calibration program has a wrong clearance, the first hypothesis is rejected only if $(1-\alpha)^n\le\varepsilon$.
 Hence no threshold can be certified for $\alpha<1-\varepsilon^{1/n}$, whatever the pricer.
 \end{corollary}
-\noindent The p-value of $k=0$ failures is $\Pr[\mathrm{Bin}(n,\alpha)=0]=(1-\alpha)^n$.
-With $\varepsilon=0.1$, certifying $\alpha=0.05$ needs at least 45 programs and $\alpha=0.02$ at least 114; this is why the target $\alpha=0.02$ became certifiable only with the full corpus: with the earlier 149 apps, a half split left 74 calibration apps, below the floor.
+\noindent With $\varepsilon=0.1$, certifying $\alpha=0.05$ needs at least 45 programs and $\alpha=0.02$ at least 114.
 
-\begin{proposition}[Only the order matters]\label{prop:order}
-Let $g$ be strictly increasing and apply the procedure of Proposition~\ref{prop:ltt} to the scores $g(b)$ with the grid $g(\delta_1)<\dots<g(\delta_K)$.
-The accepted verdicts in every program are the same as for $b$ with $\delta_1<\dots<\delta_K$.
-\end{proposition}
-\noindent Acceptance $g(b)\le g(\delta)$ is equivalent to $b\le\delta$, so every loss $L(P,\delta_k)$ and hence every test is unchanged.
-Recalibrating the prices by any monotone map therefore changes nothing; what can change the result is a pricer, or a way of combining prices, that reorders the verdicts.
-This is why the pricers in Section~\ref{sec:rq3} differ in power but not in validity, and why their ranking near the low end, not their average calibration, decides the cleared share.
-
-\subsection{Checking assumptions}
+\subsection{Checking Facts}
 \label{sec:verify}
-A receipt names facts a person can check, so a budget of checks can be spent where it unlocks most.
-A rule ranks the facts that occur in receipts of verdicts not yet accepted, using only prices and receipts: by the number of such verdicts (\emph{count}), by that number weighted by price (\emph{price}), or by the verdicts that a ``no'' alone would bring under the threshold (\emph{unlock}).
-The top $K$ facts are checked; a ``no'' removes the hole, a ``yes'' turns it into a code edge.
-Receipts and bounds are recomputed and the threshold is calibrated again.
-Because the ranking reads no answer and treats all programs alike, the checked analysis is again a fixed procedure applied to exchangeable programs, and Proposition~\ref{prop:ltt} applies unchanged.
-
-\subsection{What the guarantee says}
-For a new app drawn like the calibration apps, with probability at least $1-\varepsilon$ over the calibration sample, the probability that an accepted clean verdict is a miss is at most $\alpha$, relative to the answer key and to the analysis $A_0$.
-It does not say that $A_0$ finds the leaks FlowDroid finds, that the key is right, or that apps are exchangeable with apps of another kind (Section~\ref{sec:threats}).
-
-\begin{figure}[t]
-\input{figs/sizes}
-\caption{Receipt sizes of the 11{,}312 leak-free sinks that Jev's bound clears at the threshold certified on all apps ($\alpha=0.05$).}
-\label{fig:sizes}
-\end{figure}
+A receipt names the facts a verdict rests on, and one fact often appears in many receipts.
+When a person or a test can check a few facts, the receipts show which ones are worth checking.
+We rank the facts that appear in the receipts of verdicts not yet cleared, using only the receipts and prices: by how many such verdicts contain the fact (\emph{count}), by that number weighted by the price (\emph{price}), or by how many verdicts a ``no'' alone would bring under the threshold (\emph{unlock}).
+The top $K$ facts are checked.
+A ``no'' removes the hole edge, which can make a sink unreachable even with all remaining holes open; a ``yes'' turns the hole edge into a code edge, so the analysis now reports the corresponding leaks.
+Receipts are then recomputed and the threshold is certified again.
+Because the ranking reads no answer and treats all programs alike, the procedure with checks is again a fixed rule applied to independent programs, and Proposition~\ref{prop:ltt} still holds.

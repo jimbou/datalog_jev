@@ -1,33 +1,41 @@
 \section{Discussion}
 \label{sec:discussion}
-\paragraph{Lessons.}
-(1)~Calibrate on programs, not on verdicts: a verdict-level false-discovery rate of a few percent still leaves a wrong clearance in most apps, because the wrong verdicts are spread over apps; per-program calibration bounds what a user of one report cares about.
-(2)~State the flow rule in the question: a pricer that reads ``derived data'' narrowly under-prices getters and concentrates wrong clearances on a few widely bundled facts.
-(3)~Validity and power separate cleanly: every pricer and every way of combining prices met the target; what a better pricer buys is a larger cleared share.
-(4)~A key must be tested against the library code: a learned pricer looks excellent on a key built from the same conventions and fails when the classes it learned from are removed.
-(5)~Counting assumptions is not a substitute for pricing them: with no prices, even receipts of one fact are unsafe in 93\% of the apps, and on malware they would clear 22 documented leaks.
-(6)~Receipts are worth checking: a handful of facts sits under thousands of verdicts, so a few checks chosen by how many uncleared verdicts they block buy more than a better pricer would, and they also turn priced assumptions into reported leaks.
-(7)~A pricer must be judged at the low end: models that answer almost only 0.02 or 0.95 rank well on average but put some real flows at the lowest price, and calibration then refuses them.
 
-\paragraph{What the results mean for practice.}
-An analysis designer who ships an unsound taint analysis can ship with it a list of the library assumptions behind each clean verdict and a threshold whose risk was measured on held-out apps, at a price of about \$0.4 to \$16 per corpus, and a short list of facts whose checking would clear the most.
-The honest limit is that the certificate speaks about library holes, not about the rest of the analysis (Section~\ref{sec:rq5}).
+\paragraph{The guarantee is about library flows, not about the whole analysis.}
+Our analysis is simpler than FlowDroid.
+On the 70 of 80 apps where FlowDroid gave an answer, our analysis reaches 58\% of the leaking sink methods FlowDroid reports, and only 1\% of the sinks it flags are also flagged by FlowDroid.
+Restricting it to code reachable from entry points removed only 11.5\% of these sinks on the first 40 apps, so dead code is not the reason; the likely cause is that the analysis is context-insensitive and merges values from different calls of the same method.
+The guarantee does not depend on this precision: it bounds how often a clean verdict is wrong because of library flows, for whatever analysis produces the flow graph.
+RQ1 shows that receipts also work inside FlowDroid, where 43 of the 58 sinks that open holes add receive a receipt confirmed by FlowDroid itself.
+Certifying a threshold for FlowDroid needs more apps with hole-dependent sinks than the 19 we obtained within FlowDroid's time limits; this is the main next step.
+
+\paragraph{Other kinds of holes.}
+Library flows are one kind of gap in a soundy analysis.
+Receipts apply to any gap that can be written as a set of candidate edges.
+As a test, we added edges for inter-component communication, from each Intent an app sends to each component that could receive it, with a key from explicit targets and manifest filters.
+On 72 apps, 1{,}467 receipts contain such an edge, and the certified threshold clears 40.2\% of the hard slice at $\alpha=0.1$ with 1.4\% of apps wrong.
+These edges reach no additional documented TaintBench leak, because most of its inter-component leaks pass through databases, files or static fields, which our analysis already connects.
 
 \section{Threats to Validity}
 \label{sec:threats}
-\emph{Answer key.}
-The main key contains language-model labels; K2 is code-derived but partial, uses FlowDroid's summaries for JDK leaf methods, and is not sound; the audit is AI-assisted except for 67 facts read by one person, and it checks the facts behind the clearances, not the rejected verdicts.
-\emph{Exchangeability.}
-Apps that bundle the same library are not independent; Section~\ref{sec:rq7} reports grouped splits.
-\emph{Corpus.}
-Small F-Droid apps, with half of the large ones failing to build, and 33 TaintBench malware apps; no Play Store apps. The transfer to malware rests on 31 apps, too few to estimate a risk near 5\% precisely; it shows no sign of failure, not a second guarantee.
-\emph{The analysis.}
-Section~\ref{sec:rq5} shows it differs from FlowDroid in both directions; the guarantee is about library holes relative to our analysis.
+
+\emph{Answer keys.}
+No key is ground truth.
+The main key contains language-model labels, K2 covers only part of the library, and the audit checks the facts behind accepted verdicts, not the rejected ones.
+We address this with keys built in different ways (RQ3), with a key from two model families that agree with a person's checks on 93\% of the facts, and with random label noise.
+
+\emph{Apps.}
+The calibration apps are small open-source F-Droid apps; about half of the larger apps did not fit our memory limits.
+Apps that bundle the same libraries are not independent, which we tested by keeping such apps together in each split (Table~\ref{tab:unit}).
+The transfer to malware rests on 31 apps, which shows no sign of failure but is too few to estimate a risk near 5\% precisely.
+
 \emph{Pricers.}
-Every pricer is a language model or a classifier trained on FlowDroid's labels; the main pricer is proprietary, and the panel (Section~\ref{sec:rq3}) includes open-weight models. Language-model answers obtained through hosted services may change over time; all prices are stored in the artifact. A few methods were priced through a different access path to the same model (152 of 17{,}830 for one panel model).
+Jev is a commercial service, and hosted language models change over time; all prices are stored in our artifact.
+For one panel model, 152 of 17{,}830 methods were priced through a different access path to the same model.
+
 \emph{Checks.}
-In RQ9 the key plays the person who checks facts, so the gain assumes checks that agree with the key; a person disagrees with it on some facts (Section~\ref{sec:rq4}).
-\emph{Definition.}
-Results depend on the flow definition; the one choice that mattered (reference keeping) is reported under both readings.
-\emph{Construct.}
-A ``wrong clearance'' is relative to the key; no key is ground truth.
+In RQ5 the answer key plays the person who checks facts, so the gains assume that checks agree with the key.
+
+\emph{Definition of a flow.}
+The results depend on what counts as a flow.
+The definition is written down (Section~\ref{sec:flow}), the labels follow it with reason codes, and the one case where people commonly disagree, keeping a reference to an argument, does not change the certified clearance under either reading.

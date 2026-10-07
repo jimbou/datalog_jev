@@ -1,0 +1,52 @@
+\section{Background and Problem Definition}
+\label{sec:background}
+
+\subsection{Taint Analysis and Library Models}
+A taint analysis tracks values from \emph{sources}, calls that return sensitive data, to \emph{sinks}, calls that let data leave the app.
+It reports a sink if some source can reach it.
+Android apps reach most sources and sinks through the framework and the Java library, whose code an app-level analysis does not analyze.
+At each such call the analysis needs to know which of the call's values carry data to which others: does the receiver of \texttt{StringBuilder.toString()} reach its return value, does the argument of \texttt{List.add} reach the list?
+FlowDroid answers these questions with hand-written summaries~\cite{flowdroid}, StubDroid generates them from library code~\cite{stubdroid}, and recent work asks language models~\cite{iris,semtaint}.
+For any call without an answer, the analysis assumes that no data passes, which is the unsoundness we study.
+
+\subsection{Flow Graphs, Holes and Verdicts}
+\label{sec:setting}
+We describe an analysis by a flow graph.
+Its nodes are program values and heap locations; some nodes are sources and some are sinks.
+\emph{Code edges} $E_c$ come from code the analysis reads.
+\emph{Hole edges} $H$ are the candidate library flows: for every call to a library method, one edge from each of its arguments and its receiver to each value that could receive data (the return value, the receiver, and mutable arguments).
+The \emph{unsound analysis} $A_0$ uses only $E_c$.
+A sink $t$ is \emph{clean} if no source reaches it in $E_c$, and \emph{hole-dependent} if, in addition, a source reaches it in $E_c\cup H$.
+Clean sinks that are not hole-dependent are cleared by a sound analysis as well; our approach is about the hole-dependent ones.
+
+Let $T\subseteq H$ be the library flows that are real.
+The analysis does not know $T$; an \emph{answer key} provides it for evaluation.
+A clean, hole-dependent verdict is a \emph{miss} if a source reaches $t$ in $E_c\cup T$, that is, if the library does pass the data along some path.
+In Figure~\ref{fig:example}, both sinks are clean and hole-dependent; verdict A is a miss and verdict B is not.
+
+\subsection{What Counts as a Library Flow}
+\label{sec:flow}
+Whether a flow is real depends on what counts as a flow, and a precise answer matters because people and models label facts by it.
+A library flow from $X$ to $Y$ exists if, in ordinary executions, the data of $X$, a value computed from it, or a reference to it reaches $Y$.
+This happens when the method copies or computes $X$ into $Y$ (\texttt{String.concat}), stores $X$ in $Y$ (\texttt{List.add}, including keeping a reference), or reads $Y$ out of $X$ (\texttt{List.get}, \texttt{size}).
+It does not happen when $X$ only selects or controls something (an index, a key used for a lookup, a timeout, a flag), when $X$ only changes incidental state such as a cache, or when the data would move only through a custom override or callback.
+Like FlowDroid's default mode, we consider explicit flows only.
+Appendix~\ref{app:flow} gives the full rubric with one example per case.
+
+\subsection{Problem: How Often Is a Clean Verdict Wrong?}
+\label{sec:def}
+A soundy analysis states what it leaves out but not how often leaving it out leads to a wrong verdict.
+We make this a property of the analysis together with an \emph{acceptance rule} $\rho$, which marks some clean, hole-dependent verdicts of a program as accepted.
+Programs come from a distribution $\mathcal{D}$, for example the apps of an app store, and $\rho$ may be computed from a sample of them.
+
+\begin{definition}[$(\alpha,\varepsilon)$-soundiness]\label{def:soundy}
+An analysis $A_0$ with acceptance rule $\rho$ is \emph{$(\alpha,\varepsilon)$-soundy} for $\mathcal{D}$ and $T$ if, with probability at least $1-\varepsilon$ over the sample from which $\rho$ is computed,
+\[\Pr_{P\sim\mathcal{D}}\bigl[\text{some verdict of $P$ accepted by $\rho$ is a miss}\bigr]\le\alpha.\]
+\end{definition}
+
+\noindent A rule that accepts nothing is trivially $(0,0)$-soundy, so the goal is to accept as many verdicts as possible while meeting the definition.
+Three choices in the definition matter for what follows.
+First, the unit is the program: the definition bounds the chance that a user who reads one app's report sees a wrong clearance.
+A bound on the share of wrong verdicts among all accepted verdicts is weaker, because a few wrong verdicts spread over many apps can make many reports wrong (Section~\ref{sec:rq2}).
+Second, the bound is relative to $T$, so we test it against several answer keys.
+Third, it assumes nothing about how library flows are correlated or about how accurate any pricer is.

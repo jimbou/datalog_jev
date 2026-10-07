@@ -1,24 +1,70 @@
 \section{Related Work}
 \label{sec:related}
-\paragraph{Minimal assumptions behind a verdict.}
-Bastani et al.~\cite{bastani-oopsla15} compute min-cuts in a source-sink flow graph, each cut a set of statements assumed unreachable, and ask a developer to confirm them with tests; Zhu et al.~\cite{zhu-aplas13} abduce the library specifications needed to verify a source-sink property; Dillig et al.~\cite{dillig-pldi12} and Elrond~\cite{elrond} abduce proof obligations or specifications.
-Our receipt is their cut with prices; the human becomes optional, a calibrated prior carries the rest with a certified error, and when a person does check facts, receipts tell which few facts unlock the most verdicts (RQ9).
-\paragraph{Library specification inference.}
-Merlin~\cite{merlin} infers specifications with probabilities but thresholds them into facts; Seldon~\cite{seldon}, StubDroid~\cite{stubdroid}, Atlas~\cite{atlas} and Bastani et al.~\cite{bastani-popl15} produce specifications without a verdict-level error; LLM-based extraction~\cite{iris,semtaint} takes the model's answers as fact.
-We use StubDroid as an independent key and the model-as-fact approach as a baseline.
-\paragraph{Probabilistic inference.}
-Praline~\cite{praline} computes sound probability bounds for Datalog outputs under partly known input correlations; on a reachability fragment with only marginals known, its optimum equals the min-cut (Proposition~\ref{prop:tight}), which we use because it is a max-flow.
-\paragraph{Neuro-symbolic analysis.}
-NeuroLog~\cite{neurolog} feeds model-extracted facts to Datalog to find bugs; we use the same kind of stack to bound missed flows rather than to find them.
-\paragraph{Risk control.}
-The calibration is Learn-then-Test~\cite{lt}; conformal selection~\cite{conformalselection} is the verdict-level alternative; it controls the false-discovery rate among selected verdicts, which here leaves wrong clearances in most apps.
-\paragraph{Benchmarks.}
-TaintBench~\cite{taintbench} documents real malware leaks with their paths; we use it to ask how many of them depend on library holes and whether a threshold certified on benign apps transfers.
+
+\begin{table}[t]
+\caption{How approaches to unmodeled library code compare. \emph{Explains}: names the library facts a verdict rests on. \emph{Risk}: gives a probability that a clean verdict is wrong. \emph{Certified}: the error of accepted verdicts is bounded on new programs. \emph{Unchecked pricer}: the guarantee holds even if the model that supplies library facts is inaccurate.}
+\label{tab:related}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.44\linewidth}cccc@{}}
+\toprule
+Approach & Explains & Risk & Certified & Unchecked pricer\\
+\midrule
+Sound over-approximation & -- & -- & yes (no misses) & -- \\
+Hand-written or generated models (FlowDroid, StubDroid, Atlas) & -- & -- & -- & -- \\
+Language-model models taken as fact (IRIS, SemTaint) & -- & -- & -- & --\\
+Minimal assumptions checked by a person (Bastani et al.) & yes & -- & -- & --\\
+Probabilistic inference (Praline) & -- & yes & -- & --\\
+Conformal selection of verdicts & -- & -- & per verdict & yes\\
+Receipts with a certified threshold (ours) & yes & yes & per program & yes\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:related} summarizes how our approach relates to prior work on unmodeled library code.
+
 \paragraph{Soundiness.}
-The soundiness manifesto~\cite{soundiness} asks analyses to list what they leave out; receipts make one such list checkable per verdict and attach a risk to it.
+The soundiness manifesto~\cite{soundiness} asks analysis designers to state the features they do not handle soundly.
+We take the next step for one such feature, library code: each clean verdict states which library facts it assumes, and the analysis states how often such verdicts are wrong, with a certified bound.
+Definition~\ref{def:soundy} turns ``soundy'' from a list of omissions into a measurable property.
+
+\paragraph{Minimal assumptions behind a verdict.}
+Bastani et al.~\cite{bastani-oopsla15} compute minimal cuts in an information-flow graph, where each cut is a set of statements assumed unreachable, and ask an analyst to confirm them by testing.
+Zhu et al.~\cite{zhu-aplas13} infer the library specifications that a source-sink property needs, and abductive inference~\cite{dillig-pldi12,elrond} finds the facts that would complete a proof.
+These approaches tell the user what to check but not how likely the assumptions are to fail, so every verdict needs a person.
+Our receipts are such cuts, but with prices, and the certified threshold decides which verdicts need no person at all.
+When a person is available, receipts also tell which facts to check first (RQ5).
+We showed that counting the assumptions without prices clears nothing at any useful risk (RQ2).
+
+\paragraph{Library models.}
+FlowDroid's hand-written summaries~\cite{flowdroid} cover about 350 classes.
+StubDroid~\cite{stubdroid} generates summaries from library code, Atlas~\cite{atlas} infers specifications from library executions, Bastani et al.~\cite{bastani-popl15} infer points-to specifications, and Merlin~\cite{merlin} and Seldon~\cite{seldon} infer which methods are sources, sinks or sanitizers.
+More models make an analysis less unsound but never sound, because some methods remain unmodeled or wrongly modeled, and none of these approaches says how often its verdicts are wrong.
+Receipts are complementary: they price exactly the facts that the models leave open, and we use StubDroid as an independent answer key (RQ3).
+
+\paragraph{Language models as library models.}
+IRIS~\cite{iris} and SemTaint~\cite{semtaint} ask language models for taint specifications of library methods and use the answers as facts.
+This is the ``model taken as fact'' baseline in our evaluation: on the deletion keys it clears more than our approach, but its wrong clearances reach 7.7\% of apps and cannot be controlled (RQ2).
+We use language models in the same role, but only as pricers: their answers rank verdicts, and the calibration, not the model, provides the guarantee.
+A poor model therefore clears less instead of producing wrong clearances (RQ4).
+NeuroLog~\cite{neurolog} feeds model-extracted facts to Datalog to find bugs; we use the same kind of combination to bound missed flows.
+
+\paragraph{Probabilistic program analysis.}
+Praline~\cite{praline} computes sound bounds on the probabilities of Datalog outputs when input facts have known probabilities and partly known correlations.
+For reachability with only individual probabilities known, its optimum is the min-cut (Proposition~\ref{prop:tight}), which we compute directly with max-flow.
+Probabilistic inference gives a bound per verdict but no guarantee that the input probabilities are right; our calibration adds this guarantee and remains valid when the probabilities are wrong.
+
+\paragraph{Risk control.}
+Our threshold uses fixed-sequence testing from Learn-then-Test~\cite{lt}.
+Conformal selection~\cite{conformalselection} controls the share of wrong selections among selected items and is the natural verdict-level alternative.
+We showed that for program analysis the unit matters: at the same 5\% target, verdict-level selection left wrong clearances in half of the apps, while per-program calibration left them in 1\% (RQ2).
+
+\paragraph{Benchmarks.}
+TaintBench~\cite{taintbench} documents real malware leaks with their paths.
+We use it to measure how many documented leaks depend on unmodeled library flows and whether a threshold certified on benign apps transfers to malware (RQ6).
 
 \section{Conclusion}
 \label{sec:conclusion}
-An unsound static analysis can be $(\alpha,\varepsilon)$-soundy: it can say on which library assumptions each clean verdict rests, and clear verdicts with an error rate over programs that is certified, not hoped for.
-The certificate holds for every pricer we tried; a good pricer buys clearance, a few well-chosen checks of receipt facts buy more, and on real malware the threshold certified on benign apps transferred.
-The limits are as clear: our analysis is a weaker tool than FlowDroid, the key is only partly independent of language models, and cheap models price too confidently to help.
+Unsound static analyses report clean verdicts that silently depend on library code.
+We showed how to make this dependence explicit and measurable: each clean verdict carries a receipt of the library facts it assumes, a pricer bounds the chance that any of them is real, and a threshold certified on whole programs makes the analysis $(\alpha,\varepsilon)$-soundy for any pricer.
+On 324 Android apps, this clears 40\% of the leak-free sinks that a sound analysis cannot clear, at a 5\% risk per program, and checking a few receipt facts clears more.
+The limits are as clear: the guarantee is relative to an answer key and to the analysis it is applied to, and it needs a pricer that gives low prices only to flows that are really absent.

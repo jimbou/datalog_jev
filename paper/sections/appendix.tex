@@ -1,17 +1,47 @@
 \section{Flow Definition and Labeling Rubric}
 \label{app:flow}
-Labelers were given the following question for every fact: method $M$ is called with $X$ holding a secret; after the call, is a piece of the secret in $Y$?
-A flow exists if $X$'s data is copied or computed into $Y$ (code C), stored in $Y$ as the method's purpose, including a reference to it (S), or $Y$ is read out of $X$, including its size, emptiness or metadata (R).
-It is not a flow if $X$ only picks which existing thing is used (P), only controls how much, when or whether (K), changes only incidental state such as caches or back-pointers (I), matters only through a custom override, callback, other OS version or unusual argument (H), or has no connection (N); an undecidable case is U.
-Every answer carried a one-sentence mechanism and, for the person's pass, the evidence (line or called method).
-\tabph{4.0cm}{tab:rubric}{The reason codes and a worked example for each.}{Nine codes C, S, R, P, K, I, H, N, U with one real example each (e.g.\ \texttt{String.substring} receiver $\to$ return: C; start index $\to$ return: P). Source: \texttt{AUDIT\_RECHECK.md} (\textbf{have}).}
+People and models labeled each candidate flow by answering one question: the method is called while $X$ holds a secret; after the call, is any part of the secret in $Y$?
+Each answer gives one reason code (Table~\ref{tab:rubric}) and one sentence on the mechanism; the person who checked facts against the Android source also gave the line or the called method as evidence.
+Codes C, S and R mean that the flow exists, codes P, K, I, H and N that it does not, and U that the API contract does not decide it.
 
-\section{Proof Details}
-\label{app:proofs}
-\todo{Write out Proposition~\ref{prop:tight} with the flow-decomposition and padding construction for graphs with parallel edges and edges of probability one, and Proposition~\ref{prop:ltt} with the exact binomial p-value and the fixed-sequence argument, including why monotonicity of $L$ is needed only for the choice of order.}
+\begin{table}[h]
+\caption{Reason codes of the flow definition, each with an example.}
+\label{tab:rubric}
+\small
+\begin{tabular}{@{}cl>{\raggedright\arraybackslash}p{0.5\linewidth}@{}}
+\toprule
+Code & Meaning & Example\\
+\midrule
+C & copied or computed into $Y$ & \texttt{String.concat}: argument to return value\\
+S & stored in $Y$, including a reference & \texttt{List.add}: argument to receiver\\
+R & read out of $X$, including size or metadata & \texttt{List.get}, \texttt{List.size}: receiver to return value\\
+P & only picks which element is used & \texttt{List.get}: index to return value\\
+K & only controls how much, when or whether & \texttt{Object.wait(long)}: timeout to receiver\\
+I & only changes incidental state & \texttt{Map.get}: key to map (only access-order bookkeeping)\\
+H & only through an override or callback & \texttt{WebView.addJavascriptInterface}: web view to registered object\\
+N & no connection & \texttt{List.add}: list to the added element\\
+U & cannot be decided from the contract & \texttt{Method.invoke}: arguments to argument array\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Additional Results}
 \label{app:results}
-\tabph{6cm}{tab:app-deletion}{Method-level and class-level deletion at all rates, both targets, every pricer, with the worst seed.}{Full tables behind Figure~\ref{fig:deletion}. Source: \texttt{k1\_summary\_final\_*.log}, \texttt{k1c\_summary\_final\_*.log} (\textbf{have}).}
-\tabph{6cm}{tab:app-fd}{Per-app FlowDroid comparison (leaks found, missed, states).}{One row per app. Source: \texttt{bench/flowdroid\_compare.py}, \texttt{bench/flowdroid\_none\_compare.py} (\textbf{have}).}
-\tabph{5cm}{tab:app-keys}{Calibration per key at $\alpha\in\{0.02,0.05,0.10\}$, with the chosen threshold in each split.}{Source: \texttt{ltt\_*.log} (\textbf{have}; panel pending).}
+
+\begin{figure}[h]
+\input{figs/learning}
+\caption{Certified clearance (Jev, main key) against the number of calibration apps, tested on the remaining apps (mean of 200 draws). Dotted lines mark the smallest $n$ at which the exact test can certify each $\alpha$ (Corollary~\ref{cor:n}); the measured clearance jumps from zero exactly there.}
+\label{fig:learning}
+\end{figure}
+
+\begin{figure}[h]
+\input{figs/sizes}
+\caption{Receipt sizes of the 11{,}312 leak-free sinks that Jev's bound clears at the threshold certified on all apps ($\alpha=0.05$).}
+\label{fig:sizes}
+\end{figure}
+
+\begin{figure}[h]
+\input{figs/curve_k2}
+\caption{Wrong clearances against cleared share under the code-derived key K2 (322 apps). A language model's yes/no taken as fact is a single point; priced receipts give a curve on which the risk can be chosen.}
+\label{fig:curve-k2}
+\end{figure}

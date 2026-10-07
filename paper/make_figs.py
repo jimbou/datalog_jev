@@ -104,7 +104,7 @@ def rank_table():
     """AUROC of the bound against the certified clearance, per key and pricer."""
     keys = (("Main key", ""), ("Audited key", "ah2-"), ("K2 (code-derived)", "k2-"))
     lines = [r"\begin{tabular}{@{}llrrrr@{}}", r"\toprule",
-             r"Key & Pricer & AUROC & Cleared $\alpha{=}0.05$ & Wrong (mean / 95th pct.) & Cleared $\alpha{=}0.10$\\", r"\midrule"]
+             r"Key & Pricer & AUROC & Cleared, $\alpha{=}0.05$ & Wrong, mean / p95 & Cleared, $\alpha{=}0.10$\\", r"\midrule"]
     for kname, pre in keys:
         first = True
         for p in ("choice-obj", "sonnetp", "b6", "b3", "freq", "uniform"):

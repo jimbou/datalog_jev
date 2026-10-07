@@ -1,20 +1,25 @@
 \section{Implementation}
 \label{sec:impl}
-\paragraph{Analysis.}
-Soot~\cite{soot} extracts facts from each APK (all shipped code, including bundled libraries).
-A Souffl\'e~\cite{souffle} program computes a whole-app, context-insensitive, type-filtered Andersen points-to analysis with field sensitivity, and propagates taint from FlowDroid's default source list (84 sources, 193 sinks) with every hole on, restricted to the part that can still reach a sink.
-Hole atoms at framework call sites come from a menu of endpoint pairs per method (argument or receiver to return value, receiver or mutable argument).
-FlowDroid's manual summaries (about 350 files) give the library model of the completed analysis and one of the answer keys.
-The relevant graph is stored compressed (a few MB per app), so every pricing, ablation and answer key is post-processing.
 
-\paragraph{Min-cut.}
-A min-cut is computed per sink site with max-flow.
-Strongly connected groups of infinite-capacity code edges are contracted once per app; the contraction leaves bounds and receipts unchanged (identical output on all 332 apps) and makes evaluation about 25 times faster on the largest apps.
+\paragraph{Analysis.}
+Soot~\cite{soot} extracts facts from each APK, including the libraries the app bundles.
+A Souffl\'e~\cite{souffle} program computes a whole-app, context-insensitive, field-sensitive points-to analysis with type filtering, and propagates taint from FlowDroid's default sources and sinks with every hole open.
+It keeps only the part of the flow graph that can reach a sink and stores it compressed, a few megabytes per app, so that every pricer and answer key is evaluated on the same stored graphs.
+Holes are the candidate flows of every call to a framework or Java library method: from each argument and the receiver to the return value, the receiver and each mutable argument.
+
+\paragraph{Receipts.}
+For each clean, hole-dependent sink, a max-flow computation gives the min-cut and its value.
+Before the per-sink computations, each strongly connected group of code edges is contracted into one node.
+A finite cut never separates such a group, so the contraction leaves every bound and receipt unchanged, and it speeds up the largest apps about 25 times.
 
 \paragraph{Pricers.}
-\emph{Jev}, our first pricer, returns calibrated probabilities for yes/no questions, asked once per candidate flow with the flow rule stated (``a tainted object taints everything read or obtained from it'').
-Stating the rule matters: without it, getters on a tainted receiver are priced low and wrong clearances concentrate on a few widely bundled facts (Section~\ref{sec:rq8}).
-\emph{General language models} are asked for one probability per candidate flow of a method (verbalized, temperature 0): Sonnet~5 and a panel of other models (Section~\ref{sec:rq3}).
-Baselines: \emph{counting} (a flat price); a \emph{frequency prior} over the package and endpoint kinds; a \emph{feature classifier} (logistic regression on method-signature features, cross-fitted by method or by class and, in deletion runs, trained without the deleted methods); and the \emph{language model's yes/no taken as fact}, the model-as-specification approach~\cite{iris,semtaint}.
+Our main pricer, Jev, is a commercial service that returns a calibrated probability for a yes/no question.
+We ask one question per candidate flow and state the flow rule in the question (``a tainted object taints everything read or obtained from it'').
+General language models are asked once per method for a probability for each of its candidate flows, at temperature 0: Sonnet~5 and five cheaper models (Section~\ref{sec:rq4}).
+As baselines we use \emph{counting}, which gives every flow the same price, so that the bound is the receipt size; a \emph{frequency prior} by package and kind of flow; a \emph{feature classifier} trained on FlowDroid's models (logistic regression on signature features); and a language model's yes/no answer \emph{taken as fact}, as in recent specification-inference work~\cite{iris,semtaint}.
 
-\tabph{4.0cm}{tab:cost}{Cost of each step on the 8-core, 62\,GB server: graph build, evaluation, pricing (time and dollars per pricer), calibration.}{Rows: graph build (183 new graphs from 367 APKs in 14\,h), evaluation of 332 apps (3.5--7\,h before contraction; after: to measure), pricing time and cost per pricer (Jev about \$0.4; Sonnet~5 \$16.4; panel: pending), LTT 200 splits (seconds), FlowDroid per app. Source: server logs (\textbf{partly have}; panel costs pending).}
+\paragraph{Cost.}
+Building the flow graphs is the expensive step: 14 hours for 183 apps on an 8-core server with 62\,GB of memory.
+Computing all receipts of the 324 apps takes one to two hours per pricer.
+Pricing all 17{,}830 library methods costs about \$0.4 with Jev and \$16 with Sonnet~5.
+Certifying a threshold takes seconds.

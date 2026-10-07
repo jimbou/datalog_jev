@@ -1,10 +1,13 @@
 \documentclass[acmsmall,screen,review,anonymous]{acmart}
 % ISSTA submission format (single column, 18 pages without references and the Data Availability section).
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.17}
+\usepackage[most]{tcolorbox}
+\newcommand{\answer}[1]{\begin{tcolorbox}[colback=gray!5, colframe=black!20, arc=2pt, boxrule=0.3mm, breakable, sharp corners, left=2pt, right=2pt, top=2pt, bottom=2pt]#1\end{tcolorbox}}
 \setcopyright{none}
 \settopmatter{printacmref=false}
 \renewcommand\footnotetextcopyrightpermission[1]{}
@@ -33,17 +36,14 @@
 \renewcommand{\shortauthors}{Anonymous}
 
 \begin{abstract}
-Static taint analyses skip library code they cannot read and silently assume that no data flows through it.
-A ``no leak'' verdict may therefore be wrong, and nobody says how likely that is.
-We define when an analysis with a rule for trusting its clean verdicts is \emph{$(\alpha,\varepsilon)$-soundy}: with confidence $1-\varepsilon$, a new program gets a wrong clean verdict with probability at most $\alpha$.
-We achieve it with receipts.
-Every way data could pass through a skipped library method is a \emph{hole}; for every clean verdict a min-cut finds its \emph{receipt}, the cheapest set of assumed-absent flows it depends on; a pricer gives each flow a probability of being real, and the receipt's prices bound the chance that the verdict is wrong, the tightest such bound when only marginal probabilities are known.
-The threshold on that bound is certified on whole programs with an exact test, and stays valid whatever the pricer.
-On 324 Android apps, a sound over-approximation clears 72.0\% of the leak-free sinks; receipts clear 40\% of the remaining verdicts at a 5\% target, with wrong clearances in 1.0\% of held-out apps, while verdict-level conformal selection at the same target leaves a wrong clearance in half of the apps.
-Because receipts name their facts, a small budget of checks pays off: verifying the 25 highest-ranked facts lifts the certified clearance to 53\% and doubles the leaks the analysis reports, while random checks do nothing.
-On TaintBench malware, half of the documented leaks our analysis reaches depend on library holes, and the threshold certified on F-Droid apps transfers.
-The guarantee holds for eleven pricers and four answer keys, including code-derived StubDroid summaries and a human audit; the pricers differ only in how much they clear.
-We also report where the approach is weak: our analysis finds 58\% of FlowDroid's leaks and over-reports heavily, and cheap language models price too confidently to clear much.
+Static taint analyses skip library code they cannot read and assume that no data passes through it, so a ``no leak'' verdict may be wrong without the user knowing.
+Current answers do not tell the user how likely this is: a sound analysis reports too many false alarms, library models written by hand or inferred by tools or language models can be wrong, and a list of the assumptions behind a verdict says nothing about how likely they are to fail.
+We attach to each clean verdict a \emph{receipt}, the smallest set of library flows the verdict assumes absent, and let a language model price each flow.
+The prices on a receipt bound the probability that the verdict is wrong, without assuming that library flows are independent, and this bound is the tightest possible from the individual prices.
+A threshold on the bound is certified on a sample of programs, so that with high confidence a new program receives a wrong clean verdict with probability at most $\alpha$, whatever the quality of the prices.
+On 324 Android apps, at a 5\% target, receipts clear 40\% of the leak-free sinks that a sound analysis cannot clear, with wrong clearances in 1.0\% of held-out apps; counting assumptions without prices clears nothing.
+The guarantee holds under answer keys built from hand-written models, from library code, and from two language-model families that agree with a person's source-code checks.
+Checking the 25 receipt facts that block the most verdicts raises the cleared share to 53\%, and a threshold certified on benign apps held on 31 malware apps.
 \end{abstract}
 
 \begin{CCSXML}
@@ -62,11 +62,10 @@ We also report where the approach is weak: our analysis finds 58\% of FlowDroid'
 
 \input{sections/intro}
 \input{sections/example}
-\input{sections/setting}
+\input{sections/background}
 \input{sections/approach}
 \input{sections/impl}
-\input{sections/setup}
-\input{sections/results}
+\input{sections/eval}
 \input{sections/discussion}
 \input{sections/related}
 
