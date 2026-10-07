@@ -1,3 +1,5 @@
+> **Historical (2026-10-05).** Current open items: `paper/REMAINING_WORK.md`.
+
 # Evidence plan for the paper (ISSTA format: 18 pages without references and Data Availability)
 
 Status: **HAVE** = data exists and the number is in the text; **RUNNING** = scheduled on the server; **TODO-LOCAL** = post-processing
