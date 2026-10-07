@@ -3,7 +3,11 @@
 # Waits for Sonnet's relabeling to cover every method.
 cd "$HOME/receipts" || exit 1
 log() { echo "$1 $(date +%F-%T)" >> data/rk_chain.log; }
-while [ "$(wc -l < data/oracle-rubric-sonnet5.jsonl)" -lt "$(wc -l < data/rubric_methods.tsv)" ] || pgrep -f "[r]un_oracle.py claude-sonnet-5 rubric" > /dev/null; do sleep 300; done
+while pgrep -f "[r]un_oracle.py claude-sonnet-5 rubric" > /dev/null; do sleep 300; done
+for pass in 1 2 3; do  # fill methods whose answer failed; stop when complete
+  [ "$(wc -l < data/oracle-rubric-sonnet5.jsonl)" -ge "$(wc -l < data/rubric_methods.tsv)" ] && break
+  (cd probes && ORACLE_THREADS=4 PROMPT=rubric BACKEND=claude python3 run_oracle.py claude-sonnet-5 rubric-sonnet5 holes_android_fw ../data/rubric_methods.tsv >> ../data/rubric_sonnet.log 2>&1)
+done
 log "RK-START sonnet=$(wc -l < data/oracle-rubric-sonnet5.jsonl)"
 export JOBS=5
 FINE="0.001,0.002,0.003,0.004,0.005,0.0075,0.01,0.02,0.03,0.05,0.075,0.1,0.15,0.2,0.3,0.5"
