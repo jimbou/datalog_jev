@@ -903,6 +903,35 @@ TaintBench under rk, thresholds certified on all F-Droid apps under rk (Jev 0.2,
 clearance for either pricer (0/31); Jev clears 31.5%, Sonnet 18.2% of the leak-free hole-dependent verdicts; the same 3
 documented leaks (`addJavascriptInterface`, price 0.18) are cleared.
 
+## 22d. Fix 1: FlowDroid's models as code (prefix fm-), rubric key (2026-10-08)
+
+Holes only for the methods FlowDroid does not model; modeled methods' key-true flows are code edges, their other candidates
+removed. 307 apps with hole-dependent sinks. Sinks: 49,007 reported directly (real), 22,888 real but reachable only through
+unmodeled methods (the leaks FlowDroid-with-models would miss), 5,318 leak-free hole-dependent (hard slice, in 298 apps,
+about 18 per app), 4,946 undecided. Old setting (no library model): hard slice 20,104.
+
+| Pricer | alpha 0.02 | alpha 0.05 | alpha 0.10 |
+| --- | --- | --- | --- |
+| Jev | 37.0% (0.3%) | 48.7% (0.9%) | 60.0% (4.1%) |
+| Sonnet 5 | 16.7% (0.0%) | 16.7% (0.0%) | 16.9% (0.1%) |
+| Classifier (b6) | -- | 24.3% (1.1%) | 27.9% (2.9%) |
+| Frequency prior | -- | 19.0% (0.0%) | 19.0% (0.0%) |
+| Counting | 0% | 0% | 0% |
+
+Calibration unit (Jev, alpha 0.05): bound used as a probability 11.8% cleared, 0 apps wrong; per program 48.7% [43.4, 59.7],
+0.9% wrong [0.0, 5.8]; grouped splits 48.2%, 0.5%. Conformal selection over verdicts: FDR target 1% / 5% / 10% gives
+realized pooled FDR 1.6% / 6.6% / 18.0% (above target: not valid in this setting) and 18 / 53 / 113 of 307 apps with a wrong
+clearance.
+
+Budgeted checking (Jev, alpha 0.05, baseline 49.1% on this seed): unlock 25: 63.2% (1.0%); unlock 100: 78.2% (0.8%); count
+100: 72.9% (1.9%); random 100: 52.3% (1.1%).
+
+TaintBench (thresholds certified on all F-Droid apps: Jev 0.2, Sonnet 0.02): 83 documented leaks reported without holes,
+only 6 need unmodeled flows (old setting: 44 and 48), 82 not reached, 32 out of scope. All 6 are labeled "no flow" by our
+key: 3 `WebView.addJavascriptInterface` (callback), 1 `startActivity` (inter-component), 2 `Method.invoke` (reflection,
+bound 2.5, never cleared). 4 are cleared by every pricer, including counting. No app with a wrong clearance (by our key) for
+Jev or Sonnet (0/23); Jev clears 31.8%, Sonnet 22.9% of the leak-free hole-dependent verdicts; counting: 3/23 apps wrong.
+
 ## 23. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
