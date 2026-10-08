@@ -3,7 +3,7 @@
 This document explains the project from scratch: the problem, the gap in existing work, our idea, what we built, the
 experiments, what they show, where things stand, and where to find everything in the repository.
 Paper title: "Soundiness with Receipts: Certified Miss-Risk for Unsound Static Analyses" (target: ISSTA 2027).
-Written 2026-10-07; numbers are from the main answer key unless stated otherwise.
+Written 2026-10-07, updated 2026-10-08; numbers are from the main answer key (the rubric key: FlowDroid's models plus the labels on which two LLM families agree under a written definition) unless stated otherwise.
 
 ---
 
@@ -30,7 +30,7 @@ those gaps actually cause a wrong verdict.
 
 | Existing answer | What it does | Why it is not enough |
 | --- | --- | --- |
-| Sound analysis | assume every unmodeled method passes all data | never misses, but floods the user with false alarms: 28% of the sinks that never leak are still flagged, with no ranking |
+| Sound analysis | assume every unmodeled method passes all data | never misses, but floods the user with false alarms: 22% of the sinks that never leak are still flagged, with no ranking |
 | More library models (hand-written, StubDroid from code, Atlas, or a language model as in IRIS/SemTaint) | fill in the missing summaries | every model can be wrong, and a verdict computed from a model taken as fact has no error measure |
 | List the assumptions (Bastani et al. 2015: minimal cuts checked by a person) | tell the user which facts a verdict rests on | says *what* was assumed, not *how likely* it is to fail; every verdict still needs a person. Counting assumptions does not help: clearing every verdict that rests on one assumption leaves a wrong clearance in 93% of apps |
 
@@ -59,7 +59,7 @@ A sound analysis flags both (B is a false alarm). Counting assumptions sees "1" 
 5. **Certified threshold.** A verdict is cleared if its bound is below a threshold. The threshold is *certified* on a
    sample of other apps with an exact statistical test (Learn-then-Test), so that with confidence 1-eps, a new app gets a
    wrong clean verdict with probability at most alpha. We call this *(alpha, eps)-soundiness*. Here the certified
-   threshold is 0.3: B (0.03) is cleared, A (0.95) is reported as a possible leak.
+   threshold is 0.2: B (0.03) is cleared, A (0.95) is reported as a possible leak.
 6. **Checking facts (optional).** Receipts name facts a person can check. One fact often sits in many receipts, so
    checking a few well-chosen facts clears many verdicts.
 
@@ -94,19 +94,19 @@ common per-verdict alternative (conformal selection) leaves wrong clearances in 
 
 ## 6. Experiments and what they show
 
-Metric names: the **hard slice** = the 28,335 leak-free sinks that depend on library flows (a sound analysis cannot
+Metric names: the **hard slice** = the 20,104 leak-free sinks that depend on library flows (a sound analysis cannot
 clear them). **Cleared** = share of the hard slice we clear. **Apps wrong** = share of held-out apps with at least one
 wrong clearance (must stay below alpha).
 
 | # | Question | What we did | Result | What it shows |
 | --- | --- | --- | --- | --- |
-| RQ1 | Do clean verdicts depend on unmodeled library flows? | FlowDroid with and without its models on 80 apps; our corpus; TaintBench; holes inside FlowDroid | FlowDroid loses 82% of its leaks without models; 28% of leak-free sinks depend on library flows; 48 of 92 reachable malware leaks need unmodeled flows; FlowDroid with holes: 58 extra sinks, 43 FlowDroid-confirmed receipts | the problem is large and not specific to our analysis |
-| RQ2 | How much do receipts clear at a certified risk? | 324 apps, alpha 0.05 | Jev clears 40% of the hard slice with 1.0% of apps wrong (83% of all leak-free sinks vs 72% for the sound analysis); counting clears 0%; LLM-as-fact clears more but up to 7.7% of apps wrong with no control; per-verdict conformal: 51% of apps wrong | prices are what make receipts useful; the per-program guarantee matters |
-| RQ3 | Does the guarantee survive other answer keys? | deletion keys (no LLM labels), StubDroid key, GPT key, human-audited key, label noise, rubric key | apps wrong at most 2.6% under every key; cleared share varies (e.g. Jev 23% under the GPT key, 8-14% under a noisy key) | validity is robust; how much is cleared depends on how strict the key is |
+| RQ1 | Do clean verdicts depend on unmodeled library flows? | FlowDroid with and without its models on 80 apps; our corpus; TaintBench; holes inside FlowDroid | FlowDroid loses 82% of its leaks without models; 22% of leak-free sinks depend on library flows; 48 of 92 reachable malware leaks need unmodeled flows; FlowDroid with holes: 58 extra sinks, 43 FlowDroid-confirmed receipts | the problem is large and not specific to our analysis |
+| RQ2 | How much do receipts clear at a certified risk? | 324 apps, alpha 0.05 | Jev clears 48% of the hard slice with 1.5% of apps wrong (89% of all leak-free sinks vs 78% for the sound analysis; at alpha 0.02: 45%, 0% wrong); counting clears 0%; LLM-as-fact clears more but up to 7.7% of apps wrong with no control; per-verdict conformal: 59% of apps wrong | prices are what make receipts useful; the per-program guarantee matters |
+| RQ3 | Does the guarantee survive other answer keys? | deletion keys (no LLM labels), StubDroid key, GPT key, human-audited key, label noise, rubric key | apps wrong at most 2.6% under every key; cleared share varies (Jev 48% under the main key, 40% under the Sonnet-only key, 23% under the GPT key, 8-14% under a noisy key) | validity is robust; how much is cleared depends on how strict the key is |
 | RQ3b | Is the key reliable? | Sonnet vs GPT labels; relabeled with a written definition | short prompt: kappa 0.62; with the written definition: kappa 0.80, the models match a person's source checks on 92% and 93% of 60 facts, and 95% where both models agree | the earlier disagreement came from a vague question, now fixed |
-| RQ4 | What makes a pricer useful? | 7 LLM pricers, ranking analysis, question wording | cheap models answer too confidently and clear ~0-21%; Sonnet ranks better on average than Jev but clears less; stating the flow rule in the question nearly triples Jev's clearance | a pricer must give low prices only to flows that are really absent; the guarantee never broke |
-| RQ5 | Does checking a few facts help? | rank facts without labels, let the key answer the top K, recertify | 25 checks: 40% to 53% cleared and twice the reported real leaks; 100 random checks: no change | receipts make human effort efficient |
-| RQ6 | Does a threshold certified on benign apps hold on malware? | certify on F-Droid, apply to 31 TaintBench apps | Jev: 0 of 31 apps wrong; 3 documented leaks cleared, all resting on one callback fact (`WebView.addJavascriptInterface`) | the guarantee transferred (on a small sample), and the receipt shows exactly why the 3 were cleared |
+| RQ4 | What makes a pricer useful? | 7 LLM pricers, ranking analysis, question wording | cheap models answer too confidently and clear ~0-4% at alpha 0.05; the classifier and Sonnet rank better on average than Jev but clear much less; stating the flow rule in the question nearly triples Jev's clearance | a pricer must give low prices only to flows that are really absent; the guarantee never broke |
+| RQ5 | Does checking a few facts help? | rank facts without labels, let the key answer the top K, recertify | 25 checks: 47% to 65% cleared and twice the reported real leaks; 100 checks: 73%; 100 random checks: no change | receipts make human effort efficient |
+| RQ6 | Does a threshold certified on benign apps hold on malware? | certify on F-Droid, apply to 31 TaintBench apps | Jev and Sonnet: 0 of 31 apps wrong; 3 documented leaks cleared, all resting on one callback fact (`WebView.addJavascriptInterface`) | the guarantee transferred (on a small sample), and the receipt shows exactly why the 3 were cleared |
 
 Results that did **not** work out (reported honestly, mostly not in the paper):
 - **Our analysis is weaker than FlowDroid**: it reaches 58% of FlowDroid's leaks, ~1% precision. The guarantee is about
@@ -119,8 +119,7 @@ Results that did **not** work out (reported honestly, mostly not in the paper):
 ## 7. Where things stand
 
 - The paper is restructured in the lab's style, 16 of 18 pages, compiles cleanly: `paper/main.pdf`.
-- Running on the server: the last part of the rubric relabeling, then all main results under the rubric key (the
-  recommended main key; its numbers will likely be lower than the current headline).
+- The paper now uses the rubric key as main key (decided 2026-10-08). Still running: the wording ablation under it.
 - Mock-review estimate: about 25-30% acceptance chance now; about 45% after three planned fixes (holes only where
   FlowDroid has no model; certify on FlowDroid; show analyst effort saved).
 - Full list of open items: `paper/REMAINING_WORK.md`; detailed plans for the reviewer fixes: `paper/REVIEW_FIXES.md`.
