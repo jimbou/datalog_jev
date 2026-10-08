@@ -67,6 +67,10 @@ methods no model covers".
 
 ## Fix 3. Certify a threshold on FlowDroid itself
 
+**STATUS: step 1 RUNNING since 2026-10-08 21:19 UTC.** `bench/queues/fdr_retry_chain.sh`: the 89 failed apps rerun with
+FD_TIMEOUT=3300 in three shards (old failed records in `data/fd_receipts_fdroid_failed1200/`); log
+`data/fdr_retry_chain.log`, ends with `FDRR-DONE ok=... failed=...`. Expect one to three days. Steps 2-6 open.
+
 **Reviewer objection.** Our analysis reaches only 58% of FlowDroid's leaks with ~1% precision; "you certified the misses
 of a toy analysis". Today, receipts inside FlowDroid are a validation (43 FlowDroid-confirmed receipts in 19 apps), not a
 certified result, because too few apps have hole-dependent sinks.
