@@ -281,6 +281,7 @@ def deleted(key, rate, seed, by_class=False):
 
 
 CTX = None
+FM = False
 # inter-component holes (experiment 4): prices per (app, "send site -> component") from ICC_PRICES (jsonl rows {app, sub, p});
 # a candidate without a price gets ICC_DEFAULT
 ICC_PRICES, ICC_DEFAULT = {}, float(os.environ.get("ICC_DEFAULT", "0.5"))
@@ -313,6 +314,12 @@ def evaluate(path):
         fixed = modeled & ~gone & np.array([l is True for l in label], dtype=bool)
         code_u, code_v = np.concatenate([code_u, cu[fixed]]), np.concatenate([code_v, cm[fixed]])
         cu, cm, ch, ck, label = cu[gone], cm[gone], ch[gone], ck[gone], label[gone]
+    if FM:  # FlowDroid's models are code: modeled methods' real flows become code edges, their other candidates disappear;
+        # only methods FlowDroid does not model stay holes (the analysis is "ours plus FlowDroid's library models")
+        modeled = np.array([holes.get(k, {}).get("source") in MODELED for k in keys], dtype=bool)[ch]
+        fixed = modeled & np.array([l is True for l in label], dtype=bool)
+        code_u, code_v = np.concatenate([code_u, cu[fixed]]), np.concatenate([code_v, cm[fixed]])
+        cu, cm, ch, ck, label = cu[~modeled], cm[~modeled], ch[~modeled], ck[~modeled], label[~modeled]
     if VERIFIED:  # facts a checker has verified: a "no" removes the candidate, a "yes" becomes a code edge (see verify_select.py)
         vk = np.array([(keys[h][0], keys[h][1], int(k)) in VERIFIED for h, k in zip(ch, ck)], dtype=bool)
         vyes = vk & np.array([l is True for l in label], dtype=bool)
@@ -414,7 +421,12 @@ def evaluate(path):
 
 
 def main():
+    global FM
     pricing = sys.argv[1]
+    FM = pricing.startswith("fm-")  # prefix fm-: holes only where FlowDroid has no model (combine with a key, e.g. fm-rk-choice-obj)
+    full_name = pricing
+    if FM:
+        pricing = pricing[3:]
     app_glob = sys.argv[2] if len(sys.argv) > 2 else "*"
     k1 = None
     base = pricing
@@ -442,7 +454,7 @@ def main():
     CTX = (holes, prices, uniform, k1)
     paths = sorted(glob.glob(os.path.join(GRAPHS, app_glob + ".npz")))
     import multiprocessing
-    with open(os.path.join(ROOT, "data/android_%s%s.jsonl" % (pricing, os.environ.get("OUT_SUFFIX", ""))), "w") as f, \
+    with open(os.path.join(ROOT, "data/android_%s%s.jsonl" % (full_name, os.environ.get("OUT_SUFFIX", ""))), "w") as f, \
             multiprocessing.get_context("fork").Pool(JOBS) as pool:
         for app, recs in pool.imap_unordered(evaluate, paths):
             for r in recs:
