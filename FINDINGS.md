@@ -874,6 +874,35 @@ add 16 hole-dependent sinks in 5 apps, all 16 receipts confirmed, 9 truly leakin
 complete, holes add 42 sinks in 14 apps, 27 receipts confirmed, 12 truly leaking. Too few apps with hole-dependent sinks to
 calibrate; usable as validation that receipts are cuts FlowDroid confirms, not as a second certified corpus.
 
+## 22c. Results under the rubric key (2026-10-08)
+
+Rubric key (`rk-`): Sonnet and GPT labels under the written definition; K2 or unknown where they disagree. Final
+agreement: 90.1% of 37,160 flows, kappa 0.80; flows called real 42% / 41%; person's 60 checked facts: Sonnet 55, GPT 56; on
+the 57 facts where both models agree, the person agrees 54 times (95%). Hard slice under rk: 20,104 leak-free sinks
+(main key 28,335).
+
+| Pricer | alpha 0.05: cleared (held-out apps wrong) | alpha 0.10 |
+| --- | --- | --- |
+| Jev | 48.3% (1.5%) | 58.9% (5.2%) |
+| Sonnet 5 | 23.8% (0.0%) | 30.9% (3.8%) |
+| Classifier (b6) | 28.8% (0.5%) | 43.8% (4.7%) |
+| Frequency prior | 8.9% (0.0%) | 8.9% (0.0%) |
+| Counting | 0% | 0% |
+| Qwen3.8-27B | 0% | 0% |
+| Qwen3.7-Flash | certified in 4/200 splits | certified in 154/200 splits, 30.3% |
+| DeepSeek-V4-Flash | never certified | never certified |
+| Gemini-3.5-Flash-Lite | never certified | certified in 2/200 splits |
+| GPT-5.6-luna | 4.2% (0.0%) | 4.2% (0.0%) |
+
+Budgeted checking under rk (Jev, alpha 0.05, cleared of the rk baseline leak-free slice; baseline 46.9% on this split
+seed): count 25: 49.0% (1.2%); count 100: 68.4% (0.7%); count 400: 83.0% (0.4%); unlock 25: 64.6% (1.2%); unlock 100: 72.9%
+(0.7%); random 100: 47.3% (1.0%). Reported real leaks double after 25 checks (12,152 -> ~26,300). Under rk the unlock
+rule beats the count rule (under the old key it was the other way round).
+
+TaintBench under rk, thresholds certified on all F-Droid apps under rk (Jev 0.2, Sonnet 0.02): no malware app with a wrong
+clearance for either pricer (0/31); Jev clears 31.5%, Sonnet 18.2% of the leak-free hole-dependent verdicts; the same 3
+documented leaks (`addJavascriptInterface`, price 0.18) are cleared.
+
 ## 23. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
