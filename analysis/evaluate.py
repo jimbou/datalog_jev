@@ -282,6 +282,7 @@ def deleted(key, rate, seed, by_class=False):
 
 CTX = None
 FM = False
+FM_MODELS = {}  # (cls, sub) -> FlowDroid's labels per candidate flow, for the methods FlowDroid models
 # inter-component holes (experiment 4): prices per (app, "send site -> component") from ICC_PRICES (jsonl rows {app, sub, p});
 # a candidate without a price gets ICC_DEFAULT
 ICC_PRICES, ICC_DEFAULT = {}, float(os.environ.get("ICC_DEFAULT", "0.5"))
@@ -316,8 +317,10 @@ def evaluate(path):
         cu, cm, ch, ck, label = cu[gone], cm[gone], ch[gone], ck[gone], label[gone]
     if FM:  # FlowDroid's models are code: modeled methods' real flows become code edges, their other candidates disappear;
         # only methods FlowDroid does not model stay holes (the analysis is "ours plus FlowDroid's library models")
-        modeled = np.array([holes.get(k, {}).get("source") in MODELED for k in keys], dtype=bool)[ch]
-        fixed = modeled & np.array([l is True for l in label], dtype=bool)
+        # which methods FlowDroid models, and their flows, come from FlowDroid's own labels whatever key is tested
+        modeled = np.array([k in FM_MODELS for k in keys], dtype=bool)[ch]
+        fixed = modeled & np.array([bool(keys[h] in FM_MODELS and k < len(FM_MODELS[keys[h]]) and FM_MODELS[keys[h]][k] is True)
+                                    for h, k in zip(ch, ck)], dtype=bool)
         code_u, code_v = np.concatenate([code_u, cu[fixed]]), np.concatenate([code_v, cm[fixed]])
         cu, cm, ch, ck, label = cu[~modeled], cm[~modeled], ch[~modeled], ck[~modeled], label[~modeled]
     if VERIFIED:  # facts a checker has verified: a "no" removes the candidate, a "yes" becomes a code edge (see verify_select.py)
@@ -450,6 +453,9 @@ def main():
             prices[k] = [0.5] * len(price_holes[k]["atoms"])
         if miss:
             print("WARNING: %d methods have no price from %r and were priced 0.5" % (len(miss), base), file=sys.stderr, flush=True)
+    if FM:
+        global FM_MODELS
+        FM_MODELS = {k: [a["label"] for a in h["atoms"]] for k, h in framework_holes().items() if h["source"] in MODELED}
     global CTX
     CTX = (holes, prices, uniform, k1)
     paths = sorted(glob.glob(os.path.join(GRAPHS, app_glob + ".npz")))
