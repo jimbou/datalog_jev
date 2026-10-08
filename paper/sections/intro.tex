@@ -34,7 +34,7 @@ Unlike a list of assumptions, each receipt comes with a price, and the facts wit
 The guarantee is stated per program, because the user of an analysis reads one app's report; we show that selecting verdicts with a per-verdict error rate leaves wrong clearances in 17\% of the apps at a 5\% target, and in this setting even misses its own target.
 
 We evaluate the approach on 332 Android apps from F-Droid and 33 malware apps from TaintBench~\cite{taintbench}, against several answer keys: FlowDroid's models completed by the labels on which two language-model families agree under a written definition of a flow, which a person's source-code checks confirm for 95\% of the checked facts; a deletion benchmark built only from FlowDroid's models; summaries generated from the Android source code with StubDroid~\cite{stubdroid}; and keys with single-model labels and random noise.
-At a 5\% target, receipts clear 49\% of the false alarms that a sound treatment of unmodeled methods adds, and 0.9\% of held-out apps receive a wrong clearance.
+At a 5\% target, receipts clear 49\% of the false alarms that a sound treatment of unmodeled methods adds, and 0.9\% of held-out apps receive a wrong clearance; per app, the false alarms drop from a median of 13 to 6.
 The guarantee holds for all ten pricers and all keys we tried.
 Checking 25 receipt facts, chosen without looking at any answer, raises the cleared share to 63\%, and 100 checks to 78\%; checking 100 random facts helps little.
 On malware, a threshold certified on F-Droid apps gives no app a wrong clearance, but few documented malware leaks depend on unmodeled flows of the kind we price.
