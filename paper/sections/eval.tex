@@ -305,7 +305,7 @@ Counting, receipts of one fact: documented leaks cleared; apps wrong & 22; 21 of
 
 The threshold transfers: with Jev's and with Sonnet's prices, no malware app receives a wrong clearance by our key, and Jev clears 32\% of the leak-free hole-dependent verdicts.
 Three documented leaks are cleared by both pricers.
-All three are in one app and rest on one fact, \texttt{WebView.addJavascriptInterface} from receiver to argument.
+All three are in one app and rest on one fact: the method \texttt{addJavascriptInterface} of \texttt{WebView}, from receiver to argument.
 The app registers an object whose methods return the device identifier, and the leak happens when JavaScript in the web page calls these methods.
 That is a callback, which our flow definition excludes, so the key labels the fact ``no''.
 The receipt shows exactly which assumption the three clearances share, so a user who disagrees with the definition can check this one fact.
