@@ -13,8 +13,8 @@ For any call without an answer, the analysis assumes that no data passes, which 
 \label{sec:setting}
 We describe an analysis by a flow graph.
 Its nodes are program values and heap locations; some nodes are sources and some are sinks.
-\emph{Code edges} $E_c$ come from code the analysis reads.
-\emph{Hole edges} $H$ are the candidate library flows: for every call to a library method, one edge from each of its arguments and its receiver to each value that could receive data (the return value, the receiver, and mutable arguments).
+\emph{Code edges} $E_c$ come from code the analysis reads and from the library models it has; in our setting these are FlowDroid's models.
+\emph{Hole edges} $H$ are the candidate flows of library methods without a model: for every call to such a method, one edge from each of its arguments and its receiver to each value that could receive data (the return value, the receiver, and mutable arguments).
 The \emph{unsound analysis} $A_0$ uses only $E_c$.
 A sink $t$ is \emph{clean} if no source reaches it in $E_c$, and \emph{hole-dependent} if, in addition, a source reaches it in $E_c\cup H$.
 Clean sinks that are not hole-dependent are cleared by a sound analysis as well; our approach is about the hole-dependent ones.

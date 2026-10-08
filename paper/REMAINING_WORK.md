@@ -1,13 +1,20 @@
-# Remaining work (consolidated 2026-10-07)
+# Remaining work (consolidated 2026-10-07, updated 2026-10-08)
 
 This file replaces the open items in `paper/PLAN.md` (now historical), the "next steps" in `FINDINGS.md` §23 (stale:
 conformal selection, key labels, a second hole type and the Praline check are done) and summarizes
 `paper/REVIEW_FIXES.md` (details for items B1-B3). Status of the paper: restructured in the lab's style (commit 757bf0d),
 body ends on page 16 of 18, compiles without errors or overfull lines.
 
-Mock-review estimate of acceptance: about 25-30% now; about 35-40% with B1; about 45% with B1-B3; other items add less.
+Mock-review estimate of acceptance: about 35-40% now (B1 done, rubric key as main key); about 45% with B2-B3; other items add less.
+
+**Main setting since 2026-10-08:** FlowDroid's models as code (evaluator prefix `fm-`), rubric key as main key (`fm-rk-<pricer>`).
 
 ## A. Finish what is running (must do)
+
+A1-A5 are done (rubric relabeling, rubric key as main key, agreement numbers). Still open: the remaining `fm-` runs
+(`bench/queues/fm_all_chain.sh`: other keys, pricer panel, wording, ablation, figure statistics) and filling RQ3/RQ4 and the
+figures with them.
+
 | # | Item | Status / how |
 | --- | --- | --- |
 | A1 | Sonnet rubric relabeling | running on the server (`data/oracle-rubric-sonnet5.jsonl`, ~10,000 of 12,362 on 2026-10-07 20:30 UTC) |
@@ -19,11 +26,16 @@ Mock-review estimate of acceptance: about 25-30% now; about 35-40% with B1; abou
 ## B. Acceptance improvers from the mock review (see `REVIEW_FIXES.md`)
 | # | Item | Why | Effort |
 | --- | --- | --- | --- |
-| B1 | Holes only where FlowDroid has no model (`fm-` mode in `evaluate.py`), new motivating example with unmodeled methods and a network/SMS sink | removes the strawman objection (A0 has no library model at all; the example uses modeled methods and `Log`) | days, mostly post-processing |
+| B1 | DONE 2026-10-08: holes only where FlowDroid has no model (`fm-` mode), new example (`ContentResolver.insert` leak through unmodeled `ContentValues.put`) | removed the strawman objection | done |
 | B2 | Certify on FlowDroid itself: rerun failed apps with 3300 s, ~400 more small apps, tighter class mapping | removes "certified misses of a toy analysis" | server days; may stay a validation |
 | B3 | Show user value: false alarms per app before/after clearing, apps with no alarms left, receipt size of remaining alarms, shared checks across apps; optional timed triage sample | makes "40% of the hard slice" concrete | about a day; user study optional |
 
 ## C. Further strengtheners (lower priority)
+
+New (2026-10-08): FlowDroid's default source/sink list (2.15.1, which we use unchanged) contains Java server entries; some occur
+in Android apps (`String.replace` as a sink, `File.getAbsoluteFile` as a source). Measure the share of verdicts at such
+entries and, if large, add an Android-only sensitivity run (needs a graph rebuild with a filtered list).
+
 | # | Item | Why | Effort |
 | --- | --- | --- | --- |
 | C1 | Reproducible main pricer: report a pinned, rerunnable model next to Jev (Jev is a commercial service with an undisclosed model) | Verifiability criterion | days (pricing via Claude Code/Codex is free per call but not deterministic; an open-weight model run locally would be best, but the cheap open models we tried price too confidently) |

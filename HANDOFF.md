@@ -1,4 +1,4 @@
-# Handoff: Soundiness with Receipts (as of 2026-10-07, evening UTC)
+# Handoff: Soundiness with Receipts (as of 2026-10-08, evening UTC)
 
 Paper: "Soundiness with Receipts: Certified Miss-Risk for Unsound Static Analyses", target ISSTA 2027 (the call we
 followed was ISSTA 2026's: acmsmall, 18 pages without references and Data Availability, double-anonymous, AI disclosure
@@ -8,6 +8,11 @@ No secrets in this file.
 Read first: this file, `FINDINGS.md` (research log, newest sections 22, 22b), `paper/PLAN.md` (claims, evidence, status),
 `~/server_connect_pku.md` (how to reach the server). Memory notes for the agent live in
 `~/.claude/projects/-home-jim-datalog-jev/memory/`.
+
+**Current state (2026-10-08):** main setting = our analysis plus FlowDroid's models, holes only for unmodeled methods
+(evaluator prefix `fm-`), main key = rubric key (`fm-rk-<pricer>`). Results: `FINDINGS.md` sections 22c-22d. The paper is
+being rewritten for this setting (intro, example, setup, RQ1, RQ2, RQ5, RQ6 done; RQ3/RQ4 and figures wait for
+`bench/queues/fm_all_chain.sh`). Older numbers in this file are from the earlier setting (no library model, Sonnet key).
 
 ## 1. The idea in one paragraph
 Unsound taint analyses skip library code and assume no data flows through it. Every candidate flow through a skipped

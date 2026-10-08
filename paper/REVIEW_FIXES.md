@@ -12,6 +12,13 @@ and 4, about 45%.
 
 ## Fix 1. Remove the strawman: holes only where FlowDroid has no model
 
+**STATUS: DONE (2026-10-08).** Evaluator prefix `fm-` (FlowDroid's models always taken from FlowDroid's labels); results in
+`FINDINGS.md` section 22d; the paper now uses this setting as its main setting (rubric key). Headline: hard slice 5,318
+leak-free sinks in 298 of 307 apps (old setting 20,104); 22,888 real leaks only through unmodeled methods; Jev clears 48.7%
+at alpha 0.05 with 0.9% of apps wrong. New motivating example: `de.luhmer.owncloudnewsreader` (`ContentValues.put` real,
+`TextToSpeech.setOnUtteranceProgressListener` not). TaintBench: only 6 documented leaks need unmodeled flows (all callbacks,
+inter-component calls or reflection).
+
 **Reviewer objection.** Our unsound analysis A0 has no library model at all: every framework call is a hole, including
 the ~5,500 methods FlowDroid models (`String.equals`, `CharBuffer.toString`, ...). Part of the "hard slice" (28,335
 leak-free sinks a sound analysis cannot clear) would be settled by FlowDroid's models. The motivating example uses two

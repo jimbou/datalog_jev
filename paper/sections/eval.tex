@@ -15,16 +15,18 @@ Our evaluation answers six questions:
 \label{sec:setup}
 
 \paragraph{Apps.}
-We downloaded about 580 open-source apps from F-Droid and built flow graphs for the 332 that fit our memory and time limits; 324 of them have at least one clean, hole-dependent sink.
-These apps contain 79{,}847 clean, hole-dependent sinks whose status the main key decides; 20{,}104 of them never receive sensitive data.
-We call these 20{,}104 sinks the \emph{hard slice}: they are leak-free, but a sound analysis cannot clear them.
+We downloaded about 580 open-source apps from F-Droid and built flow graphs for the 332 that fit our memory and time limits.
+The analysis uses FlowDroid's models, and holes are the flows of the methods FlowDroid does not model.
+In 307 apps at least one clean sink depends on such holes.
+These apps contain 28{,}206 clean, hole-dependent sinks whose status the main key decides: 22{,}888 of them are real leaks that the analysis misses, and 5{,}318, in 298 apps, never receive sensitive data.
+We call these 5{,}318 sinks the \emph{hard slice}: they are leak-free, but a sound treatment of unmodeled methods cannot clear them.
 For RQ6 we use TaintBench~\cite{taintbench}, 39 malware apps with 203 documented leaks; we built graphs for 33 of them.
 
 \paragraph{Answer keys.}
 A wrong clearance is defined relative to a key, so we use several keys built in different ways.
 \begin{itemize}
 \item The \emph{main key} uses FlowDroid's hand-written models where they exist. For the 12{,}274 methods FlowDroid does not model, it uses the labels on which two language models from different families, Sonnet~5 and GPT-6.1, agree when both are given the written definition of Section~\ref{sec:flow}; where they disagree, it uses K2 (below) if K2 decides the fact, and otherwise leaves the fact unknown.
-\item The \emph{deletion keys} contain no language-model labels. They take FlowDroid's models as the truth and delete a share of the modeled classes; the deleted classes become priced holes, and all other modeled classes stay fixed. Deleting whole classes prevents a pricer from copying the answer of a sibling method.
+\item The \emph{deletion keys} contain no language-model labels. They take FlowDroid's models as the truth and delete a share of the modeled classes; the deleted classes become the holes, priced as if unmodeled, and all other modeled classes stay code. Deleting whole classes prevents a pricer from copying the answer of a sibling method.
 \item \emph{K2} uses summaries that StubDroid~\cite{stubdroid} generates from the Android~13 and Java~8 source code.
 \item The \emph{Sonnet} and \emph{GPT} keys label the unmodeled methods with one model each, asked a short question without the written definition.
 \item The \emph{audited key} replaces the labels of the 446 facts that all accepted verdicts rest on by the answers of an audit, in which a person read the Android source code of 67 facts.
@@ -41,12 +43,14 @@ The guarantee concerns the second number: it should stay below $\alpha$.
 
 To measure how much a taint analysis relies on library models, we ran FlowDroid on 80 F-Droid apps twice: with its models and without them.
 Table~\ref{tab:fd-none} shows that without its models FlowDroid loses 82\% of the leaking sinks it reports, and finds no leak that it does not also find with them.
-This is the extreme case of a missing model; in practice the models cover some methods and miss others.
-In our corpus, 12{,}274 of the 17{,}830 library methods that lie on a source-to-sink path have no FlowDroid model, and 22\% of the leak-free sinks depend on some library flow, so a sound analysis cannot clear them.
-The same holds for real leaks: of the 92 documented TaintBench leaks that our analysis reaches, 48 (52\%) are reachable only through a library flow it does not model.
+Models are what makes the analysis find leaks, but they are incomplete.
+In our corpus, 12{,}274 of the 17{,}830 library methods that lie on a source-to-sink path have no FlowDroid model.
+With FlowDroid's models, our analysis reports 49{,}007 sinks as leaks, while 22{,}888 further real leaks, a third of all, are reachable only through unmodeled methods and are reported as clean.
+Treating every unmodeled method as passing all data finds them, but adds 5{,}318 false alarms in 298 of the 307 apps.
+On TaintBench, the documented leaks are mostly reachable through modeled code: only 6 of the 89 documented leaks our analysis reaches need an unmodeled flow, and all 6 go through callbacks, inter-component communication or reflection (RQ6).
 
 The dependence is not specific to our analysis.
-We gave FlowDroid holes as well: FlowDroid reads library behavior from summary files, so opening every hole means adding a summary with every candidate flow for each method it does not model.
+We gave FlowDroid holes as well: FlowDroid reads library behavior from summary files, so opening every hole means adding a summary with every candidate flow for each method it does not model, next to its own summaries.
 On the 120 apps where all of FlowDroid's runs finished within 20 minutes, open holes add 58 reported sinks in 19 apps.
 For 43 of them, switching off the hole methods on the reported paths and running FlowDroid again removes the sink, so FlowDroid itself confirms the receipt.
 
@@ -65,13 +69,13 @@ All apps with both answers & 69 & 154 & 27 & 127 (82\%)\\
 \end{tabular}
 \end{table}
 
-\answer{\textbf{RQ1:} Clean verdicts often depend on unmodeled library flows: 22\% of the leak-free sinks in our corpus and half of the reachable documented malware leaks do, and FlowDroid loses 82\% of its leaks without its library models.}
+\answer{\textbf{RQ1:} Library models matter (FlowDroid loses 82\% of its leaks without them) and are incomplete: even with FlowDroid's models, a third of the real leaks in our corpus pass only through unmodeled methods. Opening these methods finds the leaks but adds false alarms to almost every app.}
 
 \subsection{RQ2: How Much Do Receipts Clear?}
 \label{sec:rq2}
 
 \begin{table}[t]
-\caption{Share of the hard slice cleared at a certified threshold, and held-out apps with a wrong clearance (in brackets). Main key, 324 apps.}
+\caption{Share of the hard slice cleared at a certified threshold, and held-out apps with a wrong clearance (in brackets). Main key, 307 apps.}
 \label{tab:main}
 \small
 \begin{tabular}{@{}lccc@{}}
@@ -79,27 +83,27 @@ All apps with both answers & 69 & 154 & 27 & 127 (82\%)\\
 Pricer & $\alpha=0.10$ & $\alpha=0.05$ & $\alpha=0.02$\\
 \midrule
 Counting (receipt size) & 0\% & 0\% & 0\%\\
-Frequency prior & 8.9\% (0.0\%) & 8.9\% (0.0\%) & --\\
-Feature classifier & 43.8\% (4.7\%) & 28.8\% (0.5\%) & --\\
-Sonnet~5 & 30.9\% (3.8\%) & 23.8\% (0.0\%) & --\\
-Jev & 58.9\% (5.2\%) & 48.3\% (1.5\%) & 45.3\% (0.0\%)\\
+Frequency prior & 19.0\% (0.0\%) & 19.0\% (0.0\%) & --\\
+Feature classifier & 27.9\% (2.9\%) & 24.3\% (1.1\%) & --\\
+Sonnet~5 & 16.9\% (0.1\%) & 16.7\% (0.0\%) & 16.7\% (0.0\%)\\
+Jev & 60.0\% (4.1\%) & 48.7\% (0.9\%) & 37.0\% (0.3\%)\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}[t]
 \input{figs/curve_main}
-\caption{Wrong clearances against cleared share on all 324 apps as the threshold grows. Dots: certified operating points at $\alpha=0.05$ (mean over 200 splits).}
+\caption{Wrong clearances against cleared share on all 307 apps as the threshold grows. Dots: certified operating points at $\alpha=0.05$ (mean over 200 splits).}
 \label{fig:curve}
 \end{figure}
 
 Table~\ref{tab:main} gives the cleared share for each pricer, and Figure~\ref{fig:curve} the whole trade-off between clearing and wrong clearances.
-With Jev's prices, receipts clear 48\% of the hard slice at $\alpha=0.05$, and 1.5\% of held-out apps receive a wrong clearance.
-Together with the sinks a sound analysis already clears, 89\% of all leak-free sinks are cleared, against 78\% for the sound analysis alone.
+With Jev's prices, receipts clear 49\% of the hard slice at $\alpha=0.05$, and 0.9\% of held-out apps receive a wrong clearance; at $\alpha=0.02$ they still clear 37\%.
+The analysis then reports the real leaks through unmodeled methods whose receipts are expensive, while half of the false alarms that opening these methods would add are cleared.
 In every row the observed error stays below $\alpha$, as Proposition~\ref{prop:ltt} predicts; what differs is how much is cleared.
 
 \emph{Counting assumptions clears nothing.}
-Counting gives every receipt of size one the same bound, so the first threshold already clears every one-fact receipt, and that puts a wrong clearance in 94\% of the apps.
+Counting gives every receipt of size one the same bound, so the first threshold already clears every one-fact receipt, and that puts a wrong clearance in \todo{X}\% of the apps.
 The calibration therefore refuses every threshold.
 Prices are what make receipts usable.
 
@@ -109,9 +113,9 @@ There is one operating point, and its error cannot be chosen.
 
 \emph{The unit of the guarantee matters.}
 Table~\ref{tab:unit} compares our per-program calibration with conformal selection over verdicts~\cite{conformalselection}, which controls the share of wrong verdicts among the cleared ones.
-At a 5\% target, conformal selection clears more, 73.5\%, but its wrong verdicts are spread over 192 of the 324 apps.
-A user reading one app's report would see a wrong clearance more often than not.
-Using the bound directly as a probability, without calibration, is safe for Jev but clears only 7.8\%, because its prices are conservative.
+At a 5\% target, conformal selection clears more, 74.8\%, but it misses its own target, with 6.6\% of the cleared verdicts wrong (18.0\% at a 10\% target), because verdicts in one app share facts and the apps are not alike.
+Its wrong verdicts are spread over 53 of the 307 apps, so a user reading one app's report would see a wrong clearance in one app out of six.
+Using the bound directly as a probability, without calibration, is safe for Jev but clears only 11.8\%, because its prices are conservative.
 The certified result changes little with the confidence parameter, the size of the calibration half, or when apps that bundle the same libraries are kept on the same side of each split.
 In a few splits the held-out share of wrong apps exceeds 5\%, as the bracket in Table~\ref{tab:unit} shows; the guarantee bounds how often this happens (at most a share $\varepsilon$ of calibrations), not each split.
 
@@ -123,18 +127,18 @@ In a few splits the held-out share of wrong apps exceeds 5\%, as the bracket in 
 \toprule
 Procedure & Cleared & Apps with a wrong clearance\\
 \midrule
-Bound used as a probability, $\delta=\alpha$ & 7.8\% & 0 of 324\\
-Conformal selection over verdicts, 1\% / 5\% / 10\% & 71.2 / 73.5 / 76.1\% & 10 / 59 / 78\%\\
+Bound used as a probability, $\delta=\alpha$ & 11.8\% & 0 of 307\\
+Conformal selection over verdicts, 1\% / 5\% / 10\% & 65.3 / 74.8 / 79.6\% & 6 / 17 / 37\%\\
 \midrule
-Per program (ours), $\varepsilon=0.1$, 50\% calibration & 48.3\% [42.5, 57.6] & 1.5\% [0.0, 5.6]\\
-\quad $\varepsilon=0.05$ / $0.2$ & 47.0 / 50.6\% & 0.9 / 2.4\%\\
-\quad 30\% / 70\% of apps for calibration & 46.9 / 47.2\% & 0.7 / 1.2\%\\
-\quad apps sharing libraries kept together & 46.6\% [43.0, 56.8] & 0.6\% [0.0, 5.3]\\
+Per program (ours), $\varepsilon=0.1$, 50\% calibration & 48.7\% [43.4, 59.7] & 0.9\% [0.0, 5.8]\\
+\quad $\varepsilon=0.05$ / $0.2$ & 48.7 / 50.4\% & 0.9 / 1.6\%\\
+\quad 30\% / 70\% of apps for calibration & 48.5 / 49.3\% & 0.8 / 1.3\%\\
+\quad apps sharing libraries kept together & 48.2\% [43.6, 53.6] & 0.5\% [0.0, 0.9]\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\answer{\textbf{RQ2:} At a 5\% target, priced receipts clear 48\% of the leak-free sinks a sound analysis cannot clear, with wrong clearances in 1.5\% of held-out apps. Counting assumptions clears nothing, a language model taken as fact has no risk control, and per-verdict selection leaves wrong clearances in most apps.}
+\answer{\textbf{RQ2:} At a 5\% target, priced receipts clear 49\% of the false alarms that opening unmodeled methods adds, with wrong clearances in 0.9\% of held-out apps. Counting assumptions clears nothing, a language model taken as fact has no risk control, and per-verdict selection misses its own target and leaves wrong clearances in one app in six.}
 
 \subsection{RQ3: Robustness to the Answer Key}
 \label{sec:rq3}
@@ -245,70 +249,60 @@ The calibration makes each of these valid; the union bound is the one that is al
 \caption{Checking the top-ranked receipt facts (Jev, $\alpha=0.05$). Cleared: share of the original hard slice cleared, either because the sink no longer depends on any hole or because its new bound is accepted. Reported leaks: real flows the analysis now reports without holes.}
 \label{tab:verify}
 \small
-\begin{tabular}{@{}llrrr@{}}
+\begin{tabular}{@{}lrrr@{}}
 \toprule
-Key & Facts checked & Cleared & Apps wrong & Reported real leaks\\
+Facts checked & Cleared & Apps wrong & Reported real leaks\\
 \midrule
-Main & 0 & 46.9\% & 1.0\% & 12{,}152\\
- & 25, ranked by unlock & 64.6\% & 1.2\% & 26{,}901\\
- & 100, ranked by unlock & 72.9\% & 0.7\% & 33{,}179\\
- & 25, ranked by count & 49.0\% & 1.2\% & 26{,}292\\
- & 100, ranked by count & 68.4\% & 0.7\% & 34{,}788\\
- & 400, ranked by count & 83.0\% & 0.4\% & 40{,}485\\
- & 100, at random & 47.3\% & 1.0\% & 12{,}253\\
-\midrule
-K2 & 0 & 25.5\% & 1.7\% & 12{,}152\\
- & 50 & 78.7\% & 1.8\% & 13{,}441\\
- & 200 & 83.5\% & 0.9\% & 13{,}963\\
+0 & 49.1\% & 1.1\% & 49{,}007\\
+25, ranked by unlock & 63.2\% & 1.0\% & 49{,}611\\
+100, ranked by unlock & 78.2\% & 0.8\% & 51{,}380\\
+100, ranked by count & 72.9\% & 1.9\% & 62{,}527\\
+100, at random & 52.3\% & 1.1\% & 49{,}547\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-A receipt fact often appears in many receipts; \texttt{Messenger.send} alone appears in the receipts of 481 accepted verdicts in 85 apps.
-We therefore ask how much a person, or a test, gains by checking a few facts.
+A receipt fact often appears in many receipts, so a few checks by a person, or a test, can clear many verdicts at once.
 We rank facts without looking at any answer (Section~\ref{sec:verify}), let the key answer the top $K$, and certify the threshold again.
 Table~\ref{tab:verify} shows the result.
-Checking the 25 facts that would clear the most verdicts with a ``no'' (the unlock rule) raises the cleared share from 47\% to 65\% and doubles the number of real leaks the analysis reports, because a ``yes'' turns a library flow into a known flow.
-With 100 checks the share reaches 73\%, and with 400 checks ranked by count, 83\%.
-Checking 100 facts chosen at random changes nothing, so the ranking is what makes the checks useful.
-Under the Sonnet key the order of the two rules is reversed: counting the uncleared verdicts a fact blocks works better there (64\% against 58\% at 100 checks), because more of the frequent facts are flows that the checks confirm.
+Checking the 25 facts that would clear the most verdicts with a ``no'' (the unlock rule) raises the cleared share from 49\% to 63\%, and 100 checks raise it to 78\%.
+Ranking by the number of uncleared verdicts a fact blocks clears less (73\%) but turns more facts into confirmed flows, so the analysis reports 13{,}500 more real leaks.
+Checking 100 facts chosen at random adds three points, so the ranking is what makes the checks useful.
 The held-out error stays below the target in every row.
 
-\answer{\textbf{RQ5:} Receipts make checking efficient: 25 well-chosen facts raise the cleared share from 47\% to 65\% and double the real leaks reported, while 100 random facts change nothing.}
+\answer{\textbf{RQ5:} Receipts make checking efficient: 25 well-chosen facts raise the cleared share from 49\% to 63\% and 100 facts to 78\%, while 100 random facts add three points.}
 
 \subsection{RQ6: Transfer to Malware}
 \label{sec:rq6}
 
 Our calibration apps are benign F-Droid apps, while a tool may be used on very different apps.
-We therefore certify a threshold on all 324 F-Droid apps and apply it to the TaintBench malware apps.
+We therefore certify a threshold on all 307 F-Droid apps and apply it to the TaintBench malware apps.
 For each documented leak, we look up our verdicts for the method that contains its sink (Table~\ref{tab:taintbench}).
 
 \begin{table}[t]
-\caption{TaintBench: documented leaks against our verdicts, and the threshold certified on the 324 F-Droid apps applied to the 31 malware apps with hole-dependent verdicts.}
+\caption{TaintBench: documented leaks against our verdicts (analysis with FlowDroid's models), and the threshold certified on the 307 F-Droid apps applied to the 23 malware apps with hole-dependent verdicts.}
 \label{tab:taintbench}
 \small
 \begin{tabular}{@{}lr@{}}
 \toprule
 Documented leaks & 203\\
-\quad outside our scope (no graph: 24; sink not in the list: 4) & 28\\
-\quad reported without any library flow & 44\\
-\quad reachable only through unmodeled library flows & 48\\
-\quad not reached & 83\\
+\quad outside our scope (no graph or no hole-dependent verdict: 28; sink not in the list: 4) & 32\\
+\quad reported with FlowDroid's models & 83\\
+\quad reachable only through unmodeled flows & 6\\
+\quad not reached & 82\\
 \midrule
-Documented leaks cleared, Jev ($\delta=0.2$) / Sonnet~5 ($\delta=0.02$) & 3 / 3\\
-Apps with a wrong clearance (main key), Jev / Sonnet~5 & 0 / 0 of 31\\
-Leak-free hole-dependent verdicts cleared, Jev / Sonnet~5 & 31.5\% / 18.2\%\\
-Counting, receipts of one fact: documented leaks cleared; apps wrong & 22; 21 of 31\\
+Of the 6: callbacks / inter-component calls / reflection & 3 / 1 / 2\\
+Of the 6: cleared by Jev ($\delta=0.2$), Sonnet~5 ($\delta=0.02$) and counting & 4\\
+Apps with a wrong clearance (main key), Jev / Sonnet~5 / counting & 0 / 0 / 3 of 23\\
+Leak-free hole-dependent verdicts cleared, Jev / Sonnet~5 & 31.8\% / 22.9\%\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The threshold transfers: with Jev's and with Sonnet's prices, no malware app receives a wrong clearance by our key, and Jev clears 32\% of the leak-free hole-dependent verdicts.
-Three documented leaks are cleared by both pricers.
-All three are in one app and rest on one fact: the method \texttt{addJavascriptInterface} of \texttt{WebView}, from receiver to argument.
-The app registers an object whose methods return the device identifier, and the leak happens when JavaScript in the web page calls these methods.
-That is a callback, which our flow definition excludes, so the key labels the fact ``no''.
-The receipt shows exactly which assumption the three clearances share, so a user who disagrees with the definition can check this one fact.
-Counting assumptions, in contrast, would clear 22 documented leaks.
+With FlowDroid's models, most documented leaks that our analysis reaches are reported directly (83), and only 6 need a flow of an unmodeled method.
+All 6 depend on behavior that our flow definition excludes and that the key therefore labels ``no'': three on a callback (\texttt{WebView.addJavascriptInterface}: the app registers an object whose methods return the device identifier, and JavaScript calls them), one on inter-component communication (\texttt{startActivity}) and two on reflection (\texttt{Method.invoke}).
+Four of them have cheap receipts and are cleared by every pricer, including counting; the two that pass through reflection have expensive receipts and are reported.
+The receipts show exactly which assumption each clearance shares, so a user who wants such leaks reported can see that the definition, not the prices, decides them.
+Measured against our key, the threshold transfers: no malware app receives a wrong clearance with Jev or Sonnet, against 3 of 23 apps with counting, and Jev clears 32\% of the leak-free hole-dependent verdicts.
 
-\answer{\textbf{RQ6:} A threshold certified on benign apps held on 31 malware apps: no app received a wrong clearance with either pricer. The three documented leaks that were cleared all rest on one checkable fact about a callback.}
+\answer{\textbf{RQ6:} Measured against our key, a threshold certified on benign apps held on 23 malware apps. Few documented malware leaks depend on unmodeled library flows; the six that do pass through callbacks, inter-component calls or reflection, which our definition of a flow excludes, and their receipts make this visible.}

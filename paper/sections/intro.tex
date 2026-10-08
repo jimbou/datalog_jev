@@ -5,21 +5,21 @@ Static taint analysis finds paths along which sensitive data, such as a device i
 On Android, these paths run through thousands of library methods whose code the analysis does not read.
 Tools replace such methods with models: FlowDroid ships hand-written summaries for about 350 classes, and any method without a summary is treated as passing no data.
 A ``no leak'' verdict therefore rests on assumptions about library code, and the tool does not report them.
-These assumptions are not rare corner cases.
-In our corpus of 324 apps, 12{,}274 of the 17{,}830 library methods that lie on source-to-sink paths have no FlowDroid model.
-When FlowDroid is run without its models, 82\% of the leaks it reports disappear.
-On real malware, half of the documented leaks our analysis can reach depend on library flows it does not model.
+These assumptions matter.
+When FlowDroid is run without its models, 82\% of the leaks it reports disappear, so models are what makes it find leaks at all.
+But the models are incomplete: in our corpus of 324 apps, 12{,}274 of the 17{,}830 library methods that lie on source-to-sink paths have no FlowDroid model.
+Even with all of FlowDroid's models, a third of the real leaks in these apps (22{,}888 sinks) are reachable only through such unmodeled methods, and an analysis that relies on the models reports them as clean.
 Analyses that are sound except for such documented gaps are called \emph{soundy}~\cite{soundiness}; what is missing is a way to know how often the gaps matter.
 
 There are three common answers, and none tells the user how likely a clean verdict is to be wrong.
 The first is to make the analysis sound by assuming that every unmodeled method passes all data.
-This is safe but reports a flow wherever a library call could carry one: in our corpus, 22\% of the sinks that never receive sensitive data are still flagged, and nothing ranks these false alarms.
+This catches the missed leaks but also reports a flow wherever an unmodeled call could carry one: in our corpus, it adds false alarms to 298 of 307 apps, about 18 per app, and nothing ranks them.
 The second is to write or infer more library models, by hand, from code~\cite{stubdroid,atlas}, or with a language model~\cite{iris,semtaint}.
 Every model can be wrong, and a verdict computed from a model taken as fact carries no measure of its error.
 The third is to list the assumptions behind each verdict as a minimal cut in the flow graph and let a person confirm them~\cite{bastani-oopsla15}.
-The list says what was assumed but not how likely each assumption is to fail, and counting the assumptions does not help: clearing every verdict that rests on a single assumption leaves a wrong clearance in 93\% of our apps.
+The list says what was assumed but not how likely each assumption is to fail, and counting the assumptions does not help: clearing every verdict that rests on a single assumption leaves a wrong clearance in most of our apps.
 
-We propose to keep the unsound analysis and attach to each clean verdict a \emph{receipt}: the smallest set of library flows the verdict assumes absent.
+We propose to keep the analysis with its models and attach to each clean verdict a \emph{receipt}: the smallest set of unmodeled library flows the verdict assumes absent.
 A \emph{pricer}, here a language model, gives each library flow a probability of being real.
 The prices on a receipt add up to an upper bound on the probability that the verdict is wrong, and this bound needs no assumption about how library flows are correlated.
 We show that it is the tightest bound that can be derived from the individual probabilities, and that the cheapest receipt is a minimum cut, computed by max-flow.
@@ -28,16 +28,16 @@ The threshold is not trusted but certified: we choose it on a sample of programs
 We call an analysis with such a rule \emph{$(\alpha,\varepsilon)$-soundy}.
 
 Three properties make this approach different from the answers above.
-Unlike a sound analysis, it clears verdicts that depend on library code, and it ranks the rest by risk.
+Unlike a sound analysis, it reports the likely leaks through unmodeled code without flagging every verdict that depends on it, and it ranks the rest by risk.
 Unlike a model taken as fact, its error rate is measured and bounded, and the guarantee holds for any pricer, including a poor one: the quality of the prices decides how much is cleared, not whether the guarantee holds.
 Unlike a list of assumptions, each receipt comes with a price, and the facts with the highest stakes can be checked first.
-The guarantee is stated per program, because the user of an analysis reads one app's report; we show that the more common per-verdict error rate leaves wrong clearances in 59\% of the apps at the same target.
+The guarantee is stated per program, because the user of an analysis reads one app's report; we show that selecting verdicts with a per-verdict error rate leaves wrong clearances in 17\% of the apps at a 5\% target, and in this setting even misses its own target.
 
 We evaluate the approach on 324 Android apps from F-Droid and 33 malware apps from TaintBench~\cite{taintbench}, against several answer keys: FlowDroid's models completed by the labels on which two language-model families agree under a written definition of a flow, which a person's source-code checks confirm for 95\% of the checked facts; a deletion benchmark built only from FlowDroid's models; summaries generated from the Android source code with StubDroid~\cite{stubdroid}; and keys with single-model labels and random noise.
-At a 5\% target, receipts clear 48\% of the leak-free sinks that a sound analysis cannot clear, and 1.5\% of held-out apps receive a wrong clearance.
+At a 5\% target, receipts clear 49\% of the false alarms that a sound treatment of unmodeled methods adds, and 0.9\% of held-out apps receive a wrong clearance.
 The guarantee holds for all ten pricers and all keys we tried.
-Checking 25 receipt facts, chosen without looking at any answer, raises the cleared share to 65\% and doubles the number of real leaks the analysis reports; checking 100 random facts changes nothing.
-On malware, a threshold certified on F-Droid apps gives no app a wrong clearance.
+Checking 25 receipt facts, chosen without looking at any answer, raises the cleared share to 63\%, and 100 checks to 78\%; checking 100 random facts helps little.
+On malware, a threshold certified on F-Droid apps gives no app a wrong clearance, but few documented malware leaks depend on unmodeled flows of the kind we price.
 
 In summary, this paper makes the following contributions:
 \begin{itemize}

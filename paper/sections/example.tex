@@ -7,46 +7,45 @@
 \toprule
  & \textbf{Verdict A} & \textbf{Verdict B}\\
 \midrule
-Sink & \texttt{Log.w} in \texttt{handleStationName} & \texttt{Log.i} in \texttt{resolveNextLocked}\\
-Without library flows & no source reaches it: clean & no source reaches it: clean\\
-With every library flow & a source reaches it & a source reaches it\\
-Receipt (one fact) & \texttt{CharBuffer.toString()}: receiver to return value & \texttt{String.equals(Object)}: argument to receiver\\
-Truth (FlowDroid's model) & the flow is real: \textbf{a leak} & no such flow: \textbf{no leak}\\
+Sink & \texttt{ContentResolver.insert} in \texttt{NewFeedActivity} & \texttt{Log.d} in \texttt{PodcastPlaybackService}\\
+With FlowDroid's models & no source reaches it: clean & no source reaches it: clean\\
+With unmodeled flows open & a source reaches it & a source reaches it\\
+Receipt (one fact) & \texttt{ContentValues.put}: argument to receiver & \texttt{TextToSpeech.setOnUtteranceProgressListener}: receiver to argument\\
+Truth & the flow is real: \textbf{a leak} & no such flow: \textbf{no leak}\\
 \midrule
-Unsound analysis & clean (misses the leak) & clean\\
+FlowDroid (its models) & clean (misses the leak) & clean\\
 Sound analysis & leak & leak (false alarm)\\
 Counting assumptions & 1 assumption & 1 assumption\\
 Model taken as fact & leak & clean, with no error rate\\
-\textbf{Priced receipt} & price 0.95 $>$ 0.2: \textbf{reported} & price 0.03 $\le$ 0.2: \textbf{cleared}\\
+\textbf{Priced receipt} & price 0.88 $>$ 0.2: \textbf{reported} & price 0.10 $\le$ 0.2: \textbf{cleared}\\
 \bottomrule
 \end{tabular}
-\caption{Two clean verdicts of the unsound analysis in the same app, \texttt{org.jsl.wfwt}. Each rests on one library flow. Only the price separates them; the threshold 0.2 is certified on other apps (Section~\ref{sec:approach}).}
+\caption{Two clean verdicts in the same app, \texttt{de.luhmer.owncloudnewsreader}. FlowDroid models neither library method. Each verdict rests on one library flow, and only the price separates them; the threshold 0.2 is certified on other apps (Section~\ref{sec:approach}).}
 \label{fig:example}
 \end{figure}
 
-We illustrate the problem and our approach with two verdicts from \texttt{org.jsl.wfwt}, a walkie-talkie app from F-Droid (Figure~\ref{fig:example}).
-Both verdicts are about logging calls.
-In method \texttt{handleStationName} of class \texttt{ChannelSession}, the app decodes a station name from a message buffer into a \texttt{CharBuffer}, converts it to a string and then calls \texttt{Log.w}.
-In method \texttt{resolveNextLocked} of class \texttt{Channel}, it compares a service name with \texttt{String.equals} and then calls \texttt{Log.i}.
+We illustrate the problem and our approach with two verdicts from \texttt{de.luhmer.owncloudnewsreader}, a news reader for Nextcloud from F-Droid (Figure~\ref{fig:example}).
+In \texttt{NewFeedActivity}, the app puts a value into a \texttt{ContentValues} object and passes it to \texttt{ContentResolver.insert}, which writes the data to a content provider.
+In \texttt{PodcastPlaybackService}, it registers a progress listener on a \texttt{TextToSpeech} object and then writes a message to the log.
 
-Our analysis does not model library code, so it finds no path from a source to either sink and reports both as clean.
-With every library flow switched on, a source reaches both sinks, so both verdicts depend on library behavior.
-For each verdict, the receipt is the single library flow that the verdict assumes absent.
-For verdict A, it is the flow from a \texttt{CharBuffer} to the string that \texttt{toString()} returns: sensitive data can reach the log call only through this flow.
-That flow is real, as FlowDroid's hand-written model of \texttt{CharBuffer} states, so verdict A misses a leak.
-For verdict B, it is a flow from the argument of \texttt{String.equals} into the string itself: sensitive data can reach the log call only if comparing two strings copied one into the other.
-Comparing two strings copies nothing, so verdict B is correct.
+Both sinks are clean for an analysis that uses FlowDroid's library models, because FlowDroid models neither \texttt{ContentValues} nor \texttt{TextToSpeech}, and an unmodeled method is assumed to pass no data.
+When the flows of unmodeled methods are opened, a source reaches both sinks, so both verdicts depend on library code that no model covers.
+For each verdict, the receipt is the single unmodeled flow that the verdict assumes absent.
+For verdict A, it is the flow from the argument of \texttt{ContentValues.put} into the \texttt{ContentValues} object: sensitive data reaches the provider only through this flow.
+That flow is real, since storing values is what \texttt{put} is for, so verdict A misses a leak, and so does FlowDroid.
+For verdict B, it is a flow from the \texttt{TextToSpeech} object into the listener: sensitive data reaches the log only if registering a listener copied data from the object into it.
+Registering a listener copies nothing into the listener, so verdict B is correct.
 
 The existing answers cannot tell the two verdicts apart.
-A sound analysis reports both as leaks, so the user must inspect B, a false alarm, and every similar sink in the app.
-In our corpus, such alarms are 22\% of the sinks that never leak.
+A sound analysis, which assumes that every unmodeled method passes all data, reports both as leaks, so the user must inspect B, a false alarm.
+Such alarms occur in almost every app of our corpus, about 18 per app.
 Listing the assumptions gives one fact for each verdict.
 A count of assumptions treats them alike, and a rule that clears all one-fact receipts would clear A as well.
 Asking a language model whether each flow exists, and taking the answer as fact, gives the right answer for these two facts.
 It is still not a basis for clearing verdicts, because nothing controls how often such answers are wrong: across our corpus they leave wrong clearances in up to 8\% of the apps, at a rate the user can neither choose nor measure in advance.
 
 Our approach prices each fact.
-The pricer gives 0.95 to the \texttt{CharBuffer} flow and 0.03 to the \texttt{String.equals} flow, so the receipt of A costs 0.95 and the receipt of B costs 0.03.
-A threshold of 0.2, certified on other apps so that at most 5\% of programs receive a wrong clearance, clears B and keeps A as a possible leak.
-The user sees why: B is cleared because comparing strings does not copy them, and A is reported because converting a buffer to a string does.
+The pricer gives 0.88 to the \texttt{ContentValues} flow and 0.10 to the \texttt{TextToSpeech} flow.
+A threshold of 0.2, certified on other apps so that at most 5\% of programs receive a wrong clearance, clears B and reports A as a possible leak.
+The user sees why: B is cleared because registering a listener does not copy data into it, and A is reported because storing a value in \texttt{ContentValues} does.
 If the price of a fact were wrong, the certified threshold would still bound how often such mistakes reach a user, and the receipt would show which fact to check.

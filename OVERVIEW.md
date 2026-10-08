@@ -3,7 +3,7 @@
 This document explains the project from scratch: the problem, the gap in existing work, our idea, what we built, the
 experiments, what they show, where things stand, and where to find everything in the repository.
 Paper title: "Soundiness with Receipts: Certified Miss-Risk for Unsound Static Analyses" (target: ISSTA 2027).
-Written 2026-10-07, updated 2026-10-08; numbers are from the main answer key (the rubric key: FlowDroid's models plus the labels on which two LLM families agree under a written definition) unless stated otherwise.
+Written 2026-10-07, updated 2026-10-08. Main setting: our analysis uses FlowDroid's library models, and holes are only the methods FlowDroid does not model. Numbers are from the main answer key (the rubric key: FlowDroid's models plus the labels on which two LLM families agree under a written definition) unless stated otherwise.
 
 ---
 
@@ -19,9 +19,10 @@ to the result? Does `String.equals(x)` copy `x` anywhere? Tools answer with *mod
 Android taint analysis, ships hand-written models for about 350 classes. **For every method without a model, the tool
 silently assumes that no data passes.** So a "no leak" verdict can be wrong, and the tool never says how likely that is.
 
-How big is this? In our corpus of 324 apps, 12,274 of the 17,830 library methods that lie on a source-to-sink path have
-no FlowDroid model. When FlowDroid is run without its models, 82% of the leaks it reports disappear. In real malware
-(TaintBench), half of the documented leaks our analysis can reach go through unmodeled library methods.
+How big is this? When FlowDroid is run without its models, 82% of the leaks it reports disappear, so models matter. But
+they are incomplete: in our corpus of 324 apps, 12,274 of the 17,830 library methods on source-to-sink paths have no
+FlowDroid model, and even with all of FlowDroid's models a third of the real leaks (22,888 sinks) pass only through such
+unmodeled methods, so an analysis relying on the models reports them as clean.
 
 Analyses that are "sound except for documented gaps" are called *soundy*. What was missing is a way to say how often
 those gaps actually cause a wrong verdict.
@@ -30,7 +31,7 @@ those gaps actually cause a wrong verdict.
 
 | Existing answer | What it does | Why it is not enough |
 | --- | --- | --- |
-| Sound analysis | assume every unmodeled method passes all data | never misses, but floods the user with false alarms: 22% of the sinks that never leak are still flagged, with no ranking |
+| Sound analysis | assume every unmodeled method passes all data | catches the missed leaks but adds false alarms to 298 of 307 apps (5,318 in total, about 18 per app), with no ranking |
 | More library models (hand-written, StubDroid from code, Atlas, or a language model as in IRIS/SemTaint) | fill in the missing summaries | every model can be wrong, and a verdict computed from a model taken as fact has no error measure |
 | List the assumptions (Bastani et al. 2015: minimal cuts checked by a person) | tell the user which facts a verdict rests on | says *what* was assumed, not *how likely* it is to fail; every verdict still needs a person. Counting assumptions does not help: clearing every verdict that rests on one assumption leaves a wrong clearance in 93% of apps |
 
@@ -38,11 +39,11 @@ None of them tells the user: "this clean verdict is wrong with probability at mo
 
 ## 3. Our idea, step by step (with the paper's example)
 
-App `org.jsl.wfwt` (a walkie-talkie app) has two clean verdicts, both logging calls:
-- **Verdict A** depends on one library fact: `CharBuffer.toString()` passes the buffer's content to the result.
-  This flow is real (FlowDroid's own model says so), so verdict A actually misses a leak.
-- **Verdict B** depends on one library fact: `String.equals(x)` copies `x` into the string. That never happens,
-  so verdict B is correct.
+App `de.luhmer.owncloudnewsreader` (a Nextcloud news reader) has two clean verdicts; FlowDroid models neither method:
+- **Verdict A** (`ContentResolver.insert`, data written to a content provider) depends on one library fact:
+  `ContentValues.put` stores its argument. This flow is real, so verdict A misses a leak, and so does FlowDroid.
+- **Verdict B** (a `Log.d` call) depends on one library fact: registering a listener on `TextToSpeech` copies data into
+  the listener. That never happens, so verdict B is correct.
 
 A sound analysis flags both (B is a false alarm). Counting assumptions sees "1" for both. Our approach separates them:
 
@@ -51,15 +52,15 @@ A sound analysis flags both (B is a false alarm). Counting assumptions sees "1" 
 2. **Receipt.** For each clean verdict that depends on holes, the *receipt* is the smallest set of holes such that, if
    none of them is real, the verdict is correct (a cut in the flow graph). Verdict A's receipt is the `CharBuffer`
    fact; B's is the `String.equals` fact.
-3. **Prices.** A *pricer* (a language model) gives each hole a probability of being real: 0.95 for the `CharBuffer`
-   fact, 0.03 for the `String.equals` fact.
+3. **Prices.** A *pricer* (a language model) gives each hole a probability of being real: 0.88 for the `ContentValues`
+   fact, 0.10 for the `TextToSpeech` fact.
 4. **Bound.** The sum of the prices on a receipt bounds the probability that the verdict is wrong. This needs no
    assumption that library flows are independent. The cheapest receipt is a *minimum cut*, computed by max-flow, and we
    prove that no smaller bound can be derived from the individual prices.
 5. **Certified threshold.** A verdict is cleared if its bound is below a threshold. The threshold is *certified* on a
    sample of other apps with an exact statistical test (Learn-then-Test), so that with confidence 1-eps, a new app gets a
    wrong clean verdict with probability at most alpha. We call this *(alpha, eps)-soundiness*. Here the certified
-   threshold is 0.2: B (0.03) is cleared, A (0.95) is reported as a possible leak.
+   threshold is 0.2: B (0.10) is cleared, A (0.88) is reported as a possible leak.
 6. **Checking facts (optional).** Receipts name facts a person can check. One fact often sits in many receipts, so
    checking a few well-chosen facts clears many verdicts.
 
@@ -94,19 +95,19 @@ common per-verdict alternative (conformal selection) leaves wrong clearances in 
 
 ## 6. Experiments and what they show
 
-Metric names: the **hard slice** = the 20,104 leak-free sinks that depend on library flows (a sound analysis cannot
-clear them). **Cleared** = share of the hard slice we clear. **Apps wrong** = share of held-out apps with at least one
+Metric names: the **hard slice** = the 5,318 leak-free sinks that depend on unmodeled library flows (a sound treatment of
+unmodeled methods cannot clear them). **Cleared** = share of the hard slice we clear. **Apps wrong** = share of held-out apps with at least one
 wrong clearance (must stay below alpha).
 
 | # | Question | What we did | Result | What it shows |
 | --- | --- | --- | --- | --- |
-| RQ1 | Do clean verdicts depend on unmodeled library flows? | FlowDroid with and without its models on 80 apps; our corpus; TaintBench; holes inside FlowDroid | FlowDroid loses 82% of its leaks without models; 22% of leak-free sinks depend on library flows; 48 of 92 reachable malware leaks need unmodeled flows; FlowDroid with holes: 58 extra sinks, 43 FlowDroid-confirmed receipts | the problem is large and not specific to our analysis |
-| RQ2 | How much do receipts clear at a certified risk? | 324 apps, alpha 0.05 | Jev clears 48% of the hard slice with 1.5% of apps wrong (89% of all leak-free sinks vs 78% for the sound analysis; at alpha 0.02: 45%, 0% wrong); counting clears 0%; LLM-as-fact clears more but up to 7.7% of apps wrong with no control; per-verdict conformal: 59% of apps wrong | prices are what make receipts useful; the per-program guarantee matters |
+| RQ1 | Do clean verdicts depend on unmodeled library flows? | FlowDroid with and without its models on 80 apps; our corpus with FlowDroid's models; TaintBench; holes inside FlowDroid | FlowDroid loses 82% of its leaks without models; with all of FlowDroid's models, 22,888 real leaks (a third) pass only through unmodeled methods; opening them adds 5,318 false alarms in 298 of 307 apps; FlowDroid with holes: 58 extra sinks, 43 FlowDroid-confirmed receipts | models matter and are incomplete; the gap is large |
+| RQ2 | How much do receipts clear at a certified risk? | 307 apps, alpha 0.05 | Jev clears 49% of the hard slice with 0.9% of apps wrong (37% at alpha 0.02); counting clears 0%; LLM-as-fact has no risk control (up to 7.7% of apps wrong); per-verdict conformal misses its own target (6.6% at 5%) and leaves wrong clearances in 17% of apps | prices make receipts useful; per-program calibration is needed |
 | RQ3 | Does the guarantee survive other answer keys? | deletion keys (no LLM labels), StubDroid key, GPT key, human-audited key, label noise, rubric key | apps wrong at most 2.6% under every key; cleared share varies (Jev 48% under the main key, 40% under the Sonnet-only key, 23% under the GPT key, 8-14% under a noisy key) | validity is robust; how much is cleared depends on how strict the key is |
 | RQ3b | Is the key reliable? | Sonnet vs GPT labels; relabeled with a written definition | short prompt: kappa 0.62; with the written definition: kappa 0.80, the models match a person's source checks on 92% and 93% of 60 facts, and 95% where both models agree | the earlier disagreement came from a vague question, now fixed |
 | RQ4 | What makes a pricer useful? | 7 LLM pricers, ranking analysis, question wording | cheap models answer too confidently and clear ~0-4% at alpha 0.05; the classifier and Sonnet rank better on average than Jev but clear much less; stating the flow rule in the question nearly triples Jev's clearance | a pricer must give low prices only to flows that are really absent; the guarantee never broke |
-| RQ5 | Does checking a few facts help? | rank facts without labels, let the key answer the top K, recertify | 25 checks: 47% to 65% cleared and twice the reported real leaks; 100 checks: 73%; 100 random checks: no change | receipts make human effort efficient |
-| RQ6 | Does a threshold certified on benign apps hold on malware? | certify on F-Droid, apply to 31 TaintBench apps | Jev and Sonnet: 0 of 31 apps wrong; 3 documented leaks cleared, all resting on one callback fact (`WebView.addJavascriptInterface`) | the guarantee transferred (on a small sample), and the receipt shows exactly why the 3 were cleared |
+| RQ5 | Does checking a few facts help? | rank facts without labels, let the key answer the top K, recertify | 25 checks: 49% to 63%; 100 checks: 78%; 100 random checks: 52% | receipts make human effort efficient |
+| RQ6 | Does a threshold certified on benign apps hold on malware? | certify on F-Droid, apply to 23 TaintBench apps | 0 of 23 apps wrong (Jev, Sonnet); with FlowDroid's models only 6 documented leaks need unmodeled flows, all callbacks / inter-component calls / reflection, which our flow definition excludes | transfer holds against our key; few malware leaks depend on the flows we price |
 
 Results that did **not** work out (reported honestly, mostly not in the paper):
 - **Our analysis is weaker than FlowDroid**: it reaches 58% of FlowDroid's leaks, ~1% precision. The guarantee is about
