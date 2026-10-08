@@ -159,7 +159,7 @@ K2 (StubDroid on Android code) & 25.7\% (1.7\%) & 33.6\% (2.3\%) & 20.4\% (2.3\%
 Deletion, 25\% of classes & 52.2\% (0.8\%) & 81.9\% (0.5\%) & 71.4\% (1.6\%)\\
 Deletion, 75\% of classes & 50.9\% (1.3\%) & 79.1\% (1.0\%) & 33.1\% (0.5\%)\\
 GPT labels & 22.9\% (1.8\%) & 24.0\% (0.9\%) & --\\
-Rubric labels (both models agree) & \todo{} & \todo{} & --\\
+Rubric labels (both models agree) & 48.3\% (1.5\%) & 23.8\% (0.0\%) & --\\
 Noisy main key (3 draws) & 7.6--13.9\% ($\le$2.6\%) & 17.0--23.1\% ($\le$1.6\%) & --\\
 \bottomrule
 \end{tabular}
@@ -174,6 +174,7 @@ The disagreement between Sonnet and GPT comes from the question, not from the mo
 Asked the short question, the two models agree on 81\% of the candidate flows (Cohen's $\kappa=0.62$), and they agree with a person's source-code checks on 81\% and 90\% of the facts.
 Asked again with the written definition and one reason code per answer (Appendix~\ref{app:flow}), they agree on 90\% of 37{,}160 candidate flows ($\kappa=0.80$), both call about 41\% of the flows real, and they agree with the person on 92\% and 93\% of the 60 facts; on the 57 facts where both models give the same answer, the person agrees with that answer 54 times (95\%).
 The rubric key, built from the answers on which both models agree, is therefore the most faithful key we have.
+Under it, Jev clears 48.3\% of a smaller hard slice (20{,}104 leak-free sinks instead of 28{,}335), with 1.5\% of held-out apps wrong.
 
 \emph{The deletion keys test pricers on code they have not seen.}
 Figure~\ref{fig:deletion} shows the cleared share as more classes are deleted.
