@@ -943,6 +943,13 @@ undeleted models as code). Panel (main key): Qwen3.8-27B 0%; Qwen3.7-Flash certi
 of the bound: Jev 0.970, classifier 0.965, Sonnet 0.950 (clear 49%, 24%, 17%). Receipt sizes of Jev's cleared sinks: 80% one
 fact, 99.4% at most four (2,518 sinks). Calibration floor confirmed again (certification starts at n = 60 for alpha 0.05).
 
+**Fix 4: alarms per app (fm setting, rubric key, threshold certified on all apps; `analysis/alarms_per_app.py`).** Jev
+(delta 0.2): false alarms 5,318 -> 2,800 (47% removed); per app with any, median 13 -> 6, mean 17.8 -> 9.4, p90 36 -> 20;
+only 5 of 298 apps lose all false alarms; undecided alarms 4,946 -> 4,918 (barely cleared); real alarms 22,888, 1 cleared
+wrongly; decided alarms that are real 81.1% -> 89.1%; remaining false alarms: receipt size 1 for 19%, <=4 for 67%, median 3.
+Sonnet (delta 0.02): 17% of false alarms removed, median 13 -> 11, none real cleared. Reading: opening unmodeled methods mostly
+finds real leaks (81%); receipts halve the false alarms per app but rarely empty an app's list.
+
 ## 23. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the

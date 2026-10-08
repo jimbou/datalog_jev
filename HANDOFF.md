@@ -11,8 +11,7 @@ Read first: this file, `FINDINGS.md` (research log, newest sections 22, 22b), `p
 
 **Current state (2026-10-08):** main setting = our analysis plus FlowDroid's models, holes only for unmodeled methods
 (evaluator prefix `fm-`), main key = rubric key (`fm-rk-<pricer>`). Results: `FINDINGS.md` sections 22c-22d. The paper is
-being rewritten for this setting (intro, example, setup, RQ1, RQ2, RQ5, RQ6 done; RQ3/RQ4 and figures wait for
-`bench/queues/fm_all_chain.sh`). Older numbers in this file are from the earlier setting (no library model, Sonnet key).
+fully rewritten for this setting (all sections, tables and figures; figures from `data/paper_stats_fm.json`). Older numbers in this file are from the earlier setting (no library model, Sonnet key).
 
 ## 1. The idea in one paragraph
 Unsound taint analyses skip library code and assume no data flows through it. Every candidate flow through a skipped

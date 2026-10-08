@@ -11,9 +11,8 @@ Mock-review estimate of acceptance: about 35-40% now (B1 done, rubric key as mai
 
 ## A. Finish what is running (must do)
 
-A1-A5 are done (rubric relabeling, rubric key as main key, agreement numbers). Still open: the remaining `fm-` runs
-(`bench/queues/fm_all_chain.sh`: other keys, pricer panel, wording, ablation, figure statistics) and filling RQ3/RQ4 and the
-figures with them.
+A1-A5 are done (rubric relabeling, rubric key as main key, agreement numbers), and so are all `fm-` runs
+(`bench/queues/fm_all_chain.sh`, FMA-DONE 2026-10-08 21:11 UTC): the whole paper, its figures and `FINDINGS.md` 22d use them.
 
 | # | Item | Status / how |
 | --- | --- | --- |
@@ -28,7 +27,7 @@ figures with them.
 | --- | --- | --- | --- |
 | B1 | DONE 2026-10-08: holes only where FlowDroid has no model (`fm-` mode), new example (`ContentResolver.insert` leak through unmodeled `ContentValues.put`) | removed the strawman objection | done |
 | B2 | Certify on FlowDroid itself: rerun failed apps with 3300 s, ~400 more small apps, tighter class mapping | removes "certified misses of a toy analysis" | server days; may stay a validation |
-| B3 | Show user value: false alarms per app before/after clearing, apps with no alarms left, receipt size of remaining alarms, shared checks across apps; optional timed triage sample | makes "40% of the hard slice" concrete | about a day; user study optional |
+| B3 | PART DONE 2026-10-09 (alarms per app in RQ2: median 13 -> 6, 81% -> 89% real). Open: triage time, shared checks. Show user value: false alarms per app before/after clearing, apps with no alarms left, receipt size of remaining alarms, shared checks across apps; optional timed triage sample | makes "40% of the hard slice" concrete | about a day; user study optional |
 
 ## C. Further strengtheners (lower priority)
 

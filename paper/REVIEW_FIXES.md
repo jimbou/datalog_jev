@@ -104,6 +104,10 @@ If certification stays out of reach, keep it as validation and say so.
 
 ## Fix 4. Show what it buys a user
 
+**STATUS: part 1 DONE (2026-10-09)**, `analysis/alarms_per_app.py`, FINDINGS 22d: false alarms per app median 13 -> 6 (Jev,
+delta 0.2), 5 of 298 apps fully cleaned, 81% -> 89% of alarms real, one real leak cleared. In the paper (RQ2). Parts 2-4
+(triage time, shared checks, user study) open.
+
 **Reviewer objection.** "40% of the hard slice" is abstract; no user, no saved effort.
 
 **Measure (post-processing on existing results, about a day).**
