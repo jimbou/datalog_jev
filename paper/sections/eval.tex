@@ -16,17 +16,17 @@ Our evaluation answers six questions:
 
 \paragraph{Apps.}
 We downloaded about 580 open-source apps from F-Droid and built flow graphs for the 332 that fit our memory and time limits; 324 of them have at least one clean, hole-dependent sink.
-These apps contain 84{,}753 clean, hole-dependent sinks whose status the main key decides; 28{,}335 of them never receive sensitive data.
-We call these 28{,}335 sinks the \emph{hard slice}: they are leak-free, but a sound analysis cannot clear them.
+These apps contain 79{,}847 clean, hole-dependent sinks whose status the main key decides; 20{,}104 of them never receive sensitive data.
+We call these 20{,}104 sinks the \emph{hard slice}: they are leak-free, but a sound analysis cannot clear them.
 For RQ6 we use TaintBench~\cite{taintbench}, 39 malware apps with 203 documented leaks; we built graphs for 33 of them.
 
 \paragraph{Answer keys.}
 A wrong clearance is defined relative to a key, so we use several keys built in different ways.
 \begin{itemize}
-\item The \emph{main key} uses FlowDroid's hand-written models where they exist, and labels from Sonnet~5 for the 12{,}274 methods FlowDroid does not model.
+\item The \emph{main key} uses FlowDroid's hand-written models where they exist. For the 12{,}274 methods FlowDroid does not model, it uses the labels on which two language models from different families, Sonnet~5 and GPT-6.1, agree when both are given the written definition of Section~\ref{sec:flow}; where they disagree, it uses K2 (below) if K2 decides the fact, and otherwise leaves the fact unknown.
 \item The \emph{deletion keys} contain no language-model labels. They take FlowDroid's models as the truth and delete a share of the modeled classes; the deleted classes become priced holes, and all other modeled classes stay fixed. Deleting whole classes prevents a pricer from copying the answer of a sibling method.
 \item \emph{K2} uses summaries that StubDroid~\cite{stubdroid} generates from the Android~13 and Java~8 source code.
-\item The \emph{GPT} and \emph{rubric} keys replace Sonnet's labels by those of a second model family, GPT-6.1, and by the labels on which both models agree when given the written definition of Section~\ref{sec:flow}.
+\item The \emph{Sonnet} and \emph{GPT} keys label the unmodeled methods with one model each, asked a short question without the written definition.
 \item The \emph{audited key} replaces the labels of the 446 facts that all accepted verdicts rest on by the answers of an audit, in which a person read the Android source code of 67 facts.
 \end{itemize}
 
@@ -42,7 +42,7 @@ The guarantee concerns the second number: it should stay below $\alpha$.
 To measure how much a taint analysis relies on library models, we ran FlowDroid on 80 F-Droid apps twice: with its models and without them.
 Table~\ref{tab:fd-none} shows that without its models FlowDroid loses 82\% of the leaking sinks it reports, and finds no leak that it does not also find with them.
 This is the extreme case of a missing model; in practice the models cover some methods and miss others.
-In our corpus, 12{,}274 of the 17{,}830 library methods that lie on a source-to-sink path have no FlowDroid model, and 28\% of the leak-free sinks depend on some library flow, so a sound analysis cannot clear them.
+In our corpus, 12{,}274 of the 17{,}830 library methods that lie on a source-to-sink path have no FlowDroid model, and 22\% of the leak-free sinks depend on some library flow, so a sound analysis cannot clear them.
 The same holds for real leaks: of the 92 documented TaintBench leaks that our analysis reaches, 48 (52\%) are reachable only through a library flow it does not model.
 
 The dependence is not specific to our analysis.
@@ -65,7 +65,7 @@ All apps with both answers & 69 & 154 & 27 & 127 (82\%)\\
 \end{tabular}
 \end{table}
 
-\answer{\textbf{RQ1:} Clean verdicts often depend on unmodeled library flows: 28\% of the leak-free sinks in our corpus and half of the reachable documented malware leaks do, and FlowDroid loses 82\% of its leaks without its library models.}
+\answer{\textbf{RQ1:} Clean verdicts often depend on unmodeled library flows: 22\% of the leak-free sinks in our corpus and half of the reachable documented malware leaks do, and FlowDroid loses 82\% of its leaks without its library models.}
 
 \subsection{RQ2: How Much Do Receipts Clear?}
 \label{sec:rq2}
@@ -79,10 +79,10 @@ All apps with both answers & 69 & 154 & 27 & 127 (82\%)\\
 Pricer & $\alpha=0.10$ & $\alpha=0.05$ & $\alpha=0.02$\\
 \midrule
 Counting (receipt size) & 0\% & 0\% & 0\%\\
-Frequency prior & 9.2\% (4.9\%) & 6.6\% (0.8\%) & --\\
-Feature classifier & 33.2\% (5.4\%) & 22.0\% (0.7\%) & --\\
-Sonnet~5 & 53.0\% (5.6\%) & 29.6\% (2.5\%) & --\\
-Jev & 40.0\% (1.0\%) & 40.0\% (1.0\%) & 33.4\% (0.3\%)\\
+Frequency prior & 8.9\% (0.0\%) & 8.9\% (0.0\%) & --\\
+Feature classifier & 43.8\% (4.7\%) & 28.8\% (0.5\%) & --\\
+Sonnet~5 & 30.9\% (3.8\%) & 23.8\% (0.0\%) & --\\
+Jev & 58.9\% (5.2\%) & 48.3\% (1.5\%) & 45.3\% (0.0\%)\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -94,12 +94,12 @@ Jev & 40.0\% (1.0\%) & 40.0\% (1.0\%) & 33.4\% (0.3\%)\\
 \end{figure}
 
 Table~\ref{tab:main} gives the cleared share for each pricer, and Figure~\ref{fig:curve} the whole trade-off between clearing and wrong clearances.
-With Jev's prices, receipts clear 40\% of the hard slice at $\alpha=0.05$, and 1.0\% of held-out apps receive a wrong clearance.
-Together with the sinks a sound analysis already clears, 83\% of all leak-free sinks are cleared, against 72\% for the sound analysis alone.
+With Jev's prices, receipts clear 48\% of the hard slice at $\alpha=0.05$, and 1.5\% of held-out apps receive a wrong clearance.
+Together with the sinks a sound analysis already clears, 89\% of all leak-free sinks are cleared, against 78\% for the sound analysis alone.
 In every row the observed error stays below $\alpha$, as Proposition~\ref{prop:ltt} predicts; what differs is how much is cleared.
 
 \emph{Counting assumptions clears nothing.}
-Counting gives every receipt of size one the same bound, so the first threshold already clears every one-fact receipt, and that puts a wrong clearance in 93\% of the apps.
+Counting gives every receipt of size one the same bound, so the first threshold already clears every one-fact receipt, and that puts a wrong clearance in 94\% of the apps.
 The calibration therefore refuses every threshold.
 Prices are what make receipts usable.
 
@@ -109,10 +109,11 @@ There is one operating point, and its error cannot be chosen.
 
 \emph{The unit of the guarantee matters.}
 Table~\ref{tab:unit} compares our per-program calibration with conformal selection over verdicts~\cite{conformalselection}, which controls the share of wrong verdicts among the cleared ones.
-At a 5\% target, conformal selection clears more, 55.6\%, but its wrong verdicts are spread over 166 of the 324 apps.
-A user reading one app's report would see a wrong clearance about half the time.
-Using the bound directly as a probability, without calibration, is safe for Jev but clears only 5.5\%, because its prices are conservative.
+At a 5\% target, conformal selection clears more, 73.5\%, but its wrong verdicts are spread over 192 of the 324 apps.
+A user reading one app's report would see a wrong clearance more often than not.
+Using the bound directly as a probability, without calibration, is safe for Jev but clears only 7.8\%, because its prices are conservative.
 The certified result changes little with the confidence parameter, the size of the calibration half, or when apps that bundle the same libraries are kept on the same side of each split.
+In a few splits the held-out share of wrong apps exceeds 5\%, as the bracket in Table~\ref{tab:unit} shows; the guarantee bounds how often this happens (at most a share $\varepsilon$ of calibrations), not each split.
 
 \begin{table}[t]
 \caption{Calibration unit and sensitivity (Jev, main key, $\alpha=0.05$). Brackets: 5th to 95th percentile over 200 splits.}
@@ -122,18 +123,18 @@ The certified result changes little with the confidence parameter, the size of t
 \toprule
 Procedure & Cleared & Apps with a wrong clearance\\
 \midrule
-Bound used as a probability, $\delta=\alpha$ & 5.5\% & 0 of 324\\
-Conformal selection over verdicts, 1\% / 5\% / 10\% & 47.4 / 55.6 / 59.2\% & 19 / 51 / 60\%\\
+Bound used as a probability, $\delta=\alpha$ & 7.8\% & 0 of 324\\
+Conformal selection over verdicts, 1\% / 5\% / 10\% & 71.2 / 73.5 / 76.1\% & 10 / 59 / 78\%\\
 \midrule
-Per program (ours), $\varepsilon=0.1$, 50\% calibration & 40.0\% [37.4, 42.9] & 1.0\% [0.0, 1.9]\\
-\quad $\varepsilon=0.05$ or $0.2$ & 40.0\% & 1.0\%\\
-\quad 30\% or 70\% of apps for calibration & 38.7 / 39.9\% & 0.9\%\\
-\quad apps sharing libraries kept together & 39.7\% [37.0, 42.4] & 0.9\% [0.0, 1.9]\\
+Per program (ours), $\varepsilon=0.1$, 50\% calibration & 48.3\% [42.5, 57.6] & 1.5\% [0.0, 5.6]\\
+\quad $\varepsilon=0.05$ / $0.2$ & 47.0 / 50.6\% & 0.9 / 2.4\%\\
+\quad 30\% / 70\% of apps for calibration & 46.9 / 47.2\% & 0.7 / 1.2\%\\
+\quad apps sharing libraries kept together & 46.6\% [43.0, 56.8] & 0.6\% [0.0, 5.3]\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\answer{\textbf{RQ2:} At a 5\% target, priced receipts clear 40\% of the leak-free sinks a sound analysis cannot clear, with wrong clearances in 1.0\% of held-out apps. Counting assumptions clears nothing, a language model taken as fact has no risk control, and per-verdict selection leaves wrong clearances in half of the apps.}
+\answer{\textbf{RQ2:} At a 5\% target, priced receipts clear 48\% of the leak-free sinks a sound analysis cannot clear, with wrong clearances in 1.5\% of held-out apps. Counting assumptions clears nothing, a language model taken as fact has no risk control, and per-verdict selection leaves wrong clearances in most apps.}
 
 \subsection{RQ3: Robustness to the Answer Key}
 \label{sec:rq3}
@@ -142,8 +143,8 @@ Every answer key can be wrong, so we repeat the calibration under each key in Ta
 The guarantee holds under all of them: the share of held-out apps with a wrong clearance stays at or below 2.6\% at $\alpha=0.05$.
 The cleared share, however, depends on the key.
 Keys that call more flows real leave fewer leak-free sinks and make each receipt more likely to contain a real flow.
-The GPT key is such a key: GPT-6.1, asked the same short question as Sonnet, calls 53\% of the candidate flows real against Sonnet's 35\%, and Jev's cleared share falls from 40\% to 23\%.
-Flipping 11\% of the main key's ``no'' labels at random, the error rate a person's check of the language-model labels suggested, has a similar effect.
+Asked only a short question, GPT-6.1 calls 53\% of the candidate flows real against Sonnet's 35\%, and Jev's cleared share is 23\% under the GPT key against 40\% under the Sonnet key.
+Flipping 11\% of the Sonnet key's ``no'' labels at random, the error rate a person's check of these labels suggested, has a similar effect.
 
 \begin{table}[t]
 \caption{Cleared share and held-out apps with a wrong clearance (in brackets) at $\alpha=0.05$ under other answer keys.}
@@ -153,28 +154,27 @@ Flipping 11\% of the main key's ``no'' labels at random, the error rate a person
 \toprule
 Key & Jev & Sonnet~5 & Feature classifier\\
 \midrule
-Main (Sonnet labels) & 40.0\% (1.0\%) & 29.6\% (2.5\%) & 22.0\% (0.7\%)\\
-Audited (person and audit answers) & 39.4\% (2.0\%) & -- & --\\
+Main (two models agree) & 48.3\% (1.5\%) & 23.8\% (0.0\%) & 28.8\% (0.5\%)\\
+Sonnet labels (short question) & 40.0\% (1.0\%) & 29.6\% (2.5\%) & 22.0\% (0.7\%)\\
+Sonnet labels with audit answers & 39.4\% (2.0\%) & -- & --\\
 K2 (StubDroid on Android code) & 25.7\% (1.7\%) & 33.6\% (2.3\%) & 20.4\% (2.3\%)\\
 Deletion, 25\% of classes & 52.2\% (0.8\%) & 81.9\% (0.5\%) & 71.4\% (1.6\%)\\
 Deletion, 75\% of classes & 50.9\% (1.3\%) & 79.1\% (1.0\%) & 33.1\% (0.5\%)\\
 GPT labels & 22.9\% (1.8\%) & 24.0\% (0.9\%) & --\\
-Rubric labels (both models agree) & 48.3\% (1.5\%) & 23.8\% (0.0\%) & --\\
-Noisy main key (3 draws) & 7.6--13.9\% ($\le$2.6\%) & 17.0--23.1\% ($\le$1.6\%) & --\\
+Noisy Sonnet key (3 draws) & 7.6--13.9\% ($\le$2.6\%) & 17.0--23.1\% ($\le$1.6\%) & --\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \emph{Is the key independent of the pricer?}
-The main key labels unmodeled methods with Sonnet~5, which is also a pricer.
-Under the keys that contain no Sonnet labels, the deletion keys, K2 and the GPT key, Sonnet is as good as or better than Jev, so its results do not come from agreeing with itself.
+Sonnet~5 is both a pricer and one of the two labelers of the main key.
+Under the keys that contain no Sonnet labels, the deletion keys, K2 and the GPT key, Sonnet is as good as or better than Jev, so agreement with itself does not explain its results; under the Sonnet-only key it does better than under the main key, which is why we do not use that key as the main one.
 
 \emph{Does the key follow the definition?}
 The disagreement between Sonnet and GPT comes from the question, not from the models.
 Asked the short question, the two models agree on 81\% of the candidate flows (Cohen's $\kappa=0.62$), and they agree with a person's source-code checks on 81\% and 90\% of the facts.
 Asked again with the written definition and one reason code per answer (Appendix~\ref{app:flow}), they agree on 90\% of 37{,}160 candidate flows ($\kappa=0.80$), both call about 41\% of the flows real, and they agree with the person on 92\% and 93\% of the 60 facts; on the 57 facts where both models give the same answer, the person agrees with that answer 54 times (95\%).
-The rubric key, built from the answers on which both models agree, is therefore the most faithful key we have.
-Under it, Jev clears 48.3\% of a smaller hard slice (20{,}104 leak-free sinks instead of 28{,}335), with 1.5\% of held-out apps wrong.
+This is why the main key uses the answers on which both models agree under the written definition.
 
 \emph{The deletion keys test pricers on code they have not seen.}
 Figure~\ref{fig:deletion} shows the cleared share as more classes are deleted.
@@ -200,13 +200,13 @@ Language-model pricers do not depend on siblings and keep their clearance.
 \toprule
 Pricer & Price & $\alpha=0.05$: certified, cleared & $\alpha=0.10$: certified, cleared\\
 \midrule
-Jev & \$0.4 & 200, 40.0\% & 200, 40.1\%\\
-Sonnet~5 & \$16.4 & 200, 29.6\% & 200, 53.0\%\\
-Qwen3.7-Flash & \$0.19 & 1, 21.5\% & 134, 21.5\%\\
-Gemini-3.5-Flash-Lite & \$2.82 & 0 & 6, 13.6\%\\
-DeepSeek-V4-Flash & \$0.37 & 0 & 1, 12.3\%\\
+Jev & \$0.4 & 200, 48.3\% & 200, 58.9\%\\
+Sonnet~5 & \$16.4 & 200, 23.8\% & 200, 30.9\%\\
+Qwen3.7-Flash & \$0.19 & 4, 30.3\% & 154, 30.3\%\\
+Gemini-3.5-Flash-Lite & \$2.82 & 0 & 2, 21.0\%\\
+DeepSeek-V4-Flash & \$0.37 & 0 & 0\\
 Qwen3.8-27B & \$1.96 & 200, 0\% & 200, 0\%\\
-GPT-5.6-luna & \$5.13 & 200, 3.0\% & 200, 4.0\%\\
+GPT-5.6-luna & \$5.13 & 200, 4.2\% & 200, 4.2\%\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -217,7 +217,7 @@ The lowest threshold that clears anything then already puts a wrong clearance in
 The guarantee still holds: a poor pricer costs clearance, not validity.
 
 \emph{Average ranking quality is not what counts.}
-Table~\ref{tab:rank} shows that Sonnet ranks verdicts better than Jev on average (AUROC 0.942 against 0.855), yet clears less at $\alpha=0.05$.
+Table~\ref{tab:rank} shows that the classifier and Sonnet rank verdicts better than Jev on average (AUROC 0.981 and 0.964 against 0.935), yet clear much less at $\alpha=0.05$.
 By Proposition~\ref{prop:order}, only the order of the bounds matters, and only at the low end, where verdicts are cleared: one real flow with a low price is enough to make an app wrong.
 A pricer for receipts should be judged by its curve near the origin of Figure~\ref{fig:curve}, not by an average score.
 
@@ -233,10 +233,10 @@ Jev's clearance at $\alpha=0.05$ is 14.2\% when asked only whether a flow exists
 Without the rule, getters on tainted objects receive low prices, and the few real flows among them block the threshold.
 
 \emph{How prices are combined matters less.}
-With the same receipts, summing over distinct facts instead of edges clears 43.0\%, the largest single price 46.8\%, and the product under independence 45.3\%, all with at most 1.9\% of apps wrong.
+With the same receipts, summing over distinct facts instead of edges clears 52.9\%, the largest single price 42.2\%, and the product under independence 54.2\%, all with at most 2.1\% of apps wrong.
 The calibration makes each of these valid; the union bound is the one that is also a guaranteed upper bound for each verdict.
 
-\answer{\textbf{RQ4:} A useful pricer gives low prices only to flows that are really absent. Strong models (Jev, Sonnet~5) clear 30 to 53\% of the hard slice; cheaper models answer too confidently and clear little, without breaking the guarantee. Stating the flow rule in the question nearly triples Jev's clearance.}
+\answer{\textbf{RQ4:} A useful pricer gives low prices only to flows that are really absent. Jev clears 48 to 59\% of the hard slice and Sonnet~5 24 to 31\%; cheaper models answer too confidently and clear little, without breaking the guarantee. Stating the flow rule in the question nearly triples Jev's clearance.}
 
 \subsection{RQ5: Checking Receipt Facts}
 \label{sec:rq5}
@@ -249,12 +249,13 @@ The calibration makes each of these valid; the union bound is the one that is al
 \toprule
 Key & Facts checked & Cleared & Apps wrong & Reported real leaks\\
 \midrule
-Main & 0 & 39.9\% & 0.9\% & 12{,}152\\
- & 25 & 53.2\% & 1.3\% & 26{,}743\\
- & 100 & 58.0\% & 2.0\% & 33{,}059\\
- & 400 & 66.2\% & 1.2\% & 39{,}472\\
- & 100, ranked by count & 64.2\% & 2.0\% & 34{,}788\\
- & 100, at random & 40.0\% & 0.9\% & 12{,}255\\
+Main & 0 & 46.9\% & 1.0\% & 12{,}152\\
+ & 25, ranked by unlock & 64.6\% & 1.2\% & 26{,}901\\
+ & 100, ranked by unlock & 72.9\% & 0.7\% & 33{,}179\\
+ & 25, ranked by count & 49.0\% & 1.2\% & 26{,}292\\
+ & 100, ranked by count & 68.4\% & 0.7\% & 34{,}788\\
+ & 400, ranked by count & 83.0\% & 0.4\% & 40{,}485\\
+ & 100, at random & 47.3\% & 1.0\% & 12{,}253\\
 \midrule
 K2 & 0 & 25.5\% & 1.7\% & 12{,}152\\
  & 50 & 78.7\% & 1.8\% & 13{,}441\\
@@ -267,12 +268,13 @@ A receipt fact often appears in many receipts; \texttt{Messenger.send} alone app
 We therefore ask how much a person, or a test, gains by checking a few facts.
 We rank facts without looking at any answer (Section~\ref{sec:verify}), let the key answer the top $K$, and certify the threshold again.
 Table~\ref{tab:verify} shows the result.
-Checking 25 facts raises the cleared share from 40\% to 53\% and doubles the number of real leaks the analysis reports, because a ``yes'' turns a library flow into a known flow.
+Checking the 25 facts that would clear the most verdicts with a ``no'' (the unlock rule) raises the cleared share from 47\% to 65\% and doubles the number of real leaks the analysis reports, because a ``yes'' turns a library flow into a known flow.
+With 100 checks the share reaches 73\%, and with 400 checks ranked by count, 83\%.
 Checking 100 facts chosen at random changes nothing, so the ranking is what makes the checks useful.
-Ranking by the number of uncleared verdicts a fact blocks works better than our first rule, which assumes that the answer will be ``no'', because confirmed flows also help.
+Under the Sonnet key the order of the two rules is reversed: counting the uncleared verdicts a fact blocks works better there (64\% against 58\% at 100 checks), because more of the frequent facts are flows that the checks confirm.
 The held-out error stays below the target in every row.
 
-\answer{\textbf{RQ5:} Receipts make checking efficient: 25 well-chosen facts raise the cleared share from 40\% to 53\% and double the real leaks reported, while 100 random facts change nothing.}
+\answer{\textbf{RQ5:} Receipts make checking efficient: 25 well-chosen facts raise the cleared share from 47\% to 65\% and double the real leaks reported, while 100 random facts change nothing.}
 
 \subsection{RQ6: Transfer to Malware}
 \label{sec:rq6}
@@ -293,15 +295,15 @@ Documented leaks & 203\\
 \quad reachable only through unmodeled library flows & 48\\
 \quad not reached & 83\\
 \midrule
-Documented leaks cleared, Jev ($\delta=0.3$) / Sonnet~5 ($\delta=0.03$) & 3 / 3\\
-Apps with a wrong clearance (main key), Jev / Sonnet~5 & 0 / 1 of 31\\
-Leak-free hole-dependent verdicts cleared, Jev / Sonnet~5 & 35.6\% / 30.2\%\\
+Documented leaks cleared, Jev ($\delta=0.2$) / Sonnet~5 ($\delta=0.02$) & 3 / 3\\
+Apps with a wrong clearance (main key), Jev / Sonnet~5 & 0 / 0 of 31\\
+Leak-free hole-dependent verdicts cleared, Jev / Sonnet~5 & 31.5\% / 18.2\%\\
 Counting, receipts of one fact: documented leaks cleared; apps wrong & 22; 21 of 31\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The threshold transfers: with Jev, no malware app receives a wrong clearance by our key, and 36\% of the leak-free hole-dependent verdicts are cleared.
+The threshold transfers: with Jev's and with Sonnet's prices, no malware app receives a wrong clearance by our key, and Jev clears 32\% of the leak-free hole-dependent verdicts.
 Three documented leaks are cleared by both pricers.
 All three are in one app and rest on one fact, \texttt{WebView.addJavascriptInterface} from receiver to argument.
 The app registers an object whose methods return the device identifier, and the leak happens when JavaScript in the web page calls these methods.
@@ -309,4 +311,4 @@ That is a callback, which our flow definition excludes, so the key labels the fa
 The receipt shows exactly which assumption the three clearances share, so a user who disagrees with the definition can check this one fact.
 Counting assumptions, in contrast, would clear 22 documented leaks.
 
-\answer{\textbf{RQ6:} A threshold certified on benign apps held on 31 malware apps: no app received a wrong clearance with Jev's prices. The three documented leaks that were cleared all rest on one checkable fact about a callback.}
+\answer{\textbf{RQ6:} A threshold certified on benign apps held on 31 malware apps: no app received a wrong clearance with either pricer. The three documented leaks that were cleared all rest on one checkable fact about a callback.}

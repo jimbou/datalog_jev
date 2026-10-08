@@ -8,7 +8,7 @@ import json, math, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "paper/figs")
-S = json.load(open(os.path.join(ROOT, "data/paper_stats.json")))
+S = json.load(open(os.path.join(ROOT, "data/paper_stats_rk.json")))  # main key: the rubric key
 NAMES = {"qflash": "Qwen3.7-Flash", "choice-obj": "Jev", "sonnetp": "Sonnet~5", "b6": "Classifier", "b6c": "Classifier",
          "freq": "Frequency prior", "uniform": "Counting", "b3": "LLM as fact", "b6jc": "Classifier + Jev price"}
 STYLE = {"qflash": "olive, thick, densely dotted", "choice-obj": "blue, thick", "sonnetp": "red, thick, dashed", "b6": "teal, thick, dotted", "b6c": "teal, thick, dotted",
@@ -18,7 +18,7 @@ EPS = 0.1
 
 
 def base(p):
-    return p.split("-", 1)[1] if p.startswith(("k2-", "ah2-", "au-")) else p
+    return p.split("-", 1)[1] if p.startswith(("k2-", "ah2-", "au-", "rk-")) else p
 
 
 def thin(curve, xmax=1.0):
@@ -64,7 +64,7 @@ def risk_coverage(pricings, name, caption_note):
 
 
 def learning():
-    p = "choice-obj"
+    p = "rk-choice-obj"
     L = S[p]["learning"]
     lines = [r"\begin{tikzpicture}",
              r"\begin{axis}[width=0.98\linewidth, height=4.8cm, xmin=0, xmax=290, ymin=0, ymax=0.5,",
@@ -102,7 +102,7 @@ def deletion():
 
 def rank_table():
     """AUROC of the bound against the certified clearance, per key and pricer."""
-    keys = (("Main key", ""), ("Audited key", "ah2-"), ("K2 (code-derived)", "k2-"))
+    keys = (("Main key", "rk-"), ("K2 (code-derived)", "k2-"))
     lines = [r"\begin{tabular}{@{}llrrrr@{}}", r"\toprule",
              r"Key & Pricer & AUROC & Cleared, $\alpha{=}0.05$ & Wrong, mean / p95 & Cleared, $\alpha{=}0.10$\\", r"\midrule"]
     for kname, pre in keys:
@@ -123,7 +123,7 @@ def rank_table():
 
 
 def sizes():
-    sz = S["choice-obj"]["sizes"]
+    sz = S["rk-choice-obj"]["sizes"]
     tot = sum(sz.values())
     lab = {"1": "1", "2": "2", "3": "3", "4": "4", "5": "5", "6": r"$\geq$6"}
     lines = [r"\begin{tikzpicture}",
@@ -138,7 +138,7 @@ def sizes():
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
-    risk_coverage(["choice-obj", "sonnetp", "b6", "freq", "uniform"], "curve_main.tex", "main key")
+    risk_coverage(["rk-choice-obj", "rk-sonnetp", "rk-b6", "rk-freq", "rk-uniform"], "curve_main.tex", "main key")
     risk_coverage(["k2-choice-obj", "k2-sonnetp", "k2-b6", "k2-b3", "k2-uniform"], "curve_k2.tex", "K2")
     learning()
     deletion()

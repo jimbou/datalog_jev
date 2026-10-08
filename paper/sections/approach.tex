@@ -38,7 +38,7 @@ If no edge of $C$ is in $T$, then no source reaches $t$ in $E_c\cup T$, so the v
 \noindent Any path in $E_c\cup T$ is also a path in $E_c\cup H$ and would use an edge of $C$.
 A receipt is therefore a list of library facts that, if all false, make the verdict correct.
 Each fact names a method and two of its values (``the receiver of \texttt{CharBuffer.toString()} flows into its return value''), so a person or a test can check it.
-Most receipts are short: of the leak-free sinks that our approach clears in the evaluation, 64\% rest on a single fact and 98\% on at most four.
+Most receipts are short: of the leak-free sinks that our approach clears in the evaluation, 75\% rest on a single fact and 99\% on at most four.
 
 \subsection{Prices and the Bound}
 A \emph{pricer} gives each hole edge $h$ a price $p(h)\in[0,1]$, meant as the probability that $h$ is real.

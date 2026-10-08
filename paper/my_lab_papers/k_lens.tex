@@ -1,0 +1,1787 @@
+\documentclass[acmsmall,screen,review,anonymous,nonacm]{acmart}
+
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{fit,tikzmark}
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{wrapfig}
+\usepackage{needspace}
+\usepackage{svg}
+% Draft-only spacing overrides; remove for ACM submission.
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\definecolor{klensblue}{HTML}{1764AB}
+\definecolor{ksearchgray}{HTML}{6B7280}
+\definecolor{kernelbandorange}{HTML}{E07A1F}
+\definecolor{openevolvegreen}{HTML}{2A9D6F}
+\definecolor{codexpurple}{HTML}{8B5FBF}
+
+\newcommand{\klens}{\textsc{K-LENS}\xspace}
+\newcommand{\ksearch}{\textsc{K-Search}\xspace}
+\newcommand{\kernelband}{\textsc{KernelBand}\xspace}
+\newcommand{\openevolve}{\textsc{OpenEvolve}\xspace}
+\newcommand{\standardcodex}{\textsc{Codex}\xspace}
+\newcommand{\ascendc}{\textsc{AscendC}\xspace}
+\newcommand{\nolessons}{\textsc{No-Lessons}\xspace}
+\newcommand{\onlycodinglessons}{\textsc{Only-Coding}\xspace}
+\newcommand{\tbd}[1]{\textcolor{red}{[TBD: #1]}}
+\newcommand{\numkernels}{16\xspace}
+\newcommand{\numprofiles}{100\xspace}
+\newcommand{\numreps}{3\xspace}
+\newcommand{\numruns}{192\xspace}
+\newcommand{\numtotalprofiles}{15{,}360\xspace}
+\newcommand{\dimitris}[1]{{\color{blue}\textbf{(Dimitris:} #1\textbf{)}}}
+
+% TAPS-safe summary box, matching the result boxes in gordian.tex.
+\newsavebox{\klensresultcontent}
+\newenvironment{klensresultbox}{%
+  \par\addvspace{0.5\baselineskip plus 2pt}%
+  \noindent
+  \begingroup
+  \setlength{\fboxrule}{0.3mm}%
+  \setlength{\fboxsep}{\dimexpr1mm+2pt\relax}%
+  \begin{lrbox}{\klensresultcontent}%
+  \begin{minipage}{\dimexpr\linewidth-2\fboxrule-2\fboxsep\relax}%
+}{%
+  \end{minipage}%
+  \end{lrbox}%
+  \fcolorbox{black!20}{gray!5}{\usebox{\klensresultcontent}}%
+  \endgroup
+  \par\addvspace{0.5\baselineskip plus 2pt}%
+}
+
+\title{K-LENS: Evidence-Reranked Lessons for Accelerator Kernel Optimization}
+
+
+\author{Dimitrios Stamatios Bouras}
+\orcid{0009-0001-3171-5194}
+\email{2501112125@stu.pku.edu.cn}
+\affiliation{%
+  \department{Key Lab of HCST (PKU), MoE and School of Computer Science}
+  \institution{Peking University}
+  \city{Beijing}
+  \country{China}
+}
+\affiliation{%
+  \department{Global Technical Service (GTS)}
+  \institution{Huawei Technologies Co., Ltd}
+  \city{Shanghai}
+  \country{China}
+}
+
+\author{Jian Meng}
+\orcid{0000-0002-7703-5020}
+\email{mengjian11@huawei.com}
+\affiliation{%
+  \company{Huawei Technologies}
+  \city{Shanghai}
+  \country{China}}
+
+\author{Junjie Huang}
+\orcid{0009-0007-7369-1788}
+\email{huangjunjie76@huawei.com}
+\affiliation{%
+  \institution{Huawei Technologies Co., Ltd.}
+  \city{Shenzhen}
+  \country{China}}
+
+\author{Jing Li}
+\orcid{0000-0001-9933-8383}
+\email{lijing473@huawei.com}
+\affiliation{%
+  \institution{Huawei Technologies Co., Ltd.}
+  \city{Shanghai}
+  \country{China}}
+
+
+\author{Zhanglian Lin}
+\orcid{0009-0004-2303-5211}
+\email{linzhanglian@huawei.com}
+\affiliation{%
+  \institution{Huawei Technologies Co., Ltd.}
+  \city{Shanghai}
+  \country{China}
+}
+
+\author{Zhicheng Zhou}
+\orcid{0009-0005-4431-0611}
+\email{zhouzhicheng15@huawei.com}
+\affiliation{%
+  \institution{Huawei Technologies Co., Ltd.}
+  \city{Shenzhen}
+  \country{China}}
+
+\author{Gengpei Qi}
+\orcid{0009-0002-2086-6859}
+\email{qigengpei@huawei.com}
+\affiliation{%
+  \department{}
+  \institution{Huawei Technologies Co., Ltd.}
+  \city{Shanghai}
+  \country{China}}
+
+\author{Linyuan Qiu}
+\orcid{0009-0003-1899-3063}
+\email{qiulinyuan@huawei.com}
+\affiliation{%
+  \institution{Huawei Technologies Co., Ltd.}
+  \city{Shenzhen}
+  \country{China}}
+
+\author{Abdullin Amir}
+\orcid{0009-0006-0889-2973}
+\email{abdullin.amir@h-partners.com}
+\affiliation{%
+  \company{Huawei Technologies Co., Ltd.}
+  \city{Shanghai}
+  \country{China}}
+
+\author{Ivan Nosov}
+\orcid{0009-0003-7231-6274}
+\email{nosov.ivan@h-partners.com}
+\affiliation{%
+  \company{Huawei Technologies Co., Ltd.}
+  \city{Shanghai}
+  \country{China}}
+
+\author{Bekzat Rakhimbayev}
+\orcid{0009-0005-0216-4951}
+\email{rakhimbayev.bekzat@huawei.com}
+\affiliation{%
+  \company{Huawei Technologies Co., Ltd.}
+  \city{Shanghai}
+  \country{China}}
+
+\author{Sergey Mechtaev}
+\authornote{Sergey Mechtaev is the corresponding author.}
+\orcid{0000-0001-6088-4993}
+\email{mechtaev@pku.edu.cn}
+\affiliation{%
+  \department{Key Lab of HCST (PKU), MoE and School of Computer Science}
+  \institution{Peking University}
+  \city{Beijing}
+  \country{China}
+}
+\renewcommand{\shortauthors}{Bouras et al.}
+
+\begin{document}
+
+
+\begin{abstract}
+LLM-guided optimization of low-resource domain-specific languages, such as
+\ascendc for Ascend NPU kernels, is hard: models are unfamiliar with the
+language's performance idioms, and each evaluation requires compiling,
+testing, and profiling on the device. A search can therefore afford few
+evaluations and gets little guidance from the model, so every measurement
+must become reusable knowledge rather than a one-off verdict.
+We present \klens, a search system that supplements the profiled kernel
+implementations it explores with measured optimization lessons. \klens extracts a lesson from each evaluated optimization, recording
+the conditions of the optimized candidate, the strategy applied, and the
+measured outcome. For each subsequent candidate, \klens generates optimization
+proposals using the lessons whose recorded conditions match it, and ranks them
+by the accumulated performance evidence of the lessons behind them; each
+measured result strengthens or weakens this evidence and reranks proposals.
+To initialize a new search, the ``warm-start'' version of \klens imports
+lessons extracted from similar candidates in previous searches on other
+kernels.
+We evaluate \klens on \numkernels production \ascendc kernels spanning
+attention, normalization, and mixture-of-experts operators, whose original
+implementations already contain hardware-specific tuning. We compare against
+\ksearch, \kernelband, \openevolve, and the \standardcodex coding harness under
+equal candidate-evaluation and LLM-token budgets.
+With \numprofiles candidate evaluations per kernel, \klens achieves a
+geometric-mean speedup of 22.40\% over the original implementations, nearly
+double the strongest baseline's 11.38\%, and the highest speedup at every
+reported token budget.
+Removing the lesson layer reduces the gain to 13.15\%, indicating that lessons
+account for most of \klens's advantage over the baselines.
+With warm start, the gain at 20 candidate evaluations rises from 17.58\% to
+28.45\%.
+These results suggest that accumulating and transferring measured
+knowledge enables effective LLM-guided optimization in low-resource languages.
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+  <concept>
+    <concept_id>10011007.10011074.10011099</concept_id>
+    <concept_desc>Software and its engineering~Software performance</concept_desc>
+    <concept_significance>500</concept_significance>
+  </concept>
+  <concept>
+    <concept_id>10010147.10010257</concept_id>
+    <concept_desc>Computing methodologies~Machine learning</concept_desc>
+    <concept_significance>500</concept_significance>
+  </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Software and its engineering~Software performance}
+\ccsdesc[500]{Computing methodologies~Machine learning}
+\keywords{kernel optimization, large language models, search-based software engineering, AscendC}
+
+\maketitle
+\section{Introduction}
+
+LLM-guided code optimization relies on knowledge of a language's performance
+idioms and feedback from executing candidate programs. Specialized
+domain-specific languages can offer little of either: public examples are
+scarce, and evaluating a transformation may require substantial implementation
+work. Under a limited budget, choosing a promising strategy is critical.
+
+Accelerator kernels implement computations on devices such as GPUs and neural
+processing units (NPUs). Optimizing these programs requires coordinated edits
+across multiple files, followed by compilation, testing, and profiling on the
+device. These requirements are especially demanding in complex kernel
+languages with scarce public code examples, such as \ascendc, Huawei's
+C++-based kernel language for Ascend NPUs~\citep{Cao2026AscendKernelGen}.
+MultiKernelBench shows this difficulty: under one-shot prompting,
+evaluated LLMs achieve correctness rates (Pass@1) of 0.7--2.5\% on \ascendc,
+compared with 15.8--52.6\% on CUDA~\citep{Wen2025MultiKernelBench}.
+Optimization inherits this difficulty: a candidate must compile and pass tests
+before its latency is measured, and correct kernels often fail to beat a
+baseline~\citep{Ouyang2025KernelBench}.
+
+A developer or an LLM can suggest optimization strategies, high-level code
+changes such as moving loop-invariant computations outside a loop, at
+relatively low cost. Implementing each strategy as working kernel code and
+evaluating it, however, can require substantial time, human effort, or LLM
+tokens. Under a fixed evaluation budget, the search's effectiveness therefore
+depends on carefully selecting which strategies to pursue. In a
+low-resource language, the LLM's own judgment offers limited guidance for this
+selection, as it reflects the same unfamiliarity with the language's
+performance idioms that makes these kernels difficult to optimize.
+
+Prior search-based optimizers reuse measurements to guide search, but only
+within the transformations and parameters encoded in their search
+spaces~\citep{Adams2019Halide,Zheng2020Ansor,Ansel2014OpenTuner}; they do not
+extract explicit information about which code changes helped under which
+conditions. More recent approaches combine LLMs' ability to propose
+source-code changes with guidance from earlier attempts, stored as
+optimization histories, reusable lessons, or
+skills~\citep{Liu2025Lessons,Dong2026KernelBlaster,Sun2026KernelSkill}. Such
+guidance must account for differences between implementations: a strategy that
+improves one may reduce performance in another with different bottlenecks.
+Identifying relevant guidance, however, does not determine which proposal
+deserves implementation and profiling effort. When an LLM makes this decision
+by reviewing previous attempts, every new measurement requires reinterpreting
+earlier proposals, so inference cost grows with the search. For example,
+\ksearch asks an LLM to assign priorities to proposals and revises them after
+each cycle, reasoning over a growing
+context~\citep{Cao2026K}. Two challenges remain: \emph{lesson reuse},
+applying a measurement on one candidate to proposals on others, and the
+\emph{cost of re-reasoning}, updating priorities without the LLM reassessing
+the whole search state.
+
+We present \klens (Kernel Lesson-ENhanced Search), a search system that uses
+measured results to propose and rank optimization strategies and revise their
+priorities as new results become available. \klens extracts reusable
+\emph{strategy lessons} from optimization results. Each lesson records the
+characteristics of the candidate being optimized, the strategy attempted, and
+the observed outcome. These characteristics help identify relevant lessons
+when proposing an optimization strategy for another candidate. Each proposed
+optimization strategy ``cites'' the lessons that informed it. Each lesson has
+a \emph{reputation} score that accumulates signed performance changes relative
+to the candidate being modified. \klens uses these scores to rank proposed
+optimization strategies awaiting implementation. New measurements update the
+cited lessons' reputations and the rankings of other proposed strategies that
+cite them. A result from one candidate can therefore redirect optimization
+effort elsewhere in the search. These numerical updates avoid regenerating
+proposals or repeatedly asking the LLM to reassess them and the search context
+as the search grows. Complementary \emph{coding lessons}, extracted from
+diagnostics and code changes across attempts to implement the same strategy, record repairs and
+constraints that help later attempts implement a chosen strategy correctly.
+Strategy lessons guide what to try; coding lessons guide how to implement it.
+
+Lessons record their measurement conditions, so they outlive the search and
+yield reusable knowledge, not just a faster kernel. \klens can therefore start a new search with lessons from other
+kernels, a \emph{warm start}, which matters most under small budgets, selecting
+them by kernel and bottleneck similarity, measured gains, and reputation.
+
+We evaluate \klens using GPT-5.6 Luna on 16 production \ascendc kernels, with
+implementations spanning up to 35 files and 10{,}382 SLOC, against three
+search-based optimization methods (\ksearch, \kernelband, and \openevolve) and
+the general-purpose \standardcodex coding agent. At 100 evaluation attempts,
+\klens achieves a 22.40\% gain in geometric-mean speedup, nearly twice the
+strongest baseline's 11.38\%, and leads at every reported LLM-token budget.
+Removing the lesson layer reduces the gain to 13.15\%. At 20 evaluation
+attempts, transferring lessons from other kernels increases the gain from
+17.58\% to 28.45\%, exceeding the geometric-mean gain without transfer at 100
+attempts. A comparison using Kimi K3 on six complex kernels, those exceeding
+3{,}000 SLOC, also favors \klens, providing evidence that its advantage extends to another model
+family.
+
+This paper contributes:
+\vspace{-3pt}
+\begin{itemize}
+  \item \textbf{A lesson representation} for optimizing programs in low-resource
+  languages like \ascendc. These strategy lessons record the conditions of the
+  candidate being optimized, the strategy applied, and its measured outcome.
+  \item \textbf{A search method} that uses lessons to propose and rank optimization
+  strategies, then uses measured performance changes to update lesson scores
+  and rerank pending proposals.
+  \item \textbf{An evaluation} on \ascendc kernels against three search approaches and
+  the Codex harness under equal evaluation-attempt and
+  inference budgets, including a lesson-layer ablation, transfer of lessons
+  across kernels, and repeated runs to assess LLM variability.
+\end{itemize}
+
+
+
+
+
+
+
+
+% \section{Introduction}
+
+% LLM-guided code optimization relies on knowledge of a language's performance idioms and feedback from
+% executing candidate programs. Specialized domain-specific languages can offer little of either:
+% public examples are scarce, and evaluating a transformation may require substantial implementation
+% work. Under a limited budget, choosing a promising strategy is critical.
+
+% Accelerator kernels implement computations on devices such as GPUs and
+% neural processing units (NPUs). Optimizing these programs requires
+% coordinated edits across multiple files, followed by compilation,
+% testing, and profiling on the device. These requirements can be
+% particularly demanding in complex kernel languages with scarce public
+% code examples, such as \ascendc, Huawei's C++-based kernel language for
+% Ascend NPUs~\citep{Cao2026AscendKernelGen}.
+% MultiKernelBench illustrates this difficulty: under one-shot prompting,
+%   the evaluated LLMs achieve correctness rates (Pass@1) of 0.7--2.5\%
+%   on \ascendc, compared with 15.8--52.6\% on
+%   CUDA~\citep{Wen2025MultiKernelBench}. A developer or an LLM can suggest optimization strategies, high-level
+% code changes such as moving loop-invariant computations outside a
+% loop, at relatively low cost. Implementing each strategy as working
+% kernel code and evaluating it though, can require substantial time, human effort, or LLM tokens.
+% The quality of the search for optimised kernel implementations therefore
+% depends on carefully selecting which strategies to pursue.
+
+
+% Earlier search-based code optimization methods use measured or predicted
+% performance to iteratively improve program implementations. Tree-based
+% methods explore sequences of program
+% transformations~\citep{Adams2019Halide}, population-based methods retain
+% and modify sets of implementations across
+% generations~\citep{Zheng2020Ansor}, and bandit-based methods allocate
+% evaluations among search techniques~\citep{Ansel2014OpenTuner}.
+% These methods reuse measurements to guide search, but their choices
+% remain limited to the transformations and parameters encoded in their
+% search spaces. They do not extract explicit, reusable lessons about
+% which code changes improved performance under which conditions.
+% More recent approaches extend these search methods by combining LLMs'
+% ability to propose source-code changes with guidance from earlier
+% attempts, stored as optimization histories, reusable lessons, or
+% skills~\citep{Liu2025Lessons,Dong2026KernelBlaster,Sun2026KernelSkill}.
+% This guidance must account for differences between implementations:
+% a strategy that improves one may reduce performance in another with
+% different bottlenecks. However, identifying relevant guidance does not
+% itself determine which proposed optimization should receive implementation
+% and profiling effort. When this decision relies on an LLM reviewing
+% previous attempts, new measurements must be interpreted again to
+% reconsider earlier proposals. As the search grows, this requires repeated
+% LLM reasoning over more results and alternatives, which increases
+% inference cost, limits scalability, and may degrade the
+% proposal selection quality.
+% For example, \ksearch uses an LLM to assign priorities to proposals and based on the search state and execution feedback revises these priorities after each cycle, 
+% requiring repeated reasoning over a growing search and proposal context~\citep{Cao2026K}.
+% The remaining challenge is to use measured outcomes to update proposal
+% priorities directly, without regenerating proposals or requiring repeated
+% LLM reasoning over the whole search state.
+
+% % We present \klens (Kernel Lesson-ENhanced Search), an iterative multi-agent
+% %   search system that ranks optimization proposals using reusable
+% %   \emph{strategy lessons} and updates those rankings as new performance
+% %   measurements become available. The search maintains profiled kernel
+% %   implementations, called \emph{candidates}. A proposal specifies a
+% %   high-level optimization strategy for one candidate. The search proceeds
+% %   in cycles: each cycle selects one proposal for implementation and
+% %   evaluates the resulting code to produce a new candidate. Each strategy
+% %   lesson records the conditions of the candidate being optimized, the
+% %   strategy attempted, and the observed outcome. Each lesson also stores a
+% %   \emph{reputation} score that accumulates signed performance changes,
+% %   each measured relative to the candidate being modified. At the start
+% %   of a cycle, a planner subagent selects promising candidates
+% %   and generates proposals using relevant lessons identified by comparing
+% %   the candidates' conditions and profiling results with those recorded
+% %   in the available lessons. Each proposal
+% %   identifies the lessons that influenced its strategy; we call these
+% %   references \emph{lesson citations}.
+
+% %   Proposals awaiting implementation and evaluation remain pending.
+% %   \klens ranks pending proposals using the reputation scores of cited
+% %   lessons. It deterministically forms
+% %   a shortlist that prioritizes highly ranked proposals while
+% %   preserving candidate diversity, limiting how many proposals the selector
+% %   considers as the search grows. A selector subagent compares the shortlisted
+% %   proposals and selects the one it considers most promising for improving
+% %   performance. For the selected proposal, an implementor subagent makes a
+% %   bounded number of implementation attempts. \klens compares the fastest
+% %   correct, profiled implementation with the original candidate to compute
+% %   the performance change. It uses this change to update the reputations
+% %   of the cited lessons used to rank that proposal and extracts a new
+% %   strategy lesson from the new candidate.
+% %   These updates rerank pending proposals that cite the updated lessons.
+% %   A measured result from one candidate can therefore change which strategy
+% %   is selected for another, without regenerating proposals or asking an LLM
+% %   to reassess each one.
+% We present \klens (Kernel Lesson-ENhanced Search), a search system that
+%   uses measured results to propose and rank optimization strategies and
+%   revise their priorities as new results become available.
+%   \klens extracts
+%   reusable \emph{strategy lessons} from optimization results, wich record the characteristics of the kernel candidate being optimized,
+%   the strategy attempted, and the observed outcome. These characteristics
+%   help identify relevant lessons when proposing an optimization strategy
+%   for another candidate. Each proposed optimization strategy ``cites''
+%   the lessons that informed it, explicitly recording which lessons
+%   influenced the choice of strategy. Each lesson has a
+%   \emph{reputation} score that accumulates signed performance changes
+%   relative to the candidate being modified. \klens uses these scores
+%   to rank proposed optimization strategies awaiting implementation.
+%   New measurements update the cited lessons' reputations and the rankings
+%   of other proposed strategies that cite them. A result from one candidatecan therefore redirect optimization effort elsewhere in the search.
+%   These numerical updates avoid regenerating proposals or repeatedly asking
+%   the LLM to reassess them and the search context as the search grows.
+
+%   The same lesson representation also supports reuse across different kernels.
+%   \klens can initialize a new search with lessons extracted from
+%   kernel candidates in previous searches on new kernels, a process we call
+%   a \emph{warm start}. It selects lessons using similarities in kernel
+%   characteristics and performance bottlenecks, measured performance gains,
+%   and supported lesson reputation. Measurements from the new search update the
+%   transferred lessons' reputations as the search produces lessons of its own.
+
+% % To address this problem , We present \klens (Kernel Lesson-ENhanced Search), which extacts and stores previous
+% %   optimization results as reusable \emph{strategy lessons}. Each lesson records
+% %   the conditions of the kernel candidate being modified, the optimization strategy
+% %   applied, and the observed outcome. Each lesson also stores an
+% %   \emph{implementation difficulty} score based on implementation attempts and
+% %   evaluation time. The lesson also stores a \emph{reputation}
+% %   score that accumulates signed performance changes measured relative to the
+% %   candidates being modified. A planner subagent uses these lessons and current profiled candidates to generate proposals for next optimisations. \dimitris{what are next optimizations?} A proposal specifies an optimization strategy for an existing candidate \dimitris{what is an existing candidate?} and "cites" the lesson(s) that influenced that choice of strategy.
+% %   \klens uses the cited lessons to rank pending proposals. \dimitris{what are pending proposals?} Each proposal's rank
+% %   depends on the reputation scores of the lessons it cites.
+% %   It then forms a bounded shortlist \dimitris{can a shortlist be unbounded?} from the
+% %   ranked proposals, adding proposals for promising candidates and candidates
+% %   infrequently represented. A selector agent then chooses a proposal from this
+% %   shortlist using the corresponding candidates' profiling results.
+% %   \klens computes proposal scores numerically and uses fixed rules to form
+% %   the shortlist. \dimitris{fixed rules sounds like ``magic''} The selector therefore compares a bounded number of proposals as the search grows.
+
+% %   For the selected proposal, an implementor agent makes a bounded number of implementation attempts and compares the fastest correct implementation
+% %   with the original candidate to compute the performance change. \klens then
+% %   uses this change to update the reputation scores of the
+% %   lessons cited by this proposal and extracts a new strategy lesson describing the conditions, strategy,
+% %   and outcome. These updates change the rankings of pending proposals that also cite
+% %   the updated lessons without requiring the planner to generate those proposals
+% %   again. The shortlist limits how many pending proposals the selector considers as
+% %   thier number grows, while including alternatives for unrepresented candidates
+% %   encourages broader exploration.
+% % If all implementation attempts fail, \klens
+% % retains diagnostics and code changes for extracting coding lessons but assigns
+% % no performance penalty to the strategy because its performance was not measured.
+
+% % Complementary \emph{coding lessons} turn diagnostics and code changes between implementation attempts
+% % for the same proposal into reusable repairs and implementation constraints. They guide the implementor subagent in realizing
+% % a chosen strategy, preserving useful experience even when no correct candidate is produced. Strategy
+% % lessons guide what to try; coding lessons guide how to implement it and do not enter proposal ranking or selection. \dimitris{overall, these paragraphs look like a method description rather than introduction. an introduction needs to focus on key ideas and innovations, and how they enabled improvements over previous work.}
+
+% % Since each strategy lesson is conditioned on the properties of the
+% % candidate whose optimization produced that lesson, \klens can retrieve
+% % relevant lessons for proposal generation by comparing those properties
+% % with those of the new candidate. This comparison also allows \klens to
+% % initialize a new search with lessons from similar candidates in previous
+% % searches on other kernels, a process we call a \emph{warm start}.
+% % To select a fixed-size set of lessons for transfer,
+% % \klens considers candidate similarity, measured
+% % performance gains, and lesson reputation. Measurements from the new
+% % search update the transferred lessons' reputation scores, while the
+% % search also produces its own lessons.
+
+% We evaluate \klens using GPT-5.6 Luna on 16 production \ascendc kernels,
+% with implementations spanning up to 35 files and 10{,}382 SLOC,
+% against three search-based optimization methods (\ksearch, \kernelband,
+% and \openevolve) and the general-purpose \standardcodex coding agent.
+% At 100 evaluation attempts, \klens achieves a 22.40\% gain in
+% geometric-mean speedup, nearly twice the strongest baseline's 11.38\%,
+% and leads at every reported LLM-token budget. Removing the lesson layer
+% reduces the gain to 13.15\%. At 20 evaluation attempts, transferring lessons from
+% other kernels increases the gain from 17.58\% to 28.45\%.
+% A comparison with Kimi K3 on seven of the largest kernels also favors
+% \klens, providing evidence that its advantage extends to another model family.
+
+% This paper contributes:
+% \vspace{-3pt}
+% \begin{itemize}
+%  \item A lesson representation for optimizing programs in low resource languages like \ascendc. These strategy lessons record the conditions of the candidate being
+%   optimized, the strategy applied, and its measured outcome.
+%   \item A search method that uses lessons to propose and rank optimization
+%   strategies, then uses measured performance changes to update lesson scores
+%   and rerank pending proposals.
+%   \item An evaluation on \ascendc kernels against three search approaches
+%   and a general-purpose Codex harness under equal candidate-evaluation and
+%   inference budgets, including a lesson-layer ablation, transfer of lessons
+%   across kernels, and repeated runs to assess LLM variability.
+% \end{itemize}
+
+
+
+
+
+\section{Motivating Example}
+\label{sec:motivation}
+An \emph{operator} defines a computation on multidimensional arrays, called
+tensors; a \emph{kernel} is a hardware-specific program that implements it.
+Our running example is the kernel of the \texttt{SparseAttnSharedkv} operator,
+which fuses sparse attention (scoring selected query--key pairs, normalizing
+the scores, and combining the corresponding values) into one kernel.
+Figure~\ref{fig:motivating-example} illustrates how \klens extracts lessons from measured results and reuses them to guide the search toward better candidates.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{figures/motivating_example/k_lens_motivating_example.pdf}
+    \caption{Reusing a strategy lesson in \texttt{SparseAttnSharedkv}. Code is simplified pseudocode.}
+    % Without supporting evidence, proposal P10 is selected only after other
+    % proposals fail, and it needs four implementation attempts; its 3.29\%
+    % latency reduction is recorded as lesson L11. On candidate B, which has a
+    % similar bottleneck and different optimizations, L11's reputation ranks
+    % proposal P40 first, and every implementation attempt is correct. This yields a
+    % further 7.02\% reduction (27.99\% from the baseline) and raises L11's
+    % reputation. Code is simplified pseudocode.}
+    \Description{A search tree, in which circles are candidates and arrows with
+    a P box are proposals, links candidates A, A', B and B'. Candidate A
+    re-checks unchanged conditions in every loop iteration; its child A' checks
+    them once and runs a specialized loop, reducing latency by 3.29\%. Proposal
+    P10, which produced A', had no supporting lesson: it was chosen only after
+    proposals A1 and A2 failed, and its implementation failed three times before
+    the fourth attempt was correct. The transition is recorded as strategy
+    lesson L11 with reputation 0.03. Candidate B, on another branch, has the same
+    bottleneck, so L11 creates proposal P40 on B. In the shortlist, which the
+    LLM selector reads instead of the whole tree, P40 ranks first by its
+    lesson's reputation, ahead of proposals P23 and P36 on faster parents, and
+    is chosen immediately. Guided by prior coding lessons, all three attempts
+    are correct; the best, B', is 7.02\% faster than B and 27.99\% faster than
+    the baseline. The result raises L11's reputation from 0.03 to 0.10.}
+    \label{fig:motivating-example}
+\end{figure}
+
+The kernel's hot path is a general loop that supports every input format the
+operator accepts. Because it must handle any of them, it re-derives its
+data-transfer plan and re-checks path and shape conditions on every iteration,
+although these never change within a run. The optimization we want the search
+to find specializes this loop: check those conditions once and run a fixed
+schedule, while all other inputs keep the general loop.
+
+At candidate A, an LLM proposed this specialization as proposal P10, one of
+many proposals on A and on other candidates. Without a deep
+understanding of \ascendc performance idioms, the LLM could only guess which
+proposal was most promising, so the search first tried several others, such as
+A1 and A2, which did not yield improvements. When P10 was finally selected,
+no relevant coding lesson existed, and its implementation failed to
+compile three times before the fourth attempt produced child A$'$, 3.29\%
+faster than A. The lack of evidence therefore cost search cycles, and the lack of
+implementation guidance then cost failed attempts.
+
+\klens records this measured transition as strategy lesson L11 with the conditions it was applied under (A's
+bottleneck and profile), the strategy, and its outcome. Its reputation, the sum of its measured parent-relative effects,
+starts at 0.03; the compilation failures produce no measurement and only raise
+the lesson's difficulty. It also records coding lessons on how to move the
+checks out of the loop while maintaining correctness.
+
+Candidate B lies on a different branch, retains different optimizations, and is
+already 22.55\% faster than the baseline, but its profile shows the same
+scalar-control bottleneck. \klens therefore retrieves L11, and the LLM creates
+proposal P40 citing it. The ranker places P40 at the top of the shortlist, the
+handful of open proposals that the LLM selector inspects instead of the whole
+tree, because L11 carries a positive measured reputation (0.03). Competing
+proposals such as P23 and P36 cite a weaker lesson or none (0.01 and 0.00),
+although their parents are faster (3.647 and 3.513\,ms, against 3.762\,ms for
+B). The selector picks P40 immediately.
+
+Guided by prior coding lessons, such as checking every condition the
+specialized loop assumes and keeping each buffer alive until its last use, all
+three attempts on B compile and pass the tests, at 3.592, 3.533 and
+3.498\,ms: the first is already correct, and the others extend the
+specialization and repair its synchronization. The best, B$'$, is 7.02\%
+faster than B and 27.99\% faster than the baseline.
+
+Finally, \klens credits B's measured 7.02\% latency reduction to L11, raising
+its reputation from 0.03 to 0.10, now from two measurements, so later proposals
+that cite L11 rank higher still. The decision to implement P40 thus came from a
+measured outcome on another candidate, not from an LLM re-reading the search
+state: what took A many search cycles and four attempts took B one selection
+and a first attempt that was already correct.
+
+\section{K-LENS}
+\label{sec:approach}
+
+\subsection{Overview}
+
+Figure~\ref{fig:overview} and Algorithm~\ref{alg:search} show the budgeted search
+loop. \klens maintains a search tree of profiled kernel implementations,
+called \emph{candidates}. It also stores pending \emph{proposals} and sets of
+strategy and coding lessons. Each pending proposal specifies an optimization
+strategy for a candidate; the proposal has not yet been implemented
+or evaluated. The \emph{controller} manages these records and deterministically
+updates proposal rankings and lesson reputations.
+
+A planner agent begins each cycle by choosing candidates based on their measured
+performance and opportunities for further improvement. For each candidate,
+it uses lessons extracted from candidates with similar characteristics and
+performance bottlenecks to generate proposals
+(\texttt{Plan} in Algorithm~\ref{alg:search}).
+Each proposal identifies the lessons that influenced the planner's choice of
+optimization strategy. We call these references \emph{lesson citations}.
+A citation indicates whether the proposal \emph{applies}
+the lesson's strategy, \emph{adapts} it to the candidate, or uses the lesson to
+\emph{avoid} an optimization. The controller ranks pending proposals using the
+reputations of the lessons they apply or adapt and forms a shortlist
+(\texttt{Shortlist} in Algorithm~\ref{alg:search}).
+A selector agent chooses one proposal from this shortlist
+(\texttt{Select} in Algorithm~\ref{alg:search}).
+An implementation agent attempts to implement its strategy
+(\texttt{Implement} in Algorithm~\ref{alg:search}).
+Each submitted implementation consumes one evaluation attempt, even if
+compilation or testing fails.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/pipeline/k_lens_pipeline.pdf}
+  \caption{Overview of one \klens cycle. Example values from the motivating example cycle in Figure~\ref{fig:motivating-example}.}
+  \Description{The K-LENS search loop: search tree, planner agent, rank and shortlist, selector
+  agent, implementation agent, Ascend NPU, reflector agent, and measure and update, arranged around
+  strategy and coding lessons.}
+  \label{fig:overview}
+\end{figure}
+
+The controller adds the fastest correct, profiled implementation to the search
+tree and compares it with the parent candidate to measure the performance change.
+It records a strategy lesson from the parent's conditions, the strategy, and
+this result. A reflector agent generates the lesson's summary and extracts coding
+lessons from diagnostics and code differences among implementations of the same
+proposal (\texttt{Reflect} in Algorithm~\ref{alg:search}). The controller checks the format of the generated
+lessons, asking the reflector to retry once if a strategy lesson fails the check, and uses the measured change to update the reputation of the cited
+apply/adapt lessons. If no implementation is correct and profiled, the tree
+records an all-failed marker and no reputation changes. The agents cannot alter
+recorded measurements or assign reputation scores.
+
+
+\subsection{Notation}
+We use lowercase letters for individual candidates, proposals, and lessons, and
+uppercase letters for sets. Let $x_i=(f_i,\phi_i,t_i)$ denote a correct, profiled
+kernel candidate, where $f_i$ denotes the kernel's source code,
+which may span multiple files, $\phi_i$ is its profile fingerprint
+(a set of measured profiling features), and $t_i$ is its measured latency.
+We write $t(x_i)=t_i$. The search tree $T$ starts from candidate $x_0$ and retains
+correct, profiled candidates and markers for cycles in which all attempts failed.
+
+Let $\Pi$ be the set of pending proposals. Each proposal $p\in\Pi$ specifies
+a candidate to modify, called its \emph{parent}, and an optimization strategy.
+We write $x(p)$ and $m(p)$ for the parent and strategy recorded in $p$.
+Let $\mathcal{L}^s$ and $\mathcal{L}^c$ be the sets of strategy and coding
+lessons, respectively, and let
+$\ell\in\mathcal{L}^s$ denote a strategy lesson.
+The set $\mathcal{C}(p)$ contains lessons whose strategies the proposal uses
+directly (\emph{apply}) or modifies for the candidate (\emph{adapt}).
+$\mathcal{A}(p)$ contains lessons used to rule out an optimization (\emph{avoid}).
+The proposal record is $p=(x(p),m(p),\mathcal{C}(p),\mathcal{A}(p))$.
+The strategy $m(p)$ specifies, in natural language, the bottleneck it targets
+and the profiling measurement that would confirm the expected effect.
+The shortlist $H\subseteq\Pi$ contains the proposals considered by the selector.
+
+The sequence $\tau(p)=((a_1,e_1),\ldots,(a_r,e_r))$ records attempts
+to implement proposal $p$'s strategy from the same starting candidate,
+where $a_j$ is an implementation attempt and $e_j$ is its evaluation result.
+Each result records a compilation failure, a correctness failure, or a successful
+profile with latency and profiling features. We write $\tau$ when the proposal
+is clear from context.
+The outcome $y$ is the cycle's fastest correct, profiled implementation,
+or an all-failed marker $\bot$ if none succeeds.
+
+Each cycle evaluates at most $R=10$ implementations. Counters $k_1$ and $k_2$
+count consecutive evaluations that fail to improve on the parent and on the
+cycle's best correct implementation, respectively; compilation and correctness
+failures increment both. The cycle ends when a counter reaches $K=5$, after $R$
+evaluations, or when the budget is exhausted. The total counter $b$ increments
+per submitted implementation, and the search ends when $b$ reaches the budget
+$B$.
+
+\subsection{Strategy Lessons and Proposal Selection}
+\label{sec:lesson-ranking}
+\label{sec:proposal-ranking}
+
+A strategy lesson $\ell$ records the conditions of the candidate being optimized,
+the strategy attempted, and the outcome. The planner uses these conditions to
+assess the lesson's relevance to another candidate. Table~\ref{tab:strategy-lesson}
+lists the lesson fields. The controller computes them deterministically from
+proposals, attempts, and measurements, except the summary $z$, generated by
+the reflector agent.
+
+\begin{table}[htbp]
+  \caption{Fields of a strategy lesson $\ell$.}
+  \label{tab:strategy-lesson}
+  \label{eq:lesson}
+  \small
+  \renewcommand{\arraystretch}{1.0}
+  \begin{tabular}{@{}p{0.25\linewidth}p{\dimexpr0.75\linewidth-2\tabcolsep\relax}@{}}
+    \toprule
+    Field & Stored information \\
+    \midrule
+    Conditions ($q$) & Parent task, bottleneck, profile ratios, and prior strategies. \\
+    Strategy ($m$) & The optimization strategy attempted. \\
+    Outcome ($o$) & Measurements and change from parent, or no measured result. \\
+    Reputation ($\rho$) & Cumulative signed performance credit. \\
+    Measurement count ($n$) & Number of performance measurements contributing to $\rho$. \\
+    Difficulty ($d$, $w$) & Score summarizing implementation effort, and its accumulated weight. \\
+    Source records ($\pi$) & IDs of the candidate, proposal, and attempts that produced the lesson. \\
+    Summary ($z$) & A natural-language description of the lesson. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+The planner inspects a summary of the candidate search tree that emphasizes
+the best-performing candidates and lists their latencies, profiling features,
+and pending proposals. The planner selects a candidate
+based on its current performance and opportunities for further improvement,
+inspecting source code and full profiles when needed. For the selected candidate,
+the controller then presents relevant lesson summaries, ranked by
+Gower distance over the recorded candidate context (e.g., bottleneck and prior strategies) and profiling features, the latter compared by
+cosine distance. These lessons may come from other candidates in the search or,
+with a warm start, from other kernels (Section~\ref{sec:transfer}). The planner
+uses these lessons to generate proposals for the selected candidate.
+
+Multiple planning calls can add proposals for different
+candidates within a cycle, with at most three pending proposals per candidate.
+Candidates at this limit are excluded from planning until a proposal is executed
+or retired. Before each selection, the controller requests a proposal for the fastest
+candidate if it has none.
+
+\begin{wrapfigure}[22]{R}{0.49\textwidth}
+\begin{minipage}{\linewidth}
+\scriptsize
+\raggedright
+\setlength{\algomargin}{1em}
+\SetAlFnt{\scriptsize}
+\SetAlCapFnt{\scriptsize}
+\SetAlCapNameFnt{\scriptsize}
+\begin{algorithm}[H]
+\caption{\klens search.}
+\label{alg:search}
+\SetAlgoNoEnd
+\SetAlgoNlRelativeSize{-1}
+\SetInd{0.3em}{0.5em}
+\SetKwInput{KwIn}{Input}
+\SetKwInput{KwOut}{Output}
+\SetKwFunction{Plan}{Plan}
+\SetKwFunction{Shortlist}{Shortlist}
+\SetKwFunction{SelectProposal}{Select}
+\SetKwFunction{Implement}{Implement}
+\SetKwFunction{Reflect}{Reflect}
+\KwIn{Correct, profiled $x_0$; budget $B$;
+limits $R,K$; initial $\mathcal{L}^s,\mathcal{L}^c$.}
+\KwOut{Fastest correct candidate and updated lessons.}
+$T\gets\{x_0\}$; $\Pi\gets\emptyset$; $b\gets0$\;
+\While{$b<B$}{
+  $\Pi\gets\Plan(T,\Pi,\mathcal{L}^s)$\tcp*{planner; \S\ref{sec:lesson-ranking}}
+  Recompute all $S_L(p)$, $p\in\Pi$ (Eq.~\ref{eq:proposal-score})\;
+  $H\gets\Shortlist(T,\Pi,S_L)$\tcp*{controller; \S\ref{sec:proposal-ranking}}
+  $p\gets\SelectProposal(H,T)$\tcp*{selector; \S\ref{sec:proposal-ranking}}
+  $x\gets x(p)$; $r\gets\min(R,B-b)$\;
+  $(\tau,y)\gets\Implement(p,\mathcal{L}^c,r,K)$\tcp*{\S\ref{sec:attribution}}
+  $b\gets b+|\tau|$\tcp*{failures also count}
+  Record $\ell'$ from $x,m(p),\tau$, including outcome and source IDs (Table~\ref{tab:strategy-lesson})\;
+  $(z,G)\gets\Reflect(\ell',\tau)$\tcp*{reflector; $z$ retried once on format failure}
+  \tcp{$z$: strategy summary (\S\ref{sec:lesson-ranking})}
+  \tcp{$G$: coding-lesson drafts (\S\ref{sec:coding-lessons})}
+  Update $\ell\in\mathcal{C}(p)$ by Eqs.~\ref{eq:credit-update}--\ref{eq:difficulty-update};
+  if $y=\bot$, only difficulty changes\;
+  \If{$z$ passes the format check}{
+    $(\rho_{\ell'},n_{\ell'})\gets(0,0)$\;
+    $(d_{\ell'},w_{\ell'},z_{\ell'})\gets(d(\tau),1,z)$\;
+    \If{$y\ne\bot$}{
+      $(\rho_{\ell'},n_{\ell'})\gets(\Delta(p),1)$\tcp*{Eq.~\ref{eq:delta}}
+    }
+    $\mathcal{L}^s\gets\mathcal{L}^s\cup\{\ell'\}$\;
+  }
+  Add coding lessons in $G$ that pass the format check to $\mathcal{L}^c$\;
+  Add $y$ to $T$ as a child of $x$, or an all-failed marker if $y=\bot$\;
+  $\Pi\gets\Pi\setminus\{p\}$; save search state\;
+}
+\Return fastest correct candidate in $T$, $\mathcal{L}^s$, $\mathcal{L}^c$\;
+\end{algorithm}
+\end{minipage}
+\end{wrapfigure}
+
+Each proposal cites the presented lessons that informed it as apply, adapt, or
+avoid. The controller rejects citations to lessons that were not
+presented.
+A proposal may cite no lesson when its strategy comes from the source code,
+profile, or the model's prior knowledge. The planner records why no lesson was
+used; this explanation does not affect ranking.
+
+The controller ranks pending proposals by their \emph{lesson-support score},
+computed from the reputation scores of their applied or adapted lessons:
+\par\noindent\begin{minipage}{\dimexpr0.51\textwidth-\columnsep\relax}
+\begin{equation}
+S_L(p)=
+\begin{cases}
+\displaystyle \frac{1}{|\mathcal{C}(p)|}
+\sum_{\substack{\ell\in\mathcal{C}(p)\\n_\ell>0}}\frac{\rho_\ell}{n_\ell},
+& |\mathcal{C}(p)|>0,\\[7pt]
+0, & \text{otherwise.}
+\end{cases}
+\label{eq:proposal-score}
+\end{equation}
+\end{minipage}\par
+Here, $|\mathcal{C}(p)|$ denotes the number of lessons cited as apply or
+adapt. For a lesson with measurements, $\rho_\ell/n_\ell$ is its average signed
+performance credit per measurement. The proposal score averages these
+contributions across its applied or adapted lessons. A lesson with no performance
+measurements contributes zero. This compares proposals by the average performance
+credit of their cited lessons without assigning additional credit for citation
+count alone. Avoid citations record why a
+direction was ruled out and affect neither ranking nor credit, since the implementation
+does not test that direction.
+
+Each proposal stores references to the lessons it cites. After a measured result
+updates a lesson's reputation and measurement count, the controller recomputes
+the scores of all pending proposals that apply or adapt that lesson. These
+proposals may modify different candidates elsewhere in the search tree.
+Thus, a result from one candidate can change which proposal is selected for
+another, without regenerating or rereviewing the pending proposals.
+
+The controller forms a shortlist from the top-ranked proposals, including one for the fastest
+candidate. To keep candidates diverse, it reserves places for proposals for the original candidate
+$x_0$ and for candidates not otherwise represented, so lesson scores do not repeatedly favor one
+optimization direction. A selector agent chooses one proposal from the shortlist, inspecting the
+candidates' profiles and the lesson support.
+
+\subsection{Declare-then-Measure Attribution}
+\label{sec:attribution}
+
+Because proposals declare their lesson citations before implementation, measured
+credit goes only to lessons declared in advance.
+The implementation agent produces implementations for the parent $x(p)$ selected for
+optimization, following the strategy in proposal $p$. From the outcome $y$, the fastest correct, profiled implementation, the controller computes the relative latency reduction:
+\begin{equation}
+  \Delta(p)=\frac{t(x(p))-t(y)}{t(x(p))}.
+  \label{eq:delta}
+\end{equation}
+Thus, $100\Delta(p)\%$ is the percentage reduction in latency relative to the
+parent; a negative value means that the implementation is slower.
+The controller then updates each cited apply/adapt lesson's reputation $\rho_\ell$,
+measurement count $n_\ell$, and implementation difficulty $d_\ell$.
+For $c=|\mathcal{C}(p)|>0$ lessons cited as apply or adapt, the update is
+\begin{equation}
+  (\rho_\ell,n_\ell,d_\ell)\leftarrow
+  \begin{cases}
+    (\rho_\ell+\Delta(p)/c,\ n_\ell+1,\ \operatorname{Upd}(d_\ell,d(\tau),1/c)),
+      & \text{profiled},\\
+    (\rho_\ell,\ n_\ell,\ \operatorname{Upd}(d_\ell,5,1/c)),
+      & \text{all-failed}.
+  \end{cases}
+  \label{eq:credit-update}
+\end{equation}
+The controller divides the measured performance change equally among the $c$
+lessons and increments each measurement count by one. The total reputation update
+across these lessons is therefore $\Delta(p)$, regardless of citation count.
+If no correct, profiled
+implementation exists, only difficulty changes; reputation and measurement counts
+remain unchanged.
+
+The controller computes the cycle difficulty $d(\tau)$ deterministically, without
+an LLM. It ranges from 1 to 4 and increases with the number of attempts needed
+to obtain the first correct, profiled implementation; a cycle in which all attempts fail
+receives 5. The controller updates the lesson's difficulty
+$d_\ell$ by averaging its existing value with the new cycle difficulty $\delta$,
+using weight $w$ for the new observation and accumulated weight $w_\ell$:
+\begin{equation}
+ \operatorname{Upd}(d_\ell,\delta,w)=\frac{w_\ell d_\ell+w\delta}{w_\ell+w},
+ \qquad w_\ell\leftarrow w_\ell+w.
+ \label{eq:difficulty-update}
+\end{equation}
+A lesson's initial difficulty has weight 1. For each later proposal, weight 1
+is divided equally among its $c$ cited apply/adapt lessons, giving $w=1/c$.
+The planner and selector can inspect the difficulty, but it does not
+affect the lesson-support score in Equation~\ref{eq:proposal-score}.
+A new lesson starts with reputation $\Delta(p)$ and one measurement when profiling
+succeeds, or zero reputation and no measurements otherwise. Its initial difficulty
+is the cycle difficulty. Avoided and uncited lessons receive no updates. Failed attempts cannot establish whether the strategy
+increases or decreases latency. 
+% The measured $\Delta(p)$ describes the combined
+% effect of the selected implementation's code changes; the update does not estimate
+% the contribution of each change or cited lesson separately.
+
+\subsection{Coding Lessons}
+\label{sec:coding-lessons}
+
+Coding lessons provide implementation guidance extracted from
+the diagnostics and code differences between \klens's attempts to
+implement the same proposal. They do not guide planning, proposal
+generation, ranking, or selection.
+The implementation agent has tools to list coding-lesson
+summaries, which are very short and add little to the prompt, and retrieve
+specific lessons in full. 
+
+After the cycle, the reflector agent reviews all implementation attempts
+  for the same proposal, using code differences
+  $\operatorname{diff}(a_u,a_v)$ between attempts, diagnostics,
+  and measured results. It extracts lessons that explain how to address
+  compilation or testing failures and which conditions code changes must
+  preserve, such as synchronization required for data transfers. Each lesson
+  states when the guidance applies. These lessons guide implementation in later cycles.
+
+\subsection{Initialization from Other Kernels}
+\label{sec:transfer}
+
+We call initialization with strategy lessons from earlier \klens runs on other
+kernels a \emph{warm start}. To build a reusable lesson library, we combine
+lessons from all runs of each source kernel and keep those from correct,
+profiled implementations that reduced latency.
+We rank these lessons by parent-relative latency reduction and mean reputation
+$\rho_\ell/n_\ell$.
+An LLM identifies duplicate or very similar lessons, and we retain the $n_s$
+highest-ranked distinct lessons for each kernel. Each lesson retains a reference
+to its parent implementation and profile. An LLM
+also records which operations or code characteristics each strategy requires,
+such as a reduction operation or a particular memory-access pattern. These
+descriptions are prepared once and reused across searches.
+
+For each of the 16 kernels in our evaluation, we consider the $n_s$ retained
+lessons from each of the other 15 kernels, giving $15n_s$ lessons. The new
+search starts from the kernel's original, correct, profiled candidate $x_0$.
+An LLM identifies the operations and code characteristics of $x_0$.
+The controller deterministically compares these characteristics with each
+lesson's recorded requirements and excludes lessons with incompatible
+requirements. Then $x_0$ is compared with each remaining lesson's parent candidate $x_j$.
+We represent each candidate $x$ by a vector
+$\mathbf{u}(x)$ of nine measured pipeline utilization ratios from its fingerprint $\phi$, each in $[0,1]$,
+and compute cosine similarity as $s(x_0,x_j)=
+\frac{\mathbf{u}(x_0)^\top\mathbf{u}(x_j)}
+{\lVert\mathbf{u}(x_0)\rVert_2\,\lVert\mathbf{u}(x_j)\rVert_2}$.
+This is the profiling component of the distance used within a search
+(Section~\ref{sec:lesson-ranking}); the remaining context, such as prior
+strategies, is omitted because it is not comparable across kernels.
+The comparison requires complete, nonzero vectors and excludes absolute latency.
+The controller ranks the remaining lessons by profile similarity and selects
+$n_w$ lessons with distinct optimization mechanisms. Selection is deterministic once the LLM-generated
+descriptions are available. In our experiments, $n_s=n_w=5$.
+
+The controller imports the selected lessons before generating proposals for
+$x_0$. Imported lessons retain their reputation scores and measurement counts from
+earlier runs, guide proposal generation, and contribute to proposal ranking.
+% The controller records updates from the new run separately and
+% uses the combined values
+% $(\rho_\ell,n_\ell)=(\rho_\ell^{\rm past}+\rho_\ell^{\rm new},
+% n_\ell^{\rm past}+n_\ell^{\rm new})$ for proposal ranking.
+% The labels $\mathrm{past}$ and $\mathrm{new}$ denote contributions from
+% the earlier run and the new run, respectively. The new contributions start at
+% zero and change according to Section~\ref{sec:attribution}.
+The new run also extracts its own strategy and coding lessons, as described in
+Sections~\ref{sec:attribution} and~\ref{sec:coding-lessons}.
+
+\section{Implementation}
+\label{sec:implementation}
+
+\klens is designed to be reusable across domain-specific languages: the client
+manages the agents, search, lessons, and evaluation budget, and a separate backend
+manages source files, saved candidate versions, and program execution. The backend
+exposes six HTTP/JSON operations: listing, reading, and updating source files;
+inspecting and restoring saved versions; and evaluating a candidate through
+compilation, testing, and profiling, returning diagnostics and performance
+measurements.
+This interface separates program editing and evaluation from the search
+method, allowing the client's planning, proposal ranking, budget management, and
+lesson updates to be reused with other backends. Agents access candidates only
+through these operations; only the controller writes measurements, lessons, and
+reputation scores. Our \ascendc backend manages source versions and evaluates
+candidates through SandboxFusion~\citep{Liu2024FullStackBench} on an Ascend NPU.
+
+The planner, selector, implementation, and reflector agents use the
+lightweight Pi coding-agent harness~\citep{Earendil2026Pi}. The controller
+interacts with agents only through tool calls and structured outputs, so other
+harnesses, such as Codex or Claude Code, can also adapt these
+interfaces.
+After each cycle, the controller saves the search tree, proposals, lessons,
+implementation attempts, measurements, and token usage. These records support
+resuming a run and inspecting its recorded decisions.
+
+\section{Evaluation}
+\label{sec:evaluation}
+
+We ask four questions:
+
+\begin{description}
+  \item[RQ1:] How does \klens compare with the baselines in optimization
+  performance under equal evaluation-attempt budgets?
+  \item[RQ2:] How does \klens compare with the baselines in optimization
+  performance under equal cumulative LLM-token budgets?
+  \item[RQ3:] How does initialization with lessons from other kernels affect
+  \klens's optimization performance?
+  \item[RQ4:] How much does the lesson layer contribute to the agent’s optimization performance?
+\end{description}
+
+\subsection{Experimental Setup}
+
+\begin{table}[!t]
+  \centering
+  \small
+  \caption{The \numkernels benchmark operators. SLOC counts editable device sources, including
+  header-resident \ascendc code, but excludes build files, tests, generated code, comments, and blanks.}
+  \label{tab:benchmark-scale}
+  \setlength{\tabcolsep}{3.5pt}
+  \footnotesize
+  \begin{minipage}[t]{0.485\textwidth}
+    \begin{tabular}{llrr}
+      \toprule
+      Operator & ID & Files & SLOC \\
+      \midrule
+      \multicolumn{4}{l}{\itshape Architecture-specific operators (12)} \\
+      GatherPaKvCache         & GaKV   & 6 & 1{,}326 \\
+      InterleaveRope          & IRope  & 5 & 656 \\
+      LightningIndexer        & LIdx   & 15 & 4{,}802 \\
+      MlaProlog               & MlaP   & 35 & 10{,}382 \\
+      MoeFusedTopk            & MoeF   & 2 & 460 \\
+      MoeGatingTopK           & MoeG   & 8 & 2{,}838 \\
+      MoeTokenUnpermute       & MoeU   & 3 & 437 \\
+      QkvRmsNormRopeCache     & QkvC   & 3 & 688 \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.485\textwidth}
+    \begin{tabular}{llrr}
+      \toprule
+      Operator & ID & Files & SLOC \\
+      \midrule
+      RecurrentGatedDeltaRule & RGDR   & 8 & 1{,}079 \\
+      RopeWithSinCosCache     & RopeC  & 8 & 2{,}796 \\
+      SparseAttnSharedkv      & SpSKV  & 10 & 5{,}384 \\
+      SparseFlashAttention    & SpFA   & 12 & 5{,}669 \\
+      \multicolumn{4}{l}{\itshape Common primitives (4)} \\
+      AddRmsNorm              & ARMS   & 11 & 3{,}054 \\
+      ClippedSwiglu           & CSwG   & 6 & 891 \\
+      RmsNorm                 & RMS    & 13 & 3{,}379 \\
+      SwiGlu                  & SwiG   & 12 & 919 \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+\end{table}
+
+% Draft-only heading spacing; remove for ACM submission.
+\vspace{-3pt}
+\paragraph*{Environment.}
+Candidates are compiled and evaluated in containerized SandboxFusion workers on an
+Ascend910 device with CANN 9.1.0. Full environment details are in the artifact.
+
+\vspace{-3pt}
+\paragraph*{Model configuration.}
+All methods use GPT-5.6 Luna with \texttt{xhigh} reasoning effort.
+
+\vspace{-3pt}
+\paragraph*{Benchmark and budget.}
+The benchmark contains \numkernels production \ascendc operator packages
+(Table~\ref{tab:benchmark-scale}) covering normalization, gated activations, rotary embeddings,
+KV-cache movement, latent and sparse attention, mixture-of-experts routing, and gated linear attention.
+Their original implementations already contain hardware-specific tuning, including coordinated Cube and Vector stages in fused
+attention kernels, making further optimization challenging.
+
+We selected for optimization diversity, not variants of one problem. The benchmark spans
+bandwidth-bound elementwise streaming (\textsf{SwiG}, \textsf{RMS}, \textsf{CSwG}, \textsf{ARMS});
+irregular gather/scatter (\textsf{GaKV}, \textsf{MoeU}); selection and sorting (\textsf{MoeG},
+\textsf{MoeF}); layout transformation fused with cache writes (\textsf{IRope}, \textsf{RopeC},
+\textsf{QkvC}); multi-stage attention over tiled workspaces (\textsf{MlaP}, \textsf{SpFA},
+\textsf{SpSKV}, \textsf{LIdx}); and a state-carrying sequential recurrence (\textsf{RGDR}). These workloads
+have different performance bottlenecks, so an optimization strategy that improves one workload may
+not improve another.
+We divide the operators into two groups: twelve \emph{architecture-specific operators} for particular
+decoder designs and four \emph{common primitives} for normalization and activation. 
+% We report results separately for each group.
+
+\begin{wraptable}{r}{0.42\textwidth}
+ \centering\footnotesize
+ \caption{Main-study configurations.}
+ \label{tab:study-size}
+ \setlength{\tabcolsep}{3pt}
+ \begin{tabular}{lrrr}
+ \toprule
+ Method & Runs/op. & Eval./run & Runs \\
+ \midrule
+ \ksearch & 1 & 100 & 16 \\
+ \kernelband & 1 & 100 & 16 \\
+ \openevolve & 1 & 100 & 16 \\
+ \standardcodex & 1 & 100 & 16 \\
+ \midrule
+ \klens, cold & 3 & 100 & 48 \\
+ \klens, warm & 3 & 20 & 48 \\
+ \nolessons & 1 & 100 & 16 \\
+ \onlycodinglessons & 1 & 100 & 16 \\
+ \midrule
+ Total & & & \numruns \\
+ \bottomrule
+ \end{tabular}
+\end{wraptable}
+
+Each search starts from the operator's original implementation, which we test and profile before
+optimization. All candidates use the same test cases for that operator, covering multiple input shapes and data types. The main comparison allows
+\numprofiles evaluation attempts per run. Profiling the original implementation does not count toward
+the budget.
+Warm-start runs use 20 evaluation attempts to assess how transferred lessons guide initial decisions,
+before the search has produced many lessons of its own.
+We use \emph{cold} to distinguish standard \klens, which starts without transferred lessons,
+from the warm-start version.
+
+
+For each operator, the artifact records the benchmark input configuration and the measured latency of
+the original kernel used as the speedup reference.
+
+Table~\ref{tab:study-size} groups the study configurations.
+Because optimization runs require substantial time, hardware use, and LLM tokens, we perform three
+runs per operator for \klens and its warm-start version, and one for each baseline
+and each ablation (\nolessons and \onlycodinglessons).
+The main comparison averages all three cold \klens runs within each kernel.
+The same runs provide the cold checkpoints for RQ3 and the variability estimates
+in Section~\ref{sec:variability}. The completed GPT-5.6 Luna
+study comprises \numruns runs and \numtotalprofiles evaluation attempts, and an estimated 93.57 cumulative run-days.
+
+\paragraph*{Baselines.}
+We compare against three specialized kernel optimization approaches and \standardcodex, a
+general-purpose coding-agent harness. We retain the specialized baselines' published
+search procedures behind a common realization and evaluation interface for \ascendc packages,
+replacing hardware-specific profiling features with Ascend measurements. All methods receive
+the same task description, editable source files, starting implementation, model and reasoning
+settings, and evaluation feedback, and share the same testing and profiling procedures, with
+tests and reference data hidden from the agents.
+
+\ksearch is the closest baseline because it also uses a tree-based search
+to optimize kernel implementations~\citep{Cao2026K}. We retain its selection rule: among pending proposals whose parent
+implementation is available, it selects the proposal with the highest LLM-assigned priority score.
+The implementation agent evaluates and repairs implementations of the selected strategy.
+We retain its original stagnation setting $K=7$, meaning that a cycle ends after seven consecutive
+evaluation attempts fail to improve its best result, or when the total evaluation budget is exhausted.
+
+\kernelband uses a multi-armed bandit to select among six optimization strategies~\citep{Ran2025KernelBand}.
+We retain its published strategy set and selection rule, with Ascend measurements replacing
+NVIDIA-specific ones. The Ascend profiler lacks the measurements required by its pipelining filter,
+so we retain pipelining among the available strategies.
+
+\openevolve (commit \texttt{b28ac15}) evolves a database of candidate programs, initialized with the
+measured starting kernel, using its default population settings~\citep{Sharma2025OpenEvolve}.
+As with the other methods, each run receives \numprofiles evaluation attempts.
+
+For \kernelband and \openevolve, we replace single-response code generation with the implementation
+agent used by \ksearch. The agent can edit code over multiple turns to coordinate changes across the
+files in each operator package (Table~\ref{tab:benchmark-scale}). Each method still selects the parent
+and optimization strategy, which remain fixed during editing. The agent cannot evaluate candidates
+while editing. As in the original \kernelband and \openevolve methods, the backend evaluates each
+completed candidate once, without a repair step based on that result.
+
+
+\standardcodex uses its standard shell and editing tools, with a client
+for the shared compile--test--profile backend. Given the same source code, task information,
+model, and reasoning level as the other methods, but no kernel-specific search
+controller or lesson set, it is prompted to improve performance while preserving
+behavior and told its evaluation budget. The artifact records the prompts and the
+evaluation and token logs.
+
+
+\vspace{-3pt}
+\paragraph*{Accounting and metrics.}
+Every submitted implementation counts toward the evaluation-attempt budget,
+including compilation and test failures.
+We compare total LLM-token budgets, without separate limits
+for input, cached-input, and output tokens.
+Cached input dominates token use for four methods, whereas \ksearch uses more
+uncached input, so equal total-token budgets may cost more when cached tokens are priced lower.
+The artifact reports token composition and usage by method; token use at each
+checkpoint is read from cumulative token counts.
+
+For kernel $i$, method $m$, run $r$, and budget $b$, let
+$s_{i,m,r,b}=\bar t_i/t^{\mathrm{best}}_{i,m,r,b}$ denote the
+best-so-far speedup relative to the original implementation.
+Here, $\bar t_i$ is a shared reference per kernel: the mean of its original-implementation
+measurements. The artifact lists the measurements included in each comparison.
+$t^{\mathrm{best}}_{i,m,r,b}$ is the lowest execution time among the original implementation
+(available at zero budget) and correct candidates within budget $b$.
+We first average speedups across independent runs for each kernel,
+then take the geometric mean (GM) across kernels:
+\begin{equation}
+ \bar s_{i,m,b}=\frac{1}{R_m}\sum_{r=1}^{R_m}s_{i,m,r,b},\qquad
+ \operatorname{GM}_m(b)=\exp\!\left(\frac{1}{N}\sum_{i=1}^{N}\log\bar s_{i,m,b}\right),
+ \label{eq:aggregates}
+\end{equation}
+Here, $N=16$ is the number of kernels and $R_m$ is the number of repetitions per kernel for method $m$:
+$R_m=3$ for standard and warm-start \klens, and $R_m=1$ for each baseline,
+\nolessons, and \onlycodinglessons.
+We use the same calculation for evaluation-attempt and cumulative LLM-token budgets.
+For \onlycodinglessons, we report attempt-budget results; final token consumption is in the artifact.
+Its normalized records lack candidate-level token counters for token checkpoints.
+Each kernel receives equal weight in log-speedup~\citep{Fleming1986HowNot,Ran2025KernelBand}.
+The geometric mean summarizes normalized performance across this fixed suite;
+it does not estimate end-to-end application speedup.
+A speedup factor $s$ corresponds to
+$100(s-1)$\% speedup and $100(1-1/s)$\% latency reduction.
+
+Pass measures the fraction of total evaluation attempts that compile and pass testing.
+Improved measures the fraction of total evaluation attempts per run that produce correct candidates
+faster than the shared baseline. We report per-operator speedups and per-category and overall GMs, with uncertainty across
+\klens runs estimated in Section~\ref{sec:variability}.
+
+
+\subsection{RQ1: Equal Evaluation-Attempt Budgets}
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/profile-trajectories.pdf}
+  \caption{GM speedup by evaluation-attempt budget: latest correct (left)\textsuperscript{*}
+  and best-so-far (right) candidates. Shading shows pointwise approximate 95\%
+  intervals for \klens (Section~\ref{sec:variability}).}
+  \Description{Two step plots compare five methods over 100 evaluation attempts. The left
+  chart shows the geometric-mean speedup of the latest correct candidates and the right chart the
+  geometric-mean speedup of the best-so-far candidates across all \numkernels operators.}
+  \label{fig:profile-trajectories}
+\end{figure*}
+\begingroup
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\footnotetext[1]{For readability, the left panel omits an \openevolve \textsf{RopeC} outlier
+(attempt 72; about $20\times$ the baseline latency), retaining the preceding correct candidate
+through attempt 75. Evaluation counts, tables, and best-so-far results are unchanged.}
+\endgroup
+
+\begin{table}[t]
+  \centering
+  \small
+  \caption{Best-so-far GM speedup across \numkernels kernels by evaluation budget;
+  Arch/Prim, Improved, and Pass are reported at \numprofiles attempts.
+  Grey shading marks final-budget columns.}
+  \label{tab:profiles}
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{lccccc@{\hspace{6pt}}cc@{\hspace{6pt}}cc}
+    \toprule
+    & \multicolumn{5}{c}{GM speedup at attempt} & \multicolumn{2}{c}{By category} & & \\
+    \cmidrule(lr){2-6}\cmidrule(lr){7-8}
+    Method & 20 & 40 & 60 & 80 & \tikzmarknode{profiles-budget-top}{\numprofiles} & Arch & Prim & Improved & Pass \\
+    \midrule
+    \ksearch & 1.0772 & 1.0826 & 1.0842 & 1.0909 & 1.0964 & 1.1149 & 1.0426 & 56.50\% & 86.94\% \\
+    \kernelband & 1.0900 & 1.0947 & 1.0970 & 1.1097 & 1.1138 & 1.1286 & 1.0705 & 43.06\% & 79.94\% \\
+    \openevolve & 1.0697 & 1.0755 & 1.0936 & 1.0975 & 1.0982 & 1.1102 & 1.0631 & 44.63\% & 85.13\% \\
+    \standardcodex & 1.0762 & 1.0953 & 1.1095 & 1.1106 & 1.1110 & 1.1157 & \textbf{1.0971} & 57.88\% & \textbf{92.44\%} \\
+    \klens & \textbf{1.1762} & \textbf{1.2004} & \textbf{1.2100} & \textbf{1.2213} & \tikzmarknode{profiles-budget-bottom}{\textbf{1.2240}} & \textbf{1.2718} & 1.0913 & \textbf{74.48\%} & 88.35\% \\
+    \bottomrule
+  \end{tabular}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[draw=none,fill=black,fill opacity=0.08,inner xsep=3pt,inner ysep=3pt,
+      fit=(profiles-budget-top)(profiles-budget-bottom)] {};
+  \end{tikzpicture}
+\end{table}
+
+\klens achieves the highest GM speedup at all five checkpoints in Table~\ref{tab:profiles},
+with about twice the percentage speedup of the strongest baseline throughout
+(+22.40\% versus +11.38\% for \kernelband at \numprofiles attempts). The lead is
+established early: at 20 attempts \klens reaches +17.62\%, more than any baseline
+achieves at 100.
+
+Figure~\ref{fig:profile-trajectories} shows frequent declines in latest-correct
+performance for \kernelband and \openevolve, with only intermittent gains
+in their best-so-far results. They also have the lowest Pass (79.94\%, 85.13\%)
+and Improved (43.06\%, 44.63\%) rates. Because Improved counts attempts that
+beat the original, dividing it by Pass gives the share of passing attempts that
+improve: 54\% and 52\%, against 84\% for \klens. We interpret this as a
+difference in strategy quality: without measured evidence on which strategies work,
+these methods try riskier, more diverse rewrites whose correct candidates often do not
+improve speed, whereas \klens favors strategies more likely to improve.
+
+\ksearch's Pass rate (86.94\%) is close to \klens's (88.35\%), yet its Improved rate is
+56.50\% versus 74.48\%: the gap lies in which proposals are implemented, not in whether
+attempts succeed. \ksearch shares \klens's tree and plan/implement split but ranks by
+LLM-assigned priority, and trails by 12.8 points in GM speedup (+9.64\% versus +22.40\%),
+which points to the value of ranking by measured lesson evidence.
+
+\klens performs best on 12 of the 16 kernels, while \standardcodex performs best on three
+(\textsf{RGDR}, \textsf{RMS}, and \textsf{SwiG}; Figure~\ref{fig:per-kernel-bars}) and
+\kernelband on one (\textsf{GaKV}, by 0.5 points). \standardcodex leads
+on common primitives (+9.71\%, compared with +9.13\% for \klens).
+\standardcodex is effective at producing valid implementations, achieving
+the highest Pass rate of 92.44\%. Its lower Improved rate
+(57.88\%, compared with 74.48\% for \klens) shows that implementation
+success alone does not ensure improvement: only 63\% of its passing attempts
+beat the original, against 84\% for \klens. In our baseline,
+long-term planning and reuse of previous results depend on the agent's
+use of its session history. \klens provides explicit rules for storing
+measured optimization outcomes and using them to rank subsequent proposals.
+
+The simpler structure of common primitives may allow \standardcodex to find effective
+optimizations through direct edits and evaluation feedback. Their widespread use may also mean
+more training examples of these computations and optimization patterns.
+\klens's advantage is larger on architecture-specific operators: +27.18\%, compared with
++12.86\% for the strongest baseline, consistent with lesson reuse paying off most when
+several optimization decisions interact.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/per-kernel-bars.pdf}
+  \caption{Per-kernel best-so-far speedup and overall GM after \numprofiles evaluation attempts.
+  IDs from Table~\ref{tab:benchmark-scale}. Grey shading marks overall GM results in figures.}
+  \Description{A grouped bar chart compares five methods across 16 kernels: twelve
+  architecture-specific operators and four common primitives, followed by a shaded geometric-mean
+  group. K-LENS has the highest speedup on twelve kernels, Codex on three, and KernelBand on one.}
+  \label{fig:per-kernel-bars}
+\end{figure*}
+
+\begin{klensresultbox}
+\textbf{RQ1:} At \numprofiles attempts, \klens achieves approximately twice the percentage
+speedup of the second-best method, \kernelband: +22.40\% versus +11.38\%.
+This approximately twofold advantage holds at all five reported checkpoints.
+\end{klensresultbox}
+
+\subsection{RQ2: Equal LLM-Token Budgets}
+
+% \begin{figure}[t]
+%   \centering
+%   \includegraphics[width=\textwidth]{figures/evaluation/token-trajectories.pdf}
+%   \caption{GM speedup across \numkernels kernels by cumulative LLM-token budget: latest correct
+%   candidate (left) and best-so-far candidate (right). Shading shows pointwise approximate 95\%
+%   intervals for \klens (Section~\ref{sec:variability}); baselines use one run per kernel.
+%   Through 50M tokens, the left panel samples \kernelband and \openevolve every 0.5M tokens,
+%   omitting intermediate fluctuations. Other curves and the numerical analysis use all recorded events.}
+%   \Description{Two step plots compare the latest-correct and best-so-far geometric-mean speedups
+%   of five methods across 16 kernels under cumulative budgets up to 100 million LLM tokens.}
+%   \label{fig:token-trajectories}
+% \end{figure}
+
+\begin{table}[t]
+  \centering
+  \small
+  \caption{Best-so-far GM speedup by cumulative LLM-token budget. M denotes million tokens.}
+  \label{tab:tokens}
+  \begin{tabular}{lccccc}
+    \toprule
+    Method & 10M & 20M & 30M & 50M & \tikzmarknode{tokens-budget-top}{100M} \\
+    \midrule
+    \ksearch & 1.0750 & 1.0770 & 1.0814 & 1.0841 & 1.0898 \\
+    \kernelband & 1.0824 & 1.0863 & 1.0984 & 1.1084 & 1.1138 \\
+    \openevolve & 1.0714 & 1.0923 & 1.0963 & 1.0970 & 1.0977 \\
+    \standardcodex & 1.0199 & 1.0586 & 1.0696 & 1.0838 & 1.0959 \\
+    \klens & \textbf{1.1244} & \textbf{1.1595} & \textbf{1.1733} & \textbf{1.1960} & \tikzmarknode{tokens-budget-bottom}{\textbf{1.2177}} \\
+    \bottomrule
+  \end{tabular}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[draw=none,fill=black,fill opacity=0.08,inner xsep=3pt,inner ysep=3pt,
+      fit=(tokens-budget-top)(tokens-budget-bottom)] {};
+  \end{tikzpicture}
+\end{table}
+
+We apply common token caps retrospectively to the recorded runs, reporting the best correct candidate available within each cap.
+Wall-clock time is not matched because evaluation duration also depends on failures, kernel speed,
+queues, and network conditions. We compare the fastest correct kernel each method produces
+within each token budget.
+
+
+% Figure~\ref{fig:token-trajectories} shows optimization progress under cumulative token budgets.
+Table~\ref{tab:tokens} shows that \klens leads at all five token budgets.
+\kernelband is closest at 10M tokens, where \klens's percentage gain is
+1.51 times as large. This advantage increases to 1.91 times at 100M
+tokens (+21.77\% versus +11.38\%). Thus, the gap widens as the token
+allowance increases.
+
+At 10M tokens, \klens (+12.44\%) already exceeds every baseline at 100M tokens
+(at most +11.38\%). Baselines flatten: \openevolve, the strongest at 20M, improves
+only from +9.23\% to +9.77\% thereafter, while \klens continues to gain
+(+15.95\% at 20M, +21.77\% at 100M). Additional tokens are converted into
+improvement mainly by \klens, whose ranking needs no LLM calls.
+
+\standardcodex has the lowest speedup at 10M tokens (+1.99\%), despite
+its high Pass rate in RQ1. Early in the search, code inspection and
+checks between evaluations may consume tokens without measured
+improvements. Its percentage
+speedup rises to +9.59\% at 100M tokens, still below \kernelband.
+This shows why optimization under a token budget required separate evaluation.
+
+\begin{klensresultbox}
+\textbf{RQ2:} \klens leads at every reported token budget. At 100M tokens,
+its percentage gain is 1.91 times that of the strongest baseline
+(+21.77\% versus +11.38\%). At 10M, it already exceeds all baselines at 100M.
+\end{klensresultbox}
+
+\subsection{RQ3: Effect of Cross-Kernel Lesson Transfer}
+\label{sec:rq3}
+
+We compare three warm runs per kernel with the three cold
+runs from RQ1 at 10 and 20 evaluation attempts. Warm runs import five
+lessons from other kernels before optimization
+(Section~\ref{sec:transfer}); both conditions then use the same search
+procedure. Cold GMs in this section differ slightly from Table~\ref{tab:profiles}
+because the shared baseline also includes warm-run baseline measurements.
+
+Warm start achieves higher mean speedup on 15 of 16 kernels at both
+checkpoints (Figure~\ref{fig:transfer-effects}). At 10 attempts,
+GM speedup is 1.2230 versus 1.1557 for cold search; at 20 attempts,
+it is 1.2845 versus 1.1758 (Table~\ref{tab:transfer}). These correspond
+to 1.43 and 1.62 times the cold percentage gain, respectively.
+
+\begin{table}[t]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{minipage}[t]{0.36\textwidth}
+  \centering
+  \caption{Warm-start GM speedup.}
+  \label{tab:transfer}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    Metric & Cold & Warm \\
+    \midrule
+    GM @10 & 1.1557 & 1.2230 \\
+    GM @20 & 1.1758 & 1.2845 \\
+    Arch-specific @20 & 1.2161 & 1.3139 \\
+    Primitives @20 & 1.0626 & 1.2003 \\
+    \bottomrule
+  \end{tabular}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.62\textwidth}
+  \centering
+  \caption{Lesson-layer ablation at \numprofiles attempts (RQ4).}
+  \label{tab:ablation}
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Metric & \klens & \nolessons & \onlycodinglessons \\
+    \midrule
+    GM speedup & 1.2240 & 1.1315 & 1.1452 \\
+    Improved & 74.48\% & 64.88\% & 72.44\% \\
+    Attempts to first pass & 1.31 & 2.06 & 1.19 \\
+    Compile-failure rate & 5.38\% & 2.94\% & 2.81\% \\
+    \bottomrule
+  \end{tabular}
+  \end{minipage}
+  \par\smallskip
+  \begin{minipage}{\textwidth}\footnotesize
+  Table~\ref{tab:ablation} uses a common fixed baseline per kernel.
+  Compilation failures are 258/4,800 for \klens, 47/1,600 for
+  \nolessons, and 45/1,600 for \onlycodinglessons. The two ablations
+  have one run per kernel; \klens has three.
+  \end{minipage}
+\end{table}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/warm_start/rq3_transfer_effects.pdf}
+  \caption{Warm-minus-cold percentage speedup at 10 and 20 attempts,
+  in percentage points. Per-kernel values compare mean speedups;
+  Overall compares GMs. Positive values favor warm start.}
+  \Description{Two panels show warm-minus-cold differences for
+  16 kernels and the overall GM. Warm start has higher mean speedup
+  on 15 kernels at both checkpoints.}
+  \label{fig:transfer-effects}
+\end{figure*}
+
+Warm start raises the percentage gain at 20 attempts from +17.58\% to +28.45\%, by 10.88 points.
+Excluding any single kernel leaves 7.98--11.78 points, so no one kernel accounts for the effect.
+The per-category gains in Table~\ref{tab:transfer} are less stable: the gain on common primitives
+rests mainly on \textsf{RMS}.
+
+At 20 attempts, warm start also exceeds cold search at 100 attempts on 10 of 16
+kernels (GM 1.2845 versus 1.2235, 4.99\% higher with one fifth of the budget).
+Transferred lessons thus supply measured strategies that the planner can adapt before
+local results accumulate, and that a cold search does not otherwise find within a
+larger budget.
+
+\begin{klensresultbox}
+\textbf{RQ3:} Warm runs yield 1.43 and 1.62 times the cold percentage
+gain at 10 and 20 attempts. Warm at 20 outperforms cold at 100 on 10 of 16 kernels.
+\end{klensresultbox}
+
+\subsection{RQ4: Contribution of the Lesson Layer}
+\label{sec:rq4}
+
+\nolessons uses an LLM to select parent--strategy proposals without
+lessons and therefore without lesson-based ranking. It retains
+\klens's implementation agent, evaluator, and budget, but removes reflection.
+We also evaluate \emph{\onlycodinglessons}, which is identical to \nolessons
+except that it extracts and uses coding lessons. Given the evaluation cost,
+we compare full \klens with two ablations, \nolessons and \onlycodinglessons,
+to assess the strategy-lesson mechanism, lessons together with the ranking they drive,
+against coding guidance alone.
+
+At \numprofiles attempts, \klens achieves a 70\% larger percentage speedup than
+\nolessons (+22.40\% versus +13.15\%), with higher mean speedup on 14 of 16 kernels
+(Figure~\ref{fig:lesson-effects}). Without lessons, the percentage gain is closer
+to the other baselines' +9.64--11.38\% (Table~\ref{tab:profiles}) than to \klens's
++22.40\%.
+Both ablations retain \klens's tree, evaluator, and budget. \nolessons removes all
+lessons; \onlycodinglessons retains coding lessons but removes strategy lessons and their ranking. Adding coding guidance alone yields a modest gain, from +13.15\% to +14.52\%.
+
+Compared with \nolessons, \klens has a higher compilation-failure rate (5.38\% versus
+2.94\%) but a higher Improved rate (74.48\% versus 64.88\%), and still reaches a
+first passing implementation in fewer attempts (1.31 versus 2.06; Table~\ref{tab:ablation}).
+Combining earlier strategies with existing optimizations requires coordinated
+multi-file edits, riskier but yielding faster kernels; we interpret the
+short time to first pass as coding lessons repairing these failures quickly. Excluding any one kernel, \klens still achieves 5.67--8.89\% higher GM
+speedup, so no single kernel accounts for the advantage.
+
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/lesson-effects-horizontal.pdf}
+  \caption{\klens speedup advantage (\%) over \nolessons (blue) and
+  \onlycodinglessons (green) at \numprofiles attempts. }
+  % Per-kernel points
+  % compare mean speedup across three \klens runs with each ablation's single
+  % run; the final pair compares GMs.}
+  \Description{Per-kernel speedup advantages of K-LENS over No-Lessons
+  and Only-Coding. }
+  \label{fig:lesson-effects}
+\end{figure}
+
+% At 100 attempts, using the lowest speedup from the three \klens runs
+% for each kernel still yields a 4.39\% higher GM speedup than \nolessons.
+
+Adding coding lessons reduces mean attempts to first pass from 2.06 to 1.19 and raises the
+Pass rate from 85.25\% to 91.81\%. Of \klens's 9.25-point gain in percentage speedup over
+\nolessons, 1.37 points (15\%) are attributable to coding lessons and 7.88 (85\%) to strategy
+lessons with lesson-based ranking; this decomposes observed differences and does not separate
+components that may interact. \onlycodinglessons keeps \klens's tree,
+agents, and coding guidance yet stays closer to the baselines (+9.64--11.38\%) than to \klens,
+so the harness is not the source of the gain. In our recorded searches, scores that incorporate
+later measurements align better with realized parent-relative improvement than the scores lessons
+carried when created.
+
+\begin{klensresultbox}
+\textbf{RQ4:} At \numprofiles attempts, \klens achieves 1.70 times the percentage
+speedup of \nolessons (+22.40\% versus +13.15\%), supporting the lesson layer's
+contribution to optimization. Coding lessons mainly improve implementation reliability, with only a
+  modest contribution to overall optimization gains.
+\end{klensresultbox}
+
+\subsection{Variation across Independent Runs}
+\label{sec:variability}
+
+Three independent \klens runs per kernel give mean speedup $\bar s_i$ and sample variance
+$\hat\sigma_i^2$. We summarize run-to-run variation by the median within-kernel variance,
+the median coefficient of variation, and an approximate 95\% confidence interval for the suite GM
+(Equation~\ref{eq:aggregates}). With
+$v_i=\hat\sigma_i^2/(3\bar s_i^2)$ and $\hat\mu=N^{-1}\sum_i\log\bar s_i$,
+
+\begin{equation}
+ \widehat{\operatorname{SE}}(\hat\mu)=\frac{\sqrt{\sum_i v_i}}{N},\qquad
+ \mathrm{CI}_{95}=\exp\!\left(\hat\mu\pm t_{0.975,\nu}\,
+          \widehat{\operatorname{SE}}(\hat\mu)\right),
+ \label{eq:llm-variability}
+\end{equation}
+where $\nu=(\sum_i v_i)^2/\sum_i(v_i^2/2)$ is the Welch--Satterthwaite effective degrees of
+freedom~\citep{NIST1994Uncertainty}. The approximation assumes independent searches and modest
+within-kernel variation. The interval characterizes \klens's run-to-run variability
+on the fixed benchmark suite.
+
+At \numprofiles evaluation attempts, the median within-kernel sample variance of speedup is
+$7.052\times10^{-4}$, with a median coefficient of variation of $2.46\%$.
+The suite GM speedup is $1.2240\times$, with an approximate 95\% confidence interval of
+$[1.2037,\,1.2447]$ using Equation~\ref{eq:llm-variability}.
+The interval extends about 1.7\% on either side of the GM estimate, whereas \klens's GM speedup
+is 9.90\% higher than that of the strongest baseline, \kernelband ($1.1138\times$).
+The interval describes \klens only: one \klens run has a standard error of about 1.3\% (log scale),
+so the gap to \kernelband exceeds three standard errors even if baseline runs were twice as variable,
+and each of the three \klens runs alone beats every baseline.
+The same analysis for the warm-start runs at 20 attempts gives a median
+within-kernel variance of $2.684\times10^{-4}$ and a 95\% suite-GM interval of $[1.2525,\,1.3174]$.
+
+\subsection{Generalization to Another Model}
+\label{sec:model-generalization}
+
+\begingroup
+\setlength{\intextsep}{3pt}
+\setlength{\columnsep}{7pt}
+\begin{wraptable}[9]{l}{0.42\textwidth}
+  \centering\footnotesize
+  \captionsetup{font=footnotesize,skip=2pt}
+  \caption{GM speedup on six kernels with Kimi K3.}
+  \label{tab:model-generalization}
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    Method & \shortstack{100\\attempts} & \shortstack{50M\\tokens} \\
+    \midrule
+    \ksearch       & 1.1231 & 1.1231 \\
+    \kernelband    & 1.0724 & 1.0724 \\
+    \openevolve    & 1.0645 & 1.0645 \\
+    \standardcodex & 1.1972 & 1.1971 \\
+    \klens        & \textbf{1.5033} & \textbf{1.3909} \\
+    \bottomrule
+  \end{tabular}
+\end{wraptable}
+We repeat the comparison with Kimi K3 using \texttt{low} reasoning.
+To target the most complex kernels, we set a 3{,}000-SLOC threshold, which leaves six:
+\textsf{SpSKV}, \textsf{LIdx}, \textsf{MlaP}, \textsf{RMS}, \textsf{SpFA}, and
+\textsf{ARMS} (Table~\ref{tab:benchmark-scale}). Evaluation cost limits the study to
+one run per method and kernel.
+Table~\ref{tab:model-generalization} reports best-so-far GM speedup at
+\numprofiles evaluation attempts and 50M tokens for the same six kernels.
+With low reasoning, many runs finish below 100M
+tokens; we therefore report the token-budget comparison at 50M.
+
+At \numprofiles evaluation attempts, \klens achieves
+2.55 times the percentage speedup of the strongest baseline, \standardcodex
+(+50.33\% versus +19.72\%). At 50M tokens, the ratio is 1.98
+(+39.09\% versus +19.71\%).
+The strongest baseline changes with the model (\standardcodex here), yet \klens stays
+first under both budgets in these independent runs. These results provide evidence that
+the advantage extends to a second model family on the evaluated kernels.
+% although one run per method and kernel does not establish
+% run-to-run variability.
+\par
+\endgroup
+\section{Discussion and Threats to Validity}
+\label{sec:threats}
+
+\emph{External validity.} Evaluation cost limits model and benchmark coverage:
+the 192 Luna runs consumed tokens on the order of tens of billions and an
+estimated 93.57 cumulative run-days. We selected GPT-5.6 Luna to balance coding
+capability and inference cost. A comparison with Kimi K3 on six complex kernels exceeding
+3{,}000 SLOC (Section~\ref{sec:model-generalization}) also favors \klens, providing
+evidence beyond the primary model family. Transfer may be easier between closely
+related kernels. We therefore selected 16 kernels covering distinct computations,
+implementation sizes, and bottlenecks, including architecture-specific operators
+and common primitives, and report results for all of them.
+% TODO: state selection criteria and that they were fixed before the experiments.
+% \textcolor{red}{[Dr. Meng: Please add more details about benchmark selection.]}
+Nevertheless, their shared library, language, and hardware limit generalization. Exposure to
+these kernels in training data yields no speedup, since every method starts from
+them.
+
+\emph{Internal validity.} Random model outputs and timing noise can affect the
+comparison. Three independent \klens runs per kernel show modest observed
+variability, with a median coefficient of variation of 2.46\%
+(Section~\ref{sec:variability}). Baselines and ablations use one run per kernel, so their variability
+is not characterized.
+% TODO: if available, add per-kernel wins, e.g. "\klens leads on X of 16 kernels".
+Timing noise is small relative to the gaps: candidates are profiled in containerized
+sandboxes, each NPU serves only one run at a time, and every profile discards the first three
+measurements as warm-up and averages the rest; % TODO: confirm warm-up/averaging is what the code does.
+the spread of repeated baseline measurements shifts the suite GM by about 0.7\%.
+All methods use the same starting implementations, hidden
+tests, evaluation backend, and budgets, and agents cannot inspect the correctness tests. After the searches were over, we re-ran the best
+candidate they found per kernel against the original kernel in a separate session, outside the
+budget, and the improvements they reported were reproduced. For \ksearch, \openevolve, and \kernelband, we
+adapt the code-editing and evaluation interfaces to \ascendc and release these
+adaptations. Multi-turn editing gives \kernelband and \openevolve additional
+implementation support compared with their original single-response generation.
+\kernelband's pipelining filter requires counters unavailable from the Ascend
+profiler, so we retain pipelining among its available strategies rather than
+filtering it out.
+\klens's parameters ($R$, $K$, shortlist size, $n_s$, and $n_w$) were fixed
+before the evaluation rather than tuned per kernel. % TODO: confirm.
+
+\emph{Design choices.} Dividing measured performance changes equally among cited
+lessons is a design choice because the measured outcome does not identify each
+lesson's contribution. Because the measurement count still increments by one,
+co-citation can lower a lesson's mean credit. Fewer than 10\% of evaluated proposals cite multiple
+lessons, limiting how often this choice affects attribution. The lesson ablation
+removes lessons and their ranking together; \ksearch, which ranks by LLM
+priority, is the alternative.
+Building the warm-start bank is excluded from each target's budget, amortized
+across targets, and needs no kernel evaluations or device time, only an LLM pass of
+under 1M tokens over 80 lessons the source searches already produced. Equal token budgets do not imply equal costs: cached input dominates
+token use for four methods, whereas \ksearch uses more uncached
+input, which can cost more when cached tokens are cheaper. Given the
+computational cost, future work includes broader evaluation across models,
+reasoning settings, libraries, and hardware, and additional repetitions for the
+baselines and ablations.
+
+
+\section{Related Work}
+
+\noindent\textbf{Measured kernel search.}
+Like autotuners, \klens uses measurements to guide
+search~\citep{Ansel2014OpenTuner,Chen2018Learning,Zheng2020Ansor,Adams2019Halide},
+but ranks natural-language optimization proposals rather than points in a fixed
+search space.
+\ksearch separates optimization planning from implementation in a search tree and
+uses an LLM to revise pending-action priorities~\citep{Cao2026K}.
+\kernelband uses hardware-aware bandits to select among a fixed set of
+optimization strategies, sharing reward statistics among candidates with similar
+profiling traces~\citep{Ran2025KernelBand}. ReGraphT instead builds a graph of
+optimization techniques from LLM-generated trajectories and backpropagates
+validation and performance reward through it during search~\citep{Gong2025From}.
+In both, credit attaches to strategies or techniques in a structure fixed or
+built before the search, not to lessons extracted during it. Population and multi-agent systems
+preserve programs, diagnostics, or strategy
+histories~\citep{Chen2025cuPilot,Sun2026KernelSkill,Gai2026Optimizing,Novikov2025AlphaEvolve,Sharma2025OpenEvolve,Liao2025KernelEvolve};
+profiler-guided and evolutionary systems drive revision with
+measurements~\citep{Lei2025PRAGMA,Guo2025EvoEngineer,Du2026Kernel}.
+\klens instead credits lessons extracted during the search through the proposals
+that cite them. The controller uses parent-relative measurements to update applied
+or adapted lessons and recomputes the scores of pending proposals that cite them,
+including those for other candidates, without regenerating proposals or
+LLM-based rescoring.
+
+\noindent\textbf{Experience for optimization agents.}
+LessonL updates lesson effectiveness using later speedups and selects guidance
+for code generation using effectiveness and similarity to the original
+code~\citep{Liu2025Lessons}; \klens instead uses reputation to rank which
+proposal is implemented, crediting lessons cited before implementation.
+EvoKernel updates memory using a refinement reward that compares latency with the
+best-so-far implementation and penalizes infeasibility~\citep{Zheng2026Cold}.
+KernelBlaster selects state-conditioned CUDA optimizations using stored scores
+but revises its strategy knowledge through LLM-based performance
+analysis~\citep{Dong2026KernelBlaster}.
+daVinci-kernel selects and summarizes execution-validated
+skills~\citep{Fu2026daVinciKernel}; KernelSkill joins long-term knowledge with
+task-local memory~\citep{Sun2026KernelSkill}; and AccelOpt generalizes selected
+slow--fast kernel pairs into reusable plans~\citep{zhang2026accelopt}. For
+transfer, \klens selects lessons by requirement compatibility and profile
+similarity and continues updating their reputations on the new kernel.
+Scored experience is thus not new in itself; \klens's distinction is
+declare-then-measure credit: lessons cited before implementation receive
+parent-relative credit, which reranks pending proposals for other candidates
+without LLM rescoring.
+
+\noindent\textbf{Agent memory.}
+Reflexion retains outcome-derived verbal feedback for later
+decisions~\citep{Shinn2023Reflexion}, while ExpeL extracts experience
+that can transfer across tasks~\citep{Zhao2023ExpeL}. For code optimization,
+SBLLM combines retrieved optimization patterns with execution-based
+candidate selection~\citep{Gao2025SBLLM}. Repeated language-model rewriting
+can degrade useful memory~\citep{Zhang2026Useful}; \klens does not rewrite
+recorded lessons and updates only their numerical scores.
+
+\noindent\textbf{Ascend systems.}
+AscendOptimizer identifies optimizations whose removal increases latency, then
+combines the resulting patterns with profiling-guided host-side
+search~\citep{Wu2026AscendOptimizer}. Hawk maintains structured AscendC knowledge
+online, refining its applicability or removing entries after
+failures~\citep{Wen2026Hawk}; when no implementation is measured, \klens leaves
+reputation unchanged and updates only implementation difficulty.
+AscendKernelGen, AscendCraft, and AgenticCANN strengthen model knowledge,
+structural validity, or knowledge
+orchestration~\citep{Cao2026AscendKernelGen,Wen2026AscendCraft,Qiu2026AgenticCANN};
+\klens instead accumulates measured knowledge during search and is complementary
+to these approaches. NPU benchmarks report challenges in kernel correctness and
+performance~\citep{Wen2025MultiKernelBench,Gao2026CANN}.
+
+
+\section{Conclusion}
+
+\klens treats every measurement as something to learn from. It records what each
+optimization did to a kernel as a lesson, uses these lessons to propose new
+optimizations, and ranks proposals by the measured gains of the lessons they cite.
+Each new result updates the scores of the lessons it relied on and reranks the
+pending proposals, without regenerating them. On \numkernels \ascendc kernels,
+\klens nearly doubles the strongest baseline's gain at \numprofiles evaluation
+attempts (22.40\% versus 11.38\%) and leads at every token budget. Without the
+lesson layer, the gain falls to 13.15\%, so lessons account for most of its
+advantage over the baselines. Starting a search with lessons from other kernels
+raises the gain at 20 attempts from 17.58\% to 28.45\%.
+
+\section*{Data Availability}
+
+The anonymized replication package is available at \url{https://figshare.com/s/7000a3edb4be81c6ea22}. It contains the 16-kernel benchmark, configurations and prompts, client code, proposal and lesson records, evaluation logs,
+token accounting, analysis scripts and an experimental details document with the full environment, baseline, and accounting
+configuration. The best optimized source version is included for each of the 16 operators,
+with its recorded baseline and optimized performance.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}

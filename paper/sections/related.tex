@@ -56,7 +56,7 @@ Probabilistic inference gives a bound per verdict but no guarantee that the inpu
 \paragraph{Risk control.}
 Our threshold uses fixed-sequence testing from Learn-then-Test~\cite{lt}.
 Conformal selection~\cite{conformalselection} controls the share of wrong selections among selected items and is the natural verdict-level alternative.
-We showed that for program analysis the unit matters: at the same 5\% target, verdict-level selection left wrong clearances in half of the apps, while per-program calibration left them in 1\% (RQ2).
+We showed that for program analysis the unit matters: at the same 5\% target, verdict-level selection left wrong clearances in 59\% of the apps, while per-program calibration left them in 1.5\% (RQ2).
 
 \paragraph{Benchmarks.}
 TaintBench~\cite{taintbench} documents real malware leaks with their paths.
@@ -66,5 +66,5 @@ We use it to measure how many documented leaks depend on unmodeled library flows
 \label{sec:conclusion}
 Unsound static analyses report clean verdicts that silently depend on library code.
 We showed how to make this dependence explicit and measurable: each clean verdict carries a receipt of the library facts it assumes, a pricer bounds the chance that any of them is real, and a threshold certified on whole programs makes the analysis $(\alpha,\varepsilon)$-soundy for any pricer.
-On 324 Android apps, this clears 40\% of the leak-free sinks that a sound analysis cannot clear, at a 5\% risk per program, and checking a few receipt facts clears more.
+On 324 Android apps, this clears 48\% of the leak-free sinks that a sound analysis cannot clear, at a 5\% risk per program, and checking a few receipt facts clears more.
 The limits are as clear: the guarantee is relative to an answer key and to the analysis it is applied to, and it needs a pricer that gives low prices only to flows that are really absent.

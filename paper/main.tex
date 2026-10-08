@@ -41,9 +41,9 @@ Current answers do not tell the user how likely this is: a sound analysis report
 We attach to each clean verdict a \emph{receipt}, the smallest set of library flows the verdict assumes absent, and let a language model price each flow.
 The prices on a receipt bound the probability that the verdict is wrong, without assuming that library flows are independent, and this bound is the tightest possible from the individual prices.
 A threshold on the bound is certified on a sample of programs, so that with high confidence a new program receives a wrong clean verdict with probability at most $\alpha$, whatever the quality of the prices.
-On 324 Android apps, at a 5\% target, receipts clear 40\% of the leak-free sinks that a sound analysis cannot clear, with wrong clearances in 1.0\% of held-out apps; counting assumptions without prices clears nothing.
+On 324 Android apps, at a 5\% target, receipts clear 48\% of the leak-free sinks that a sound analysis cannot clear, with wrong clearances in 1.5\% of held-out apps; counting assumptions without prices clears nothing.
 The guarantee holds under answer keys built from hand-written models, from library code, and from two language-model families that agree with a person's source-code checks.
-Checking the 25 receipt facts that block the most verdicts raises the cleared share to 53\%, and a threshold certified on benign apps held on 31 malware apps.
+Checking 25 well-chosen receipt facts raises the cleared share to 65\%, and a threshold certified on benign apps held on 31 malware apps.
 \end{abstract}
 
 \begin{CCSXML}

@@ -17,10 +17,10 @@ Unsound analysis & clean (misses the leak) & clean\\
 Sound analysis & leak & leak (false alarm)\\
 Counting assumptions & 1 assumption & 1 assumption\\
 Model taken as fact & leak & clean, with no error rate\\
-\textbf{Priced receipt} & price 0.95 $>$ 0.3: \textbf{reported} & price 0.03 $\le$ 0.3: \textbf{cleared}\\
+\textbf{Priced receipt} & price 0.95 $>$ 0.2: \textbf{reported} & price 0.03 $\le$ 0.2: \textbf{cleared}\\
 \bottomrule
 \end{tabular}
-\caption{Two clean verdicts of the unsound analysis in the same app, \texttt{org.jsl.wfwt}. Each rests on one library flow. Only the price separates them; the threshold 0.3 is certified on other apps (Section~\ref{sec:approach}).}
+\caption{Two clean verdicts of the unsound analysis in the same app, \texttt{org.jsl.wfwt}. Each rests on one library flow. Only the price separates them; the threshold 0.2 is certified on other apps (Section~\ref{sec:approach}).}
 \label{fig:example}
 \end{figure}
 
@@ -39,7 +39,7 @@ Comparing two strings copies nothing, so verdict B is correct.
 
 The existing answers cannot tell the two verdicts apart.
 A sound analysis reports both as leaks, so the user must inspect B, a false alarm, and every similar sink in the app.
-In our corpus, such alarms are 28\% of the sinks that never leak.
+In our corpus, such alarms are 22\% of the sinks that never leak.
 Listing the assumptions gives one fact for each verdict.
 A count of assumptions treats them alike, and a rule that clears all one-fact receipts would clear A as well.
 Asking a language model whether each flow exists, and taking the answer as fact, gives the right answer for these two facts.
@@ -47,6 +47,6 @@ It is still not a basis for clearing verdicts, because nothing controls how ofte
 
 Our approach prices each fact.
 The pricer gives 0.95 to the \texttt{CharBuffer} flow and 0.03 to the \texttt{String.equals} flow, so the receipt of A costs 0.95 and the receipt of B costs 0.03.
-A threshold of 0.3, certified on other apps so that at most 5\% of programs receive a wrong clearance, clears B and keeps A as a possible leak.
+A threshold of 0.2, certified on other apps so that at most 5\% of programs receive a wrong clearance, clears B and keeps A as a possible leak.
 The user sees why: B is cleared because comparing strings does not copy them, and A is reported because converting a buffer to a string does.
 If the price of a fact were wrong, the certified threshold would still bound how often such mistakes reach a user, and the receipt would show which fact to check.

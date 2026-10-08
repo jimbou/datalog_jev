@@ -13,7 +13,7 @@ Analyses that are sound except for such documented gaps are called \emph{soundy}
 
 There are three common answers, and none tells the user how likely a clean verdict is to be wrong.
 The first is to make the analysis sound by assuming that every unmodeled method passes all data.
-This is safe but reports a flow wherever a library call could carry one: in our corpus, 28\% of the sinks that never receive sensitive data are still flagged, and nothing ranks these false alarms.
+This is safe but reports a flow wherever a library call could carry one: in our corpus, 22\% of the sinks that never receive sensitive data are still flagged, and nothing ranks these false alarms.
 The second is to write or infer more library models, by hand, from code~\cite{stubdroid,atlas}, or with a language model~\cite{iris,semtaint}.
 Every model can be wrong, and a verdict computed from a model taken as fact carries no measure of its error.
 The third is to list the assumptions behind each verdict as a minimal cut in the flow graph and let a person confirm them~\cite{bastani-oopsla15}.
@@ -31,12 +31,12 @@ Three properties make this approach different from the answers above.
 Unlike a sound analysis, it clears verdicts that depend on library code, and it ranks the rest by risk.
 Unlike a model taken as fact, its error rate is measured and bounded, and the guarantee holds for any pricer, including a poor one: the quality of the prices decides how much is cleared, not whether the guarantee holds.
 Unlike a list of assumptions, each receipt comes with a price, and the facts with the highest stakes can be checked first.
-The guarantee is stated per program, because the user of an analysis reads one app's report; we show that the more common per-verdict error rate leaves wrong clearances in half of the apps at the same target.
+The guarantee is stated per program, because the user of an analysis reads one app's report; we show that the more common per-verdict error rate leaves wrong clearances in 59\% of the apps at the same target.
 
-We evaluate the approach on 324 Android apps from F-Droid and 33 malware apps from TaintBench~\cite{taintbench}, against four answer keys: FlowDroid's models with language-model labels for the methods it does not model, a deletion benchmark built only from FlowDroid's models, summaries generated from the Android source code with StubDroid~\cite{stubdroid}, and labels written by two language models under a written definition of a flow and checked by a person against the source code.
-At a 5\% target, receipts clear 40\% of the leak-free sinks that a sound analysis cannot clear, and 1.0\% of held-out apps receive a wrong clearance.
+We evaluate the approach on 324 Android apps from F-Droid and 33 malware apps from TaintBench~\cite{taintbench}, against several answer keys: FlowDroid's models completed by the labels on which two language-model families agree under a written definition of a flow, which a person's source-code checks confirm for 95\% of the checked facts; a deletion benchmark built only from FlowDroid's models; summaries generated from the Android source code with StubDroid~\cite{stubdroid}; and keys with single-model labels and random noise.
+At a 5\% target, receipts clear 48\% of the leak-free sinks that a sound analysis cannot clear, and 1.5\% of held-out apps receive a wrong clearance.
 The guarantee holds for all ten pricers and all keys we tried.
-Checking the 25 receipt facts that block the most verdicts raises the cleared share to 53\% and doubles the number of real leaks the analysis reports; checking 100 random facts changes nothing.
+Checking 25 receipt facts, chosen without looking at any answer, raises the cleared share to 65\% and doubles the number of real leaks the analysis reports; checking 100 random facts changes nothing.
 On malware, a threshold certified on F-Droid apps gives no app a wrong clearance.
 
 In summary, this paper makes the following contributions:
@@ -44,6 +44,6 @@ In summary, this paper makes the following contributions:
 \item A quantitative notion of soundiness, $(\alpha,\varepsilon)$-soundiness, which bounds per program how often an analysis wrongly clears a verdict.
 \item Receipts with prices: a per-verdict bound on the probability of a missed flow that needs no independence assumption and is the tightest possible from marginal probabilities, together with a certified acceptance threshold that is valid for any pricer.
 \item Budgeted checking: a way to choose which library facts a person should verify, without looking at any answer, so that each check clears as many verdicts as possible.
-\item An evaluation on 324 benign and 33 malicious apps with four answer keys and ten pricers, receipts computed on FlowDroid itself, and an account of the cases where the approach clears little.
+\item An evaluation on 324 benign and 33 malicious apps with eight answer keys and ten pricers, receipts computed on FlowDroid itself, and an account of the cases where the approach clears little.
 \end{itemize}
 All code, flow graphs, prices, answer keys and audit data are available at \todo{anonymous link}.
