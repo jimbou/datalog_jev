@@ -932,6 +932,17 @@ key: 3 `WebView.addJavascriptInterface` (callback), 1 `startActivity` (inter-com
 bound 2.5, never cleared). 4 are cleared by every pricer, including counting. No app with a wrong clearance (by our key) for
 Jev or Sonnet (0/23); Jev clears 31.8%, Sonnet 22.9% of the leak-free hole-dependent verdicts; counting: 3/23 apps wrong.
 
+**Other keys, panel and ablations in the fm setting (2026-10-08).** Jev / Sonnet / classifier at alpha 0.05, cleared (held-out
+apps wrong): Sonnet key 23.9% (1.1%) / 9.1% (1.1%) / 11.0% (0.3%), hard slice 13,549; Sonnet key + audit 23.9% (1.0%); K2
+93.1% (1.3%) / 95.9% (1.6%) / 42.5% (1.5%), hard slice 1,288 in 261 apps; GPT key 25.6% (1.5%) / 17.0% (1.1%), hard slice
+5,200; noisy Sonnet keys Jev 4.1-7.4% (<=2.3%), Sonnet 0-7.0% (<=1.3%). Deletion keys unchanged (they already treat
+undeleted models as code). Panel (main key): Qwen3.8-27B 0%; Qwen3.7-Flash certified in 0/200 (alpha 0.05) and 48/200 splits
+(alpha 0.1, 17.5% when certified); DeepSeek and Gemini never certified; luna 5.1% (0.0%). Wording: object convention 48.7%,
+"taint" 8.5% (1.5%), "choice" certified in 2/200 splits at alpha 0.05. Combination: sum over edges 48.7%, distinct facts
+51.7%, max 33.7%, independence 52.3% (all <=1.8% wrong). Counting: 266/307 apps (87%) have a real one-fact receipt. AUROC
+of the bound: Jev 0.970, classifier 0.965, Sonnet 0.950 (clear 49%, 24%, 17%). Receipt sizes of Jev's cleared sinks: 80% one
+fact, 99.4% at most four (2,518 sinks). Calibration floor confirmed again (certification starts at n = 60 for alpha 0.05).
+
 ## 23. Next steps, in order
 
 1. **Conformal layer:** split apps into calibration and test sets, conformal selection with the
