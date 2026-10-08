@@ -22,6 +22,6 @@ As baselines we use \emph{counting}, which gives every flow the same price, so t
 
 \paragraph{Cost.}
 Building the flow graphs is the expensive step: 14 hours for 183 apps on an 8-core server with 62\,GB of memory.
-Computing all receipts of the 324 apps takes one to two hours per pricer.
+Computing all receipts takes a few minutes per pricer with FlowDroid's models, and one to two hours without them, when every library call is a hole.
 Pricing all 17{,}830 library methods costs about \$0.4 with Jev and \$16 with Sonnet~5.
 Certifying a threshold takes seconds.

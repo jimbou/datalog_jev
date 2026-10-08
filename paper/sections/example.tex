@@ -10,7 +10,7 @@
 Sink & \texttt{ContentResolver.insert} in \texttt{NewFeedActivity} & \texttt{Log.d} in \texttt{PodcastPlaybackService}\\
 With FlowDroid's models & no source reaches it: clean & no source reaches it: clean\\
 With unmodeled flows open & a source reaches it & a source reaches it\\
-Receipt (one fact) & \texttt{ContentValues.put}: argument to receiver & \texttt{TextToSpeech.setOnUtteranceProgressListener}: receiver to argument\\
+Receipt (one fact) & \texttt{ContentValues.put}: argument to receiver & \texttt{TextToSpeech}: registering a listener (\texttt{setOnUtterance}\allowbreak\texttt{ProgressListener}), receiver to argument\\
 Truth & the flow is real: \textbf{a leak} & no such flow: \textbf{no leak}\\
 \midrule
 FlowDroid (its models) & clean (misses the leak) & clean\\
@@ -20,11 +20,11 @@ Model taken as fact & leak & clean, with no error rate\\
 \textbf{Priced receipt} & price 0.88 $>$ 0.2: \textbf{reported} & price 0.10 $\le$ 0.2: \textbf{cleared}\\
 \bottomrule
 \end{tabular}
-\caption{Two clean verdicts in the same app, \texttt{de.luhmer.owncloudnewsreader}. FlowDroid models neither library method. Each verdict rests on one library flow, and only the price separates them; the threshold 0.2 is certified on other apps (Section~\ref{sec:approach}).}
+\caption{Two clean verdicts in the same app, \texttt{de.luhmer.}\allowbreak\texttt{owncloudnewsreader}. FlowDroid models neither library method. Each verdict rests on one library flow, and only the price separates them; the threshold 0.2 is certified on other apps (Section~\ref{sec:approach}).}
 \label{fig:example}
 \end{figure}
 
-We illustrate the problem and our approach with two verdicts from \texttt{de.luhmer.owncloudnewsreader}, a news reader for Nextcloud from F-Droid (Figure~\ref{fig:example}).
+We illustrate the problem and our approach with two verdicts from a news reader for Nextcloud from F-Droid, \texttt{de.luhmer.}\allowbreak\texttt{owncloudnewsreader} (Figure~\ref{fig:example}).
 In \texttt{NewFeedActivity}, the app puts a value into a \texttt{ContentValues} object and passes it to \texttt{ContentResolver.insert}, which writes the data to a content provider.
 In \texttt{PodcastPlaybackService}, it registers a progress listener on a \texttt{TextToSpeech} object and then writes a message to the log.
 

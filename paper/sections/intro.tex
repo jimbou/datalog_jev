@@ -7,7 +7,7 @@ Tools replace such methods with models: FlowDroid ships hand-written summaries f
 A ``no leak'' verdict therefore rests on assumptions about library code, and the tool does not report them.
 These assumptions matter.
 When FlowDroid is run without its models, 82\% of the leaks it reports disappear, so models are what makes it find leaks at all.
-But the models are incomplete: in our corpus of 324 apps, 12{,}274 of the 17{,}830 library methods that lie on source-to-sink paths have no FlowDroid model.
+But the models are incomplete: in our corpus of 332 apps, 12{,}274 of the 17{,}830 library methods that lie on source-to-sink paths have no FlowDroid model.
 Even with all of FlowDroid's models, a third of the real leaks in these apps (22{,}888 sinks) are reachable only through such unmodeled methods, and an analysis that relies on the models reports them as clean.
 Analyses that are sound except for such documented gaps are called \emph{soundy}~\cite{soundiness}; what is missing is a way to know how often the gaps matter.
 
@@ -33,7 +33,7 @@ Unlike a model taken as fact, its error rate is measured and bounded, and the gu
 Unlike a list of assumptions, each receipt comes with a price, and the facts with the highest stakes can be checked first.
 The guarantee is stated per program, because the user of an analysis reads one app's report; we show that selecting verdicts with a per-verdict error rate leaves wrong clearances in 17\% of the apps at a 5\% target, and in this setting even misses its own target.
 
-We evaluate the approach on 324 Android apps from F-Droid and 33 malware apps from TaintBench~\cite{taintbench}, against several answer keys: FlowDroid's models completed by the labels on which two language-model families agree under a written definition of a flow, which a person's source-code checks confirm for 95\% of the checked facts; a deletion benchmark built only from FlowDroid's models; summaries generated from the Android source code with StubDroid~\cite{stubdroid}; and keys with single-model labels and random noise.
+We evaluate the approach on 332 Android apps from F-Droid and 33 malware apps from TaintBench~\cite{taintbench}, against several answer keys: FlowDroid's models completed by the labels on which two language-model families agree under a written definition of a flow, which a person's source-code checks confirm for 95\% of the checked facts; a deletion benchmark built only from FlowDroid's models; summaries generated from the Android source code with StubDroid~\cite{stubdroid}; and keys with single-model labels and random noise.
 At a 5\% target, receipts clear 49\% of the false alarms that a sound treatment of unmodeled methods adds, and 0.9\% of held-out apps receive a wrong clearance.
 The guarantee holds for all ten pricers and all keys we tried.
 Checking 25 receipt facts, chosen without looking at any answer, raises the cleared share to 63\%, and 100 checks to 78\%; checking 100 random facts helps little.
@@ -44,6 +44,6 @@ In summary, this paper makes the following contributions:
 \item A quantitative notion of soundiness, $(\alpha,\varepsilon)$-soundiness, which bounds per program how often an analysis wrongly clears a verdict.
 \item Receipts with prices: a per-verdict bound on the probability of a missed flow that needs no independence assumption and is the tightest possible from marginal probabilities, together with a certified acceptance threshold that is valid for any pricer.
 \item Budgeted checking: a way to choose which library facts a person should verify, without looking at any answer, so that each check clears as many verdicts as possible.
-\item An evaluation on 324 benign and 33 malicious apps with eight answer keys and ten pricers, receipts computed on FlowDroid itself, and an account of the cases where the approach clears little.
+\item An evaluation on 332 benign and 33 malicious apps with eight answer keys and ten pricers, receipts computed on FlowDroid itself, and an account of the cases where the approach clears little.
 \end{itemize}
 All code, flow graphs, prices, answer keys and audit data are available at \todo{anonymous link}.

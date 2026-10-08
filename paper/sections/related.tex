@@ -66,5 +66,5 @@ We use it to measure how many documented leaks depend on unmodeled library flows
 \label{sec:conclusion}
 Unsound static analyses report clean verdicts that silently depend on library code.
 We showed how to make this dependence explicit and measurable: each clean verdict carries a receipt of the library facts it assumes, a pricer bounds the chance that any of them is real, and a threshold certified on whole programs makes the analysis $(\alpha,\varepsilon)$-soundy for any pricer.
-On 324 Android apps, this clears 48\% of the leak-free sinks that a sound analysis cannot clear, at a 5\% risk per program, and checking a few receipt facts clears more.
+On 307 Android apps, receipts on top of FlowDroid's models clear half of the false alarms that opening unmodeled methods adds, at a 5\% risk per program, and checking a few receipt facts clears most of the rest.
 The limits are as clear: the guarantee is relative to an answer key and to the analysis it is applied to, and it needs a pricer that gives low prices only to flows that are really absent.
