@@ -59,7 +59,7 @@ def run_fd(apk, ss, sumdir, tag):
             os.remove(p)
     with open(logp, "w") as lf:
         try:
-            subprocess.run(["timeout", str(RUN_TIMEOUT), JAVA, "-Xmx10g", "-XX:ActiveProcessorCount=3", "-cp", os.path.join(ROOT, "tools/flowdroid/lib/*"),
+            subprocess.run(["timeout", str(RUN_TIMEOUT), JAVA, "-Xmx" + os.environ.get("FD_XMX", "10g"), "-XX:ActiveProcessorCount=3", "-cp", os.path.join(ROOT, "tools/flowdroid/lib/*"),
                             "soot.jimple.infoflow.cmd.MainClass", "-a", apk, "-p", os.path.join(ROOT, "tools/flowdroid/platforms"),
                             "-s", ss, "-tw", "STUBDROID", "-t", sumdir, "-o", xmlp, "-cp", "-dt", str(RUN_TIMEOUT - 120), "-mt", "3"],
                            stdout=lf, stderr=subprocess.STDOUT, cwd=ROOT)
