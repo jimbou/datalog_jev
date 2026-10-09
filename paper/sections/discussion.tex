@@ -7,7 +7,12 @@ On the 70 of 80 apps where FlowDroid gave an answer, our analysis reaches 58\% o
 Restricting it to code reachable from entry points removed only 11.5\% of these sinks on the first 40 apps, so dead code is not the reason; the likely cause is that the analysis is context-insensitive and merges values from different calls of the same method.
 The guarantee does not depend on this precision: it bounds how often a clean verdict is wrong because of library flows, for whatever analysis produces the flow graph.
 RQ1 shows that receipts also work inside FlowDroid, where 43 of the 58 sinks that open holes add receive a receipt confirmed by FlowDroid itself.
-Certifying a threshold for FlowDroid needs more apps with hole-dependent sinks than the 19 we obtained within FlowDroid's time limits; this is the main next step.
+Certifying a threshold for FlowDroid, however, needs more apps than we could analyze with it.
+Our receipts need only a stored flow graph, built once with every hole open, so pricing and certifying them takes minutes.
+Inside FlowDroid, a receipt needs repeated full runs: one with FlowDroid's models, one with every unmodeled method opened, and reruns that confirm each cut.
+On 89 of 181 F-Droid apps that our analysis handles, these runs did not finish within 20 minutes and 10\,GB, and the apps we retried with 55 minutes and 24\,GB ran out of memory again, although FlowDroid's own analysis is unchanged.
+% Update with the final count when bench/queues/fdr_retry_chain.sh logs FDRR-DONE (2026-10-09: 21 retried, none finished).
+We therefore use FlowDroid to validate receipts and our analysis to certify them; a cheaper way to open holes inside a precise analysis is future work.
 
 \paragraph{Other kinds of holes.}
 Library flows are one kind of gap in a soundy analysis.
