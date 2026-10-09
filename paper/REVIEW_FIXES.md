@@ -70,6 +70,10 @@ methods no model covers".
 **STATUS: step 1 RUNNING since 2026-10-08 21:19 UTC.** `bench/queues/fdr_retry_chain.sh`: the 89 failed apps rerun with
 FD_TIMEOUT=3300 in three shards (old failed records in `data/fd_receipts_fdroid_failed1200/`); log
 `data/fdr_retry_chain.log`, ends with `FDRR-DONE ok=... failed=...`. Expect one to three days. Steps 2-6 open.
+Update 2026-10-09 14:30 UTC: the 10 GB retry failed on memory (37 of 38 apps), so it was restarted with 24 GB, two
+shards (`FD_XMX`). After 9 hours, 21 of 88 apps are done and all failed again: most runs hit `DataFlowOutOfMemory` at
+24 GB or end without output, and one hits a FlowDroid error ("cannot set body for non-concrete method"). The runs with
+holes open are heavier than FlowDroid's own run. Expect few successes; fix 3 will most likely stay a validation.
 
 **Reviewer objection.** Our analysis reaches only 58% of FlowDroid's leaks with ~1% precision; "you certified the misses
 of a toy analysis". Today, receipts inside FlowDroid are a validation (43 FlowDroid-confirmed receipts in 19 apps), not a
