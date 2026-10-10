@@ -1,11 +1,25 @@
-# Remaining work (consolidated 2026-10-07, updated 2026-10-08)
+# Remaining work (consolidated 2026-10-07, updated 2026-10-10)
 
 This file replaces the open items in `paper/PLAN.md` (now historical), the "next steps" in `FINDINGS.md` §23 (stale:
 conformal selection, key labels, a second hole type and the Praline check are done) and summarizes
 `paper/REVIEW_FIXES.md` (details for items B1-B3). Status of the paper: restructured in the lab's style (commit 757bf0d),
 body ends on page 16 of 18, compiles without errors or overfull lines.
 
-Mock-review estimate of acceptance: about 35-40% now (B1 done, rubric key as main key); about 45% with B2-B3; other items add less.
+Mock-review estimate of acceptance: about 35-40% now (B1 done, B3 part done, rubric key as main key); B2 will most likely
+stay a validation; other items add less.
+
+**Done since 2026-10-07 (summary):**
+- Rubric relabeling; rubric key is the main key (A1-A5).
+- B1: main setting is now our analysis + FlowDroid's models, holes only for the 12,274 unmodeled methods (`fm-`); whole paper,
+  tables and figures rewritten for it (new example `de.luhmer.owncloudnewsreader`; RQ1 now "a third of real leaks pass only
+  through unmodeled methods"; RQ6 now "only 6 documented malware leaks need unmodeled flows").
+- B3 part 1: false alarms per app before/after clearing (RQ2, intro): median 13 -> 6, 81% -> 89% of alarms real.
+- B2 step 1: retry of the 89 FlowDroid-failing apps with 55 min and 24 GB (running; 30 of 31 finished apps failed on memory,
+  1 rescued with 8 FlowDroid-confirmed receipts). Discussion now explains why we certify on our analysis and validate on
+  FlowDroid (runs with open holes exceed memory).
+- Framing: receipts complement library models (intro sentence, example, related-work table and paragraph, discussion); the
+  paper no longer presents FlowDroid as a competitor.
+- Implementation section states that FlowDroid's default source/sink list (2.15.1) contains Java server entries.
 
 **Main setting since 2026-10-08:** FlowDroid's models as code (evaluator prefix `fm-`), rubric key as main key (`fm-rk-<pricer>`).
 
@@ -16,24 +30,24 @@ A1-A5 are done (rubric relabeling, rubric key as main key, agreement numbers), a
 
 | # | Item | Status / how |
 | --- | --- | --- |
-| A1 | Sonnet rubric relabeling | running on the server (`data/oracle-rubric-sonnet5.jsonl`, ~10,000 of 12,362 on 2026-10-07 20:30 UTC) |
-| A2 | Main results under the rubric key | `bench/queues/rk_chain.sh` starts after A1; `data/rk_chain.log`, `ltt_rk-*` |
-| A3 | Fill the rubric row of Table 4 (`tab:keys`) and check the RQ3 box ("all eight keys") | after A2 |
-| A4 | Final Sonnet-rubric accuracy on all 60 person-checked facts and final agreement numbers | after A1; update RQ3 text (now "93%, kappa 0.80" from partial data) |
-| A5 | Decide the paper's main key (recommended: rubric key) and, if switched, rerun the main tables, budgeted checking and TaintBench under it | decision for the user, then reruns |
+| A1 | Sonnet rubric relabeling | DONE |
+| A2 | Main results under the rubric key | DONE (then redone in the `fm-` setting) |
+| A3 | Fill the rubric row of Table 4 and check the RQ3 box | DONE |
+| A4 | Final agreement numbers | DONE (90.1%, kappa 0.80; person agrees on 54 of 57 facts where both models agree) |
+| A5 | Main key | DONE: rubric key |
 
 ## B. Acceptance improvers from the mock review (see `REVIEW_FIXES.md`)
 | # | Item | Why | Effort |
 | --- | --- | --- | --- |
 | B1 | DONE 2026-10-08: holes only where FlowDroid has no model (`fm-` mode), new example (`ContentResolver.insert` leak through unmodeled `ContentValues.put`) | removed the strawman objection | done |
-| B2 | Certify on FlowDroid itself: rerun failed apps with 3300 s, ~400 more small apps, tighter class mapping | removes "certified misses of a toy analysis" | server days; may stay a validation |
+| B2 | IN PROGRESS: certify on FlowDroid itself. Step 1 (retry with 3300 s / 24 GB) running, mostly memory failures. Open: more small apps, tighter class mapping, or certify at alpha 0.1 on all completed apps (zero-loss apps included). See "Building on FlowDroid" in REVIEW_FIXES.md | removes "certified misses of a toy analysis" | server days; will most likely stay a validation |
 | B3 | PART DONE 2026-10-09 (alarms per app in RQ2: median 13 -> 6, 81% -> 89% real). Open: triage time, shared checks. Show user value: false alarms per app before/after clearing, apps with no alarms left, receipt size of remaining alarms, shared checks across apps; optional timed triage sample | makes "40% of the hard slice" concrete | about a day; user study optional |
 
 ## C. Further strengtheners (lower priority)
 
-New (2026-10-08): FlowDroid's default source/sink list (2.15.1, which we use unchanged) contains Java server entries; some occur
-in Android apps (`String.replace` as a sink, `File.getAbsoluteFile` as a source). Measure the share of verdicts at such
-entries and, if large, add an Android-only sensitivity run (needs a graph rebuild with a filtered list).
+C0 (2026-10-08): FlowDroid's default source/sink list (2.15.1, which we use unchanged) contains Java server entries; some occur
+in Android apps (`String.replace` as a sink, `File.getAbsoluteFile` as a source). The paper now states this (impl). Open:
+measure the share of verdicts at such entries and, if large, add an Android-only sensitivity run (graph rebuild).
 
 | # | Item | Why | Effort |
 | --- | --- | --- | --- |
@@ -55,7 +69,6 @@ entries and, if large, add an Android-only sensitivity run (needs a graph rebuil
 | D7 | Regenerate figures after any rerun: `analysis/paper_stats.py` on the server, then `paper/make_figs.py` |
 
 ## E. Decisions only the user can make
-- Main key (A5).
 - Whether to do B2 (server days, uncertain outcome) and C1/C2 (time).
 - Whether a colleague can be the second rater (C3) or join a small triage study (B3 optional).
 - Target venue/date (ISSTA 2027 deadline unknown until the call is out).

@@ -10,7 +10,7 @@
 Approach & Explains & Risk & Certified & Unchecked pricer\\
 \midrule
 Sound over-approximation & -- & -- & yes (no misses) & -- \\
-Hand-written or generated models (FlowDroid, StubDroid, Atlas) & -- & -- & -- & -- \\
+Hand-written or generated models (FlowDroid, StubDroid, Atlas) & \multicolumn{4}{c}{complementary: receipts start from these models}\\
 Language-model models taken as fact (IRIS, SemTaint) & -- & -- & -- & --\\
 Minimal assumptions checked by a person (Bastani et al.) & yes & -- & -- & --\\
 Probabilistic inference (Praline) & -- & yes & -- & --\\
@@ -39,7 +39,7 @@ We showed that counting the assumptions without prices clears nothing at any use
 FlowDroid's hand-written summaries~\cite{flowdroid} cover about 350 classes.
 StubDroid~\cite{stubdroid} generates summaries from library code, Atlas~\cite{atlas} infers specifications from library executions, Bastani et al.~\cite{bastani-popl15} infer points-to specifications, and Merlin~\cite{merlin} and Seldon~\cite{seldon} infer which methods are sources, sinks or sanitizers.
 More models make an analysis less unsound but never sound, because some methods remain unmodeled or wrongly modeled, and none of these approaches says how often its verdicts are wrong.
-Receipts are complementary: they price exactly the facts that the models leave open, and we use StubDroid as an independent answer key (RQ3).
+Receipts are complementary: they start from the models, here FlowDroid's, and price exactly the facts that the models leave open; better models leave fewer holes to price. We also use StubDroid as an independent answer key (RQ3).
 
 \paragraph{Language models as library models.}
 IRIS~\cite{iris} and SemTaint~\cite{semtaint} ask language models for taint specifications of library methods and use the answers as facts.

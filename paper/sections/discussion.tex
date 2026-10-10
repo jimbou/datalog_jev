@@ -2,8 +2,8 @@
 \label{sec:discussion}
 
 \paragraph{The guarantee is about library flows, not about the whole analysis.}
-Our analysis is simpler than FlowDroid.
-On the 70 of 80 apps where FlowDroid gave an answer, our analysis reaches 58\% of the leaking sink methods FlowDroid reports, and only 1\% of the sinks it flags are also flagged by FlowDroid.
+Receipts are meant to run on top of an analysis such as FlowDroid; our Datalog analysis stands in for it, with FlowDroid's models and source and sink list, because receipts need a stored flow graph with every hole open.
+The stand-in is less precise than FlowDroid: on the 70 of 80 apps where FlowDroid gave an answer, our analysis reaches 58\% of the leaking sink methods FlowDroid reports, and only 1\% of the sinks it flags are also flagged by FlowDroid.
 Restricting it to code reachable from entry points removed only 11.5\% of these sinks on the first 40 apps, so dead code is not the reason; the likely cause is that the analysis is context-insensitive and merges values from different calls of the same method.
 The guarantee does not depend on this precision: it bounds how often a clean verdict is wrong because of library flows, for whatever analysis produces the flow graph.
 RQ1 shows that receipts also work inside FlowDroid, where 43 of the 58 sinks that open holes add receive a receipt confirmed by FlowDroid itself.

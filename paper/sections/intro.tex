@@ -26,6 +26,8 @@ We show that it is the tightest bound that can be derived from the individual pr
 A verdict is accepted when its bound is below a threshold.
 The threshold is not trusted but certified: we choose it on a sample of programs with an exact statistical test, so that with confidence $1-\varepsilon$, a new program receives a wrong clean verdict with probability at most $\alpha$.
 We call an analysis with such a rule \emph{$(\alpha,\varepsilon)$-soundy}.
+Receipts do not replace library models but complete them: the models decide the methods they cover, and receipts price and certify the methods they leave open.
+Our implementation therefore uses FlowDroid's models and its list of sources and sinks, and treats only the methods without a model as holes.
 
 Three properties make this approach different from the answers above.
 Unlike a sound analysis, it reports the likely leaks through unmodeled code without flagging every verdict that depends on it, and it ranks the rest by risk.

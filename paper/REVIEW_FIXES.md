@@ -110,6 +110,38 @@ If certification stays out of reach, keep it as validation and say so.
 
 ---
 
+## Building on FlowDroid: how hard it is (written 2026-10-10)
+
+**What exists (`bench/fd_receipts.py`).** Holes are added to FlowDroid as extra summary files: every unmodeled method gets
+a summary with all its candidate flows, next to FlowDroid's own summaries. Per app: a run with FlowDroid's models, a run with
+holes open, a truth run (holes replaced by the key's true flows; evaluation only), and up to 4 reruns per sink that switch off
+the hole methods on the reported paths to confirm a cut. FlowDroid does not expose a flow graph, so the min-cut is
+approximated from reported paths and confirmed by reruns.
+
+**Why it is hard.**
+1. Memory. With every unmodeled method passing all data, the IFDS solver propagates far more taint facts; the run with holes
+   open is the one that exceeds 10 GB and then 24 GB (most of the 88 retried apps). This does not go away with better code.
+2. No graph. Receipts need all source-to-sink paths through holes. FlowDroid keeps taint abstractions with predecessor
+   links only for path reconstruction, which is itself memory-heavy, and it reports one path per source-sink pair. An exact
+   min-cut needs the abstraction DAG with every predecessor kept.
+3. Reruns. Without the graph, each candidate cut is confirmed by a full rerun, and each new pricer needs new cuts. On our
+   stored graphs, a new pricer takes minutes.
+
+**Options, from cheap to expensive.**
+- A (days): certify on the apps FlowDroid finishes, counting apps without hole-dependent sinks as zero-loss programs
+  (valid under the per-program definition, but most apps are trivially safe). About 93 apps; half-splits give ~46
+  calibration apps, enough for alpha 0.1 (floor 22) and borderline for 0.05 (floor 45). Report both "all apps" and "apps with
+  hole-dependent sinks". Weak but honest.
+- B (2-4 weeks of Java work in Soot/Heros/FlowDroid): instrument FlowDroid to tag taint abstractions created by a hole
+  summary and keep the full predecessor DAG for the run with holes open; export it as a flow graph and reuse our min-cut,
+  pricing and certification unchanged. Removes the reruns, not the memory problem; still fails on about half the apps.
+- C (research): open holes lazily (only where a sink becomes reachable), or run FlowDroid with the cheaper settings it
+  offers (shorter access paths, flow-insensitive aliasing). Scales better, but a reviewer may say it is no longer FlowDroid.
+
+**Recommendation.** A for this submission, if the user wants a certified FlowDroid number; B only as future work.
+
+---
+
 ## Fix 4. Show what it buys a user
 
 **STATUS: part 1 DONE (2026-10-09)**, `analysis/alarms_per_app.py`, FINDINGS 22d: false alarms per app median 13 -> 6 (Jev,

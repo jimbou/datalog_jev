@@ -8,12 +8,11 @@
  & \textbf{Verdict A} & \textbf{Verdict B}\\
 \midrule
 Sink & \texttt{ContentResolver.insert} in \texttt{NewFeedActivity} & \texttt{Log.d} in \texttt{PodcastPlaybackService}\\
-With FlowDroid's models & no source reaches it: clean & no source reaches it: clean\\
+With FlowDroid's models (the starting point) & clean, but the leak is missed & clean\\
 With unmodeled flows open & a source reaches it & a source reaches it\\
 Receipt (one fact) & \texttt{ContentValues.put}: argument to receiver & \texttt{TextToSpeech}: registering a listener (\texttt{setOnUtterance}\allowbreak\texttt{ProgressListener}), receiver to argument\\
 Truth & the flow is real: \textbf{a leak} & no such flow: \textbf{no leak}\\
 \midrule
-FlowDroid (its models) & clean (misses the leak) & clean\\
 Sound analysis & leak & leak (false alarm)\\
 Counting assumptions & 1 assumption & 1 assumption\\
 Model taken as fact & leak & clean, with no error rate\\
