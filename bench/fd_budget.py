@@ -1,9 +1,9 @@
 """Same-budget comparison: FlowDroid on every picked F-Droid app, with the time and memory our graph build had.
 
-Usage: python3 bench/fd_budget.py OUT.jsonl   (env: FDB_TIMEOUT=2100, FDB_XMX=16g, FDB_JOBS=3, FDB_THREADS=3, FDROID_BASE)
+Usage: python3 bench/fd_budget.py OUT.jsonl   (env: FDB_TIMEOUT=2100, FDB_XMX=16g, FDB_JOBS=2, FDB_THREADS=4, FDROID_BASE)
 
 Our build per app: Soot extraction (1200 s) + Souffle (900 s, 16 GB address space), two apps in parallel. FlowDroid gets
-2100 s and a 16 GB heap per run, three runs of 3 threads in parallel on the 8 cores. Two runs per app: FlowDroid with its models (base), and with every
+2100 s and a 16 GB heap per run, two runs of 4 threads in parallel on the 8 cores, like our build. Two runs per app: FlowDroid with its models (base), and with every
 unmodeled method of our hole file opened as an all-flows summary (holes; skipped when the base run fails). APKs deleted after a failed build of ours are
 downloaded again from the F-Droid mirror; if the picked version is gone, the current one is used and recorded.
 Our outcome per app comes from data/graphs (built) and data/android_failed.txt (over the limits).
@@ -20,8 +20,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JAVA = os.path.expanduser("~/jdk/jdk-21.0.12.1+1/bin/java")
 TIMEOUT = int(os.environ.get("FDB_TIMEOUT", "2100"))
 XMX = os.environ.get("FDB_XMX", "16g")
-JOBS = int(os.environ.get("FDB_JOBS", "3"))
-THREADS = os.environ.get("FDB_THREADS", "3")
+JOBS = int(os.environ.get("FDB_JOBS", "2"))
+THREADS = os.environ.get("FDB_THREADS", "4")
 FDROID = os.environ.get("FDROID_BASE", "https://mirrors.tuna.tsinghua.edu.cn/fdroid/repo")
 APKS = os.path.join(ROOT, "bench/apks")
 DL = os.path.join(ROOT, "data/fd_budget_apks")
