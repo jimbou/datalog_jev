@@ -20,6 +20,11 @@ stay a validation; other items add less.
 - Framing: receipts complement library models (intro sentence, example, related-work table and paragraph, discussion); the
   paper no longer presents FlowDroid as a competitor.
 - Implementation section states that FlowDroid's default source/sink list (2.15.1) contains Java server entries.
+- RUNNING since 2026-10-10: same-budget comparison (`bench/fd_budget.py`, results `data/fd_budget.jsonl`, log
+  `data/fd_budget.log`): FlowDroid on all 585 picked F-Droid apps with our build's budget (2100 s, 16 GB per run; 3 runs of
+  3 threads in parallel), with its models and with holes open (holes run skipped when the base run fails). Our outcome per
+  app: 331 built, 253 over the limits (`data/android_failed.txt`). The 24 GB FlowDroid retry was stopped (superseded).
+  Expect about 3 days. Then: one row/table in RQ1 and update the discussion paragraph.
 
 **Main setting since 2026-10-08:** FlowDroid's models as code (evaluator prefix `fm-`), rubric key as main key (`fm-rk-<pricer>`).
 
