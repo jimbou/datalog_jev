@@ -1,0 +1,25 @@
+START interp 2026-10-13-03:00:26
+END interp 2026-10-13-03:10:35
+START bin 2026-10-13-03:10:35
+END bin 2026-10-13-03:31:09
+apps in all of data/f1/graphs_interp, data/f1/graphs_bin, data/graphs: 6
+ademar.bitac                             same same
+systems.sieber.remotespotlight           same DIFF (code,n,stats)
+theakki.synctool                         same same
+uk.co.busydoingnothing.anagrams          same same
+us.spotco.malwarescanner                 same same
+uscartools.USTravelConverter             same DIFF (cand,cand_holes,code,n,stats)
+COMPARE-DONE 2026-10-13-03:31:10
+evaluation on compiled graphs: 1238 sinks in 6 apps, paper 1238 sinks; identical: True
+EVAL-DONE 2026-10-13-03:31:32
+START par 2026-10-13-03:31:39
+END par 2026-10-13-03:38:18
+apps in all of data/f1/graphs_interp, data/f1/graphs_par, data/graphs: 5
+ademar.bitac                             same same
+theakki.synctool                         same same
+uk.co.busydoingnothing.anagrams          same same
+us.spotco.malwarescanner                 same same
+uscartools.USTravelConverter             same DIFF (cand,cand_holes,code,n,stats)
+COMPARE-DONE 2026-10-13-03:38:19
+par evaluation on compiled graphs: 734 sinks in 5 apps, paper 734 sinks; identical: True
+EVAL-DONE 2026-10-13-03:38:25

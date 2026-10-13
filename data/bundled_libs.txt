@@ -1,0 +1,41 @@
+# F1 e (REMAINING_WORK.md): package prefixes of widely bundled third-party libraries. Classes under these prefixes are
+# treated as library code like the Android framework: their bodies are not analyzed, calls into them are library calls,
+# and their methods become holes (candidate flows from the same menu as framework methods).
+# Fixed on 2026-10-13 before any step-e result, from the libraries seen in three failing apps (app.flicky,
+# be.ugent.zeus.hydra.open, app.devswitch) and common Android dependencies. The app's own package is never excluded.
+# Not detected: minified (R8/ProGuard-renamed) library classes, whose package names are gone.
+androidx.
+android.support.
+com.google.android.material.
+com.google.android.gms.
+com.google.firebase.
+com.google.gson.
+com.google.common.
+com.google.protobuf.
+com.google.zxing.
+com.google.errorprone.
+com.google.auto.
+kotlin.
+kotlinx.
+org.jetbrains.
+org.intellij.
+j$.
+okhttp3.
+okio.
+retrofit2.
+com.squareup.
+io.reactivex.
+io.ktor.
+com.fasterxml.
+org.apache.
+org.slf4j.
+dagger.
+javax.inject.
+com.bumptech.glide.
+coil.
+org.greenrobot.
+com.jakewharton.
+org.bouncycastle.
+org.joda.
+org.osmdroid.
+com.mikepenz.

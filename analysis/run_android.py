@@ -1,6 +1,12 @@
 """Build stage: run the Soufflé taint analysis on each extracted app and store its flow graph.
 
-Usage: run_android.py [APP_GLOB]      (env: JOBS, SOUFFLE_MEM_GB, SCRATCH_DIR)
+Usage: run_android.py [APP_GLOB]      (env: JOBS, SOUFFLE_MEM_GB, SCRATCH_DIR; F1 options below)
+F1 options (REMAINING_WORK.md): TOTAL_TIMEOUT=2100 gives extraction and Soufflé one shared budget per app instead of
+1200 + 900 s; SOUFFLE_BIN runs taint.dl compiled with `souffle -o` (checked against the md5 of TAINT_DL stored next to
+it); SOUFFLE_THREADS (default 8); EXTRACT_XMX (default 6g) and EXTRACT_THREADS for the Soot JVM; REASONS_FILE records
+per app the outcome, the failing stage and the seconds used. LIB_PREFIXES (F1 e, e.g. data/bundled_libs.txt): classes under
+these package prefixes (except the app's own package) are not extracted and their methods become holes.
+BUDGET_FILE (lines "app TAB seconds"): a per-app budget overriding TOTAL_TIMEOUT, e.g. the time a first attempt left.
 For every app (stored facts in facts_apk_all/, or an APK listed in bench/apks/pick*.txt, whose
 facts are extracted into a temporary directory and deleted afterwards), writes
 data/graphs/<app>.npz holding the relevant subgraph
@@ -14,7 +20,7 @@ data/graphs/<app>.npz holding the relevant subgraph
 Soufflé writes to a temporary directory that is removed after each app, so only the graphs
 are kept. Graphs do not depend on prices or labels; analysis/evaluate.py prices them.
 """
-import fnmatch, glob, gzip, json, os, re, resource, subprocess, sys, tempfile
+import fnmatch, glob, gzip, hashlib, json, os, re, resource, subprocess, sys, tempfile, time
 import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "probes"))
@@ -31,6 +37,18 @@ VALUE_TYPES = {"void", "int", "long", "short", "byte", "boolean", "char", "doubl
                "java.lang.Character", "java.lang.Double", "java.lang.Float", "java.lang.CharSequence"}
 SOUFFLE_TIMEOUT = 900
 EXTRACT_TIMEOUT = 1200
+TOTAL_TIMEOUT = int(os.environ.get("TOTAL_TIMEOUT", "0"))  # 0: the separate limits above
+SOUFFLE_BIN = os.environ.get("SOUFFLE_BIN")
+SOUFFLE_THREADS = os.environ.get("SOUFFLE_THREADS", "8")
+EXTRACT_XMX = os.environ.get("EXTRACT_XMX", "6g")
+EXTRACT_THREADS = os.environ.get("EXTRACT_THREADS")
+REASONS_FILE = os.environ.get("REASONS_FILE")
+# F1 e: bundled third-party libraries as library code (data/bundled_libs.txt): not extracted, their methods become holes
+# per-app budget in seconds (file "app TAB seconds"): overrides TOTAL_TIMEOUT, e.g. the time left after a first attempt
+BUDGETS = {a: int(s) for a, s in (l.split("\t")[:2] for l in open(os.environ["BUDGET_FILE"]) if "\t" in l)} \
+    if os.environ.get("BUDGET_FILE") else {}
+LIB_PREFIXES_FILE = os.environ.get("LIB_PREFIXES")
+LIB_PREFIXES = tuple(l.strip() for l in open(LIB_PREFIXES_FILE) if l.strip() and not l.startswith("#")) if LIB_PREFIXES_FILE else ()
 MAX_ATTEMPTS = 3  # an app that has crashed the run this many times is skipped
 SOUFFLE_MEM = int(os.environ.get("SOUFFLE_MEM_GB", "12")) << 30
 JOBS = int(os.environ.get("JOBS", "2"))
@@ -95,7 +113,7 @@ def prepare(app_dir, fw, supers, src, snk):
     called = set(kinds)
     with open(os.path.join(app_dir, "HoleAtom.facts"), "w") as f:
         for (cls, sub), kind in kinds.items():
-            if cls in fw:
+            if cls in fw or (LIB_PREFIXES and cls.startswith(LIB_PREFIXES)):
                 for k, (s, t) in enumerate(menu({"sig": sub, "kind": kind})):
                     f.write("%s\t%s\t%d\t%s\t%s\n" % (cls, sub, k, s, t))
     with open(os.path.join(app_dir, "FwSuper.facts"), "w") as f:
@@ -109,7 +127,10 @@ def prepare(app_dir, fw, supers, src, snk):
     with open(os.path.join(app_dir, "ValueSub.facts"), "w") as f:
         for sub in sorted({sub for _, sub in called if sub.split(" ")[0] in VALUE_TYPES}):
             f.write(sub + "\n")
-    for name in ("Component", "IntentFilter"):
+    # the extractor writes a relation's file only when the app has a fact for it (e.g. no SStore.facts in an app without
+    # static field writes), and Soufflé refuses to start on a missing input file: create the missing ones empty
+    inputs = [r.strip() for l in open(TAINT_DL) if l.startswith(".input") for r in l[len(".input"):].split(",")]
+    for name in inputs + ["Component", "IntentFilter"]:
         open(os.path.join(app_dir, name + ".facts"), "a").close()
     for name, table in (("SourceMethod", src), ("SinkMethod", snk)):
         with open(os.path.join(app_dir, name + ".facts"), "w") as f:
@@ -150,15 +171,25 @@ def rows(out, rel):
         return [l.rstrip("\n").split("\t") for l in f]
 
 
-def run_souffle(app_dir, out):
+def run_souffle(app_dir, out, timeout=SOUFFLE_TIMEOUT):
+    """None on success, else why Soufflé failed: timeout, memory (killed by a signal or out of address space), error."""
     def limit():
         resource.setrlimit(resource.RLIMIT_AS, (SOUFFLE_MEM, SOUFFLE_MEM))
+    cmd = ([SOUFFLE_BIN] if SOUFFLE_BIN else [SOUFFLE]) + ["-j", SOUFFLE_THREADS, "-F", app_dir, "-D", out]
+    if not SOUFFLE_BIN:
+        cmd.append(TAINT_DL)
+    if timeout <= 0:
+        return "souffle timeout (no time left)"
     try:
-        subprocess.run([SOUFFLE, "-j", "8", "-F", app_dir, "-D", out, TAINT_DL],
-                       check=True, capture_output=True, text=True, timeout=SOUFFLE_TIMEOUT, preexec_fn=limit)
-    except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
-        return False
-    return True
+        p = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, preexec_fn=limit)
+    except subprocess.TimeoutExpired:
+        return "souffle timeout"
+    if p.returncode == 0:
+        return None
+    err = (p.stderr or "").strip().splitlines()
+    if p.returncode < 0 or "bad_alloc" in p.stderr or "memory" in p.stderr.lower():
+        return "souffle memory (rc %d)" % p.returncode
+    return "souffle error (rc %d: %s)" % (p.returncode, err[-1][:100] if err else "")
 
 
 def sink_call_count(app_dir):
@@ -220,11 +251,17 @@ def save_graph(out, app, kinds=None, n_sink_calls=0):
 CTX = None
 
 
-def extract(apk, out):
+def extract(apk, out, timeout=EXTRACT_TIMEOUT, app=""):
     """Soot facts for one APK (all code shipped in it); returns True on success."""
-    p = subprocess.run(["java", "-Xmx6g", "-cp", os.path.join(ROOT, "tools/soot-4.6.0-jar-with-dependencies.jar"),
+    jvm = ["java", "-Xmx" + EXTRACT_XMX] + (["-XX:ActiveProcessorCount=" + EXTRACT_THREADS] if EXTRACT_THREADS else [])
+    p = subprocess.run(jvm + ["-cp", os.path.join(ROOT, "tools/soot-4.6.0-jar-with-dependencies.jar"),
                         os.path.join(ROOT, "extract/Facts.java"), apk, os.path.join(ROOT, "tools/android/android.jar"),
-                        "", out], capture_output=True, text=True, timeout=EXTRACT_TIMEOUT)
+                        "", out], capture_output=True, text=True, timeout=timeout,
+                       env=dict(os.environ, EXCLUDE_PREFIXES=LIB_PREFIXES_FILE or "", KEEP_PREFIX=app if LIB_PREFIXES else ""))
+    if p.returncode != 0 and "OutOfMemoryError" in (p.stderr or "") + (p.stdout or ""):
+        extract.reason = "extract memory"
+    else:
+        extract.reason = "extract error (rc %d)" % p.returncode
     ok = p.returncode == 0 and os.path.exists(os.path.join(out, "Call.facts"))
     if ok and "icc" in os.path.basename(TAINT_DL):  # components and intent filters for the inter-component holes
         cp = ":".join(glob.glob(os.path.join(ROOT, "tools/flowdroid/lib/*.jar")))
@@ -233,11 +270,13 @@ def extract(apk, out):
     return ok
 
 
-def analyse(app, app_dir):
+def analyse(app, app_dir, deadline=None):
     fw, supers, (src, snk) = CTX
     prepare(app_dir, fw, supers, src, snk)
     with tempfile.TemporaryDirectory(prefix="souffle-", dir=SCRATCH) as out:
-        if not run_souffle(app_dir, out):
+        why = run_souffle(app_dir, out, round(deadline - time.time()) if deadline else SOUFFLE_TIMEOUT)
+        if why:
+            process.reason = why
             return app, None
         save_graph(out, app, called_methods(app_dir), sink_call_count(app_dir))
         return app, dict((k, int(v)) for k, v in rows(out, "Stats"))
@@ -248,18 +287,40 @@ def process(item):
     directory that is deleted afterwards, so only the graph is kept. Returns (app, stats dict),
     (app, None) when the analysis ran out of memory / time, or (app, "error: ...") on a bug."""
     app, src_path = item
+    t0 = time.time()
+    budget = BUDGETS.get(app, TOTAL_TIMEOUT)
+    deadline = t0 + budget if budget else None
+    process.reason = "ok"
+    try:
+        res = _process(app, src_path, deadline)
+    finally:
+        if REASONS_FILE:
+            with open(REASONS_FILE, "a") as f:
+                f.write("%s\t%s\t%d\n" % (app, process.reason, round(time.time() - t0)))
+    return res
+
+
+def _process(app, src_path, deadline):
     with open(os.environ.get("ATTEMPTS_FILE") or os.path.join(ROOT, "data/android_attempts.txt"), "a") as f:
         f.write(app + "\n")  # lets a restarted run skip an app that keeps killing it
     try:
         if os.path.isdir(src_path):
-            return analyse(app, src_path)
+            return analyse(app, src_path, deadline)
         with tempfile.TemporaryDirectory(prefix="facts-", dir=SCRATCH) as d:
-            if not extract(src_path, d):
+            try:
+                ok = extract(src_path, d, round(deadline - time.time()) if deadline else EXTRACT_TIMEOUT, app)
+            except subprocess.TimeoutExpired:
+                process.reason = "extract timeout"
                 return app, None
-            return analyse(app, d)
+            if not ok:
+                process.reason = extract.reason
+                return app, None
+            return analyse(app, d, deadline)
     except subprocess.TimeoutExpired:
+        process.reason = "timeout"
         return app, None
     except Exception as e:
+        process.reason = "error: %r" % (e,)
         return app, "error: %r" % (e,)
 
 
@@ -291,6 +352,11 @@ def main():
     global CTX
     fw = {l.strip() for l in open(os.path.join(ROOT, "data/android_classes.txt"))}
     CTX = (fw, framework_supers(), sources_sinks())
+    if SOUFFLE_BIN:  # a compiled program must come from the current TAINT_DL
+        want = open(SOUFFLE_BIN + ".dl.md5").read().split()[0]
+        have = hashlib.md5(open(TAINT_DL, "rb").read()).hexdigest()
+        if want != have:
+            sys.exit("SOUFFLE_BIN was compiled from another version of %s; recompile it" % TAINT_DL)
     failed_path = os.environ.get("FAILED_FILE") or os.path.join(ROOT, "data/android_failed.txt")
     failed = set(open(failed_path).read().split()) if os.path.exists(failed_path) else set()
     attempts_path = os.environ.get("ATTEMPTS_FILE") or os.path.join(ROOT, "data/android_attempts.txt")

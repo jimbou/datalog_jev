@@ -1,0 +1,7 @@
+building 6 apps (0 skipped after 3 attempts)
+ademar.bitac {'src_sites': 6, 'sink_sites': 36, 'pts': 1656505, 'tainted_vars': 56476, 'rel_vars': 33896, 'rel_cands': 21538}
+theakki.synctool {'src_sites': 14, 'sink_sites': 61, 'pts': 196449, 'tainted_vars': 18696, 'rel_vars': 10494, 'rel_cands': 9384}
+uk.co.busydoingnothing.anagrams {'src_sites': 11, 'sink_sites': 55, 'pts': 165256, 'tainted_vars': 17066, 'rel_vars': 10208, 'rel_cands': 9084}
+us.spotco.malwarescanner {'src_sites': 3, 'sink_sites': 19, 'pts': 1967534, 'tainted_vars': 18890, 'rel_vars': 14696, 'rel_cands': 2647}
+uscartools.USTravelConverter {'src_sites': 8, 'sink_sites': 39, 'pts': 294705, 'tainted_vars': 30600, 'rel_vars': 17569, 'rel_cands': 13640}
+systems.sieber.remotespotlight {'src_sites': 13, 'sink_sites': 72, 'pts': 22428480, 'tainted_vars': 112031, 'rel_vars': 70276, 'rel_cands': 42987}

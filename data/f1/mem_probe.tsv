@@ -1,0 +1,4 @@
+extract	-	26
+interp	rc=0	508 s	max RSS 13.9 GB
+bin1	rc=0	1153 s	max RSS 12.8 GB
+par	rc=0	461 s	max RSS 16.0 GB

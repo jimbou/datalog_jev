@@ -1,0 +1,12 @@
+com.codelv.inventory
+com.conreo.couchytv
+com.dn0ne.lotus.community
+com.firebirdberlin.nightdream.noGms
+com.musheer360.swiftslate
+com.hexcorp.ringr
+com.w2sv.wifiwidget
+eus.ordunte.app
+io.github.kitswas.virtualgamepadmobile
+io.github.luantak.fokuslauncher
+io.timelimit.android.aosp.direct
+life.andre.message487

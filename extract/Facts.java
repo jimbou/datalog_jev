@@ -41,9 +41,20 @@ public class Facts {
         o.setPhaseOption("jb", "use-original-names:true");
         Scene.v().loadNecessaryClasses();
 
+        // F1 e: classes under the prefixes listed in $EXCLUDE_PREFIXES (a file, # comments) are bundled library code
+        // and are not emitted, so calls into them become library calls; classes under $KEEP_PREFIX (the app's own
+        // package) are always emitted
+        List<String> exclude = new ArrayList<>();
+        String exFile = System.getenv("EXCLUDE_PREFIXES"), keep = System.getenv("KEEP_PREFIX");
+        if (exFile != null && !exFile.isEmpty())
+            for (String l : Files.readAllLines(Paths.get(exFile)))
+                if (!l.isBlank() && !l.startsWith("#")) exclude.add(l.trim());
         List<SootClass> app = new ArrayList<>();
-        for (SootClass c : Scene.v().getApplicationClasses())
-            if (c.getName().startsWith(prefix)) app.add(c);
+        for (SootClass c : Scene.v().getApplicationClasses()) {
+            String n = c.getName();
+            boolean lib = exclude.stream().anyMatch(n::startsWith) && !(keep != null && !keep.isEmpty() && n.startsWith(keep));
+            if (n.startsWith(prefix) && !lib) app.add(c);
+        }
         for (SootClass c : app) {
             emit("Class", c.getName(), c.isInterface() ? "interface" : "class");
             if (c.hasSuperclass()) emit("Super", c.getName(), c.getSuperclass().getName());

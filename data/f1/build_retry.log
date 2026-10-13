@@ -1,0 +1,67 @@
+building 253 apps (0 skipped after 3 attempts)
+app.devswitch souffle failed
+app.eduroam.geteduroam souffle failed
+app.govroam.getgovroam souffle failed
+app.flicky souffle failed
+app.linkclear souffle failed
+app.rapidsplit souffle failed
+app.openkuma souffle failed
+app.simple.peri souffle failed
+app.sterna souffle failed
+at.manuelbichler.octalsuntime souffle failed
+aws.apps.usbDeviceEnumerator souffle failed
+bou.amine.apps.readerforselfossv2.android souffle failed
+ca.ilianokokoro.umihi.music souffle failed
+be.ugent.zeus.hydra.open souffle failed
+ch.abertschi.adfree souffle failed
+ch.bailu.aat souffle failed
+cl.coders.faketraveler souffle failed
+com.MarcosDiez.shareviahttp souffle failed
+com.afollestad.nocknock souffle failed
+com.agepony.app souffle failed
+com.ammar.wallflow souffle failed
+com.android.gpstest.osmdroid souffle failed
+com.antony.muzei.pixiv {'src_sites': 9, 'sink_sites': 48, 'pts': 13431858, 'tainted_vars': 57892, 'rel_vars': 39030, 'rel_cands': 33928}
+com.arsvechkarev.vault souffle failed
+building 230 apps (0 skipped after 3 attempts)
+app.rapidsplit {'src_sites': 0, 'sink_sites': 2, 'pts': 132, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+com.axiel7.anihyou souffle failed
+com.awagam.android souffle failed
+com.blogspot.developersu.ns_usbloader souffle failed
+com.bartixxx.oneplusarbchecker souffle failed
+com.bnyro.wallpaper souffle failed
+com.bote.app souffle failed
+com.brentpanther.bitcoinwidget souffle failed
+com.chaser.paintballnotificator souffle failed
+com.chesire.nekome souffle failed
+com.concept1tech.instalate {'src_sites': 14, 'sink_sites': 74, 'pts': 2740060, 'tainted_vars': 68265, 'rel_vars': 40782, 'rel_cands': 31664}
+com.codelv.inventory souffle failed
+com.corphish.nightlight.generic souffle failed
+com.conreo.couchytv souffle failed
+com.craftworks.music souffle failed
+com.damiengo.websiterss souffle failed
+com.cosmos.unreddit souffle failed
+com.decred.decredaddressscanner souffle failed
+com.davidtakac.bura souffle failed
+com.deedeedev.ytreader souffle failed
+com.desarrollodroide.pagekeeper souffle failed
+com.divinelink.scenepeek souffle failed
+com.designlife.justdo souffle failed
+com.droidrops.app souffle failed
+com.dn0ne.lotus.community souffle failed
+com.example.regis_cat souffle failed
+com.fediphoto.lineage souffle failed
+com.ferlagod.rocinante souffle failed
+com.folio.reader souffle failed
+com.firebirdberlin.nightdream.noGms souffle failed
+com.foss.aihub souffle failed
+com.freetime.ssmpc souffle failed
+com.freeftp.app souffle failed
+com.furthersecrets.chemsearch souffle failed
+com.geauxweather.app souffle failed
+com.github.ashutoshgngwr.noice souffle failed
+com.ghostsq.commander souffle failed
+com.github.digitallyrefined.androidipcamera souffle failed
+com.github.ktsr42.rsyncserver {'src_sites': 11, 'sink_sites': 69, 'pts': 15597712, 'tainted_vars': 57536, 'rel_vars': 37772, 'rel_cands': 22035}
+com.github.livingwithhippos.unchained souffle failed
+com.hexcorp.ringr souffle failed

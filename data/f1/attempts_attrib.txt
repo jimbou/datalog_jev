@@ -1,0 +1,8 @@
+be.ugent.zeus.hydra.open
+com.damiengo.websiterss
+com.geauxweather.app
+com.saverio.wordoftheday_en
+de.bulling.barcodebuddyscanner
+eu.frigo.dispensa
+foss.cnugteren.nlweer
+org.proninyaroslav.opencomicvine

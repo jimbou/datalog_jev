@@ -1,0 +1,6 @@
+ademar.bitac
+uk.co.busydoingnothing.anagrams
+uscartools.USTravelConverter
+theakki.synctool
+us.spotco.malwarescanner
+systems.sieber.remotespotlight
