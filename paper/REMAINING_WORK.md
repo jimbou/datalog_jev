@@ -99,17 +99,28 @@ EXTRACT_XMX/EXTRACT_THREADS, LIB_PREFIXES, BUDGET_FILE; `extract/Facts.java` EXC
   `cls:` edit) with identical evaluation results.
 - Bug found: the extractor omits a relation file when an app has no fact of it (e.g. SStore), and Soufflé then refuses to
   start; fixed in `prepare()` (empty files). Rescues app.rapidsplit (trivial graph).
-- d. RUNNING since 2026-10-13 04:18 (restarted 06:11 with the fix): 253 failed apps. At 49: 3 built (one by the fix, one
-  by the longer time), all others out of memory, so memory is the bottleneck.
+- d. DONE (2026-10-13 04:18 to 20:59, restarted 06:11 with the fix): 253 failed apps, 12 built, 241 out of memory
+  (all in Soufflé), so memory is the bottleneck, not time.
 - e. Subset DONE (`data/f1e_subset.tsv`, 20 built + 20 failed, seed 20261013; prefixes `data/bundled_libs.txt`, fixed
   before results). Built apps: sources 181 -> 68, sinks 923 -> 441, hole-dependent sinks 5,490 -> 1,317 (most sources and
   sinks sit inside bundled libraries; in 4 apps all sources go): rejected for all apps. Failed apps: 8 of 20 build, and all
   8 run out of memory without step e (attribution run, `data/f1/reasons_attrib.tsv`). Minified apps (e.g. app.devswitch,
   96% renamed classes) gain little from prefixes.
-- e as fallback: QUEUED after d (`bench/queues/f1e_fallback.sh`): every app still failing on memory or time gets step e
-  with only the time its full attempt left (2100 s minus its recorded seconds), 16 GB, so the per-app budget stays
-  FlowDroid's. Then decide whether rescued apps enter the corpus (needs rubric labels via CLIs, K2 labels, Jev prices
-  with approval) and describe the mixed corpus.
+- e as fallback: DONE (2026-10-13 20:59 to 2026-10-14 06:23, `bench/queues/f1e_fallback.sh`): the 241 apps still
+  failing got step e with only the time their full attempt left (2100 s minus its recorded seconds), 16 GB, so the per-app
+  budget stays FlowDroid's. 98 built, 143 out of memory. In all: 110 of the 253 rescued (12 by d, 98 by e).
+- FlowDroid with the same budget on these 253 (`data/fd_budget.jsonl`): succeeds on 103 (21 with a sink). Ours 110: 83 both,
+  27 only ours (3 retry, 24 fallback), 20 only FlowDroid. All 585 picked apps: ours 344 without step e, 442 with it
+  (step e apps analyze bundled libraries as holes, FlowDroid analyzes their code), FlowDroid 317.
+- New hole methods of the rescued apps (`probes/extend_holes_fw.py` with LIB_PREFIXES, appended to
+  holes_android_fw.jsonl on the server, backup .bak): 10,503 (340 framework, 10,163 bundled-library: androidx 5,926,
+  kotlin 1,303, kotlinx 542, ...), 8.8 candidate flows per method vs 2.9 before; 66 of the 98 fallback apps have library
+  holes (median 80, max 1,278), 8,037 methods occur in one app. 10,149 need rubric labels.
+- Labels and prices RUNNING (2026-10-14, `bench/queues/f1_label.sh`, `f1_label_gpt.sh`): Sonnet rubric labels then
+  sonnetp prices via Claude Code; luna prices via Codex; GPT rubric labels (gpt-6.1-sol, 2 threads; it returned 429 at
+  first) via Codex. Jev and the OpenRouter panel: estimated $7.75 (by question count; $3.9 flat), awaiting approval. K2 for
+  library methods (disagreements) would need StubDroid on library code from the APKs. Then decide whether rescued apps
+  enter the corpus; report them apart (retry, fallback) and merged.
 
 **F2. Pricers on a development subset.** Fix a random 30% of the 307 apps (seeded) as development apps; choose the variant
 there; report the chosen variant with the usual 200 splits on all apps and on the other 70% alone, and list every variant

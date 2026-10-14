@@ -1,0 +1,241 @@
+app.devswitch	souffle memory (rc -6)	340
+app.eduroam.geteduroam	souffle memory (rc 1)	355
+app.flicky	ok	24
+app.govroam.getgovroam	souffle memory (rc 1)	355
+app.linkclear	souffle memory (rc 1)	398
+app.simple.peri	ok	11
+app.openkuma	souffle memory (rc 1)	365
+at.manuelbichler.octalsuntime	ok	7
+aws.apps.usbDeviceEnumerator	ok	5
+app.sterna	souffle memory (rc -6)	699
+be.ugent.zeus.hydra.open	ok	492
+bou.amine.apps.readerforselfossv2.android	souffle memory (rc -6)	298
+ch.abertschi.adfree	ok	13
+ch.bailu.aat	ok	17
+cl.coders.faketraveler	ok	5
+com.MarcosDiez.shareviahttp	ok	5
+com.afollestad.nocknock	ok	256
+ca.ilianokokoro.umihi.music	souffle memory (rc -6)	540
+com.ammar.wallflow	ok	15
+com.android.gpstest.osmdroid	ok	7
+com.agepony.app	souffle memory (rc 1)	518
+com.arsvechkarev.vault	souffle memory (rc 1)	570
+com.awagam.android	souffle memory (rc 1)	505
+com.axiel7.anihyou	souffle memory (rc 1)	678
+com.blogspot.developersu.ns_usbloader	ok	4
+com.bartixxx.oneplusarbchecker	souffle memory (rc 1)	420
+com.bote.app	ok	8
+com.bnyro.wallpaper	souffle memory (rc -6)	268
+com.brentpanther.bitcoinwidget	souffle memory (rc 1)	309
+com.chesire.nekome	ok	142
+com.codelv.inventory	souffle memory (rc -6)	243
+com.chaser.paintballnotificator	souffle memory (rc 1)	588
+com.corphish.nightlight.generic	ok	8
+com.conreo.couchytv	souffle memory (rc 1)	415
+com.cosmos.unreddit	souffle memory (rc 1)	485
+com.damiengo.websiterss	ok	12
+com.craftworks.music	souffle memory (rc -6)	350
+com.decred.decredaddressscanner	ok	5
+com.deedeedev.ytreader	souffle memory (rc -6)	224
+com.davidtakac.bura	souffle memory (rc -6)	601
+com.desarrollodroide.pagekeeper	souffle memory (rc -6)	303
+com.designlife.justdo	souffle memory (rc -6)	564
+com.divinelink.scenepeek	souffle memory (rc 1)	618
+com.droidrops.app	ok	70
+com.example.regis_cat	ok	5
+com.fediphoto.lineage	souffle memory (rc -6)	296
+com.dn0ne.lotus.community	souffle memory (rc 1)	595
+com.ferlagod.rocinante	souffle memory (rc -6)	397
+com.firebirdberlin.nightdream.noGms	souffle memory (rc 1)	434
+com.folio.reader	souffle memory (rc -6)	377
+com.foss.aihub	souffle memory (rc -6)	346
+com.freetime.ssmpc	souffle memory (rc 1)	329
+com.freeftp.app	souffle memory (rc -6)	441
+com.geauxweather.app	ok	5
+com.ghostsq.commander	ok	37
+com.github.ashutoshgngwr.noice	ok	255
+com.furthersecrets.chemsearch	souffle memory (rc 1)	399
+com.github.digitallyrefined.androidipcamera	ok	84
+com.github.livingwithhippos.unchained	souffle memory (rc -6)	318
+com.indieweb.indigenous	ok	10
+com.iskrembilen.quasseldroid	ok	148
+com.jakubhlavacek.gtfsrealtimemap	ok	6
+com.hexcorp.ringr	souffle memory (rc 1)	631
+com.jksalcedo.librefind	souffle memory (rc -6)	438
+com.juliencardoux.openwol	souffle memory (rc 1)	374
+com.kbul.spicycrab	souffle memory (rc -6)	227
+com.leinardi.ubuntucountdownwidget	souffle memory (rc -6)	272
+com.luk.saucenao	souffle memory (rc -6)	353
+com.ma.tehro	souffle memory (rc 1)	424
+com.machiav3lli.fdroid	ok	123
+com.maksimowiczm.findmyip	souffle memory (rc -6)	299
+com.manimarank.websitemonitor	ok	6
+com.maazm7d.termuxhub	souffle memory (rc 1)	862
+com.mateusrodcosta.apps.vidyamusic	souffle memory (rc -6)	295
+com.meow.lnctattendance	souffle memory (rc 1)	393
+com.meteocompare.app	souffle memory (rc -6)	308
+com.metromusic	souffle memory (rc -6)	288
+com.mshdabiola.playnotepad.foss	souffle memory (rc 1)	568
+com.mubarak.mbcompass	souffle memory (rc -6)	376
+com.musicremover.app	souffle memory (rc 1)	365
+com.musheer360.swiftslate	souffle memory (rc -6)	443
+com.networkscanner.app	souffle memory (rc -6)	261
+com.neatcode.tabgreater	souffle memory (rc -6)	338
+com.openstablediffusion	ok	4
+com.pearlnode	souffle memory (rc 1)	493
+com.nononsenseapps.wanidoku	souffle memory (rc 1)	547
+com.pebblerecorder.app	ok	5
+com.polyalerts	souffle memory (rc -6)	301
+com.powerdino.splatoon3_companion	souffle memory (rc 1)	447
+com.prajwalch.torrentsearch	souffle memory (rc -6)	284
+com.prayertimemuter	ok	5
+com.porter.tvremote	souffle memory (rc 1)	1205
+com.readrops.app	ok	70
+com.prof18.feedflow	souffle memory (rc -6)	467
+com.roozbehzarei.filester	souffle memory (rc -6)	336
+com.sakethh.otic	souffle memory (rc -6)	395
+com.saverio.wordoftheday_en	ok	5
+com.sadellie.unitto	souffle memory (rc -6)	739
+com.shapeshed.kiosk	souffle memory (rc 1)	312
+com.socks5	ok	244
+com.streamatico.polymarketviewer	ok	14
+com.streamplayer.app	ok	15
+com.siarheikuchuk.ftpsserver	souffle memory (rc 1)	399
+com.termoneplus	ok	6
+com.studio4plus.homerplayer2	ok	49
+com.tokyoxpa3.androidproxy	ok	5
+com.ubergeek42.WeechatAndroid	ok	8
+com.todobom.opennotescanner	ok	224
+com.utazukin.ichaival	souffle memory (rc 1)	244
+com.vsmartcard.acardemulator	ok	7
+com.w2sv.wifiwidget	souffle memory (rc -6)	391
+com.wirelessalien.android.moviedb	ok	27
+com.vakarux.instadownload	souffle memory (rc 1)	577
+com.yacgroup.yacguide	souffle memory (rc 1)	804
+com.yacgroup.yacguide.dev	souffle memory (rc 1)	795
+com.zell_mbc.medilog.fdroid	souffle memory (rc -6)	258
+com.yogeshpaliyal.deepr	souffle memory (rc -6)	784
+cz.mendelu.xmarik.train_manager	ok	5
+cz.lastaapps.menza	souffle memory (rc -6)	581
+de.bulling.barcodebuddyscanner	ok	6
+de.c3nav.droid	ok	6
+de.ccc.events.badge.card10	ok	6
+de.christinecoenen.code.zapp	souffle memory (rc -6)	248
+de.devmil.muzei.bingimageofthedayartsource	ok	5
+de.eknoes.inofficialgolem	ok	6
+de.maniac103.squeezeclient	ok	9
+de.marmaro.krt.ffupdater	ok	7
+de.miraisoft.wadoku	ok	4
+de.bixilon.unithen	souffle memory (rc 1)	692
+de.mymiggi.tankblick	souffle memory (rc -6)	241
+de.nulide.findmydevice	ok	10
+de.nulide.findmydevice.edge	ok	10
+de.saschahlusiak.freebloks	ok	9
+de.thefeiter.liedgutverzeichnis	ok	7
+de.uni_potsdam.hpi.openmensa	souffle memory (rc -6)	261
+dev.bg.skylib	ok	11
+de.readeckapp	souffle memory (rc -6)	360
+dev.dettmer.simplenotes	souffle memory (rc -6)	339
+dev.gpxit.app	souffle memory (rc -6)	374
+dev.itsvic.parceltracker	souffle memory (rc 1)	324
+ee.malt.diadem	ok	5
+dev.otherworld.shoppinglist	souffle memory (rc -6)	370
+eu.frigo.dispensa	ok	872
+eus.ordunte.app	souffle memory (rc -6)	274
+eu.quelltext.coloring	souffle memory (rc -6)	1034
+foss.cnugteren.nlweer	ok	10
+fi.kroon.vadret	ok	133
+fr.framagit.jeromeo.etagere	souffle memory (rc 1)	405
+fr.hellpc.mirror	souffle memory (rc -6)	409
+fr.nihilus.music	souffle memory (rc -6)	380
+freemap.hikar	ok	6
+home.wyoming_android_tts.indigane	ok	5
+fr.luteal.app	souffle memory (rc 1)	535
+horse.amazin.my.stratum0.statuswidget	ok	167
+indi.dmzz_yyhyy.lightnovelreader	souffle memory (rc -6)	222
+info.dvkr.screenstream	souffle memory (rc -6)	529
+info.varden.hauk	ok	5
+info.plateaukao.einkbro	souffle memory (rc 1)	442
+io.github.antoinepirlot.satunes	souffle memory (rc -6)	397
+info.zamojski.soft.towercollector	ok	722
+io.github.benji377.timety	souffle memory (rc 1)	509
+io.github.deprec8.enigmadroid	souffle memory (rc -6)	275
+io.github.luantak.fokuslauncher	souffle memory (rc -6)	236
+io.github.kitswas.virtualgamepadmobile	souffle memory (rc -6)	318
+io.github.mkckr0.audio_share_app	ok	4
+io.github.mickaelmagniez.windbubble	souffle memory (rc 1)	371
+io.github.mouse233.localsendkotlin	ok	7
+io.github.mortenfyhn.feltbok	souffle memory (rc 1)	484
+io.github.nofuturekid.nova	souffle memory (rc 1)	453
+io.github.pitonite.exch_cx	souffle memory (rc 1)	346
+io.github.quillpad	souffle memory (rc -6)	270
+io.github.project_kaat.gpsdrelay	souffle memory (rc -6)	345
+io.github.samolego.canta	souffle memory (rc 1)	440
+io.github.soundremote	souffle memory (rc 1)	406
+io.pcontacts.app	souffle memory (rc 1)	282
+io.timelimit.android.aosp.direct	souffle memory (rc -6)	222
+io.github.v2compose	souffle memory (rc 1)	633
+io.vertretungsplan.client.android	souffle memory (rc -6)	257
+kiwi.root.an2linuxclient	souffle memory (rc -6)	361
+life.andre.message487	souffle memory (rc 1)	539
+me.echeung.moemoekyun.fdroid	ok	22
+liou.rayyuan.ebooksearchtaiwan	souffle memory (rc 1)	604
+me.kerooker.rpgcharactergenerator	souffle memory (rc -6)	300
+me.testcase.ognarviewer	ok	5
+net.millaguie.cosmovisor	souffle memory (rc -6)	291
+me.mudkip.moememos	souffle memory (rc -6)	429
+net.phbwt.paperwork	souffle memory (rc -6)	333
+net.nurik.roman.muzei	souffle memory (rc -6)	488
+net.yukh.xui	souffle memory (rc -6)	301
+nl.sonck.streamplayer	souffle memory (rc 1)	465
+nightlock.peppercarrot	ok	966
+nodomain.aditya1875more.stashly	souffle memory (rc 1)	604
+org.akvo.rsr.up	ok	5
+org.alberto97.ouilookup	souffle memory (rc -6)	269
+off.kys.backtalk	souffle memory (rc 1)	629
+org.blitzortung.android.app	ok	21
+org.bombusmod	ok	10
+org.avmedia.gshockGoogleSync	souffle memory (rc 1)	396
+org.dkf.jmule	ok	9
+org.equeim.tremotesf	ok	12
+org.codeberg.quecomet.oshi	souffle memory (rc 1)	354
+org.freedombox.freedombox	ok	8
+org.gateshipone.malp	ok	8
+org.havenapp.neruppu	souffle memory (rc 1)	363
+org.fairspeed.test	souffle memory (rc 1)	512
+org.joinmastodon.android	ok	329
+org.knightstalker.app	souffle memory (rc 1)	357
+org.libreoffice.impressremote	ok	4
+org.moire.ultrasonic	ok	15
+org.mosad.teapod	ok	173
+org.mult.daap	ok	4
+org.juanro.autumandu	souffle memory (rc -6)	757
+org.musicbrainz.picard.barcodescanner	ok	7
+org.nuclearfog.smither	souffle memory (rc 1)	405
+org.ostrya.presencepublisher	ok	75
+org.proninyaroslav.opencomicvine	ok	18
+org.purple.smoke	ok	14
+org.purple.smokestack	ok	6
+org.shirakumo.ocelot	ok	6
+org.nitri.opentopo	souffle memory (rc -6)	614
+org.unifiedpush.distributor.sunup	souffle memory (rc -6)	296
+org.unifiedpush.distributor.nextpush	souffle memory (rc -6)	434
+org.unifiedpush.example	souffle memory (rc -6)	420
+org.y20k.escapepod	souffle memory (rc 1)	395
+page.codeberg.lanticy.guandan	ok	4
+org.y20k.transistor	souffle memory (rc -6)	350
+page.ooooo.geoshare	souffle memory (rc -6)	465
+rak.pixellwp	ok	5
+ru.ra66it.updaterforspotify	ok	5
+player.phonograph.plus	souffle memory (rc -6)	389
+sitavi.seenema	souffle memory (rc 1)	380
+systems.sieber.fsclock	ok	5
+site.remlit.snowdrop	souffle memory (rc 1)	478
+top.donmor.tiddloid	ok	6
+truewatcher.tower	ok	5
+tech.xvanturing.freeproxy	souffle memory (rc -6)	341
+uk.org.retallack.slimbook	ok	4
+uk.nktnet.webviewkiosk	souffle memory (rc 1)	406
+xyz.hisname.fireflyiii	ok	22
+whl.trending.ai	souffle memory (rc 1)	484
+xyz.linerly.searxist	souffle memory (rc -6)	400

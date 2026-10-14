@@ -1,0 +1,242 @@
+building 241 apps (0 skipped after 3 attempts)
+app.devswitch souffle failed
+app.eduroam.geteduroam souffle failed
+app.flicky {'src_sites': 2, 'sink_sites': 18, 'pts': 678444, 'tainted_vars': 12882, 'rel_vars': 9400, 'rel_cands': 24609}
+app.govroam.getgovroam souffle failed
+app.linkclear souffle failed
+app.simple.peri {'src_sites': 2, 'sink_sites': 21, 'pts': 243327, 'tainted_vars': 23, 'rel_vars': 0, 'rel_cands': 0}
+app.openkuma souffle failed
+at.manuelbichler.octalsuntime {'src_sites': 3, 'sink_sites': 11, 'pts': 70691, 'tainted_vars': 3180, 'rel_vars': 2166, 'rel_cands': 1274}
+aws.apps.usbDeviceEnumerator {'src_sites': 3, 'sink_sites': 14, 'pts': 3186, 'tainted_vars': 166, 'rel_vars': 69, 'rel_cands': 60}
+app.sterna souffle failed
+be.ugent.zeus.hydra.open {'src_sites': 10, 'sink_sites': 49, 'pts': 7240688, 'tainted_vars': 35356, 'rel_vars': 23083, 'rel_cands': 21218}
+bou.amine.apps.readerforselfossv2.android souffle failed
+ch.abertschi.adfree {'src_sites': 7, 'sink_sites': 24, 'pts': 304692, 'tainted_vars': 14635, 'rel_vars': 10110, 'rel_cands': 7481}
+ch.bailu.aat {'src_sites': 10, 'sink_sites': 40, 'pts': 370543, 'tainted_vars': 27769, 'rel_vars': 18444, 'rel_cands': 9532}
+cl.coders.faketraveler {'src_sites': 2, 'sink_sites': 8, 'pts': 1075, 'tainted_vars': 7, 'rel_vars': 0, 'rel_cands': 0}
+com.MarcosDiez.shareviahttp {'src_sites': 3, 'sink_sites': 14, 'pts': 1883, 'tainted_vars': 459, 'rel_vars': 139, 'rel_cands': 182}
+com.afollestad.nocknock {'src_sites': 4, 'sink_sites': 23, 'pts': 8661671, 'tainted_vars': 23465, 'rel_vars': 15950, 'rel_cands': 6245}
+ca.ilianokokoro.umihi.music souffle failed
+com.ammar.wallflow {'src_sites': 2, 'sink_sites': 12, 'pts': 112566, 'tainted_vars': 17264, 'rel_vars': 11077, 'rel_cands': 29257}
+com.android.gpstest.osmdroid {'src_sites': 5, 'sink_sites': 25, 'pts': 17646, 'tainted_vars': 3818, 'rel_vars': 1970, 'rel_cands': 3511}
+com.agepony.app souffle failed
+com.arsvechkarev.vault souffle failed
+com.awagam.android souffle failed
+com.axiel7.anihyou souffle failed
+com.blogspot.developersu.ns_usbloader {'src_sites': 2, 'sink_sites': 12, 'pts': 1346, 'tainted_vars': 312, 'rel_vars': 214, 'rel_cands': 224}
+com.bartixxx.oneplusarbchecker souffle failed
+com.bote.app {'src_sites': 3, 'sink_sites': 20, 'pts': 50950, 'tainted_vars': 4765, 'rel_vars': 2987, 'rel_cands': 3177}
+com.bnyro.wallpaper souffle failed
+com.brentpanther.bitcoinwidget souffle failed
+com.chesire.nekome {'src_sites': 4, 'sink_sites': 42, 'pts': 6123119, 'tainted_vars': 50450, 'rel_vars': 31948, 'rel_cands': 28249}
+com.codelv.inventory souffle failed
+com.chaser.paintballnotificator souffle failed
+com.corphish.nightlight.generic {'src_sites': 5, 'sink_sites': 27, 'pts': 31718, 'tainted_vars': 6242, 'rel_vars': 3675, 'rel_cands': 2513}
+com.conreo.couchytv souffle failed
+com.cosmos.unreddit souffle failed
+com.damiengo.websiterss {'src_sites': 8, 'sink_sites': 37, 'pts': 132436, 'tainted_vars': 13483, 'rel_vars': 8270, 'rel_cands': 9502}
+com.craftworks.music souffle failed
+com.decred.decredaddressscanner {'src_sites': 2, 'sink_sites': 12, 'pts': 3338, 'tainted_vars': 287, 'rel_vars': 0, 'rel_cands': 0}
+com.deedeedev.ytreader souffle failed
+com.davidtakac.bura souffle failed
+com.desarrollodroide.pagekeeper souffle failed
+com.designlife.justdo souffle failed
+com.divinelink.scenepeek souffle failed
+com.droidrops.app {'src_sites': 2, 'sink_sites': 20, 'pts': 1549320, 'tainted_vars': 25103, 'rel_vars': 16872, 'rel_cands': 31910}
+com.example.regis_cat {'src_sites': 1, 'sink_sites': 3, 'pts': 843, 'tainted_vars': 14, 'rel_vars': 0, 'rel_cands': 0}
+com.fediphoto.lineage souffle failed
+com.dn0ne.lotus.community souffle failed
+com.ferlagod.rocinante souffle failed
+com.firebirdberlin.nightdream.noGms souffle failed
+com.folio.reader souffle failed
+com.foss.aihub souffle failed
+com.freetime.ssmpc souffle failed
+com.freeftp.app souffle failed
+com.geauxweather.app {'src_sites': 4, 'sink_sites': 18, 'pts': 4074, 'tainted_vars': 1896, 'rel_vars': 1169, 'rel_cands': 1452}
+com.ghostsq.commander {'src_sites': 7, 'sink_sites': 50, 'pts': 1451945, 'tainted_vars': 32809, 'rel_vars': 22389, 'rel_cands': 19862}
+com.github.ashutoshgngwr.noice {'src_sites': 12, 'sink_sites': 67, 'pts': 6560702, 'tainted_vars': 63144, 'rel_vars': 41049, 'rel_cands': 37136}
+com.furthersecrets.chemsearch souffle failed
+com.github.digitallyrefined.androidipcamera {'src_sites': 3, 'sink_sites': 29, 'pts': 2403427, 'tainted_vars': 15802, 'rel_vars': 10716, 'rel_cands': 11864}
+com.github.livingwithhippos.unchained souffle failed
+com.indieweb.indigenous {'src_sites': 7, 'sink_sites': 29, 'pts': 108264, 'tainted_vars': 9201, 'rel_vars': 5493, 'rel_cands': 4766}
+com.iskrembilen.quasseldroid {'src_sites': 2, 'sink_sites': 26, 'pts': 1844707, 'tainted_vars': 14607, 'rel_vars': 9355, 'rel_cands': 14569}
+com.jakubhlavacek.gtfsrealtimemap {'src_sites': 4, 'sink_sites': 21, 'pts': 17355, 'tainted_vars': 3519, 'rel_vars': 2244, 'rel_cands': 1757}
+com.hexcorp.ringr souffle failed
+com.jksalcedo.librefind souffle failed
+com.juliencardoux.openwol souffle failed
+com.kbul.spicycrab souffle failed
+com.leinardi.ubuntucountdownwidget souffle failed
+com.luk.saucenao souffle failed
+com.ma.tehro souffle failed
+com.machiav3lli.fdroid {'src_sites': 5, 'sink_sites': 43, 'pts': 2133998, 'tainted_vars': 28530, 'rel_vars': 20560, 'rel_cands': 57805}
+com.maksimowiczm.findmyip souffle failed
+com.manimarank.websitemonitor {'src_sites': 2, 'sink_sites': 10, 'pts': 3767, 'tainted_vars': 20, 'rel_vars': 0, 'rel_cands': 0}
+com.maazm7d.termuxhub souffle failed
+com.mateusrodcosta.apps.vidyamusic souffle failed
+com.meow.lnctattendance souffle failed
+com.meteocompare.app souffle failed
+com.metromusic souffle failed
+com.mshdabiola.playnotepad.foss souffle failed
+com.mubarak.mbcompass souffle failed
+com.musicremover.app souffle failed
+com.musheer360.swiftslate souffle failed
+com.networkscanner.app souffle failed
+com.neatcode.tabgreater souffle failed
+com.openstablediffusion {'src_sites': 2, 'sink_sites': 4, 'pts': 904, 'tainted_vars': 6, 'rel_vars': 0, 'rel_cands': 0}
+com.pearlnode souffle failed
+com.nononsenseapps.wanidoku souffle failed
+com.pebblerecorder.app {'src_sites': 7, 'sink_sites': 29, 'pts': 15343, 'tainted_vars': 1549, 'rel_vars': 969, 'rel_cands': 1194}
+com.polyalerts souffle failed
+com.powerdino.splatoon3_companion souffle failed
+com.prajwalch.torrentsearch souffle failed
+com.prayertimemuter {'src_sites': 0, 'sink_sites': 5, 'pts': 2124, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+com.porter.tvremote souffle failed
+com.readrops.app {'src_sites': 2, 'sink_sites': 22, 'pts': 1746851, 'tainted_vars': 25280, 'rel_vars': 16548, 'rel_cands': 30973}
+com.prof18.feedflow souffle failed
+com.roozbehzarei.filester souffle failed
+com.sakethh.otic souffle failed
+com.saverio.wordoftheday_en {'src_sites': 1, 'sink_sites': 6, 'pts': 998, 'tainted_vars': 28, 'rel_vars': 0, 'rel_cands': 0}
+com.sadellie.unitto souffle failed
+com.shapeshed.kiosk souffle failed
+com.socks5 {'src_sites': 6, 'sink_sites': 54, 'pts': 6610502, 'tainted_vars': 49073, 'rel_vars': 33971, 'rel_cands': 28595}
+com.streamatico.polymarketviewer {'src_sites': 0, 'sink_sites': 13, 'pts': 508330, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+com.streamplayer.app {'src_sites': 6, 'sink_sites': 37, 'pts': 271183, 'tainted_vars': 15935, 'rel_vars': 10392, 'rel_cands': 12370}
+com.siarheikuchuk.ftpsserver souffle failed
+com.termoneplus {'src_sites': 1, 'sink_sites': 18, 'pts': 11334, 'tainted_vars': 6, 'rel_vars': 0, 'rel_cands': 0}
+com.studio4plus.homerplayer2 {'src_sites': 3, 'sink_sites': 14, 'pts': 1344937, 'tainted_vars': 11050, 'rel_vars': 7416, 'rel_cands': 19718}
+com.tokyoxpa3.androidproxy {'src_sites': 2, 'sink_sites': 13, 'pts': 3236, 'tainted_vars': 20, 'rel_vars': 9, 'rel_cands': 9}
+com.ubergeek42.WeechatAndroid {'src_sites': 0, 'sink_sites': 23, 'pts': 115509, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+com.todobom.opennotescanner {'src_sites': 6, 'sink_sites': 46, 'pts': 7892619, 'tainted_vars': 34655, 'rel_vars': 26174, 'rel_cands': 12613}
+com.utazukin.ichaival souffle failed
+com.vsmartcard.acardemulator {'src_sites': 0, 'sink_sites': 19, 'pts': 110052, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+com.w2sv.wifiwidget souffle failed
+com.wirelessalien.android.moviedb {'src_sites': 4, 'sink_sites': 23, 'pts': 887465, 'tainted_vars': 27973, 'rel_vars': 16055, 'rel_cands': 16086}
+com.vakarux.instadownload souffle failed
+com.yacgroup.yacguide souffle failed
+com.yacgroup.yacguide.dev souffle failed
+com.zell_mbc.medilog.fdroid souffle failed
+com.yogeshpaliyal.deepr souffle failed
+cz.mendelu.xmarik.train_manager {'src_sites': 0, 'sink_sites': 5, 'pts': 2250, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+cz.lastaapps.menza souffle failed
+de.bulling.barcodebuddyscanner {'src_sites': 2, 'sink_sites': 26, 'pts': 5130, 'tainted_vars': 1376, 'rel_vars': 809, 'rel_cands': 1098}
+de.c3nav.droid {'src_sites': 2, 'sink_sites': 27, 'pts': 19203, 'tainted_vars': 14, 'rel_vars': 0, 'rel_cands': 0}
+de.ccc.events.badge.card10 {'src_sites': 0, 'sink_sites': 11, 'pts': 9721, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+de.christinecoenen.code.zapp souffle failed
+de.devmil.muzei.bingimageofthedayartsource {'src_sites': 3, 'sink_sites': 24, 'pts': 3522, 'tainted_vars': 876, 'rel_vars': 604, 'rel_cands': 1033}
+de.eknoes.inofficialgolem {'src_sites': 4, 'sink_sites': 23, 'pts': 3428, 'tainted_vars': 1037, 'rel_vars': 611, 'rel_cands': 525}
+de.maniac103.squeezeclient {'src_sites': 1, 'sink_sites': 33, 'pts': 85239, 'tainted_vars': 339, 'rel_vars': 162, 'rel_cands': 377}
+de.marmaro.krt.ffupdater {'src_sites': 0, 'sink_sites': 19, 'pts': 205974, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+de.miraisoft.wadoku {'src_sites': 1, 'sink_sites': 4, 'pts': 318, 'tainted_vars': 43, 'rel_vars': 0, 'rel_cands': 0}
+de.bixilon.unithen souffle failed
+de.mymiggi.tankblick souffle failed
+de.nulide.findmydevice {'src_sites': 6, 'sink_sites': 28, 'pts': 183674, 'tainted_vars': 4937, 'rel_vars': 3330, 'rel_cands': 6414}
+de.nulide.findmydevice.edge {'src_sites': 6, 'sink_sites': 28, 'pts': 183811, 'tainted_vars': 4940, 'rel_vars': 3333, 'rel_cands': 6415}
+de.saschahlusiak.freebloks {'src_sites': 0, 'sink_sites': 20, 'pts': 146290, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+de.thefeiter.liedgutverzeichnis {'src_sites': 4, 'sink_sites': 22, 'pts': 8646, 'tainted_vars': 2181, 'rel_vars': 712, 'rel_cands': 515}
+de.uni_potsdam.hpi.openmensa souffle failed
+dev.bg.skylib {'src_sites': 2, 'sink_sites': 28, 'pts': 115492, 'tainted_vars': 8419, 'rel_vars': 5918, 'rel_cands': 18703}
+de.readeckapp souffle failed
+dev.dettmer.simplenotes souffle failed
+dev.gpxit.app souffle failed
+dev.itsvic.parceltracker souffle failed
+ee.malt.diadem {'src_sites': 4, 'sink_sites': 17, 'pts': 5148, 'tainted_vars': 1995, 'rel_vars': 1259, 'rel_cands': 1292}
+dev.otherworld.shoppinglist souffle failed
+eu.frigo.dispensa {'src_sites': 10, 'sink_sites': 48, 'pts': 13262243, 'tainted_vars': 46884, 'rel_vars': 31494, 'rel_cands': 32019}
+eus.ordunte.app souffle failed
+eu.quelltext.coloring souffle failed
+foss.cnugteren.nlweer {'src_sites': 3, 'sink_sites': 14, 'pts': 115981, 'tainted_vars': 9946, 'rel_vars': 6215, 'rel_cands': 2996}
+fi.kroon.vadret {'src_sites': 8, 'sink_sites': 21, 'pts': 4080913, 'tainted_vars': 36147, 'rel_vars': 25640, 'rel_cands': 12907}
+fr.framagit.jeromeo.etagere souffle failed
+fr.hellpc.mirror souffle failed
+fr.nihilus.music souffle failed
+freemap.hikar {'src_sites': 6, 'sink_sites': 15, 'pts': 16449, 'tainted_vars': 3016, 'rel_vars': 1744, 'rel_cands': 1430}
+home.wyoming_android_tts.indigane {'src_sites': 0, 'sink_sites': 9, 'pts': 1287, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+fr.luteal.app souffle failed
+horse.amazin.my.stratum0.statuswidget {'src_sites': 0, 'sink_sites': 20, 'pts': 10989188, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+indi.dmzz_yyhyy.lightnovelreader souffle failed
+info.dvkr.screenstream souffle failed
+info.varden.hauk {'src_sites': 3, 'sink_sites': 22, 'pts': 5670, 'tainted_vars': 1346, 'rel_vars': 726, 'rel_cands': 597}
+info.plateaukao.einkbro souffle failed
+io.github.antoinepirlot.satunes souffle failed
+info.zamojski.soft.towercollector {'src_sites': 12, 'sink_sites': 57, 'pts': 11736618, 'tainted_vars': 48955, 'rel_vars': 31650, 'rel_cands': 35254}
+io.github.benji377.timety souffle failed
+io.github.deprec8.enigmadroid souffle failed
+io.github.luantak.fokuslauncher souffle failed
+io.github.kitswas.virtualgamepadmobile souffle failed
+io.github.mkckr0.audio_share_app {'src_sites': 0, 'sink_sites': 4, 'pts': 4739, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+io.github.mickaelmagniez.windbubble souffle failed
+io.github.mouse233.localsendkotlin {'src_sites': 3, 'sink_sites': 20, 'pts': 11763, 'tainted_vars': 3678, 'rel_vars': 2117, 'rel_cands': 3213}
+io.github.mortenfyhn.feltbok souffle failed
+io.github.nofuturekid.nova souffle failed
+io.github.pitonite.exch_cx souffle failed
+io.github.quillpad souffle failed
+io.github.project_kaat.gpsdrelay souffle failed
+io.github.samolego.canta souffle failed
+io.github.soundremote souffle failed
+io.pcontacts.app souffle failed
+io.timelimit.android.aosp.direct souffle failed
+io.github.v2compose souffle failed
+io.vertretungsplan.client.android souffle failed
+kiwi.root.an2linuxclient souffle failed
+life.andre.message487 souffle failed
+me.echeung.moemoekyun.fdroid {'src_sites': 0, 'sink_sites': 9, 'pts': 839784, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+liou.rayyuan.ebooksearchtaiwan souffle failed
+me.kerooker.rpgcharactergenerator souffle failed
+me.testcase.ognarviewer {'src_sites': 2, 'sink_sites': 8, 'pts': 2153, 'tainted_vars': 67, 'rel_vars': 0, 'rel_cands': 0}
+net.millaguie.cosmovisor souffle failed
+me.mudkip.moememos souffle failed
+net.phbwt.paperwork souffle failed
+net.nurik.roman.muzei souffle failed
+net.yukh.xui souffle failed
+nl.sonck.streamplayer souffle failed
+nightlock.peppercarrot {'src_sites': 4, 'sink_sites': 34, 'pts': 27250072, 'tainted_vars': 69966, 'rel_vars': 49260, 'rel_cands': 21540}
+nodomain.aditya1875more.stashly souffle failed
+org.akvo.rsr.up {'src_sites': 5, 'sink_sites': 20, 'pts': 9173, 'tainted_vars': 1724, 'rel_vars': 1164, 'rel_cands': 2033}
+org.alberto97.ouilookup souffle failed
+off.kys.backtalk souffle failed
+org.blitzortung.android.app {'src_sites': 4, 'sink_sites': 25, 'pts': 873633, 'tainted_vars': 15312, 'rel_vars': 10012, 'rel_cands': 8220}
+org.bombusmod {'src_sites': 3, 'sink_sites': 24, 'pts': 181517, 'tainted_vars': 6691, 'rel_vars': 3868, 'rel_cands': 2953}
+org.avmedia.gshockGoogleSync souffle failed
+org.dkf.jmule {'src_sites': 5, 'sink_sites': 32, 'pts': 83525, 'tainted_vars': 7890, 'rel_vars': 4757, 'rel_cands': 3910}
+org.equeim.tremotesf {'src_sites': 1, 'sink_sites': 11, 'pts': 94001, 'tainted_vars': 11379, 'rel_vars': 7589, 'rel_cands': 26104}
+org.codeberg.quecomet.oshi souffle failed
+org.freedombox.freedombox {'src_sites': 3, 'sink_sites': 22, 'pts': 24313, 'tainted_vars': 960, 'rel_vars': 560, 'rel_cands': 401}
+org.gateshipone.malp {'src_sites': 4, 'sink_sites': 32, 'pts': 28421, 'tainted_vars': 3957, 'rel_vars': 2207, 'rel_cands': 1798}
+org.havenapp.neruppu souffle failed
+org.fairspeed.test souffle failed
+org.joinmastodon.android {'src_sites': 3, 'sink_sites': 37, 'pts': 6865058, 'tainted_vars': 35931, 'rel_vars': 23067, 'rel_cands': 24240}
+org.knightstalker.app souffle failed
+org.libreoffice.impressremote {'src_sites': 0, 'sink_sites': 14, 'pts': 1107, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+org.moire.ultrasonic {'src_sites': 2, 'sink_sites': 22, 'pts': 424267, 'tainted_vars': 11396, 'rel_vars': 6663, 'rel_cands': 6880}
+org.mosad.teapod {'src_sites': 2, 'sink_sites': 27, 'pts': 4303210, 'tainted_vars': 28064, 'rel_vars': 18445, 'rel_cands': 17101}
+org.mult.daap {'src_sites': 3, 'sink_sites': 10, 'pts': 2473, 'tainted_vars': 850, 'rel_vars': 504, 'rel_cands': 580}
+org.juanro.autumandu souffle failed
+org.musicbrainz.picard.barcodescanner {'src_sites': 1, 'sink_sites': 20, 'pts': 27814, 'tainted_vars': 5173, 'rel_vars': 3417, 'rel_cands': 2594}
+org.nuclearfog.smither souffle failed
+org.ostrya.presencepublisher {'src_sites': 9, 'sink_sites': 48, 'pts': 2087970, 'tainted_vars': 29688, 'rel_vars': 19487, 'rel_cands': 20218}
+org.proninyaroslav.opencomicvine {'src_sites': 2, 'sink_sites': 13, 'pts': 205638, 'tainted_vars': 14996, 'rel_vars': 9075, 'rel_cands': 34428}
+org.purple.smoke {'src_sites': 2, 'sink_sites': 15, 'pts': 304405, 'tainted_vars': 3602, 'rel_vars': 2307, 'rel_cands': 4378}
+org.purple.smokestack {'src_sites': 1, 'sink_sites': 10, 'pts': 35231, 'tainted_vars': 1345, 'rel_vars': 827, 'rel_cands': 1723}
+org.shirakumo.ocelot {'src_sites': 2, 'sink_sites': 21, 'pts': 5582, 'tainted_vars': 1712, 'rel_vars': 1016, 'rel_cands': 712}
+org.nitri.opentopo souffle failed
+org.unifiedpush.distributor.sunup souffle failed
+org.unifiedpush.distributor.nextpush souffle failed
+org.unifiedpush.example souffle failed
+org.y20k.escapepod souffle failed
+page.codeberg.lanticy.guandan {'src_sites': 0, 'sink_sites': 6, 'pts': 5292, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+org.y20k.transistor souffle failed
+page.ooooo.geoshare souffle failed
+rak.pixellwp {'src_sites': 1, 'sink_sites': 9, 'pts': 1750, 'tainted_vars': 881, 'rel_vars': 491, 'rel_cands': 560}
+ru.ra66it.updaterforspotify {'src_sites': 0, 'sink_sites': 3, 'pts': 1562, 'tainted_vars': 0, 'rel_vars': 0, 'rel_cands': 0}
+player.phonograph.plus souffle failed
+sitavi.seenema souffle failed
+systems.sieber.fsclock {'src_sites': 2, 'sink_sites': 12, 'pts': 1760, 'tainted_vars': 18, 'rel_vars': 18, 'rel_cands': 57}
+site.remlit.snowdrop souffle failed
+top.donmor.tiddloid {'src_sites': 2, 'sink_sites': 11, 'pts': 5275, 'tainted_vars': 1003, 'rel_vars': 572, 'rel_cands': 1722}
+truewatcher.tower {'src_sites': 3, 'sink_sites': 13, 'pts': 8892, 'tainted_vars': 1502, 'rel_vars': 963, 'rel_cands': 1561}
+tech.xvanturing.freeproxy souffle failed
+uk.org.retallack.slimbook {'src_sites': 1, 'sink_sites': 6, 'pts': 807, 'tainted_vars': 56, 'rel_vars': 0, 'rel_cands': 0}
+uk.nktnet.webviewkiosk souffle failed
+xyz.hisname.fireflyiii {'src_sites': 7, 'sink_sites': 33, 'pts': 464971, 'tainted_vars': 21056, 'rel_vars': 12353, 'rel_cands': 15670}
+whl.trending.ai souffle failed
+xyz.linerly.searxist souffle failed
