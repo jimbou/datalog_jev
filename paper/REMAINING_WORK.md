@@ -116,11 +116,20 @@ EXTRACT_XMX/EXTRACT_THREADS, LIB_PREFIXES, BUDGET_FILE; `extract/Facts.java` EXC
   holes_android_fw.jsonl on the server, backup .bak): 10,503 (340 framework, 10,163 bundled-library: androidx 5,926,
   kotlin 1,303, kotlinx 542, ...), 8.8 candidate flows per method vs 2.9 before; 66 of the 98 fallback apps have library
   holes (median 80, max 1,278), 8,037 methods occur in one app. 10,149 need rubric labels.
-- Labels and prices RUNNING (2026-10-14, `bench/queues/f1_label.sh`, `f1_label_gpt.sh`): Sonnet rubric labels then
-  sonnetp prices via Claude Code; luna prices via Codex; GPT rubric labels (gpt-6.1-sol, 2 threads; it returned 429 at
-  first) via Codex. Jev and the OpenRouter panel: estimated $7.75 (by question count; $3.9 flat), awaiting approval. K2 for
-  library methods (disagreements) would need StubDroid on library code from the APKs. Then decide whether rescued apps
-  enter the corpus; report them apart (retry, fallback) and merged.
+- Labels and prices RUNNING (2026-10-14, `bench/queues/f1_label.sh`, `f1_label_gpt.sh`, `f1_label_gpt4.sh`): Sonnet rubric
+  labels then sonnetp prices via Claude Code; luna prices via Codex; GPT rubric labels (gpt-6.1-sol; it returned 429 at
+  first, 2 threads, 4 after luna) via Codex. OpenRouter prices DONE (approved, `bench/queues/f1_price_or.sh`, cap $10):
+  $9.17 (Jev choice-obj $0.62, taint $0.36, choice $0.55; q27 $2.20, qflash $0.30, dsflash $0.86, gflash $4.29). q27,
+  qflash and dsflash now reason by default on OpenRouter (slow, up to 50x the cost): their default pass was stopped after
+  a few minutes and they were priced with NO_REASONING=1, the setting of the old fill-in pass (old cost per method
+  matches). Jev fails on 4 methods (522 to 1,204 candidate flows; price 0.5). K2 for library methods (disagreements)
+  would need StubDroid on library code from the APKs. Then decide whether rescued apps enter the corpus; report them apart
+  (retry, fallback) and merged.
+- Step-e threat found: R8 moves app code into library-named classes (e.g. `okio.Okio.HomeScreenContent(...)`, a Compose
+  screen of com.ammar.wallflow), so prefixes treat some app code as library code. Lower bound (library holes whose
+  signature names a type of the app's package): 224 of 10,163 methods (2.2%), 9.6% of candidate flows, 17 of the 66 apps
+  with library holes (top: com.ammar.wallflow 64 of 760, org.equeim.tremotesf 39, com.readrops.app 37). Labels and
+  prices for such methods have no API contract to go by. Report fallback apps with and without these 17 at least.
 
 **F2. Pricers on a development subset.** Fix a random 30% of the 307 apps (seeded) as development apps; choose the variant
 there; report the chosen variant with the usual 200 splits on all apps and on the other 70% alone, and list every variant
