@@ -282,7 +282,8 @@ Pipeline from here; times are working time unless marked as server time.
 2. Quick items (half a day): F5 recall-side headline; C2 from the F1 data (pricers on bundled-library methods: Jev holds,
    Sonnet misses AppCompatActivity.setContentView); C0 share of verdicts at Java-server source/sink entries.
 3. B3 user value (about a day): false alarms per app before and after clearing, apps with no alarms left, receipt sizes.
-4. F2 better pricers on a development subset (2-3 days): Jev with the written definition (about $1-2 OpenRouter, needs
+4. F2 better pricers on a development subset (2-3 days; Sonnet variants possibly on the cloud-session credits, see
+   `paper/CLOUD_CREDITS_PLAN.md`, expires 2026-11-05): Jev with the written definition (about $1-2 OpenRouter, needs
    approval) and free combinations of existing prices; no 5-sample Sonnet run (Claude Code usage).
 5. F3 second population (about a week): AndroZoo when the key arrives; meanwhile prepare the IzzyOnDroid list (fixed in
    advance: date, size limit, seed). Build with the same pipeline (fallback included), labels via Claude Code and Codex,
