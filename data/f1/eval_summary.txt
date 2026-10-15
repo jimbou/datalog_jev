@@ -1,0 +1,15 @@
+# fm-rk-<pricer> on the F1-rescued apps; threshold certified (app_ltt.calibrate, eps 0.1) on all main apps per pricer, applied to each set.
+# Columns: cleared share of decided leak-free hole-dependent sinks, apps with a false accept / apps with decided sinks.
+# fallback-17: without the 17 apps whose library holes include R8-moved app code. Script: analysis/f1_score.py.
+alpha 0.05
+  choice-obj delta 0.2   | main  47.3% 1/307   | retry  48.6% 0/10  | fallback  41.5% 0/56  | fallback-17  54.9% 0/41
+  sonnetp    delta 0.02  | main  16.7% 0/307   | retry  15.1% 0/10  | fallback  11.9% 2/56  | fallback-17  13.7% 1/41
+  b6         delta None  | main   0.0% 0/307   | retry   0.0% 0/10  | fallback   0.0% 0/56  | fallback-17   0.0% 0/41
+  freq       delta 0.03  | main  19.0% 0/307   | retry  13.4% 0/10  | fallback  12.9% 0/56  | fallback-17  11.5% 0/41
+  uniform    delta 0.5   | main   0.0% 0/307   | retry   0.0% 0/10  | fallback   0.0% 0/56  | fallback-17   0.0% 0/41
+alpha 0.1
+  choice-obj delta 0.3   | main  60.1% 12/307  | retry  54.7% 1/10  | fallback  55.3% 1/56  | fallback-17  71.4% 0/41
+  sonnetp    delta 0.02  | main  16.7% 0/307   | retry  15.1% 0/10  | fallback  11.9% 2/56  | fallback-17  13.7% 1/41
+  b6         delta None  | main   0.0% 0/307   | retry   0.0% 0/10  | fallback   0.0% 0/56  | fallback-17   0.0% 0/41
+  freq       delta 0.03  | main  19.0% 0/307   | retry  13.4% 0/10  | fallback  12.9% 0/56  | fallback-17  11.5% 0/41
+  uniform    delta 0.5   | main   0.0% 0/307   | retry   0.0% 0/10  | fallback   0.0% 0/56  | fallback-17   0.0% 0/41

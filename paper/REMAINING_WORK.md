@@ -134,6 +134,13 @@ EXTRACT_XMX/EXTRACT_THREADS, LIB_PREFIXES, BUDGET_FILE; `extract/Facts.java` EXC
   main 47.3%, 1/307 | retry 10 apps 48.6%, 0/10 | fallback 56 apps 41.5%, 0/56 (undecided 18.2% of sinks) | fallback
   without the 17 misattributed apps 41 apps 54.9%, 0/41. At alpha 0.1: main 60.1% 12/307, retry 54.7% 1/10, fallback
   55.3% 1/56 (dev.bg.skylib). Only 66 of the 110 rescued apps have decided hole-dependent sinks.
+- All prices DONE 2026-10-15 08:34 (sonnetp via Claude Code, 8 threads, 0 errors). Every main pricer on the rescued apps
+  (`data/f1/eval_summary.txt`, `analysis/f1_score.py`; threshold certified on all main apps per pricer, alpha 0.05):
+  Jev 47.3% main / 48.6% retry / 41.5% fallback / 54.9% fallback-17, no false accepts on rescued apps; Sonnet 16.7% /
+  15.1% / 11.9% / 13.7%, but 2 of 56 fallback apps with a false accept (com.wirelessalien.android.moviedb,
+  xyz.hisname.fireflyiii), both through one atom: androidx AppCompatActivity.setContentView(View) arg0 -> this, labeled
+  a flow by both labelers, Sonnet price 0.02 (on the main corpus androidx is app code, so this hole never occurs); freq
+  19.0% / 13.4% / 12.9% / 11.5%; b6 and counting clear nothing at alpha 0.05, as on the main corpus.
 - Step-e threat found: R8 moves app code into library-named classes (e.g. `okio.Okio.HomeScreenContent(...)`, a Compose
   screen of com.ammar.wallflow), so prefixes treat some app code as library code. Lower bound (library holes whose
   signature names a type of the app's package): 224 of 10,163 methods (2.2%), 9.6% of candidate flows, 17 of the 66 apps

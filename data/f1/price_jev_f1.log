@@ -1,0 +1,9 @@
+choice-obj 0 priced 10504 errors 4
+choice 0 priced 10613 errors 3
+taint 0 priced 10614 errors 2
+choice-obj 0 priced 0 errors 4
+taint 0 priced 0 errors 2
+choice 0 priced 0 errors 3
+choice-obj 0 priced 0 errors 4
+taint 0 priced 0 errors 2
+choice 0 priced 0 errors 3
