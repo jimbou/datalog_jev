@@ -41,6 +41,7 @@ This line fills holes; it never says how wrong the filling might be. Merlin is t
 | [Seldon, PLDI 2019](https://www.sri.inf.ethz.ch/publications/chibotaru2019pldi) | Source/sink/sanitizer roles from big code by linear optimization | Reports 67% estimated precision; no per-spec confidence used downstream |
 | [Atlas, PLDI 2018](https://arxiv.org/abs/1711.03239) | Points-to specs for Java library methods by running them (active learning) | None; tests as oracle. Our oracle 2 is close to this. |
 | [IRIS, ICLR 2025](https://arxiv.org/abs/2405.17238) | LLM infers taint specs for library APIs, fed to CodeQL | LLM answers taken as fact |
+| [LLMDFA, NeurIPS 2024](https://arxiv.org/abs/2402.10754) | LLM extracts sources, sinks and dataflow summaries (LLM-written scripts, theorem prover for path feasibility), compilation-free | LLM output as fact; no error bound |
 | [SemTaint, 2026](https://arxiv.org/abs/2601.10865v1) | Multi-agent LLM extraction of sources, sinks, call edges and library flow summaries for npm packages, fed to CodeQL | No confidence reported |
 
 Atlas is worth citing next to closing: it already executes library methods to learn specs. Your difference is which methods to test (the ones receipts depend on) and what the result buys (a certified verdict).

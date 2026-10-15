@@ -255,4 +255,4 @@ noise; GPT key; rubric relabeling (GPT done); FlowDroid with/without models on 8
 (validation); Intent holes; conformal comparison on 324 apps; sensitivity and grouped splits; calibration floor;
 figures from data.
 
-should we add this to related work: Possibly missing: LLMDFA (Wang et al., NeurIPS 2024) isn't in Related work.md or the paper, as far as I can find. It uses LLMs to extract sources and sinks and summarize dataflow inside functions, again taking the output as fact. It may deserve a citation next to IRIS. I'm going from memory here, so the reference should be checked before it goes in.
+LLMDFA (Wang et al., NeurIPS 2024, arXiv 2402.10754) verified and added on 2026-10-15: refs.bib, related.tex (next to IRIS and SemTaint), Related work.md.

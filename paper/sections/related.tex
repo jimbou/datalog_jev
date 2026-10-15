@@ -42,7 +42,7 @@ More models make an analysis less unsound but never sound, because some methods 
 Receipts are complementary: they start from the models, here FlowDroid's, and price exactly the facts that the models leave open; better models leave fewer holes to price. We also use StubDroid as an independent answer key (RQ3).
 
 \paragraph{Language models as library models.}
-IRIS~\cite{iris} and SemTaint~\cite{semtaint} ask language models for taint specifications of library methods and use the answers as facts.
+IRIS~\cite{iris} and SemTaint~\cite{semtaint} ask language models for taint specifications of library methods and use the answers as facts; LLMDFA~\cite{llmdfa} has a language model extract sources, sinks and dataflow summaries and likewise trusts them.
 This is the ``model taken as fact'' baseline in our evaluation: on the deletion keys it clears more than our approach, but its wrong clearances reach 7.7\% of apps and cannot be controlled (RQ2).
 We use language models in the same role, but only as pricers: their answers rank verdicts, and the calibration, not the model, provides the guarantee.
 A poor model therefore clears less instead of producing wrong clearances (RQ4).
