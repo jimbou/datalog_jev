@@ -125,6 +125,15 @@ EXTRACT_XMX/EXTRACT_THREADS, LIB_PREFIXES, BUDGET_FILE; `extract/Facts.java` EXC
   matches). Jev fails on 4 methods (522 to 1,204 candidate flows; price 0.5). K2 for library methods (disagreements)
   would need StubDroid on library code from the APKs. Then decide whether rescued apps enter the corpus; report them apart
   (retry, fallback) and merged.
+- Labels DONE 2026-10-15 03:00: Sonnet 10,148 of 10,149, GPT 10,149. Where both decide, Sonnet vs GPT agree as before
+  (kappa 0.82 on the new library methods, 0.80 old), but GPT answers U (undecidable) for 27.2% of library candidate
+  flows (Sonnet 0.3%), so 27.4% of library flows are unknown in the key before K2. luna prices DONE; sonnetp running
+  (8 threads from 03:20, about 7.5 methods/min).
+- First main evaluation (fm-rk-choice-obj, `bench/queues/f1_eval.sh`, threshold certified on all 307 main apps; alpha
+  0.05 -> delta 0.2, alpha 0.1 -> 0.3). Cleared share of leak-free hole-dependent sinks, apps with a false accept:
+  main 47.3%, 1/307 | retry 10 apps 48.6%, 0/10 | fallback 56 apps 41.5%, 0/56 (undecided 18.2% of sinks) | fallback
+  without the 17 misattributed apps 41 apps 54.9%, 0/41. At alpha 0.1: main 60.1% 12/307, retry 54.7% 1/10, fallback
+  55.3% 1/56 (dev.bg.skylib). Only 66 of the 110 rescued apps have decided hole-dependent sinks.
 - Step-e threat found: R8 moves app code into library-named classes (e.g. `okio.Okio.HomeScreenContent(...)`, a Compose
   screen of com.ammar.wallflow), so prefixes treat some app code as library code. Lower bound (library holes whose
   signature names a type of the app's package): 224 of 10,163 methods (2.2%), 9.6% of candidate flows, 17 of the 66 apps
