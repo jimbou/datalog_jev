@@ -160,6 +160,15 @@ EXTRACT_XMX/EXTRACT_THREADS, LIB_PREFIXES, BUDGET_FILE; `extract/Facts.java` EXC
   with library holes (top: com.ammar.wallflow 64 of 760, org.equeim.tremotesf 39, com.readrops.app 37). Labels and
   prices for such methods have no API contract to go by. Report fallback apps with and without these 17 at least.
 
+**F2 cost (measured 2026-10-15).** Methods to price (unmodeled holes): dev subset (92 apps) about 5,300; all 307 main apps
+7,518; main + rescued 17,894. Claude Code is a subscription with usage limits; one pricing call is about $0.009 in
+API-equivalent usage (measured with `claude -p --output-format json` on 10 methods with 1 to 9 candidate flows; library
+methods cost more). Jev with the written definition: about $0.3-0.5 (dev), $0.5-0.8 (all main), $1-2 (main + rescued),
+OpenRouter, needs approval. Sonnet with 5 samples: 26,500 calls (dev, about $240 equivalent, about 18 h at 8 threads),
+89,000 calls for main + rescued (about $800 equivalent, about 60 h): too much of the subscription. Sonnet with 1 sample on
+the dev subset: about $50 equivalent. Combinations of existing prices (Jev with ties broken by the classifier,
+max(Jev, Sonnet)): free. Recommended: Jev with the definition plus the free combinations; no 5-sample Sonnet run.
+
 **F2. Pricers on a development subset.** Fix a random 30% of the 307 apps (seeded) as development apps; choose the variant
 there; report the chosen variant with the usual 200 splits on all apps and on the other 70% alone, and list every variant
 tried. The guarantee holds for every variant (Proposition 2); the dev subset only guards against choosing on the test
@@ -243,7 +252,8 @@ measure the share of verdicts at such entries and, if large, add an Android-only
 - Target venue/date (ISSTA 2027 deadline unknown until the call is out).
 - F2: approve the OpenRouter spend for Jev with the written definition (about $0.4).
 - F1e: after the subset trial, whether to rebuild all graphs with bundled libraries as holes (all paper numbers change).
-- F3: request an AndroZoo API key; without it, IzzyOnDroid first; Google Play downloads only with the supervisor's OK.
+- F3: AndroZoo key APPLIED by the user on 2026-10-15, waiting; without it, IzzyOnDroid first; Google Play downloads only
+  with the supervisor's OK.
 - F4a: whether callbacks join the flow definition or stay a separate hole type.
 - Server builds for F1 and F4 start only when the user says so.
 
@@ -256,3 +266,29 @@ noise; GPT key; rubric relabeling (GPT done); FlowDroid with/without models on 8
 figures from data.
 
 LLMDFA (Wang et al., NeurIPS 2024, arXiv 2402.10754) verified and added on 2026-10-15: refs.bib, related.tex (next to IRIS and SemTaint), Related work.md.
+
+## Next steps (agreed order, 2026-10-15)
+
+Pipeline from here; times are working time unless marked as server time.
+
+1. F1 finish (1-2 days). FlowDroid control running (`bench/queues/fd_fallback.sh`, up to about a day of server time):
+   FlowDroid's out-of-memory apps get the bundled-library exclusion with only the time left after the memory cap
+   (2100 s minus the seconds of the full run), exactly as our fallback; its timeouts used the whole budget and get no
+   second run. The control reruns of FlowDroid's successful apps with sinks only measure leaks lost by the exclusion and
+   are not counted as coverage. Then: paper text for the pipeline (approach, impl), RQ1 coverage and reach paragraph,
+   same-budget paragraph in the Discussion, pipeline row in the main tables (main tables stay on the 307 apps), threats
+   (R8-moved app code, fallback chosen after the 40-app subset, 27% undecidable library flows in the key). K2 for library
+   disagreements skipped and disclosed.
+2. Quick items (half a day): F5 recall-side headline; C2 from the F1 data (pricers on bundled-library methods: Jev holds,
+   Sonnet misses AppCompatActivity.setContentView); C0 share of verdicts at Java-server source/sink entries.
+3. B3 user value (about a day): false alarms per app before and after clearing, apps with no alarms left, receipt sizes.
+4. F2 better pricers on a development subset (2-3 days): Jev with the written definition (about $1-2 OpenRouter, needs
+   approval) and free combinations of existing prices; no 5-sample Sonnet run (Claude Code usage).
+5. F3 second population (about a week): AndroZoo when the key arrives; meanwhile prepare the IzzyOnDroid list (fixed in
+   advance: date, size limit, seed). Build with the same pipeline (fallback included), labels via Claude Code and Codex,
+   prices with approval.
+6. Optional: F4 malware (a week or more); B2 kept as a validation, not pursued; C1 pinned pricer; C3 second rater.
+7. Housekeeping D1-D7 last, when the numbers are final (1-2 days), then the authors' read-through.
+
+Must-do total: about 4-6 working days plus server time; with F2 and F3: about 2.5-3.5 weeks; F4 adds about a week.
+
