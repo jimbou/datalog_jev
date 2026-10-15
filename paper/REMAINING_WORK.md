@@ -9,6 +9,7 @@ Mock-review estimate of acceptance: about 35-40% now (B1 done, B3 part done, rub
 stay a validation; other items add less.
 
 **Done since 2026-10-07 (summary):**
+
 - Rubric relabeling; rubric key is the main key (A1-A5).
 - B1: main setting is now our analysis + FlowDroid's models, holes only for the 12,274 unmodeled methods (`fm-`); whole paper,
   tables and figures rewritten for it (new example `de.luhmer.owncloudnewsreader`; RQ1 now "a third of real leaks pass only
@@ -45,6 +46,7 @@ A1-A5 are done (rubric relabeling, rubric key as main key, agreement numbers), a
 | A5 | Main key | DONE: rubric key |
 
 ## B. Acceptance improvers from the mock review (see `REVIEW_FIXES.md`)
+
 | # | Item | Why | Effort |
 | --- | --- | --- | --- |
 | B1 | DONE 2026-10-08: holes only where FlowDroid has no model (`fm-` mode), new example (`ContentResolver.insert` leak through unmodeled `ContentValues.put`) | removed the strawman objection | done |
@@ -72,6 +74,7 @@ bundled libraries dominate the analysis (small apps already have millions of poi
 3.1M, `uk.org.ngo.squeezer` 5.9M, mostly AndroidX/Kotlin code), Soufflé runs as an interpreter, and the rule
 `TV(to) :- TV(b), Load(to, b, _)` with context-insensitive points-to spreads taint widely (35k tainted variables in a DNS
 toggle app; probably also why we reach only 58% of FlowDroid's leaks at ~1% precision).
+
 - a. Record per app which stage failed and why (extraction timeout or error, Soufflé timeout, Soufflé out of memory),
   in `data/android_failed.txt` or a new file with a reason column.
 - b. One combined limit of 2100 s per app (extraction plus Soufflé) instead of 1200 + 900, and 16 GB, so the budget is
@@ -91,6 +94,7 @@ toggle app; probably also why we reach only 58% of FlowDroid's leaks at ~1% prec
 **F1 status (2026-10-13).** Code: `analysis/run_android.py` options TOTAL_TIMEOUT, REASONS_FILE, SOUFFLE_BIN,
 EXTRACT_XMX/EXTRACT_THREADS, LIB_PREFIXES, BUDGET_FILE; `extract/Facts.java` EXCLUDE_PREFIXES/KEEP_PREFIX; queues
 `bench/queues/f1_*.sh`, `f1e_*.sh`; results (no graphs) in `data/f1/`.
+
 - a. DONE: reason and seconds per app (`data/f1/reasons*.tsv`). The old build recorded no reasons.
 - b. DONE: 2100 s shared, 16 GB (Soufflé address space; Soot heap now also 16 GB), 4 threads, 2 apps on 8 cores.
 - c. TRIED, NOT USED: compiled taint.dl gives identical graphs and identical per-sink results on 6 check apps, but on
@@ -141,6 +145,15 @@ EXTRACT_XMX/EXTRACT_THREADS, LIB_PREFIXES, BUDGET_FILE; `extract/Facts.java` EXC
   xyz.hisname.fireflyiii), both through one atom: androidx AppCompatActivity.setContentView(View) arg0 -> this, labeled
   a flow by both labelers, Sonnet price 0.02 (on the main corpus androidx is app code, so this hole never occurs); freq
   19.0% / 13.4% / 12.9% / 11.5%; b6 and counting clear nothing at alpha 0.05, as on the main corpus.
+- AGREED 2026-10-15: the fallback becomes part of the pipeline (full build; on the memory cap, step e with the time
+  left), positioned as graceful degradation: what does not fit becomes priced holes and the bound still holds. Main
+  tables stay on the 307 apps; add a pipeline row and the coverage claim. LTT with 200 splits on main + rescued (373
+  apps), alpha 0.05: Jev 1.3% held-out apps wrong (main 0.9%), power 49.6% (48.7%); Sonnet 0.5% (0.0%), 16.3% (16.7%);
+  freq 0.0%, 18.4% (19.0%). Coverage on the 585 picked apps: FlowDroid 317, ours 344 without the fallback, 442 with it.
+  Disclose that the fallback was chosen after the 40-app subset (prefix list fixed before any step-e result).
+- FlowDroid control RUNNING (2026-10-15 08:53, `bench/fd_fallback.py`, `bench/FDExclude.java`, `bench/queues/fd_fallback.sh`):
+  FlowDroid with the same prefixes excluded (Soot exclude list, app package kept), 151 out-of-memory apps with the time
+  left (fallback), then the 107 successful apps with sinks at 2100 s (control: leaks lost without notice).
 - Step-e threat found: R8 moves app code into library-named classes (e.g. `okio.Okio.HomeScreenContent(...)`, a Compose
   screen of com.ammar.wallflow), so prefixes treat some app code as library code. Lower bound (library holes whose
   signature names a type of the app's package): 224 of 10,163 methods (2.2%), 9.6% of candidate flows, 17 of the 66 apps
@@ -151,6 +164,7 @@ EXTRACT_XMX/EXTRACT_THREADS, LIB_PREFIXES, BUDGET_FILE; `extract/Facts.java` EXC
 there; report the chosen variant with the usual 200 splits on all apps and on the other 70% alone, and list every variant
 tried. The guarantee holds for every variant (Proposition 2); the dev subset only guards against choosing on the test
 data. Price only the methods on the dev apps' receipts first.
+
 - Jev with the full written flow definition (Appendix A) in the question. Jev does not label the key, so this is not
   circular. Needs approval for OpenRouter spending (about $0.4 for the whole corpus, less for the subset).
 - Sonnet 5 with the written definition, about 5 samples per method via Claude Code (free), price = the highest sample,
@@ -163,6 +177,7 @@ data. Price only the methods on the dev apps' receipts first.
 **F3. Second population and fallbacks without AndroZoo.** Apply for the AndroZoo key first (university email, usually
 days). Whatever the source: fix the app list before running (store, date, size limit, seed), and put only SHA-256 hashes
 in the artifact, not the APKs (stores and AndroZoo forbid redistribution). Fallbacks, best first:
+
 - IzzyOnDroid repository: F-Droid-style, so our F-Droid download tooling should work with only the repository address
   changed; no account. Developer-built apps that often bundle Firebase, ads and analytics SDKs. Cheap enough to try
   next to the F1e subset trial. Related: F-Droid apps with the anti-features Tracking, Ads or NonFreeNet (chosen by
@@ -176,6 +191,7 @@ in the artifact, not the APKs (stores and AndroZoo forbid redistribution). Fallb
   can be downloaded; they are from 2017-2020.
 
 **F4. Malware.**
+
 - a. Callback holes, built like the Intent holes (`taint_icc.dl`): edges from an object registered with the framework
   (`WebView.addJavascriptInterface`, listeners) to the parameters and return values of its callback methods. Puts 3 of
   the 6 TaintBench leaks in scope. Decide whether callbacks join the flow definition or stay a separate hole type with its
@@ -209,6 +225,7 @@ measure the share of verdicts at such entries and, if large, add an Android-only
 | C5 | Now F4 | | |
 
 ## D. Paper housekeeping (must do before submission)
+
 | # | Item |
 | --- | --- |
 | D1 | Check the ISSTA 2027 call (template, page limit, anonymity, AI-disclosure and data-availability rules); we followed ISSTA 2026's |
@@ -220,6 +237,7 @@ measure the share of verdicts at such entries and, if large, add an Android-only
 | D7 | Regenerate figures after any rerun: `analysis/paper_stats.py` on the server, then `paper/make_figs.py` |
 
 ## E. Decisions only the user can make
+
 - Whether to do B2 (server days, uncertain outcome) and C1/C2 (time).
 - Whether a colleague can be the second rater (C3) or join a small triage study (B3 optional).
 - Target venue/date (ISSTA 2027 deadline unknown until the call is out).
@@ -230,8 +248,11 @@ measure the share of verdicts at such entries and, if large, add an Android-only
 - Server builds for F1 and F4 start only when the user says so.
 
 ## Done (for reference)
+
 Restructured paper (problem-first intro, real motivating example, background and definition, approach with theory,
 6 RQs with answer boxes, comparative related work); TaintBench; budgeted checking; pricer panel; wording ablation; label
 noise; GPT key; rubric relabeling (GPT done); FlowDroid with/without models on 80 apps; receipts on FlowDroid
 (validation); Intent holes; conformal comparison on 324 apps; sensitivity and grouped splits; calibration floor;
 figures from data.
+
+should we add this to related work: Possibly missing: LLMDFA (Wang et al., NeurIPS 2024) isn't in Related work.md or the paper, as far as I can find. It uses LLMs to extract sources and sinks and summarize dataflow inside functions, again taking the output as fact. It may deserve a citation next to IRIS. I'm going from memory here, so the reference should be checked before it goes in.
