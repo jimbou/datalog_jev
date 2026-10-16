@@ -5,16 +5,24 @@ BACKEND=codex   Codex (`codex exec`): read-only sandbox, the system text is prep
 Neither CLI exposes the sampling temperature, so answers are not forced to be deterministic (the API runs used 0).
 Calls run in an empty directory so no project context is picked up. Returns the model's text answer.
 """
-import json, os, subprocess, tempfile
+import json, os, shutil, subprocess, tempfile
 
 WORKDIR = tempfile.mkdtemp(prefix="cli_llm_")
 PROXY = os.path.expanduser("~/ai-proxy/with-proxy")
 PREFIX = [PROXY] if os.path.exists(PROXY) else []
 
 
+def _bin(name):  # ~/.local/bin on the PKU server; elsewhere (e.g. a Claude Code cloud session) whatever is on PATH
+    p = os.path.expanduser("~/.local/bin/" + name)
+    return p if os.path.exists(p) else shutil.which(name) or p
+
+
+CLAUDE, CODEX = os.environ.get("CLAUDE_BIN") or _bin("claude"), _bin("codex")
+
+
 def chat(backend, model, system, user, timeout=300):
     if backend == "claude":
-        cmd = PREFIX + [os.path.expanduser("~/.local/bin/claude"), "-p", user, "--model", model, "--system-prompt", system,
+        cmd = PREFIX + [CLAUDE, "-p", user, "--model", model, "--system-prompt", system,
                         "--tools", "", "--output-format", "json", "--max-turns", "1"]
         out = subprocess.run(cmd, cwd=WORKDIR, capture_output=True, text=True, timeout=timeout, stdin=subprocess.DEVNULL)
         d = json.loads(out.stdout)
@@ -23,7 +31,7 @@ def chat(backend, model, system, user, timeout=300):
         return d["result"]
     if backend == "codex":
         with tempfile.NamedTemporaryFile("r", suffix=".txt", dir=WORKDIR) as last:
-            cmd = PREFIX + [os.path.expanduser("~/.local/bin/codex"), "exec", "--skip-git-repo-check", "--sandbox", "read-only",
+            cmd = PREFIX + [CODEX, "exec", "--skip-git-repo-check", "--sandbox", "read-only",
                             "-m", model, "--output-last-message", last.name, system + "\n\n" + user]
             out = subprocess.run(cmd, cwd=WORKDIR, capture_output=True, text=True, timeout=timeout, stdin=subprocess.DEVNULL)
             text = open(last.name).read()
