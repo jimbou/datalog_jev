@@ -45,3 +45,30 @@ library methods cost more).
   server with the user's approval).
 - Fix the dev subset (seed, 30% of the 307 main apps) before pricing, and list every variant tried (F2 rules).
 - Record the model id and CLI version the cloud session used.
+
+## Attempt log
+
+- 2026-10-16: a "remote" agent started from the CLI ran on the laptop instead (remote agents are not available in this
+  setup); it stopped before any call because the laptop's Claude Code has ANTHROPIC_API_KEY set (local `claude -p` would
+  bill that key, and says nothing about the cloud credit). No routines exist on the account. Next: start the session by
+  hand on claude.ai/code with the prompt below.
+
+## Prompt for the cloud session (claude.ai/code, repository jimbou/datalog_jev, branch main)
+
+Small test of whether `claude -p` works in this cloud session, pricing 30 methods (paper/CLOUD_CREDITS_PLAN.md, way 1,
+then way 2 only if way 1 fails). No OpenRouter or other paid API calls; do not install or log in to anything; never print
+secret values.
+1. Record: `hostname`, `which claude`, `claude --version`, `python3 --version`, which of ANTHROPIC_API_KEY,
+   CLAUDE_CODE_OAUTH_TOKEN, ANTHROPIC_AUTH_TOKEN are set (names only), and whether
+   `claude -p "Say ok." --model claude-sonnet-5 --tools "" --max-turns 1 --output-format json` works (print only
+   is_error, result, total_cost_usd, model ids). If the hostname looks like a personal laptop, stop and report.
+2. Way 1: `cd probes && BACKEND=claude PRICE_THREADS=4 python3 run_sonnet_price.py claude-sonnet-5 sonnetcloud f2_test30`
+   (writes data/jev_f2_test30_sonnetcloud_r0.jsonl; rerun once if some methods fail).
+3. Way 2 only if `claude -p` does not work: price the 30 records of data/f2_test30.jsonl yourself with the SYSTEM prompt
+   and the question text of ask1() in probes/run_sonnet_price.py (state/endpoint from probes/run_jev.py), one method at a
+   time, into data/jev_f2_test30_sonnetagent_r0.jsonl (same format, cost 0).
+4. Compare with data/jev_holes_android_fw_sonnetp_r0.jsonl (match cls+sig): methods and atoms matched, mean absolute
+   difference, share of atoms both <= 0.05, share differing by more than 0.3.
+5. Write data/f2/cloud_test_report.md (time, step-1 facts, way used, priced/errors, wall-clock, costs seen, comparison).
+6. Branch cloud-test-20261016: commit only the report and the new price file (`git add -f`), push the branch. Never push
+   to main, never force-push.
