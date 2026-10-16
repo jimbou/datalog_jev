@@ -39,6 +39,13 @@ library methods cost more).
 5. If way 1 is billed to the credit: run F2's Sonnet variants there (dev subset first, seeded 30% draw fixed before any
    run), in chunks that finish well before 2026-11-05. If not: way 2 as an extra variant, or skip Sonnet in F2.
 
+## Budget for F2 on the credit (about $249 left, about $0.01 per call)
+
+Sonnet with 3 samples per method (price = the highest): dev subset 5,094 methods = 15,282 calls (about $150); if it is
+chosen on the dev subset, the other main apps need 7,518 - 5,094 = 2,424 methods = 7,272 calls (about $75). Total about
+$225, inside the credit. 5 samples on the dev subset alone (about $255) would not fit. The rescued apps' 10,000+ new
+methods would need the plan's usage or another source.
+
 ## Constraints
 
 - The cloud session only sees what is on GitHub; keep keys out (no OpenRouter calls from the cloud; Jev stays on the
@@ -52,6 +59,15 @@ library methods cost more).
   setup); it stopped before any call because the laptop's Claude Code has ANTHROPIC_API_KEY set (local `claude -p` would
   bill that key, and says nothing about the cloud credit). No routines exist on the account. Next: start the session by
   hand on claude.ai/code with the prompt below.
+- 2026-10-16: private repository not accessible from claude.ai/code ("Authentication failed"); the user made it public.
+- 2026-10-16, cloud session on claude.ai/code (hostname `vm`, claude 2.1.301 at /opt/node22/bin/claude, Python 3.13.16; no
+  ANTHROPIC_API_KEY / CLAUDE_CODE_OAUTH_TOKEN / ANTHROPIC_AUTH_TOKEN set): `claude -p` WORKS (test call
+  total_cost_usd 0.0104, model claude-sonnet-5). Way 1 priced all 30 methods unchanged, 0 errors, 57 s at 4 threads.
+  Against the server's sonnetp prices (30/30 methods, 107 atoms): mean absolute difference 0.067, both <= 0.05 for
+  61.7% of atoms, differ by more than 0.3 for 7.5% (8 atoms). Credit 250 -> 249 (whole session). Results NOT pushed:
+  git push 403 and the GitHub connector "Resource not accessible by personal access token": the session can read the
+  repository but not write. Fix before a full run: reconnect GitHub at https://claude.ai/connect-github (Claude GitHub
+  App with write access to jimbou/datalog_jev).
 
 ## Prompt for the cloud session (claude.ai/code, repository jimbou/datalog_jev, branch main)
 
