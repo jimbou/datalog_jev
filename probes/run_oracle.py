@@ -4,6 +4,7 @@ Usage: run_oracle.py MODEL TAG DATASET [KEYS_FILE]     (env PROMPT=rubric: the w
        rows then carry "codes" and labels true / false / null for unknown)
   DATASET   data/<DATASET>.jsonl hole records (cls, sig, kind, atoms)
   KEYS_FILE optional file of "cls<TAB>sig" lines restricting which methods to label
+  env LIMIT=n: only the first n methods of DATASET (chunked runs, e.g. bench/cloud_price.sh)
 Writes data/oracle-<TAG>.jsonl: {cls, sig, labels: [bool...], cost}
 """
 import json, os, re, sys, time, urllib.request
@@ -50,7 +51,8 @@ def ask(model, r):
                 text = cli_llm.chat(BACKEND, model, RUBRIC, st + "\n\nCandidate flows:\n" + qs)
                 obj = json.loads(re.search(r"\{.*\}", text, re.S).group(0))
                 codes = [str(obj.get(str(k), obj.get(k, "U"))).strip().upper()[:1] for k in range(len(r["atoms"]))]
-                return {"cls": r["cls"], "sig": r["sig"], "codes": codes, "labels": [FLOW_CODES.get(c) for c in codes], "cost": 0}
+                return {"cls": r["cls"], "sig": r["sig"], "codes": codes, "labels": [FLOW_CODES.get(c) for c in codes],
+                        "cost": cli_llm.last_cost()}  # API-equivalent for Claude Code, 0 for Codex
             if BACKEND != "openrouter":
                 text, d = cli_llm.chat(BACKEND, model, SYSTEM, st + "\n\nCandidate flows:\n" + qs), {"usage": {"cost": 0}}
             else:
@@ -72,6 +74,8 @@ def main():
     if len(sys.argv) > 4:
         keys = {tuple(l.rstrip("\n").split("\t")) for l in open(sys.argv[4])}
         rows = [r for r in rows if (r["cls"], r["sig"]) in keys]
+    if os.environ.get("LIMIT"):
+        rows = rows[:int(os.environ["LIMIT"])]
     out = os.path.join(ROOT, "data/oracle-%s.jsonl" % tag)
     done = {(d["cls"], d["sig"]) for d in map(json.loads, open(out))} if os.path.exists(out) else set()
     todo = [r for r in rows if (r["cls"], r["sig"]) not in done]

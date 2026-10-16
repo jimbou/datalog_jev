@@ -24,7 +24,7 @@ For RQ5 we also use TaintBench~\cite{taintbench}, 39 malware apps with 203 docum
 \paragraph{Answer keys.}
 A wrong clearance is defined relative to a key, so we use several keys built in different ways.
 \begin{itemize}
-\item The \emph{main key} uses FlowDroid's hand-written models where they exist. For the 12{,}274 methods FlowDroid does not model, it uses the labels on which two language models from different families, Sonnet~5 and GPT-6.1, agree when both are given the written definition of Section~\ref{sec:flow}; where they disagree, it uses K2 (below) if K2 decides the fact, and otherwise leaves the fact unknown.
+\item The \emph{main key} uses FlowDroid's hand-written models where they exist. For the methods FlowDroid does not model, it uses the labels on which two language models from different families, Sonnet~5 and GPT-6.1, agree when both are given the written definition of Section~\ref{sec:flow}; where they disagree, it uses K2 (below) if K2 decides the fact, and otherwise leaves the fact unknown.
 \item The \emph{deletion keys} contain no language-model labels. They take FlowDroid's models as the truth and delete a share of the modeled classes; the deleted classes become the holes, priced as if unmodeled, and all other modeled classes stay code. Deleting whole classes prevents a pricer from copying the answer of a sibling method.
 \item \emph{K2} uses summaries that StubDroid~\cite{stubdroid} generates from the Android~13 and Java~8 source code.
 \item The \emph{Sonnet} and \emph{GPT} keys label the unmodeled methods with one model each, asked a short question without the written definition.
@@ -97,9 +97,9 @@ Conformal selection clears the most, 74.8\%, but misses its own target, with 6.6
 RQ3 returns to the unit of the guarantee.
 
 \emph{Cost.}
-Building the flow graphs is the expensive step: 14 hours for 183 apps on an 8-core server with 62\,GB of memory.
-Pricing all 17{,}830 library methods costs about \$0.4 with Jev and \$16 with Sonnet~5, once for the whole corpus; computing all receipts takes a few minutes per pricer, and certifying a threshold takes seconds.
-\todo{G3: per-app numbers (pricing cost per pricer, max-flow time, certification time) and the one-off cost of the key.}
+Building the flow graph is the expensive step: within FlowDroid's budget, a build takes a median of 25\,s per app (90th percentile 489\,s; FlowDroid 10\,s, on fewer apps, Section~\ref{sec:discussion}).
+The pricer is asked once per method, not per app: the 7{,}530 unmodeled methods of the corpus cost \$0.21 with Jev and \$7.27 with Sonnet~5, an app alone needs a median of 1{,}067 of them (\$0.03 and \$1.05), and a new app adds a median of one.
+Receipts for all 332 apps take under five minutes on four cores, 200 calibrations 5\,s, and the answer key one call per method and labeling model, once.
 
 \answer{\textbf{RQ1:} At a 5\% target, priced receipts clear 49\% of the false alarms that opening unmodeled methods adds, keep all but one of the real leaks that FlowDroid's models miss, and give 0.9\% of held-out apps a wrong clearance. Counting assumptions clears nothing, a model taken as fact has no risk control, and per-verdict selection misses its own target.}
 
@@ -213,20 +213,20 @@ The deletion keys (Figure~\ref{fig:deletion} in the appendix) show a second prop
 Language-model pricers do not depend on siblings and keep their clearance.
 
 \begin{table}[t]
-\caption{Pricers on the main key (200 half splits). Certified: number of splits in which a threshold was certified; cleared: mean over those splits. Price: whole corpus.}
+\caption{Pricers on the main key (200 half splits). Certified: number of splits in which a threshold was certified; cleared: mean over those splits. Price: the 7{,}530 unmodeled methods of the corpus, at API prices.}
 \label{tab:panel}
 \small
 \begin{tabular}{@{}lrll@{}}
 \toprule
 Pricer & Price & $\alpha=0.05$: certified, cleared & $\alpha=0.10$: certified, cleared\\
 \midrule
-Jev & \$0.4 & 200, 48.7\% & 200, 60.0\%\\
-Sonnet~5 & \$16.4 & 200, 16.7\% & 200, 16.9\%\\
-Qwen3.7-Flash & \$0.19 & 0 & 48, 17.5\%\\
-Gemini-3.5-Flash-Lite & \$2.82 & 0 & 0\\
-DeepSeek-V4-Flash & \$0.37 & 0 & 0\\
-Qwen3.8-27B & \$1.96 & 200, 0\% & 200, 0\%\\
-GPT-5.6-luna & \$5.13 & 200, 5.1\% & 200, 5.1\%\\
+Jev & \$0.21 & 200, 48.7\% & 200, 60.0\%\\
+Sonnet~5 & \$7.27 & 200, 16.7\% & 200, 16.9\%\\
+Qwen3.7-Flash & \$0.09 & 0 & 48, 17.5\%\\
+Gemini-3.5-Flash-Lite & \$1.27 & 0 & 0\\
+DeepSeek-V4-Flash & \$0.17 & 0 & 0\\
+Qwen3.8-27B & \$0.90 & 200, 0\% & 200, 0\%\\
+GPT-5.6-luna & \$2.27 & 200, 5.1\% & 200, 5.1\%\\
 \bottomrule
 \end{tabular}
 \end{table}

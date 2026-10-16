@@ -38,7 +38,7 @@ Before defining the problem, we measure how much a taint analysis depends on its
 We ran FlowDroid on 80 F-Droid apps twice, with its models and without them (Table~\ref{tab:fd-none}).
 Without its models, FlowDroid loses 82\% of the leaking sinks it reports and finds no leak that it does not also find with them: the models are what makes the analysis find leaks.
 They are also incomplete.
-In our corpus of 332 apps (Section~\ref{sec:setup}), 12{,}274 of the 17{,}830 library methods that lie on a source-to-sink path have no FlowDroid model.
+In our corpus of 332 apps (Section~\ref{sec:setup}), 7{,}530 of the 11{,}552 library methods that lie on a source-to-sink path have no FlowDroid model.
 With FlowDroid's models, our analysis reports 49{,}007 sinks as leaks, while 22{,}888 further real leaks, a third of all, are reachable only through unmodeled methods and are reported as clean.
 Treating every unmodeled method as passing all data finds them but adds 5{,}318 false alarms in 298 of the 307 apps with hole-dependent verdicts.
 

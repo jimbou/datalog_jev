@@ -7,7 +7,7 @@ Tools replace such methods with models: FlowDroid ships hand-written summaries f
 A ``no leak'' verdict therefore rests on assumptions about library code, and the tool neither reports these assumptions nor measures how often they fail.
 Analyses that are sound except for such documented gaps are called \emph{soundy}~\cite{soundiness}.
 The gaps matter in practice.
-In our corpus of 332 Android apps, 12{,}274 of the 17{,}830 library methods that lie on source-to-sink paths have no FlowDroid model, and a third of the real leaks (22{,}888 sinks) are reachable only through such unmodeled methods, so an analysis that relies on the models reports them as clean.
+In our corpus of 332 Android apps, 7{,}530 of the 11{,}552 library methods that lie on source-to-sink paths have no FlowDroid model, and a third of the real leaks (22{,}888 sinks) are reachable only through such unmodeled methods, so an analysis that relies on the models reports them as clean.
 
 Prior work offers three answers to unmodeled library code, and none of them tells the user how likely a clean verdict is to be wrong.
 The first is to make the analysis sound by assuming that every unmodeled method passes all data.

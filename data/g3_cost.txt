@@ -1,0 +1,14 @@
+Pricing, 332 main graphs, 7530 distinct unmodeled methods
+  unmodeled methods per app          median 1067  mean 995  p90 1525  max 1853  (n=332)
+  choice-obj, one app alone ($)      median 0.0306  mean 0.0285  p90 0.0438  max 0.0523  (n=332)
+  sonnetp, one app alone ($)         median 1.0474  mean 0.9760  p90 1.4948  max 1.7789  (n=332)
+  new methods per app, last 10%      median 1  mean 7  p90 21  max 94  (n=34)
+  choice-obj, new app, last 10% ($)  median 0.0000  mean 0.0002  p90 0.0004  max 0.0023  (n=34)
+  choice-obj, whole corpus           $0.21
+  sonnetp, new app, last 10% ($)     median 0.0006  mean 0.0060  p90 0.0140  max 0.0789  (n=34)
+  sonnetp, whole corpus              $7.27
+Build under FlowDroid's budget (data/f1/reasons_par.tsv, data/f1/reasons.tsv, data/f3/reasons.tsv)
+  our build, seconds per app         median 25  mean 148  p90 489  max 1277  (n=74)
+  FlowDroid with its models, seconds median 10  mean 66  p90 190  max 1964  (n=317)
+    same apps: ours                  median 34  mean 249  p90 470  max 1277  (n=13)
+    same apps: FlowDroid             median 4  mean 5  p90 9  max 9  (n=13)

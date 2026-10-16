@@ -20,7 +20,7 @@ Android taint analysis, ships hand-written models for about 350 classes. **For e
 silently assumes that no data passes.** So a "no leak" verdict can be wrong, and the tool never says how likely that is.
 
 How big is this? When FlowDroid is run without its models, 82% of the leaks it reports disappear, so models matter. But
-they are incomplete: in our corpus of 324 apps, 12,274 of the 17,830 library methods on source-to-sink paths have no
+they are incomplete: in our corpus of 332 apps, 7,530 of the 11,552 library methods on source-to-sink paths have no
 FlowDroid model, and even with all of FlowDroid's models a third of the real leaks (22,888 sinks) pass only through such
 unmodeled methods, so an analysis relying on the models reports them as clean.
 
@@ -88,7 +88,7 @@ common per-verdict alternative (conformal selection) leaves wrong clearances in 
 - **Analysis**: a Souffle Datalog program (`analysis/taint.dl`) computes points-to and taint with every hole open and
   stores the relevant flow graph per app (a few MB, `.npz`).
 - **Receipts and bounds**: `analysis/evaluate.py` runs max-flow/min-cut per sink, for any pricer and answer key.
-- **Pricing**: Jev (a commercial calibrated yes/no service, our main pricer, ~$0.4 for all methods), Sonnet 5 (~$16),
+- **Pricing**: Jev (a commercial calibrated yes/no service, our main pricer, $0.21 for the 7,530 unmodeled methods of the corpus), Sonnet 5 ($7.27),
   five cheaper LLMs, and simple baselines (counting, frequency prior, a classifier, LLM answers taken as fact).
 - **Calibration**: `analysis/app_ltt.py` (certified threshold, 200 random half splits of the apps).
 - Heavy runs happen on a lab server (8 cores, 62 GB); see `~/server_connect_pku.md` and `bench/SERVER_RUNBOOK.md`.

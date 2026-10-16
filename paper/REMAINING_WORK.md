@@ -1,4 +1,4 @@
-# Remaining work (consolidated 2026-10-07, updated 2026-10-13)
+# Remaining work (consolidated 2026-10-07, updated 2026-10-16)
 
 This file replaces the open items in `paper/PLAN.md` (now historical), the "next steps" in `FINDINGS.md` §23 (stale:
 conformal selection, key labels, a second hole type and the Praline check are done) and summarizes
@@ -255,6 +255,66 @@ G3 are new. All five are now must-do, and the paper has a placeholder for each.
 | G5 | Pinned, rerunnable pricer next to Jev: report every F2 variant (Jev wording, Sonnet 5.5 with definition, combinations) in one ablation row group, chosen on the dev subset; promote the best rerunnable one if it clears more than Sonnet 5 | C1 + F2 | runs in progress | RQ3 ablation table, row group |
 
 Order: G1, G3 (no server time) first; G2 when a colleague is free; G5 as F2 finishes; G4 after F1.
+
+**Status 2026-10-16 (morning).** Server jobs of this session run on cores 12-15 at nice 10 only (cores 0-7: IzzyOnDroid
+build; cores 8-11 stay free for the user's symex jobs, which are not pinned).
+
+- G3 DONE (`analysis/g3_cost.py`, `data/g3_cost.txt`; paper paragraph "Cost" filled). Pricing is per method, not per
+  app: the 7,530 unmodeled methods of the main graphs cost $0.21 with Jev and $7.27 with Sonnet 5 (API prices); one app
+  alone a median of 1,067 methods ($0.03 / $1.05); a new app adds a median of 1 new method. Build within FlowDroid's
+  budget: median 25 s per app (p90 489 s, 74 apps built with the final pipeline; the original build of the 332 apps
+  recorded no times), FlowDroid with its models 10 s (317 apps). Receipts for 332 apps: 4.6 min on 4 cores (about 3
+  CPU-s per app); 200 calibrations: 4.7 s.
+- Correction found with G3, now fixed in intro, background, setup, the panel table and OVERVIEW.md: "12,274 of the 17,830
+  library methods on source-to-sink paths" counted the hole file, which lists every library method the apps call. The
+  stored graphs (the source-to-sink paths with all holes open) contain 11,552 library methods, 7,530 of them without a
+  FlowDroid model (7,488 none + 42 gap). The panel table's prices were for the whole 17,830-method file; now for the
+  7,530 (Jev $0.21, Sonnet 5 $7.27, Qwen3.7-Flash $0.09, Gemini-3.5-Flash-Lite $1.27, DeepSeek-V4-Flash $0.17,
+  Qwen3.8-27B $0.90, GPT-5.6-luna $2.27). The discussion's "152 of the 17,830 methods we priced" stays (it is about
+  what was priced).
+- F2 RUNNING (`bench/queues/f2_dev_variants.sh`, log `data/f2/variants.log`, results `data/f2/variants_results.txt`,
+  about an hour): every remaining variant on the dev subset, list fixed before results: sonnet55def3 (cloud prices), and
+  free combinations via `analysis/f2_combine.py`: tie-cs (Jev, ties broken by Sonnet 5), max-cs, tie-cs55, max-cs55,
+  mean-cd (mean of the two Jev wordings). Keys rk and gk for all, K2 also for sonnet55def3; baselines choice-obj,
+  sonnetp, choice-def on the same apps.
+- G1 RUNNING after F2 (`bench/queues/g1_fact.sh`, `analysis/g1_fact.py`, log `data/g1_fact.log`): jevfact (Jev >= 0.5),
+  gptfact (GPT rubric labels; undecidable = no flow), gptfactu (undecidable = flow, sensitivity); all apps and 200
+  held-out halves.
+
+**Next server steps for G4 (IzzyOnDroid), after IZZY-DONE in `data/f3/f3_izzy.log`:**
+1. New hole methods: `GRAPHS_DIRS=data/graphs_izzy:data/graphs_izzy_fb LIB_PREFIXES=data/bundled_libs.txt python3
+   probes/extend_holes_fw.py` (back up holes_android_fw.jsonl first).
+2. `data/f3_izzy.jsonl`: the hole records of the IzzyOnDroid graph methods that FlowDroid does not model and that lack a
+   Sonnet rubric label or a sonnetp price; push it to main for the cloud job below.
+3. GPT rubric labels and luna prices via Codex on the server (tell the user the proxy traffic first: about 9 MB per
+   call); Jev (choice-obj) via OpenRouter only with the user's approval.
+4. Merge the cloud results into `data/oracle-rubric-sonnet5.jsonl` and `data/jev_holes_android_fw_sonnetp_r0.jsonl`,
+   evaluate the IzzyOnDroid graphs (full and fallback) with every main pricer, and apply the thresholds certified on the
+   307 F-Droid apps unchanged (as in `analysis/f1_score.py`).
+
+**Next cloud job (G4): Sonnet labels and prices for the IzzyOnDroid methods.** Start only when the current cloud job
+(`f2_rest`) has ended and `data/f3_izzy.jsonl` is on main. Credit: about $180 left after `f2_rest` (expires 2026-11-05
+09:59 GMT+2); the caps below total $140. The models are those of the main corpus: Claude Sonnet 5 for the rubric labels
+(`rubric-sonnet5`) and for the main Sonnet pricer (`sonnetp`, short question, 1 sample). If F2 picks sonnet55def3 on the
+dev subset, its 3 samples cost about 3x and fit only if credit is left after both steps. Paste into a claude.ai/code
+session on repository jimbou/datalog_jev, branch main, session model Sonnet 5.5:
+
+> IzzyOnDroid labeling and pricing job for paper/REMAINING_WORK.md (section G, "Next cloud job"). Do only this; no
+> paid APIs, no installs, never push to main, never force-push, never print secret values.
+> 1. `git fetch origin main && git checkout -B f3-cloud-izzy origin/main && wc -l data/f3_izzy.jsonl` (stop and report if
+>    the file is missing).
+> 2. Answer-key labels first. Start in the background:
+>    `KIND=label nohup bash bench/cloud_price.sh claude-sonnet-5 rubric-sonnet5-izzy f3_izzy 1 70 f3-cloud-izzy 250 6 > /tmp/cloud_label.log 2>&1 &`
+>    It writes data/oracle-rubric-sonnet5-izzy.jsonl with the written flow definition (reason codes), pushes it to branch
+>    f3-cloud-izzy after every 250 methods, and stops at $70 API-equivalent.
+> 3. Every 9 minutes (`sleep 540; tail -n 3 /tmp/cloud_label.log`, nothing else) report the last CHUNK line. Stop the job
+>    (kill its PID) and report if most methods error or "PUSH FAILED" appears twice in a row.
+> 4. When the log says DONE or CAP reached, start the prices on the same branch:
+>    `PRICE_PROMPT=short nohup bash bench/cloud_price.sh claude-sonnet-5 sonnetp f3_izzy 1 70 f3-cloud-izzy 250 6 > /tmp/cloud_sonnetp.log 2>&1 &`
+>    (writes data/jev_f3_izzy_sonnetp_r0.jsonl, the main Sonnet pricer's question, 1 sample, cap $70), and monitor it
+>    the same way.
+> 5. At the end report both final lines (methods, cost), the `claude --version`, and confirm the last push
+>    (`git log origin/f3-cloud-izzy -1`).
 
 ## C. Further strengtheners (lower priority)
 

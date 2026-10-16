@@ -4,9 +4,15 @@
 # file to BRANCH after every chunk (pushes are retried: cloud pushes sometimes fail with 403 and work later), and stops
 # when the recorded API-equivalent cost of the file reaches CAP dollars. Restartable: priced methods are skipped.
 # Usage: bash bench/cloud_price.sh MODEL TAG DATASET SAMPLES CAP BRANCH [CHUNK] [THREADS]
+# env KIND=label: answer-key labels instead of prices (probes/run_oracle.py, PROMPT=rubric), written to
+#   data/oracle-TAG.jsonl (SAMPLES is ignored); PRICE_PROMPT=short: the main Sonnet pricer's question (sonnetp)
+#   instead of the written definition.
 set -u
 MODEL=$1 TAG=$2 DATASET=$3 SAMPLES=$4 CAP=$5 BRANCH=$6 CHUNK=${7:-250} THREADS=${8:-4}
+KIND=${KIND:-price} PP=${PRICE_PROMPT:-definition}
+[ "$PP" = short ] && PP=
 OUT=data/jev_${DATASET}_${TAG}_r0.jsonl
+[ $KIND = label ] && OUT=data/oracle-${TAG}.jsonl
 N=$(wc -l < data/$DATASET.jsonl)
 cost() { python3 -c "import json,sys; print('%.2f' % sum(json.loads(l).get('cost') or 0 for l in open(sys.argv[1])))" $OUT 2>/dev/null || echo 0; }
 push() {
@@ -20,10 +26,14 @@ else
 fi
 for ((lim = CHUNK; ; lim += CHUNK)); do
   [ $lim -gt $N ] && lim=$N
-  (cd probes && BACKEND=claude PRICE_PROMPT=definition SAMPLES=$SAMPLES PRICE_THREADS=$THREADS \
-     python3 run_sonnet_price.py "$MODEL" "$TAG" "$DATASET" $lim)
+  if [ $KIND = label ]; then
+    (cd probes && BACKEND=claude PROMPT=rubric ORACLE_THREADS=$THREADS LIMIT=$lim python3 run_oracle.py "$MODEL" "$TAG" "$DATASET")
+  else
+    (cd probes && BACKEND=claude PRICE_PROMPT=$PP SAMPLES=$SAMPLES PRICE_THREADS=$THREADS \
+       python3 run_sonnet_price.py "$MODEL" "$TAG" "$DATASET" $lim)
+  fi
   done_n=$(wc -l < $OUT 2>/dev/null || echo 0); c=$(cost)
-  git add -f $OUT && git commit -q -m "F2 cloud pricing $TAG: $done_n of $N methods, \$$c API-equivalent" && push
+  git add -f $OUT && git commit -q -m "Cloud $KIND $TAG: $done_n of $N methods, \$$c API-equivalent" && push
   echo "$(date -u +%F-%T) CHUNK limit=$lim priced=$done_n of $N cost=\$$c"
   if python3 -c "import sys; sys.exit(0 if float('$c') >= float('$CAP') else 1)"; then echo "CAP reached (\$$c >= \$$CAP)"; break; fi
   [ $lim -ge $N ] && break
