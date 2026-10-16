@@ -316,7 +316,8 @@ Main corpus (held-out halves, reference) & 307 & 48.7\% (0.9\%) & 16.7\% (0.0\%)
 Large apps, full analysis after retry & 10 & 48.6\% (0 of 10) & 15.1\% (0 of 10)\\
 Large apps, bundled libraries as holes & 56 & 41.5\% (0 of 56) & 11.9\% (2 of 56)\\
 TaintBench malware & 23 & 31.8\% (0 of 23) & 22.9\% (0 of 23)\\
-Second population (\todo{G4: IzzyOnDroid or AndroZoo}) & \todo{n} & \todo{G4} & \todo{G4}\\
+IzzyOnDroid, full analysis & 65 & 43.7\% (0 of 65) & \todo{G4: Sonnet~5 prices in progress}\\
+IzzyOnDroid, bundled libraries as holes & 18 & 50.6\% (0 of 18) & \todo{G4}\\
 Inter-component holes ($\alpha=0.1$, held-out halves) & 72 & 40.2\% (1.4\%) & --\\
 \bottomrule
 \end{tabular}
@@ -339,7 +340,11 @@ The receipts show that the definition, not the prices, decides these clearances.
 Measured against our key, the threshold transfers: no malware app receives a wrong clearance with Jev or Sonnet, against 3 of 23 apps with counting.
 
 \emph{A second population.}
-\todo{G4: apps from a second store, list fixed in advance, built with the same pipeline; threshold certified on F-Droid applied unchanged.}
+IzzyOnDroid distributes open-source apps that F-Droid does not build itself.
+We fixed the list before any run: every app in its index of 15 October 2026 that is not in F-Droid and meets the main corpus's criteria (Section~\ref{sec:setup}), 134 apps.
+The same pipeline builds 94 of them, 68 fully and 26 with bundled libraries as holes (the other 40 exceed the budget even then; these apps are larger than F-Droid's), and 83 have a hole-dependent verdict the key decides; the new apps add 2{,}648 unmodeled methods, labeled for the key exactly as in the main corpus.
+With the threshold certified on F-Droid, Jev clears 43.7\% of the leak-free verdicts in the fully built apps and 50.6\% in the fallback apps, with no wrong clearance in any of the 83 apps; at $\alpha=0.1$ (threshold 0.3) it clears 60.9\%, again with none.
+Sonnet~5.5 with the written definition clears 36.6\%, also without a wrong clearance.
 
 \emph{Other kinds of holes.}
 Receipts apply to any gap that can be written as a set of candidate edges.

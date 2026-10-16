@@ -32,7 +32,7 @@ The calibration apps are small open-source F-Droid apps: the full analysis build
 The fallback adds 98 larger apps; it was adopted after a trial on 40 apps (prefix list fixed before), misses minified libraries, turns app code that R8 moved into library classes into holes (17 apps), and leaves more verdicts undecided, as one key labeler finds 27\% of bundled-library flows undecidable.
 Apps that bundle the same libraries are not independent, which we tested by keeping such apps together in each split (Table~\ref{tab:unit}).
 The transfer to malware rests on 23 apps, which shows no sign of failure but is too few to estimate a risk near 5\% precisely.
-\todo{G4: update once the second population is in.}
+A second store, IzzyOnDroid, shows the same behavior on 83 apps chosen before any run (Section~\ref{sec:rq5}), but it is again open-source software; commercial apps from Google Play remain untested.
 
 \emph{Pricers.}
 Jev is a commercial service, and hosted language models change over time; all prices are stored in our artifact, and Sonnet~5 is reported in every table as a rerunnable pricer.

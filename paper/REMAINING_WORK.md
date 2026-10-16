@@ -294,6 +294,16 @@ build; cores 8-11 stay free for the user's symex jobs, which are not pinned).
 - Consequence for the rescued F1 apps: the main pricer stays Jev, so the 373-app row needs no Sonnet 5.5 prices.
   Optional: Sonnet 5.5 with 1 sample for their 10,149 methods (about $44 of cloud credit) as a secondary row.
 
+- G4 DONE except the Sonnet 5 column (2026-10-16; `data/f3/g4_score.txt`, `bench/queues/g4_eval.sh`,
+  `analysis/g4_score.py`): 134 apps picked, 94 built (68 full, 26 fallback), 83 with a decided hole-dependent verdict.
+  Threshold certified on the 307 F-Droid apps, unchanged: Jev alpha 0.05 (0.2) full 43.7% (0 of 65 apps wrong),
+  fallback 50.6% (0 of 18), all 44.2%; alpha 0.1 (0.3) all 60.9% (0 of 83). Sonnet 5.5 (def3) 36.6% (0 of 83);
+  classifier (b6) not certified on all 307 apps at once (as in F1); freq 10.6%. Paper: RQ5 table rows and paragraph,
+  discussion. Cost: cloud labels $50.57, Sonnet 5.5 $48.21 (+148 methods on the server, $3.34, redundant), Jev $0.17,
+  GPT labels via Codex. OPEN: Sonnet 5 (sonnetp) prices, cloud job stalled at 500 of 2,648 (18:36 UTC); when done, copy
+  data/jev_f3_izzy_sonnetp_r0.jsonl to the server as data/jev_f3_izzy_sonnetp_r0_izzycloud.jsonl and rerun
+  g4_eval.sh (merges only new methods; evaluating only sonnetp is enough).
+
 **Next server steps for G4 (IzzyOnDroid), after IZZY-DONE in `data/f3/f3_izzy.log`:**
 1. New hole methods: `GRAPHS_DIRS=data/graphs_izzy:data/graphs_izzy_fb LIB_PREFIXES=data/bundled_libs.txt python3
    probes/extend_holes_fw.py` (back up holes_android_fw.jsonl first).
