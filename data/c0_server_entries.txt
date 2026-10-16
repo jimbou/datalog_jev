@@ -1,0 +1,8 @@
+apps with kept facts and hole-dependent sinks: 98 of 307; hole-dependent verdicts 11366
+  Android           verdicts  10971 ( 96.5%)  hard slice  1525  real  7776
+  generic Java      verdicts    395 (  3.5%)  hard slice    27  real   261
+  server framework  verdicts      0 (  0.0%)  hard slice     0  real     0
+  other library     verdicts      0 (  0.0%)  hard slice     0  real     0
+  unmatched         verdicts      0 (  0.0%)  hard slice     0  real     0
+source call sites by group: {'other library': 62, 'generic Java': 573, 'Android': 4216}
+top non-Android sink APIs: [('java.io.OutputStream.void write(byte[])', 156), ('java.io.FileOutputStream.void write(byte[],int,int)', 74), ('java.io.OutputStream.void write(byte[],int,int)', 20), ('java.io.Writer.void write(java.lang.String)', 19), ('java.lang.String.java.lang.String replace(java.lang.CharSequence,java.lang.CharSequence)', 19), ('java.io.ByteArrayOutputStream.void write(int)', 14), ('java.io.DataOutputStream.void write(byte[])', 13), ('java.io.Writer.void write(java.lang.String,int,int)', 10)]

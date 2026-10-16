@@ -105,3 +105,21 @@ to main, never force-push.
    If the log shows errors for most methods or "PUSH FAILED" twice in a row, stop the job (kill its PID) and report.
 3. When the log says DONE or CAP reached, report the final line, the number of priced methods and the cost, and confirm
    the last push succeeded (`git log origin/f2-cloud-sonnet55 -1`).
+
+## Follow-up prompt (after the 5,094 dev methods are done): the rest of the main corpus, cap $40
+
+Same session (or a new one on branch main). Paste:
+
+Next pricing job for paper/CLOUD_CREDITS_PLAN.md. Same rules: only this; no paid APIs, no installs, never push to main,
+never force-push.
+1. Make sure the dev job has ended (its log says DONE or CAP reached) and its last chunk is on origin
+   (`git log origin/f2-cloud-sonnet55 -1`).
+2. Bring the new dataset from main into the results branch and push it:
+   `git fetch origin main f2-cloud-sonnet55 && git checkout -B f2-cloud-sonnet55 origin/f2-cloud-sonnet55 && git merge --no-edit origin/main && git push origin f2-cloud-sonnet55`
+   (data/f2_rest.jsonl, 2,424 methods: the main corpus's unmodeled methods outside the dev subset).
+3. Start in the background:
+   `nohup bash bench/cloud_price.sh claude-sonnet-5-5 sonnet55def3 f2_rest 3 40 f2-cloud-sonnet55 250 6 > /tmp/cloud_price_rest.log 2>&1 &`
+   It writes data/jev_f2_rest_sonnet55def3_r0.jsonl and pushes it to the same branch after every 250 methods; it stops at
+   $40 API-equivalent for this file.
+4. Every 9 minutes (`sleep 540; tail -n 3 /tmp/cloud_price_rest.log`) report the last CHUNK line; stop the job if most
+   methods error or "PUSH FAILED" appears twice in a row. At the end report the final line and confirm the last push.

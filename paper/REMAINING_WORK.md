@@ -175,6 +175,17 @@ OpenRouter, needs approval. Sonnet with 5 samples: 26,500 calls (dev, about $240
 the dev subset: about $50 equivalent. Combinations of existing prices (Jev with ties broken by the classifier,
 max(Jev, Sonnet)): free. Recommended: Jev with the definition plus the free combinations; no 5-sample Sonnet run.
 
+**F2 status (2026-10-16).** Dev subset fixed (`analysis/f2_dev.py`: 92 of 307 apps, seed 20261016, 5,094 methods,
+`data/f2/`). Variants tried so far (all listed here, per the F2 rules):
+- Jev with the written definition (`choice-def`, $0.26 OpenRouter, `bench/queues/f2_jev_def.sh`): on the dev apps, 200
+  splits, 39.0% cleared (1.9% held-out apps wrong) at alpha 0.05 and 51.3% (2.9%) at 0.1, against the main wording
+  choice-obj 38.4% (1.6%) and 50.8% (2.7%) (`bench/queues/f2_eval_dev.sh`): no gain; its prices spread over more
+  thresholds (certified 0.075-0.2).
+- Sonnet 5.5 with the written definition, 3 samples, price = highest (`sonnet55def3`): RUNNING in a claude.ai/code cloud
+  session on the cloud-session credit (`paper/CLOUD_CREDITS_PLAN.md`, `bench/cloud_price.sh`, branch f2-cloud-sonnet55).
+- Next, free: combinations of existing prices (mean of the two Jev wordings, Jev with ties broken by Sonnet or the
+  classifier, max(Jev, Sonnet)).
+
 **F2. Pricers on a development subset.** Fix a random 30% of the 307 apps (seeded) as development apps; choose the variant
 there; report the chosen variant with the usual 200 splits on all apps and on the other 70% alone, and list every variant
 tried. The guarantee holds for every variant (Proposition 2); the dev subset only guards against choosing on the test
@@ -281,7 +292,9 @@ checkers, `data/audit_private/`).**
 
 Pipeline from here; times are working time unless marked as server time.
 
-1. F1 finish (1-2 days). FlowDroid control running (`bench/queues/fd_fallback.sh`, up to about a day of server time):
+1. F1 finish (1-2 days). PAPER TEXT DONE 2026-10-16 (setup, impl "Large apps", RQ1 reach paragraph, pipeline rows in
+   Table main and RQ2 sentence, Discussion same-budget paragraph with the FlowDroid fallback, threats, intro sentence);
+   body ends on page 18 again. Remaining from this item: nothing but the authors' read. FlowDroid control running (`bench/queues/fd_fallback.sh`, up to about a day of server time):
    FlowDroid's out-of-memory apps get the bundled-library exclusion with only the time left after the memory cap
    (2100 s minus the seconds of the full run), exactly as our fallback; its timeouts used the whole budget and get no
    second run. The control reruns of FlowDroid's successful apps with sinks only measure leaks lost by the exclusion and
@@ -289,7 +302,9 @@ Pipeline from here; times are working time unless marked as server time.
    same-budget paragraph in the Discussion, pipeline row in the main tables (main tables stay on the 307 apps), threats
    (R8-moved app code, fallback chosen after the 40-app subset, 27% undecidable library flows in the key). K2 for library
    disagreements skipped and disclosed.
-2. Quick items (half a day): F5 recall-side headline; C2 from the F1 data (pricers on bundled-library methods: Jev holds,
+2. Quick items (half a day) DONE 2026-10-16: F5 (abstract, intro, RQ2 lead with recall; RQ5 per-app alarms after
+   checks), C2 (RQ4 paragraph, analysis/c2_pricers_lib.py), C0 (impl sentence, analysis/c0_server_entries.py: 96.5%
+   of hole-dependent verdicts at Android sinks, 0 at server entries; no rebuild). Was: F5 recall-side headline; C2 from the F1 data (pricers on bundled-library methods: Jev holds,
    Sonnet misses AppCompatActivity.setContentView); C0 share of verdicts at Java-server source/sink entries.
 3. B3 user value (about a day): false alarms per app before and after clearing, apps with no alarms left, receipt sizes.
 4. F2 better pricers on a development subset (2-3 days; Sonnet variants possibly on the cloud-session credits, see

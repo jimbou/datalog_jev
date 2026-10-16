@@ -1,0 +1,1 @@
+IzzyOnDroid index timestamp 2026-10-15 17:50 UTC (1792086631000 ms); packages 1400; also in F-Droid excluded; eligible 134; picked 134 (seed 20261016)
