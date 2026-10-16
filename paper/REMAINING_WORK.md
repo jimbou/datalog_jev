@@ -348,6 +348,11 @@ LLMDFA (Wang et al., NeurIPS 2024, arXiv 2402.10754) verified and added on 2026-
 clone it (private access failed). Switch it back to private after the cloud runs (double-blind review; audit sheets name
 checkers, `data/audit_private/`).**
 
+**Reminder: remove the deploy key `pku-receipts-deploy`** (added 2026-10-16 so `bench/queues/f3_dataset.sh` on the PKU
+server can push `data/f3_izzy.jsonl`; write access to this repository only) at
+https://github.com/jimbou/datalog_jev/settings/keys once `data/f3/f3_dataset.log` on the server says F3D-PUSHED or
+PUSH-FAILED, and delete `~/.ssh/datalog_deploy*` on the server.
+
 Pipeline from here; times are working time unless marked as server time.
 
 1. F1 finish (1-2 days). PAPER TEXT DONE 2026-10-16 (setup, impl "Large apps", RQ1 reach paragraph, pipeline rows in
