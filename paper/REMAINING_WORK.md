@@ -175,6 +175,17 @@ OpenRouter, needs approval. Sonnet with 5 samples: 26,500 calls (dev, about $240
 the dev subset: about $50 equivalent. Combinations of existing prices (Jev with ties broken by the classifier,
 max(Jev, Sonnet)): free. Recommended: Jev with the definition plus the free combinations; no 5-sample Sonnet run.
 
+**F2 status (2026-10-16).** Dev subset fixed (`analysis/f2_dev.py`: 92 of 307 apps, seed 20261016, 5,094 methods,
+`data/f2/`). Variants tried so far (all listed here, per the F2 rules):
+- Jev with the written definition (`choice-def`, $0.26 OpenRouter, `bench/queues/f2_jev_def.sh`): on the dev apps, 200
+  splits, 39.0% cleared (1.9% held-out apps wrong) at alpha 0.05 and 51.3% (2.9%) at 0.1, against the main wording
+  choice-obj 38.4% (1.6%) and 50.8% (2.7%) (`bench/queues/f2_eval_dev.sh`): no gain; its prices spread over more
+  thresholds (certified 0.075-0.2).
+- Sonnet 5.5 with the written definition, 3 samples, price = highest (`sonnet55def3`): RUNNING in a claude.ai/code cloud
+  session on the cloud-session credit (`paper/CLOUD_CREDITS_PLAN.md`, `bench/cloud_price.sh`, branch f2-cloud-sonnet55).
+- Next, free: combinations of existing prices (mean of the two Jev wordings, Jev with ties broken by Sonnet or the
+  classifier, max(Jev, Sonnet)).
+
 **F2. Pricers on a development subset.** Fix a random 30% of the 307 apps (seeded) as development apps; choose the variant
 there; report the chosen variant with the usual 200 splits on all apps and on the other 70% alone, and list every variant
 tried. The guarantee holds for every variant (Proposition 2); the dev subset only guards against choosing on the test
