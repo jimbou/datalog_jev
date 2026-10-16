@@ -4248,3 +4248,253 @@
 {"cls": "java.security.cert.X509Certificate", "sig": "void verify(java.security.PublicKey)", "p": [0.03, 0.02], "samples": [[0.03, 0.02], [0.03, 0.02], [0.03, 0.02]], "cost": 0.0080022}
 {"cls": "java.security.interfaces.ECKey", "sig": "java.security.spec.ECParameterSpec getParams()", "p": [0.9], "samples": [[0.85], [0.85], [0.9]], "cost": 0.0076468000000000005}
 {"cls": "java.security.interfaces.ECPublicKey", "sig": "java.security.spec.ECPoint getW()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0076626}
+{"cls": "java.security.spec.ECFieldFp", "sig": "java.math.BigInteger getP()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0076332}
+{"cls": "java.security.spec.ECParameterSpec", "sig": "java.security.spec.EllipticCurve getCurve()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0076468000000000005}
+{"cls": "java.security.spec.ECPoint", "sig": "java.math.BigInteger getAffineX()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0076274}
+{"cls": "java.security.spec.ECPoint", "sig": "java.math.BigInteger getAffineY()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.007637400000000001}
+{"cls": "java.security.spec.ECPoint", "sig": "void <init>(java.math.BigInteger,java.math.BigInteger)", "p": [0.97, 0.97], "samples": [[0.97, 0.97], [0.97, 0.97], [0.97, 0.97]], "cost": 0.0080358}
+{"cls": "java.security.spec.ECPublicKeySpec", "sig": "void <init>(java.security.spec.ECPoint,java.security.spec.ECParameterSpec)", "p": [0.95, 0.02, 0.9, 0.02], "samples": [[0.95, 0.02, 0.9, 0.02], [0.95, 0.02, 0.9, 0.02], [0.95, 0.02, 0.9, 0.02]], "cost": 0.0089388}
+{"cls": "java.security.spec.EllipticCurve", "sig": "java.math.BigInteger getA()", "p": [0.95], "samples": [[0.93], [0.95], [0.93]], "cost": 0.007623199999999999}
+{"cls": "java.security.spec.EllipticCurve", "sig": "java.math.BigInteger getB()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0076132000000000005}
+{"cls": "java.security.spec.EllipticCurve", "sig": "java.security.spec.ECField getField()", "p": [0.93], "samples": [[0.93], [0.93], [0.9]], "cost": 0.0076174}
+{"cls": "java.security.spec.PKCS8EncodedKeySpec", "sig": "void <init>(byte[])", "p": [0.95], "samples": [[0.95], [0.95], [0.93]], "cost": 0.0076536}
+{"cls": "java.security.spec.X509EncodedKeySpec", "sig": "byte[] getEncoded()", "p": [0.96], "samples": [[0.96], [0.95], [0.95]], "cost": 0.0089416}
+{"cls": "java.security.spec.X509EncodedKeySpec", "sig": "void <init>(byte[])", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007671000000000001}
+{"cls": "java.sql.Date", "sig": "java.sql.Date valueOf(java.lang.String)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0076500000000000005}
+{"cls": "java.sql.Date", "sig": "void <init>(long)", "p": [0.95], "samples": [[0.95], [0.93], [0.95]], "cost": 0.0075938}
+{"cls": "java.sql.Time", "sig": "void <init>(long)", "p": [0.95], "samples": [[0.95], [0.93], [0.95]], "cost": 0.0075738}
+{"cls": "java.sql.Timestamp", "sig": "int getNanos()", "p": [0.95], "samples": [[0.93], [0.9], [0.95]], "cost": 0.0082812}
+{"cls": "java.sql.Timestamp", "sig": "long getTime()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007587}
+{"cls": "java.sql.Timestamp", "sig": "void <init>(long)", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.007616400000000001}
+{"cls": "java.text.BreakIterator", "sig": "int first()", "p": [0.4], "samples": [[0.4], [0.1], [0.2]], "cost": 0.0115486}
+{"cls": "java.text.BreakIterator", "sig": "int last()", "p": [0.55], "samples": [[0.35], [0.55], [0.5]], "cost": 0.008948600000000001}
+{"cls": "java.text.BreakIterator", "sig": "int next()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.0075786000000000004}
+{"cls": "java.text.BreakIterator", "sig": "int preceding(int)", "p": [0.1, 0.03, 0.35], "samples": [[0.1, 0.03, 0.35], [0.1, 0.03, 0.3], [0.1, 0.03, 0.1]], "cost": 0.0081408}
+{"cls": "java.text.BreakIterator", "sig": "java.text.BreakIterator getCharacterInstance(java.util.Locale)", "p": [0.12], "samples": [[0.12], [0.1], [0.1]], "cost": 0.0076904}
+{"cls": "java.text.BreakIterator", "sig": "void setText(java.lang.String)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0101642}
+{"cls": "java.text.Collator", "sig": "int compare(java.lang.String,java.lang.String)", "p": [0.2, 0.02, 0.2, 0.02, 0.05], "samples": [[0.2, 0.02, 0.2, 0.02, 0.05], [0.1, 0.02, 0.1, 0.02, 0.03], [0.1, 0.02, 0.1, 0.02, 0.03]], "cost": 0.0088338}
+{"cls": "java.text.DateFormat", "sig": "java.lang.Object clone()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007603800000000001}
+{"cls": "java.text.DateFormat", "sig": "java.lang.String format(java.util.Date)", "p": [0.93, 0.03, 0.2, 0.02], "samples": [[0.93, 0.03, 0.2, 0.02], [0.92, 0.03, 0.2, 0.02], [0.93, 0.03, 0.2, 0.02]], "cost": 0.0085314}
+{"cls": "java.text.DateFormat", "sig": "java.text.DateFormat getDateInstance(int,java.util.Locale)", "p": [0.1, 0.02, 0.2], "samples": [[0.08, 0.01, 0.2], [0.1, 0.02, 0.15], [0.05, 0.01, 0.1]], "cost": 0.0082626}
+{"cls": "java.text.DateFormat", "sig": "java.text.DateFormat getDateTimeInstance(int,int)", "p": [0.1, 0.1], "samples": [[0.1, 0.1], [0.1, 0.1], [0.1, 0.1]], "cost": 0.0079014}
+{"cls": "java.text.DateFormat", "sig": "java.text.DateFormat getDateTimeInstance(int,int,java.util.Locale)", "p": [0.3, 0.02, 0.3, 0.02, 0.5], "samples": [[0.3, 0.02, 0.3, 0.02, 0.5], [0.3, 0.02, 0.3, 0.02, 0.4], [0.3, 0.02, 0.3, 0.02, 0.4]], "cost": 0.0088842}
+{"cls": "java.text.DateFormat", "sig": "java.text.DateFormat getTimeInstance(int,java.util.Locale)", "p": [0.15, 0.02, 0.15], "samples": [[0.1, 0.02, 0.1], [0.1, 0.01, 0.15], [0.15, 0.02, 0.15]], "cost": 0.008266800000000001}
+{"cls": "java.text.DateFormat", "sig": "java.util.Date parse(java.lang.String)", "p": [0.9, 0.05, 0.05], "samples": [[0.9, 0.03, 0.05], [0.9, 0.05, 0.05], [0.9, 0.03, 0.05]], "cost": 0.0082164}
+{"cls": "java.text.DateFormat", "sig": "java.util.Date parse(java.lang.String,java.text.ParsePosition)", "p": [0.93, 0.03, 0.3, 0.03, 0.03, 0.15, 0.03], "samples": [[0.93, 0.03, 0.1, 0.03, 0.02, 0.1, 0.03], [0.93, 0.03, 0.3, 0.03, 0.02, 0.15, 0.03], [0.93, 0.03, 0.1, 0.03, 0.03, 0.12, 0.03]], "cost": 0.0096066}
+{"cls": "java.text.DateFormat", "sig": "java.util.TimeZone getTimeZone()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007629}
+{"cls": "java.text.DateFormat", "sig": "void setCalendar(java.util.Calendar)", "p": [0.93, 0.04], "samples": [[0.93, 0.04], [0.93, 0.04], [0.93, 0.04]], "cost": 0.007977}
+{"cls": "java.text.DateFormat", "sig": "void setLenient(boolean)", "p": [0.85], "samples": [[0.5], [0.85], [0.85]], "cost": 0.007623199999999999}
+{"cls": "java.text.DateFormat", "sig": "void setTimeZone(java.util.TimeZone)", "p": [0.9, 0.03], "samples": [[0.9, 0.02], [0.9, 0.03], [0.85, 0.02]], "cost": 0.0096138}
+{"cls": "java.text.DateFormatSymbols", "sig": "java.lang.String[] getAmPmStrings()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.00764}
+{"cls": "java.text.DateFormatSymbols", "sig": "java.lang.String[] getEras()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007629}
+{"cls": "java.text.DateFormatSymbols", "sig": "java.lang.String[] getMonths()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076332}
+{"cls": "java.text.DateFormatSymbols", "sig": "java.lang.String[] getShortMonths()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076916}
+{"cls": "java.text.DateFormatSymbols", "sig": "java.lang.String[] getShortWeekdays()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076500000000000005}
+{"cls": "java.text.DateFormatSymbols", "sig": "java.lang.String[] getWeekdays()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076416}
+{"cls": "java.text.DateFormatSymbols", "sig": "java.lang.String[][] getZoneStrings()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.009340000000000001}
+{"cls": "java.text.DateFormatSymbols", "sig": "java.text.DateFormatSymbols getInstance(java.util.Locale)", "p": [0.2], "samples": [[0.1], [0.1], [0.2]], "cost": 0.0076888}
+{"cls": "java.text.DateFormatSymbols", "sig": "void <init>(java.util.Locale)", "p": [0.6], "samples": [[0.6], [0.6], [0.5]], "cost": 0.007669400000000001}
+{"cls": "java.text.DecimalFormat", "sig": "java.lang.String format(double)", "p": [0.93, 0.03, 0.2], "samples": [[0.93, 0.03, 0.2], [0.93, 0.03, 0.2], [0.93, 0.03, 0.15]], "cost": 0.008157600000000001}
+{"cls": "java.text.DecimalFormat", "sig": "java.lang.String format(java.lang.Object)", "p": [0.93, 0.03, 0.3, 0.02], "samples": [[0.93, 0.03, 0.3, 0.02], [0.93, 0.03, 0.3, 0.02], [0.9, 0.03, 0.3, 0.02]], "cost": 0.0085566}
+{"cls": "java.text.DecimalFormat", "sig": "java.lang.String format(long)", "p": [0.95, 0.03, 0.3], "samples": [[0.95, 0.03, 0.3], [0.95, 0.03, 0.1], [0.95, 0.03, 0.15]], "cost": 0.008157600000000001}
+{"cls": "java.text.DecimalFormat", "sig": "void <init>(java.lang.String)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076626}
+{"cls": "java.text.DecimalFormat", "sig": "void <init>(java.lang.String,java.text.DecimalFormatSymbols)", "p": [0.85, 0.03, 0.75], "samples": [[0.85, 0.03, 0.6], [0.85, 0.03, 0.6], [0.85, 0.02, 0.75]], "cost": 0.0084348}
+{"cls": "java.text.DecimalFormat", "sig": "void setDecimalFormatSymbols(java.text.DecimalFormatSymbols)", "p": [0.8, 0.02], "samples": [[0.5, 0.02], [0.8, 0.02], [0.6, 0.02]], "cost": 0.008102999999999999}
+{"cls": "java.text.DecimalFormat", "sig": "void setMaximumFractionDigits(int)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076542}
+{"cls": "java.text.DecimalFormat", "sig": "void setMinimumFractionDigits(int)", "p": [0.85], "samples": [[0.85], [0.8], [0.85]], "cost": 0.007624199999999999}
+{"cls": "java.text.DecimalFormat", "sig": "void setRoundingMode(java.math.RoundingMode)", "p": [0.9, 0.02], "samples": [[0.85, 0.02], [0.9, 0.02], [0.85, 0.02]], "cost": 0.008039}
+{"cls": "java.text.DecimalFormatSymbols", "sig": "char getDecimalSeparator()", "p": [0.93], "samples": [[0.9], [0.93], [0.93]], "cost": 0.0076332}
+{"cls": "java.text.DecimalFormatSymbols", "sig": "java.text.DecimalFormatSymbols getInstance(java.util.Locale)", "p": [0.3], "samples": [[0.3], [0.3], [0.3]], "cost": 0.0077155999999999995}
+{"cls": "java.text.DecimalFormatSymbols", "sig": "void <init>(java.util.Locale)", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.0076878}
+{"cls": "java.text.Format", "sig": "java.lang.String format(java.lang.Object)", "p": [0.9, 0.03, 0.3, 0.02], "samples": [[0.9, 0.03, 0.3, 0.02], [0.9, 0.03, 0.3, 0.02], [0.9, 0.03, 0.3, 0.02]], "cost": 0.008535599999999999}
+{"cls": "java.text.MessageFormat", "sig": "java.lang.String format(java.lang.String,java.lang.Object[])", "p": [0.9, 0.02, 0.9], "samples": [[0.9, 0.02, 0.9], [0.9, 0.02, 0.9], [0.9, 0.02, 0.9]], "cost": 0.008313000000000001}
+{"cls": "java.text.MessageFormat", "sig": "java.lang.String toPattern()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075921999999999995}
+{"cls": "java.text.MessageFormat", "sig": "void applyPattern(java.lang.String)", "p": [0.93], "samples": [[0.93], [0.93], [0.9]], "cost": 0.0076668000000000005}
+{"cls": "java.text.MessageFormat", "sig": "void setFormats(java.text.Format[])", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.0079686}
+{"cls": "java.text.Normalizer", "sig": "java.lang.String normalize(java.lang.CharSequence,java.text.Normalizer$Form)", "p": [0.95, 0.02, 0.03, 0.01], "samples": [[0.95, 0.02, 0.03, 0.01], [0.95, 0.02, 0.03, 0.01], [0.95, 0.02, 0.03, 0.01]], "cost": 0.008796}
+{"cls": "java.text.NumberFormat", "sig": "java.lang.Number parse(java.lang.String)", "p": [0.9, 0.03, 0.05], "samples": [[0.9, 0.03, 0.05], [0.9, 0.03, 0.03], [0.9, 0.03, 0.03]], "cost": 0.0082248}
+{"cls": "java.text.NumberFormat", "sig": "java.lang.String format(double)", "p": [0.95, 0.03, 0.3], "samples": [[0.95, 0.03, 0.3], [0.95, 0.03, 0.15], [0.93, 0.03, 0.25]], "cost": 0.0081534}
+{"cls": "java.text.NumberFormat", "sig": "java.lang.String format(java.lang.Object)", "p": [0.9, 0.03, 0.15, 0.02], "samples": [[0.9, 0.03, 0.15, 0.02], [0.9, 0.03, 0.15, 0.02], [0.9, 0.03, 0.15, 0.02]], "cost": 0.0085524}
+{"cls": "java.text.NumberFormat", "sig": "java.lang.String format(long)", "p": [0.95, 0.03, 0.2], "samples": [[0.95, 0.03, 0.2], [0.95, 0.03, 0.1], [0.95, 0.02, 0.1]], "cost": 0.0081534}
+{"cls": "java.text.NumberFormat", "sig": "java.text.NumberFormat getInstance(java.util.Locale)", "p": [0.2], "samples": [[0.2], [0.15], [0.15]], "cost": 0.0076836000000000005}
+{"cls": "java.text.NumberFormat", "sig": "java.text.NumberFormat getNumberInstance(java.util.Locale)", "p": [0.3], "samples": [[0.06], [0.15], [0.3]], "cost": 0.0086862}
+{"cls": "java.text.NumberFormat", "sig": "void setMinimumFractionDigits(int)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076500000000000005}
+{"cls": "java.text.ParsePosition", "sig": "int getErrorIndex()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075838}
+{"cls": "java.text.ParsePosition", "sig": "int getIndex()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0089612}
+{"cls": "java.text.ParsePosition", "sig": "void <init>(int)", "p": [0.96], "samples": [[0.96], [0.95], [0.95]], "cost": 0.007616400000000001}
+{"cls": "java.text.ParsePosition", "sig": "void setErrorIndex(int)", "p": [0.96], "samples": [[0.95], [0.95], [0.96]], "cost": 0.007603199999999999}
+{"cls": "java.text.ParsePosition", "sig": "void setIndex(int)", "p": [0.96], "samples": [[0.96], [0.95], [0.95]], "cost": 0.0076206}
+{"cls": "java.time.Duration", "sig": "int getNano()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0075744}
+{"cls": "java.time.Duration", "sig": "java.time.Duration ofSeconds(long,long)", "p": [0.97, 0.9], "samples": [[0.97, 0.9], [0.95, 0.9], [0.95, 0.9]], "cost": 0.007872}
+{"cls": "java.time.Duration", "sig": "long getSeconds()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007582800000000001}
+{"cls": "java.time.Instant", "sig": "int getNano()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0075744}
+{"cls": "java.time.Instant", "sig": "java.time.Instant ofEpochSecond(long,long)", "p": [0.97, 0.9], "samples": [[0.95, 0.9], [0.95, 0.9], [0.97, 0.9]], "cost": 0.0078804}
+{"cls": "java.time.Instant", "sig": "long getEpochSecond()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0079012}
+{"cls": "java.time.Instant", "sig": "long toEpochMilli()", "p": [0.95], "samples": [[0.95], [0.95], [0.93]], "cost": 0.007591200000000001}
+{"cls": "java.time.LocalDate", "sig": "int getDayOfMonth()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007603800000000001}
+{"cls": "java.time.LocalDate", "sig": "int getMonthValue()", "p": [0.93], "samples": [[0.93], [0.9], [0.93]], "cost": 0.007585400000000001}
+{"cls": "java.time.LocalDate", "sig": "int getYear()", "p": [0.95], "samples": [[0.95], [0.93], [0.93]], "cost": 0.0076328}
+{"cls": "java.time.LocalDate", "sig": "java.time.LocalDate of(int,int,int)", "p": [0.97, 0.97, 0.97], "samples": [[0.97, 0.97, 0.97], [0.96, 0.96, 0.96], [0.97, 0.97, 0.97]], "cost": 0.0081534}
+{"cls": "java.time.LocalDate", "sig": "java.time.LocalDate parse(java.lang.CharSequence)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007672}
+{"cls": "java.time.LocalDateTime", "sig": "java.time.LocalDate toLocalDate()", "p": [0.93], "samples": [[0.93], [0.93], [0.9]], "cost": 0.0076274}
+{"cls": "java.time.LocalDateTime", "sig": "java.time.LocalDateTime of(java.time.LocalDate,java.time.LocalTime)", "p": [0.95, 0.02, 0.95, 0.02], "samples": [[0.93, 0.02, 0.93, 0.02], [0.95, 0.01, 0.95, 0.01], [0.93, 0.02, 0.93, 0.02]], "cost": 0.0087498}
+{"cls": "java.time.LocalDateTime", "sig": "java.time.LocalTime toLocalTime()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007637400000000001}
+{"cls": "java.time.LocalTime", "sig": "int getHour()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007582800000000001}
+{"cls": "java.time.LocalTime", "sig": "int getMinute()", "p": [0.95], "samples": [[0.93], [0.93], [0.95]], "cost": 0.007587}
+{"cls": "java.time.LocalTime", "sig": "int getNano()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.007582800000000001}
+{"cls": "java.time.LocalTime", "sig": "int getSecond()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007587}
+{"cls": "java.time.LocalTime", "sig": "java.time.LocalTime of(int,int,int,int)", "p": [0.97, 0.97, 0.97, 0.97], "samples": [[0.97, 0.97, 0.97, 0.97], [0.97, 0.97, 0.97, 0.97], [0.97, 0.97, 0.97, 0.97]], "cost": 0.008439}
+{"cls": "java.time.MonthDay", "sig": "int getDayOfMonth()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007603800000000001}
+{"cls": "java.time.MonthDay", "sig": "int getMonthValue()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0079754}
+{"cls": "java.time.MonthDay", "sig": "java.time.MonthDay of(int,int)", "p": [0.95, 0.95], "samples": [[0.93, 0.93], [0.93, 0.93], [0.95, 0.95]], "cost": 0.0078678}
+{"cls": "java.time.OffsetDateTime", "sig": "java.time.LocalDateTime toLocalDateTime()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007708400000000001}
+{"cls": "java.time.OffsetDateTime", "sig": "java.time.OffsetDateTime of(java.time.LocalDateTime,java.time.ZoneOffset)", "p": [0.95, 0.02, 0.93, 0.02], "samples": [[0.95, 0.02, 0.93, 0.02], [0.93, 0.02, 0.9, 0.02], [0.95, 0.02, 0.93, 0.02]], "cost": 0.008825399999999999}
+{"cls": "java.time.OffsetDateTime", "sig": "java.time.ZoneOffset getOffset()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076416}
+{"cls": "java.time.OffsetTime", "sig": "java.time.LocalTime toLocalTime()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0076232}
+{"cls": "java.time.OffsetTime", "sig": "java.time.OffsetTime of(java.time.LocalTime,java.time.ZoneOffset)", "p": [0.95, 0.02, 0.93, 0.02], "samples": [[0.95, 0.02, 0.93, 0.02], [0.93, 0.02, 0.9, 0.02], [0.93, 0.02, 0.9, 0.02]], "cost": 0.008775}
+{"cls": "java.time.OffsetTime", "sig": "java.time.ZoneOffset getOffset()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076232}
+{"cls": "java.time.Period", "sig": "int getDays()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.007570200000000001}
+{"cls": "java.time.Period", "sig": "int getMonths()", "p": [0.95], "samples": [[0.93], [0.93], [0.95]], "cost": 0.007564400000000001}
+{"cls": "java.time.Period", "sig": "int getYears()", "p": [0.95], "samples": [[0.95], [0.93], [0.95]], "cost": 0.0075402}
+{"cls": "java.time.Period", "sig": "java.time.Period of(int,int,int)", "p": [0.97, 0.97, 0.97], "samples": [[0.97, 0.97, 0.97], [0.97, 0.97, 0.97], [0.97, 0.97, 0.97]], "cost": 0.0081282}
+{"cls": "java.time.Year", "sig": "int getValue()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.007550200000000001}
+{"cls": "java.time.Year", "sig": "java.time.Year of(int)", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.007587}
+{"cls": "java.time.YearMonth", "sig": "int getMonthValue()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075954}
+{"cls": "java.time.YearMonth", "sig": "int getYear()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007582800000000001}
+{"cls": "java.time.YearMonth", "sig": "java.time.YearMonth of(int,int)", "p": [0.97, 0.97], "samples": [[0.97, 0.97], [0.97, 0.97], [0.97, 0.97]], "cost": 0.0078678}
+{"cls": "java.time.ZoneId", "sig": "java.lang.String getId()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0084796}
+{"cls": "java.time.ZoneId", "sig": "java.time.ZoneId of(java.lang.String)", "p": [0.85], "samples": [[0.8], [0.82], [0.85]], "cost": 0.0101242}
+{"cls": "java.time.ZoneOffset", "sig": "int getTotalSeconds()", "p": [0.95], "samples": [[0.93], [0.95], [0.95]], "cost": 0.0076022}
+{"cls": "java.time.ZoneOffset", "sig": "java.time.ZoneOffset ofTotalSeconds(int)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007642599999999999}
+{"cls": "java.time.ZonedDateTime", "sig": "java.time.LocalDate toLocalDate()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0076216}
+{"cls": "java.time.ZonedDateTime", "sig": "java.time.LocalDateTime toLocalDateTime()", "p": [0.96], "samples": [[0.96], [0.95], [0.95]], "cost": 0.007658400000000001}
+{"cls": "java.time.ZonedDateTime", "sig": "java.time.ZoneId getZone()", "p": [0.9], "samples": [[0.9], [0.9], [0.85]], "cost": 0.007609}
+{"cls": "java.time.ZonedDateTime", "sig": "java.time.ZoneOffset getOffset()", "p": [0.93], "samples": [[0.9], [0.9], [0.93]], "cost": 0.0090316}
+{"cls": "java.time.ZonedDateTime", "sig": "java.time.ZonedDateTime ofInstant(java.time.LocalDateTime,java.time.ZoneOffset,java.time.ZoneId)", "p": [0.9, 0.02, 0.02, 0.6, 0.02, 0.02, 0.85, 0.02, 0.02], "samples": [[0.9, 0.02, 0.02, 0.6, 0.02, 0.02, 0.85, 0.02, 0.02], [0.9, 0.02, 0.02, 0.6, 0.02, 0.02, 0.85, 0.02, 0.02], [0.9, 0.02, 0.02, 0.6, 0.02, 0.02, 0.85, 0.02, 0.02]], "cost": 0.010690199999999999}
+{"cls": "java.time.chrono.ChronoLocalDateTime", "sig": "java.time.Instant toInstant(java.time.ZoneOffset)", "p": [0.6, 0.02, 0.95, 0.02], "samples": [[0.5, 0.02, 0.9, 0.02], [0.45, 0.02, 0.92, 0.02], [0.6, 0.02, 0.95, 0.02]], "cost": 0.0101542}
+{"cls": "java.util.ArrayList", "sig": "void replaceAll(java.util.function.UnaryOperator)", "p": [0.1, 0.6], "samples": [[0.1, 0.6], [0.1, 0.6], [0.05, 0.6]], "cost": 0.008039999999999999}
+{"cls": "java.util.BitSet", "sig": "boolean get(int)", "p": [0.04, 0.02, 0.9], "samples": [[0.03, 0.01, 0.9], [0.04, 0.02, 0.85], [0.03, 0.01, 0.9]], "cost": 0.0081324}
+{"cls": "java.util.BitSet", "sig": "int cardinality()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007582800000000001}
+{"cls": "java.util.BitSet", "sig": "int length()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007570200000000001}
+{"cls": "java.util.BitSet", "sig": "int nextClearBit(int)", "p": [0.3, 0.02, 0.85], "samples": [[0.3, 0.02, 0.85], [0.3, 0.02, 0.6], [0.3, 0.02, 0.6]], "cost": 0.008145000000000001}
+{"cls": "java.util.BitSet", "sig": "int nextSetBit(int)", "p": [0.1, 0.02, 0.8], "samples": [[0.1, 0.02, 0.8], [0.1, 0.02, 0.8], [0.1, 0.02, 0.7]], "cost": 0.008145000000000001}
+{"cls": "java.util.BitSet", "sig": "java.util.BitSet valueOf(long[])", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.007629}
+{"cls": "java.util.BitSet", "sig": "void <init>(int)", "p": [0.05], "samples": [[0.04], [0.04], [0.05]], "cost": 0.007608}
+{"cls": "java.util.BitSet", "sig": "void clear(int)", "p": [0.06], "samples": [[0.04], [0.06], [0.04]], "cost": 0.0095938}
+{"cls": "java.util.BitSet", "sig": "void set(int)", "p": [0.6], "samples": [[0.6], [0.5], [0.4]], "cost": 0.0092796}
+{"cls": "java.util.BitSet", "sig": "void set(int,boolean)", "p": [0.1, 0.5], "samples": [[0.1, 0.5], [0.08, 0.3], [0.08, 0.3]], "cost": 0.007893}
+{"cls": "java.util.BitSet", "sig": "void set(int,int)", "p": [0.3, 0.3], "samples": [[0.3, 0.3], [0.25, 0.25], [0.3, 0.3]], "cost": 0.0138962}
+{"cls": "java.util.BitSet", "sig": "void set(int,int,boolean)", "p": [0.15, 0.15, 0.6], "samples": [[0.05, 0.05, 0.5], [0.15, 0.15, 0.6], [0.1, 0.1, 0.5]], "cost": 0.0126696}
+{"cls": "java.util.Calendar", "sig": "boolean after(java.lang.Object)", "p": [0.1, 0.02, 0.1, 0.02], "samples": [[0.1, 0.02, 0.1, 0.02], [0.1, 0.02, 0.1, 0.02], [0.1, 0.02, 0.1, 0.02]], "cost": 0.0085314}
+{"cls": "java.util.Calendar", "sig": "boolean before(java.lang.Object)", "p": [0.1, 0.02, 0.1, 0.02], "samples": [[0.1, 0.02, 0.1, 0.02], [0.1, 0.02, 0.1, 0.02], [0.1, 0.02, 0.1, 0.02]], "cost": 0.0085314}
+{"cls": "java.util.Calendar", "sig": "boolean equals(java.lang.Object)", "p": [0.1, 0.02, 0.1, 0.02], "samples": [[0.05, 0.01, 0.05, 0.01], [0.05, 0.01, 0.05, 0.01], [0.1, 0.02, 0.1, 0.02]], "cost": 0.008535599999999999}
+{"cls": "java.util.Calendar", "sig": "int compareTo(java.util.Calendar)", "p": [0.5, 0.02, 0.5, 0.02], "samples": [[0.4, 0.02, 0.4, 0.02], [0.5, 0.02, 0.5, 0.02], [0.5, 0.02, 0.5, 0.02]], "cost": 0.0085524}
+{"cls": "java.util.Calendar", "sig": "int get(int)", "p": [0.03, 0.02, 0.9], "samples": [[0.03, 0.02, 0.9], [0.03, 0.02, 0.9], [0.03, 0.02, 0.9]], "cost": 0.008124000000000001}
+{"cls": "java.util.Calendar", "sig": "int getActualMaximum(int)", "p": [0.05, 0.02, 0.6], "samples": [[0.05, 0.02, 0.5], [0.05, 0.02, 0.6], [0.05, 0.02, 0.5]], "cost": 0.0081492}
+{"cls": "java.util.Calendar", "sig": "int getActualMinimum(int)", "p": [0.05, 0.02, 0.2], "samples": [[0.05, 0.02, 0.2], [0.05, 0.02, 0.15], [0.05, 0.01, 0.2]], "cost": 0.0081492}
+{"cls": "java.util.Calendar", "sig": "int getFirstDayOfWeek()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075921999999999995}
+{"cls": "java.util.Calendar", "sig": "int getLeastMaximum(int)", "p": [0.05, 0.02, 0.1], "samples": [[0.03, 0.01, 0.1], [0.04, 0.02, 0.1], [0.05, 0.02, 0.1]], "cost": 0.0081534}
+{"cls": "java.util.Calendar", "sig": "int getMaximum(int)", "p": [0.03, 0.01, 0.05], "samples": [[0.03, 0.01, 0.05], [0.03, 0.01, 0.04], [0.03, 0.01, 0.05]], "cost": 0.0081408}
+{"cls": "java.util.Calendar", "sig": "int getMinimalDaysInFirstWeek()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.009099}
+{"cls": "java.util.Calendar", "sig": "java.lang.Object clone()", "p": [0.95], "samples": [[0.93], [0.93], [0.95]], "cost": 0.0075896}
+{"cls": "java.util.Calendar", "sig": "java.lang.String getDisplayName(int,int,java.util.Locale)", "p": [0.08, 0.02, 0.02, 0.05, 0.02, 0.02, 0.12, 0.02, 0.88, 0.03], "samples": [[0.05, 0.02, 0.02, 0.05, 0.02, 0.02, 0.1, 0.02, 0.6, 0.02], [0.06, 0.02, 0.02, 0.04, 0.02, 0.02, 0.12, 0.02, 0.85, 0.03], [0.08, 0.02, 0.02, 0.04, 0.02, 0.02, 0.12, 0.02, 0.88, 0.02]], "cost": 0.0131494}
+{"cls": "java.util.Calendar", "sig": "java.util.Calendar getInstance(java.util.Locale)", "p": [0.2], "samples": [[0.15], [0.15], [0.2]], "cost": 0.0076668000000000005}
+{"cls": "java.util.Calendar", "sig": "java.util.Calendar getInstance(java.util.TimeZone)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076736}
+{"cls": "java.util.Calendar", "sig": "java.util.Calendar getInstance(java.util.TimeZone,java.util.Locale)", "p": [0.9, 0.02, 0.5, 0.02], "samples": [[0.9, 0.02, 0.5, 0.02], [0.9, 0.02, 0.4, 0.02], [0.9, 0.02, 0.35, 0.02]], "cost": 0.0087036}
+{"cls": "java.util.Calendar", "sig": "java.util.Date getTime()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075996}
+{"cls": "java.util.Calendar", "sig": "java.util.Map getDisplayNames(int,int,java.util.Locale)", "p": [0.05, 0.02, 0.02, 0.04, 0.02, 0.02, 0.3, 0.02, 0.1, 0.02], "samples": [[0.05, 0.02, 0.02, 0.04, 0.02, 0.02, 0.3, 0.02, 0.05, 0.02], [0.03, 0.02, 0.01, 0.03, 0.02, 0.01, 0.08, 0.02, 0.1, 0.01], [0.03, 0.02, 0.01, 0.03, 0.02, 0.01, 0.1, 0.02, 0.1, 0.01]], "cost": 0.0103836}
+{"cls": "java.util.Calendar", "sig": "java.util.TimeZone getTimeZone()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076148000000000006}
+{"cls": "java.util.Calendar", "sig": "long getTimeInMillis()", "p": [0.93], "samples": [[0.9], [0.93], [0.9]], "cost": 0.0075996}
+{"cls": "java.util.Calendar", "sig": "void add(int,int)", "p": [0.05, 0.9], "samples": [[0.05, 0.9], [0.05, 0.9], [0.05, 0.85]], "cost": 0.008536199999999999}
+{"cls": "java.util.Calendar", "sig": "void roll(int,int)", "p": [0.1, 0.85], "samples": [[0.07, 0.85], [0.05, 0.85], [0.1, 0.85]], "cost": 0.0110904}
+{"cls": "java.util.Calendar", "sig": "void set(int,int)", "p": [0.1, 0.93], "samples": [[0.05, 0.93], [0.1, 0.9], [0.1, 0.9]], "cost": 0.008456199999999999}
+{"cls": "java.util.Calendar", "sig": "void set(int,int,int)", "p": [0.95, 0.95, 0.95], "samples": [[0.95, 0.95, 0.95], [0.95, 0.95, 0.95], [0.95, 0.95, 0.95]], "cost": 0.009952800000000001}
+{"cls": "java.util.Calendar", "sig": "void set(int,int,int,int,int)", "p": [0.95, 0.95, 0.95, 0.95, 0.95], "samples": [[0.95, 0.95, 0.95, 0.95, 0.95], [0.95, 0.95, 0.95, 0.95, 0.95], [0.95, 0.95, 0.95, 0.95, 0.95]], "cost": 0.011216}
+{"cls": "java.util.Calendar", "sig": "void set(int,int,int,int,int,int)", "p": [0.95, 0.95, 0.95, 0.95, 0.95, 0.95], "samples": [[0.93, 0.93, 0.93, 0.93, 0.93, 0.93], [0.95, 0.95, 0.95, 0.95, 0.95, 0.95], [0.93, 0.93, 0.93, 0.93, 0.93, 0.93]], "cost": 0.009102599999999999}
+{"cls": "java.util.Calendar", "sig": "void setFirstDayOfWeek(int)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076416}
+{"cls": "java.util.Calendar", "sig": "void setLenient(boolean)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007629}
+{"cls": "java.util.Calendar", "sig": "void setMinimalDaysInFirstWeek(int)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007658400000000001}
+{"cls": "java.util.Calendar", "sig": "void setTime(java.util.Date)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0079392}
+{"cls": "java.util.Calendar", "sig": "void setTimeInMillis(long)", "p": [0.95], "samples": [[0.93], [0.95], [0.95]], "cost": 0.007629}
+{"cls": "java.util.Calendar", "sig": "void setTimeZone(java.util.TimeZone)", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.0079896}
+{"cls": "java.util.Comparator", "sig": "int compare(java.lang.Object,java.lang.Object)", "p": [0.04, 0.02, 0.02, 0.04, 0.02, 0.02, 0.04, 0.02, 0.02], "samples": [[0.04, 0.02, 0.02, 0.04, 0.02, 0.02, 0.04, 0.02, 0.02], [0.04, 0.02, 0.02, 0.04, 0.02, 0.02, 0.03, 0.02, 0.02], [0.04, 0.02, 0.02, 0.04, 0.02, 0.02, 0.03, 0.02, 0.02]], "cost": 0.0102072}
+{"cls": "java.util.Currency", "sig": "java.lang.String getCurrencyCode()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076064}
+{"cls": "java.util.Currency", "sig": "java.lang.String getSymbol(java.util.Locale)", "p": [0.1, 0.02, 0.85, 0.02], "samples": [[0.1, 0.02, 0.8, 0.02], [0.1, 0.02, 0.85, 0.02], [0.1, 0.02, 0.85, 0.02]], "cost": 0.0085566}
+{"cls": "java.util.Currency", "sig": "java.util.Currency getInstance(java.lang.String)", "p": [0.2], "samples": [[0.2], [0.12], [0.12]], "cost": 0.009930000000000001}
+{"cls": "java.util.Currency", "sig": "java.util.Currency getInstance(java.util.Locale)", "p": [0.3], "samples": [[0.3], [0.2], [0.2]], "cost": 0.0076484000000000005}
+{"cls": "java.util.Date", "sig": "boolean after(java.util.Date)", "p": [0.1, 0.01, 0.1, 0.01], "samples": [[0.1, 0.01, 0.1, 0.01], [0.1, 0.01, 0.1, 0.01], [0.1, 0.01, 0.1, 0.01]], "cost": 0.0085062}
+{"cls": "java.util.Date", "sig": "boolean before(java.util.Date)", "p": [0.1, 0.01, 0.1, 0.01], "samples": [[0.08, 0.01, 0.08, 0.01], [0.1, 0.01, 0.1, 0.01], [0.1, 0.01, 0.1, 0.01]], "cost": 0.0085062}
+{"cls": "java.util.Date", "sig": "boolean equals(java.lang.Object)", "p": [0.1, 0.01, 0.1, 0.01], "samples": [[0.1, 0.01, 0.1, 0.01], [0.1, 0.01, 0.1, 0.01], [0.1, 0.01, 0.1, 0.01]], "cost": 0.0085272}
+{"cls": "java.util.Date", "sig": "int compareTo(java.util.Date)", "p": [0.3, 0.02, 0.3, 0.02], "samples": [[0.1, 0.02, 0.1, 0.02], [0.08, 0.02, 0.08, 0.02], [0.3, 0.01, 0.3, 0.01]], "cost": 0.0097204}
+{"cls": "java.util.Date", "sig": "int getDate()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007570200000000001}
+{"cls": "java.util.Date", "sig": "int getMonth()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075744}
+{"cls": "java.util.Date", "sig": "int getYear()", "p": [0.95], "samples": [[0.95], [0.93], [0.93]], "cost": 0.0081402}
+{"cls": "java.util.Date", "sig": "java.lang.Object clone()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.007591200000000001}
+{"cls": "java.util.Date", "sig": "java.lang.String toGMTString()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0076495999999999995}
+{"cls": "java.util.Date", "sig": "long getTime()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.007570200000000001}
+{"cls": "java.util.Date", "sig": "void <init>(int,int,int)", "p": [0.93, 0.93, 0.93], "samples": [[0.93, 0.93, 0.93], [0.93, 0.93, 0.93], [0.9, 0.9, 0.9]], "cost": 0.0081828}
+{"cls": "java.util.Date", "sig": "void <init>(int,int,int,int,int,int)", "p": [0.95, 0.95, 0.95, 0.95, 0.95, 0.95], "samples": [[0.93, 0.93, 0.93, 0.93, 0.93, 0.93], [0.95, 0.95, 0.95, 0.95, 0.95, 0.95], [0.93, 0.93, 0.95, 0.95, 0.95, 0.93]], "cost": 0.009102599999999999}
+{"cls": "java.util.Date", "sig": "void <init>(long)", "p": [0.97], "samples": [[0.97], [0.97], [0.97]], "cost": 0.0075996}
+{"cls": "java.util.Date", "sig": "void setTime(long)", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0075996}
+{"cls": "java.util.Dictionary", "sig": "java.lang.Object get(java.lang.Object)", "p": [0.03, 0.02, 0.9, 0.02], "samples": [[0.03, 0.02, 0.9, 0.02], [0.03, 0.02, 0.9, 0.02], [0.03, 0.02, 0.9, 0.02]], "cost": 0.0085524}
+{"cls": "java.util.Dictionary", "sig": "java.lang.Object put(java.lang.Object,java.lang.Object)", "p": [0.03, 0.85, 0.02, 0.1, 0.88, 0.02, 0.1, 0.02, 0.02], "samples": [[0.03, 0.6, 0.02, 0.1, 0.65, 0.02, 0.1, 0.02, 0.02], [0.03, 0.85, 0.02, 0.1, 0.88, 0.02, 0.03, 0.02, 0.02], [0.03, 0.85, 0.02, 0.1, 0.85, 0.02, 0.1, 0.02, 0.02]], "cost": 0.010232400000000001}
+{"cls": "java.util.Dictionary", "sig": "java.util.Enumeration elements()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076121999999999995}
+{"cls": "java.util.Dictionary", "sig": "java.util.Enumeration keys()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076121999999999995}
+{"cls": "java.util.Formatter", "sig": "java.util.Formatter format(java.lang.String,java.lang.Object[])", "p": [0.1, 0.9, 0.03, 0.2, 0.85, 0.95, 0.03], "samples": [[0.05, 0.9, 0.02, 0.1, 0.85, 0.95, 0.02], [0.1, 0.9, 0.03, 0.2, 0.85, 0.95, 0.03], [0.1, 0.9, 0.02, 0.1, 0.85, 0.95, 0.03]], "cost": 0.009573}
+{"cls": "java.util.Formatter", "sig": "java.util.Formatter format(java.util.Locale,java.lang.String,java.lang.Object[])", "p": [0.03, 0.15, 0.01, 0.03, 0.9, 0.01, 0.02, 0.05, 0.85, 0.01, 0.97, 0.01, 0.02], "samples": [[0.03, 0.1, 0.01, 0.03, 0.9, 0.01, 0.01, 0.05, 0.85, 0.01, 0.97, 0.01, 0.02], [0.03, 0.15, 0.01, 0.03, 0.9, 0.01, 0.01, 0.05, 0.85, 0.01, 0.97, 0.01, 0.02], [0.03, 0.1, 0.01, 0.03, 0.9, 0.01, 0.02, 0.05, 0.8, 0.01, 0.95, 0.01, 0.02]], "cost": 0.011609999999999999}
+{"cls": "java.util.Formatter", "sig": "void <init>(java.lang.Appendable)", "p": [0.93], "samples": [[0.9], [0.93], [0.9]], "cost": 0.0076552}
+{"cls": "java.util.Formatter", "sig": "void <init>(java.lang.Appendable,java.util.Locale)", "p": [0.93, 0.02, 0.3, 0.02], "samples": [[0.9, 0.02, 0.3, 0.02], [0.93, 0.02, 0.2, 0.02], [0.9, 0.02, 0.15, 0.02]], "cost": 0.0087162}
+{"cls": "java.util.GregorianCalendar", "sig": "int getFirstDayOfWeek()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007629}
+{"cls": "java.util.GregorianCalendar", "sig": "int getMinimalDaysInFirstWeek()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0093658}
+{"cls": "java.util.GregorianCalendar", "sig": "java.util.Date getGregorianChange()", "p": [0.9], "samples": [[0.9], [0.85], [0.9]], "cost": 0.0076132}
+{"cls": "java.util.GregorianCalendar", "sig": "java.util.Date getTime()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007616400000000001}
+{"cls": "java.util.GregorianCalendar", "sig": "java.util.TimeZone getTimeZone()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076416}
+{"cls": "java.util.GregorianCalendar", "sig": "void <init>(int,int,int)", "p": [0.93, 0.93, 0.93], "samples": [[0.93, 0.93, 0.93], [0.93, 0.93, 0.93], [0.9, 0.9, 0.9]], "cost": 0.008208}
+{"cls": "java.util.GregorianCalendar", "sig": "void <init>(int,int,int,int,int,int)", "p": [0.93, 0.93, 0.93, 0.93, 0.93, 0.93], "samples": [[0.93, 0.93, 0.93, 0.93, 0.93, 0.93], [0.93, 0.93, 0.93, 0.93, 0.93, 0.93], [0.93, 0.93, 0.93, 0.93, 0.93, 0.93]], "cost": 0.009127799999999998}
+{"cls": "java.util.GregorianCalendar", "sig": "void <init>(java.util.Locale)", "p": [0.3], "samples": [[0.1], [0.3], [0.3]], "cost": 0.0076652}
+{"cls": "java.util.GregorianCalendar", "sig": "void <init>(java.util.TimeZone)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007672000000000001}
+{"cls": "java.util.GregorianCalendar", "sig": "void <init>(java.util.TimeZone,java.util.Locale)", "p": [0.9, 0.02, 0.6, 0.02], "samples": [[0.9, 0.02, 0.6, 0.02], [0.9, 0.02, 0.6, 0.02], [0.9, 0.02, 0.6, 0.02]], "cost": 0.008733000000000001}
+{"cls": "java.util.GregorianCalendar", "sig": "void set(int,int)", "p": [0.08, 0.95], "samples": [[0.08, 0.95], [0.05, 0.93], [0.04, 0.93]], "cost": 0.009862999999999999}
+{"cls": "java.util.GregorianCalendar", "sig": "void setTime(java.util.Date)", "p": [0.95, 0.03], "samples": [[0.93, 0.02], [0.93, 0.02], [0.95, 0.03]], "cost": 0.007956}
+{"cls": "java.util.GregorianCalendar", "sig": "void setTimeInMillis(long)", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.007645800000000001}
+{"cls": "java.util.GregorianCalendar", "sig": "void setTimeZone(java.util.TimeZone)", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.0080064}
+{"cls": "java.util.HashMap", "sig": "java.lang.Object computeIfAbsent(java.lang.Object,java.util.function.Function)", "p": [0.1, 0.85, 0.3, 0.85, 0.6, 0.05, 0.6, 0.05, 0.05], "samples": [[0.1, 0.6, 0.1, 0.6, 0.5, 0.05, 0.6, 0.03, 0.03], [0.05, 0.85, 0.3, 0.85, 0.6, 0.03, 0.6, 0.03, 0.05], [0.1, 0.85, 0.3, 0.6, 0.6, 0.05, 0.6, 0.05, 0.05]], "cost": 0.0102828}
+{"cls": "java.util.HashMap", "sig": "void replaceAll(java.util.function.BiFunction)", "p": [0.3, 0.55], "samples": [[0.3, 0.25], [0.04, 0.5], [0.08, 0.55]], "cost": 0.0106806}
+{"cls": "java.util.Locale", "sig": "boolean equals(java.lang.Object)", "p": [0.04, 0.01, 0.04, 0.01], "samples": [[0.04, 0.01, 0.04, 0.01], [0.04, 0.01, 0.04, 0.01], [0.04, 0.01, 0.04, 0.01]], "cost": 0.0085314}
+{"cls": "java.util.Locale", "sig": "java.lang.Object clone()", "p": [0.93], "samples": [[0.93], [0.9], [0.93]], "cost": 0.0108754}
+{"cls": "java.util.Locale", "sig": "java.lang.String getCountry()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075996}
+{"cls": "java.util.Locale", "sig": "java.lang.String getDisplayCountry()", "p": [0.9], "samples": [[0.9], [0.9], [0.85]], "cost": 0.0097064}
+{"cls": "java.util.Locale", "sig": "java.lang.String getDisplayLanguage()", "p": [0.85], "samples": [[0.85], [0.8], [0.85]], "cost": 0.0076105999999999995}
+{"cls": "java.util.Locale", "sig": "java.lang.String getDisplayLanguage(java.util.Locale)", "p": [0.3, 0.02, 0.85, 0.02], "samples": [[0.15, 0.02, 0.85, 0.02], [0.3, 0.02, 0.85, 0.02], [0.2, 0.02, 0.85, 0.02]], "cost": 0.0085734}
+{"cls": "java.util.Locale", "sig": "java.lang.String getDisplayName()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007608}
+{"cls": "java.util.Locale", "sig": "java.lang.String getDisplayName(java.util.Locale)", "p": [0.35, 0.02, 0.9, 0.02], "samples": [[0.35, 0.02, 0.9, 0.02], [0.3, 0.02, 0.9, 0.02], [0.3, 0.02, 0.85, 0.02]], "cost": 0.0085608}
+{"cls": "java.util.Locale", "sig": "java.lang.String getISO3Language()", "p": [0.85], "samples": [[0.8], [0.85], [0.72]], "cost": 0.009758}
+{"cls": "java.util.Locale", "sig": "java.lang.String getLanguage()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007603800000000001}
+{"cls": "java.util.Locale", "sig": "java.lang.String getScript()", "p": [0.93], "samples": [[0.93], [0.9], [0.93]], "cost": 0.0075954}
+{"cls": "java.util.Locale", "sig": "java.lang.String getVariant()", "p": [0.93], "samples": [[0.93], [0.9], [0.93]], "cost": 0.009879599999999999}
+{"cls": "java.util.Locale", "sig": "java.lang.String toLanguageTag()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0076022}
+{"cls": "java.util.Locale", "sig": "java.util.Locale forLanguageTag(java.lang.String)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076426}
+{"cls": "java.util.Locale", "sig": "void <init>(java.lang.String)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007615800000000001}
+{"cls": "java.util.Locale", "sig": "void <init>(java.lang.String,java.lang.String)", "p": [0.93, 0.9], "samples": [[0.93, 0.9], [0.9, 0.85], [0.93, 0.9]], "cost": 0.0079644}
+{"cls": "java.util.Locale", "sig": "void <init>(java.lang.String,java.lang.String,java.lang.String)", "p": [0.93, 0.93, 0.9], "samples": [[0.93, 0.93, 0.85], [0.9, 0.9, 0.85], [0.93, 0.93, 0.9]], "cost": 0.008313000000000001}
+{"cls": "java.util.Locale$Builder", "sig": "java.util.Locale build()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.009898}
+{"cls": "java.util.Locale$Builder", "sig": "java.util.Locale$Builder setLanguage(java.lang.String)", "p": [0.05, 0.9, 0.9], "samples": [[0.03, 0.9, 0.9], [0.05, 0.9, 0.9], [0.03, 0.9, 0.9]], "cost": 0.0082584}
+{"cls": "java.util.Locale$Builder", "sig": "java.util.Locale$Builder setRegion(java.lang.String)", "p": [0.03, 0.9, 0.05], "samples": [[0.03, 0.85, 0.05], [0.03, 0.9, 0.03], [0.03, 0.85, 0.05]], "cost": 0.0082542}
+{"cls": "java.util.Locale$Builder", "sig": "java.util.Locale$Builder setScript(java.lang.String)", "p": [0.03, 0.88, 0.9], "samples": [[0.03, 0.85, 0.9], [0.03, 0.85, 0.9], [0.03, 0.88, 0.9]], "cost": 0.00825}
+{"cls": "java.util.Map", "sig": "java.lang.Object computeIfAbsent(java.lang.Object,java.util.function.Function)", "p": [0.1, 0.6, 0.1, 0.5, 0.6, 0.03, 0.6, 0.03, 0.05], "samples": [[0.05, 0.6, 0.1, 0.5, 0.6, 0.03, 0.6, 0.03, 0.05], [0.1, 0.6, 0.05, 0.5, 0.2, 0.03, 0.35, 0.03, 0.03], [0.1, 0.6, 0.05, 0.5, 0.3, 0.02, 0.35, 0.03, 0.05]], "cost": 0.0102744}
+{"cls": "java.util.Objects", "sig": "boolean equals(java.lang.Object,java.lang.Object)", "p": [0.1, 0.01, 0.1, 0.01], "samples": [[0.1, 0.01, 0.1, 0.01], [0.1, 0.01, 0.1, 0.01], [0.1, 0.01, 0.1, 0.01]], "cost": 0.0086364}
+{"cls": "java.util.Objects", "sig": "int hashCode(java.lang.Object)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076332}
+{"cls": "java.util.Objects", "sig": "java.lang.Object requireNonNull(java.lang.Object)", "p": [0.97], "samples": [[0.97], [0.97], [0.97]], "cost": 0.007636800000000001}
+{"cls": "java.util.Objects", "sig": "java.lang.Object requireNonNull(java.lang.Object,java.util.function.Supplier)", "p": [0.97, 0.02, 0.03, 0.01], "samples": [[0.97, 0.02, 0.03, 0.01], [0.97, 0.01, 0.03, 0.01], [0.97, 0.01, 0.03, 0.01]], "cost": 0.0087204}
+{"cls": "java.util.Observable", "sig": "void addObserver(java.util.Observer)", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.0079518}
+{"cls": "java.util.Observable", "sig": "void notifyObservers(java.lang.Object)", "p": [0.03, 0.35], "samples": [[0.03, 0.05], [0.03, 0.05], [0.03, 0.35]], "cost": 0.0079602}
+{"cls": "java.util.ResourceBundle", "sig": "boolean containsKey(java.lang.String)", "p": [0.04, 0.02, 0.15], "samples": [[0.03, 0.02, 0.15], [0.04, 0.02, 0.1], [0.03, 0.02, 0.15]], "cost": 0.008220600000000002}
+{"cls": "java.util.ResourceBundle", "sig": "java.lang.String getString(java.lang.String)", "p": [0.05, 0.02, 0.85], "samples": [[0.04, 0.02, 0.85], [0.05, 0.02, 0.8], [0.05, 0.02, 0.85]], "cost": 0.0082248}
+{"cls": "java.util.ResourceBundle", "sig": "java.util.Enumeration getKeys()", "p": [0.85], "samples": [[0.8], [0.85], [0.85]], "cost": 0.007619000000000001}
+{"cls": "java.util.ResourceBundle", "sig": "java.util.ResourceBundle getBundle(java.lang.String)", "p": [0.1], "samples": [[0.1], [0.05], [0.07]], "cost": 0.010813600000000001}
+{"cls": "java.util.ResourceBundle", "sig": "java.util.ResourceBundle getBundle(java.lang.String,java.util.Locale)", "p": [0.45, 0.02, 0.2], "samples": [[0.3, 0.02, 0.1], [0.45, 0.02, 0.2], [0.3, 0.02, 0.12]], "cost": 0.008334000000000001}
+{"cls": "java.util.ResourceBundle", "sig": "java.util.ResourceBundle getBundle(java.lang.String,java.util.Locale,java.lang.ClassLoader)", "p": [0.6, 0.02, 0.02, 0.2, 0.02, 0.25, 0.02], "samples": [[0.6, 0.02, 0.02, 0.2, 0.02, 0.15, 0.02], [0.6, 0.02, 0.02, 0.2, 0.02, 0.15, 0.02], [0.55, 0.02, 0.02, 0.2, 0.02, 0.25, 0.02]], "cost": 0.0097956}
+{"cls": "java.util.ServiceLoader", "sig": "java.util.Iterator iterator()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.0076006}
+{"cls": "java.util.ServiceLoader", "sig": "java.util.ServiceLoader load(java.lang.Class,java.lang.ClassLoader)", "p": [0.9, 0.03, 0.85], "samples": [[0.9, 0.03, 0.8], [0.9, 0.02, 0.8], [0.9, 0.02, 0.85]], "cost": 0.0083844}
+{"cls": "java.util.SimpleTimeZone", "sig": "void <init>(int,java.lang.String)", "p": [0.9, 0.9], "samples": [[0.9, 0.9], [0.9, 0.9], [0.9, 0.85]], "cost": 0.0079676}
+{"cls": "java.util.Spliterator", "sig": "boolean tryAdvance(java.util.function.Consumer)", "p": [0.03, 0.03, 0.05, 0.9], "samples": [[0.03, 0.03, 0.05, 0.9], [0.03, 0.03, 0.05, 0.88], [0.03, 0.03, 0.05, 0.88]], "cost": 0.008607}
