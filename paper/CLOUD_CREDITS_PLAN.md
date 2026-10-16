@@ -123,3 +123,29 @@ never force-push.
    $40 API-equivalent for this file.
 4. Every 9 minutes (`sleep 540; tail -n 3 /tmp/cloud_price_rest.log`) report the last CHUNK line; stop the job if most
    methods error or "PUSH FAILED" appears twice in a row. At the end report the final line and confirm the last push.
+
+## G4 prompt (IzzyOnDroid labels and prices, caps $70 + $70)
+
+Start only when the current cloud job
+(`f2_rest`) has ended and `data/f3_izzy.jsonl` is on main. Credit: about $180 left after `f2_rest` (expires 2026-11-05
+09:59 GMT+2); the caps below total $140. The models are those of the main corpus: Claude Sonnet 5 for the rubric labels
+(`rubric-sonnet5`) and for the main Sonnet pricer (`sonnetp`, short question, 1 sample). If F2 picks sonnet55def3 on the
+dev subset, its 3 samples cost about 3x and fit only if credit is left after both steps. Paste into a claude.ai/code
+session on repository jimbou/datalog_jev, branch main, session model Sonnet 5.5:
+
+> IzzyOnDroid labeling and pricing job for paper/REMAINING_WORK.md (G4) and paper/CLOUD_CREDITS_PLAN.md ("G4 prompt"). Do only this; no
+> paid APIs, no installs, never push to main, never force-push, never print secret values.
+> 1. `git fetch origin main && git checkout -B f3-cloud-izzy origin/main && wc -l data/f3_izzy.jsonl` (stop and report if
+>    the file is missing).
+> 2. Answer-key labels first. Start in the background:
+>    `KIND=label nohup bash bench/cloud_price.sh claude-sonnet-5 rubric-sonnet5-izzy f3_izzy 1 70 f3-cloud-izzy 250 6 > /tmp/cloud_label.log 2>&1 &`
+>    It writes data/oracle-rubric-sonnet5-izzy.jsonl with the written flow definition (reason codes), pushes it to branch
+>    f3-cloud-izzy after every 250 methods, and stops at $70 API-equivalent.
+> 3. Every 9 minutes (`sleep 540; tail -n 3 /tmp/cloud_label.log`, nothing else) report the last CHUNK line. Stop the job
+>    (kill its PID) and report if most methods error or "PUSH FAILED" appears twice in a row.
+> 4. When the log says DONE or CAP reached, start the prices on the same branch:
+>    `PRICE_PROMPT=short nohup bash bench/cloud_price.sh claude-sonnet-5 sonnetp f3_izzy 1 70 f3-cloud-izzy 250 6 > /tmp/cloud_sonnetp.log 2>&1 &`
+>    (writes data/jev_f3_izzy_sonnetp_r0.jsonl, the main Sonnet pricer's question, 1 sample, cap $70), and monitor it
+>    the same way.
+> 5. At the end report both final lines (methods, cost), the `claude --version`, and confirm the last push
+>    (`git log origin/f3-cloud-izzy -1`).
