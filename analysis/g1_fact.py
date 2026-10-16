@@ -6,7 +6,7 @@ python3 analysis/g1_fact.py prices
       jevfact   Jev's main price (choice-obj) >= 0.5
       gptfact   GPT-6.1's rubric labels (data/oracle-rubric-gpt61.jsonl); "undecidable" = no model = no flow,
                 as FlowDroid treats a method without a model; methods without a label also 0
-      gptfactu  the same, but "undecidable" = flow (sensitivity)
+      gptfactu  the same, but "undecidable" and unlabeled = flow (sensitivity)
     Sonnet's labels are part of the main key, so they are not used here.
 python3 analysis/g1_fact.py summary RUN [RUN ...]     (RUN e.g. fm-rk-jevfact)
     the single operating point, on all apps and on the held-out halves of 200 random app splits (seed 0, as
@@ -31,10 +31,24 @@ def write(tag, rows):
 def prices():
     jev = [json.loads(l) for l in open(os.path.join(D, "jev_holes_android_fw_choice-obj_r0.jsonl"))]
     write("jevfact", [(r["cls"], r["sig"], [1.0 if x >= 0.5 else 0.0 for x in r["p"]]) for r in jev if r.get("p")])
-    gpt = [json.loads(l) for l in open(os.path.join(D, "oracle-rubric-gpt61.jsonl"))]
-    gpt = [d for d in gpt if "labels" in d]
-    write("gptfact", [(d["cls"], d["sig"], [1.0 if x else 0.0 for x in d["labels"]]) for d in gpt])
-    write("gptfactu", [(d["cls"], d["sig"], [0.0 if x is False else 1.0 for x in d["labels"]]) for d in gpt])
+    gpt = {(d["cls"], d["sig"]): d["labels"] for d in map(json.loads, open(os.path.join(D, "oracle-rubric-gpt61.jsonl")))
+           if "labels" in d}
+    # every hole method gets a price: evaluate.py would price a missing method 0.5, which counts as a flow at 0.5
+    sys.path.insert(0, os.path.join(ROOT, "analysis"))
+    from evaluate import framework_holes
+    holes = framework_holes()
+    fact, factu, miss = [], [], 0
+    for (cls, sig), h in holes.items():
+        n = len(h["atoms"])
+        lab = gpt.get((cls, sig))
+        if lab is None or len(lab) != n:
+            miss += 1
+            lab = [None] * n  # no label: no model, as for undecidable
+        fact.append((cls, sig, [1.0 if x else 0.0 for x in lab]))
+        factu.append((cls, sig, [0.0 if x is False else 1.0 for x in lab]))
+    print("methods without a GPT label:", miss)
+    write("gptfact", fact)
+    write("gptfactu", factu)
 
 
 def summary(run, splits=200):
