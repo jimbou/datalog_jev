@@ -2498,3 +2498,253 @@
 {"cls": "android.view.View", "sig": "boolean requestFocus(int)", "p": [0.03, 0.03, 0.1], "samples": [[0.03, 0.03, 0.1], [0.03, 0.03, 0.1], [0.03, 0.03, 0.1]], "cost": 0.0081366}
 {"cls": "android.view.View", "sig": "boolean requestFocus(int,android.graphics.Rect)", "p": [0.03, 0.03, 0.03, 0.04, 0.04, 0.1, 0.12], "samples": [[0.03, 0.03, 0.03, 0.04, 0.04, 0.1, 0.1], [0.03, 0.03, 0.03, 0.04, 0.04, 0.05, 0.12], [0.03, 0.03, 0.03, 0.04, 0.03, 0.1, 0.1]], "cost": 0.0094848}
 {"cls": "android.view.View", "sig": "boolean requestRectangleOnScreen(android.graphics.Rect,boolean)", "p": [0.03, 0.03, 0.03, 0.02, 0.03, 0.05, 0.3], "samples": [[0.03, 0.03, 0.03, 0.02, 0.03, 0.05, 0.3], [0.03, 0.03, 0.03, 0.02, 0.03, 0.05, 0.3], [0.03, 0.03, 0.03, 0.02, 0.03, 0.05, 0.3]], "cost": 0.0095436}
+{"cls": "android.view.View", "sig": "boolean startDrag(android.content.ClipData,android.view.View$DragShadowBuilder,java.lang.Object,int)", "p": [0.03, 0.5, 0.03, 0.03, 0.03, 0.5, 0.02, 0.03, 0.03, 0.5, 0.02, 0.02, 0.03, 0.1, 0.02, 0.02, 0.02, 0.06, 0.04, 0.07, 0.03], "samples": [[0.03, 0.5, 0.03, 0.03, 0.03, 0.5, 0.02, 0.03, 0.03, 0.5, 0.02, 0.02, 0.03, 0.1, 0.02, 0.02, 0.02, 0.06, 0.03, 0.06, 0.03], [0.03, 0.3, 0.03, 0.03, 0.03, 0.3, 0.02, 0.03, 0.03, 0.45, 0.02, 0.02, 0.03, 0.05, 0.02, 0.02, 0.02, 0.05, 0.03, 0.05, 0.03], [0.03, 0.35, 0.03, 0.03, 0.03, 0.35, 0.02, 0.03, 0.03, 0.4, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.04, 0.07, 0.03]], "cost": 0.0304644}
+{"cls": "android.view.View", "sig": "boolean startDragAndDrop(android.content.ClipData,android.view.View$DragShadowBuilder,java.lang.Object,int)", "p": [0.03, 0.3, 0.05, 0.04, 0.03, 0.3, 0.03, 0.03, 0.03, 0.3, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.03, 0.03, 0.05, 0.2, 0.3], "samples": [[0.03, 0.15, 0.05, 0.03, 0.03, 0.15, 0.03, 0.03, 0.03, 0.15, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.03, 0.04, 0.12, 0.3], [0.03, 0.3, 0.05, 0.04, 0.03, 0.3, 0.03, 0.03, 0.03, 0.3, 0.02, 0.02, 0.02, 0.04, 0.02, 0.02, 0.03, 0.03, 0.05, 0.2, 0.3], [0.03, 0.3, 0.05, 0.03, 0.03, 0.3, 0.03, 0.03, 0.03, 0.3, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.03, 0.03, 0.05, 0.12, 0.2]], "cost": 0.021918}
+{"cls": "android.view.View", "sig": "boolean startNestedScroll(int)", "p": [0.03, 0.05, 0.1], "samples": [[0.03, 0.05, 0.1], [0.03, 0.05, 0.1], [0.03, 0.05, 0.1]], "cost": 0.0081366}
+{"cls": "android.view.View", "sig": "float getAlpha()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007566}
+{"cls": "android.view.View", "sig": "float getElevation()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075618000000000005}
+{"cls": "android.view.View", "sig": "float getPivotX()", "p": [0.9], "samples": [[0.85], [0.9], [0.9]], "cost": 0.007546}
+{"cls": "android.view.View", "sig": "float getPivotY()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007566}
+{"cls": "android.view.View", "sig": "float getRotation()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075618000000000005}
+{"cls": "android.view.View", "sig": "float getRotationX()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007566}
+{"cls": "android.view.View", "sig": "float getRotationY()", "p": [0.93], "samples": [[0.93], [0.9], [0.9]], "cost": 0.007546}
+{"cls": "android.view.View", "sig": "float getScaleX()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007566}
+{"cls": "android.view.View", "sig": "float getScaleY()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007566}
+{"cls": "android.view.View", "sig": "float getTransitionAlpha()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007582800000000001}
+{"cls": "android.view.View", "sig": "float getTranslationX()", "p": [0.93], "samples": [[0.93], [0.9], [0.9]], "cost": 0.007570200000000001}
+{"cls": "android.view.View", "sig": "float getTranslationY()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007570200000000001}
+{"cls": "android.view.View", "sig": "float getTranslationZ()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075744}
+{"cls": "android.view.View", "sig": "float getX()", "p": [0.93], "samples": [[0.9], [0.9], [0.93]], "cost": 0.0095034}
+{"cls": "android.view.View", "sig": "float getY()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075534}
+{"cls": "android.view.View", "sig": "float getZ()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075576}
+{"cls": "android.view.View", "sig": "int combineMeasuredStates(int,int)", "p": [0.96, 0.96], "samples": [[0.95, 0.95], [0.96, 0.96], [0.95, 0.95]], "cost": 0.0078426}
+{"cls": "android.view.View", "sig": "int getAccessibilityLiveRegion()", "p": [0.85], "samples": [[0.8], [0.85], [0.62]], "cost": 0.0100296}
+{"cls": "android.view.View", "sig": "int getBaseline()", "p": [0.05], "samples": [[0.05], [0.05], [0.05]], "cost": 0.007566}
+{"cls": "android.view.View", "sig": "int getBottom()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075618000000000005}
+{"cls": "android.view.View", "sig": "int getDefaultSize(int,int)", "p": [0.7, 0.85], "samples": [[0.6, 0.85], [0.7, 0.85], [0.6, 0.8]], "cost": 0.0120742}
+{"cls": "android.view.View", "sig": "int getHeight()", "p": [0.85], "samples": [[0.75], [0.62], [0.85]], "cost": 0.0108818}
+{"cls": "android.view.View", "sig": "int getId()", "p": [0.9], "samples": [[0.9], [0.9], [0.85]], "cost": 0.0075534}
+{"cls": "android.view.View", "sig": "int getImportantForAccessibility()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007587}
+{"cls": "android.view.View", "sig": "int getImportantForAutofill()", "p": [0.6], "samples": [[0.35], [0.6], [0.6]], "cost": 0.007582800000000001}
+{"cls": "android.view.View", "sig": "int getLayerType()", "p": [0.2], "samples": [[0.2], [0.1], [0.1]], "cost": 0.007566}
+{"cls": "android.view.View", "sig": "int getLayoutDirection()", "p": [0.2], "samples": [[0.1], [0.1], [0.2]], "cost": 0.0075786000000000004}
+{"cls": "android.view.View", "sig": "int getLeft()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075618000000000005}
+{"cls": "android.view.View", "sig": "int getMeasuredHeight()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007582800000000001}
+{"cls": "android.view.View", "sig": "int getMeasuredState()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075744}
+{"cls": "android.view.View", "sig": "int getMeasuredWidth()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007582800000000001}
+{"cls": "android.view.View", "sig": "int getMeasuredWidthAndState()", "p": [0.9], "samples": [[0.9], [0.85], [0.9]], "cost": 0.0075954}
+{"cls": "android.view.View", "sig": "int getMinimumHeight()", "p": [0.9], "samples": [[0.85], [0.9], [0.85]], "cost": 0.0075786000000000004}
+{"cls": "android.view.View", "sig": "int getMinimumWidth()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075786000000000004}
+{"cls": "android.view.View", "sig": "int getOverScrollMode()", "p": [0.9], "samples": [[0.85], [0.9], [0.85]], "cost": 0.0075686}
+{"cls": "android.view.View", "sig": "int getPaddingBottom()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075786000000000004}
+{"cls": "android.view.View", "sig": "int getPaddingEnd()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075786000000000004}
+{"cls": "android.view.View", "sig": "int getPaddingLeft()", "p": [0.9], "samples": [[0.85], [0.85], [0.9]], "cost": 0.0075686}
+{"cls": "android.view.View", "sig": "int getPaddingRight()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075744}
+{"cls": "android.view.View", "sig": "int getPaddingStart()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075744}
+{"cls": "android.view.View", "sig": "int getPaddingTop()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075744}
+{"cls": "android.view.View", "sig": "int getRight()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075576}
+{"cls": "android.view.View", "sig": "int getScrollX()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007566}
+{"cls": "android.view.View", "sig": "int getScrollY()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007566}
+{"cls": "android.view.View", "sig": "int getSuggestedMinimumHeight()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0093496}
+{"cls": "android.view.View", "sig": "int getSuggestedMinimumWidth()", "p": [0.85], "samples": [[0.85], [0.7], [0.6]], "cost": 0.0075996}
+{"cls": "android.view.View", "sig": "int getSystemUiVisibility()", "p": [0.9], "samples": [[0.85], [0.9], [0.85]], "cost": 0.007587}
+{"cls": "android.view.View", "sig": "int getTextAlignment()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075744}
+{"cls": "android.view.View", "sig": "int getTextDirection()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007570200000000001}
+{"cls": "android.view.View", "sig": "int getTop()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075576}
+{"cls": "android.view.View", "sig": "int getVisibility()", "p": [0.85], "samples": [[0.6], [0.6], [0.85]], "cost": 0.007566}
+{"cls": "android.view.View", "sig": "int getWidth()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075618000000000005}
+{"cls": "android.view.View", "sig": "int getWindowSystemUiVisibility()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075996}
+{"cls": "android.view.View", "sig": "int getWindowVisibility()", "p": [0.4], "samples": [[0.4], [0.1], [0.3]], "cost": 0.0119186}
+{"cls": "android.view.View", "sig": "int resolveSize(int,int)", "p": [0.85, 0.85], "samples": [[0.8, 0.75], [0.85, 0.85], [0.85, 0.8]], "cost": 0.013265800000000001}
+{"cls": "android.view.View", "sig": "int resolveSizeAndState(int,int,int)", "p": [0.88, 0.85, 0.8], "samples": [[0.88, 0.8, 0.7], [0.8, 0.85, 0.8], [0.85, 0.8, 0.7]], "cost": 0.0144982}
+{"cls": "android.view.View", "sig": "int[] getDrawableState()", "p": [0.6], "samples": [[0.6], [0.5], [0.6]], "cost": 0.0075786000000000004}
+{"cls": "android.view.View", "sig": "int[] mergeDrawableStates(int[],int[])", "p": [0.95, 0.03, 0.88, 0.9], "samples": [[0.95, 0.03, 0.85, 0.88], [0.95, 0.03, 0.85, 0.9], [0.95, 0.02, 0.88, 0.9]], "cost": 0.0136678}
+{"cls": "android.view.View", "sig": "java.lang.CharSequence getAccessibilityPaneTitle()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007637400000000001}
+{"cls": "android.view.View", "sig": "java.lang.CharSequence getContentDescription()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007608}
+{"cls": "android.view.View", "sig": "java.lang.CharSequence getStateDescription()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007608}
+{"cls": "android.view.View", "sig": "java.lang.Object getTag()", "p": [0.1], "samples": [[0.1], [0.1], [0.1]], "cost": 0.007582800000000001}
+{"cls": "android.view.View", "sig": "java.lang.Object getTag(int)", "p": [0.05, 0.02, 0.9], "samples": [[0.03, 0.02, 0.9], [0.05, 0.02, 0.85], [0.03, 0.01, 0.9]], "cost": 0.0081366}
+{"cls": "android.view.View", "sig": "java.lang.String getTransitionName()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007591200000000001}
+{"cls": "android.view.View", "sig": "void <init>(android.content.Context)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007629}
+{"cls": "android.view.View", "sig": "void <init>(android.content.Context,android.util.AttributeSet)", "p": [0.9, 0.03, 0.3, 0.02], "samples": [[0.85, 0.03, 0.3, 0.02], [0.9, 0.03, 0.3, 0.02], [0.9, 0.03, 0.3, 0.02]], "cost": 0.0086952}
+{"cls": "android.view.View", "sig": "void <init>(android.content.Context,android.util.AttributeSet,int)", "p": [0.95, 0.03, 0.35, 0.03, 0.12, 0.02, 0.02], "samples": [[0.93, 0.03, 0.35, 0.03, 0.12, 0.02, 0.02], [0.95, 0.02, 0.3, 0.02, 0.05, 0.02, 0.02], [0.95, 0.03, 0.3, 0.03, 0.05, 0.02, 0.02]], "cost": 0.009657}
+{"cls": "android.view.View", "sig": "void addFocusables(java.util.ArrayList,int,int)", "p": [0.03, 0.03, 0.03, 0.03, 0.03, 0.9], "samples": [[0.03, 0.02, 0.03, 0.02, 0.03, 0.9], [0.03, 0.03, 0.03, 0.03, 0.03, 0.85], [0.03, 0.02, 0.03, 0.02, 0.03, 0.9]], "cost": 0.0092412}
+{"cls": "android.view.View", "sig": "void addOnAttachStateChangeListener(android.view.View$OnAttachStateChangeListener)", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.0081714}
+{"cls": "android.view.View", "sig": "void addOnLayoutChangeListener(android.view.View$OnLayoutChangeListener)", "p": [0.9, 0.03], "samples": [[0.85, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.008094599999999999}
+{"cls": "android.view.View", "sig": "void addOnUnhandledKeyEventListener(android.view.View$OnUnhandledKeyEventListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.02], [0.9, 0.03]], "cost": 0.008145}
+{"cls": "android.view.View", "sig": "void addTouchables(java.util.ArrayList)", "p": [0.03, 0.85], "samples": [[0.03, 0.8], [0.03, 0.8], [0.03, 0.85]], "cost": 0.0079644}
+{"cls": "android.view.View", "sig": "void announceForAccessibility(java.lang.CharSequence)", "p": [0.15, 0.02], "samples": [[0.15, 0.02], [0.1, 0.02], [0.1, 0.02]], "cost": 0.0080296}
+{"cls": "android.view.View", "sig": "void draw(android.graphics.Canvas)", "p": [0.03, 0.85], "samples": [[0.03, 0.85], [0.03, 0.8], [0.03, 0.85]], "cost": 0.0079844}
+{"cls": "android.view.View", "sig": "void drawableHotspotChanged(float,float)", "p": [0.5, 0.5], "samples": [[0.1, 0.1], [0.5, 0.5], [0.1, 0.1]], "cost": 0.007893}
+{"cls": "android.view.View", "sig": "void getDrawingRect(android.graphics.Rect)", "p": [0.02, 0.93], "samples": [[0.02, 0.93], [0.02, 0.93], [0.02, 0.93]], "cost": 0.0080328}
+{"cls": "android.view.View", "sig": "void getHitRect(android.graphics.Rect)", "p": [0.02, 0.95], "samples": [[0.02, 0.95], [0.02, 0.95], [0.02, 0.95]], "cost": 0.0080244}
+{"cls": "android.view.View", "sig": "void getLocationInWindow(int[])", "p": [0.02, 0.9], "samples": [[0.02, 0.9], [0.02, 0.9], [0.02, 0.9]], "cost": 0.007953}
+{"cls": "android.view.View", "sig": "void getLocationOnScreen(int[])", "p": [0.02, 0.93], "samples": [[0.02, 0.93], [0.02, 0.93], [0.02, 0.93]], "cost": 0.0079172}
+{"cls": "android.view.View", "sig": "void getWindowVisibleDisplayFrame(android.graphics.Rect)", "p": [0.02, 0.9], "samples": [[0.02, 0.9], [0.02, 0.9], [0.02, 0.85]], "cost": 0.008046399999999999}
+{"cls": "android.view.View", "sig": "void invalidate(android.graphics.Rect)", "p": [0.2, 0.03], "samples": [[0.2, 0.02], [0.1, 0.03], [0.1, 0.02]], "cost": 0.0079802}
+{"cls": "android.view.View", "sig": "void layout(int,int,int,int)", "p": [0.9, 0.9, 0.9, 0.9], "samples": [[0.9, 0.9, 0.9, 0.9], [0.9, 0.9, 0.9, 0.9], [0.9, 0.9, 0.9, 0.9]], "cost": 0.0084726}
+{"cls": "android.view.View", "sig": "void measure(int,int)", "p": [0.85, 0.85], "samples": [[0.85, 0.85], [0.8, 0.8], [0.6, 0.6]], "cost": 0.0078594}
+{"cls": "android.view.View", "sig": "void offsetLeftAndRight(int)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007616400000000001}
+{"cls": "android.view.View", "sig": "void offsetTopAndBottom(int)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007616400000000001}
+{"cls": "android.view.View", "sig": "void onConfigurationChanged(android.content.res.Configuration)", "p": [0.03, 0.02], "samples": [[0.03, 0.02], [0.03, 0.01], [0.03, 0.02]], "cost": 0.007993799999999999}
+{"cls": "android.view.View", "sig": "void onDraw(android.graphics.Canvas)", "p": [0.03, 0.1], "samples": [[0.03, 0.1], [0.03, 0.1], [0.03, 0.1]], "cost": 0.007972799999999999}
+{"cls": "android.view.View", "sig": "void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent)", "p": [0.03, 0.93], "samples": [[0.03, 0.93], [0.03, 0.9], [0.03, 0.9]], "cost": 0.0089956}
+{"cls": "android.view.View", "sig": "void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo)", "p": [0.04, 0.9], "samples": [[0.03, 0.9], [0.04, 0.9], [0.03, 0.9]], "cost": 0.008166}
+{"cls": "android.view.View", "sig": "void onLayout(boolean,int,int,int,int)", "p": [0.02, 0.03, 0.03, 0.03, 0.03], "samples": [[0.02, 0.03, 0.03, 0.03, 0.03], [0.02, 0.03, 0.03, 0.03, 0.03], [0.02, 0.03, 0.03, 0.03, 0.03]], "cost": 0.0088044}
+{"cls": "android.view.View", "sig": "void onMeasure(int,int)", "p": [0.85, 0.85], "samples": [[0.85, 0.85], [0.85, 0.85], [0.85, 0.85]], "cost": 0.012032000000000001}
+{"cls": "android.view.View", "sig": "void onPopulateAccessibilityEvent(android.view.accessibility.AccessibilityEvent)", "p": [0.03, 0.4], "samples": [[0.02, 0.15], [0.03, 0.15], [0.03, 0.4]], "cost": 0.0217356}
+{"cls": "android.view.View", "sig": "void onRestoreInstanceState(android.os.Parcelable)", "p": [0.3, 0.02], "samples": [[0.3, 0.02], [0.3, 0.02], [0.25, 0.02]], "cost": 0.0079854}
+{"cls": "android.view.View", "sig": "void onScrollChanged(int,int,int,int)", "p": [0.05, 0.05, 0.04, 0.04], "samples": [[0.04, 0.04, 0.03, 0.03], [0.05, 0.05, 0.04, 0.04], [0.04, 0.04, 0.03, 0.03]], "cost": 0.0168136}
+{"cls": "android.view.View", "sig": "void onSizeChanged(int,int,int,int)", "p": [0.03, 0.03, 0.02, 0.02], "samples": [[0.03, 0.03, 0.02, 0.02], [0.03, 0.03, 0.02, 0.02], [0.03, 0.03, 0.02, 0.02]], "cost": 0.0088536}
+{"cls": "android.view.View", "sig": "void onWindowSystemUiVisibilityChanged(int)", "p": [0.03], "samples": [[0.03], [0.03], [0.03]], "cost": 0.007645800000000001}
+{"cls": "android.view.View", "sig": "void postOnAnimation(java.lang.Runnable)", "p": [0.3, 0.03], "samples": [[0.3, 0.03], [0.1, 0.03], [0.3, 0.03]], "cost": 0.0079928}
+{"cls": "android.view.View", "sig": "void postOnAnimationDelayed(java.lang.Runnable,long)", "p": [0.3, 0.03, 0.02, 0.05], "samples": [[0.3, 0.03, 0.02, 0.05], [0.15, 0.03, 0.02, 0.05], [0.3, 0.03, 0.02, 0.04]], "cost": 0.008628}
+{"cls": "android.view.View", "sig": "void removeOnAttachStateChangeListener(android.view.View$OnAttachStateChangeListener)", "p": [0.03, 0.02], "samples": [[0.03, 0.02], [0.03, 0.02], [0.03, 0.01]], "cost": 0.0081356}
+{"cls": "android.view.View", "sig": "void removeOnLayoutChangeListener(android.view.View$OnLayoutChangeListener)", "p": [0.03, 0.02], "samples": [[0.03, 0.02], [0.03, 0.02], [0.03, 0.02]], "cost": 0.0080988}
+{"cls": "android.view.View", "sig": "void removeOnUnhandledKeyEventListener(android.view.View$OnUnhandledKeyEventListener)", "p": [0.03, 0.02], "samples": [[0.03, 0.02], [0.03, 0.02], [0.03, 0.02]], "cost": 0.0081692}
+{"cls": "android.view.View", "sig": "void restoreHierarchyState(android.util.SparseArray)", "p": [0.8, 0.03], "samples": [[0.8, 0.03], [0.6, 0.03], [0.8, 0.03]], "cost": 0.007981199999999999}
+{"cls": "android.view.View", "sig": "void saveAttributeDataForStyleable(android.content.Context,int[],android.util.AttributeSet,android.content.res.TypedArray,int,int)", "p": [0.4, 0.03, 0.03, 0.04, 0.7, 0.03, 0.03, 0.04, 0.5, 0.03, 0.03, 0.04, 0.65, 0.03, 0.03, 0.02, 0.5, 0.02, 0.02, 0.02, 0.03, 0.5, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.02, 0.03], "samples": [[0.4, 0.03, 0.03, 0.04, 0.7, 0.02, 0.02, 0.03, 0.5, 0.02, 0.02, 0.03, 0.65, 0.02, 0.03, 0.02, 0.5, 0.02, 0.02, 0.02, 0.03, 0.5, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.02, 0.03], [0.3, 0.03, 0.03, 0.04, 0.5, 0.03, 0.03, 0.04, 0.3, 0.03, 0.03, 0.04, 0.4, 0.03, 0.03, 0.02, 0.12, 0.02, 0.02, 0.02, 0.03, 0.12, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.03], [0.15, 0.02, 0.02, 0.03, 0.6, 0.02, 0.02, 0.02, 0.45, 0.02, 0.02, 0.02, 0.45, 0.02, 0.02, 0.02, 0.15, 0.02, 0.02, 0.02, 0.02, 0.15, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02]], "cost": 0.0492484}
+{"cls": "android.view.View", "sig": "void saveHierarchyState(android.util.SparseArray)", "p": [0.03, 0.9], "samples": [[0.03, 0.9], [0.03, 0.9], [0.03, 0.9]], "cost": 0.007977}
+{"cls": "android.view.View", "sig": "void scrollBy(int,int)", "p": [0.9, 0.9], "samples": [[0.9, 0.9], [0.9, 0.9], [0.9, 0.9]], "cost": 0.007872}
+{"cls": "android.view.View", "sig": "void scrollTo(int,int)", "p": [0.93, 0.93], "samples": [[0.93, 0.93], [0.9, 0.9], [0.93, 0.93]], "cost": 0.007872}
+{"cls": "android.view.View", "sig": "void sendAccessibilityEventUnchecked(android.view.accessibility.AccessibilityEvent)", "p": [0.05, 0.85], "samples": [[0.05, 0.8], [0.05, 0.8], [0.05, 0.85]], "cost": 0.0155198}
+{"cls": "android.view.View", "sig": "void setAccessibilityDelegate(android.view.View$AccessibilityDelegate)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0080778}
+{"cls": "android.view.View", "sig": "void setAccessibilityHeading(boolean)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076332}
+{"cls": "android.view.View", "sig": "void setAccessibilityLiveRegion(int)", "p": [0.65], "samples": [[0.6], [0.6], [0.65]], "cost": 0.012559}
+{"cls": "android.view.View", "sig": "void setAccessibilityPaneTitle(java.lang.CharSequence)", "p": [0.93, 0.03], "samples": [[0.93, 0.02], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0080106}
+{"cls": "android.view.View", "sig": "void setActivated(boolean)", "p": [0.85], "samples": [[0.85], [0.6], [0.85]], "cost": 0.007608}
+{"cls": "android.view.View", "sig": "void setAlpha(float)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075954}
+{"cls": "android.view.View", "sig": "void setAnimation(android.view.animation.Animation)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.9, 0.03]], "cost": 0.007997}
+{"cls": "android.view.View", "sig": "void setAnimationMatrix(android.graphics.Matrix)", "p": [0.8, 0.03], "samples": [[0.6, 0.03], [0.8, 0.03], [0.8, 0.03]], "cost": 0.007993799999999999}
+{"cls": "android.view.View", "sig": "void setBackground(android.graphics.drawable.Drawable)", "p": [0.93, 0.1], "samples": [[0.9, 0.05], [0.93, 0.1], [0.93, 0.04]], "cost": 0.0080232}
+{"cls": "android.view.View", "sig": "void setBackgroundColor(int)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007608}
+{"cls": "android.view.View", "sig": "void setBackgroundDrawable(android.graphics.drawable.Drawable)", "p": [0.9, 0.05], "samples": [[0.9, 0.05], [0.9, 0.05], [0.9, 0.05]], "cost": 0.008048399999999999}
+{"cls": "android.view.View", "sig": "void setBackgroundResource(int)", "p": [0.2], "samples": [[0.2], [0.2], [0.2]], "cost": 0.007608}
+{"cls": "android.view.View", "sig": "void setBackgroundTintList(android.content.res.ColorStateList)", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.008019}
+{"cls": "android.view.View", "sig": "void setBackgroundTintMode(android.graphics.PorterDuff$Mode)", "p": [0.85, 0.02], "samples": [[0.85, 0.02], [0.85, 0.02], [0.85, 0.02]], "cost": 0.0080736}
+{"cls": "android.view.View", "sig": "void setBottom(int)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007591200000000001}
+{"cls": "android.view.View", "sig": "void setClickable(boolean)", "p": [0.85], "samples": [[0.85], [0.85], [0.6]], "cost": 0.007598000000000001}
+{"cls": "android.view.View", "sig": "void setClipBounds(android.graphics.Rect)", "p": [0.85, 0.03], "samples": [[0.85, 0.03], [0.85, 0.03], [0.85, 0.03]], "cost": 0.0079686}
+{"cls": "android.view.View", "sig": "void setClipToOutline(boolean)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076206}
+{"cls": "android.view.View", "sig": "void setContentDescription(java.lang.CharSequence)", "p": [0.93, 0.02], "samples": [[0.93, 0.02], [0.93, 0.02], [0.93, 0.02]], "cost": 0.007981199999999999}
+{"cls": "android.view.View", "sig": "void setElevation(float)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007591200000000001}
+{"cls": "android.view.View", "sig": "void setEnabled(boolean)", "p": [0.6], "samples": [[0.45], [0.6], [0.6]], "cost": 0.0092422}
+{"cls": "android.view.View", "sig": "void setFitsSystemWindows(boolean)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076332}
+{"cls": "android.view.View", "sig": "void setFocusable(boolean)", "p": [0.85], "samples": [[0.85], [0.6], [0.85]], "cost": 0.0076121999999999995}
+{"cls": "android.view.View", "sig": "void setForeground(android.graphics.drawable.Drawable)", "p": [0.93, 0.04], "samples": [[0.93, 0.04], [0.9, 0.03], [0.9, 0.03]], "cost": 0.0080232}
+{"cls": "android.view.View", "sig": "void setFrameContentVelocity(float)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007616400000000001}
+{"cls": "android.view.View", "sig": "void setId(int)", "p": [0.95], "samples": [[0.93], [0.95], [0.95]], "cost": 0.007582800000000001}
+{"cls": "android.view.View", "sig": "void setImportantForAccessibility(int)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007616400000000001}
+{"cls": "android.view.View", "sig": "void setKeyboardNavigationCluster(boolean)", "p": [0.9], "samples": [[0.85], [0.9], [0.85]], "cost": 0.007645800000000001}
+{"cls": "android.view.View", "sig": "void setLayerPaint(android.graphics.Paint)", "p": [0.85, 0.03], "samples": [[0.6, 0.03], [0.85, 0.03], [0.6, 0.03]], "cost": 0.0080128}
+{"cls": "android.view.View", "sig": "void setLayerType(int,android.graphics.Paint)", "p": [0.8, 0.03, 0.85, 0.04], "samples": [[0.6, 0.02, 0.8, 0.04], [0.6, 0.02, 0.8, 0.04], [0.8, 0.03, 0.85, 0.04]], "cost": 0.0156728}
+{"cls": "android.view.View", "sig": "void setLayoutParams(android.view.ViewGroup$LayoutParams)", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.0080736}
+{"cls": "android.view.View", "sig": "void setLeft(int)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007591200000000001}
+{"cls": "android.view.View", "sig": "void setLeftTopRightBottom(int,int,int,int)", "p": [0.93, 0.93, 0.93, 0.93], "samples": [[0.93, 0.93, 0.93, 0.93], [0.93, 0.93, 0.93, 0.93], [0.93, 0.93, 0.93, 0.93]], "cost": 0.0085104}
+{"cls": "android.view.View", "sig": "void setLongClickable(boolean)", "p": [0.85], "samples": [[0.85], [0.5], [0.85]], "cost": 0.0097964}
+{"cls": "android.view.View", "sig": "void setMeasuredDimension(int,int)", "p": [0.95, 0.95], "samples": [[0.93, 0.93], [0.95, 0.95], [0.93, 0.93]], "cost": 0.0078888}
+{"cls": "android.view.View", "sig": "void setMinimumHeight(int)", "p": [0.93], "samples": [[0.93], [0.9], [0.9]], "cost": 0.007608}
+{"cls": "android.view.View", "sig": "void setMinimumWidth(int)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007608}
+{"cls": "android.view.View", "sig": "void setNestedScrollingEnabled(boolean)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076416}
+{"cls": "android.view.View", "sig": "void setOnApplyWindowInsetsListener(android.view.View$OnApplyWindowInsetsListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.008145}
+{"cls": "android.view.View", "sig": "void setOnClickListener(android.view.View$OnClickListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0080306}
+{"cls": "android.view.View", "sig": "void setOnCreateContextMenuListener(android.view.View$OnCreateContextMenuListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.02]], "cost": 0.0081114}
+{"cls": "android.view.View", "sig": "void setOnDragListener(android.view.View$OnDragListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0080106}
+{"cls": "android.view.View", "sig": "void setOnFocusChangeListener(android.view.View$OnFocusChangeListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0081378}
+{"cls": "android.view.View", "sig": "void setOnHoverListener(android.view.View$OnHoverListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.02], [0.93, 0.03], [0.93, 0.03]], "cost": 0.008027399999999999}
+{"cls": "android.view.View", "sig": "void setOnKeyListener(android.view.View$OnKeyListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.008067399999999999}
+{"cls": "android.view.View", "sig": "void setOnLongClickListener(android.view.View$OnLongClickListener)", "p": [0.93, 0.03], "samples": [[0.9, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0080442}
+{"cls": "android.view.View", "sig": "void setOnTouchListener(android.view.View$OnTouchListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0080874}
+{"cls": "android.view.View", "sig": "void setOutlineProvider(android.view.ViewOutlineProvider)", "p": [0.93, 0.03], "samples": [[0.9, 0.03], [0.93, 0.03], [0.9, 0.03]], "cost": 0.008039999999999999}
+{"cls": "android.view.View", "sig": "void setOverScrollMode(int)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007608}
+{"cls": "android.view.View", "sig": "void setPadding(int,int,int,int)", "p": [0.93, 0.93, 0.93, 0.93], "samples": [[0.9, 0.93, 0.9, 0.93], [0.93, 0.93, 0.93, 0.93], [0.9, 0.93, 0.9, 0.93]], "cost": 0.008480999999999999}
+{"cls": "android.view.View", "sig": "void setPaddingRelative(int,int,int,int)", "p": [0.9, 0.93, 0.9, 0.93], "samples": [[0.9, 0.93, 0.9, 0.93], [0.9, 0.93, 0.9, 0.93], [0.9, 0.9, 0.9, 0.9]], "cost": 0.0084978}
+{"cls": "android.view.View", "sig": "void setPivotX(float)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075954}
+{"cls": "android.view.View", "sig": "void setPivotY(float)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075954}
+{"cls": "android.view.View", "sig": "void setPointerIcon(android.view.PointerIcon)", "p": [0.93, 0.03], "samples": [[0.93, 0.02], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0079854}
+{"cls": "android.view.View", "sig": "void setRight(int)", "p": [0.93], "samples": [[0.9], [0.93], [0.93]], "cost": 0.007587}
+{"cls": "android.view.View", "sig": "void setRotation(float)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007591200000000001}
+{"cls": "android.view.View", "sig": "void setRotationX(float)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075954}
+{"cls": "android.view.View", "sig": "void setRotationY(float)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075954}
+{"cls": "android.view.View", "sig": "void setScaleX(float)", "p": [0.93], "samples": [[0.9], [0.93], [0.93]], "cost": 0.0075954}
+{"cls": "android.view.View", "sig": "void setScaleY(float)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075954}
+{"cls": "android.view.View", "sig": "void setScreenReaderFocusable(boolean)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007637400000000001}
+{"cls": "android.view.View", "sig": "void setScrollX(int)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007585400000000001}
+{"cls": "android.view.View", "sig": "void setScrollY(int)", "p": [0.93], "samples": [[0.93], [0.9], [0.9]], "cost": 0.0075954}
+{"cls": "android.view.View", "sig": "void setSelected(boolean)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007608}
+{"cls": "android.view.View", "sig": "void setStateDescription(java.lang.CharSequence)", "p": [0.93, 0.02], "samples": [[0.93, 0.02], [0.9, 0.02], [0.9, 0.02]], "cost": 0.007981199999999999}
+{"cls": "android.view.View", "sig": "void setStateListAnimator(android.animation.StateListAnimator)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.008014799999999999}
+{"cls": "android.view.View", "sig": "void setSystemGestureExclusionRects(java.util.List)", "p": [0.9, 0.03], "samples": [[0.85, 0.03], [0.9, 0.03], [0.85, 0.03]], "cost": 0.007947599999999999}
+{"cls": "android.view.View", "sig": "void setSystemUiVisibility(int)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007616400000000001}
+{"cls": "android.view.View", "sig": "void setTag(int,java.lang.Object)", "p": [0.03, 0.01, 0.93, 0.02], "samples": [[0.03, 0.01, 0.93, 0.02], [0.03, 0.01, 0.93, 0.02], [0.03, 0.01, 0.93, 0.02]], "cost": 0.0085608}
+{"cls": "android.view.View", "sig": "void setTag(java.lang.Object)", "p": [0.95, 0.03], "samples": [[0.95, 0.03], [0.95, 0.02], [0.95, 0.03]], "cost": 0.0079508}
+{"cls": "android.view.View", "sig": "void setTextAlignment(int)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007603800000000001}
+{"cls": "android.view.View", "sig": "void setTextDirection(int)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075996}
+{"cls": "android.view.View", "sig": "void setTooltipText(java.lang.CharSequence)", "p": [0.93, 0.02], "samples": [[0.93, 0.02], [0.93, 0.02], [0.93, 0.02]], "cost": 0.007981199999999999}
+{"cls": "android.view.View", "sig": "void setTop(int)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007587}
+{"cls": "android.view.View", "sig": "void setTransitionAlpha(float)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076121999999999995}
+{"cls": "android.view.View", "sig": "void setTransitionName(java.lang.String)", "p": [0.95], "samples": [[0.95], [0.93], [0.93]], "cost": 0.0088916}
+{"cls": "android.view.View", "sig": "void setTransitionVisibility(int)", "p": [0.9], "samples": [[0.9], [0.9], [0.85]], "cost": 0.0076121999999999995}
+{"cls": "android.view.View", "sig": "void setTranslationX(float)", "p": [0.95], "samples": [[0.93], [0.95], [0.93]], "cost": 0.0075996}
+{"cls": "android.view.View", "sig": "void setTranslationY(float)", "p": [0.93], "samples": [[0.93], [0.93], [0.9]], "cost": 0.0075996}
+{"cls": "android.view.View", "sig": "void setTranslationZ(float)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007603800000000001}
+{"cls": "android.view.View", "sig": "void setVisibility(int)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075954}
+{"cls": "android.view.View", "sig": "void setWillNotDraw(boolean)", "p": [0.6], "samples": [[0.6], [0.55], [0.6]], "cost": 0.007624800000000001}
+{"cls": "android.view.View", "sig": "void setWindowInsetsAnimationCallback(android.view.WindowInsetsAnimation$Callback)", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.85, 0.03], [0.9, 0.03]], "cost": 0.0081324}
+{"cls": "android.view.View", "sig": "void setX(float)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007582800000000001}
+{"cls": "android.view.View", "sig": "void setY(float)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075728}
+{"cls": "android.view.View", "sig": "void setZ(float)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007587}
+{"cls": "android.view.View", "sig": "void startAnimation(android.view.animation.Animation)", "p": [0.9, 0.08], "samples": [[0.85, 0.05], [0.85, 0.05], [0.9, 0.08]], "cost": 0.012397000000000002}
+{"cls": "android.view.View", "sig": "void transformMatrixToGlobal(android.graphics.Matrix)", "p": [0.02, 0.85], "samples": [[0.02, 0.85], [0.02, 0.85], [0.02, 0.85]], "cost": 0.0117522}
+{"cls": "android.view.View", "sig": "void transformMatrixToLocal(android.graphics.Matrix)", "p": [0.03, 0.85], "samples": [[0.02, 0.85], [0.03, 0.6], [0.03, 0.8]], "cost": 0.013128}
+{"cls": "android.view.View", "sig": "void unscheduleDrawable(android.graphics.drawable.Drawable)", "p": [0.04, 0.03], "samples": [[0.04, 0.02], [0.03, 0.03], [0.04, 0.03]], "cost": 0.0080442}
+{"cls": "android.view.View$AccessibilityDelegate", "sig": "android.view.accessibility.AccessibilityNodeProvider getAccessibilityNodeProvider(android.view.View)", "p": [0.03, 0.02, 0.04, 0.02], "samples": [[0.03, 0.02, 0.04, 0.02], [0.03, 0.01, 0.03, 0.01], [0.03, 0.01, 0.03, 0.01]], "cost": 0.010199}
+{"cls": "android.view.View$AccessibilityDelegate", "sig": "boolean dispatchPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)", "p": [0.08, 0.03, 0.6, 0.04, 0.03, 0.05, 0.03, 0.03, 0.05], "samples": [[0.05, 0.03, 0.6, 0.04, 0.03, 0.05, 0.03, 0.03, 0.05], [0.05, 0.03, 0.6, 0.04, 0.03, 0.05, 0.03, 0.02, 0.04], [0.08, 0.03, 0.6, 0.04, 0.03, 0.05, 0.03, 0.03, 0.05]], "cost": 0.0154906}
+{"cls": "android.view.View$AccessibilityDelegate", "sig": "boolean onRequestSendAccessibilityEvent(android.view.ViewGroup,android.view.View,android.view.accessibility.AccessibilityEvent)", "p": [0.03, 0.03, 0.02, 0.04, 0.03, 0.03, 0.02, 0.06, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.03], "samples": [[0.03, 0.02, 0.02, 0.04, 0.03, 0.02, 0.02, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03], [0.03, 0.03, 0.02, 0.04, 0.03, 0.03, 0.02, 0.06, 0.03, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03], [0.03, 0.02, 0.02, 0.04, 0.03, 0.02, 0.02, 0.04, 0.03, 0.02, 0.03, 0.03, 0.03, 0.02, 0.02, 0.03]], "cost": 0.0249758}
+{"cls": "android.view.View$AccessibilityDelegate", "sig": "boolean performAccessibilityAction(android.view.View,int,android.os.Bundle)", "p": [0.1, 0.03, 0.04, 0.08, 0.03, 0.05, 0.03, 0.08, 0.03, 0.15, 0.05, 0.03, 0.03], "samples": [[0.05, 0.03, 0.03, 0.08, 0.03, 0.05, 0.03, 0.05, 0.03, 0.1, 0.03, 0.03, 0.03], [0.08, 0.03, 0.03, 0.07, 0.03, 0.03, 0.03, 0.05, 0.03, 0.06, 0.03, 0.03, 0.03], [0.1, 0.03, 0.04, 0.08, 0.03, 0.05, 0.03, 0.08, 0.03, 0.15, 0.05, 0.03, 0.03]], "cost": 0.0185314}
+{"cls": "android.view.View$AccessibilityDelegate", "sig": "void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)", "p": [0.02, 0.85, 0.02, 0.04, 0.02, 0.05], "samples": [[0.02, 0.85, 0.02, 0.04, 0.02, 0.03], [0.02, 0.8, 0.02, 0.04, 0.02, 0.04], [0.02, 0.8, 0.02, 0.04, 0.02, 0.05]], "cost": 0.013319799999999998}
+{"cls": "android.view.View$AccessibilityDelegate", "sig": "void onInitializeAccessibilityNodeInfo(android.view.View,android.view.accessibility.AccessibilityNodeInfo)", "p": [0.04, 0.9, 0.03, 0.06, 0.03, 0.07], "samples": [[0.03, 0.9, 0.03, 0.06, 0.03, 0.07], [0.03, 0.9, 0.03, 0.04, 0.02, 0.05], [0.04, 0.85, 0.03, 0.06, 0.02, 0.05]], "cost": 0.0153054}
+{"cls": "android.view.View$AccessibilityDelegate", "sig": "void onPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)", "p": [0.03, 0.5, 0.02, 0.05, 0.02, 0.04], "samples": [[0.03, 0.4, 0.02, 0.05, 0.02, 0.04], [0.03, 0.5, 0.02, 0.04, 0.02, 0.04], [0.02, 0.5, 0.02, 0.04, 0.02, 0.04]], "cost": 0.0157898}
+{"cls": "android.view.View$AccessibilityDelegate", "sig": "void sendAccessibilityEvent(android.view.View,int)", "p": [0.03, 0.02, 0.02, 0.04], "samples": [[0.03, 0.02, 0.02, 0.03], [0.03, 0.02, 0.02, 0.04], [0.03, 0.02, 0.02, 0.03]], "cost": 0.008607}
+{"cls": "android.view.View$AccessibilityDelegate", "sig": "void sendAccessibilityEventUnchecked(android.view.View,android.view.accessibility.AccessibilityEvent)", "p": [0.03, 0.8, 0.03, 0.1, 0.03, 0.05], "samples": [[0.03, 0.6, 0.03, 0.07, 0.03, 0.05], [0.02, 0.8, 0.03, 0.1, 0.02, 0.05], [0.03, 0.6, 0.02, 0.08, 0.02, 0.05]], "cost": 0.016204}
+{"cls": "android.view.View$BaseSavedState", "sig": "void <init>(android.os.Parcelable)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0093978}
+{"cls": "android.view.View$MeasureSpec", "sig": "int getMode(int)", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.0075954}
+{"cls": "android.view.View$MeasureSpec", "sig": "int getSize(int)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075954}
+{"cls": "android.view.View$MeasureSpec", "sig": "int makeMeasureSpec(int,int)", "p": [0.95, 0.8], "samples": [[0.95, 0.8], [0.95, 0.8], [0.95, 0.8]], "cost": 0.0121362}
+{"cls": "android.view.View$OnApplyWindowInsetsListener", "sig": "android.view.WindowInsets onApplyWindowInsets(android.view.View,android.view.WindowInsets)", "p": [0.05, 0.03, 0.03, 0.6, 0.04, 0.03, 0.1, 0.03, 0.04], "samples": [[0.05, 0.03, 0.03, 0.55, 0.04, 0.03, 0.05, 0.03, 0.04], [0.05, 0.03, 0.03, 0.6, 0.04, 0.03, 0.1, 0.03, 0.03], [0.05, 0.03, 0.03, 0.6, 0.04, 0.03, 0.1, 0.02, 0.03]], "cost": 0.010345799999999999}
+{"cls": "android.view.View$OnLongClickListener", "sig": "boolean onLongClick(android.view.View)", "p": [0.03, 0.03, 0.02, 0.02], "samples": [[0.03, 0.03, 0.02, 0.02], [0.03, 0.03, 0.02, 0.02], [0.03, 0.03, 0.02, 0.02]], "cost": 0.0085314}
+{"cls": "android.view.ViewAnimationUtils", "sig": "android.animation.Animator createCircularReveal(android.view.View,int,int,float,float)", "p": [0.6, 0.6, 0.03, 0.6, 0.03, 0.6, 0.03, 0.6, 0.03], "samples": [[0.6, 0.6, 0.03, 0.6, 0.03, 0.6, 0.03, 0.6, 0.03], [0.6, 0.6, 0.03, 0.6, 0.03, 0.6, 0.03, 0.6, 0.03], [0.6, 0.6, 0.03, 0.6, 0.03, 0.6, 0.03, 0.6, 0.03]], "cost": 0.0100518}
+{"cls": "android.view.ViewConfiguration", "sig": "android.view.ViewConfiguration get(android.content.Context)", "p": [0.4], "samples": [[0.4], [0.15], [0.35]], "cost": 0.009031}
+{"cls": "android.view.ViewConfiguration", "sig": "boolean hasPermanentMenuKey()", "p": [0.1], "samples": [[0.1], [0.1], [0.1]], "cost": 0.007629}
+{"cls": "android.view.ViewConfiguration", "sig": "int getScaledMaximumFlingVelocity()", "p": [0.85], "samples": [[0.85], [0.85], [0.6]], "cost": 0.007637400000000001}
+{"cls": "android.view.ViewConfiguration", "sig": "int getScaledMaximumFlingVelocity(int,int,int)", "p": [0.03, 0.01, 0.03, 0.01, 0.03, 0.01, 0.8], "samples": [[0.03, 0.01, 0.03, 0.01, 0.03, 0.01, 0.55], [0.03, 0.01, 0.03, 0.01, 0.03, 0.01, 0.6], [0.03, 0.01, 0.03, 0.01, 0.03, 0.01, 0.8]], "cost": 0.0124988}
+{"cls": "android.view.ViewConfiguration", "sig": "int getScaledMinimumFlingVelocity()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007637400000000001}
+{"cls": "android.view.ViewConfiguration", "sig": "int getScaledMinimumFlingVelocity(int,int,int)", "p": [0.04, 0.01, 0.04, 0.01, 0.04, 0.01, 0.5], "samples": [[0.03, 0.01, 0.03, 0.01, 0.03, 0.01, 0.5], [0.04, 0.01, 0.04, 0.01, 0.04, 0.01, 0.45], [0.04, 0.01, 0.04, 0.01, 0.04, 0.01, 0.4]], "cost": 0.0134088}
+{"cls": "android.view.ViewConfiguration", "sig": "int getScaledPagingTouchSlop()", "p": [0.4], "samples": [[0.2], [0.4], [0.4]], "cost": 0.007629}
+{"cls": "android.view.ViewConfiguration", "sig": "int getScaledTouchSlop()", "p": [0.6], "samples": [[0.6], [0.6], [0.4]], "cost": 0.007616400000000001}
+{"cls": "android.view.ViewGroup", "sig": "android.content.Context getContext()", "p": [0.8], "samples": [[0.8], [0.6], [0.6]], "cost": 0.0116496}
+{"cls": "android.view.ViewGroup", "sig": "android.content.res.Resources getResources()", "p": [0.6], "samples": [[0.6], [0.2], [0.6]], "cost": 0.0101122}
+{"cls": "android.view.ViewGroup", "sig": "android.graphics.drawable.Drawable getBackground()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007637400000000001}
+{"cls": "android.view.ViewGroup", "sig": "android.view.View findFocus()", "p": [0.6], "samples": [[0.6], [0.6], [0.55]], "cost": 0.0116696}
+{"cls": "android.view.ViewGroup", "sig": "android.view.View findViewById(int)", "p": [0.03, 0.02, 0.6], "samples": [[0.03, 0.02, 0.6], [0.03, 0.01, 0.6], [0.03, 0.02, 0.6]], "cost": 0.0081534}
+{"cls": "android.view.ViewGroup", "sig": "android.view.View focusSearch(android.view.View,int)", "p": [0.15, 0.03, 0.05, 0.02, 0.02, 0.6, 0.03], "samples": [[0.15, 0.03, 0.05, 0.02, 0.02, 0.5, 0.03], [0.12, 0.03, 0.04, 0.02, 0.01, 0.5, 0.03], [0.12, 0.03, 0.03, 0.02, 0.01, 0.6, 0.03]], "cost": 0.0160118}
+{"cls": "android.view.ViewGroup", "sig": "android.view.View getChildAt(int)", "p": [0.03, 0.01, 0.9], "samples": [[0.03, 0.01, 0.9], [0.03, 0.01, 0.9], [0.03, 0.01, 0.9]], "cost": 0.008157600000000001}
+{"cls": "android.view.ViewGroup", "sig": "android.view.View getFocusedChild()", "p": [0.9], "samples": [[0.9], [0.85], [0.85]], "cost": 0.0076121999999999995}
+{"cls": "android.view.ViewGroup", "sig": "android.view.View getRootView()", "p": [0.8], "samples": [[0.55], [0.8], [0.6]], "cost": 0.011999600000000001}
+{"cls": "android.view.ViewGroup", "sig": "android.view.ViewGroup$LayoutParams generateDefaultLayoutParams()", "p": [0.03], "samples": [[0.03], [0.03], [0.03]], "cost": 0.0076836000000000005}
+{"cls": "android.view.ViewGroup", "sig": "android.view.ViewGroup$LayoutParams getLayoutParams()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076626}
+{"cls": "android.view.ViewGroup", "sig": "android.view.ViewGroupOverlay getOverlay()", "p": [0.6], "samples": [[0.45], [0.4], [0.6]], "cost": 0.0132016}
+{"cls": "android.view.ViewGroup", "sig": "android.view.ViewParent getParent()", "p": [0.1], "samples": [[0.1], [0.1], [0.05]], "cost": 0.0076121999999999995}
+{"cls": "android.view.ViewGroup", "sig": "android.view.ViewTreeObserver getViewTreeObserver()", "p": [0.6], "samples": [[0.6], [0.5], [0.4]], "cost": 0.0106842}
+{"cls": "android.view.ViewGroup", "sig": "boolean canScrollHorizontally(int)", "p": [0.05, 0.02, 0.1], "samples": [[0.05, 0.02, 0.1], [0.05, 0.02, 0.1], [0.03, 0.01, 0.1]], "cost": 0.008166000000000001}
+{"cls": "android.view.ViewGroup", "sig": "boolean canScrollVertically(int)", "p": [0.1, 0.02, 0.1], "samples": [[0.08, 0.02, 0.1], [0.05, 0.02, 0.1], [0.1, 0.02, 0.1]], "cost": 0.008157600000000001}
+{"cls": "android.view.ViewGroup", "sig": "boolean checkLayoutParams(android.view.ViewGroup$LayoutParams)", "p": [0.03, 0.01, 0.02, 0.01], "samples": [[0.03, 0.01, 0.02, 0.01], [0.03, 0.01, 0.02, 0.01], [0.03, 0.01, 0.02, 0.01]], "cost": 0.0087288}
+{"cls": "android.view.ViewGroup", "sig": "boolean dispatchPopulateAccessibilityEvent(android.view.accessibility.AccessibilityEvent)", "p": [0.04, 0.05, 0.05, 0.85], "samples": [[0.03, 0.05, 0.05, 0.8], [0.03, 0.05, 0.04, 0.85], [0.04, 0.05, 0.05, 0.85]], "cost": 0.0141534}
+{"cls": "android.view.ViewGroup", "sig": "boolean drawChild(android.graphics.Canvas,android.view.View,long)", "p": [0.03, 0.05, 0.04, 0.1, 0.1, 0.3, 0.02, 0.03, 0.03, 0.02, 0.1, 0.15, 0.15], "samples": [[0.03, 0.05, 0.04, 0.05, 0.1, 0.3, 0.02, 0.03, 0.03, 0.02, 0.05, 0.15, 0.1], [0.03, 0.03, 0.03, 0.1, 0.05, 0.3, 0.02, 0.03, 0.03, 0.02, 0.1, 0.15, 0.15], [0.03, 0.03, 0.03, 0.05, 0.08, 0.3, 0.02, 0.02, 0.03, 0.02, 0.1, 0.12, 0.08]], "cost": 0.011484000000000001}
+{"cls": "android.view.ViewGroup", "sig": "boolean fitSystemWindows(android.graphics.Rect)", "p": [0.08, 0.55, 0.04, 0.04], "samples": [[0.08, 0.55, 0.04, 0.04], [0.05, 0.55, 0.04, 0.04], [0.05, 0.5, 0.03, 0.04]], "cost": 0.0202544}
+{"cls": "android.view.ViewGroup", "sig": "boolean isInEditMode()", "p": [0.03], "samples": [[0.03], [0.03], [0.03]], "cost": 0.0083296}
+{"cls": "android.view.ViewGroup", "sig": "boolean onKeyUp(int,android.view.KeyEvent)", "p": [0.03, 0.02, 0.02, 0.05, 0.03, 0.05, 0.03], "samples": [[0.03, 0.02, 0.02, 0.04, 0.03, 0.05, 0.03], [0.03, 0.02, 0.02, 0.05, 0.03, 0.05, 0.03], [0.03, 0.02, 0.02, 0.04, 0.03, 0.05, 0.03]], "cost": 0.009522599999999999}
+{"cls": "android.view.ViewGroup", "sig": "boolean onTouchEvent(android.view.MotionEvent)", "p": [0.03, 0.03, 0.03, 0.02], "samples": [[0.03, 0.03, 0.03, 0.02], [0.03, 0.03, 0.03, 0.02], [0.03, 0.03, 0.03, 0.02]], "cost": 0.008607}
+{"cls": "android.view.ViewGroup", "sig": "boolean performAccessibilityAction(int,android.os.Bundle)", "p": [0.05, 0.04, 0.02, 0.04, 0.05, 0.1, 0.04], "samples": [[0.05, 0.03, 0.02, 0.04, 0.04, 0.05, 0.03], [0.04, 0.04, 0.02, 0.04, 0.05, 0.1, 0.04], [0.05, 0.03, 0.02, 0.04, 0.03, 0.1, 0.03]], "cost": 0.0094932}
+{"cls": "android.view.ViewGroup", "sig": "boolean post(java.lang.Runnable)", "p": [0.03, 0.3, 0.03, 0.03], "samples": [[0.03, 0.3, 0.03, 0.02], [0.03, 0.3, 0.03, 0.02], [0.03, 0.3, 0.03, 0.03]], "cost": 0.008565}
+{"cls": "android.view.ViewGroup", "sig": "boolean removeCallbacks(java.lang.Runnable)", "p": [0.03, 0.05, 0.03, 0.02], "samples": [[0.03, 0.05, 0.03, 0.02], [0.03, 0.05, 0.03, 0.02], [0.03, 0.05, 0.03, 0.02]], "cost": 0.0085902}
