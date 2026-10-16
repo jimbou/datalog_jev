@@ -151,9 +151,15 @@ EXTRACT_XMX/EXTRACT_THREADS, LIB_PREFIXES, BUDGET_FILE; `extract/Facts.java` EXC
   apps), alpha 0.05: Jev 1.3% held-out apps wrong (main 0.9%), power 49.6% (48.7%); Sonnet 0.5% (0.0%), 16.3% (16.7%);
   freq 0.0%, 18.4% (19.0%). Coverage on the 585 picked apps: FlowDroid 317, ours 344 without the fallback, 442 with it.
   Disclose that the fallback was chosen after the 40-app subset (prefix list fixed before any step-e result).
-- FlowDroid control RUNNING (2026-10-15 08:53, `bench/fd_fallback.py`, `bench/FDExclude.java`, `bench/queues/fd_fallback.sh`):
-  FlowDroid with the same prefixes excluded (Soot exclude list, app package kept), 151 out-of-memory apps with the time
-  left (fallback), then the 107 successful apps with sinks at 2100 s (control: leaks lost without notice).
+- FlowDroid control DONE (2026-10-15 08:53 to 20:26, `bench/fd_fallback.py`, `bench/FDExclude.java`,
+  `bench/fd_fallback_summary.py`, `data/fd_fallback.jsonl`): FlowDroid with the same prefixes excluded (Soot exclude list,
+  app package kept). Fallback (151 out-of-memory apps, only the time left): 14 succeed (3 of them "No sources found",
+  i.e. nothing left to analyze; 7 report a sink), 110 out of memory again, 27 time out; 6 of the 14 are also rescued by
+  us. Coverage on the 585 picked apps: FlowDroid 317 -> 331 with the same fallback, ours 344 -> 442. Control (107
+  successful apps with sinks, full 2100 s): 103 succeed, 4 now fail (2 timeouts, 2 out of memory); of 308 leaks (distinct
+  sink statements) 23 (7.5%) are lost, in 14 of 103 apps, with no warning; 7 runs find no sources at all; no new leaks.
+  Our fallback instead makes the excluded code priced holes, and the bound holds on main + rescued (Jev 1.3% held-out
+  apps wrong at alpha 0.05).
 - Step-e threat found: R8 moves app code into library-named classes (e.g. `okio.Okio.HomeScreenContent(...)`, a Compose
   screen of com.ammar.wallflow), so prefixes treat some app code as library code. Lower bound (library holes whose
   signature names a type of the app's package): 224 of 10,163 methods (2.2%), 9.6% of candidate flows, 17 of the 66 apps
