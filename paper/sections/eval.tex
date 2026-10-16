@@ -252,6 +252,11 @@ Without the rule, getters on tainted objects receive low prices, and the few rea
 With the same receipts, summing over distinct facts instead of edges clears 51.7\%, the largest single price 33.7\%, and the product under independence 52.3\%, all with at most 1.8\% of apps wrong.
 The calibration makes each of these valid; the union bound is the one that is also a guaranteed upper bound for each verdict.
 
+\emph{Pricers on less-known library code.}
+The rescued large apps have 10{,}163 bundled-library methods as holes (AndroidX, Kotlin, OkHttp and others), code that no calibration app contained as holes.
+On the 61{,}602 candidate flows of these methods that both key labelers decide alike, the pricers rank about as well as on framework methods (AUC 0.94 for Jev and 0.95 for Sonnet~5, against 0.94 for both), but Jev prices them far more confidently: it gives 82\% of the absent flows a price of at most 0.05 (35\% on framework methods), and also 8.1\% of the real ones (0.7\%).
+The threshold certified on the main corpus still gave none of the 56 rescued apps with decided verdicts a wrong clearance with Jev, while Sonnet's two wrong clearances there come from such a library flow (RQ2).
+
 \answer{\textbf{RQ4:} A useful pricer gives low prices only to flows that are really absent. Jev clears 49 to 60\% of the hard slice and Sonnet~5 17\%; cheaper models answer too confidently and clear little, without breaking the guarantee. Stating the flow rule in the question raises Jev's clearance from 9\% to 49\%.}
 
 \subsection{RQ5: Checking Receipt Facts}
