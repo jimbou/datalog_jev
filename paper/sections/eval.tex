@@ -60,8 +60,8 @@ Anchors & Sound (every unmodeled flow open) & 0\% (0\%) & 0\% (0\%)\\
  & Models only (clean verdicts trusted) & 100\% (\todo{share}) & 100\% (\todo{share})\\
 \midrule
 Baselines & Counting assumptions~\cite{bastani-oopsla15} & 0\% (0\%) & 0\% (0\%)\\
- & Jev taken as fact (price $\ge 0.5$) & \todo{G1} & \todo{G1}\\
- & GPT labels taken as fact & \todo{G1} & \todo{G1}\\
+ & Jev taken as fact (price $\ge 0.5$) & 96.4\% (57\%) & 96.4\% (57\%)\\
+ & GPT labels taken as fact & 99.6\% (3.3\%) & 99.6\% (3.3\%)\\
  & Uncalibrated bound, $\delta=\alpha$ (Jev) & 11.8\% (0\%) & \todo{x}\\
  & Conformal selection over verdicts & 74.8\% (17\%) & 79.6\% (37\%)\\
 \midrule
@@ -91,7 +91,7 @@ Receipts therefore halve the triage work rather than remove it; checking facts (
 \emph{Each baseline fails in its own way.}
 Counting gives every receipt of size one the same bound, so the first threshold already clears every one-fact receipt, which puts a wrong clearance in 87\% of the apps, and the calibration refuses every threshold: prices are what make receipts usable.
 Taking a language model's yes/no answers as library models has one operating point whose error cannot be chosen: on the deletion keys it clears 80 to 90\% of the hard slice, but 3.5\% of the apps receive a wrong clearance on average and up to 7.7\% in some runs, above a 5\% target in 9 of 18 runs.
-\todo{G1: the same baseline on the main key, with Jev's answers at 0.5 and with the GPT labels (Sonnet's labels are part of the key).}
+On the main key the same baseline is worse with Jev's answers at 0.5: it clears 96.4\% of the hard slice but leaves a wrong clearance in 57\% of the apps, because Jev answers ``no'' to many methods that do propagate. GPT-6.1's rubric labels, read as models (``undecidable'' as no model, as FlowDroid treats a missing model), clear 99.6\% with 3.3\% of the apps wrong; this is flattering, since these labels are half of the main key, and still the error exceeds 5\% in 11 of the 200 held-out halves (95th percentile 5.2\%), with no knob to lower it.
 Using the bound directly as a probability is safe for Jev but clears only 11.8\%, because Jev's prices are conservative.
 Conformal selection clears the most, 74.8\%, but misses its own target, with 6.6\% of the cleared verdicts wrong at a 5\% target (18.0\% at 10\%), because verdicts in one app share facts and the apps are not alike; its wrong verdicts are spread over 53 of the 307 apps, so a user reading one app's report would see a wrong clearance in one app out of six.
 RQ3 returns to the unit of the guarantee.
@@ -192,8 +192,15 @@ Combination of prices & union bound over edges (default) & 48.7\% & 0.9\%\\
 \midrule
 Pricer variants (dev subset) & Jev, main wording & 38.4\% & 1.6\%\\
  & Jev, written definition & 39.0\% & 1.9\%\\
- & Sonnet~5.5, written definition & \todo{G5} & \todo{G5}\\
- & combinations of existing prices & \todo{G5} & \todo{G5}\\
+ & Sonnet~5.5, written definition, highest of 3 samples & 43.8\% & 0\%\\
+ & mean of the two Jev wordings & 44.9\% & 1.6\%\\
+ & Jev with ties broken by Sonnet~5 or~5.5; highest of Jev and Sonnet~5 & 36.5--38.1\% & 1.6\%\\
+ & \textbf{highest of Jev and Sonnet~5.5 (chosen)} & 47.9\% & 1.1\%\\
+ & post hoc: Sonnet~5.5, first sample only & 46.4\% & 0\%\\
+\midrule
+Chosen variant on the other 215 apps & Jev, main wording & 49.5\% & 1.0\%\\
+ & highest of Jev and Sonnet~5.5 & 42.8\% & 1.4\%\\
+ & Sonnet~5.5, written definition & 43.0\% & 0\%\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -222,6 +229,7 @@ Pricer & Price & $\alpha=0.05$: certified, cleared & $\alpha=0.10$: certified, c
 \midrule
 Jev & \$0.21 & 200, 48.7\% & 200, 60.0\%\\
 Sonnet~5 & \$7.27 & 200, 16.7\% & 200, 16.9\%\\
+Sonnet~5.5, definition, 3 samples & \$68 & 200, 43.2\% & 200, 43.2\%\\
 Qwen3.7-Flash & \$0.09 & 0 & 48, 17.5\%\\
 Gemini-3.5-Flash-Lite & \$1.27 & 0 & 0\\
 DeepSeek-V4-Flash & \$0.17 & 0 & 0\\
@@ -249,7 +257,11 @@ The calibration makes each of these valid; the union bound is the one that is al
 \emph{Pricer variants.}
 To improve the pricer without choosing on the test data, we fixed a development subset of 92 apps and try each variant there first; every variant tried is reported.
 Jev with the full written definition in the question clears the same as the main wording (39.0\% against 38.4\% on the development apps).
-\todo{G5: Sonnet~5.5 with the definition and the free combinations of existing prices; promote the best rerunnable variant if it beats Sonnet~5 on the full corpus.}
+Sonnet~5.5 asked with the written definition (three samples, the highest price kept) clears 43.8\%, and five combinations of existing prices that need no new calls clear between 36.5\% and 47.9\%; the best, the higher of Jev's and Sonnet~5.5's prices, was chosen.
+On the other 215 apps of the corpus it clears 42.8\% (1.4\% of apps wrong), less than Jev alone (49.5\%, 1.0\%): the development apps are harder for Jev (38.4\%), and the gain did not transfer, so Jev remains the default.
+This is the outcome the development subset exists to catch.
+Sonnet~5.5 with the definition is the strongest hosted pricer we tried, 2.6 times Sonnet~5 on all apps (43.2\% against 16.7\%) with no wrong clearance; like Sonnet~5 it is certified only at thresholds up to 0.03, so a looser $\alpha$ does not help it.
+After these results we also checked a single sample, which clears at least as much on the development apps (46.4\%): the highest of three samples only raises prices.
 
 \emph{The number of calibration apps.}
 By Corollary~\ref{cor:n}, certifying $\alpha=0.05$ at $\varepsilon=0.1$ needs at least 45 programs; Figure~\ref{fig:learning} in the appendix shows that the measured clearance jumps from zero exactly there and grows slowly afterwards.
