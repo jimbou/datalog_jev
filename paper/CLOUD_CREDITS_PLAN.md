@@ -88,3 +88,20 @@ secret values.
 5. Write data/f2/cloud_test_report.md (time, step-1 facts, way used, priced/errors, wall-clock, costs seen, comparison).
 6. Branch cloud-test-20261016: commit only the report and the new price file (`git add -f`), push the branch. Never push
    to main, never force-push.
+
+## F2 run prompt (dev subset, Sonnet 5.5, 3 samples, cap $150)
+
+Session model in the claude.ai/code picker: Sonnet 5.5 (the session only starts and watches a script; the pricing
+model is set in the command). Paste:
+
+F2 pricing run for paper/CLOUD_CREDITS_PLAN.md. Do only this; no other changes, no paid APIs, no installs, never push
+to main, never force-push.
+1. From the repository root start, in the background:
+   `nohup bash bench/cloud_price.sh claude-sonnet-5-5 sonnet55def3 f2_dev 3 150 f2-cloud-sonnet55 250 6 > /tmp/cloud_price.log 2>&1 &`
+   It prices data/f2_dev.jsonl (5,094 methods) with `claude -p`, 3 samples per method under the written flow definition,
+   pushes data/jev_f2_dev_sonnet55def3_r0.jsonl to branch f2-cloud-sonnet55 after every 250 methods, and stops at $150
+   API-equivalent. If the branch already exists it resumes from it.
+2. Every 9 minutes (one `sleep 540; tail -n 3 /tmp/cloud_price.log` per check, nothing else) report the last CHUNK line.
+   If the log shows errors for most methods or "PUSH FAILED" twice in a row, stop the job (kill its PID) and report.
+3. When the log says DONE or CAP reached, report the final line, the number of priced methods and the cost, and confirm
+   the last push succeeded (`git log origin/f2-cloud-sonnet55 -1`).
