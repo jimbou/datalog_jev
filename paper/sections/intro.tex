@@ -4,49 +4,50 @@
 Static taint analysis finds paths along which sensitive data, such as a device identifier, can reach a sink, such as a network call~\cite{flowdroid}.
 On Android, these paths run through thousands of library methods whose code the analysis does not read.
 Tools replace such methods with models: FlowDroid ships hand-written summaries for about 350 classes, and any method without a summary is treated as passing no data.
-A ``no leak'' verdict therefore rests on assumptions about library code, and the tool does not report them.
-These assumptions matter.
-When FlowDroid is run without its models, 82\% of the leaks it reports disappear, so models are what makes it find leaks at all.
-But the models are incomplete: in our corpus of 332 apps, 12{,}274 of the 17{,}830 library methods that lie on source-to-sink paths have no FlowDroid model.
-Even with all of FlowDroid's models, a third of the real leaks in these apps (22{,}888 sinks) are reachable only through such unmodeled methods, and an analysis that relies on the models reports them as clean.
-Analyses that are sound except for such documented gaps are called \emph{soundy}~\cite{soundiness}; what is missing is a way to know how often the gaps matter.
+A ``no leak'' verdict therefore rests on assumptions about library code, and the tool neither reports these assumptions nor measures how often they fail.
+Analyses that are sound except for such documented gaps are called \emph{soundy}~\cite{soundiness}.
+The gaps matter in practice.
+In our corpus of 332 Android apps, 12{,}274 of the 17{,}830 library methods that lie on source-to-sink paths have no FlowDroid model, and a third of the real leaks (22{,}888 sinks) are reachable only through such unmodeled methods, so an analysis that relies on the models reports them as clean.
 
-There are three common answers, and none tells the user how likely a clean verdict is to be wrong.
+Prior work offers three answers to unmodeled library code, and none of them tells the user how likely a clean verdict is to be wrong.
 The first is to make the analysis sound by assuming that every unmodeled method passes all data.
-This catches the missed leaks but also reports a flow wherever an unmodeled call could carry one: in our corpus, it adds false alarms to 298 of 307 apps, about 18 per app, and nothing ranks them.
-The second is to write or infer more library models, by hand, from code~\cite{stubdroid,atlas}, or with a language model~\cite{iris,semtaint}.
-Every model can be wrong, and a verdict computed from a model taken as fact carries no measure of its error.
-The third is to list the assumptions behind each verdict as a minimal cut in the flow graph and let a person confirm them~\cite{bastani-oopsla15}.
-The list says what was assumed but not how likely each assumption is to fail, and counting the assumptions does not help: clearing every verdict that rests on a single assumption leaves a wrong clearance in most of our apps.
+This finds the missed leaks but also reports a flow wherever an unmodeled call could carry one: in our corpus, it adds false alarms to 298 of 307 apps, about 18 per app, with nothing to rank them.
+The second is to write or infer more library models, by hand, from library code or documentation~\cite{stubdroid,atlas,dainfer}, or with a language model~\cite{iris,semtaint,llmdfa,cpghunter}.
+Every inferred model can be wrong, and a verdict computed from a model taken as fact carries no measure of its error.
+The third is to list the assumptions behind each verdict, as a minimal cut in the flow graph, and let a person confirm them~\cite{bastani-oopsla15}.
+The list says what was assumed but not how likely each assumption is to fail, so every verdict needs a person; counting the assumptions does not help, because clearing every verdict that rests on a single assumption leaves a wrong clearance in most of our apps.
+In short, existing approaches either trust the library oracle, whether a person, a tool or a language model, or give it no role at all.
+What is missing is a way to use an oracle that may be wrong and still bound how often its mistakes reach the user.
 
-We propose to keep the analysis with its models and attach to each clean verdict a \emph{receipt}: the smallest set of unmodeled library flows the verdict assumes absent.
-A \emph{pricer}, here a language model, gives each library flow a probability of being real.
-The prices on a receipt add up to an upper bound on the probability that the verdict is wrong, and this bound needs no assumption about how library flows are correlated.
-We show that it is the tightest bound that can be derived from the individual probabilities, and that the cheapest receipt is a minimum cut, computed by max-flow.
-A verdict is accepted when its bound is below a threshold.
-The threshold is not trusted but certified: we choose it on a sample of programs with an exact statistical test, so that with confidence $1-\varepsilon$, a new program receives a wrong clean verdict with probability at most $\alpha$.
+We propose \emph{receipts with certified risk}.
+The analysis keeps its models, and each clean verdict that depends on unmodeled library code receives a \emph{receipt}: the smallest set of unmodeled library flows the verdict assumes absent, computed as a minimum cut in the flow graph.
+A \emph{pricer}, in our implementation a language model, gives each library flow a probability of being real.
+By the union bound, the prices on a receipt bound the probability that the verdict is wrong, with no assumption about how library flows are correlated, and we show that no bound derived from individual prices can be tighter.
+The key design decision is that the prices are not trusted.
+A verdict is cleared when its bound is below a threshold, and the threshold is \emph{certified} on a sample of programs with distribution-free risk control~\cite{lt}: with confidence $1-\varepsilon$, a new program receives a wrong clean verdict with probability at most $\alpha$.
 We call an analysis with such a rule \emph{$(\alpha,\varepsilon)$-soundy}.
-Receipts do not replace library models but complete them: the models decide the methods they cover, and receipts price and certify the methods they leave open.
-Our implementation therefore uses FlowDroid's models and its list of sources and sinks, and treats only the methods without a model as holes.
+The guarantee holds for any pricer; the quality of the pricer decides how many verdicts are cleared, not whether the guarantee holds.
+Receipts thus complete library models rather than replace them: the models decide the methods they cover, and receipts price and certify the methods they leave open.
 
-Three properties make this approach different from the answers above.
-Unlike a sound analysis, it reports the likely leaks through unmodeled code without flagging every verdict that depends on it, and it ranks the rest by risk.
-Unlike a model taken as fact, its error rate is measured and bounded, and the guarantee holds for any pricer, including a poor one: the quality of the prices decides how much is cleared, not whether the guarantee holds.
-Unlike a list of assumptions, each receipt comes with a price, and the facts with the highest stakes can be checked first.
-The guarantee is stated per program, because the user of an analysis reads one app's report; we show that selecting verdicts with a per-verdict error rate leaves wrong clearances in 17\% of the apps at a 5\% target, and in this setting even misses its own target.
+This design differs from the three answers above in three ways.
+Unlike a sound analysis, it reports the likely leaks through unmodeled code without flagging every verdict that depends on it, and it ranks the remaining alarms by risk.
+Unlike a model taken as fact, its error rate is measured and bounded, and the bound survives a poor pricer.
+Unlike a list of assumptions, each receipt carries a price, so the facts with the highest stakes can be checked first.
+The guarantee is stated per program, because a user reads one app's report; we show that controlling the error per verdict instead, with conformal selection, leaves wrong clearances in 17\% of the apps at a 5\% target and misses its own target.
 
-We evaluate the approach on 332 Android apps from F-Droid and 33 malware apps from TaintBench~\cite{taintbench}, against several answer keys: FlowDroid's models completed by the labels on which two language-model families agree under a written definition of a flow, which a person's source-code checks confirm for 95\% of the checked facts; a deletion benchmark built only from FlowDroid's models; summaries generated from the Android source code with StubDroid~\cite{stubdroid}; and keys with single-model labels and random noise.
-At a 5\% target, the analysis still reports all but one of the 22{,}888 real leaks that FlowDroid's models miss, while receipts clear 49\% of the false alarms that a sound treatment of unmodeled methods adds; 0.9\% of held-out apps receive a wrong clearance, and per app the false alarms drop from a median of 13 to 6.
-The guarantee holds for all ten pricers and all keys we tried.
-Checking 25 receipt facts, chosen without looking at any answer, raises the cleared share to 63\%, and 100 checks to 78\%; checking 100 random facts helps little.
-On malware, a threshold certified on F-Droid apps gives no app a wrong clearance, but few documented malware leaks depend on unmodeled flows of the kind we price.
-Receipts also let the analysis degrade gracefully: when an app does not fit in memory, bundled libraries become priced holes instead of a failure, so with the same time and memory per app our pipeline analyzes 442 of 585 apps against FlowDroid's 317, the guarantee still holds, and FlowDroid given the same fallback analyzes 331 and silently loses 7.5\% of its leaks.
+We evaluate the approach on 332 open-source Android apps from F-Droid and 33 malware apps from TaintBench~\cite{taintbench}, against eight answer keys and ten pricers, with the same protocol throughout: a threshold is certified on half of the apps and tested on the other half, 200 times.
+At $\alpha=0.05$, priced receipts clear 49\% of the false alarms that opening unmodeled methods adds, keep all but one of the 22{,}888 real leaks that FlowDroid's models miss, and give 0.9\% of held-out apps a wrong clearance; per app, the false alarms drop from a median of 13 to 6.
+The baselines fail in different ways: counting assumptions clears nothing, a language model taken as fact exceeds a 5\% error in half of its runs, and per-verdict selection misses its target.
+The guarantee holds under every key and pricer we tried, including keys with no language-model labels and keys with random noise.
+Ablations show what decides the cleared share: the unit of the guarantee, the pricer's behavior at the low end of its ranking rather than its average ranking quality, and the wording of the question.
+Receipts also make human checking efficient: checking 25 facts chosen from the receipts alone raises the cleared share from 49\% to 63\%, while 100 random facts add three points.
+Finally, a threshold certified on F-Droid apps holds unchanged on larger apps whose bundled libraries are treated as holes, and on malware.
 
-In summary, this paper makes the following contributions:
+In summary, the paper makes the following contributions:
 \begin{itemize}
-\item A quantitative notion of soundiness, $(\alpha,\varepsilon)$-soundiness, which bounds per program how often an analysis wrongly clears a verdict.
-\item Receipts with prices: a per-verdict bound on the probability of a missed flow that needs no independence assumption and is the tightest possible from marginal probabilities, together with a certified acceptance threshold that is valid for any pricer.
-\item Budgeted checking: a way to choose which library facts a person should verify, without looking at any answer, so that each check clears as many verdicts as possible.
-\item An evaluation on 332 benign and 33 malicious apps with eight answer keys and ten pricers, receipts computed on FlowDroid itself, and an account of the cases where the approach clears little.
+\item $(\alpha,\varepsilon)$-soundiness, a quantitative notion of soundiness that bounds, per program, how often an analysis wrongly clears a verdict.
+\item Priced receipts: a per-verdict bound on the probability of a missed flow that needs no independence assumption and is the tightest possible from individual prices, with a certified threshold that is valid for any pricer.
+\item An empirical study on 307 Android apps against six baselines, with ablations of every component of the approach, and the finding that the unit of the guarantee and the low end of the pricer's ranking, not its average quality, decide what can be cleared.
+\item Two uses of receipts beyond clearing verdicts: budgeted checking, which chooses the library facts a person should verify, and graceful degradation, which turns code that an analysis cannot afford to analyze into priced holes.
 \end{itemize}
 All code, flow graphs, prices, answer keys and audit data are available at \todo{anonymous link}.

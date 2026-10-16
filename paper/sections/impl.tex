@@ -3,31 +3,26 @@
 
 \paragraph{Analysis.}
 Soot~\cite{soot} extracts facts from each APK, including the libraries the app bundles.
-A Souffl\'e~\cite{souffle} program computes a whole-app, context-insensitive, field-sensitive points-to analysis with type filtering, and propagates taint from FlowDroid's default sources and sinks with every hole open.
-This default list (version 2.15.1) also contains entries for Java server libraries and generic Java methods, such as \texttt{String.replace} as a sink; we keep the list unchanged so that our analysis and FlowDroid use the same one. On the 98 apps whose facts we kept, 96.5\% of the hole-dependent verdicts are at Android sinks, none at server-library entries, and 3.5\% at generic Java sinks, mostly stream writes (\texttt{String.replace}: 0.2\%).
-It keeps only the part of the flow graph that can reach a sink and stores it compressed, a few megabytes per app, so that every pricer and answer key is evaluated on the same stored graphs.
+A Souffl\'e~\cite{souffle} program computes a whole-app, context-insensitive, field-sensitive points-to analysis with type filtering and propagates taint from FlowDroid's default sources and sinks with every hole open.
+This default list (version 2.15.1) also contains entries for Java server libraries and generic Java methods, such as \texttt{String.replace} as a sink; we keep the list unchanged so that our analysis and FlowDroid use the same one.
+On the 98 apps whose facts we kept, 96.5\% of the hole-dependent verdicts are at Android sinks, none at server-library entries, and 3.5\% at generic Java sinks, mostly stream writes.
+The analysis keeps only the part of the flow graph that can reach a sink and stores it compressed, a few megabytes per app, so that every pricer and answer key is evaluated on the same stored graphs.
 Calls to library methods that FlowDroid models use FlowDroid's summaries as code edges.
 Holes are the candidate flows of every call to a library method without a model: from each argument and the receiver to the return value, the receiver and each mutable argument.
 
 \paragraph{Receipts.}
 For each clean, hole-dependent sink, a max-flow computation gives the min-cut and its value.
-Before the per-sink computations, each strongly connected group of code edges is contracted into one node.
-A finite cut never separates such a group, so the contraction leaves every bound and receipt unchanged, and it speeds up the largest apps about 25 times.
+Before the per-sink computations, each strongly connected group of code edges is contracted into one node; a finite cut never separates such a group, so the contraction leaves every bound and receipt unchanged and speeds up the largest apps about 25 times.
 
-\paragraph{Pricers.}
+\paragraph{Pricers and baselines.}
 Our main pricer, Jev, is a commercial service that returns a calibrated probability for a yes/no question.
 We ask one question per candidate flow and state the flow rule in the question (``a tainted object taints everything read or obtained from it'').
-General language models are asked once per method for a probability for each of its candidate flows, at temperature 0: Sonnet~5 and five cheaper models (Section~\ref{sec:rq4}).
-As baselines we use \emph{counting}, which gives every flow the same price, so that the bound is the receipt size; a \emph{frequency prior} by package and kind of flow; a \emph{feature classifier} trained on FlowDroid's models (logistic regression on signature features); and a language model's yes/no answer \emph{taken as fact}, as in recent specification-inference work~\cite{iris,semtaint}.
+General language models are asked once per method for a probability for each of its candidate flows, at temperature 0: Sonnet~5 and five cheaper models (Section~\ref{sec:rq3}).
+As further pricers we use a \emph{frequency prior} by package and kind of flow, and a \emph{feature classifier} trained on FlowDroid's models (logistic regression on signature features).
+The baselines are \emph{counting}, which gives every flow the same price so that the bound is the receipt size~\cite{bastani-oopsla15}; a language model's yes/no answer \emph{taken as fact}, as in specification-inference work~\cite{iris,semtaint}; the \emph{uncalibrated bound}, which compares the bound with $\alpha$ directly; and \emph{conformal selection} over verdicts~\cite{conformalselection}.
 
 \paragraph{Large apps.}
 Souffl\'e keeps every derived fact in memory and stops at its limit, as FlowDroid does.
 When it runs out of memory, the pipeline rebuilds the app with bundled third-party libraries treated as library code: classes under a fixed list of 35 package prefixes (AndroidX, Kotlin, OkHttp, Gson and similar; the app's own package is never excluded) are not analyzed, and calls into them become holes, priced like framework methods.
 The rebuild gets only the time the first attempt left, so each app stays within one budget, the one we give FlowDroid: 35 minutes and 16\,GB.
 Prefixes cannot recognize minified library code, and R8 sometimes moves app code into library-named classes, which then becomes holes as well.
-
-\paragraph{Cost.}
-Building the flow graphs is the expensive step: 14 hours for 183 apps on an 8-core server with 62\,GB of memory.
-Computing all receipts takes a few minutes per pricer with FlowDroid's models, and one to two hours without them, when every library call is a hole.
-Pricing all 17{,}830 library methods costs about \$0.4 with Jev and \$16 with Sonnet~5.
-Certifying a threshold takes seconds.

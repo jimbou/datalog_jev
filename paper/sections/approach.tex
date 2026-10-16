@@ -38,7 +38,7 @@ If no edge of $C$ is in $T$, then no source reaches $t$ in $E_c\cup T$, so the v
 \noindent Any path in $E_c\cup T$ is also a path in $E_c\cup H$ and would use an edge of $C$.
 A receipt is therefore a list of library facts that, if all false, make the verdict correct.
 Each fact names a method and two of its values (``the receiver of \texttt{CharBuffer.toString()} flows into its return value''), so a person or a test can check it.
-Most receipts are short: of the leak-free sinks that our approach clears in the evaluation, 80\% rest on a single fact and 99\% on at most four.
+Most receipts are short: of the leak-free sinks that our approach clears in the evaluation, 80\% rest on a single fact and 99\% on at most four (Figure~\ref{fig:sizes}).
 
 \subsection{Prices and the Bound}
 A \emph{pricer} gives each hole edge $h$ a price $p(h)\in[0,1]$, meant as the probability that $h$ is real.
@@ -46,8 +46,7 @@ By Lemma~\ref{lem:cut}, a verdict can be a miss only if some edge of its receipt
 \[\Pr[\text{miss}]\le\min\Bigl(1,\sum_{h\in C}p(h)\Bigr),\]
 whatever the correlation between library flows.
 A sink usually has many receipts, and we use the cheapest one: a minimum cut in the flow graph where hole edges have capacity $p(h)$ and code edges infinite capacity, computed by max-flow.
-One might hope for a smaller bound by using the structure of the graph more cleverly.
-The next result shows that this is impossible without information beyond the individual prices.
+One might hope for a smaller bound from a cleverer use of the graph's structure; the next result shows that this is impossible without information beyond the individual prices.
 \begin{proposition}[Tightness]\label{prop:tight}
 Among all joint distributions of $T$ with $\Pr[h\in T]=p(h)$ for every $h$, the largest probability that a source reaches $t$ in $E_c\cup T$ is $\min(1,\mathrm{mincut}_p(t))$.
 \end{proposition}
@@ -61,8 +60,8 @@ Every marginal is then met, and $t$ is reachable with probability at least $F$, 
 Probabilistic Datalog engines such as Praline~\cite{praline} can use such knowledge when it is available; with marginals only, their optimum on reachability is the min-cut.
 
 \subsection{Certifying the Threshold}
-A bound is only as good as the prices, and a language model's prices can be wrong.
-We therefore do not compare the bound with $\alpha$ directly; we choose the threshold so that the definition of Section~\ref{sec:def} holds.
+A bound is only as good as its prices, and a language model's prices can be wrong.
+We therefore do not compare the bound with $\alpha$ directly but choose the threshold so that Definition~\ref{def:soundy} holds, whatever the prices are.
 A verdict is accepted at threshold $\delta$ if its bound is at most $\delta$.
 For a program $P$, let $L(P,\delta)=1$ if some verdict of $P$ accepted at $\delta$ is a miss, and $0$ otherwise.
 Then $R(\delta)=\mathbb{E}_{P\sim\mathcal{D}}L(P,\delta)$ is the probability that a new program receives a wrong clearance, and it grows with $\delta$.
@@ -85,7 +84,7 @@ In fact, only the order of the bounds matters:
 If $g$ is strictly increasing, running the procedure on scores $g(b)$ with thresholds $g(\delta_1)<\dots<g(\delta_K)$ accepts exactly the same verdicts as running it on $b$ with $\delta_1<\dots<\delta_K$.
 \end{proposition}
 \noindent Since $g(b)\le g(\delta)$ holds exactly when $b\le\delta$, every loss and every test is the same.
-Rescaling prices therefore changes nothing; a better pricer helps only by ordering verdicts better, and only at the low end of the order, where clearing happens (Section~\ref{sec:rq4}).
+Rescaling prices therefore changes nothing; a better pricer helps only by ordering verdicts better, and only at the low end of the order, where clearing happens (Section~\ref{sec:rq3}).
 
 \emph{The guarantee needs enough programs.}
 \begin{corollary}[Calibration floor]\label{cor:n}

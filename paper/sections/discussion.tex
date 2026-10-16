@@ -2,27 +2,21 @@
 \label{sec:discussion}
 
 \paragraph{The guarantee is about library flows, not about the whole analysis.}
-Receipts are meant to run on top of an analysis such as FlowDroid; our Datalog analysis stands in for it, with FlowDroid's models and source and sink list, because receipts need a stored flow graph with every hole open.
+Receipts are meant to run on top of an analysis such as FlowDroid.
+Our Datalog analysis stands in for it, with FlowDroid's models and its source and sink list, because receipts need a stored flow graph with every hole open.
 The stand-in is less precise than FlowDroid: on the 70 of 80 apps where FlowDroid gave an answer, our analysis reaches 58\% of the leaking sink methods FlowDroid reports, and only 1\% of the sinks it flags are also flagged by FlowDroid.
-Restricting it to code reachable from entry points removed only 11.5\% of these sinks on the first 40 apps, so dead code is not the reason; the likely cause is that the analysis is context-insensitive and merges values from different calls of the same method.
-The guarantee does not depend on this precision: it bounds how often a clean verdict is wrong because of library flows, for whatever analysis produces the flow graph.
-RQ1 shows that receipts also work inside FlowDroid, where 43 of the 58 sinks that open holes add receive a receipt confirmed by FlowDroid itself.
+The likely cause is that the analysis is context-insensitive and merges values from different calls of the same method; restricting it to code reachable from entry points removed only 11.5\% of these sinks on the first 40 apps.
+The guarantee does not depend on this precision.
+It bounds how often a clean verdict is wrong because of library flows, for whatever analysis produces the flow graph, and Section~\ref{sec:stake} shows that receipts also work inside FlowDroid, where 43 of the 58 sinks that open holes add receive a receipt confirmed by FlowDroid itself.
 Certifying a threshold for FlowDroid, however, needs more apps than we could analyze with it.
-Our receipts need only a stored flow graph, built once with every hole open, so pricing and certifying them takes minutes.
-Inside FlowDroid, a receipt needs repeated full runs: one with FlowDroid's models, one with every unmodeled method opened, and reruns that confirm each cut.
-To compare cost on equal terms, we ran FlowDroid on all 585 apps with the budget of our pipeline: 35 minutes and 16\,GB per app, two four-thread runs in parallel on eight cores.
-FlowDroid with its models finishes on 317 apps (54\%), and with every unmodeled method opened on 252 (43\%): opening the holes costs it 65 apps, 46 to the time limit and 19 to memory, while our graph contains every hole by construction.
-Our full analysis finishes on 344 apps (59\%); neither is uniformly lighter, as 163 apps finish only with ours and 71 only with FlowDroid with open holes.
-When memory runs out, our pipeline treats bundled libraries as holes (Section~\ref{sec:impl}) and finishes 98 more apps, 442 in all (76\%).
-With the same fallback, FlowDroid finishes 14 more apps (331), and on 103 apps with leaks it silently loses 23 of its 308 reported leaks (7.5\%); our fallback instead turns the excluded code into priced holes that the certified bound covers (Table~\ref{tab:main}).
+Our receipts need only a stored flow graph, built once with every hole open, so pricing and certifying them takes minutes; inside FlowDroid, a receipt needs repeated full runs, one with FlowDroid's models, one with every unmodeled method opened, and reruns that confirm each cut.
+On equal budgets (Section~\ref{sec:rq5}), opening the holes costs FlowDroid 65 of 317 apps, while our graph contains every hole by construction.
 We therefore use FlowDroid to validate receipts and our analysis to certify them; a cheaper way to open holes inside a precise analysis is future work.
 
 \paragraph{Other kinds of holes.}
 Library flows are one kind of gap in a soundy analysis.
-Receipts apply to any gap that can be written as a set of candidate edges.
-As a test, we added edges for inter-component communication, from each Intent an app sends to each component that could receive it, with a key from explicit targets and manifest filters.
-On 72 apps, 1{,}467 receipts contain such an edge, and the certified threshold clears 40.2\% of the hard slice at $\alpha=0.1$ with 1.4\% of apps wrong.
-These edges reach no additional documented TaintBench leak, because most of its inter-component leaks pass through databases, files or static fields, which our analysis already connects.
+Receipts apply to any gap that can be written as a set of candidate edges, and Section~\ref{sec:rq5} shows this for inter-component communication.
+Callbacks and reflection, which account for all documented malware leaks our analysis reaches only through unmodeled code, are natural next candidates.
 
 \section{Threats to Validity}
 \label{sec:threats}
@@ -30,20 +24,22 @@ These edges reach no additional documented TaintBench leak, because most of its 
 \emph{Answer keys.}
 No key is ground truth.
 The main key contains language-model labels, K2 covers only part of the library, and the audit checks the facts behind accepted verdicts, not the rejected ones.
-We address this with keys built in different ways (RQ3), with a key built from the answers on which two model families agree, which match a person's source checks on 95\% of the checked facts, and with random label noise.
+We address this with keys built in different ways (Section~\ref{sec:rq2}), with a key built from the answers on which two model families agree, which match a person's source checks on 95\% of the checked facts, and with random label noise.
+\todo{G2: add the second rater's agreement once available.}
 
 \emph{Apps.}
 The calibration apps are small open-source F-Droid apps: the full analysis builds 344 of 585 apps within FlowDroid's budget.
 The fallback adds 98 larger apps; it was adopted after a trial on 40 apps (prefix list fixed before), misses minified libraries, turns app code that R8 moved into library classes into holes (17 apps), and leaves more verdicts undecided, as one key labeler finds 27\% of bundled-library flows undecidable.
 Apps that bundle the same libraries are not independent, which we tested by keeping such apps together in each split (Table~\ref{tab:unit}).
-The transfer to malware rests on 31 apps, which shows no sign of failure but is too few to estimate a risk near 5\% precisely.
+The transfer to malware rests on 23 apps, which shows no sign of failure but is too few to estimate a risk near 5\% precisely.
+\todo{G4: update once the second population is in.}
 
 \emph{Pricers.}
-Jev is a commercial service, and hosted language models change over time; all prices are stored in our artifact.
+Jev is a commercial service, and hosted language models change over time; all prices are stored in our artifact, and Sonnet~5 is reported in every table as a rerunnable pricer.
 For one panel model, 152 of 17{,}830 methods were priced through a different access path to the same model.
 
 \emph{Checks.}
-In RQ5 the answer key plays the person who checks facts, so the gains assume that checks agree with the key.
+In Section~\ref{sec:rq4} the answer key plays the person who checks facts, so the gains assume that checks agree with the key.
 
 \emph{Definition of a flow.}
 The results depend on what counts as a flow.

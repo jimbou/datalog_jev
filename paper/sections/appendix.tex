@@ -28,6 +28,30 @@ U & cannot be decided from the contract & \texttt{Method.invoke}: arguments to a
 \section{Additional Results}
 \label{app:results}
 
+\begin{table}[h]
+\caption{TaintBench: documented leaks against our verdicts (analysis with FlowDroid's models).}
+\label{tab:taintbench}
+\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+Documented leaks & 203\\
+\quad outside our scope (no graph or no hole-dependent verdict: 28; sink not in the list: 4) & 32\\
+\quad reported with FlowDroid's models & 83\\
+\quad reachable only through unmodeled flows & 6\\
+\quad not reached & 82\\
+\midrule
+Of the 6: callbacks / inter-component calls / reflection & 3 / 1 / 2\\
+Of the 6: cleared by Jev ($\delta=0.2$), Sonnet~5 ($\delta=0.02$) and counting & 4\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\input{figs/deletion}
+\caption{Deletion keys: share of the hard slice cleared at $\alpha=0.05$ as more of FlowDroid's modeled classes are deleted (three seeds). In every cell, the share of calibrations whose held-out error exceeds $\alpha$ stays within $\varepsilon$.}
+\label{fig:deletion}
+\end{figure}
+
 \begin{figure}[h]
 \input{figs/learning}
 \caption{Certified clearance (Jev, main key) against the number of calibration apps, tested on the remaining apps (mean of 200 draws). Dotted lines mark the smallest $n$ at which the exact test can certify each $\alpha$ (Corollary~\ref{cor:n}); the measured clearance jumps from zero exactly there.}

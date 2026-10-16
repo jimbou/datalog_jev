@@ -2,22 +2,21 @@
 \label{sec:background}
 
 \subsection{Taint Analysis and Library Models}
-A taint analysis tracks values from \emph{sources}, calls that return sensitive data, to \emph{sinks}, calls that let data leave the app.
-It reports a sink if some source can reach it.
+A taint analysis tracks values from \emph{sources}, calls that return sensitive data, to \emph{sinks}, calls that let data leave the app, and reports a sink if some source can reach it.
 Android apps reach most sources and sinks through the framework and the Java library, whose code an app-level analysis does not analyze.
-At each such call the analysis needs to know which of the call's values carry data to which others: does the receiver of \texttt{StringBuilder.toString()} reach its return value, does the argument of \texttt{List.add} reach the list?
+At each such call the analysis needs to know which of the call's values carry data to which others: does the receiver of \texttt{StringBuilder.toString()} reach its return value, and does the argument of \texttt{List.add} reach the list?
 FlowDroid answers these questions with hand-written summaries~\cite{flowdroid}, StubDroid generates them from library code~\cite{stubdroid}, and recent work asks language models~\cite{iris,semtaint}.
-For any call without an answer, the analysis assumes that no data passes, which is the unsoundness we study.
+For any call without an answer, the analysis assumes that no data passes.
+This is the unsoundness we study.
 
 \subsection{Flow Graphs, Holes and Verdicts}
 \label{sec:setting}
-We describe an analysis by a flow graph.
-Its nodes are program values and heap locations; some nodes are sources and some are sinks.
-\emph{Code edges} $E_c$ come from code the analysis reads and from the library models it has; in our setting these are FlowDroid's models.
-\emph{Hole edges} $H$ are the candidate flows of library methods without a model: for every call to such a method, one edge from each of its arguments and its receiver to each value that could receive data (the return value, the receiver, and mutable arguments).
+We describe an analysis by a flow graph whose nodes are program values and heap locations; some nodes are sources and some are sinks.
+\emph{Code edges} $E_c$ come from code the analysis reads and from the library models it has, in our setting FlowDroid's models.
+\emph{Hole edges} $H$ are the candidate flows of library methods without a model: for every call to such a method, one edge from each argument and the receiver to each value that could receive data (the return value, the receiver and mutable arguments).
 The \emph{unsound analysis} $A_0$ uses only $E_c$.
 A sink $t$ is \emph{clean} if no source reaches it in $E_c$, and \emph{hole-dependent} if, in addition, a source reaches it in $E_c\cup H$.
-Clean sinks that are not hole-dependent are cleared by a sound analysis as well; our approach is about the hole-dependent ones.
+Clean sinks that are not hole-dependent are cleared by a sound analysis as well, so our approach concerns the hole-dependent ones.
 
 Let $T\subseteq H$ be the library flows that are real.
 The analysis does not know $T$; an \emph{answer key} provides it for evaluation.
@@ -29,9 +28,40 @@ In Figure~\ref{fig:example}, both sinks are clean and hole-dependent; verdict A 
 Whether a flow is real depends on what counts as a flow, and a precise answer matters because people and models label facts by it.
 A library flow from $X$ to $Y$ exists if, in ordinary executions, the data of $X$, a value computed from it, or a reference to it reaches $Y$.
 This happens when the method copies or computes $X$ into $Y$ (\texttt{String.concat}), stores $X$ in $Y$ (\texttt{List.add}, including keeping a reference), or reads $Y$ out of $X$ (\texttt{List.get}, \texttt{size}).
-It does not happen when $X$ only selects or controls something (an index, a key used for a lookup, a timeout, a flag), when $X$ only changes incidental state such as a cache, or when the data would move only through a custom override or callback.
+It does not happen when $X$ only selects or controls something (an index, a lookup key, a timeout, a flag), when $X$ only changes incidental state such as a cache, or when the data would move only through a custom override or callback.
 Like FlowDroid's default mode, we consider explicit flows only.
 Appendix~\ref{app:flow} gives the full rubric with one example per case.
+
+\subsection{How Much Is at Stake}
+\label{sec:stake}
+Before defining the problem, we measure how much a taint analysis depends on its library models and how incomplete the models are.
+We ran FlowDroid on 80 F-Droid apps twice, with its models and without them (Table~\ref{tab:fd-none}).
+Without its models, FlowDroid loses 82\% of the leaking sinks it reports and finds no leak that it does not also find with them: the models are what makes the analysis find leaks.
+They are also incomplete.
+In our corpus of 332 apps (Section~\ref{sec:setup}), 12{,}274 of the 17{,}830 library methods that lie on a source-to-sink path have no FlowDroid model.
+With FlowDroid's models, our analysis reports 49{,}007 sinks as leaks, while 22{,}888 further real leaks, a third of all, are reachable only through unmodeled methods and are reported as clean.
+Treating every unmodeled method as passing all data finds them but adds 5{,}318 false alarms in 298 of the 307 apps with hole-dependent verdicts.
+
+\begin{table}[t]
+\caption{FlowDroid on 80 F-Droid apps with and without its library models: leaking sink methods it reports.}
+\label{tab:fd-none}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Apps & Number & With models & Without & Lost without models\\
+\midrule
+Both runs complete & 52 & 46 & 6 & 40 (87\%)\\
+One run stopped at its memory limit & 17 & 108 & 21 & 87 (81\%)\\
+All apps with both answers & 69 & 154 & 27 & 127 (82\%)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The dependence is not specific to our analysis.
+FlowDroid reads library behavior from summary files, so we gave it holes as well, by adding a summary with every candidate flow for each method it does not model.
+On the 120 apps where all of FlowDroid's runs finished within 20 minutes, open holes add 58 reported sinks in 19 apps, and for 43 of them, switching off the hole methods on the reported paths and running FlowDroid again removes the sink, so FlowDroid itself confirms the receipt.
+How often holes matter depends on how much code an analysis reaches: FlowDroid analyzes only the code its call graph reaches from the app's entry points, and on the 142 apps where both analyses finish and both counts are available, it finds a median of 4 sources and 44 sinks per app, against 11 source and 57 sink sites in our analysis.
+On TaintBench malware, open holes add reported sinks in 14 of 30 apps.
 
 \subsection{Problem: How Often Is a Clean Verdict Wrong?}
 \label{sec:def}
@@ -47,6 +77,6 @@ An analysis $A_0$ with acceptance rule $\rho$ is \emph{$(\alpha,\varepsilon)$-so
 \noindent A rule that accepts nothing is trivially $(0,0)$-soundy, so the goal is to accept as many verdicts as possible while meeting the definition.
 Three choices in the definition matter for what follows.
 First, the unit is the program: the definition bounds the chance that a user who reads one app's report sees a wrong clearance.
-A bound on the share of wrong verdicts among all accepted verdicts is weaker, because a few wrong verdicts spread over many apps can make many reports wrong (Section~\ref{sec:rq2}).
+A bound on the share of wrong verdicts among all accepted verdicts is weaker, because a few wrong verdicts spread over many apps can make many reports wrong (Section~\ref{sec:rq3}).
 Second, the bound is relative to $T$, so we test it against several answer keys.
 Third, it assumes nothing about how library flows are correlated or about how accurate any pricer is.

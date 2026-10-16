@@ -23,28 +23,25 @@ Model taken as fact & leak & clean, with no error rate\\
 \label{fig:example}
 \end{figure}
 
-We illustrate the problem and our approach with two verdicts from a news reader for Nextcloud from F-Droid, \texttt{de.luhmer.}\allowbreak\texttt{owncloudnewsreader} (Figure~\ref{fig:example}).
+We illustrate the problem and our approach with two verdicts from a Nextcloud news reader on F-Droid, \texttt{de.luhmer.}\allowbreak\texttt{owncloudnewsreader} (Figure~\ref{fig:example}).
 In \texttt{NewFeedActivity}, the app puts a value into a \texttt{ContentValues} object and passes it to \texttt{ContentResolver.insert}, which writes the data to a content provider.
 In \texttt{PodcastPlaybackService}, it registers a progress listener on a \texttt{TextToSpeech} object and then writes a message to the log.
 
 Both sinks are clean for an analysis that uses FlowDroid's library models, because FlowDroid models neither \texttt{ContentValues} nor \texttt{TextToSpeech}, and an unmodeled method is assumed to pass no data.
 When the flows of unmodeled methods are opened, a source reaches both sinks, so both verdicts depend on library code that no model covers.
-For each verdict, the receipt is the single unmodeled flow that the verdict assumes absent.
-For verdict A, it is the flow from the argument of \texttt{ContentValues.put} into the \texttt{ContentValues} object: sensitive data reaches the provider only through this flow.
-That flow is real, since storing values is what \texttt{put} is for, so verdict A misses a leak, and so does FlowDroid.
-For verdict B, it is a flow from the \texttt{TextToSpeech} object into the listener: sensitive data reaches the log only if registering a listener copied data from the object into it.
+The receipt of each verdict is the single unmodeled flow it assumes absent.
+For verdict A, this is the flow from the argument of \texttt{ContentValues.put} into the \texttt{ContentValues} object; sensitive data reaches the provider only through this flow.
+The flow is real, since storing values is what \texttt{put} is for, so verdict A misses a leak, and so does FlowDroid.
+For verdict B, the receipt is a flow from the \texttt{TextToSpeech} object into the listener; sensitive data reaches the log only if registering a listener copied data from the object into it.
 Registering a listener copies nothing into the listener, so verdict B is correct.
 
-The existing answers cannot tell the two verdicts apart.
-A sound analysis, which assumes that every unmodeled method passes all data, reports both as leaks, so the user must inspect B, a false alarm.
-Such alarms occur in almost every app of our corpus, about 18 per app.
-Listing the assumptions gives one fact for each verdict.
-A count of assumptions treats them alike, and a rule that clears all one-fact receipts would clear A as well.
-Asking a language model whether each flow exists, and taking the answer as fact, gives the right answer for these two facts.
-It is still not a basis for clearing verdicts, because nothing controls how often such answers are wrong: across our corpus they leave wrong clearances in up to 8\% of the apps, at a rate the user can neither choose nor measure in advance.
+None of the existing answers tells the two verdicts apart.
+A sound analysis, which assumes that every unmodeled method passes all data, reports both as leaks, and the user must inspect B, a false alarm; such alarms occur in almost every app of our corpus, about 18 per app.
+Listing the assumptions gives one fact per verdict, and a rule based on the count of assumptions treats A and B alike.
+Asking a language model whether each flow exists and taking the answer as fact happens to give the right answer for these two facts, but nothing controls how often such answers are wrong: across our corpus they leave wrong clearances in up to 8\% of the apps, at a rate the user can neither choose nor measure in advance.
 
 Our approach prices each fact.
 The pricer gives 0.88 to the \texttt{ContentValues} flow and 0.10 to the \texttt{TextToSpeech} flow.
 A threshold of 0.2, certified on other apps so that at most 5\% of programs receive a wrong clearance, clears B and reports A as a possible leak.
-The user sees why: B is cleared because registering a listener does not copy data into it, and A is reported because storing a value in \texttt{ContentValues} does.
-If the price of a fact were wrong, the certified threshold would still bound how often such mistakes reach a user, and the receipt would show which fact to check.
+The user also sees why: B is cleared because registering a listener does not copy data into it, and A is reported because storing a value in \texttt{ContentValues} does.
+If a price were wrong, the certified threshold would still bound how often such mistakes reach a user, and the receipt would show which fact to check.

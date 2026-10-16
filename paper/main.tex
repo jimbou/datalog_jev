@@ -36,14 +36,16 @@
 \renewcommand{\shortauthors}{Anonymous}
 
 \begin{abstract}
-Static taint analyses replace library code with hand-written models and assume that methods without a model pass no data.
-Even with all of FlowDroid's models, a third of the real leaks in 332 Android apps pass only through such unmodeled methods, and the analysis reports them as clean.
-Treating every unmodeled method as passing all data finds these leaks but adds false alarms to almost every app, and library models inferred by tools or language models carry no measure of their error.
-We attach to each clean verdict a \emph{receipt}, the smallest set of unmodeled library flows the verdict assumes absent, and let a language model price each flow.
-The prices on a receipt bound the probability that the verdict is wrong, without assuming that library flows are independent, and this bound is the tightest possible from the individual prices.
-A threshold on the bound is certified on a sample of programs, so that with high confidence a new program receives a wrong clean verdict with probability at most $\alpha$, whatever the quality of the prices.
-At a 5\% target, the analysis still reports all but one of the 22{,}888 real leaks that FlowDroid's models miss, while receipts clear half of the false alarms that opening unmodeled methods adds, with wrong clearances in 0.9\% of held-out apps; counting assumptions without prices clears nothing, and selecting verdicts by a per-verdict error rate misses its own target.
-The guarantee holds under answer keys built from hand-written models, from library code, and from two language-model families that agree with a person's source-code checks, and checking 25 well-chosen receipt facts raises the cleared share from 49\% to 63\%.
+Static taint analyses replace library code with models and assume that a method without a model passes no data.
+This assumption is rarely stated and never measured: in 332 Android apps, a third of the real leaks pass only through methods that FlowDroid does not model, and the analysis reports them as clean.
+Assuming instead that every unmodeled method passes all data finds these leaks but adds false alarms to almost every app, and library models inferred by tools or language models are taken as fact, with no bound on their error.
+We present receipts, which make the dependence of a clean verdict on unmodeled library code explicit and bound the risk it carries.
+A receipt is the smallest set of unmodeled library flows that a clean verdict assumes absent, computed as a minimum cut; a language model prices each flow, and the prices on a receipt bound the probability that the verdict is wrong, without assuming that library flows are independent and as tightly as individual prices allow.
+The prices are not trusted: an acceptance threshold is certified on a sample of programs with distribution-free risk control, so that with high confidence a new program receives a wrong clean verdict with probability at most $\alpha$, whatever the quality of the pricer.
+We call an analysis with such a rule $(\alpha,\varepsilon)$-soundy.
+On 307 F-Droid apps at a 5\% target, receipts clear half of the false alarms that opening unmodeled methods adds, keep all but one of the 22{,}888 real leaks that FlowDroid's models miss, and give 0.9\% of held-out apps a wrong clearance.
+Counting assumptions without prices clears nothing, a language model taken as fact exceeds the target in half of its runs, and controlling the error per verdict instead of per program misses its own target.
+The guarantee holds under eight answer keys and ten pricers, ablations show that the unit of the guarantee and the low end of the pricer's ranking decide what is cleared, and checking 25 receipt facts chosen from the receipts alone raises the cleared share from 49\% to 63\%.
 \end{abstract}
 
 \begin{CCSXML}

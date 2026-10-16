@@ -236,6 +236,26 @@ leaks that FlowDroid's models miss, while adding half of the false alarms that a
 per-app false alarms after 25 and 100 checks (RQ5), and the per-app cost of checking 25 facts once for the whole corpus
 (about 0.08 checks per app).
 
+**Paper rewritten 2026-10-16** in the framing of `paper/FRAMING.md`: five RQs (effectiveness, validity, ablations, checking,
+beyond the calibration setting), prevalence moved to Section 3.4, fixed row set in the main table, ablation table, RQ5
+table; TaintBench table and deletion figure moved to the appendix; body ends on page 18; placeholders `\todo{G1..G5}`.
+Old text is in git (commit 1fb11fe and earlier).
+
+## G. Framing items (added 2026-10-16, from `paper/FRAMING.md`; placeholders are in the paper, marked \todo{G..})
+
+Of the five items in the memo, F3 (second population), C3 (second rater) and C1 (pinned pricer) already existed; G1 and
+G3 are new. All five are now must-do, and the paper has a placeholder for each.
+
+| # | Item | Was | Effort | Placeholder in paper |
+| --- | --- | --- | --- | --- |
+| G1 | LLM-as-fact baseline on the main key: Jev's answer at 0.5 and the GPT labels used as library models (not Sonnet, which is in the key); cleared share of the hard slice, apps with a wrong clearance, with 200 splits like every other row. No new pricing; `analysis/evaluate.py` with a "fact" mode | new | half a day | RQ1 main table, two rows |
+| G2 | Second human rater on 30-40 of the audited facts, Cohen's kappa between raters and against the key | C3 | hours of a colleague | Setup (keys) and RQ2 |
+| G3 | Cost and time per app: pricing cost per pricer per app, receipt (max-flow) time, certification time, one-off key cost | new | hours (numbers exist in logs) | RQ1, paragraph "Cost" |
+| G4 | Second population (IzzyOnDroid now; AndroZoo when the key arrives): list fixed in advance (date, size limit, seed), same pipeline with fallback, labels via Claude Code/Codex, threshold certified on the 307 F-Droid apps and applied unchanged | F3 | a week | RQ5 table row and paragraph |
+| G5 | Pinned, rerunnable pricer next to Jev: report every F2 variant (Jev wording, Sonnet 5.5 with definition, combinations) in one ablation row group, chosen on the dev subset; promote the best rerunnable one if it clears more than Sonnet 5 | C1 + F2 | runs in progress | RQ3 ablation table, row group |
+
+Order: G1, G3 (no server time) first; G2 when a colleague is free; G5 as F2 finishes; G4 after F1.
+
 ## C. Further strengtheners (lower priority)
 
 C0 (2026-10-08): FlowDroid's default source/sink list (2.15.1, which we use unchanged) contains Java server entries; some occur
