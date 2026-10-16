@@ -3748,3 +3748,253 @@
 {"cls": "android.widget.RelativeLayout", "sig": "void addView(android.view.View)", "p": [0.9, 0.1], "samples": [[0.9, 0.1], [0.9, 0.1], [0.9, 0.1]], "cost": 0.007947599999999999}
 {"cls": "android.widget.RelativeLayout", "sig": "void addView(android.view.View,android.view.ViewGroup$LayoutParams)", "p": [0.93, 0.1, 0.6, 0.1, 0.1, 0.04], "samples": [[0.93, 0.1, 0.6, 0.08, 0.1, 0.04], [0.9, 0.1, 0.6, 0.1, 0.03, 0.03], [0.9, 0.1, 0.6, 0.1, 0.03, 0.03]], "cost": 0.0095184}
 {"cls": "android.widget.RelativeLayout", "sig": "void addView(android.view.View,int,android.view.ViewGroup$LayoutParams)", "p": [0.9, 0.1, 0.03, 0.02, 0.05, 0.3, 0.15, 0.1, 0.1], "samples": [[0.9, 0.1, 0.03, 0.02, 0.05, 0.3, 0.15, 0.1, 0.1], [0.9, 0.05, 0.03, 0.02, 0.03, 0.3, 0.15, 0.1, 0.05], [0.9, 0.05, 0.03, 0.02, 0.03, 0.3, 0.15, 0.1, 0.1]], "cost": 0.0105054}
+{"cls": "android.widget.RelativeLayout", "sig": "void addView(android.view.View,int,int)", "p": [0.9, 0.35, 0.55, 0.35, 0.55, 0.08], "samples": [[0.85, 0.35, 0.55, 0.35, 0.55, 0.08], [0.9, 0.25, 0.5, 0.25, 0.5, 0.06], [0.9, 0.25, 0.5, 0.25, 0.5, 0.08]], "cost": 0.0162572}
+{"cls": "android.widget.RelativeLayout", "sig": "void layout(int,int,int,int)", "p": [0.9, 0.9, 0.9, 0.9], "samples": [[0.9, 0.9, 0.9, 0.9], [0.9, 0.9, 0.9, 0.9], [0.88, 0.88, 0.88, 0.88]], "cost": 0.0127652}
+{"cls": "android.widget.RelativeLayout", "sig": "void measure(int,int)", "p": [0.72, 0.72], "samples": [[0.6, 0.6], [0.72, 0.72], [0.7, 0.7]], "cost": 0.011172}
+{"cls": "android.widget.RelativeLayout", "sig": "void setBackgroundColor(int)", "p": [0.9], "samples": [[0.85], [0.8], [0.9]], "cost": 0.0076206}
+{"cls": "android.widget.RelativeLayout", "sig": "void setBackgroundDrawable(android.graphics.drawable.Drawable)", "p": [0.9, 0.04], "samples": [[0.9, 0.03], [0.9, 0.03], [0.9, 0.04]], "cost": 0.008060999999999999}
+{"cls": "android.widget.RelativeLayout", "sig": "void setId(int)", "p": [0.95], "samples": [[0.93], [0.93], [0.95]], "cost": 0.0075954}
+{"cls": "android.widget.RelativeLayout", "sig": "void setLayoutParams(android.view.ViewGroup$LayoutParams)", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.9, 0.03], [0.85, 0.03]], "cost": 0.0080862}
+{"cls": "android.widget.RelativeLayout", "sig": "void setOnClickListener(android.view.View$OnClickListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.9, 0.02], [0.93, 0.03]], "cost": 0.0080232}
+{"cls": "android.widget.RelativeLayout$LayoutParams", "sig": "void <init>(int,int)", "p": [0.97, 0.97], "samples": [[0.95, 0.95], [0.95, 0.95], [0.97, 0.97]], "cost": 0.0079056}
+{"cls": "android.widget.RelativeLayout$LayoutParams", "sig": "void addRule(int,int)", "p": [0.12, 0.93], "samples": [[0.1, 0.93], [0.1, 0.93], [0.12, 0.93]], "cost": 0.0107456}
+{"cls": "android.widget.RemoteViews", "sig": "android.widget.RemoteViews clone()", "p": [0.93], "samples": [[0.9], [0.9], [0.93]], "cost": 0.007603800000000001}
+{"cls": "android.widget.RemoteViews", "sig": "void <init>(java.lang.String,int)", "p": [0.93, 0.9], "samples": [[0.93, 0.9], [0.9, 0.75], [0.9, 0.8]], "cost": 0.007914000000000001}
+{"cls": "android.widget.RemoteViews", "sig": "void addView(int,android.widget.RemoteViews)", "p": [0.03, 0.02, 0.9, 0.03], "samples": [[0.03, 0.02, 0.9, 0.03], [0.03, 0.02, 0.9, 0.03], [0.03, 0.02, 0.9, 0.03]], "cost": 0.0086322}
+{"cls": "android.widget.RemoteViews", "sig": "void removeAllViews(int)", "p": [0.1], "samples": [[0.1], [0.1], [0.1]], "cost": 0.007608}
+{"cls": "android.widget.RemoteViews", "sig": "void setBoolean(int,java.lang.String,boolean)", "p": [0.1, 0.55, 0.85], "samples": [[0.1, 0.55, 0.8], [0.1, 0.55, 0.85], [0.1, 0.55, 0.85]], "cost": 0.008245800000000001}
+{"cls": "android.widget.RemoteViews", "sig": "void setChronometerCountDown(int,boolean)", "p": [0.03, 0.55], "samples": [[0.03, 0.55], [0.03, 0.55], [0.03, 0.55]], "cost": 0.007974}
+{"cls": "android.widget.RemoteViews", "sig": "void setContentDescription(int,java.lang.CharSequence)", "p": [0.03, 0.02, 0.9, 0.03], "samples": [[0.03, 0.01, 0.9, 0.01], [0.03, 0.02, 0.9, 0.03], [0.03, 0.01, 0.9, 0.02]], "cost": 0.0086322}
+{"cls": "android.widget.RemoteViews", "sig": "void setImageViewBitmap(int,android.graphics.Bitmap)", "p": [0.03, 0.02, 0.9, 0.03], "samples": [[0.03, 0.01, 0.9, 0.02], [0.03, 0.01, 0.9, 0.02], [0.03, 0.02, 0.9, 0.03]], "cost": 0.0086616}
+{"cls": "android.widget.RemoteViews", "sig": "void setImageViewResource(int,int)", "p": [0.1, 0.85], "samples": [[0.1, 0.6], [0.1, 0.85], [0.1, 0.85]], "cost": 0.0078888}
+{"cls": "android.widget.RemoteViews", "sig": "void setInt(int,java.lang.String,int)", "p": [0.3, 0.45, 0.85], "samples": [[0.1, 0.4, 0.85], [0.3, 0.4, 0.85], [0.3, 0.45, 0.8]], "cost": 0.008220600000000002}
+{"cls": "android.widget.RemoteViews", "sig": "void setLong(int,java.lang.String,long)", "p": [0.05, 0.1, 0.9], "samples": [[0.05, 0.1, 0.9], [0.05, 0.1, 0.9], [0.05, 0.08, 0.9]], "cost": 0.008220600000000002}
+{"cls": "android.widget.RemoteViews", "sig": "void setOnClickFillInIntent(int,android.content.Intent)", "p": [0.15, 0.02, 0.93, 0.03], "samples": [[0.15, 0.02, 0.93, 0.03], [0.1, 0.02, 0.9, 0.03], [0.1, 0.02, 0.9, 0.02]], "cost": 0.0086028}
+{"cls": "android.widget.RemoteViews", "sig": "void setOnClickPendingIntent(int,android.app.PendingIntent)", "p": [0.1, 0.02, 0.93, 0.03], "samples": [[0.1, 0.02, 0.9, 0.03], [0.1, 0.02, 0.93, 0.03], [0.1, 0.02, 0.93, 0.03]], "cost": 0.0086532}
+{"cls": "android.widget.RemoteViews", "sig": "void setPendingIntentTemplate(int,android.app.PendingIntent)", "p": [0.1, 0.02, 0.93, 0.03], "samples": [[0.1, 0.02, 0.9, 0.02], [0.1, 0.02, 0.9, 0.02], [0.1, 0.02, 0.93, 0.03]], "cost": 0.0086532}
+{"cls": "android.widget.RemoteViews", "sig": "void setRemoteAdapter(int,android.content.Intent)", "p": [0.1, 0.02, 0.85, 0.03], "samples": [[0.1, 0.02, 0.85, 0.03], [0.05, 0.02, 0.85, 0.03], [0.05, 0.02, 0.85, 0.02]], "cost": 0.0085944}
+{"cls": "android.widget.RemoteViews", "sig": "void setRemoteAdapter(int,int,android.content.Intent)", "p": [0.05, 0.02, 0.05, 0.02, 0.9, 0.02], "samples": [[0.03, 0.02, 0.05, 0.02, 0.9, 0.02], [0.05, 0.02, 0.05, 0.02, 0.85, 0.02], [0.03, 0.02, 0.03, 0.02, 0.85, 0.02]], "cost": 0.009224399999999999}
+{"cls": "android.widget.RemoteViews", "sig": "void setTextColor(int,int)", "p": [0.05, 0.85], "samples": [[0.05, 0.85], [0.03, 0.85], [0.03, 0.85]], "cost": 0.0078804}
+{"cls": "android.widget.RemoteViews", "sig": "void setTextViewText(int,java.lang.CharSequence)", "p": [0.03, 0.01, 0.9, 0.02], "samples": [[0.03, 0.01, 0.9, 0.02], [0.03, 0.01, 0.9, 0.02], [0.03, 0.01, 0.9, 0.02]], "cost": 0.0086322}
+{"cls": "android.widget.RemoteViews", "sig": "void setTextViewTextSize(int,int,float)", "p": [0.05, 0.3, 0.85], "samples": [[0.05, 0.3, 0.85], [0.05, 0.3, 0.85], [0.05, 0.25, 0.8]], "cost": 0.0082038}
+{"cls": "android.widget.RemoteViews", "sig": "void setViewPadding(int,int,int,int,int)", "p": [0.55, 0.85, 0.85, 0.85, 0.85], "samples": [[0.5, 0.85, 0.85, 0.85, 0.85], [0.55, 0.8, 0.8, 0.8, 0.8], [0.55, 0.8, 0.8, 0.8, 0.8]], "cost": 0.013804400000000001}
+{"cls": "android.widget.RemoteViews", "sig": "void setViewVisibility(int,int)", "p": [0.15, 0.55], "samples": [[0.1, 0.55], [0.15, 0.55], [0.1, 0.55]], "cost": 0.0079288}
+{"cls": "android.widget.ScrollView", "sig": "void <init>(android.content.Context)", "p": [0.9], "samples": [[0.9], [0.9], [0.85]], "cost": 0.0076332}
+{"cls": "android.widget.ScrollView", "sig": "void addView(android.view.View)", "p": [0.9, 0.05], "samples": [[0.9, 0.05], [0.85, 0.04], [0.9, 0.05]], "cost": 0.0079056}
+{"cls": "android.widget.ScrollView", "sig": "void scrollTo(int,int)", "p": [0.6, 0.6], "samples": [[0.6, 0.6], [0.55, 0.6], [0.6, 0.6]], "cost": 0.0078762}
+{"cls": "android.widget.ScrollView", "sig": "void smoothScrollTo(int,int)", "p": [0.2, 0.2], "samples": [[0.1, 0.1], [0.2, 0.2], [0.1, 0.1]], "cost": 0.0078888}
+{"cls": "android.widget.Scroller", "sig": "int getCurrX()", "p": [0.93], "samples": [[0.93], [0.9], [0.93]], "cost": 0.007566}
+{"cls": "android.widget.Scroller", "sig": "int getCurrY()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007566}
+{"cls": "android.widget.Scroller", "sig": "int getDuration()", "p": [0.93], "samples": [[0.9], [0.93], [0.93]], "cost": 0.0075618000000000005}
+{"cls": "android.widget.Scroller", "sig": "int getFinalX()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007566}
+{"cls": "android.widget.Scroller", "sig": "int getFinalY()", "p": [0.9], "samples": [[0.9], [0.85], [0.9]], "cost": 0.007556}
+{"cls": "android.widget.Scroller", "sig": "int getStartX()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075618000000000005}
+{"cls": "android.widget.Scroller", "sig": "int timePassed()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.0075618000000000005}
+{"cls": "android.widget.Scroller", "sig": "void <init>(android.content.Context,android.view.animation.Interpolator)", "p": [0.1, 0.02, 0.9, 0.02], "samples": [[0.08, 0.02, 0.9, 0.02], [0.1, 0.02, 0.9, 0.02], [0.1, 0.02, 0.85, 0.02]], "cost": 0.0087288}
+{"cls": "android.widget.Scroller", "sig": "void fling(int,int,int,int,int,int,int,int)", "p": [0.95, 0.95, 0.85, 0.85, 0.9, 0.9, 0.9, 0.9], "samples": [[0.93, 0.93, 0.85, 0.85, 0.9, 0.9, 0.9, 0.9], [0.95, 0.95, 0.85, 0.85, 0.9, 0.9, 0.9, 0.9], [0.93, 0.93, 0.8, 0.8, 0.85, 0.85, 0.85, 0.85]], "cost": 0.019549}
+{"cls": "android.widget.Scroller", "sig": "void startScroll(int,int,int,int,int)", "p": [0.95, 0.95, 0.95, 0.95, 0.9], "samples": [[0.95, 0.95, 0.93, 0.93, 0.9], [0.95, 0.95, 0.95, 0.95, 0.9], [0.95, 0.95, 0.95, 0.95, 0.9]], "cost": 0.0126876}
+{"cls": "android.widget.SearchView", "sig": "void setOnQueryTextListener(android.widget.SearchView$OnQueryTextListener)", "p": [0.9, 0.03], "samples": [[0.9, 0.02], [0.9, 0.02], [0.9, 0.03]], "cost": 0.0081114}
+{"cls": "android.widget.SearchView", "sig": "void setSearchableInfo(android.app.SearchableInfo)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.9, 0.03], [0.93, 0.03]], "cost": 0.0080022}
+{"cls": "android.widget.SeekBar", "sig": "android.content.Context getContext()", "p": [0.4], "samples": [[0.1], [0.4], [0.2]], "cost": 0.007582800000000001}
+{"cls": "android.widget.SeekBar", "sig": "android.graphics.drawable.Drawable getProgressDrawable()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007637400000000001}
+{"cls": "android.widget.SeekBar", "sig": "android.graphics.drawable.Drawable getThumb()", "p": [0.9], "samples": [[0.85], [0.9], [0.85]], "cost": 0.0076206}
+{"cls": "android.widget.SeekBar", "sig": "int getKeyProgressIncrement()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075954}
+{"cls": "android.widget.SeekBar", "sig": "int[] getDrawableState()", "p": [0.45], "samples": [[0.45], [0.4], [0.4]], "cost": 0.007582800000000001}
+{"cls": "android.widget.SeekBar", "sig": "void <init>(android.content.Context,android.util.AttributeSet,int)", "p": [0.85, 0.03, 0.5, 0.03, 0.05, 0.02, 0.02], "samples": [[0.85, 0.03, 0.5, 0.03, 0.05, 0.02, 0.02], [0.6, 0.03, 0.35, 0.03, 0.05, 0.02, 0.02], [0.6, 0.03, 0.35, 0.03, 0.05, 0.02, 0.02]], "cost": 0.009661199999999998}
+{"cls": "android.widget.SeekBar", "sig": "void setEnabled(boolean)", "p": [0.1], "samples": [[0.1], [0.1], [0.1]], "cost": 0.007616400000000001}
+{"cls": "android.widget.SeekBar", "sig": "void setKeyProgressIncrement(int)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007624800000000001}
+{"cls": "android.widget.SeekBar", "sig": "void setMax(int)", "p": [0.9], "samples": [[0.85], [0.85], [0.9]], "cost": 0.007591200000000001}
+{"cls": "android.widget.SeekBar", "sig": "void setOnSeekBarChangeListener(android.widget.SeekBar$OnSeekBarChangeListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0081786}
+{"cls": "android.widget.SeekBar", "sig": "void setPadding(int,int,int,int)", "p": [0.9, 0.9, 0.9, 0.9], "samples": [[0.9, 0.9, 0.9, 0.9], [0.9, 0.9, 0.9, 0.9], [0.85, 0.85, 0.85, 0.85]], "cost": 0.0084852}
+{"cls": "android.widget.SeekBar", "sig": "void setProgress(int)", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075954}
+{"cls": "android.widget.SeekBar", "sig": "void setThumb(android.graphics.drawable.Drawable)", "p": [0.9, 0.05], "samples": [[0.9, 0.05], [0.9, 0.05], [0.9, 0.05]], "cost": 0.008027399999999999}
+{"cls": "android.widget.SimpleCursorAdapter", "sig": "android.view.View getView(int,android.view.View,android.view.ViewGroup)", "p": [0.1, 0.03, 0.08, 0.02, 0.85, 0.05, 0.03, 0.12, 0.03, 0.05, 0.7, 0.6, 0.04], "samples": [[0.1, 0.03, 0.03, 0.02, 0.85, 0.05, 0.03, 0.1, 0.03, 0.03, 0.7, 0.55, 0.03], [0.07, 0.03, 0.06, 0.02, 0.75, 0.04, 0.02, 0.12, 0.03, 0.03, 0.65, 0.55, 0.04], [0.08, 0.03, 0.08, 0.02, 0.85, 0.04, 0.02, 0.1, 0.03, 0.05, 0.7, 0.6, 0.03]], "cost": 0.020052399999999998}
+{"cls": "android.widget.SimpleCursorAdapter", "sig": "void <init>(android.content.Context,int,android.database.Cursor,java.lang.String[],int[])", "p": [0.5, 0.03, 0.02, 0.02, 0.15, 0.02, 0.02, 0.02, 0.02, 0.9, 0.03, 0.03, 0.03, 0.85, 0.02, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03], "samples": [[0.5, 0.03, 0.02, 0.02, 0.15, 0.02, 0.02, 0.02, 0.02, 0.9, 0.03, 0.03, 0.03, 0.85, 0.02, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03], [0.5, 0.03, 0.02, 0.02, 0.15, 0.01, 0.02, 0.02, 0.02, 0.9, 0.03, 0.03, 0.03, 0.85, 0.02, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03], [0.5, 0.03, 0.02, 0.02, 0.15, 0.02, 0.02, 0.02, 0.02, 0.9, 0.03, 0.03, 0.03, 0.85, 0.02, 0.02, 0.02, 0.9, 0.03, 0.03, 0.03]], "cost": 0.0217374}
+{"cls": "android.widget.SimpleCursorAdapter", "sig": "void <init>(android.content.Context,int,android.database.Cursor,java.lang.String[],int[],int)", "p": [0.6, 0.02, 0.02, 0.02, 0.3, 0.02, 0.02, 0.02, 0.02, 0.85, 0.02, 0.02, 0.02, 0.8, 0.02, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.1, 0.03, 0.03, 0.02, 0.02], "samples": [[0.6, 0.02, 0.02, 0.02, 0.3, 0.02, 0.02, 0.02, 0.02, 0.85, 0.02, 0.02, 0.02, 0.7, 0.02, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.1, 0.03, 0.03, 0.02, 0.02], [0.6, 0.02, 0.02, 0.02, 0.3, 0.02, 0.02, 0.02, 0.02, 0.75, 0.02, 0.02, 0.02, 0.6, 0.02, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.05, 0.02, 0.02, 0.02, 0.02], [0.6, 0.02, 0.02, 0.02, 0.3, 0.02, 0.02, 0.02, 0.02, 0.85, 0.02, 0.02, 0.02, 0.8, 0.02, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.1, 0.02, 0.02, 0.02, 0.02]], "cost": 0.023325}
+{"cls": "android.widget.Space", "sig": "void <init>(android.content.Context)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076206}
+{"cls": "android.widget.Spinner", "sig": "android.content.Context getContext()", "p": [0.85], "samples": [[0.6], [0.05], [0.85]], "cost": 0.0100886}
+{"cls": "android.widget.Spinner", "sig": "android.graphics.drawable.Drawable getBackground()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007616400000000001}
+{"cls": "android.widget.Spinner", "sig": "android.widget.SpinnerAdapter getAdapter()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076206}
+{"cls": "android.widget.Spinner", "sig": "boolean post(java.lang.Runnable)", "p": [0.03, 0.3, 0.03, 0.03], "samples": [[0.03, 0.3, 0.03, 0.03], [0.02, 0.3, 0.02, 0.03], [0.02, 0.2, 0.02, 0.02]], "cost": 0.008544}
+{"cls": "android.widget.Spinner", "sig": "int getCount()", "p": [0.6], "samples": [[0.4], [0.4], [0.6]], "cost": 0.0075576}
+{"cls": "android.widget.Spinner", "sig": "int getMeasuredHeight()", "p": [0.4], "samples": [[0.4], [0.3], [0.3]], "cost": 0.007572800000000001}
+{"cls": "android.widget.Spinner", "sig": "int getMeasuredWidth()", "p": [0.1], "samples": [[0.1], [0.1], [0.1]], "cost": 0.007582800000000001}
+{"cls": "android.widget.Spinner", "sig": "int getPaddingLeft()", "p": [0.85], "samples": [[0.6], [0.6], [0.85]], "cost": 0.0075786000000000004}
+{"cls": "android.widget.Spinner", "sig": "int getPaddingRight()", "p": [0.85], "samples": [[0.8], [0.85], [0.6]], "cost": 0.010004400000000002}
+{"cls": "android.widget.Spinner", "sig": "int getSelectedItemPosition()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007587}
+{"cls": "android.widget.Spinner", "sig": "int getWidth()", "p": [0.85], "samples": [[0.85], [0.85], [0.8]], "cost": 0.0086718}
+{"cls": "android.widget.Spinner", "sig": "java.lang.Object getItemAtPosition(int)", "p": [0.04, 0.02, 0.85], "samples": [[0.04, 0.02, 0.85], [0.03, 0.01, 0.8], [0.04, 0.02, 0.8]], "cost": 0.008157600000000001}
+{"cls": "android.widget.Spinner", "sig": "java.lang.Object getSelectedItem()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075996}
+{"cls": "android.widget.Spinner", "sig": "void <init>(android.content.Context,android.util.AttributeSet,int)", "p": [0.9, 0.02, 0.35, 0.02, 0.1, 0.02, 0.02], "samples": [[0.9, 0.02, 0.35, 0.02, 0.1, 0.02, 0.02], [0.9, 0.02, 0.35, 0.02, 0.1, 0.02, 0.02], [0.9, 0.02, 0.35, 0.02, 0.1, 0.02, 0.02]], "cost": 0.009657}
+{"cls": "android.widget.Spinner", "sig": "void onMeasure(int,int)", "p": [0.6, 0.5], "samples": [[0.55, 0.45], [0.6, 0.5], [0.5, 0.42]], "cost": 0.014842000000000001}
+{"cls": "android.widget.Spinner", "sig": "void setAdapter(android.widget.SpinnerAdapter)", "p": [0.9, 0.04], "samples": [[0.9, 0.04], [0.9, 0.04], [0.9, 0.04]], "cost": 0.008027399999999999}
+{"cls": "android.widget.Spinner", "sig": "void setEnabled(boolean)", "p": [0.6], "samples": [[0.6], [0.6], [0.4]], "cost": 0.0076121999999999995}
+{"cls": "android.widget.Spinner", "sig": "void setLayoutParams(android.view.ViewGroup$LayoutParams)", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.0080736}
+{"cls": "android.widget.Spinner", "sig": "void setMeasuredDimension(int,int)", "p": [0.93, 0.93], "samples": [[0.93, 0.93], [0.93, 0.93], [0.93, 0.93]], "cost": 0.007908799999999999}
+{"cls": "android.widget.Spinner", "sig": "void setOnItemSelectedListener(android.widget.AdapterView$OnItemSelectedListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.02], [0.93, 0.02]], "cost": 0.0081408}
+{"cls": "android.widget.Spinner", "sig": "void setPopupBackgroundDrawable(android.graphics.drawable.Drawable)", "p": [0.85, 0.03], "samples": [[0.85, 0.03], [0.85, 0.03], [0.85, 0.03]], "cost": 0.008060999999999999}
+{"cls": "android.widget.Spinner", "sig": "void setSelection(int)", "p": [0.5], "samples": [[0.5], [0.3], [0.5]], "cost": 0.012781200000000001}
+{"cls": "android.widget.SpinnerAdapter", "sig": "android.view.View getView(int,android.view.View,android.view.ViewGroup)", "p": [0.1, 0.05, 0.03, 0.02, 0.5, 0.04, 0.02, 0.12, 0.03, 0.03, 0.6, 0.05, 0.05], "samples": [[0.1, 0.03, 0.03, 0.02, 0.45, 0.03, 0.02, 0.1, 0.03, 0.03, 0.6, 0.04, 0.03], [0.1, 0.05, 0.03, 0.02, 0.5, 0.03, 0.02, 0.12, 0.03, 0.03, 0.55, 0.05, 0.05], [0.1, 0.03, 0.03, 0.02, 0.45, 0.04, 0.02, 0.08, 0.02, 0.03, 0.5, 0.03, 0.03]], "cost": 0.011484000000000001}
+{"cls": "android.widget.SpinnerAdapter", "sig": "int getCount()", "p": [0.6], "samples": [[0.6], [0.45], [0.5]], "cost": 0.0075686}
+{"cls": "android.widget.SpinnerAdapter", "sig": "int getItemViewType(int)", "p": [0.1, 0.02, 0.05], "samples": [[0.1, 0.02, 0.05], [0.04, 0.01, 0.03], [0.08, 0.01, 0.05]], "cost": 0.008145000000000001}
+{"cls": "android.widget.TabHost", "sig": "android.widget.TabHost$TabSpec newTabSpec(java.lang.String)", "p": [0.93, 0.03, 0.05], "samples": [[0.93, 0.03, 0.05], [0.93, 0.03, 0.05], [0.93, 0.03, 0.05]], "cost": 0.008245800000000001}
+{"cls": "android.widget.TabHost", "sig": "void addTab(android.widget.TabHost$TabSpec)", "p": [0.85, 0.04], "samples": [[0.85, 0.04], [0.85, 0.04], [0.85, 0.04]], "cost": 0.0080316}
+{"cls": "android.widget.TabHost", "sig": "void setOnTabChangedListener(android.widget.TabHost$OnTabChangeListener)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.0081114}
+{"cls": "android.widget.TabHost$TabSpec", "sig": "android.widget.TabHost$TabSpec setContent(android.widget.TabHost$TabContentFactory)", "p": [0.05, 0.9, 0.97, 0.02], "samples": [[0.05, 0.9, 0.03, 0.02], [0.03, 0.9, 0.97, 0.02], [0.03, 0.9, 0.97, 0.01]], "cost": 0.0087624}
+{"cls": "android.widget.TableLayout", "sig": "int getChildCount()", "p": [0.85], "samples": [[0.85], [0.6], [0.85]], "cost": 0.0102902}
+{"cls": "android.widget.TableLayout", "sig": "void <init>(android.content.Context,android.util.AttributeSet)", "p": [0.6, 0.03, 0.3, 0.02], "samples": [[0.5, 0.03, 0.3, 0.02], [0.6, 0.02, 0.2, 0.02], [0.6, 0.02, 0.2, 0.02]], "cost": 0.0086994}
+{"cls": "android.widget.TableLayout", "sig": "void addView(android.view.View)", "p": [0.9, 0.05], "samples": [[0.9, 0.05], [0.9, 0.05], [0.9, 0.05]], "cost": 0.0079056}
+{"cls": "android.widget.TableLayout", "sig": "void addView(android.view.View,int)", "p": [0.9, 0.1, 0.02, 0.05], "samples": [[0.9, 0.05, 0.02, 0.05], [0.9, 0.05, 0.02, 0.04], [0.9, 0.1, 0.02, 0.05]], "cost": 0.0085272}
+{"cls": "android.widget.TableRow", "sig": "android.view.View findViewById(int)", "p": [0.03, 0.02, 0.85], "samples": [[0.03, 0.01, 0.85], [0.03, 0.01, 0.8], [0.03, 0.02, 0.6]], "cost": 0.0081324}
+{"cls": "android.widget.TableRow", "sig": "void <init>(android.content.Context)", "p": [0.9], "samples": [[0.85], [0.9], [0.85]], "cost": 0.007629}
+{"cls": "android.widget.TableRow", "sig": "void addView(android.view.View,android.view.ViewGroup$LayoutParams)", "p": [0.9, 0.03, 0.5, 0.03, 0.05, 0.03], "samples": [[0.9, 0.03, 0.35, 0.03, 0.03, 0.03], [0.9, 0.03, 0.5, 0.03, 0.05, 0.03], [0.9, 0.03, 0.45, 0.03, 0.03, 0.03]], "cost": 0.0094722}
+{"cls": "android.widget.TextSwitcher", "sig": "void setText(java.lang.CharSequence)", "p": [0.85, 0.02], "samples": [[0.85, 0.02], [0.8, 0.02], [0.8, 0.02]], "cost": 0.008017}
+{"cls": "android.widget.ThemedSpinnerAdapter", "sig": "android.content.res.Resources$Theme getDropDownViewTheme()", "p": [0.4], "samples": [[0.35], [0.3], [0.4]], "cost": 0.0076652000000000005}
+{"cls": "android.widget.ThemedSpinnerAdapter", "sig": "void setDropDownViewTheme(android.content.res.Resources$Theme)", "p": [0.85, 0.03], "samples": [[0.8, 0.03], [0.85, 0.03], [0.8, 0.02]], "cost": 0.0080936}
+{"cls": "android.widget.Toolbar", "sig": "java.lang.CharSequence getSubtitle()", "p": [0.93], "samples": [[0.9], [0.9], [0.93]], "cost": 0.0076121999999999995}
+{"cls": "android.widget.Toolbar", "sig": "java.lang.CharSequence getTitle()", "p": [0.93], "samples": [[0.93], [0.9], [0.9]], "cost": 0.007603800000000001}
+{"cls": "android.widget.ViewAnimator", "sig": "android.view.View getCurrentView()", "p": [0.8], "samples": [[0.6], [0.8], [0.6]], "cost": 0.0075996}
+{"cls": "android.widget.ViewAnimator", "sig": "void setInAnimation(android.view.animation.Animation)", "p": [0.93, 0.03], "samples": [[0.93, 0.02], [0.93, 0.03], [0.93, 0.03]], "cost": 0.007993799999999999}
+{"cls": "android.widget.ViewAnimator", "sig": "void setOutAnimation(android.view.animation.Animation)", "p": [0.93, 0.03], "samples": [[0.93, 0.03], [0.93, 0.03], [0.93, 0.03]], "cost": 0.008058}
+{"cls": "android.widget.ViewSwitcher", "sig": "void setFactory(android.widget.ViewSwitcher$ViewFactory)", "p": [0.85, 0.04], "samples": [[0.8, 0.04], [0.85, 0.04], [0.85, 0.04]], "cost": 0.0113056}
+{"cls": "java.io.DataInput", "sig": "byte readByte()", "p": [0.93], "samples": [[0.9], [0.93], [0.93]], "cost": 0.0075576}
+{"cls": "java.io.DataInput", "sig": "int readInt()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075534}
+{"cls": "java.io.DataInput", "sig": "int readUnsignedByte()", "p": [0.93], "samples": [[0.93], [0.9], [0.9]], "cost": 0.0075744}
+{"cls": "java.io.DataInput", "sig": "int readUnsignedShort()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075744}
+{"cls": "java.io.DataInput", "sig": "java.lang.String readUTF()", "p": [0.93], "samples": [[0.93], [0.93], [0.9]], "cost": 0.0075786000000000004}
+{"cls": "java.io.DataInput", "sig": "long readLong()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075534}
+{"cls": "java.io.DataOutput", "sig": "void write(byte[],int,int)", "p": [0.93, 0.05, 0.02, 0.05, 0.02, 0.02], "samples": [[0.93, 0.03, 0.02, 0.03, 0.02, 0.02], [0.9, 0.05, 0.02, 0.05, 0.02, 0.02], [0.9, 0.05, 0.02, 0.05, 0.02, 0.02]], "cost": 0.009102599999999999}
+{"cls": "java.io.PushbackReader", "sig": "void <init>(java.io.Reader,int)", "p": [0.95, 0.3, 0.02], "samples": [[0.95, 0.25, 0.02], [0.95, 0.3, 0.02], [0.95, 0.3, 0.02]], "cost": 0.0082416}
+{"cls": "java.io.RandomAccessFile", "sig": "int read(byte[])", "p": [0.03, 0.03, 0.1, 0.95], "samples": [[0.03, 0.02, 0.1, 0.9], [0.03, 0.03, 0.1, 0.9], [0.03, 0.03, 0.1, 0.95]], "cost": 0.0084558}
+{"cls": "java.io.RandomAccessFile", "sig": "int read(byte[],int,int)", "p": [0.04, 0.03, 0.03, 0.02, 0.05, 0.12, 0.02, 0.06, 0.6, 0.96], "samples": [[0.04, 0.03, 0.03, 0.02, 0.05, 0.12, 0.02, 0.05, 0.5, 0.95], [0.03, 0.03, 0.03, 0.02, 0.03, 0.12, 0.02, 0.06, 0.4, 0.96], [0.03, 0.03, 0.03, 0.02, 0.03, 0.08, 0.02, 0.06, 0.6, 0.93]], "cost": 0.0180666}
+{"cls": "java.io.RandomAccessFile", "sig": "int readInt()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007570200000000001}
+{"cls": "java.io.RandomAccessFile", "sig": "java.nio.channels.FileChannel getChannel()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.007624800000000001}
+{"cls": "java.io.RandomAccessFile", "sig": "long getFilePointer()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.007582800000000001}
+{"cls": "java.io.RandomAccessFile", "sig": "long length()", "p": [0.5], "samples": [[0.3], [0.3], [0.5]], "cost": 0.0075618000000000005}
+{"cls": "java.io.RandomAccessFile", "sig": "long readLong()", "p": [0.9], "samples": [[0.9], [0.9], [0.85]], "cost": 0.007570200000000001}
+{"cls": "java.io.RandomAccessFile", "sig": "void <init>(java.io.File,java.lang.String)", "p": [0.6, 0.05, 0.02], "samples": [[0.6, 0.05, 0.02], [0.6, 0.05, 0.02], [0.6, 0.05, 0.02]], "cost": 0.0082878}
+{"cls": "java.io.RandomAccessFile", "sig": "void <init>(java.lang.String,java.lang.String)", "p": [0.6, 0.04], "samples": [[0.6, 0.04], [0.6, 0.04], [0.6, 0.04]], "cost": 0.0079602}
+{"cls": "java.io.RandomAccessFile", "sig": "void seek(long)", "p": [0.6], "samples": [[0.6], [0.5], [0.5]], "cost": 0.0075954}
+{"cls": "java.io.RandomAccessFile", "sig": "void write(byte[])", "p": [0.9, 0.02], "samples": [[0.85, 0.02], [0.9, 0.02], [0.9, 0.01]], "cost": 0.007908799999999999}
+{"cls": "java.io.RandomAccessFile", "sig": "void write(byte[],int,int)", "p": [0.9, 0.05, 0.02, 0.05, 0.02, 0.02], "samples": [[0.9, 0.03, 0.01, 0.04, 0.01, 0.01], [0.9, 0.04, 0.02, 0.04, 0.02, 0.02], [0.9, 0.05, 0.02, 0.05, 0.02, 0.02]], "cost": 0.0091152}
+{"cls": "java.io.RandomAccessFile", "sig": "void writeLong(long)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007603800000000001}
+{"cls": "java.io.Reader", "sig": "int read()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0075408}
+{"cls": "java.io.Reader", "sig": "int read(char[])", "p": [0.03, 0.03, 0.05, 0.93], "samples": [[0.03, 0.03, 0.05, 0.93], [0.03, 0.03, 0.05, 0.93], [0.03, 0.03, 0.05, 0.9]], "cost": 0.008418}
+{"cls": "java.io.Reader", "sig": "int read(char[],int,int)", "p": [0.03, 0.03, 0.03, 0.03, 0.02, 0.05, 0.02, 0.03, 0.35, 0.93], "samples": [[0.03, 0.03, 0.03, 0.03, 0.02, 0.05, 0.02, 0.03, 0.2, 0.93], [0.03, 0.03, 0.02, 0.02, 0.02, 0.04, 0.02, 0.03, 0.35, 0.93], [0.03, 0.03, 0.03, 0.03, 0.02, 0.04, 0.02, 0.03, 0.35, 0.93]], "cost": 0.0101904}
+{"cls": "java.io.Reader", "sig": "long skip(long)", "p": [0.3, 0.03, 0.3], "samples": [[0.15, 0.03, 0.3], [0.2, 0.03, 0.1], [0.3, 0.03, 0.3]], "cost": 0.0080988}
+{"cls": "java.io.StreamTokenizer", "sig": "int lineno()", "p": [0.6], "samples": [[0.4], [0.6], [0.5]], "cost": 0.007570200000000001}
+{"cls": "java.io.StreamTokenizer", "sig": "int nextToken()", "p": [0.72], "samples": [[0.62], [0.72], [0.6]], "cost": 0.012704400000000001}
+{"cls": "java.io.StreamTokenizer", "sig": "void <init>(java.io.Reader)", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0076500000000000005}
+{"cls": "java.lang.ClassLoader", "sig": "java.io.InputStream getResourceAsStream(java.lang.String)", "p": [0.1, 0.02, 0.3], "samples": [[0.1, 0.02, 0.3], [0.1, 0.02, 0.2], [0.1, 0.02, 0.3]], "cost": 0.0082332}
+{"cls": "java.lang.ClassLoader", "sig": "java.io.InputStream getSystemResourceAsStream(java.lang.String)", "p": [0.1], "samples": [[0.1], [0.1], [0.1]], "cost": 0.0076752}
+{"cls": "java.lang.ClassLoader", "sig": "java.lang.Class loadClass(java.lang.String)", "p": [0.12, 0.03, 0.15], "samples": [[0.12, 0.03, 0.1], [0.1, 0.03, 0.15], [0.1, 0.03, 0.1]], "cost": 0.008212200000000001}
+{"cls": "java.lang.ClassLoader", "sig": "java.lang.ClassLoader getParent()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007598}
+{"cls": "java.lang.ClassLoader", "sig": "java.net.URL getResource(java.lang.String)", "p": [0.3, 0.03, 0.1], "samples": [[0.3, 0.02, 0.1], [0.3, 0.02, 0.1], [0.3, 0.03, 0.1]], "cost": 0.0082038}
+{"cls": "java.lang.ClassLoader", "sig": "java.util.Enumeration getResources(java.lang.String)", "p": [0.15, 0.02, 0.3], "samples": [[0.15, 0.02, 0.3], [0.1, 0.02, 0.3], [0.1, 0.02, 0.3]], "cost": 0.0082164}
+{"cls": "java.lang.Comparable", "sig": "int compareTo(java.lang.Object)", "p": [0.3, 0.03, 0.3, 0.02], "samples": [[0.1, 0.02, 0.12, 0.02], [0.1, 0.02, 0.12, 0.02], [0.3, 0.03, 0.3, 0.02]], "cost": 0.0085146}
+{"cls": "java.lang.Enum", "sig": "boolean equals(java.lang.Object)", "p": [0.05, 0.01, 0.05, 0.01], "samples": [[0.05, 0.01, 0.05, 0.01], [0.03, 0.01, 0.03, 0.01], [0.03, 0.01, 0.03, 0.01]], "cost": 0.0085104}
+{"cls": "java.lang.Enum", "sig": "int compareTo(java.lang.Enum)", "p": [0.1, 0.01, 0.1, 0.01], "samples": [[0.1, 0.01, 0.1, 0.01], [0.1, 0.01, 0.1, 0.01], [0.1, 0.01, 0.1, 0.01]], "cost": 0.0085272}
+{"cls": "java.lang.Enum", "sig": "int ordinal()", "p": [0.85], "samples": [[0.4], [0.85], [0.4]], "cost": 0.0082476}
+{"cls": "java.lang.Enum", "sig": "java.lang.Class getDeclaringClass()", "p": [0.15], "samples": [[0.15], [0.1], [0.15]], "cost": 0.0075996}
+{"cls": "java.lang.Enum", "sig": "java.lang.Enum valueOf(java.lang.Class,java.lang.String)", "p": [0.15, 0.1], "samples": [[0.15, 0.1], [0.15, 0.1], [0.15, 0.1]], "cost": 0.0079992}
+{"cls": "java.lang.Enum", "sig": "java.lang.String name()", "p": [0.9], "samples": [[0.9], [0.9], [0.85]], "cost": 0.007566}
+{"cls": "java.lang.Enum", "sig": "void <init>(java.lang.String,int)", "p": [0.97, 0.97], "samples": [[0.96, 0.95], [0.97, 0.95], [0.97, 0.97]], "cost": 0.0079014}
+{"cls": "java.lang.Iterable", "sig": "java.util.Iterator iterator()", "p": [0.9], "samples": [[0.85], [0.9], [0.85]], "cost": 0.007587}
+{"cls": "java.lang.Iterable", "sig": "void forEach(java.util.function.Consumer)", "p": [0.03, 0.93], "samples": [[0.03, 0.9], [0.02, 0.93], [0.02, 0.9]], "cost": 0.0079886}
+{"cls": "java.lang.Number", "sig": "byte byteValue()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075576}
+{"cls": "java.lang.Number", "sig": "double doubleValue()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075576}
+{"cls": "java.lang.Number", "sig": "float floatValue()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075534}
+{"cls": "java.lang.Number", "sig": "int intValue()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007549200000000001}
+{"cls": "java.lang.Number", "sig": "long longValue()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007549200000000001}
+{"cls": "java.lang.Number", "sig": "short shortValue()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075534}
+{"cls": "java.lang.Object", "sig": "boolean equals(java.lang.Object)", "p": [0.04, 0.01, 0.04, 0.01], "samples": [[0.04, 0.01, 0.04, 0.01], [0.04, 0.01, 0.04, 0.01], [0.03, 0.01, 0.03, 0.01]], "cost": 0.0085062}
+{"cls": "java.lang.Object", "sig": "int hashCode()", "p": [0.2], "samples": [[0.2], [0.2], [0.15]], "cost": 0.0075534}
+{"cls": "java.lang.Object", "sig": "java.lang.Class getClass()", "p": [0.05], "samples": [[0.05], [0.05], [0.05]], "cost": 0.0075744}
+{"cls": "java.lang.Object", "sig": "java.lang.Object clone()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007570200000000001}
+{"cls": "java.lang.Object", "sig": "void wait(long)", "p": [0.02], "samples": [[0.02], [0.02], [0.02]], "cost": 0.0075744}
+{"cls": "java.lang.Object", "sig": "void wait(long,int)", "p": [0.02, 0.02], "samples": [[0.02, 0.02], [0.02, 0.02], [0.02, 0.02]], "cost": 0.007851}
+{"cls": "java.lang.Package", "sig": "java.lang.String getImplementationVersion()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.007591200000000001}
+{"cls": "java.lang.Package", "sig": "java.lang.String getName()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007566}
+{"cls": "java.lang.Process", "sig": "int waitFor()", "p": [0.2], "samples": [[0.15], [0.15], [0.2]], "cost": 0.0075534}
+{"cls": "java.lang.Process", "sig": "java.io.InputStream getInputStream()", "p": [0.85], "samples": [[0.85], [0.6], [0.8]], "cost": 0.007587}
+{"cls": "java.lang.Process", "sig": "java.io.OutputStream getOutputStream()", "p": [0.6], "samples": [[0.5], [0.6], [0.4]], "cost": 0.0075954}
+{"cls": "java.lang.Runtime", "sig": "boolean removeShutdownHook(java.lang.Thread)", "p": [0.03, 0.03, 0.05, 0.02], "samples": [[0.03, 0.03, 0.05, 0.02], [0.03, 0.03, 0.04, 0.02], [0.03, 0.03, 0.04, 0.02]], "cost": 0.0085566}
+{"cls": "java.lang.Runtime", "sig": "java.lang.Process exec(java.lang.String[])", "p": [0.3, 0.03, 0.05, 0.02], "samples": [[0.3, 0.03, 0.03, 0.02], [0.2, 0.02, 0.03, 0.02], [0.1, 0.02, 0.05, 0.02]], "cost": 0.0085398}
+{"cls": "java.lang.Runtime", "sig": "java.lang.Process exec(java.lang.String[],java.lang.String[],java.io.File)", "p": [0.6, 0.05, 0.02, 0.02, 0.3, 0.03, 0.02, 0.02, 0.25, 0.03, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02], "samples": [[0.6, 0.05, 0.02, 0.02, 0.3, 0.03, 0.02, 0.02, 0.25, 0.03, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02], [0.55, 0.05, 0.02, 0.02, 0.3, 0.03, 0.02, 0.02, 0.2, 0.03, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02], [0.4, 0.03, 0.02, 0.02, 0.2, 0.03, 0.02, 0.02, 0.25, 0.03, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02]], "cost": 0.012555}
+{"cls": "java.lang.Runtime", "sig": "void addShutdownHook(java.lang.Thread)", "p": [0.6, 0.03], "samples": [[0.6, 0.03], [0.5, 0.03], [0.5, 0.03]], "cost": 0.0079602}
+{"cls": "java.lang.StackTraceElement", "sig": "int getLineNumber()", "p": [0.95], "samples": [[0.93], [0.95], [0.95]], "cost": 0.009022800000000001}
+{"cls": "java.lang.StackTraceElement", "sig": "java.lang.String getClassName()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075954}
+{"cls": "java.lang.StackTraceElement", "sig": "java.lang.String getFileName()", "p": [0.95], "samples": [[0.95], [0.95], [0.95]], "cost": 0.0075954}
+{"cls": "java.lang.StackTraceElement", "sig": "java.lang.String getMethodName()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075996}
+{"cls": "java.lang.StackTraceElement", "sig": "void <init>(java.lang.String,java.lang.String,java.lang.String,int)", "p": [0.95, 0.95, 0.95, 0.9], "samples": [[0.95, 0.95, 0.95, 0.9], [0.95, 0.95, 0.95, 0.9], [0.95, 0.95, 0.95, 0.9]], "cost": 0.0086154}
+{"cls": "java.lang.Thread$UncaughtExceptionHandler", "sig": "void uncaughtException(java.lang.Thread,java.lang.Throwable)", "p": [0.1, 0.03, 0.1, 0.03, 0.03, 0.03], "samples": [[0.1, 0.03, 0.1, 0.03, 0.03, 0.03], [0.1, 0.03, 0.1, 0.03, 0.03, 0.03], [0.1, 0.03, 0.1, 0.03, 0.03, 0.03]], "cost": 0.009434399999999999}
+{"cls": "java.lang.ThreadGroup", "sig": "int enumerate(java.lang.Thread[],boolean)", "p": [0.03, 0.03, 0.02, 0.02, 0.03, 0.35, 0.9], "samples": [[0.03, 0.02, 0.02, 0.02, 0.03, 0.15, 0.9], [0.03, 0.03, 0.02, 0.02, 0.03, 0.35, 0.85], [0.03, 0.02, 0.02, 0.02, 0.03, 0.12, 0.9]], "cost": 0.0095184}
+{"cls": "java.lang.ThreadGroup", "sig": "java.lang.String getName()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.007587}
+{"cls": "java.lang.ThreadGroup", "sig": "java.lang.ThreadGroup getParent()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007616400000000001}
+{"cls": "java.lang.annotation.Annotation", "sig": "boolean equals(java.lang.Object)", "p": [0.05, 0.02, 0.05, 0.02], "samples": [[0.05, 0.01, 0.05, 0.01], [0.05, 0.02, 0.05, 0.02], [0.04, 0.01, 0.04, 0.01]], "cost": 0.0085314}
+{"cls": "java.lang.annotation.Annotation", "sig": "java.lang.Class annotationType()", "p": [0.12], "samples": [[0.12], [0.1], [0.12]], "cost": 0.007603800000000001}
+{"cls": "java.lang.invoke.MethodHandle", "sig": "java.lang.Object invokeWithArguments(java.lang.Object[])", "p": [0.8, 0.03, 0.5, 0.04], "samples": [[0.8, 0.02, 0.5, 0.03], [0.8, 0.03, 0.45, 0.04], [0.6, 0.02, 0.5, 0.03]], "cost": 0.008607}
+{"cls": "java.lang.invoke.MethodHandle", "sig": "java.lang.invoke.MethodHandle bindTo(java.lang.Object)", "p": [0.93, 0.03, 0.85, 0.02], "samples": [[0.93, 0.02, 0.6, 0.02], [0.93, 0.03, 0.85, 0.02], [0.93, 0.02, 0.85, 0.02]], "cost": 0.0085986}
+{"cls": "java.lang.ref.Reference", "sig": "java.lang.Object get()", "p": [0.93], "samples": [[0.93], [0.88], [0.9]], "cost": 0.0102328}
+{"cls": "java.lang.ref.ReferenceQueue", "sig": "java.lang.ref.Reference poll()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.007624800000000001}
+{"cls": "java.lang.ref.ReferenceQueue", "sig": "java.lang.ref.Reference remove()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007624800000000001}
+{"cls": "java.lang.reflect.AccessibleObject", "sig": "boolean isAccessible()", "p": [0.1], "samples": [[0.1], [0.1], [0.1]], "cost": 0.0075938}
+{"cls": "java.lang.reflect.AccessibleObject", "sig": "java.lang.'annotation'.Annotation[] getAnnotations()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.0076668000000000005}
+{"cls": "java.lang.reflect.AnnotatedElement", "sig": "java.lang.'annotation'.Annotation[] getAnnotations()", "p": [0.6], "samples": [[0.6], [0.3], [0.45]], "cost": 0.007671000000000001}
+{"cls": "java.lang.reflect.AnnotatedElement", "sig": "java.lang.'annotation'.Annotation[] getDeclaredAnnotations()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.007692000000000001}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.'annotation'.Annotation[] getDeclaredAnnotations()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.0076652000000000005}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.'annotation'.Annotation[][] getParameterAnnotations()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.007671000000000001}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.Class getDeclaringClass()", "p": [0.85], "samples": [[0.85], [0.85], [0.5]], "cost": 0.0076106}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.Class[] getParameterTypes()", "p": [0.85], "samples": [[0.7], [0.85], [0.85]], "cost": 0.007624800000000001}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.Object newInstance(java.lang.Object[])", "p": [0.6, 0.03, 0.15, 0.02], "samples": [[0.6, 0.03, 0.1, 0.02], [0.6, 0.03, 0.15, 0.02], [0.6, 0.03, 0.1, 0.02]], "cost": 0.0128618}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.String getName()", "p": [0.85], "samples": [[0.6], [0.85], [0.85]], "cost": 0.007591200000000001}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.reflect.TypeVariable[] getTypeParameters()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.007708400000000001}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.reflect.Type[] getGenericParameterTypes()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076442}
+{"cls": "java.lang.reflect.GenericArrayType", "sig": "java.lang.reflect.Type getGenericComponentType()", "p": [0.9], "samples": [[0.9], [0.9], [0.9]], "cost": 0.0076500000000000005}
+{"cls": "java.lang.reflect.Member", "sig": "java.lang.Class getDeclaringClass()", "p": [0.9], "samples": [[0.85], [0.85], [0.9]], "cost": 0.0075922}
+{"cls": "java.lang.reflect.Method", "sig": "boolean isAccessible()", "p": [0.1], "samples": [[0.1], [0.1], [0.1]], "cost": 0.007582800000000001}
+{"cls": "java.lang.reflect.Method", "sig": "int getModifiers()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075744}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)", "p": [0.1, 0.02, 0.75], "samples": [[0.1, 0.02, 0.6], [0.1, 0.02, 0.75], [0.1, 0.01, 0.6]], "cost": 0.008266800000000001}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.'annotation'.Annotation[] getDeclaredAnnotations()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.0076668000000000005}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.'annotation'.Annotation[][] getParameterAnnotations()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076626}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.Class getDeclaringClass()", "p": [0.85], "samples": [[0.85], [0.85], [0.8]], "cost": 0.0075922}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.Class getReturnType()", "p": [0.6], "samples": [[0.6], [0.55], [0.6]], "cost": 0.0075996}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.Class[] getParameterTypes()", "p": [0.85], "samples": [[0.8], [0.85], [0.85]], "cost": 0.007616400000000001}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.Object invoke(java.lang.Object,java.lang.Object[])", "p": [0.3, 0.03, 0.02, 0.6, 0.04, 0.03, 0.35, 0.05, 0.05], "samples": [[0.3, 0.03, 0.02, 0.5, 0.04, 0.03, 0.35, 0.03, 0.03], [0.3, 0.03, 0.02, 0.4, 0.03, 0.03, 0.3, 0.03, 0.03], [0.25, 0.03, 0.02, 0.6, 0.03, 0.03, 0.3, 0.05, 0.05]], "cost": 0.010261799999999998}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.String getName()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007582800000000001}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.reflect.Type getGenericReturnType()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.007629}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.reflect.TypeVariable[] getTypeParameters()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0076500000000000005}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.reflect.Type[] getGenericParameterTypes()", "p": [0.85], "samples": [[0.8], [0.85], [0.8]], "cost": 0.007645800000000001}
+{"cls": "java.lang.reflect.Modifier", "sig": "boolean isPublic(int)", "p": [0.3], "samples": [[0.3], [0.15], [0.3]], "cost": 0.012311200000000001}
+{"cls": "java.lang.reflect.Modifier", "sig": "boolean isStatic(int)", "p": [0.12], "samples": [[0.1], [0.12], [0.12]], "cost": 0.009461200000000001}
+{"cls": "java.lang.reflect.Parameter", "sig": "java.lang.String getName()", "p": [0.85], "samples": [[0.8], [0.85], [0.85]], "cost": 0.007591200000000001}
+{"cls": "java.lang.reflect.ParameterizedType", "sig": "java.lang.reflect.Type getOwnerType()", "p": [0.9], "samples": [[0.85], [0.85], [0.9]], "cost": 0.0076416}
+{"cls": "java.lang.reflect.ParameterizedType", "sig": "java.lang.reflect.Type getRawType()", "p": [0.85], "samples": [[0.85], [0.8], [0.8]], "cost": 0.0076132000000000005}
+{"cls": "java.lang.reflect.ParameterizedType", "sig": "java.lang.reflect.Type[] getActualTypeArguments()", "p": [0.9], "samples": [[0.85], [0.85], [0.9]], "cost": 0.0076626}
+{"cls": "java.lang.reflect.Proxy", "sig": "java.lang.Object newProxyInstance(java.lang.ClassLoader,java.lang.Class[],java.lang.reflect.InvocationHandler)", "p": [0.15, 0.02, 0.02, 0.2, 0.02, 0.02, 0.85, 0.02, 0.02], "samples": [[0.15, 0.02, 0.02, 0.2, 0.02, 0.02, 0.85, 0.02, 0.02], [0.1, 0.02, 0.02, 0.15, 0.02, 0.02, 0.85, 0.02, 0.02], [0.1, 0.02, 0.02, 0.15, 0.02, 0.02, 0.85, 0.02, 0.02]], "cost": 0.010769999999999998}
+{"cls": "java.lang.reflect.Proxy", "sig": "java.lang.reflect.InvocationHandler getInvocationHandler(java.lang.Object)", "p": [0.9], "samples": [[0.85], [0.85], [0.9]], "cost": 0.007683000000000001}
+{"cls": "java.lang.reflect.TypeVariable", "sig": "java.lang.String getName()", "p": [0.9], "samples": [[0.88], [0.9], [0.9]], "cost": 0.0093796}
+{"cls": "java.lang.reflect.TypeVariable", "sig": "java.lang.reflect.GenericDeclaration getGenericDeclaration()", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.0076652}
+{"cls": "java.lang.reflect.TypeVariable", "sig": "java.lang.reflect.Type[] getBounds()", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.007637400000000001}
+{"cls": "java.lang.reflect.WildcardType", "sig": "java.lang.reflect.Type[] getLowerBounds()", "p": [0.85], "samples": [[0.85], [0.85], [0.8]], "cost": 0.0076358}
+{"cls": "java.lang.reflect.WildcardType", "sig": "java.lang.reflect.Type[] getUpperBounds()", "p": [0.9], "samples": [[0.9], [0.85], [0.85]], "cost": 0.0076258}
+{"cls": "java.math.MathContext", "sig": "void <init>(int)", "p": [0.93], "samples": [[0.9], [0.93], [0.93]], "cost": 0.007582800000000001}
+{"cls": "java.net.Authenticator", "sig": "java.net.PasswordAuthentication requestPasswordAuthentication(java.lang.String,java.net.InetAddress,int,java.lang.String,java.lang.String,java.lang.String,java.net.URL,java.net.Authenticator$RequestorType)", "p": [0.06, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.04, 0.02, 0.02, 0.02, 0.06, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.04, 0.02, 0.02], "samples": [[0.06, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.04, 0.02, 0.02, 0.02, 0.06, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.03, 0.02, 0.02], [0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.04, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.04, 0.02, 0.02], [0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.03, 0.02, 0.02]], "cost": 0.0360194}
+{"cls": "java.net.CookieManager", "sig": "java.util.Map get(java.net.URI,java.util.Map)", "p": [0.1, 0.02, 0.02, 0.04, 0.02, 0.02, 0.9, 0.02, 0.03], "samples": [[0.1, 0.02, 0.02, 0.04, 0.02, 0.01, 0.88, 0.02, 0.03], [0.08, 0.02, 0.02, 0.03, 0.02, 0.02, 0.9, 0.02, 0.03], [0.08, 0.02, 0.02, 0.04, 0.02, 0.02, 0.9, 0.02, 0.03]], "cost": 0.015202600000000002}
+{"cls": "java.net.CookieManager", "sig": "void put(java.net.URI,java.util.Map)", "p": [0.6, 0.02, 0.9, 0.02, 0.03, 0.03], "samples": [[0.6, 0.02, 0.9, 0.02, 0.02, 0.02], [0.4, 0.02, 0.85, 0.02, 0.03, 0.03], [0.6, 0.02, 0.9, 0.02, 0.03, 0.03]], "cost": 0.012428}
+{"cls": "java.net.CookieManager", "sig": "void setCookiePolicy(java.net.CookiePolicy)", "p": [0.9, 0.03], "samples": [[0.9, 0.03], [0.9, 0.03], [0.9, 0.03]], "cost": 0.0080022}
+{"cls": "java.net.DatagramPacket", "sig": "byte[] getData()", "p": [0.96], "samples": [[0.95], [0.96], [0.95]], "cost": 0.007564400000000001}
+{"cls": "java.net.DatagramPacket", "sig": "int getLength()", "p": [0.85], "samples": [[0.85], [0.6], [0.85]], "cost": 0.007566}
+{"cls": "java.net.DatagramPacket", "sig": "int getPort()", "p": [0.93], "samples": [[0.9], [0.93], [0.93]], "cost": 0.009375999999999999}
+{"cls": "java.net.DatagramPacket", "sig": "java.net.InetAddress getAddress()", "p": [0.93], "samples": [[0.93], [0.93], [0.93]], "cost": 0.0075938}
+{"cls": "java.net.DatagramPacket", "sig": "void <init>(byte[],int)", "p": [0.95, 0.3, 0.03], "samples": [[0.95, 0.3, 0.02], [0.93, 0.1, 0.02], [0.93, 0.15, 0.03]], "cost": 0.008199600000000001}
+{"cls": "java.net.DatagramPacket", "sig": "void <init>(byte[],int,int)", "p": [0.95, 0.3, 0.03, 0.3, 0.03], "samples": [[0.95, 0.3, 0.02, 0.3, 0.02], [0.9, 0.05, 0.03, 0.1, 0.03], [0.95, 0.3, 0.02, 0.3, 0.02]], "cost": 0.0088128}
+{"cls": "java.net.DatagramPacket", "sig": "void <init>(byte[],int,java.net.InetAddress,int)", "p": [0.95, 0.02, 0.4, 0.02, 0.02, 0.93, 0.02, 0.5, 0.02, 0.02], "samples": [[0.95, 0.02, 0.3, 0.02, 0.02, 0.9, 0.02, 0.3, 0.02, 0.02], [0.95, 0.02, 0.4, 0.02, 0.02, 0.9, 0.02, 0.5, 0.02, 0.02], [0.95, 0.02, 0.3, 0.02, 0.02, 0.93, 0.02, 0.4, 0.02, 0.02]], "cost": 0.0105348}
+{"cls": "java.net.DatagramPacket", "sig": "void <init>(byte[],int,java.net.SocketAddress)", "p": [0.95, 0.03, 0.6, 0.02, 0.02, 0.9, 0.02], "samples": [[0.95, 0.03, 0.6, 0.02, 0.02, 0.85, 0.02], [0.95, 0.03, 0.6, 0.02, 0.02, 0.85, 0.02], [0.95, 0.03, 0.6, 0.02, 0.02, 0.9, 0.02]], "cost": 0.0096108}
+{"cls": "java.net.DatagramPacket", "sig": "void setAddress(java.net.InetAddress)", "p": [0.95, 0.02], "samples": [[0.95, 0.02], [0.95, 0.02], [0.95, 0.02]], "cost": 0.0079686}
+{"cls": "java.net.DatagramPacket", "sig": "void setData(byte[])", "p": [0.95, 0.03], "samples": [[0.95, 0.03], [0.95, 0.03], [0.95, 0.03]], "cost": 0.0078888}
+{"cls": "java.net.DatagramPacket", "sig": "void setLength(int)", "p": [0.85], "samples": [[0.85], [0.85], [0.85]], "cost": 0.0075954}
+{"cls": "java.net.DatagramSocket", "sig": "void <init>(int)", "p": [0.6], "samples": [[0.6], [0.6], [0.6]], "cost": 0.0075954}
+{"cls": "java.net.DatagramSocket", "sig": "void <init>(int,java.net.InetAddress)", "p": [0.6, 0.02, 0.6], "samples": [[0.5, 0.02, 0.5], [0.6, 0.02, 0.6], [0.4, 0.02, 0.5]], "cost": 0.008271}
+{"cls": "java.net.DatagramSocket", "sig": "void <init>(java.net.SocketAddress)", "p": [0.6], "samples": [[0.45], [0.6], [0.6]], "cost": 0.007671000000000001}
+{"cls": "java.net.DatagramSocket", "sig": "void bind(java.net.SocketAddress)", "p": [0.6, 0.03], "samples": [[0.55, 0.03], [0.4, 0.03], [0.6, 0.03]], "cost": 0.007972799999999999}
