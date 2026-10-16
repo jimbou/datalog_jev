@@ -275,6 +275,10 @@ LLMDFA (Wang et al., NeurIPS 2024, arXiv 2402.10754) verified and added on 2026-
 
 ## Next steps (agreed order, 2026-10-15)
 
+**Reminder: the GitHub repository jimbou/datalog_jev was made PUBLIC on 2026-10-16 so a claude.ai/code cloud session could
+clone it (private access failed). Switch it back to private after the cloud runs (double-blind review; audit sheets name
+checkers, `data/audit_private/`).**
+
 Pipeline from here; times are working time unless marked as server time.
 
 1. F1 finish (1-2 days). FlowDroid control running (`bench/queues/fd_fallback.sh`, up to about a day of server time):
