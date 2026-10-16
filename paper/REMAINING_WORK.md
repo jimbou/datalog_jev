@@ -272,14 +272,27 @@ build; cores 8-11 stay free for the user's symex jobs, which are not pinned).
   7,530 (Jev $0.21, Sonnet 5 $7.27, Qwen3.7-Flash $0.09, Gemini-3.5-Flash-Lite $1.27, DeepSeek-V4-Flash $0.17,
   Qwen3.8-27B $0.90, GPT-5.6-luna $2.27). The discussion's "152 of the 17,830 methods we priced" stays (it is about
   what was priced).
-- F2 RUNNING (`bench/queues/f2_dev_variants.sh`, log `data/f2/variants.log`, results `data/f2/variants_results.txt`,
-  about an hour): every remaining variant on the dev subset, list fixed before results: sonnet55def3 (cloud prices), and
-  free combinations via `analysis/f2_combine.py`: tie-cs (Jev, ties broken by Sonnet 5), max-cs, tie-cs55, max-cs55,
-  mean-cd (mean of the two Jev wordings). Keys rk and gk for all, K2 also for sonnet55def3; baselines choice-obj,
-  sonnetp, choice-def on the same apps.
-- G1 RUNNING after F2 (`bench/queues/g1_fact.sh`, `analysis/g1_fact.py`, log `data/g1_fact.log`): jevfact (Jev >= 0.5),
-  gptfact (GPT rubric labels; undecidable = no flow), gptfactu (undecidable = flow, sensitivity); all apps and 200
-  held-out halves.
+- F2 DONE (dev subset, 92 apps, key rk, alpha 0.05 / 0.1, cleared share of the hard slice, false-accept rate in
+  brackets; `data/f2/variants_results.txt`): choice-obj 38.4% (1.6%) / 50.8%; choice-def 39.0% / 51.3%; sonnetp 17.6% /
+  17.8%; sonnet55def3 43.8% (0%) / 43.8%; mean-cd 44.9% / 55.1%; tie-cs, tie-cs55, max-cs 36.5-38.1% / 44-51%;
+  **max-cs55 47.9% (1.1%) / 58.4%, picked.** Post-hoc (added after these results; `data/f2/one_sample.log`): the first of
+  the three Sonnet 5.5 samples alone, sonnet55def1 46.4% (0%) / 46.4%, max(Jev, sonnet55def1) 52.4% / 58.4%: one sample
+  is at least as good as three (the max of three raises prices).
+- G5 DONE, the pick on the other 215 main apps (test; `data/g5_full_results.txt`, all 307 apps in brackets): choice-obj
+  49.5% (1.0%) / 60.0% [48.7% / 60.0%]; **max-cs55 42.8% (1.4%) / 58.7% [46.2% / 58.5%]**; sonnet55def3 43.0% (0%) /
+  43.0% [43.2%]; sonnetp 16.1% / 16.1%. **The dev pick does not transfer: Jev (choice-obj) stays the main pricer.** The
+  dev subset is harder (Jev 38.4% there, 49.5% on the rest). Sonnet 5.5 with the definition is the best rerunnable
+  hosted pricer: 2.6x Sonnet 5 at 0% false accepts, but it never clears at thresholds above 0.03, so it gains nothing
+  from a looser alpha. GPT-only key (gk), all apps: choice-obj 25.6% / 32.4%, sonnet55def3 32.8% / 44.1%, max-cs55
+  25.9% / 32.2%. K2: all above 93%.
+- G1 DONE (rerun with the fix: methods without a GPT label were priced 0.5 by evaluate.py, a flow at 0.5; now 0 in
+  gptfact, 1 in gptfactu; `data/g5_full.log`), all 307 apps: jevfact clears 96.4%, 57.3% of apps wrong (above 5% in
+  200/200 halves); gptfact clears 99.6%, 3.3% of apps wrong (p95 5.2%, above 5% in 11/200). gptfactu gives the same
+  numbers: the two differ on 12 verdicts, all outside the hard slice (key unsure). Caveat for the paper: GPT's labels
+  are half of the main key (rk = Sonnet and GPT agreeing), so gptfact is flattered by construction; even so it has no
+  guarantee (11 of 200 halves above 5%).
+- Consequence for the rescued F1 apps: the main pricer stays Jev, so the 373-app row needs no Sonnet 5.5 prices.
+  Optional: Sonnet 5.5 with 1 sample for their 10,149 methods (about $44 of cloud credit) as a secondary row.
 
 **Next server steps for G4 (IzzyOnDroid), after IZZY-DONE in `data/f3/f3_izzy.log`:**
 1. New hole methods: `GRAPHS_DIRS=data/graphs_izzy:data/graphs_izzy_fb LIB_PREFIXES=data/bundled_libs.txt python3
