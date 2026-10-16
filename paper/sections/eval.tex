@@ -109,7 +109,7 @@ Table~\ref{tab:main} gives the cleared share for each pricer, and Figure~\ref{fi
 With Jev's prices, receipts clear 49\% of the hard slice at $\alpha=0.05$, and 0.9\% of held-out apps receive a wrong clearance; at $\alpha=0.02$ they still clear 37\%.
 The analysis then reports the real leaks through unmodeled methods whose receipts are expensive, while half of the false alarms that opening these methods would add are cleared.
 For a user of the threshold certified on all apps (0.2), this means the following.
-Opening unmodeled methods adds 28{,}206 decided alarms, of which 81\% are real leaks; clearing raises this share to 89\% and wrongly clears one real leak.
+Opening unmodeled methods adds 28{,}206 decided alarms, of which 81\% are real leaks; clearing raises this share to 89\% and wrongly clears one real leak, so the analysis reports 22{,}887 of the 22{,}888 real leaks that FlowDroid's models miss (real on our flow graph, which is less precise than FlowDroid's; Section~\ref{sec:discussion}).
 Per app, the false alarms drop from a median of 13 to 6 (90th percentile: 36 to 20), but only 5 of 298 apps lose all of them, and a remaining false alarm rests on a median of three facts.
 Receipts therefore halve the triage work for these alarms rather than remove it; checking facts (RQ5) clears more.
 In every row the observed error stays below $\alpha$, as Proposition~\ref{prop:ltt} predicts; what differs is how much is cleared.
@@ -152,7 +152,7 @@ Per program (ours), $\varepsilon=0.1$, 50\% calibration & 48.7\% [43.4, 59.7] & 
 \end{tabular}
 \end{table}
 
-\answer{\textbf{RQ2:} At a 5\% target, priced receipts clear 49\% of the false alarms that opening unmodeled methods adds, with wrong clearances in 0.9\% of held-out apps. Counting assumptions clears nothing, a language model taken as fact has no risk control, and per-verdict selection misses its own target and leaves wrong clearances in one app in six.}
+\answer{\textbf{RQ2:} At a 5\% target, the analysis keeps all but one of the real leaks that FlowDroid's models miss, and priced receipts clear 49\% of the false alarms that opening unmodeled methods adds, with wrong clearances in 0.9\% of held-out apps. Counting assumptions clears nothing, a language model taken as fact has no risk control, and per-verdict selection misses its own target and leaves wrong clearances in one app in six.}
 
 \subsection{RQ3: Robustness to the Answer Key}
 \label{sec:rq3}
@@ -281,6 +281,7 @@ Checking the 25 facts that would clear the most verdicts with a ``no'' (the unlo
 Ranking by the number of uncleared verdicts a fact blocks clears less (73\%) but turns more facts into confirmed flows, so the analysis reports 13{,}500 more real leaks.
 Checking 100 facts chosen at random adds three points, so the ranking is what makes the checks useful.
 The held-out error stays below the target in every row.
+At the threshold certified on all apps, the false alarms left per app fall from a median of 6 to 5 after 25 checks and to 3 after 100 (90th percentile: 20, 15, 9), 22 apps lose all of them, and still one real leak is wrongly cleared; 25 checks done once serve the whole corpus, about 0.08 checks per app.
 
 \answer{\textbf{RQ5:} Receipts make checking efficient: 25 well-chosen facts raise the cleared share from 49\% to 63\% and 100 facts to 78\%, while 100 random facts add three points.}
 
