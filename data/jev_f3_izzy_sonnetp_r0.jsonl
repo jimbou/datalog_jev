@@ -1,0 +1,250 @@
+{"cls": "android.animation.Animator$AnimatorListener", "sig": "void onAnimationStart(android.animation.Animator,boolean)", "p": [0.03, 0.02, 0.02, 0.03], "cost": 0.007274}
+{"cls": "android.animation.Animator$AnimatorPauseListener", "sig": "void onAnimationResume(android.animation.Animator)", "p": [0.03, 0.03], "cost": 0.006898}
+{"cls": "android.animation.ValueAnimator", "sig": "void removeUpdateListener(android.animation.ValueAnimator$AnimatorUpdateListener)", "p": [0.03, 0.03], "cost": 0.007065999999999999}
+{"cls": "android.animation.ValueAnimator$AnimatorUpdateListener", "sig": "void onAnimationUpdate(android.animation.ValueAnimator)", "p": [0.03, 0.03], "cost": 0.006973999999999999}
+{"cls": "android.app.Activity", "sig": "android.content.res.ColorStateList getColorStateList(int)", "p": [0.03, 0.02, 0.03], "cost": 0.0069299999999999995}
+{"cls": "android.app.Activity", "sig": "int getTitleColor()", "p": [0.08], "cost": 0.00657}
+{"cls": "android.app.Activity", "sig": "void setTitleColor(int)", "p": [0.05], "cost": 0.0065980000000000006}
+{"cls": "android.app.AlertDialog", "sig": "void setDismissMessage(android.os.Message)", "p": [0.95, 0.05], "cost": 0.0068379999999999995}
+{"cls": "android.app.Application", "sig": "android.content.ContentResolver getContentResolver()", "p": [0.05], "cost": 0.006602}
+{"cls": "android.app.Application", "sig": "void sendBroadcast(android.content.Intent)", "p": [0.03, 0.02], "cost": 0.006834}
+{"cls": "android.app.Application", "sig": "void unregisterReceiver(android.content.BroadcastReceiver)", "p": [0.03, 0.03], "cost": 0.0069099999999999995}
+{"cls": "android.app.ListActivity", "sig": "void setResult(int,android.content.Intent)", "p": [0.03, 0.03, 0.1, 0.05], "cost": 0.00719}
+{"cls": "android.app.Notification$Builder", "sig": "android.app.Notification$Builder setChannel(java.lang.String)", "p": [0.03, 0.95, 0.9], "cost": 0.006994}
+{"cls": "android.app.NotificationChannel", "sig": "void setName(java.lang.CharSequence)", "p": [0.95, 0.03], "cost": 0.006869999999999999}
+{"cls": "android.app.StatusBarManager", "sig": "void requestAddTileService(android.content.ComponentName,java.lang.CharSequence,android.graphics.drawable.Icon,java.util.concurrent.Executor,java.util.function.Consumer)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.021263999999999998}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "long getMaximumTimeToLock(android.content.ComponentName)", "p": [0.03, 0.02, 0.03, 0.02], "cost": 0.007234}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "void addPersistentPreferredActivity(android.content.ComponentName,android.content.IntentFilter,android.content.ComponentName)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.009768}
+{"cls": "android.app.admin.DevicePolicyManager", "sig": "void clearPackagePersistentPreferredActivities(android.content.ComponentName,java.lang.String)", "p": [0.03, 0.03, 0.02, 0.02], "cost": 0.0073620000000000005}
+{"cls": "android.app.role.RoleManager", "sig": "boolean isRoleAvailable(java.lang.String)", "p": [0.03, 0.02, 0.03], "cost": 0.006978}
+{"cls": "android.app.role.RoleManager", "sig": "boolean isRoleHeld(java.lang.String)", "p": [0.03, 0.02, 0.03], "cost": 0.006974}
+{"cls": "android.bluetooth.le.ScanRecord", "sig": "android.util.SparseArray getManufacturerSpecificData()", "p": [0.95], "cost": 0.006658000000000001}
+{"cls": "android.bluetooth.le.ScanRecord", "sig": "java.lang.String getDeviceName()", "p": [0.95], "cost": 0.006626000000000001}
+{"cls": "android.bluetooth.le.ScanResult", "sig": "boolean isConnectable()", "p": [0.05], "cost": 0.006606000000000001}
+{"cls": "android.bluetooth.le.ScanResult", "sig": "boolean isLegacy()", "p": [0.05], "cost": 0.006606000000000001}
+{"cls": "android.bluetooth.le.ScanResult", "sig": "long getTimestampNanos()", "p": [0.95], "cost": 0.00661}
+{"cls": "android.content.ContentProvider", "sig": "android.os.Bundle call(java.lang.String,java.lang.String,android.os.Bundle)", "p": [0.3, 0.08, 0.08, 0.3, 0.08, 0.08, 0.45, 0.1, 0.3, 0.1], "cost": 0.013648}
+{"cls": "android.content.ContentProviderClient", "sig": "android.content.res.AssetFileDescriptor openTypedAssetFileDescriptor(android.net.Uri,java.lang.String,android.os.Bundle)", "p": [0.85, 0.05, 0.03, 0.05, 0.03, 0.02, 0.03, 0.1, 0.05, 0.02, 0.1, 0.02, 0.02], "cost": 0.019678}
+{"cls": "android.content.ContentProviderClient", "sig": "android.os.Bundle call(java.lang.String,java.lang.String,android.os.Bundle)", "p": [0.3, 0.03, 0.03, 0.3, 0.03, 0.03, 0.6, 0.03, 0.05, 0.03], "cost": 0.015496}
+{"cls": "android.content.RestrictionsManager", "sig": "android.os.Bundle getApplicationRestrictions()", "p": [0.03], "cost": 0.006634}
+{"cls": "android.content.pm.PackageManager", "sig": "java.util.List getAllPermissionGroups(int)", "p": [0.03, 0.02, 0.1], "cost": 0.006938}
+{"cls": "android.content.pm.PackageManager", "sig": "java.util.List queryContentProviders(java.lang.String,int,int)", "p": [0.05, 0.03, 0.03, 0.03, 0.03, 0.03, 0.9], "cost": 0.007618}
+{"cls": "android.content.pm.PackageManager", "sig": "java.util.List queryPermissionsByGroup(java.lang.String,int)", "p": [0.05, 0.02, 0.03, 0.02, 0.1], "cost": 0.007318000000000001}
+{"cls": "android.content.res.AssetFileDescriptor", "sig": "android.os.Bundle getExtras()", "p": [0.85], "cost": 0.006626000000000001}
+{"cls": "android.content.res.Resources", "sig": "android.graphics.Typeface getFont(int)", "p": [0.05, 0.03, 0.1], "cost": 0.006918}
+{"cls": "android.database.CursorWindow", "sig": "byte[] getBlob(int,int)", "p": [0.03, 0.02, 0.03, 0.02, 0.95], "cost": 0.0072180000000000005}
+{"cls": "android.database.CursorWindow", "sig": "int getStartPosition()", "p": [0.05], "cost": 0.006582}
+{"cls": "android.database.DatabaseUtils", "sig": "void appendEscapedSQLString(java.lang.StringBuilder,java.lang.String)", "p": [0.97], "cost": 0.006758}
+{"cls": "android.database.DatabaseUtils", "sig": "void bindObjectToProgram(android.database.sqlite.SQLiteProgram,int,java.lang.Object)", "p": [0.02, 0.02, 0.02, 0.95], "cost": 0.0074860000000000005}
+{"cls": "android.drm.DrmManagerClient", "sig": "android.drm.DrmConvertedStatus closeConvertSession(int)", "p": [0.05, 0.1, 0.5], "cost": 0.00697}
+{"cls": "android.drm.DrmManagerClient", "sig": "android.drm.DrmConvertedStatus convertData(int,byte[])", "p": [0.05, 0.03, 0.03, 0.9, 0.1, 0.05, 0.05], "cost": 0.010176000000000001}
+{"cls": "android.drm.DrmManagerClient", "sig": "int openConvertSession(java.lang.String)", "p": [0.08, 0.3, 0.03], "cost": 0.00697}
+{"cls": "android.drm.DrmManagerClient", "sig": "void <init>(android.content.Context)", "p": [0.05], "cost": 0.0066500000000000005}
+{"cls": "android.graphics.Movie", "sig": "boolean setTime(int)", "p": [0.03, 0.05, 0.03], "cost": 0.00689}
+{"cls": "android.graphics.Movie", "sig": "int duration()", "p": [0.08], "cost": 0.006562}
+{"cls": "android.graphics.Movie", "sig": "int height()", "p": [0.05], "cost": 0.0065580000000000005}
+{"cls": "android.graphics.Movie", "sig": "int width()", "p": [0.05], "cost": 0.0065580000000000005}
+{"cls": "android.graphics.Movie", "sig": "void draw(android.graphics.Canvas,float,float)", "p": [0.03, 0.02, 0.02, 0.02, 0.02, 0.9], "cost": 0.007606}
+{"cls": "android.graphics.Paint", "sig": "android.graphics.Xfermode getXfermode()", "p": [0.95], "cost": 0.006614}
+{"cls": "android.graphics.Picture", "sig": "void draw(android.graphics.Canvas)", "p": [0.03, 0.9], "cost": 0.006862}
+{"cls": "android.graphics.RenderEffect", "sig": "android.graphics.RenderEffect createColorFilterEffect(android.graphics.ColorFilter)", "p": [0.95], "cost": 0.006738}
+{"cls": "android.graphics.RenderNode", "sig": "android.graphics.RecordingCanvas beginRecording(int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.05], "cost": 0.007266000000000001}
+{"cls": "android.graphics.Typeface", "sig": "int hashCode()", "p": [0.05], "cost": 0.006574}
+{"cls": "android.graphics.drawable.BitmapDrawable", "sig": "android.graphics.Shader$TileMode getTileModeX()", "p": [0.15], "cost": 0.006666}
+{"cls": "android.graphics.drawable.BitmapDrawable", "sig": "android.graphics.Shader$TileMode getTileModeY()", "p": [0.95], "cost": 0.006666}
+{"cls": "android.graphics.drawable.BitmapDrawable", "sig": "int getGravity()", "p": [0.05], "cost": 0.006606000000000001}
+{"cls": "android.graphics.drawable.BitmapDrawable", "sig": "void setFilterBitmap(boolean)", "p": [0.05], "cost": 0.006666}
+{"cls": "android.graphics.drawable.BitmapDrawable", "sig": "void setGravity(int)", "p": [0.95], "cost": 0.006634}
+{"cls": "android.graphics.drawable.BitmapDrawable", "sig": "void setTargetDensity(android.util.DisplayMetrics)", "p": [0.05, 0.02], "cost": 0.006941999999999999}
+{"cls": "android.graphics.drawable.ColorDrawable", "sig": "boolean setLevel(int)", "p": [0.05, 0.1, 0.03], "cost": 0.006926}
+{"cls": "android.graphics.drawable.Drawable", "sig": "android.graphics.Rect copyBounds()", "p": [0.9], "cost": 0.006626000000000001}
+{"cls": "android.graphics.drawable.GradientDrawable", "sig": "android.content.res.ColorStateList getColor()", "p": [0.95], "cost": 0.006642}
+{"cls": "android.graphics.drawable.NinePatchDrawable", "sig": "android.graphics.Paint getPaint()", "p": [0.08], "cost": 0.006642}
+{"cls": "android.graphics.drawable.NinePatchDrawable", "sig": "void <init>(android.graphics.Bitmap,byte[],android.graphics.Rect,java.lang.String)", "p": [0.95, 0.02, 0.02, 0.9, 0.02, 0.02, 0.85, 0.02, 0.02, 0.6, 0.02, 0.02, 0.02], "cost": 0.012898}
+{"cls": "android.graphics.drawable.NinePatchDrawable", "sig": "void setTargetDensity(android.util.DisplayMetrics)", "p": [0.05, 0.03], "cost": 0.006946}
+{"cls": "android.hardware.Camera$Parameters", "sig": "java.util.List getSupportedPreviewFormats()", "p": [0.03], "cost": 0.006638000000000001}
+{"cls": "android.hardware.camera2.CameraExtensionCharacteristics", "sig": "java.util.List getExtensionSupportedSizes(int,int)", "p": [0.03, 0.02, 0.03, 0.02, 0.1], "cost": 0.007306}
+{"cls": "android.hardware.camera2.CameraExtensionCharacteristics", "sig": "java.util.List getExtensionSupportedSizes(int,java.lang.Class)", "p": [0.03, 0.02, 0.03, 0.02, 0.1], "cost": 0.007378}
+{"cls": "android.hardware.usb.UsbDevice", "sig": "boolean equals(java.lang.Object)", "p": [0.05, 0.03, 0.03, 0.03], "cost": 0.00717}
+{"cls": "android.hardware.usb.UsbDevice", "sig": "java.lang.String getManufacturerName()", "p": [0.9], "cost": 0.006626000000000001}
+{"cls": "android.hardware.usb.UsbDevice", "sig": "java.lang.String getSerialNumber()", "p": [0.95], "cost": 0.006626000000000001}
+{"cls": "android.icu.lang.UCharacter", "sig": "java.lang.String toLowerCase(java.lang.String)", "p": [0.97], "cost": 0.006658000000000001}
+{"cls": "android.location.LocationManager", "sig": "void addTestProvider(java.lang.String,android.location.provider.ProviderProperties)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.007374}
+{"cls": "android.location.LocationManager", "sig": "void addTestProvider(java.lang.String,boolean,boolean,boolean,boolean,boolean,boolean,boolean,int,int)", "p": [0.85, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.75, 0.75], "cost": 0.010756}
+{"cls": "android.location.LocationManager", "sig": "void removeTestProvider(java.lang.String)", "p": [0.03], "cost": 0.0066500000000000005}
+{"cls": "android.location.LocationManager", "sig": "void setTestProviderEnabled(java.lang.String,boolean)", "p": [0.4, 0.3], "cost": 0.006849999999999999}
+{"cls": "android.location.LocationManager", "sig": "void setTestProviderLocation(java.lang.String,android.location.Location)", "p": [0.03, 0.03, 0.1, 0.03], "cost": 0.0072580000000000006}
+{"cls": "android.media.AudioDeviceInfo", "sig": "java.lang.CharSequence getProductName()", "p": [0.85], "cost": 0.006626000000000001}
+{"cls": "android.media.AudioManager", "sig": "float getStreamVolumeDb(int,int,int)", "p": [0.2, 0.03, 0.8, 0.03, 0.15, 0.03, 0.1], "cost": 0.018222}
+{"cls": "android.media.AudioRecord", "sig": "boolean setPreferredDevice(android.media.AudioDeviceInfo)", "p": [0.03, 0.1, 0.03, 0.03], "cost": 0.007286}
+{"cls": "android.media.AudioRecord", "sig": "int getChannelCount()", "p": [0.05], "cost": 0.006582}
+{"cls": "android.media.AudioTrack", "sig": "int setAuxEffectSendLevel(float)", "p": [0.03, 0.05, 0.03], "cost": 0.006922}
+{"cls": "android.media.AudioTrack", "sig": "int setLoopPoints(int,int,int)", "p": [0.03, 0.45, 0.03, 0.45, 0.03, 0.45, 0.05], "cost": 0.011684}
+{"cls": "android.media.CamcorderProfile", "sig": "android.media.CamcorderProfile get(int)", "p": [0.02], "cost": 0.006618000000000001}
+{"cls": "android.media.JetPlayer", "sig": "boolean loadJetFile(android.content.res.AssetFileDescriptor)", "p": [0.05, 0.2, 0.03, 0.02], "cost": 0.0073100000000000005}
+{"cls": "android.media.JetPlayer", "sig": "boolean loadJetFile(java.lang.String)", "p": [0.05, 0.2, 0.03], "cost": 0.006966}
+{"cls": "android.media.JetPlayer", "sig": "boolean queueJetSegmentMuteArray(int,int,int,int,boolean[],byte)", "p": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.013149999999999998}
+{"cls": "android.media.JetPlayer", "sig": "boolean setMuteArray(boolean[],boolean)", "p": [0.05, 0.3, 0.03, 0.05, 0.03, 0.03, 0.03], "cost": 0.01191}
+{"cls": "android.media.JetPlayer", "sig": "boolean setMuteFlag(int,boolean,boolean)", "p": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05], "cost": 0.011229999999999999}
+{"cls": "android.media.JetPlayer", "sig": "void setEventListener(android.media.JetPlayer$OnJetEventListener)", "p": [0.03, 0.03], "cost": 0.006986}
+{"cls": "android.media.MediaCodec", "sig": "void setCallback(android.media.MediaCodec$Callback)", "p": [0.03, 0.03], "cost": 0.006921999999999999}
+{"cls": "android.media.MediaMetadataRetriever", "sig": "byte[] getEmbeddedPicture()", "p": [0.95], "cost": 0.0066300000000000005}
+{"cls": "android.media.MediaMuxer", "sig": "void <init>(java.io.FileDescriptor,int)", "p": [0.85, 0.03, 0.02], "cost": 0.007058}
+{"cls": "android.media.MediaMuxer", "sig": "void <init>(java.lang.String,int)", "p": [0.9, 0.05], "cost": 0.006814}
+{"cls": "android.media.MediaMuxer", "sig": "void setLocation(float,float)", "p": [0.95, 0.95], "cost": 0.006777999999999999}
+{"cls": "android.media.MediaPlayer", "sig": "void setDataSource(java.io.FileDescriptor)", "p": [0.95, 0.03], "cost": 0.006894}
+{"cls": "android.media.MediaRecorder", "sig": "void setOrientationHint(int)", "p": [0.05], "cost": 0.006618000000000001}
+{"cls": "android.media.MediaRecorder", "sig": "void setProfile(android.media.CamcorderProfile)", "p": [0.05, 0.02], "cost": 0.006902}
+{"cls": "android.media.SoundPool", "sig": "int load(android.content.res.AssetFileDescriptor,int)", "p": [0.15, 0.2, 0.03, 0.03, 0.02, 0.05, 0.02], "cost": 0.018328}
+{"cls": "android.media.SoundPool", "sig": "int load(java.lang.String,int)", "p": [0.05, 0.3, 0.03, 0.05, 0.03], "cost": 0.00725}
+{"cls": "android.net.ConnectivityManager", "sig": "int startUsingNetworkFeature(int,java.lang.String)", "p": [0.02, 0.03, 0.03, 0.03, 0.03], "cost": 0.007302}
+{"cls": "android.net.ConnectivityManager", "sig": "void requestNetwork(android.net.NetworkRequest,android.net.ConnectivityManager$NetworkCallback)", "p": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.008026}
+{"cls": "android.net.LocalSocket", "sig": "java.io.FileDescriptor[] getAncillaryFileDescriptors()", "p": [0.85], "cost": 0.006658000000000001}
+{"cls": "android.net.NetworkCapabilities", "sig": "int getLinkUpstreamBandwidthKbps()", "p": [0.95], "cost": 0.006638000000000001}
+{"cls": "android.net.NetworkRequest$Builder", "sig": "android.net.NetworkRequest$Builder setNetworkSpecifier(java.lang.String)", "p": [0.03, 0.95, 0.95], "cost": 0.00705}
+{"cls": "android.net.RouteInfo", "sig": "android.net.IpPrefix getDestination()", "p": [0.95], "cost": 0.00661}
+{"cls": "android.net.RouteInfo", "sig": "java.lang.String getInterface()", "p": [0.95], "cost": 0.006594}
+{"cls": "android.net.VpnService$Builder", "sig": "android.net.VpnService$Builder addAddress(java.net.InetAddress,int)", "p": [0.9, 0.9, 0.6, 0.6, 0.03, 0.95, 0.03], "cost": 0.010446}
+{"cls": "android.net.http.SslCertificate$DName", "sig": "java.lang.String getDName()", "p": [0.95], "cost": 0.00661}
+{"cls": "android.net.wifi.ScanResult", "sig": "boolean is80211mcResponder()", "p": [0.05], "cost": 0.00661}
+{"cls": "android.net.wifi.p2p.WifiP2pDevice", "sig": "java.net.InetAddress getIpAddress()", "p": [0.95], "cost": 0.006658000000000001}
+{"cls": "android.net.wifi.p2p.WifiP2pGroup", "sig": "java.lang.String getNetworkName()", "p": [0.95], "cost": 0.006646}
+{"cls": "android.net.wifi.p2p.WifiP2pGroup", "sig": "java.lang.String getPassphrase()", "p": [0.95], "cost": 0.006646}
+{"cls": "android.net.wifi.p2p.WifiP2pGroup", "sig": "java.util.Collection getClientList()", "p": [0.95], "cost": 0.006642}
+{"cls": "android.net.wifi.p2p.WifiP2pManager", "sig": "android.net.wifi.p2p.WifiP2pManager$Channel initialize(android.content.Context,android.os.Looper,android.net.wifi.p2p.WifiP2pManager$ChannelListener)", "p": [0.55, 0.05, 0.02, 0.02, 0.5, 0.05, 0.02, 0.02, 0.5, 0.05, 0.02, 0.02, 0.15, 0.02, 0.02, 0.02], "cost": 0.01546}
+{"cls": "android.net.wifi.p2p.WifiP2pManager", "sig": "void createGroup(android.net.wifi.p2p.WifiP2pManager$Channel,android.net.wifi.p2p.WifiP2pConfig,android.net.wifi.p2p.WifiP2pManager$ActionListener)", "p": [0.04, 0.03, 0.03, 0.04, 0.03, 0.03, 0.04, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.023686}
+{"cls": "android.net.wifi.p2p.WifiP2pManager", "sig": "void createGroup(android.net.wifi.p2p.WifiP2pManager$Channel,android.net.wifi.p2p.WifiP2pManager$ActionListener)", "p": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.00843}
+{"cls": "android.net.wifi.p2p.WifiP2pManager", "sig": "void removeGroup(android.net.wifi.p2p.WifiP2pManager$Channel,android.net.wifi.p2p.WifiP2pManager$ActionListener)", "p": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.008434}
+{"cls": "android.net.wifi.p2p.WifiP2pManager", "sig": "void requestConnectionInfo(android.net.wifi.p2p.WifiP2pManager$Channel,android.net.wifi.p2p.WifiP2pManager$ConnectionInfoListener)", "p": [0.03, 0.03, 0.05, 0.12, 0.03, 0.03], "cost": 0.01761}
+{"cls": "android.net.wifi.p2p.WifiP2pManager", "sig": "void requestGroupInfo(android.net.wifi.p2p.WifiP2pManager$Channel,android.net.wifi.p2p.WifiP2pManager$GroupInfoListener)", "p": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.012876}
+{"cls": "android.opengl.GLSurfaceView", "sig": "void setOnTouchListener(android.view.View$OnTouchListener)", "p": [0.03, 0.03], "cost": 0.006941999999999999}
+{"cls": "android.os.FileObserver", "sig": "void <init>(java.lang.String)", "p": [0.9], "cost": 0.006634}
+{"cls": "android.os.Handler$Callback", "sig": "boolean handleMessage(android.os.Message)", "p": [0.3, 0.25, 0.1, 0.08], "cost": 0.00715}
+{"cls": "android.os.SharedMemory", "sig": "android.os.SharedMemory create(java.lang.String,int)", "p": [0.05, 0.03], "cost": 0.006794}
+{"cls": "android.os.SharedMemory", "sig": "boolean setProtect(int)", "p": [0.03, 0.03, 0.03], "cost": 0.006898}
+{"cls": "android.os.SharedMemory", "sig": "java.nio.ByteBuffer mapReadOnly()", "p": [0.95], "cost": 0.0066300000000000005}
+{"cls": "android.os.SharedMemory", "sig": "java.nio.ByteBuffer mapReadWrite()", "p": [0.95], "cost": 0.0066300000000000005}
+{"cls": "android.os.UserManager", "sig": "android.os.Bundle getApplicationRestrictions(java.lang.String)", "p": [0.05, 0.03, 0.1], "cost": 0.006994}
+{"cls": "android.os.storage.StorageVolume", "sig": "android.content.Intent createAccessIntent(java.lang.String)", "p": [0.85, 0.03, 0.75], "cost": 0.008487999999999999}
+{"cls": "android.preference.DialogPreference", "sig": "android.graphics.drawable.Drawable getDialogIcon()", "p": [0.95], "cost": 0.006642}
+{"cls": "android.preference.DialogPreference", "sig": "java.lang.CharSequence getDialogMessage()", "p": [0.95], "cost": 0.006626000000000001}
+{"cls": "android.preference.DialogPreference", "sig": "java.lang.CharSequence getDialogTitle()", "p": [0.85], "cost": 0.006626000000000001}
+{"cls": "android.preference.DialogPreference", "sig": "java.lang.CharSequence getNegativeButtonText()", "p": [0.95], "cost": 0.006634}
+{"cls": "android.preference.DialogPreference", "sig": "java.lang.CharSequence getPositiveButtonText()", "p": [0.95], "cost": 0.006634}
+{"cls": "android.preference.DialogPreference", "sig": "void setDialogTitle(java.lang.CharSequence)", "p": [0.95, 0.02], "cost": 0.006889999999999999}
+{"cls": "android.preference.ListPreference", "sig": "android.graphics.drawable.Drawable getDialogIcon()", "p": [0.85], "cost": 0.006638000000000001}
+{"cls": "android.preference.ListPreference", "sig": "android.view.View onCreateDialogView()", "p": [0.85], "cost": 0.006606000000000001}
+{"cls": "android.preference.ListPreference", "sig": "java.lang.CharSequence getDialogMessage()", "p": [0.95], "cost": 0.006622}
+{"cls": "android.preference.ListPreference", "sig": "java.lang.CharSequence getDialogTitle()", "p": [0.95], "cost": 0.006622}
+{"cls": "android.preference.ListPreference", "sig": "java.lang.CharSequence getNegativeButtonText()", "p": [0.95], "cost": 0.0066300000000000005}
+{"cls": "android.preference.ListPreference", "sig": "void onBindDialogView(android.view.View)", "p": [0.03, 0.9], "cost": 0.006826}
+{"cls": "android.preference.ListPreference", "sig": "void onClick(android.content.DialogInterface,int)", "p": [0.05, 0.85, 0.05, 0.05], "cost": 0.013462}
+{"cls": "android.preference.MultiSelectListPreference", "sig": "android.graphics.drawable.Drawable getDialogIcon()", "p": [0.05], "cost": 0.006658000000000001}
+{"cls": "android.preference.MultiSelectListPreference", "sig": "android.view.View onCreateDialogView()", "p": [0.85], "cost": 0.006626000000000001}
+{"cls": "android.preference.MultiSelectListPreference", "sig": "int findIndexOfValue(java.lang.String)", "p": [0.03, 0.03, 0.1], "cost": 0.006986}
+{"cls": "android.preference.MultiSelectListPreference", "sig": "java.lang.CharSequence getDialogMessage()", "p": [0.95], "cost": 0.006642}
+{"cls": "android.preference.MultiSelectListPreference", "sig": "java.lang.CharSequence getDialogTitle()", "p": [0.9], "cost": 0.006642}
+{"cls": "android.preference.MultiSelectListPreference", "sig": "java.lang.CharSequence getNegativeButtonText()", "p": [0.95], "cost": 0.0066500000000000005}
+{"cls": "android.preference.MultiSelectListPreference", "sig": "java.lang.CharSequence getPositiveButtonText()", "p": [0.05], "cost": 0.0066500000000000005}
+{"cls": "android.preference.MultiSelectListPreference", "sig": "java.lang.CharSequence[] getEntries()", "p": [0.95], "cost": 0.006638000000000001}
+{"cls": "android.preference.MultiSelectListPreference", "sig": "java.util.Set getValues()", "p": [0.95], "cost": 0.00661}
+{"cls": "android.preference.MultiSelectListPreference", "sig": "void onBindDialogView(android.view.View)", "p": [0.05, 0.6], "cost": 0.010366}
+{"cls": "android.provider.MediaStore", "sig": "android.net.Uri getMediaUri(android.content.Context,android.net.Uri)", "p": [0.03, 0.03, 0.9, 0.03], "cost": 0.007266}
+{"cls": "android.provider.Telephony$Threads", "sig": "long getOrCreateThreadId(android.content.Context,java.lang.String)", "p": [0.03, 0.9, 0.03], "cost": 0.00705}
+{"cls": "android.provider.Telephony$Threads", "sig": "long getOrCreateThreadId(android.content.Context,java.util.Set)", "p": [0.03, 0.03, 0.9, 0.03], "cost": 0.007254}
+{"cls": "android.security.keystore.KeyInfo", "sig": "boolean isInsideSecureHardware()", "p": [0.03], "cost": 0.006622}
+{"cls": "android.support.v4.media.MediaDescriptionCompat", "sig": "void <init>(java.lang.String,java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,android.graphics.Bitmap,android.net.Uri,android.os.Bundle,android.net.Uri)", "p": [0.95, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.95, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.95, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.95, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.95, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.04802}
+{"cls": "android.support.v4.media.a", "sig": "void <init>(t1.G,android.os.Looper)", "p": [0.85, 0.03, 0.1, 0.03], "cost": 0.007242}
+{"cls": "android.support.v4.media.f", "sig": "android.graphics.Bitmap e(android.media.MediaDescription)", "p": [0.85], "cost": 0.006678000000000001}
+{"cls": "android.support.v4.media.f", "sig": "android.net.Uri f(android.media.MediaDescription)", "p": [0.95], "cost": 0.006662}
+{"cls": "android.support.v4.media.f", "sig": "android.os.Bundle d(android.media.MediaDescription)", "p": [0.95], "cost": 0.006666}
+{"cls": "android.support.v4.media.f", "sig": "java.lang.CharSequence c(android.media.MediaDescription)", "p": [0.85], "cost": 0.006674}
+{"cls": "android.support.v4.media.f", "sig": "java.lang.CharSequence h(android.media.MediaDescription)", "p": [0.9], "cost": 0.006674}
+{"cls": "android.support.v4.media.f", "sig": "java.lang.CharSequence i(android.media.MediaDescription)", "p": [0.92], "cost": 0.006674}
+{"cls": "android.support.v4.media.f", "sig": "java.lang.String g(android.media.MediaDescription)", "p": [0.85], "cost": 0.006658000000000001}
+{"cls": "android.support.v4.media.g", "sig": "android.net.Uri a(android.media.MediaDescription)", "p": [0.95], "cost": 0.006662}
+{"cls": "android.support.v4.media.session.MediaSessionCompat$Token", "sig": "void <init>(android.os.Parcelable,android.support.v4.media.session.b)", "p": [0.95, 0.03, 0.1, 0.03], "cost": 0.0074540000000000006}
+{"cls": "android.support.v4.media.session.PlaybackStateCompat", "sig": "void writeToParcel(android.os.Parcel,int)", "p": [0.03, 0.03, 0.03, 0.95], "cost": 0.007266}
+{"cls": "android.support.v4.media.session.a", "sig": "void <init>(android.content.Context,android.support.v4.media.session.MediaSessionCompat$Token)", "p": [0.05, 0.02, 0.1, 0.02], "cost": 0.007538}
+{"cls": "android.support.v4.media.session.b", "sig": "void <init>(tt0)", "p": [0.85], "cost": 0.006622}
+{"cls": "android.support.v4.media.session.h", "sig": "android.content.Intent R(h.l)", "p": [0.85], "cost": 0.006614}
+{"cls": "android.support.v4.media.session.h", "sig": "android.content.Intent S(h.l,android.content.ComponentName)", "p": [0.85, 0.03, 0.8, 0.03], "cost": 0.011618}
+{"cls": "android.support.v4.media.session.h", "sig": "android.graphics.Typeface c0(android.content.res.Configuration,android.graphics.Typeface)", "p": [0.1, 0.03, 0.9, 0.03], "cost": 0.011522000000000001}
+{"cls": "android.support.v4.media.session.h", "sig": "android.graphics.drawable.Drawable Q(android.content.Context,int)", "p": [0.1, 0.05, 0.02], "cost": 0.011456000000000001}
+{"cls": "android.support.v4.media.session.h", "sig": "android.os.Bundle K0(android.os.Bundle)", "p": [0.95], "cost": 0.006662}
+{"cls": "android.support.v4.media.session.h", "sig": "android.util.TypedValue q0(android.content.Context,int)", "p": [0.1, 0.3, 0.03], "cost": 0.012356}
+{"cls": "android.support.v4.media.session.h", "sig": "android.util.TypedValue t0(android.content.Context,int,java.lang.String)", "p": [0.05, 0.05, 0.02, 0.05, 0.02], "cost": 0.027712}
+{"cls": "android.support.v4.media.session.h", "sig": "android.widget.ImageView$ScaleType E(int)", "p": [0.05], "cost": 0.00715}
+{"cls": "android.support.v4.media.session.h", "sig": "boolean F(java.io.File,android.content.res.Resources,int)", "p": [0.05, 0.02, 0.05, 0.85, 0.05, 0.85, 0.02], "cost": 0.011592}
+{"cls": "android.support.v4.media.session.h", "sig": "boolean G(java.io.File,java.io.InputStream)", "p": [0.05, 0.03, 0.05, 0.9], "cost": 0.008918}
+{"cls": "android.support.v4.media.session.h", "sig": "boolean f(s.h,s.c,s.c)", "p": [0.05, 0.08, 0.1, 0.1, 0.05, 0.08, 0.08, 0.12, 0.05, 0.08, 0.08, 0.12, 0.04, 0.06, 0.06, 0.06], "cost": 0.018734}
+{"cls": "android.support.v4.media.session.h", "sig": "boolean g(s.h,java.lang.Object,java.lang.Object)", "p": [0.05, 0.03, 0.03, 0.03, 0.08, 0.03, 0.03, 0.05, 0.08, 0.03, 0.03, 0.05, 0.03, 0.02, 0.02, 0.02], "cost": 0.028610000000000003}
+{"cls": "android.support.v4.media.session.h", "sig": "boolean h(s.h,s.g,s.g)", "p": [0.15, 0.1, 0.06, 0.06, 0.15, 0.1, 0.05, 0.06, 0.15, 0.1, 0.05, 0.06, 0.08, 0.04, 0.04, 0.04], "cost": 0.035394}
+{"cls": "android.support.v4.media.session.h", "sig": "byte[] F0(I2.a)", "p": [0.85], "cost": 0.006614}
+{"cls": "android.support.v4.media.session.h", "sig": "float W(android.view.View)", "p": [0.55, 0.1, 0.1, 0.03], "cost": 0.012264}
+{"cls": "android.support.v4.media.session.h", "sig": "int N(byte,byte,byte,byte)", "p": [0.85, 0.85, 0.85, 0.85], "cost": 0.007812}
+{"cls": "android.support.v4.media.session.h", "sig": "int u0(long)", "p": [0.85], "cost": 0.0065780000000000005}
+{"cls": "android.support.v4.media.session.h", "sig": "int y(long)", "p": [0.95], "cost": 0.007284}
+{"cls": "android.support.v4.media.session.h", "sig": "int z(int,int,int)", "p": [0.85, 0.85, 0.85], "cost": 0.009937999999999999}
+{"cls": "android.support.v4.media.session.h", "sig": "int[] E0(java.util.Collection)", "p": [0.85], "cost": 0.006634}
+{"cls": "android.support.v4.media.session.h", "sig": "java.io.File U(android.content.Context)", "p": [0.05], "cost": 0.0066300000000000005}
+{"cls": "android.support.v4.media.session.h", "sig": "java.lang.Object P(java.util.concurrent.Future)", "p": [0.85], "cost": 0.006678000000000001}
+{"cls": "android.support.v4.media.session.h", "sig": "java.lang.Object a(android.os.Parcel,android.os.Parcelable$Creator)", "p": [0.95, 0.03, 0.05, 0.03], "cost": 0.012702}
+{"cls": "android.support.v4.media.session.h", "sig": "java.lang.String T(android.app.Activity,android.content.ComponentName)", "p": [0.1, 0.03, 0.35, 0.03], "cost": 0.011477999999999999}
+{"cls": "android.support.v4.media.session.h", "sig": "java.nio.MappedByteBuffer d0(android.content.Context,android.net.Uri)", "p": [0.1, 0.03, 0.85, 0.03], "cost": 0.010886}
+{"cls": "android.support.v4.media.session.h", "sig": "java.util.List c(int[])", "p": [0.95], "cost": 0.006602}
+{"cls": "android.support.v4.media.session.h", "sig": "long K(long,long,java.math.RoundingMode)", "p": [0.9, 0.02, 0.9, 0.02, 0.03], "cost": 0.00872}
+{"cls": "android.support.v4.media.session.h", "sig": "long O(long,long)", "p": [0.85, 0.85], "cost": 0.006725999999999999}
+{"cls": "android.support.v4.media.session.h", "sig": "long n0(h0.E,int,int)", "p": [0.4, 0.5, 0.05, 0.5, 0.05], "cost": 0.035528000000000004}
+{"cls": "android.support.v4.media.session.h", "sig": "long v0(long,long)", "p": [0.85, 0.85], "cost": 0.0078000000000000005}
+{"cls": "android.support.v4.media.session.h", "sig": "n2.q H0(n2.A,h2.j)", "p": [0.75, 0.05, 0.6, 0.05], "cost": 0.011686}
+{"cls": "android.support.v4.media.session.h", "sig": "n2.x a0(java.lang.Object)", "p": [0.95], "cost": 0.007668}
+{"cls": "android.support.v4.media.session.h", "sig": "void A0(android.widget.TextView,int)", "p": [0.55], "cost": 0.011571999999999999}
+{"cls": "android.support.v4.media.session.h", "sig": "void C0(android.view.View,float)", "p": [0.05, 0.05, 0.4, 0.05], "cost": 0.013336}
+{"cls": "android.support.v4.media.session.h", "sig": "void D0(android.view.View,int)", "p": [0.1, 0.05, 0.05, 0.1], "cost": 0.010616}
+{"cls": "android.support.v4.media.session.h", "sig": "void G0(g1.g,g1.o,h0.m)", "p": [0.55, 0.15, 0.1, 0.1, 0.1, 0.1], "cost": 0.011054000000000001}
+{"cls": "android.support.v4.media.session.h", "sig": "void b(com.google.android.material.textfield.TextInputLayout,com.google.android.material.internal.CheckableImageButton,android.content.res.ColorStateList,android.graphics.PorterDuff$Mode)", "p": [0.03, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.85, 0.02, 0.02, 0.55, 0.02], "cost": 0.022538000000000002}
+{"cls": "android.support.v4.media.session.h", "sig": "void k0(s.g,s.g)", "p": [0.5, 0.05, 0.5, 0.05, 0.1, 0.1], "cost": 0.012079999999999999}
+{"cls": "android.support.v4.media.session.h", "sig": "void l0(s.g,java.lang.Thread)", "p": [0.85, 0.05, 0.6, 0.05, 0.03, 0.03], "cost": 0.01008}
+{"cls": "android.support.v4.media.session.h", "sig": "void o(boolean,java.lang.String,java.lang.Comparable)", "p": [0.03, 0.07], "cost": 0.015696}
+{"cls": "android.support.v4.media.session.h", "sig": "void o0(com.google.android.material.textfield.TextInputLayout,com.google.android.material.internal.CheckableImageButton,android.content.res.ColorStateList)", "p": [0.05, 0.03, 0.03, 0.03, 0.03, 0.85], "cost": 0.011864}
+{"cls": "android.support.v4.media.session.h", "sig": "void y0(android.widget.TextView,int)", "p": [0.05], "cost": 0.006662}
+{"cls": "android.support.v4.media.session.h", "sig": "void z0(com.google.android.material.internal.CheckableImageButton,android.view.View$OnLongClickListener)", "p": [0.03, 0.03], "cost": 0.008262}
+{"cls": "android.telecom.Call", "sig": "android.telecom.Call$Details getDetails()", "p": [0.92], "cost": 0.006606000000000001}
+{"cls": "android.telecom.Call", "sig": "void registerCallback(android.telecom.Call$Callback)", "p": [0.03, 0.03], "cost": 0.006894}
+{"cls": "android.telecom.Call$Details", "sig": "android.net.Uri getHandle()", "p": [0.95], "cost": 0.006602}
+{"cls": "android.telephony.CellInfo", "sig": "int getCellConnectionStatus()", "p": [0.95], "cost": 0.006602}
+{"cls": "android.telephony.CellSignalStrengthNr", "sig": "int getLevel()", "p": [0.05], "cost": 0.006602}
+{"cls": "android.telephony.SignalStrength", "sig": "int getLevel()", "p": [0.08], "cost": 0.006582}
+{"cls": "android.telephony.SmsManager", "sig": "void downloadMultimediaMessage(android.content.Context,java.lang.String,android.net.Uri,android.os.Bundle,android.app.PendingIntent)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.025812}
+{"cls": "android.telephony.SmsManager", "sig": "void sendMultimediaMessage(android.content.Context,android.net.Uri,java.lang.String,android.os.Bundle,android.app.PendingIntent)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.018424000000000003}
+{"cls": "android.telephony.SubscriptionInfo", "sig": "java.lang.String getNumber()", "p": [0.95], "cost": 0.006614}
+{"cls": "android.telephony.SubscriptionManager", "sig": "android.telephony.SubscriptionInfo getActiveSubscriptionInfo(int)", "p": [0.03, 0.02, 0.9], "cost": 0.006998}
+{"cls": "android.telephony.TelephonyManager", "sig": "java.lang.String getMmsUAProfUrl()", "p": [0.05], "cost": 0.006634}
+{"cls": "android.telephony.TelephonyManager", "sig": "java.lang.String getMmsUserAgent()", "p": [0.05], "cost": 0.006626000000000001}
+{"cls": "android.telephony.cdma.CdmaCellLocation", "sig": "void setCellLocationData(int,int,int,int,int)", "p": [0.95, 0.95, 0.95, 0.95, 0.95], "cost": 0.007338000000000001}
+{"cls": "android.telephony.gsm.GsmCellLocation", "sig": "void setLacAndCid(int,int)", "p": [0.95, 0.95], "cost": 0.006817999999999999}
+{"cls": "android.text.StaticLayout", "sig": "int getBottomPadding()", "p": [0.85], "cost": 0.006586000000000001}
+{"cls": "android.text.StaticLayout", "sig": "int getParagraphDirection(int)", "p": [0.03, 0.02, 0.08], "cost": 0.006906}
+{"cls": "android.text.StaticLayout", "sig": "int getTopPadding()", "p": [0.95], "cost": 0.006582}
+{"cls": "android.text.TextUtils$TruncateAt", "sig": "android.text.TextUtils$TruncateAt valueOf(java.lang.String)", "p": [0.95], "cost": 0.0067020000000000005}
+{"cls": "android.util.AttributeSet", "sig": "int getAttributeResourceValue(int,int)", "p": [0.03, 0.02, 0.03, 0.02, 0.55], "cost": 0.00723}
+{"cls": "android.view.AttachedSurfaceControl", "sig": "boolean applyTransactionOnDraw(android.view.SurfaceControl$Transaction)", "p": [0.05, 0.03, 0.03, 0.05], "cost": 0.00735}
+{"cls": "android.view.ContextThemeWrapper", "sig": "void onApplyThemeResource(android.content.res.Resources$Theme,int,boolean)", "p": [0.05, 0.05, 0.35, 0.05, 0.15, 0.05], "cost": 0.020128}
+{"cls": "android.view.KeyCharacterMap", "sig": "int get(int,int)", "p": [0.05, 0.02, 0.05, 0.02, 0.3], "cost": 0.007206000000000001}
+{"cls": "android.view.KeyEvent", "sig": "android.view.KeyCharacterMap getKeyCharacterMap()", "p": [0.05], "cost": 0.006646}
+{"cls": "android.view.Surface", "sig": "android.graphics.Canvas lockCanvas(android.graphics.Rect)", "p": [0.1, 0.05, 0.3, 0.05], "cost": 0.014303999999999999}
+{"cls": "android.view.SurfaceView", "sig": "android.view.AttachedSurfaceControl getRootSurfaceControl()", "p": [0.9], "cost": 0.006654}
+{"cls": "android.view.SurfaceView", "sig": "void setOnTouchListener(android.view.View$OnTouchListener)", "p": [0.03, 0.03], "cost": 0.006926}
+{"cls": "android.view.View", "sig": "boolean onKeyMultiple(int,int,android.view.KeyEvent)", "p": [0.05, 0.1, 0.03, 0.05, 0.1, 0.03, 0.3, 0.5, 0.1, 0.05], "cost": 0.008234}
+{"cls": "android.view.View", "sig": "void setOnScrollChangeListener(android.view.View$OnScrollChangeListener)", "p": [0.03, 0.05], "cost": 0.006954}
+{"cls": "android.view.ViewGroup", "sig": "android.view.WindowInsets onApplyWindowInsets(android.view.WindowInsets)", "p": [0.9, 0.3, 0.1, 0.08], "cost": 0.0072580000000000006}
+{"cls": "android.view.autofill.AutofillManager", "sig": "boolean isEnabled()", "p": [0.03], "cost": 0.006602}
+{"cls": "android.webkit.WebView", "sig": "android.graphics.Picture capturePicture()", "p": [0.9], "cost": 0.006606000000000001}
+{"cls": "android.webkit.WebView", "sig": "void postUrl(java.lang.String,byte[])", "p": [0.05, 0.03, 0.05, 0.03], "cost": 0.007194}
+{"cls": "android.widget.AbsListView", "sig": "void smoothScrollToPositionFromTop(int,int,int)", "p": [0.03, 0.03, 0.03], "cost": 0.006986}
+{"cls": "android.widget.AdapterView", "sig": "int getChildCount()", "p": [0.03], "cost": 0.0065780000000000005}
+{"cls": "android.widget.CursorAdapter", "sig": "java.lang.Object getItem(int)", "p": [0.05, 0.03, 0.9], "cost": 0.006918}
+{"cls": "android.widget.FrameLayout", "sig": "void setBackgroundTintMode(android.graphics.PorterDuff$Mode)", "p": [0.05, 0.03], "cost": 0.006973999999999999}
+{"cls": "android.widget.FrameLayout", "sig": "void setOnApplyWindowInsetsListener(android.view.View$OnApplyWindowInsetsListener)", "p": [0.03, 0.03], "cost": 0.007042}
+{"cls": "android.widget.HorizontalScrollView", "sig": "void setBackgroundColor(int)", "p": [0.03], "cost": 0.006634}
