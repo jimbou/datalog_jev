@@ -10,8 +10,11 @@ RQ1 shows that receipts also work inside FlowDroid, where 43 of the 58 sinks tha
 Certifying a threshold for FlowDroid, however, needs more apps than we could analyze with it.
 Our receipts need only a stored flow graph, built once with every hole open, so pricing and certifying them takes minutes.
 Inside FlowDroid, a receipt needs repeated full runs: one with FlowDroid's models, one with every unmodeled method opened, and reruns that confirm each cut.
-On 89 of 181 F-Droid apps that our analysis handles, these runs did not finish within 20 minutes and 10\,GB, and the apps we retried with 55 minutes and 24\,GB ran out of memory again, although FlowDroid's own analysis is unchanged.
-% Update with the final count when bench/queues/fdr_retry_chain.sh logs FDRR-DONE (2026-10-09: 21 retried, none finished).
+To compare cost on equal terms, we ran FlowDroid on all 585 apps with the budget of our pipeline: 35 minutes and 16\,GB per app, two four-thread runs in parallel on eight cores.
+FlowDroid with its models finishes on 317 apps (54\%), and with every unmodeled method opened on 252 (43\%): opening the holes costs it 65 apps, 46 to the time limit and 19 to memory, while our graph contains every hole by construction.
+Our full analysis finishes on 344 apps (59\%); neither is uniformly lighter, as 163 apps finish only with ours and 71 only with FlowDroid with open holes.
+When memory runs out, our pipeline treats bundled libraries as holes (Section~\ref{sec:impl}) and finishes 98 more apps, 442 in all (76\%).
+With the same fallback, FlowDroid finishes 14 more apps (331), and on 103 apps with leaks it silently loses 23 of its 308 reported leaks (7.5\%); our fallback instead turns the excluded code into priced holes that the certified bound covers (Table~\ref{tab:main}).
 We therefore use FlowDroid to validate receipts and our analysis to certify them; a cheaper way to open holes inside a precise analysis is future work.
 
 \paragraph{Other kinds of holes.}
@@ -30,7 +33,8 @@ The main key contains language-model labels, K2 covers only part of the library,
 We address this with keys built in different ways (RQ3), with a key built from the answers on which two model families agree, which match a person's source checks on 95\% of the checked facts, and with random label noise.
 
 \emph{Apps.}
-The calibration apps are small open-source F-Droid apps; about half of the larger apps did not fit our memory limits.
+The calibration apps are small open-source F-Droid apps: the full analysis builds 344 of 585 apps within FlowDroid's budget.
+The fallback adds 98 larger apps; it was adopted after a trial on 40 apps (prefix list fixed before), misses minified libraries, turns app code that R8 moved into library classes into holes (17 apps), and leaves more verdicts undecided, as one key labeler finds 27\% of bundled-library flows undecidable.
 Apps that bundle the same libraries are not independent, which we tested by keeping such apps together in each split (Table~\ref{tab:unit}).
 The transfer to malware rests on 31 apps, which shows no sign of failure but is too few to estimate a risk near 5\% precisely.
 

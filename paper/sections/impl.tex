@@ -20,6 +20,12 @@ We ask one question per candidate flow and state the flow rule in the question (
 General language models are asked once per method for a probability for each of its candidate flows, at temperature 0: Sonnet~5 and five cheaper models (Section~\ref{sec:rq4}).
 As baselines we use \emph{counting}, which gives every flow the same price, so that the bound is the receipt size; a \emph{frequency prior} by package and kind of flow; a \emph{feature classifier} trained on FlowDroid's models (logistic regression on signature features); and a language model's yes/no answer \emph{taken as fact}, as in recent specification-inference work~\cite{iris,semtaint}.
 
+\paragraph{Large apps.}
+Souffl\'e keeps every derived fact in memory and stops at its limit, as FlowDroid does.
+When it runs out of memory, the pipeline rebuilds the app with bundled third-party libraries treated as library code: classes under a fixed list of 35 package prefixes (AndroidX, Kotlin, OkHttp, Gson and similar; the app's own package is never excluded) are not analyzed, and calls into them become holes, priced like framework methods.
+The rebuild gets only the time the first attempt left, so each app stays within one budget, the one we give FlowDroid: 35 minutes and 16\,GB.
+Prefixes cannot recognize minified library code, and R8 sometimes moves app code into library-named classes, which then becomes holes as well.
+
 \paragraph{Cost.}
 Building the flow graphs is the expensive step: 14 hours for 183 apps on an 8-core server with 62\,GB of memory.
 Computing all receipts takes a few minutes per pricer with FlowDroid's models, and one to two hours without them, when every library call is a hole.

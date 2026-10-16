@@ -281,7 +281,9 @@ checkers, `data/audit_private/`).**
 
 Pipeline from here; times are working time unless marked as server time.
 
-1. F1 finish (1-2 days). FlowDroid control running (`bench/queues/fd_fallback.sh`, up to about a day of server time):
+1. F1 finish (1-2 days). PAPER TEXT DONE 2026-10-16 (setup, impl "Large apps", RQ1 reach paragraph, pipeline rows in
+   Table main and RQ2 sentence, Discussion same-budget paragraph with the FlowDroid fallback, threats, intro sentence);
+   body ends on page 18 again. Remaining from this item: nothing but the authors' read. FlowDroid control running (`bench/queues/fd_fallback.sh`, up to about a day of server time):
    FlowDroid's out-of-memory apps get the bundled-library exclusion with only the time left after the memory cap
    (2100 s minus the seconds of the full run), exactly as our fallback; its timeouts used the whole budget and get no
    second run. The control reruns of FlowDroid's successful apps with sinks only measure leaks lost by the exclusion and

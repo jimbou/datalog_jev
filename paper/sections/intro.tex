@@ -40,6 +40,7 @@ At a 5\% target, receipts clear 49\% of the false alarms that a sound treatment 
 The guarantee holds for all ten pricers and all keys we tried.
 Checking 25 receipt facts, chosen without looking at any answer, raises the cleared share to 63\%, and 100 checks to 78\%; checking 100 random facts helps little.
 On malware, a threshold certified on F-Droid apps gives no app a wrong clearance, but few documented malware leaks depend on unmodeled flows of the kind we price.
+Receipts also let the analysis degrade gracefully: when an app does not fit in memory, bundled libraries become priced holes instead of a failure, so with the same time and memory per app our pipeline analyzes 442 of 585 apps against FlowDroid's 317, the guarantee still holds, and FlowDroid given the same fallback analyzes 331 and silently loses 7.5\% of its leaks.
 
 In summary, this paper makes the following contributions:
 \begin{itemize}

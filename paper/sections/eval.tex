@@ -15,11 +15,12 @@ Our evaluation answers six questions:
 \label{sec:setup}
 
 \paragraph{Apps.}
-We downloaded about 580 open-source apps from F-Droid and built flow graphs for the 332 that fit our memory and time limits.
+We selected 585 open-source apps from F-Droid and built flow graphs for the 332 that fit our first limits (20 minutes of extraction, then 15 minutes and 16\,GB for Souffl\'e); they are the main corpus.
 The analysis uses FlowDroid's models, and holes are the flows of the methods FlowDroid does not model.
 In 307 apps at least one clean sink depends on such holes.
 These apps contain 28{,}206 clean, hole-dependent sinks whose status the main key decides: 22{,}888 of them are real leaks that the analysis misses, and 5{,}318, in 298 apps, never receive sensitive data.
 We call these 5{,}318 sinks the \emph{hard slice}: they are leak-free, but a sound treatment of unmodeled methods cannot clear them.
+With FlowDroid's budget and the fallback for large apps (Section~\ref{sec:impl}), 110 more apps build, 66 of them with decided hole-dependent sinks; we report them separately (RQ2, Section~\ref{sec:discussion}).
 For RQ6 we use TaintBench~\cite{taintbench}, 39 malware apps with 203 documented leaks; we built graphs for 33 of them.
 
 \paragraph{Answer keys.}
@@ -53,6 +54,10 @@ The dependence is not specific to our analysis.
 We gave FlowDroid holes as well: FlowDroid reads library behavior from summary files, so opening every hole means adding a summary with every candidate flow for each method it does not model, next to its own summaries.
 On the 120 apps where all of FlowDroid's runs finished within 20 minutes, open holes add 58 reported sinks in 19 apps.
 For 43 of them, switching off the hole methods on the reported paths and running FlowDroid again removes the sink, so FlowDroid itself confirms the receipt.
+How often holes matter depends on how much code an analysis reaches.
+In the same-budget run (Section~\ref{sec:discussion}), FlowDroid finished both runs on 252 apps; it reports no leak in 191 of them, and open holes add reported sinks in 17.
+FlowDroid analyzes only the code its call graph reaches from the app's entry points: on the 142 apps where both analyses finish and both counts are available, it finds a median of 4 sources and 44 sinks per app, against 11 source and 57 sink sites in our analysis.
+On TaintBench, open holes add reported sinks in 14 of 30 apps.
 
 \begin{table}[t]
 \caption{FlowDroid on 80 F-Droid apps with and without its library models: leaking sink methods it reports.}
@@ -75,7 +80,7 @@ All apps with both answers & 69 & 154 & 27 & 127 (82\%)\\
 \label{sec:rq2}
 
 \begin{table}[t]
-\caption{Share of the hard slice cleared at a certified threshold, and held-out apps with a wrong clearance (in brackets). Main key, 307 apps.}
+\caption{Share of the hard slice cleared at a certified threshold, and held-out apps with a wrong clearance (in brackets). Main key, 307 apps; last two rows: the 373 apps of the whole pipeline (307 plus 66 rescued large apps).}
 \label{tab:main}
 \small
 \begin{tabular}{@{}lccc@{}}
@@ -87,6 +92,9 @@ Frequency prior & 19.0\% (0.0\%) & 19.0\% (0.0\%) & --\\
 Feature classifier & 27.9\% (2.9\%) & 24.3\% (1.1\%) & --\\
 Sonnet~5 & 16.9\% (0.1\%) & 16.7\% (0.0\%) & 16.7\% (0.0\%)\\
 Jev & 60.0\% (4.1\%) & 48.7\% (0.9\%) & 37.0\% (0.3\%)\\
+\midrule
+Sonnet~5, 373 apps & 16.3\% (0.5\%) & 16.3\% (0.5\%) & 4.0\% (0.3\%)\\
+Jev, 373 apps & 59.5\% (3.8\%) & 49.6\% (1.3\%) & 36.2\% (0.3\%)\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -105,6 +113,8 @@ Opening unmodeled methods adds 28{,}206 decided alarms, of which 81\% are real l
 Per app, the false alarms drop from a median of 13 to 6 (90th percentile: 36 to 20), but only 5 of 298 apps lose all of them, and a remaining false alarm rests on a median of three facts.
 Receipts therefore halve the triage work for these alarms rather than remove it; checking facts (RQ5) clears more.
 In every row the observed error stays below $\alpha$, as Proposition~\ref{prop:ltt} predicts; what differs is how much is cleared.
+Adding the 66 rescued large apps, whose bundled libraries are holes, leaves Jev's result unchanged (49.6\% at $\alpha=0.05$, 1.3\% of held-out apps wrong).
+Sonnet~5 wrongly clears sinks in two of them through one bundled-library flow it prices at 0.02 (\texttt{AppCompatActivity.setContentView}), which costs it most of its clearance at $\alpha=0.02$.
 
 \emph{Counting assumptions clears nothing.}
 Counting gives every receipt of size one the same bound, so the first threshold already clears every one-fact receipt, and that puts a wrong clearance in 87\% of the apps.
