@@ -1,0 +1,30 @@
+{"cls": "android.animation.AnimatorSet", "sig": "void playTogether(java.util.Collection)", "p": [0.95, 0.03], "cost": 0}
+{"cls": "android.app.Notification$Builder", "sig": "android.app.Notification$Builder setStyle(android.app.Notification$Style)", "p": [0.05, 0.9, 0.1, 0.05], "cost": 0}
+{"cls": "android.app.PendingIntent", "sig": "int hashCode()", "p": [0.05], "cost": 0}
+{"cls": "android.content.SharedPreferences$Editor", "sig": "android.content.SharedPreferences$Editor putBoolean(java.lang.String,boolean)", "p": [0.03, 0.9, 0.03, 0.9, 0.95], "cost": 0}
+{"cls": "android.content.res.TypedArray", "sig": "int getDimensionPixelSize(int,int)", "p": [0.03, 0.02, 0.6, 0.02, 0.55], "cost": 0}
+{"cls": "android.graphics.Canvas", "sig": "boolean clipRect(android.graphics.RectF)", "p": [0.03, 0.05, 0.03, 0.03], "cost": 0}
+{"cls": "android.graphics.drawable.Drawable", "sig": "boolean setLayoutDirection(int)", "p": [0.03, 0.05, 0.03], "cost": 0}
+{"cls": "android.graphics.drawable.InsetDrawable", "sig": "android.graphics.drawable.Drawable getDrawable()", "p": [0.95], "cost": 0}
+{"cls": "android.os.Handler", "sig": "android.os.Message obtainMessage(int,int,int)", "p": [0.95, 0.03, 0.95, 0.03, 0.95, 0.03, 0.85], "cost": 0}
+{"cls": "android.text.StaticLayout$Builder", "sig": "android.text.StaticLayout$Builder obtain(java.lang.CharSequence,int,int,android.text.TextPaint,int)", "p": [0.95, 0.03, 0.4, 0.02, 0.02, 0.4, 0.02, 0.02, 0.9, 0.03, 0.2, 0.02, 0.02], "cost": 0}
+{"cls": "android.view.LayoutInflater", "sig": "android.view.LayoutInflater$Factory2 getFactory2()", "p": [0.08], "cost": 0}
+{"cls": "android.view.ViewGroup", "sig": "void removeDetachedView(android.view.View,boolean)", "p": [0.08, 0.02, 0.02, 0.05], "cost": 0}
+{"cls": "android.view.ViewGroup", "sig": "void setClipToPadding(boolean)", "p": [0.02], "cost": 0}
+{"cls": "android.view.accessibility.AccessibilityNodeInfo", "sig": "void setTraversalAfter(android.view.View)", "p": [0.05, 0.05], "cost": 0}
+{"cls": "android.widget.AbsListView", "sig": "void setSelectionFromTop(int,int)", "p": [0.05, 0.05], "cost": 0}
+{"cls": "android.widget.AbsListView$OnScrollListener", "sig": "void onScroll(android.widget.AbsListView,int,int,int)", "p": [0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03], "cost": 0}
+{"cls": "android.widget.FrameLayout", "sig": "android.view.View findFocus()", "p": [0.85], "cost": 0}
+{"cls": "android.widget.GridView", "sig": "android.view.View getChildAt(int)", "p": [0.03, 0.02, 0.9], "cost": 0}
+{"cls": "android.widget.ImageView", "sig": "int getHeight()", "p": [0.08], "cost": 0}
+{"cls": "android.widget.ListView", "sig": "void setOnScrollListener(android.widget.AbsListView$OnScrollListener)", "p": [0.03, 0.03], "cost": 0}
+{"cls": "android.widget.PopupWindow", "sig": "void showAsDropDown(android.view.View)", "p": [0.2, 0.05], "cost": 0}
+{"cls": "java.net.Socket", "sig": "int getSendBufferSize()", "p": [0.05], "cost": 0}
+{"cls": "java.nio.charset.CharsetEncoder", "sig": "java.nio.charset.CharsetEncoder onUnmappableCharacter(java.nio.charset.CodingErrorAction)", "p": [0.05, 0.9, 0.9, 0.03], "cost": 0}
+{"cls": "java.nio.file.SimpleFileVisitor", "sig": "java.nio.file.FileVisitResult visitFileFailed(java.lang.Object,java.io.IOException)", "p": [0.05, 0.03, 0.03, 0.05, 0.03, 0.03, 0.03, 0.02, 0.02], "cost": 0}
+{"cls": "java.text.DateFormatSymbols", "sig": "java.text.DateFormatSymbols getInstance(java.util.Locale)", "p": [0.05], "cost": 0}
+{"cls": "java.util.BitSet", "sig": "void <init>(int)", "p": [0.03], "cost": 0}
+{"cls": "java.util.Calendar", "sig": "java.util.Calendar getInstance(java.util.TimeZone)", "p": [0.1], "cost": 0}
+{"cls": "java.util.concurrent.atomic.AtomicReferenceFieldUpdater", "sig": "boolean compareAndSet(java.lang.Object,java.lang.Object,java.lang.Object)", "p": [0.03, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.05, 0.02, 0.9, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0}
+{"cls": "java.util.function.Predicate", "sig": "java.util.function.Predicate negate()", "p": [0.95], "cost": 0}
+{"cls": "java.util.stream.IntStream", "sig": "java.util.stream.IntStream sequential()", "p": [0.95], "cost": 0}
