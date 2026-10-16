@@ -5,7 +5,7 @@ BACKEND=codex   Codex (`codex exec`): read-only sandbox, the system text is prep
 Neither CLI exposes the sampling temperature, so answers are not forced to be deterministic (the API runs used 0).
 Calls run in an empty directory so no project context is picked up. Returns the model's text answer.
 """
-import json, os, shutil, subprocess, tempfile
+import json, os, shutil, subprocess, tempfile, threading
 
 WORKDIR = tempfile.mkdtemp(prefix="cli_llm_")
 PROXY = os.path.expanduser("~/ai-proxy/with-proxy")
@@ -18,6 +18,12 @@ def _bin(name):  # ~/.local/bin on the PKU server; elsewhere (e.g. a Claude Code
 
 
 CLAUDE, CODEX = os.environ.get("CLAUDE_BIN") or _bin("claude"), _bin("codex")
+_LAST = threading.local()
+
+
+def last_cost():
+    """API-equivalent cost (total_cost_usd) of this thread's last Claude Code call; 0 for Codex, which reports none."""
+    return getattr(_LAST, "cost", 0.0)
 
 
 def chat(backend, model, system, user, timeout=300):
@@ -26,6 +32,7 @@ def chat(backend, model, system, user, timeout=300):
                         "--tools", "", "--output-format", "json", "--max-turns", "1"]
         out = subprocess.run(cmd, cwd=WORKDIR, capture_output=True, text=True, timeout=timeout, stdin=subprocess.DEVNULL)
         d = json.loads(out.stdout)
+        _LAST.cost = d.get("total_cost_usd") or 0.0
         if d.get("is_error"):
             raise RuntimeError("claude: %s" % d.get("result"))
         return d["result"]

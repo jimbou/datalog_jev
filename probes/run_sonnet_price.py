@@ -1,7 +1,9 @@
 """Stated-confidence pricer: Sonnet 5 gives a probability for every candidate flow of a method (baseline B5).
 
 Usage: run_sonnet_price.py MODEL TAG DATASET [LIMIT]   (env NO_REASONING=1 turns hidden reasoning off for models that have it; PRICE_THREADS sets the number of parallel requests;
-  BACKEND=claude or codex asks through a logged-in Claude Code / Codex CLI instead of OpenRouter, see cli_llm.py)
+  BACKEND=claude or codex asks through a logged-in Claude Code / Codex CLI instead of OpenRouter, see cli_llm.py;
+  PRICE_PROMPT=definition asks under the written flow definition of the paper's Appendix A (the rubric of the labels);
+  SAMPLES=k asks k times per method and prices each flow at the highest answer, keeping every sample in "samples")
   DATASET data/<DATASET>.jsonl hole records (cls, sig, kind, atoms)
 Writes data/jev_<DATASET>_<TAG>_r0.jsonl rows {cls, sig, p: [prob, ...], cost}; priced methods are skipped, so it
 can be restarted. evaluate.py reads it like a Jev price file (pricing name TAG). The question and the flow rule
@@ -23,7 +25,35 @@ SYSTEM = ("You are an expert on the Java and Android framework APIs and on stati
           "exist). Answer only with a JSON object mapping each question id to a number.")
 
 
+DEFINITION = ("You are an expert on the Java and Android framework APIs. For a library method, estimate for each candidate "
+              "flow the probability that data flows from X to Y under this definition. Method M is called with X holding a "
+              "secret; after the call, is a piece of the secret in Y, in ordinary executions with standard arguments? It is a "
+              "flow when X's data is copied or computed into Y, when X is stored in Y as the method's purpose (including "
+              "keeping a reference to X), or when Y is read out of X (including its size, emptiness or metadata). It is not a "
+              "flow when X only picks which existing thing is used or returned (an index, a lookup key), only controls how "
+              "much, when or whether (a flag, a timeout, a boolean test result), only changes incidental state (caches, "
+              "listeners' bookkeeping, back-pointers), would matter only through a custom override, callback, other OS "
+              "version or unusual argument, or has no connection. Give calibrated probabilities between 0 and 1 (use small "
+              "values such as 0.02 for flows you are sure do not exist). Answer only with a JSON object mapping each "
+              "question id to a number.")
+if os.environ.get("PRICE_PROMPT") == "definition":
+    SYSTEM = DEFINITION
+SAMPLES = int(os.environ.get("SAMPLES", "1"))
+
+
 def ask(model, r):
+    """SAMPLES > 1: the method is asked SAMPLES times; each flow is priced at the highest answer."""
+    if SAMPLES > 1:
+        runs = [ask_once(model, r) for _ in range(SAMPLES)]
+        bad = [x for x in runs if "error" in x]
+        if bad:
+            return {"cls": r["cls"], "sig": r["sig"], "error": bad[0]["error"]}
+        return {"cls": r["cls"], "sig": r["sig"], "p": [max(ps) for ps in zip(*(x["p"] for x in runs))],
+                "samples": [x["p"] for x in runs], "cost": sum(x["cost"] for x in runs)}
+    return ask_once(model, r)
+
+
+def ask_once(model, r):
     """A method with more than 20 candidate flows is asked in chunks of 15 (one long answer can be cut off)."""
     if len(r["atoms"]) > 20:
         ps, cost = [], 0.0
@@ -50,7 +80,7 @@ def ask1(model, r):
         try:
             if BACKEND != "openrouter":
                 text = cli_llm.chat(BACKEND, model, SYSTEM, st + "\n\nCandidate flows:\n" + qs)
-                d = {"choices": [{"message": {"content": text}}], "usage": {"cost": 0}}  # subscription: no per-call price
+                d = {"choices": [{"message": {"content": text}}], "usage": {"cost": cli_llm.last_cost()}}  # API-equivalent
             else:
                 req = urllib.request.Request(URL, body, {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"})
                 d = json.load(urllib.request.urlopen(req, timeout=120))
