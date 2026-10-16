@@ -21,6 +21,16 @@ WORDINGS = {
 WORDINGS["choice-obj"] = ("Taint is tracked at object granularity: a tainted object taints everything read or "
                           "obtained from it (its fields, getter results, contents, and derived values). "
                           "If {src} is tainted before the call, is {tgt} tainted after the call?")
+# F2: the written flow definition of the paper's Appendix A (the rubric of the key labels) stated in the question
+WORDINGS["choice-def"] = ("Definition of a flow: the method is called while {src} holds a secret; after the call, is a "
+                          "piece of the secret in {tgt}, in ordinary executions with standard arguments? It is a flow "
+                          "when the secret is copied or computed into {tgt}, when it is stored in {tgt} as the method's "
+                          "purpose (including keeping a reference to it), or when {tgt} is read out of {src} (including "
+                          "its size, emptiness or metadata). It is not a flow when {src} only picks which existing thing "
+                          "is used or returned (an index, a lookup key), only controls how much, when or whether (a flag, "
+                          "a timeout, a boolean test result), only changes incidental state (caches, bookkeeping), would "
+                          "matter only through a custom override, callback, other OS version or unusual argument, or has "
+                          "no connection. Is there a flow from {src} to {tgt}?")
 CHOICE = {"yes": "yes, the tainted data reaches it", "no": "no, the tainted data does not reach it"}
 
 
