@@ -291,7 +291,9 @@ Pipeline from here; times are working time unless marked as server time.
    same-budget paragraph in the Discussion, pipeline row in the main tables (main tables stay on the 307 apps), threats
    (R8-moved app code, fallback chosen after the 40-app subset, 27% undecidable library flows in the key). K2 for library
    disagreements skipped and disclosed.
-2. Quick items (half a day): F5 recall-side headline; C2 from the F1 data (pricers on bundled-library methods: Jev holds,
+2. Quick items (half a day) DONE 2026-10-16: F5 (abstract, intro, RQ2 lead with recall; RQ5 per-app alarms after
+   checks), C2 (RQ4 paragraph, analysis/c2_pricers_lib.py), C0 (impl sentence, analysis/c0_server_entries.py: 96.5%
+   of hole-dependent verdicts at Android sinks, 0 at server entries; no rebuild). Was: F5 recall-side headline; C2 from the F1 data (pricers on bundled-library methods: Jev holds,
    Sonnet misses AppCompatActivity.setContentView); C0 share of verdicts at Java-server source/sink entries.
 3. B3 user value (about a day): false alarms per app before and after clearing, apps with no alarms left, receipt sizes.
 4. F2 better pricers on a development subset (2-3 days; Sonnet variants possibly on the cloud-session credits, see
