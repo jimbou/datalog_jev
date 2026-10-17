@@ -4,6 +4,8 @@
 # branch last-cloud; server: f1_s55_server, f1_s55_rest2_rev), first price per method wins. The old dev-only def1 file is
 # kept as .bak-dev. Evaluate on all graph sets, score the rescued apps with the main threshold (f1_score.py), certify
 # the pools (373 = main + rescued, 390 = main + IzzyOnDroid, 456 = all). Cores 12-15, nice 10.
+# Rerun 2026-10-17 after pricing f1_s55_gap (273 unmodeled graph methods outside every Sonnet 5.5 set, 281 of the 293
+# per-population misses in IzzyOnDroid): F1_S55_GAP=1 prices them first.
 cd ~/receipts
 C="taskset -c 12-15 nice -n 10"
 L=data/f1/s55_eval.log
@@ -11,6 +13,10 @@ log() { echo "$1 $(date -u +%F-%T)" >> $L; }
 log "WAIT"
 until grep -q S55-REST-DONE data/f1/price_s55_rest.log 2>/dev/null; do sleep 120; done
 log "START"
+if [ -n "$F1_S55_GAP" ]; then
+  (cd probes && BACKEND=claude PRICE_PROMPT=definition SAMPLES=1 PRICE_THREADS=4 python3 run_sonnet_price.py claude-sonnet-5-5 sonnet55def1 f1_s55_gap >> ../data/f1/price_s55_gap.log 2>&1)
+  log "GAP-PRICED $(wc -l < data/jev_f1_s55_gap_sonnet55def1_r0.jsonl)"
+fi
 F=data/jev_holes_android_fw_sonnet55def1_r0.jsonl
 [ -e $F.bak-dev ] || cp $F $F.bak-dev
 python3 - >> $L <<'PY'
@@ -27,7 +33,8 @@ def add(path, first_sample):
     print(path, "added", n)
 add("data/jev_holes_android_fw_sonnet55def3_r0.jsonl", True)
 for f in ["data/f1_cloud/jev_f1_s55_cloud_sonnet55def1_r0.jsonl", "data/f1_cloud/jev_f1_s55_rest2_sonnet55def1_r0.jsonl",
-          "data/jev_f1_s55_server_sonnet55def1_r0.jsonl", "data/jev_f1_s55_rest2_rev_sonnet55def1_r0.jsonl"]:
+          "data/jev_f1_s55_server_sonnet55def1_r0.jsonl", "data/jev_f1_s55_rest2_rev_sonnet55def1_r0.jsonl",
+          "data/jev_f1_s55_gap_sonnet55def1_r0.jsonl"]:
     add(f, False)
 want = set()
 for f in ["data/f1_s55_cloud.jsonl", "data/f1_s55_server.jsonl"]:
