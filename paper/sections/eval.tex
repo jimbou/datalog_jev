@@ -346,6 +346,7 @@ We fixed the list before any run: every app in its index of 15 October 2026 that
 The same pipeline builds 94 of them, 68 fully and 26 with bundled libraries as holes (the other 40 exceed the budget even then; these apps are larger than F-Droid's), and 83 have a hole-dependent verdict the key decides; the new apps add 2{,}648 unmodeled methods, labeled for the key exactly as in the main corpus.
 With the threshold certified on F-Droid, Jev clears 43.7\% of the leak-free verdicts in the fully built apps and 50.6\% in the fallback apps, with no wrong clearance in any of the 83 apps; at $\alpha=0.1$ (threshold 0.3) it clears 60.9\%, again with none.
 Sonnet~5.5 with the written definition clears 36.6\%, also without a wrong clearance.
+Certifying on the pooled populations instead changes little: on the 390 F-Droid and IzzyOnDroid apps Jev clears 52.1\% of the hard slice with 1.7\% of held-out apps wrong, and 51.8\% (1.7\%) with the 66 rescued large apps added (456 apps).
 
 \emph{Other kinds of holes.}
 Receipts apply to any gap that can be written as a set of candidate edges.

@@ -13,8 +13,12 @@ paths are added. The final set is a cut that FlowDroid itself has confirmed (the
 A sink whose receipt cannot be confirmed within MAX_ITERS runs gets no bound (it is never cleared). Output per app:
 OUT_DIR/<name>.json with the sinks of each kind and, per hole-dependent sink, the receipt (list of [cls, sig]), whether it
 was confirmed, and whether the truth run reports the sink.
+env HOLE_SCOPE=DIR[:DIR...]: open (and use for truth and cuts) only the hole methods that our own flow graph of the app
+(DIR/<name>.npz, hole_cls/hole_sub) contains, instead of every unmodeled method; summary directories are then per app.
+Apps without a graph are skipped. The rest of FlowDroid (call graph, taint propagation, paths) is unchanged.
 """
 import json, os, re, shutil, subprocess, sys, time, html
+import numpy as np
 import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,6 +31,7 @@ JAVA = os.path.expanduser("~/jdk/jdk-21.0.12.1+1/bin/java")
 WORK = os.path.join(ROOT, "data/fd_receipts_work")
 MAX_ITERS = 4
 RUN_TIMEOUT = int(os.environ.get("FD_TIMEOUT", "1200"))
+SCOPE = [x for x in os.environ.get("HOLE_SCOPE", "").split(":") if x]
 
 
 def write_dir(out, extra):
@@ -120,9 +125,22 @@ def main():
             continue
         t0 = time.time()
         rec = {"app": name}
+        flows, a_on, a_truth = all_flows, d_on, d_truth
+        if SCOPE:
+            g = next((os.path.join(ROOT, x, name + ".npz") for x in SCOPE if os.path.exists(os.path.join(ROOT, x, name + ".npz"))), None)
+            if g is None:
+                print(name, "no graph, skipped", flush=True)
+                continue
+            z = np.load(g, allow_pickle=True)
+            H = set(zip(z["hole_cls"].tolist(), z["hole_sub"].tolist()))
+            flows = {k: v for k, v in all_flows.items() if k in H}
+            a_on, a_truth = os.path.join(WORK, "sum_on_" + name), os.path.join(WORK, "sum_truth_" + name)
+            write_dir(a_on, flows)
+            write_dir(a_truth, {k: v for k, v in true_flows.items() if k in H})
+            rec["scope_methods"] = len(flows)
         base = run_fd(apk, ss, os.path.join(ROOT, "data/stubdroid"), name + ".base")
-        on = run_fd(apk, ss, d_on, name + ".on") if base is not None else None
-        truth = run_fd(apk, ss, d_truth, name + ".truth") if on is not None else None
+        on = run_fd(apk, ss, a_on, name + ".on") if base is not None else None
+        truth = run_fd(apk, ss, a_truth, name + ".truth") if on is not None else None
         if base is None or on is None or truth is None:
             rec["status"] = "failed"
             json.dump(rec, open(outp, "w"))
@@ -137,7 +155,7 @@ def main():
                 if not cut:
                     break
                 d = os.path.join(WORK, "sum_cut_" + name)
-                write_dir(d, {k: v for k, v in all_flows.items() if k not in cut})
+                write_dir(d, {k: v for k, v in flows.items() if k not in cut})
                 res = run_fd(apk, ss, d, "%s.cut%d_%d" % (name, i, it))
                 if res is None:
                     break
@@ -150,6 +168,10 @@ def main():
                 cut |= new
             rec["sinks"][s] = {"receipt": sorted(cut), "confirmed": confirmed, "truth": s in truth}
         rec["seconds"] = round(time.time() - t0)
+        if SCOPE:
+            for x in (a_on, a_truth, os.path.join(WORK, "sum_cut_" + name)):
+                if os.path.exists(x):
+                    shutil.rmtree(x)
         json.dump(rec, open(outp, "w"))
         print(name, "base", len(base), "hole-dependent", len(hd), "confirmed", sum(v["confirmed"] for v in rec["sinks"].values()),
               "seconds", rec["seconds"], flush=True)
