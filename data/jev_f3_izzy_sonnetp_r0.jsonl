@@ -1998,3 +1998,253 @@
 {"cls": "com.google.android.material.tabs.TabLayout", "sig": "uh1 e()", "p": [0.75], "cost": 0.009586}
 {"cls": "com.google.android.material.tabs.TabLayout", "sig": "void g(uh1,boolean)", "p": [0.75, 0.05, 0.03, 0.35], "cost": 0.011358}
 {"cls": "com.google.android.material.textfield.TextInputEditText", "sig": "void <init>(android.content.Context)", "p": [0.08], "cost": 0.006658000000000001}
+{"cls": "com.google.android.material.textfield.TextInputLayout", "sig": "void <init>(android.content.Context)", "p": [0.05], "cost": 0.006666}
+{"cls": "com.google.android.material.textfield.TextInputLayout", "sig": "void setCounterMaxLength(int)", "p": [0.05], "cost": 0.0066500000000000005}
+{"cls": "com.google.android.material.textfield.TextInputLayout", "sig": "void setEnabled(boolean)", "p": [0.03], "cost": 0.0066500000000000005}
+{"cls": "com.google.android.material.textfield.TextInputLayout", "sig": "void setEndIconDrawable(int)", "p": [0.03], "cost": 0.0066500000000000005}
+{"cls": "com.google.android.material.textfield.TextInputLayout", "sig": "void setErrorEnabled(boolean)", "p": [0.03], "cost": 0.006662}
+{"cls": "com.google.android.material.textfield.TextInputLayout", "sig": "void setHelperText(java.lang.CharSequence)", "p": [0.95, 0.03], "cost": 0.006906}
+{"cls": "com.google.android.material.textfield.TextInputLayout", "sig": "void setStartIconDrawable(android.graphics.drawable.Drawable)", "p": [0.95, 0.03], "cost": 0.00697}
+{"cls": "com.google.android.material.textfield.TextInputLayout", "sig": "void setStartIconDrawable(int)", "p": [0.03], "cost": 0.0066500000000000005}
+{"cls": "com.google.common.base.Splitter", "sig": "void <init>(java.lang.Object,java.lang.Object,int,int)", "p": [0.9, 0.03, 0.9, 0.03, 0.75, 0.03, 0.03, 0.75, 0.03, 0.03], "cost": 0.014395999999999999}
+{"cls": "com.google.gson.JsonArray", "sig": "java.util.Iterator iterator()", "p": [0.95], "cost": 0.0065980000000000006}
+{"cls": "com.google.gson.JsonArray", "sig": "void add(com.google.gson.JsonElement)", "p": [0.95, 0.03], "cost": 0.006886}
+{"cls": "com.google.gson.JsonElement", "sig": "com.google.gson.JsonArray getAsJsonArray()", "p": [0.97], "cost": 0.006634}
+{"cls": "com.google.gson.JsonElement", "sig": "com.google.gson.JsonObject getAsJsonObject()", "p": [0.97], "cost": 0.006634}
+{"cls": "com.google.gson.JsonElement", "sig": "java.lang.Number getAsNumber()", "p": [0.95], "cost": 0.006606000000000001}
+{"cls": "com.google.gson.JsonElement", "sig": "java.lang.String getAsString()", "p": [0.95], "cost": 0.006594}
+{"cls": "com.google.gson.JsonElement", "sig": "java.lang.String toString()", "p": [0.95], "cost": 0.006586000000000001}
+{"cls": "com.google.gson.JsonElement", "sig": "long getAsLong()", "p": [0.95], "cost": 0.0065780000000000005}
+{"cls": "com.google.gson.JsonObject", "sig": "com.google.gson.JsonElement get(java.lang.String)", "p": [0.05, 0.03, 0.95], "cost": 0.006982}
+{"cls": "com.google.gson.JsonObject", "sig": "void add(java.lang.String,com.google.gson.JsonElement)", "p": [0.95, 0.03, 0.95, 0.03], "cost": 0.007326}
+{"cls": "com.google.gson.JsonParser", "sig": "com.google.gson.JsonElement parseString(java.lang.String)", "p": [0.95], "cost": 0.006658000000000001}
+{"cls": "com.google.gson.TypeAdapter", "sig": "void write(com.google.gson.stream.JsonWriter,java.lang.Object)", "p": [0.03, 0.03, 0.03, 0.9, 0.03, 0.03], "cost": 0.007846}
+{"cls": "com.google.gson.internal.f", "sig": "java.lang.Class h(java.lang.reflect.Type)", "p": [0.95], "cost": 0.006666}
+{"cls": "com.google.gson.internal.f", "sig": "java.lang.reflect.Type a(java.lang.reflect.Type)", "p": [0.95], "cost": 0.0066820000000000004}
+{"cls": "com.google.gson.internal.r", "sig": "java.lang.Object a(java.lang.Class)", "p": [0.05, 0.05, 0.05], "cost": 0.012889999999999999}
+{"cls": "com.google.gson.j", "sig": "com.google.gson.v c(e2.a)", "p": [0.92, 0.05, 0.1, 0.03], "cost": 0.010432}
+{"cls": "com.google.gson.j", "sig": "f2.b e(java.io.Writer)", "p": [0.92, 0.03, 0.05, 0.03], "cost": 0.012454}
+{"cls": "com.google.gson.j", "sig": "java.lang.Object b(java.lang.String,java.lang.reflect.Type)", "p": [0.95, 0.05, 0.03, 0.05, 0.03, 0.05, 0.02], "cost": 0.01111}
+{"cls": "com.google.gson.reflect.a", "sig": "com.google.gson.reflect.a get(java.lang.Class)", "p": [0.85], "cost": 0.006658000000000001}
+{"cls": "com.google.gson.reflect.a", "sig": "com.google.gson.reflect.a get(java.lang.reflect.Type)", "p": [0.95], "cost": 0.006690000000000001}
+{"cls": "com.google.gson.reflect.a", "sig": "java.lang.Class getRawType()", "p": [0.95], "cost": 0.0065980000000000006}
+{"cls": "com.google.gson.reflect.a", "sig": "java.lang.reflect.Type getType()", "p": [0.95], "cost": 0.006606000000000001}
+{"cls": "com.google.gson.v", "sig": "java.lang.Object b(f2.a)", "p": [0.85, 0.05, 0.1, 0.03], "cost": 0.012388}
+{"cls": "com.google.gson.v", "sig": "void c(f2.b,java.lang.Object)", "p": [0.03, 0.03, 0.03, 0.9, 0.05, 0.03], "cost": 0.013592}
+{"cls": "com.squareup.moshi.JsonAdapter", "sig": "java.lang.Object fromJson(com.squareup.moshi.JsonReader)", "p": [0.95, 0.1, 0.08, 0.05], "cost": 0.007322}
+{"cls": "com.squareup.moshi.JsonUtf8Reader", "sig": "int peek()", "p": [0.85], "cost": 0.0065980000000000006}
+{"cls": "com.squareup.moshi.JsonUtf8Reader", "sig": "void <init>(okio.Buffer)", "p": [0.95], "cost": 0.006678000000000001}
+{"cls": "dalvik.system.DexFile", "sig": "java.util.Enumeration entries()", "p": [0.85], "cost": 0.006594}
+{"cls": "dalvik.system.PathClassLoader", "sig": "void <init>(java.lang.String,java.lang.ClassLoader)", "p": [0.95, 0.03, 0.5], "cost": 0.007122}
+{"cls": "j$.time.Instant", "sig": "j$.time.Instant parse(java.lang.CharSequence)", "p": [0.95], "cost": 0.006654}
+{"cls": "j$.util.concurrent.ThreadLocalRandom", "sig": "int nextInt(int,int)", "p": [0.03, 0.02, 0.03, 0.02, 0.03], "cost": 0.0072380000000000005}
+{"cls": "java.lang.reflect.Constructor", "sig": "java.lang.String toGenericString()", "p": [0.85], "cost": 0.006602}
+{"cls": "java.net.DatagramPacket", "sig": "java.net.SocketAddress getSocketAddress()", "p": [0.95], "cost": 0.006618000000000001}
+{"cls": "java.net.DatagramPacket", "sig": "void setSocketAddress(java.net.SocketAddress)", "p": [0.95, 0.03], "cost": 0.006882}
+{"cls": "java.net.DatagramSocket", "sig": "boolean getBroadcast()", "p": [0.05], "cost": 0.006586000000000001}
+{"cls": "java.net.DatagramSocket", "sig": "boolean getReuseAddress()", "p": [0.03], "cost": 0.00659}
+{"cls": "java.net.DatagramSocket", "sig": "int getTrafficClass()", "p": [0.15], "cost": 0.006582}
+{"cls": "java.net.DatagramSocket", "sig": "void setSendBufferSize(int)", "p": [0.05], "cost": 0.006614}
+{"cls": "java.net.DatagramSocket", "sig": "void setTrafficClass(int)", "p": [0.05], "cost": 0.00661}
+{"cls": "java.net.FileNameMap", "sig": "java.lang.String getContentTypeFor(java.lang.String)", "p": [0.85, 0.03, 0.1], "cost": 0.006978}
+{"cls": "java.net.IDN", "sig": "java.lang.String toASCII(java.lang.String,int)", "p": [0.95, 0.03], "cost": 0.00677}
+{"cls": "java.net.MulticastSocket", "sig": "boolean getLoopbackMode()", "p": [0.95], "cost": 0.006594}
+{"cls": "java.net.MulticastSocket", "sig": "int getTimeToLive()", "p": [0.95], "cost": 0.006582}
+{"cls": "java.net.MulticastSocket", "sig": "java.net.InetAddress getInterface()", "p": [0.95], "cost": 0.006602}
+{"cls": "java.net.MulticastSocket", "sig": "void setLoopbackMode(boolean)", "p": [0.04], "cost": 0.0066300000000000005}
+{"cls": "java.net.NetworkInterface", "sig": "boolean equals(java.lang.Object)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.0071460000000000004}
+{"cls": "java.net.ServerSocket", "sig": "boolean getReuseAddress()", "p": [0.15], "cost": 0.006586000000000001}
+{"cls": "java.net.ServerSocket", "sig": "int getReceiveBufferSize()", "p": [0.95], "cost": 0.00659}
+{"cls": "java.net.ServerSocket", "sig": "int getSoTimeout()", "p": [0.15], "cost": 0.0065780000000000005}
+{"cls": "java.net.Socket", "sig": "boolean getOOBInline()", "p": [0.85], "cost": 0.00657}
+{"cls": "java.net.Socket", "sig": "boolean getReuseAddress()", "p": [0.05], "cost": 0.006574}
+{"cls": "java.net.Socket", "sig": "int getTrafficClass()", "p": [0.85], "cost": 0.006566000000000001}
+{"cls": "java.net.Socket", "sig": "void setOOBInline(boolean)", "p": [0.03], "cost": 0.006606000000000001}
+{"cls": "java.nio.channels.DatagramChannel", "sig": "java.nio.channels.SelectionKey keyFor(java.nio.channels.Selector)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.007278}
+{"cls": "java.nio.channels.FileChannel", "sig": "long write(java.nio.ByteBuffer[])", "p": [0.05, 0.03, 0.03, 0.02], "cost": 0.007246}
+{"cls": "java.nio.channels.MembershipKey", "sig": "java.net.NetworkInterface networkInterface()", "p": [0.05], "cost": 0.006626000000000001}
+{"cls": "java.nio.channels.MulticastChannel", "sig": "java.nio.channels.MembershipKey join(java.net.InetAddress,java.net.NetworkInterface)", "p": [0.05, 0.2, 0.03, 0.05, 0.2, 0.03, 0.1, 0.03, 0.03], "cost": 0.008346}
+{"cls": "java.nio.channels.MulticastChannel", "sig": "java.nio.channels.MembershipKey join(java.net.InetAddress,java.net.NetworkInterface,java.net.InetAddress)", "p": [0.92, 0.12, 0.03, 0.03, 0.9, 0.12, 0.03, 0.03, 0.85, 0.12, 0.03, 0.03, 0.5, 0.03, 0.03, 0.03], "cost": 0.035132}
+{"cls": "java.nio.channels.NetworkChannel", "sig": "java.lang.Object getOption(java.net.SocketOption)", "p": [0.05, 0.03, 0.5, 0.03], "cost": 0.007214}
+{"cls": "java.nio.channels.NetworkChannel", "sig": "java.nio.channels.NetworkChannel setOption(java.net.SocketOption,java.lang.Object)", "p": [0.05, 0.08, 0.03, 0.05, 0.1, 0.03, 0.03, 0.03, 0.03], "cost": 0.008262}
+{"cls": "java.nio.channels.NetworkChannel", "sig": "java.util.Set supportedOptions()", "p": [0.05], "cost": 0.006614}
+{"cls": "java.nio.channels.SeekableByteChannel", "sig": "java.nio.channels.SeekableByteChannel truncate(long)", "p": [0.05, 0.03, 0.1], "cost": 0.00697}
+{"cls": "java.nio.channels.SelectableChannel", "sig": "java.nio.channels.SelectionKey keyFor(java.nio.channels.Selector)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.007278}
+{"cls": "java.nio.channels.ServerSocketChannel", "sig": "java.nio.channels.SelectionKey keyFor(java.nio.channels.Selector)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.007286}
+{"cls": "java.nio.channels.SocketChannel", "sig": "java.net.SocketAddress getLocalAddress()", "p": [0.15], "cost": 0.0066300000000000005}
+{"cls": "java.nio.channels.SocketChannel", "sig": "java.nio.channels.SelectionKey keyFor(java.nio.channels.Selector)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.007274}
+{"cls": "java.nio.file.Files", "sig": "java.nio.channels.SeekableByteChannel newByteChannel(java.nio.file.Path,java.nio.file.OpenOption[])", "p": [0.95, 0.03, 0.05, 0.03], "cost": 0.007446}
+{"cls": "java.nio.file.attribute.AclFileAttributeView", "sig": "java.nio.file.attribute.UserPrincipal getOwner()", "p": [0.95], "cost": 0.006674}
+{"cls": "java.nio.file.attribute.AclFileAttributeView", "sig": "java.util.List getAcl()", "p": [0.85], "cost": 0.006622}
+{"cls": "java.nio.file.attribute.PosixFileAttributeView", "sig": "java.nio.file.attribute.PosixFileAttributes readAttributes()", "p": [0.95], "cost": 0.006690000000000001}
+{"cls": "java.nio.file.attribute.PosixFilePermissions", "sig": "java.lang.String toString(java.util.Set)", "p": [0.95], "cost": 0.006662}
+{"cls": "java.security.KeyFactory", "sig": "java.security.spec.KeySpec getKeySpec(java.security.Key,java.lang.Class)", "p": [0.92, 0.1, 0.03, 0.03, 0.02, 0.3, 0.02], "cost": 0.007774}
+{"cls": "java.security.KeyStore$PrivateKeyEntry", "sig": "java.security.PrivateKey getPrivateKey()", "p": [0.95], "cost": 0.006654}
+{"cls": "java.security.KeyStore$PrivateKeyEntry", "sig": "java.security.cert.Certificate getCertificate()", "p": [0.85], "cost": 0.0066500000000000005}
+{"cls": "java.security.cert.X509Certificate", "sig": "java.lang.String getSigAlgOID()", "p": [0.95], "cost": 0.006614}
+{"cls": "java.text.StringCharacterIterator", "sig": "char first()", "p": [0.95], "cost": 0.006566000000000001}
+{"cls": "java.text.StringCharacterIterator", "sig": "char next()", "p": [0.95], "cost": 0.006566000000000001}
+{"cls": "java.time.Duration", "sig": "int compareTo(java.lang.Object)", "p": [0.03, 0.02, 0.03, 0.02], "cost": 0.00713}
+{"cls": "java.time.Instant", "sig": "int compareTo(java.lang.Object)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.00713}
+{"cls": "java.time.Instant", "sig": "java.time.Instant minusSeconds(long)", "p": [0.95, 0.03, 0.95], "cost": 0.006902}
+{"cls": "java.time.LocalDateTime", "sig": "java.time.LocalDateTime minusMinutes(long)", "p": [0.95, 0.02, 0.95], "cost": 0.006934}
+{"cls": "java.time.LocalDateTime", "sig": "java.time.LocalDateTime now(java.time.Clock)", "p": [0.95], "cost": 0.0066500000000000005}
+{"cls": "java.util.HashMap", "sig": "java.lang.Object computeIfAbsent(java.lang.Object,java.util.function.Function)", "p": [0.55, 0.9, 0.05, 0.85, 0.8, 0.05, 0.85, 0.03, 0.03], "cost": 0.012678}
+{"cls": "java.util.Map", "sig": "java.lang.Object computeIfAbsent(java.lang.Object,java.util.function.Function)", "p": [0.15, 0.9, 0.9, 0.85, 0.85, 0.03, 0.5, 0.03, 0.05], "cost": 0.01896}
+{"cls": "java.util.concurrent.AbstractExecutorService", "sig": "java.util.concurrent.Future submit(java.lang.Runnable,java.lang.Object)", "p": [0.05, 0.02, 0.03, 0.9, 0.02, 0.03, 0.02, 0.02, 0.02], "cost": 0.012374}
+{"cls": "java.util.concurrent.ConcurrentHashMap", "sig": "java.lang.Object compute(java.lang.Object,java.util.function.BiFunction)", "p": [0.3, 0.8, 0.9, 0.9, 0.9, 0.05, 0.6, 0.05, 0.7], "cost": 0.03679}
+{"cls": "java.util.concurrent.ConcurrentHashMap", "sig": "java.lang.Object computeIfAbsent(java.lang.Object,java.util.function.Function)", "p": [0.1, 0.85, 0.75, 0.9, 0.8, 0.03, 0.6, 0.03, 0.05], "cost": 0.022761999999999998}
+{"cls": "java.util.concurrent.atomic.AtomicIntegerArray", "sig": "void lazySet(int,int)", "p": [0.05, 0.95], "cost": 0.006817999999999999}
+{"cls": "java.util.concurrent.atomic.AtomicIntegerFieldUpdater", "sig": "int getAndAdd(java.lang.Object,int)", "p": [0.05, 0.03, 0.9, 0.03, 0.03, 0.3, 0.03], "cost": 0.007726}
+{"cls": "java.util.concurrent.atomic.AtomicLongFieldUpdater", "sig": "long getAndSet(java.lang.Object,long)", "p": [0.85, 0.03, 0.1, 0.03, 0.85, 0.03, 0.03], "cost": 0.013744}
+{"cls": "java.util.concurrent.locks.AbstractOwnableSynchronizer", "sig": "void setExclusiveOwnerThread(java.lang.Thread)", "p": [0.95, 0.03], "cost": 0.006938}
+{"cls": "java.util.jar.JarFile", "sig": "java.util.jar.JarEntry getJarEntry(java.lang.String)", "p": [0.85, 0.03, 0.1], "cost": 0.006998}
+{"cls": "java.util.jar.JarFile", "sig": "void <init>(java.lang.String)", "p": [0.9], "cost": 0.006634}
+{"cls": "java.util.logging.Logger", "sig": "void config(java.lang.String)", "p": [0.03], "cost": 0.006622}
+{"cls": "java.util.stream.Stream", "sig": "java.util.stream.Stream filter(java.util.function.Predicate)", "p": [0.05, 0.03, 0.95, 0.9], "cost": 0.0072180000000000005}
+{"cls": "java.util.stream.Stream", "sig": "java.util.stream.Stream map(java.util.function.Function)", "p": [0.05, 0.02, 0.9, 0.9], "cost": 0.007182}
+{"cls": "java.util.stream.Stream", "sig": "java.util.stream.Stream sorted(java.util.Comparator)", "p": [0.05, 0.03, 0.95, 0.05], "cost": 0.00719}
+{"cls": "java.util.zip.Adler32", "sig": "void update(byte[])", "p": [0.95, 0.02], "cost": 0.006777999999999999}
+{"cls": "java.util.zip.Adler32", "sig": "void update(java.nio.ByteBuffer)", "p": [0.95, 0.02], "cost": 0.006882}
+{"cls": "java.util.zip.CRC32", "sig": "void update(java.nio.ByteBuffer)", "p": [0.95, 0.03], "cost": 0.006882}
+{"cls": "java.util.zip.ZipEntry", "sig": "void setCompressedSize(long)", "p": [0.95], "cost": 0.006618000000000001}
+{"cls": "java.util.zip.ZipFile", "sig": "void <init>(java.io.File,int)", "p": [0.95, 0.05, 0.02], "cost": 0.006982}
+{"cls": "javax.crypto.EncryptedPrivateKeyInfo", "sig": "java.lang.String getAlgName()", "p": [0.95], "cost": 0.006638000000000001}
+{"cls": "javax.crypto.EncryptedPrivateKeyInfo", "sig": "java.security.AlgorithmParameters getAlgParameters()", "p": [0.85], "cost": 0.006674}
+{"cls": "javax.crypto.EncryptedPrivateKeyInfo", "sig": "java.security.spec.PKCS8EncodedKeySpec getKeySpec(javax.crypto.Cipher)", "p": [0.05, 0.03, 0.92, 0.03], "cost": 0.012452000000000001}
+{"cls": "javax.crypto.EncryptedPrivateKeyInfo", "sig": "void <init>(byte[])", "p": [0.95], "cost": 0.006658000000000001}
+{"cls": "javax.inject.Provider", "sig": "java.lang.Object get()", "p": [0.85], "cost": 0.006574}
+{"cls": "javax.net.ServerSocketFactory", "sig": "java.net.ServerSocket createServerSocket(int,int)", "p": [0.03, 0.02, 0.03, 0.02, 0.05], "cost": 0.0072580000000000006}
+{"cls": "javax.net.ssl.KeyManagerFactory", "sig": "void <init>(javax.net.ssl.KeyManagerFactorySpi,java.security.Provider,java.lang.String)", "p": [0.08, 0.03, 0.08, 0.03, 0.03, 0.03, 0.02], "cost": 0.008222}
+{"cls": "javax.net.ssl.SNIHostName", "sig": "java.lang.String getAsciiName()", "p": [0.95], "cost": 0.006614}
+{"cls": "javax.net.ssl.SNIHostName", "sig": "void <init>(java.lang.String)", "p": [0.95], "cost": 0.0066500000000000005}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "int getPeerPort()", "p": [0.08], "cost": 0.006594}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "java.lang.String getPeerHost()", "p": [0.95], "cost": 0.006614}
+{"cls": "javax.net.ssl.SSLEngine", "sig": "void <init>(java.lang.String,int)", "p": [0.9, 0.3], "cost": 0.006822}
+{"cls": "javax.net.ssl.SSLParameters", "sig": "void setServerNames(java.util.List)", "p": [0.95, 0.03], "cost": 0.00683}
+{"cls": "javax.net.ssl.SSLServerSocketFactory", "sig": "java.lang.String[] getSupportedCipherSuites()", "p": [0.03], "cost": 0.006662}
+{"cls": "javax.net.ssl.TrustManagerFactory", "sig": "void <init>(javax.net.ssl.TrustManagerFactorySpi,java.security.Provider,java.lang.String)", "p": [0.05, 0.03, 0.05, 0.03, 0.03, 0.03, 0.02], "cost": 0.008222}
+{"cls": "javax.net.ssl.X509ExtendedTrustManager", "sig": "void checkClientTrusted(java.security.cert.X509Certificate[],java.lang.String,javax.net.ssl.SSLEngine)", "p": [0.03, 0.03, 0.03, 0.02, 0.02, 0.03, 0.02, 0.03, 0.03], "cost": 0.008718}
+{"cls": "javax.net.ssl.X509ExtendedTrustManager", "sig": "void checkServerTrusted(java.security.cert.X509Certificate[],java.lang.String,javax.net.ssl.SSLEngine)", "p": [0.03, 0.03, 0.03, 0.02, 0.02, 0.03, 0.02, 0.03, 0.03], "cost": 0.012128}
+{"cls": "kotlin.ExceptionsKt", "sig": "java.lang.Object withContext(kotlin.coroutines.CoroutineContext,kotlin.jvm.functions.Function2,kotlin.coroutines.Continuation)", "p": [0.05, 0.15, 0.05, 0.85, 0.05, 0.1, 0.05, 0.05, 0.05], "cost": 0.024112}
+{"cls": "kotlin.ExceptionsKt", "sig": "kotlinx.coroutines.DeferredCoroutine async$default(kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher,kotlin.jvm.functions.Function2,int)", "p": [0.15, 0.03, 0.03, 0.08, 0.03, 0.03, 0.55, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02], "cost": 0.014794}
+{"cls": "kotlin.ExceptionsKt", "sig": "kotlinx.coroutines.StandaloneCoroutine launch$default(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.ContinuationInterceptor,int,kotlin.jvm.functions.Function2,int)", "p": [0.55, 0.05, 0.05, 0.55, 0.05, 0.05, 0.02, 0.02, 0.02, 0.02, 0.3, 0.05, 0.05, 0.02, 0.02, 0.02, 0.02], "cost": 0.022928}
+{"cls": "kotlin.NotImplementedError", "sig": "void <init>(java.lang.String)", "p": [0.95], "cost": 0.006638000000000001}
+{"cls": "kotlin.ResultKt", "sig": "androidx.compose.material3.SheetState rememberModalBottomSheetState(androidx.compose.runtime.Composer)", "p": [0.03], "cost": 0.006758}
+{"cls": "kotlin.ResultKt", "sig": "androidx.compose.runtime.ParcelableSnapshotMutableFloatState mutableFloatStateOf(float)", "p": [0.95], "cost": 0.0067020000000000005}
+{"cls": "kotlin.ResultKt", "sig": "androidx.compose.runtime.State rememberCheckableColor-Bx497Mc(boolean,java.lang.String,boolean,long,androidx.compose.runtime.GapComposer,int)", "p": [0.6, 0.45, 0.2, 0.3, 0.55, 0.45, 0.65, 0.5, 0.3, 0.04, 0.08], "cost": 0.023424}
+{"cls": "kotlin.ResultKt", "sig": "androidx.compose.runtime.internal.ComposableLambdaImpl composableLambda(androidx.compose.runtime.Composer,int,kotlin.jvm.internal.Lambda)", "p": [0.05, 0.03, 0.1, 0.02, 0.02, 0.9, 0.03], "cost": 0.016900000000000002}
+{"cls": "kotlin.ResultKt", "sig": "androidx.compose.ui.graphics.painter.Painter painterResource(int,androidx.compose.runtime.Composer)", "p": [0.05, 0.02, 0.02], "cost": 0.007168}
+{"cls": "kotlin.ResultKt", "sig": "com.airbnb.lottie.compose.LottieCompositionResultImpl rememberLottieComposition(com.airbnb.lottie.compose.LottieCompositionSpec$RawRes,androidx.compose.runtime.GapComposer)", "p": [0.08, 0.03, 0.03, 0.03], "cost": 0.007858}
+{"cls": "kotlin.ResultKt", "sig": "com.google.accompanist.permissions.PermissionState rememberPermissionState(java.lang.String,kotlin.jvm.functions.Function1,androidx.compose.runtime.GapComposer)", "p": [0.85, 0.03, 0.02, 0.08, 0.02, 0.02, 0.02], "cost": 0.014273999999999998}
+{"cls": "kotlin.ResultKt", "sig": "com.pyamsoft.tetherfi.server.proxy.session.netty.handler.http.HttpHostAndPort parseUriAndPort(java.lang.String,int,kotlin.jvm.functions.Function0)", "p": [0.9, 0.05, 0.6, 0.05, 0.3], "cost": 0.014128}
+{"cls": "kotlin.ResultKt", "sig": "float textAlpha(boolean)", "p": [0.05], "cost": 0.00659}
+{"cls": "kotlin.ResultKt", "sig": "int getPort(java.net.SocketAddress)", "p": [0.95], "cost": 0.006638000000000001}
+{"cls": "kotlin.ResultKt", "sig": "io.netty.handler.codec.socksx.v5.Socks5AddressType resolveSocks5AddressType(java.net.InetSocketAddress)", "p": [0.05], "cost": 0.006786}
+{"cls": "kotlin.ResultKt", "sig": "java.lang.Object rememberSaveable(java.lang.Object[],androidx.compose.runtime.saveable.SaverKt$Saver$1,kotlin.jvm.functions.Function0,androidx.compose.runtime.Composer,int)", "p": [0.05, 0.03, 0.03, 0.1, 0.25, 0.03, 0.03, 0.05, 0.9, 0.02, 0.02, 0.2, 0.3, 0.02, 0.02, 0.05, 0.03, 0.02, 0.02, 0.03, 0.03], "cost": 0.055478}
+{"cls": "kotlin.ResultKt", "sig": "java.lang.Object showUniqueSnackbar$default(androidx.compose.material3.SnackbarHostState,java.lang.String,dev.bg.octo.ui.NavigationKt$$ExternalSyntheticLambda19,java.lang.String,kotlin.coroutines.jvm.internal.SuspendLambda,int)", "p": [0.05, 0.05, 0.05, 0.05, 0.5, 0.08, 0.08, 0.05, 0.05, 0.05, 0.05, 0.35, 0.05, 0.05, 0.05, 0.05, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.045298}
+{"cls": "kotlin.ResultKt", "sig": "java.lang.String getAddress(java.net.SocketAddress)", "p": [0.95], "cost": 0.006662}
+{"cls": "kotlin.ResultKt", "sig": "java.lang.String key(com.pyamsoft.tetherfi.server.clients.TetherClient)", "p": [0.85], "cost": 0.010199999999999999}
+{"cls": "kotlin.ResultKt", "sig": "java.lang.String rememberPortNumber(int,androidx.compose.runtime.GapComposer)", "p": [0.85, 0.1, 0.1], "cost": 0.011252}
+{"cls": "kotlin.ResultKt", "sig": "java.lang.String rememberServerHostname(com.pyamsoft.tetherfi.server.broadcast.BroadcastNetworkStatus$ConnectionInfo,androidx.compose.runtime.GapComposer)", "p": [0.85, 0.1, 0.03, 0.03], "cost": 0.010537999999999999}
+{"cls": "kotlin.ResultKt", "sig": "java.lang.String rememberServerPassword(com.pyamsoft.tetherfi.server.broadcast.BroadcastNetworkStatus$GroupInfo,boolean,androidx.compose.runtime.GapComposer)", "p": [0.85, 0.05, 0.3, 0.02, 0.02, 0.03, 0.02], "cost": 0.013698}
+{"cls": "kotlin.ResultKt", "sig": "java.lang.String rememberServerRawPassword(com.pyamsoft.tetherfi.server.broadcast.BroadcastNetworkStatus$GroupInfo,androidx.compose.runtime.GapComposer)", "p": [0.85, 0.03, 0.03, 0.02], "cost": 0.010454}
+{"cls": "kotlin.ResultKt", "sig": "java.lang.String rememberServerSSID(com.pyamsoft.tetherfi.server.broadcast.BroadcastNetworkStatus$GroupInfo,androidx.compose.runtime.GapComposer)", "p": [0.85, 0.1, 0.05, 0.03], "cost": 0.011556}
+{"cls": "kotlin.ResultKt", "sig": "java.util.List getTariffsFromNow(java.util.List,boolean)", "p": [0.95, 0.05, 0.03], "cost": 0.006994}
+{"cls": "kotlin.ResultKt", "sig": "long rememberCheckableIconColor(boolean,boolean,androidx.compose.runtime.GapComposer,int)", "p": [0.55, 0.12, 0.55, 0.12, 0.2, 0.15, 0.05], "cost": 0.015324}
+{"cls": "kotlin.ResultKt", "sig": "void BatteryOptimization(int,androidx.compose.runtime.GapComposer,androidx.compose.ui.Modifier,com.pyamsoft.tetherfi.behavior.BehaviorViewState,java.lang.String,kotlin.jvm.functions.Function0,boolean)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.05, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02], "cost": 0.030095999999999998}
+{"cls": "kotlin.ResultKt", "sig": "void InstallPYDroidExtras(androidx.compose.ui.Modifier,java.lang.String,androidx.compose.runtime.GapComposer,int)", "p": [0.03, 0.03, 0.03, 0.03, 0.02, 0.02], "cost": 0.014211999999999999}
+{"cls": "kotlin.ResultKt", "sig": "void Label-qwLXCLc(androidx.compose.ui.Modifier,java.lang.String,long,androidx.compose.ui.text.style.TextAlign,kotlin.jvm.functions.Function0,androidx.compose.runtime.GapComposer,int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.025844}
+{"cls": "kotlin.ResultKt", "sig": "void LoadingSpinner(androidx.compose.ui.Modifier,androidx.compose.runtime.GapComposer,int)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.009872}
+{"cls": "kotlin.ResultKt", "sig": "void ModalBottomSheet-dYc4hso(kotlin.jvm.functions.Function0,androidx.compose.ui.Modifier,androidx.compose.material3.SheetState,float,androidx.compose.ui.graphics.Shape,long,long,float,long,kotlin.jvm.functions.Function2,androidx.compose.foundation.layout.WindowInsets,androidx.compose.material3.ModalBottomSheetProperties,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.1, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.1, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.156358}
+{"cls": "kotlin.ResultKt", "sig": "void NotificationPerms(int,androidx.compose.runtime.GapComposer,androidx.compose.ui.Modifier,com.pyamsoft.tetherfi.behavior.BehaviorViewState,kotlin.jvm.functions.Function0,boolean)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.014816}
+{"cls": "kotlin.ResultKt", "sig": "void OnLifecycleEvent(kotlin.jvm.functions.Function2,androidx.compose.runtime.GapComposer,int)", "p": [0.05, 0.05, 0.03, 0.03], "cost": 0.009455999999999999}
+{"cls": "kotlin.ResultKt", "sig": "void ShowChangeLogWidget(androidx.compose.ui.Modifier,androidx.compose.ui.Modifier,androidx.compose.runtime.GapComposer,int)", "p": [0.05, 0.03, 0.05, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02], "cost": 0.011968000000000001}
+{"cls": "kotlin.ResultKt", "sig": "void StatusItem-RFMEUTM(androidx.compose.ui.Modifier,androidx.compose.ui.Modifier,java.lang.String,java.lang.String,kotlin.jvm.functions.Function0,androidx.compose.ui.text.TextStyle,long,androidx.compose.runtime.GapComposer,int,int)", "p": [0.05, 0.03, 0.03, 0.03, 0.05, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.044846}
+{"cls": "kotlin.ResultKt", "sig": "void VersionCheckWidget(androidx.compose.ui.Modifier,androidx.compose.runtime.GapComposer,int)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.009715999999999999}
+{"cls": "kotlin.ResultKt", "sig": "void applyBandwidthLimitFor(io.netty.channel.ChannelPipeline,com.pyamsoft.tetherfi.server.clients.TetherClient)", "p": [0.03, 0.05], "cost": 0.007261999999999999}
+{"cls": "kotlin.ResultKt", "sig": "void applyChannelAttributes(io.netty.channel.Channel,io.netty.channel.Channel,com.pyamsoft.tetherfi.server.proxy.session.netty.handler.RelayHandler$Direction,java.lang.String,com.pyamsoft.tetherfi.server.clients.TetherClient)", "p": [0.3, 0.03, 0.12, 0.3, 0.03, 0.12, 0.55, 0.5, 0.1, 0.6, 0.55, 0.03, 0.15, 0.6, 0.55, 0.03], "cost": 0.042546}
+{"cls": "kotlin.ResultKt", "sig": "void closeFinally(java.io.Closeable,java.lang.Throwable)", "p": [0.02, 0.02], "cost": 0.006946}
+{"cls": "kotlin.ResultKt", "sig": "void closeOnFailure(io.netty.channel.ChannelFuture,io.netty.channel.ChannelHandlerContext,java.lang.String,java.lang.String)", "p": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.010106}
+{"cls": "kotlin.ResultKt", "sig": "void dropHandler(io.netty.channel.ChannelPipeline,kotlin.jvm.internal.ClassReference)", "p": [0.03, 0.03], "cost": 0.008308}
+{"cls": "kotlin.ResultKt", "sig": "void runInEventLoop(io.netty.util.concurrent.EventExecutor,kotlin.jvm.functions.Function0)", "p": [0.03, 0.03], "cost": 0.007146}
+{"cls": "kotlin.TuplesKt", "sig": "com.airbnb.lottie.compose.LottieAnimatableImpl animateLottieCompositionAsState(com.airbnb.lottie.LottieComposition,androidx.compose.runtime.GapComposer,int)", "p": [0.9, 0.03, 0.05, 0.03, 0.4, 0.03, 0.03], "cost": 0.013642000000000001}
+{"cls": "kotlin.TuplesKt", "sig": "com.google.gson.JsonElement parseReader(com.google.gson.stream.JsonReader)", "p": [0.95], "cost": 0.006730000000000001}
+{"cls": "kotlin.TuplesKt", "sig": "com.google.gson.JsonElement parseString(java.lang.String)", "p": [0.95], "cost": 0.006654}
+{"cls": "kotlin.TuplesKt", "sig": "int getColumnIndexOrThrow(android.database.Cursor,java.lang.String)", "p": [0.05, 0.08, 0.03], "cost": 0.007066}
+{"cls": "kotlin.TuplesKt", "sig": "java.lang.Object assertivelyGet(java.lang.Object,java.util.Map)", "p": [0.05, 0.02, 0.85, 0.02], "cost": 0.010246}
+{"cls": "kotlin.TuplesKt", "sig": "java.lang.String stringResource(int,androidx.compose.runtime.Composer)", "p": [0.85, 0.1, 0.05], "cost": 0.017466000000000002}
+{"cls": "kotlin.TuplesKt", "sig": "void BackHandler(boolean,kotlin.jvm.functions.Function0,androidx.compose.runtime.Composer,int,int)", "p": [0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02], "cost": 0.0104}
+{"cls": "kotlin.TuplesKt", "sig": "void HorizontalPager-xYaah8o(androidx.compose.foundation.pager.PagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize,int,float,androidx.compose.ui.Alignment$Vertical,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,boolean,boolean,kotlin.jvm.functions.Function1,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,kotlin.jvm.functions.Function4,androidx.compose.runtime.Composer,int,int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.05, 0.15, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.191814}
+{"cls": "kotlin.TuplesKt", "sig": "void KonfettiView(androidx.compose.ui.Modifier,java.util.List,okhttp3.ConnectionPool,androidx.compose.runtime.GapComposer,int)", "p": [0.05, 0.03, 0.03, 0.07, 0.03, 0.05, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.014422}
+{"cls": "kotlin.TuplesKt", "sig": "void PermissionLifecycleCheckerEffect(com.google.accompanist.permissions.MutablePermissionState,androidx.lifecycle.Lifecycle$Event,androidx.compose.runtime.GapComposer,int)", "p": [0.03, 0.05, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02], "cost": 0.0118}
+{"cls": "kotlin.collections.AbstractMap$$ExternalSyntheticLambda0", "sig": "void <init>(java.lang.Object,byte)", "p": [0.95, 0.3, 0.03], "cost": 0.007086}
+{"cls": "kotlin.collections.ArrayDeque", "sig": "int getSize()", "p": [0.03], "cost": 0.006582}
+{"cls": "kotlin.collections.ArrayDeque", "sig": "java.lang.Object get(int)", "p": [0.03, 0.03, 0.95], "cost": 0.006914}
+{"cls": "kotlin.collections.ArrayDeque", "sig": "java.lang.Object lastOrNull()", "p": [0.95], "cost": 0.006618000000000001}
+{"cls": "kotlin.collections.ArrayDeque", "sig": "java.lang.Object removeAt(int)", "p": [0.85, 0.03, 0.9], "cost": 0.006926}
+{"cls": "kotlin.collections.ArrayDeque", "sig": "void add(int,java.lang.Object)", "p": [0.03, 0.03, 0.95, 0.05], "cost": 0.007198}
+{"cls": "kotlin.collections.ArraysKt", "sig": "boolean contains(java.lang.Object,java.lang.Object[])", "p": [0.03, 0.02, 0.9, 0.02], "cost": 0.007282}
+{"cls": "kotlin.collections.ArraysKt", "sig": "byte[] copyInto$default(byte[],byte[],int,int,int,int,java.lang.Object)", "p": [0.95, 0.95, 0.02, 0.95, 0.02, 0.02, 0.03, 0.03, 0.03, 0.02, 0.03, 0.03, 0.03, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.027614}
+{"cls": "kotlin.collections.ArraysKt", "sig": "byte[] sliceArray(byte[],kotlin.ranges.IntRange)", "p": [0.95, 0.03, 0.03, 0.03], "cost": 0.007314}
+{"cls": "kotlin.collections.ArraysKt", "sig": "java.lang.String joinToString$default(java.lang.Object[],java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence,int,java.lang.CharSequence,kotlin.jvm.functions.Function1,int,java.lang.Object)", "p": [0.95, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.9, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.9, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.92, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.9, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.85, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.080798}
+{"cls": "kotlin.collections.ArraysKt", "sig": "void copyInto$default(int,int,int,java.lang.Object[],java.lang.Object[])", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.95, 0.03], "cost": 0.028788}
+{"cls": "kotlin.collections.ArraysKt", "sig": "void fill(int,int,java.lang.Object,java.lang.Object[])", "p": [0.03, 0.03, 0.03, 0.03, 0.95, 0.03], "cost": 0.012306}
+{"cls": "kotlin.collections.ArraysKt___ArraysKt", "sig": "void toCollection(java.util.LinkedHashSet,java.lang.Object[])", "p": [0.02, 0.95], "cost": 0.007026}
+{"cls": "kotlin.collections.ArraysKt___ArraysKt$asSequence$$inlined$Sequence$1", "sig": "java.util.Iterator iterator()", "p": [0.95], "cost": 0.0067020000000000005}
+{"cls": "kotlin.collections.ArraysKt___ArraysKt$asSequence$$inlined$Sequence$1", "sig": "void <init>(int,java.lang.Object)", "p": [0.85, 0.03, 0.9], "cost": 0.00891}
+{"cls": "kotlin.collections.CollectionsKt__IterablesKt", "sig": "int collectionSizeOrDefault(java.lang.Iterable)", "p": [0.03], "cost": 0.006710000000000001}
+{"cls": "kotlin.collections.CollectionsKt__IterablesKt", "sig": "java.util.ArrayList flatten(java.util.ArrayList)", "p": [0.97], "cost": 0.006710000000000001}
+{"cls": "kotlin.collections.CollectionsKt__IteratorsJVMKt", "sig": "java.util.ArrayList flatten(java.lang.Iterable)", "p": [0.97], "cost": 0.006726}
+{"cls": "kotlin.collections.CollectionsKt__MutableCollectionsKt", "sig": "java.lang.Object removeLastOrNull(java.util.List)", "p": [0.95], "cost": 0.006706}
+{"cls": "kotlin.collections.MapsKt", "sig": "kotlin.collections.ArraysKt___ArraysKt$asSequence$$inlined$Sequence$1 asSequence(java.util.Map)", "p": [0.97], "cost": 0.0067740000000000005}
+{"cls": "kotlin.collections.MapsKt___MapsJvmKt", "sig": "java.lang.Object getValue(java.lang.Object,java.util.Map)", "p": [0.05, 0.02, 0.9, 0.02], "cost": 0.007294}
+{"cls": "kotlin.collections.MapsKt___MapsJvmKt", "sig": "java.util.LinkedHashMap toMutableMap(java.util.Map)", "p": [0.97], "cost": 0.006710000000000001}
+{"cls": "kotlin.coroutines.AbstractCoroutineContextElement", "sig": "void <init>(kotlin.coroutines.CoroutineContext$Key)", "p": [0.95], "cost": 0.0067940000000000006}
+{"cls": "kotlin.coroutines.jvm.internal.Boxing", "sig": "java.lang.Byte boxByte(byte)", "p": [0.97], "cost": 0.0066500000000000005}
+{"cls": "kotlin.io.FileTreeWalk", "sig": "void <init>(java.io.File)", "p": [0.95], "cost": 0.006642}
+{"cls": "kotlin.io.path.PathsKt", "sig": "java.lang.String getInvariantSeparatorsPathString(java.nio.file.Path)", "p": [0.95], "cost": 0.006710000000000001}
+{"cls": "kotlin.jvm.functions.Function6", "sig": "java.lang.Object invoke(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)", "p": [0.4, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.4, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.4, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.85, 0.05, 0.03, 0.03, 0.03, 0.03, 0.03, 0.85, 0.05, 0.03, 0.03, 0.03, 0.03, 0.03, 0.92, 0.05, 0.03, 0.03, 0.03, 0.03, 0.03, 0.15, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03], "cost": 0.051504}
+{"cls": "kotlin.math.MathKt", "sig": "androidx.lifecycle.compose.ComposeLifecycleOwner rememberLifecycleOwner(androidx.lifecycle.Lifecycle$State,androidx.compose.runtime.ComposerImpl)", "p": [0.85, 0.05, 0.05, 0.02], "cost": 0.010012}
+{"cls": "kotlin.math.MathKt", "sig": "boolean isScrollingForward(androidx.compose.foundation.pager.DefaultPagerState,float)", "p": [0.1, 0.45, 0.03], "cost": 0.010382}
+{"cls": "kotlin.math.MathKt", "sig": "com.patrykandpatrick.vico.core.common.component.LineComponent rememberAxisGuidelineComponent-zXfTrVk(androidx.compose.runtime.ComposerImpl)", "p": [0.05], "cost": 0.006878}
+{"cls": "kotlin.math.MathKt", "sig": "com.patrykandpatrick.vico.core.common.component.LineComponent rememberAxisLineComponent-zXfTrVk(androidx.compose.runtime.ComposerImpl)", "p": [0.03], "cost": 0.006866000000000001}
+{"cls": "kotlin.math.MathKt", "sig": "com.patrykandpatrick.vico.core.common.component.LineComponent rememberAxisTickComponent-zXfTrVk(androidx.compose.runtime.ComposerImpl)", "p": [0.03], "cost": 0.006866000000000001}
+{"cls": "kotlin.math.MathKt", "sig": "com.patrykandpatrick.vico.core.common.component.TextComponent rememberAxisLabelComponent-D4Z8ATg(androidx.compose.runtime.ComposerImpl)", "p": [0.03], "cost": 0.006874000000000001}
+{"cls": "kotlin.math.MathKt", "sig": "float dragGestureDelta(androidx.compose.foundation.pager.DefaultPagerState)", "p": [0.85], "cost": 0.009758}
+{"cls": "kotlin.math.MathKt", "sig": "float getStart(android.graphics.RectF,boolean)", "p": [0.95, 0.03, 0.02], "cost": 0.007006}
+{"cls": "kotlin.math.MathKt", "sig": "java.lang.Object access$runMigrations(java.util.List,androidx.datastore.core.DataStoreImpl$InitDataStore$doRun$initData$1$api$1,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.45, 0.05, 0.2, 0.7, 0.05, 0.35, 0.3, 0.05, 0.05], "cost": 0.059168}
+{"cls": "kotlin.math.MathKt", "sig": "long pack(float,long)", "p": [0.95, 0.95], "cost": 0.006718}
+{"cls": "kotlin.math.MathKt", "sig": "void HorizontalPager--8jOkeI(androidx.compose.foundation.pager.DefaultPagerState,androidx.compose.ui.Modifier,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.pager.PageSize$Fill,androidx.compose.ui.BiasAlignment$Vertical,androidx.compose.foundation.gestures.snapping.SnapFlingBehavior,boolean,androidx.compose.ui.input.nestedscroll.NestedScrollConnection,androidx.compose.foundation.gestures.snapping.SnapPosition$Start,androidx.compose.foundation.AndroidEdgeEffectOverscrollEffect,androidx.compose.runtime.internal.ComposableLambdaImpl,androidx.compose.runtime.GapComposer,int)", "p": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.05, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03], "cost": 0.127332}
+{"cls": "kotlin.math.MathKt", "sig": "void LazyColumn(int,int,androidx.compose.foundation.AndroidEdgeEffectOverscrollEffect,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.layout.Arrangement$Vertical,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.lazy.LazyListState,androidx.compose.runtime.GapComposer,androidx.compose.ui.Alignment$Horizontal,androidx.compose.ui.Modifier,kotlin.jvm.functions.Function1,boolean)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.05, 0.03, 0.03, 0.04, 0.03], "cost": 0.097974}
+{"cls": "kotlin.math.MathKt", "sig": "void SettingsCategoryHeader(java.lang.String,androidx.compose.ui.Modifier,androidx.compose.runtime.ComposerImpl,int)", "p": [0.05, 0.12, 0.08, 0.05, 0.03, 0.05], "cost": 0.013646}
+{"cls": "kotlin.math.MathKt", "sig": "void SimpleLayout(androidx.compose.ui.Modifier,androidx.compose.runtime.internal.ComposableLambdaImpl,androidx.compose.runtime.GapComposer,int)", "p": [0.03, 0.03, 0.03, 0.03, 0.03, 0.05, 0.02, 0.02, 0.02], "cost": 0.011030000000000002}
+{"cls": "kotlin.math.MathKt", "sig": "void Sparkline-9W8sC3Y(java.util.List,long,androidx.compose.ui.Modifier,long,float,androidx.compose.runtime.ComposerImpl,int)", "p": [0.05, 0.75, 0.02, 0.05, 0.55, 0.02, 0.3, 0.02, 0.05, 0.55, 0.02, 0.05, 0.5, 0.02, 0.05, 0.02, 0.02, 0.45], "cost": 0.019014000000000003}
+{"cls": "kotlin.math.MathKt", "sig": "void appendPlaceholders(int,java.lang.StringBuilder)", "p": [0.95], "cost": 0.006698}
+{"cls": "kotlin.math.MathKt", "sig": "void rotate(android.graphics.RectF,float)", "p": [0.03], "cost": 0.006662}
+{"cls": "kotlin.math.MathKt", "sig": "void set(android.graphics.RectF,java.lang.Number,java.lang.Number,java.lang.Number,java.lang.Number)", "p": [0.02, 0.02, 0.02, 0.02, 0.95, 0.02, 0.02, 0.02, 0.95, 0.02, 0.02, 0.02, 0.95, 0.02, 0.02, 0.02, 0.95, 0.02, 0.02, 0.02], "cost": 0.014141999999999998}
+{"cls": "kotlin.properties.ObservableProperty", "sig": "java.lang.Object getValue(java.lang.Object,kotlin.reflect.KProperty)", "p": [0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.9, 0.02, 0.02], "cost": 0.011685999999999998}
+{"cls": "kotlin.properties.ObservableProperty", "sig": "void setValue(kotlin.reflect.KProperty,java.lang.Object)", "p": [0.03, 0.02, 0.9, 0.02, 0.03, 0.05], "cost": 0.009518}
+{"cls": "kotlin.ranges.ClosedFloatRange", "sig": "boolean equals(java.lang.Object)", "p": [0.05, 0.02, 0.05, 0.02], "cost": 0.007174}
+{"cls": "kotlin.ranges.ClosedFloatRange", "sig": "void <init>(float,float)", "p": [0.95, 0.95], "cost": 0.006794}
+{"cls": "kotlin.ranges.RangesKt", "sig": "java.lang.Comparable coerceIn(java.lang.Float,kotlin.ranges.ClosedFloatingPointRange)", "p": [0.95, 0.03, 0.5], "cost": 0.00725}
+{"cls": "kotlin.ranges.RangesKt", "sig": "java.lang.Object findByCallsign(eu.darken.apl.main.core.AircraftRepo,java.lang.String,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.55, 0.2, 0.5, 0.05, 0.2, 0.3, 0.15], "cost": 0.045318}
+{"cls": "kotlin.ranges.RangesKt", "sig": "java.lang.Object findByHex(eu.darken.apl.main.core.AircraftRepo,java.lang.String,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.78, 0.2, 0.72, 0.03, 0.18, 0.1, 0.03], "cost": 0.045169999999999995}
+{"cls": "kotlin.ranges.RangesKt", "sig": "kotlinx.coroutines.channels.BufferedChannel Channel$default(int,int,kotlinx.coroutines.channels.BufferOverflow)", "p": [0.9, 0.03, 0.05, 0.02, 0.9], "cost": 0.016682000000000002}
+{"cls": "kotlin.ranges.RangesKt___RangesKt", "sig": "float coerceAtLeast(float,float)", "p": [0.95, 0.95], "cost": 0.006777999999999999}
+{"cls": "kotlin.ranges.RangesKt___RangesKt", "sig": "float coerceIn(float,float,float)", "p": [0.95, 0.3, 0.3], "cost": 0.006918}
+{"cls": "kotlin.ranges.RangesKt___RangesKt", "sig": "void Dialog(kotlin.jvm.functions.Function0,androidx.compose.ui.window.DialogProperties,kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.015574000000000001}
+{"cls": "kotlin.ranges.RangesKt___RangesKt", "sig": "void DropdownMenu-4kj-_NE(boolean,kotlin.jvm.functions.Function0,androidx.compose.ui.Modifier,long,androidx.compose.foundation.ScrollState,androidx.compose.ui.window.PopupProperties,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.05, 0.03, 0.03, 0.03, 0.03, 0.03, 0.08, 0.03, 0.03, 0.03, 0.03, 0.08, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.057796}
+{"cls": "kotlin.ranges.RangesKt___RangesKt", "sig": "void DropdownMenuItem(kotlin.jvm.functions.Function2,kotlin.jvm.functions.Function0,androidx.compose.ui.Modifier,kotlin.jvm.functions.Function2,kotlin.jvm.functions.Function2,boolean,androidx.compose.material3.MenuItemColors,androidx.compose.foundation.layout.PaddingValues,androidx.compose.foundation.interaction.MutableInteractionSourceImpl,androidx.compose.runtime.Composer,int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.090568}
+{"cls": "kotlin.reflect.KCallable", "sig": "java.lang.String getName()", "p": [0.85], "cost": 0.00659}
+{"cls": "kotlin.reflect.KClass", "sig": "java.lang.String getSimpleName()", "p": [0.05], "cost": 0.006602}
+{"cls": "kotlin.reflect.KMutableProperty0", "sig": "void set(java.lang.Object)", "p": [0.95, 0.03], "cost": 0.006846}
+{"cls": "kotlin.reflect.jvm.KCallablesJvm", "sig": "boolean isEmergencySquawk(eu.darken.apl.main.core.aircraft.Aircraft)", "p": [0.6], "cost": 0.006818}
+{"cls": "kotlin.reflect.jvm.KCallablesJvm", "sig": "java.lang.Object awaitClose$default(kotlinx.coroutines.channels.ProducerCoroutine,kotlin.coroutines.jvm.internal.SuspendLambda)", "p": [0.05, 0.3, 0.05, 0.08], "cost": 0.018699999999999998}
+{"cls": "kotlin.reflect.jvm.KCallablesJvm", "sig": "java.lang.Object awaitClose(kotlinx.coroutines.channels.ProducerCoroutine,kotlin.jvm.functions.Function0,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.1, 0.05, 0.12, 0.1, 0.05, 0.12, 0.35, 0.05, 0.05], "cost": 0.0198}
+{"cls": "kotlin.reflect.jvm.KCallablesJvm", "sig": "java.lang.String getMessageTypeLabel(eu.darken.apl.main.core.aircraft.Aircraft)", "p": [0.85], "cost": 0.006834000000000001}
+{"cls": "kotlin.reflect.jvm.KTypesJvm", "sig": "int compareValues(java.lang.Comparable,java.lang.Comparable)", "p": [0.95, 0.03, 0.95, 0.03], "cost": 0.007346}
+{"cls": "kotlin.reflect.jvm.KTypesJvm", "sig": "java.lang.Object startUndspatched(kotlinx.coroutines.internal.ScopeCoroutine,boolean,kotlinx.coroutines.internal.ScopeCoroutine,kotlin.jvm.functions.Function2)", "p": [0.15, 0.5, 0.05, 0.05, 0.05, 0.05, 0.03, 0.15, 0.5, 0.05, 0.85, 0.4, 0.4], "cost": 0.033518}
+{"cls": "kotlin.reflect.jvm.KTypesJvm", "sig": "java.lang.String optNull(org.json.JSONObject,java.lang.String)", "p": [0.85, 0.05, 0.03], "cost": 0.010088}
+{"cls": "kotlin.reflect.jvm.internal.KCallableImpl$_parameters$1$3", "sig": "void <init>(int,androidx.compose.runtime.MutableState,int)", "p": [0.85, 0.03, 0.85, 0.85, 0.03], "cost": 0.010513999999999999}
+{"cls": "kotlin.reflect.jvm.internal.KCallableImpl$_parameters$1$3", "sig": "void <init>(int,int,java.lang.Object)", "p": [0.85, 0.03, 0.85, 0.03, 0.9], "cost": 0.015646}
