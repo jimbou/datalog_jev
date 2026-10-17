@@ -197,3 +197,54 @@
 {"cls": "android.widget.ImageView", "sig": "void setTag(java.lang.Object)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.00739}
 {"cls": "android.widget.LinearLayout", "sig": "void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo)", "codes": ["N", "C"], "labels": [false, true], "cost": 0.0076219999999999994}
 {"cls": "android.widget.ListView", "sig": "void setAdapter(android.widget.ListAdapter)", "codes": ["S", "I"], "labels": [true, false], "cost": 0.007442}
+{"cls": "android.view.ContentInfo$Builder", "sig": "android.view.ContentInfo$Builder setClip(android.content.ClipData)", "codes": ["N", "S", "C", "N"], "labels": [false, true, true, false], "cost": 0.0057527}
+{"cls": "android.widget.ListView", "sig": "void setEmptyView(android.view.View)", "codes": ["S", "I"], "labels": [true, false], "cost": 0.00739}
+{"cls": "android.widget.ListView", "sig": "void setOnItemClickListener(android.widget.AdapterView$OnItemClickListener)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.0075699999999999995}
+{"cls": "android.widget.PopupMenu", "sig": "void setOnMenuItemClickListener(android.widget.PopupMenu$OnMenuItemClickListener)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.0076419999999999995}
+{"cls": "android.widget.TextView", "sig": "void addTextChangedListener(android.text.TextWatcher)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007457999999999999}
+{"cls": "android.widget.TextView", "sig": "void setOnEditorActionListener(android.widget.TextView$OnEditorActionListener)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007561999999999999}
+{"cls": "android.widget.TextView", "sig": "void setText(java.lang.CharSequence)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007434}
+{"cls": "android.widget.Toast", "sig": "android.widget.Toast makeText(android.content.Context,int,int)", "codes": ["S", "P", "N", "C", "N"], "labels": [true, false, false, true, false], "cost": 0.009732}
+{"cls": "android.widget.Toast", "sig": "android.widget.Toast makeText(android.content.Context,java.lang.CharSequence,int)", "codes": ["S", "N", "S", "N", "K", "N", "N"], "labels": [true, false, true, false, false, false, false], "cost": 0.00826}
+{"cls": "android.widget.VideoView", "sig": "void setVideoURI(android.net.Uri)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007417999999999999}
+{"cls": "java.beans.PropertyChangeEvent", "sig": "void <init>(java.lang.Object,java.lang.String,java.lang.Object,java.lang.Object)", "codes": ["S", "N", "N", "S", "N", "N", "N", "S", "N", "N", "S", "N", "N"], "labels": [true, false, false, true, false, false, false, true, false, false, true, false, false], "cost": 0.00946}
+{"cls": "java.io.BufferedOutputStream", "sig": "void write(byte[])", "codes": ["C", "N"], "labels": [true, false], "cost": 0.00737}
+{"cls": "java.io.BufferedOutputStream", "sig": "void write(byte[],int,int)", "codes": ["C", "P", "N", "K", "N", "N"], "labels": [true, false, false, false, false, false], "cost": 0.007937999999999999}
+{"cls": "java.io.BufferedWriter", "sig": "java.io.Writer append(java.lang.CharSequence)", "codes": ["N", "C", "N", "N"], "labels": [false, true, false, false], "cost": 0.009000000000000001}
+{"cls": "java.io.ByteArrayOutputStream", "sig": "void write(byte[])", "codes": ["C", "N"], "labels": [true, false], "cost": 0.007378}
+{"cls": "java.io.ByteArrayOutputStream", "sig": "void write(byte[],int,int)", "codes": ["C", "P", "N", "K", "N", "N"], "labels": [true, false, false, false, false, false], "cost": 0.007946}
+{"cls": "java.io.DataOutputStream", "sig": "void write(byte[])", "codes": ["C", "N"], "labels": [true, false], "cost": 0.007362}
+{"cls": "java.io.File", "sig": "java.io.File createTempFile(java.lang.String,java.lang.String)", "codes": ["C", "C"], "labels": [true, true], "cost": 0.007385999999999999}
+{"cls": "java.io.File", "sig": "java.io.File[] listFiles(java.io.FilenameFilter)", "codes": ["K", "I", "C", "N"], "labels": [false, false, true, false], "cost": 0.0077339999999999996}
+{"cls": "java.io.File", "sig": "void <init>(java.io.File,java.lang.String)", "codes": ["C", "C", "N"], "labels": [true, true, false], "cost": 0.007568}
+{"cls": "java.io.FileOutputStream", "sig": "void write(byte[])", "codes": ["C", "N"], "labels": [true, false], "cost": 0.007362}
+{"cls": "java.io.FileOutputStream", "sig": "void write(byte[],int,int)", "codes": ["C", "K", "N", "K", "N", "N"], "labels": [true, false, false, false, false, false], "cost": 0.00793}
+{"cls": "java.io.FileWriter", "sig": "java.io.Writer append(java.lang.CharSequence)", "codes": ["N", "C", "N", "N"], "labels": [false, true, false, false], "cost": 0.0019407}
+{"cls": "java.io.FileWriter", "sig": "void write(char[],int,int)", "codes": ["C", "P", "N", "K", "N", "N"], "labels": [true, false, false, false, false, false], "cost": 0.007902}
+{"cls": "java.io.FilenameFilter", "sig": "boolean accept(java.io.File,java.lang.String)", "codes": ["K", "N", "K", "N", "N", "N", "N"], "labels": [false, false, false, false, false, false, false], "cost": 0.008124000000000001}
+{"cls": "java.io.InputStream", "sig": "boolean markSupported()", "codes": ["N"], "labels": [false], "cost": 0.00718}
+{"cls": "java.io.InputStream", "sig": "int read(byte[])", "codes": ["N", "N", "K", "C"], "labels": [false, false, false, true], "cost": 0.0075899999999999995}
+{"cls": "java.io.InputStream", "sig": "int read(byte[],int,int)", "codes": ["N", "N", "N", "N", "P", "K", "K", "K", "R", "C"], "labels": [false, false, false, false, false, false, false, false, true, true], "cost": 0.011726}
+{"cls": "java.io.InputStreamReader", "sig": "void <init>(java.io.InputStream,java.lang.String)", "codes": ["S", "P", "N"], "labels": [true, false, false], "cost": 0.007628}
+{"cls": "java.io.InputStreamReader", "sig": "void <init>(java.io.InputStream,java.nio.charset.Charset)", "codes": ["S", "N", "I", "N"], "labels": [true, false, false, false], "cost": 0.007890000000000001}
+{"cls": "java.io.OutputStream", "sig": "void write(byte[])", "codes": ["C", "N"], "labels": [true, false], "cost": 0.007353999999999999}
+{"cls": "java.io.OutputStream", "sig": "void write(byte[],int,int)", "codes": ["C", "K", "N", "K", "N", "N"], "labels": [true, false, false, false, false, false], "cost": 0.007922}
+{"cls": "java.io.OutputStreamWriter", "sig": "java.io.Writer append(java.lang.CharSequence)", "codes": ["N", "C", "N", "N"], "labels": [false, true, false, false], "cost": 0.009268}
+{"cls": "java.io.OutputStreamWriter", "sig": "void <init>(java.io.OutputStream,java.nio.charset.Charset)", "codes": ["S", "N", "K", "N"], "labels": [true, false, false, false], "cost": 0.007914000000000001}
+{"cls": "java.io.PrintWriter", "sig": "java.io.PrintWriter append(java.lang.CharSequence)", "codes": ["N", "C", "N", "N"], "labels": [false, true, false, false], "cost": 0.007738}
+{"cls": "java.io.PrintWriter", "sig": "void println(java.lang.Object)", "codes": ["C", "N"], "labels": [true, false], "cost": 0.007402}
+{"cls": "java.io.PushbackInputStream", "sig": "void <init>(java.io.InputStream,int)", "codes": ["S", "K", "N"], "labels": [true, false, false], "cost": 0.007572000000000001}
+{"cls": "java.io.Writer", "sig": "java.io.Writer append(java.lang.CharSequence)", "codes": ["N", "C", "N", "N"], "labels": [false, true, false, false], "cost": 0.008904}
+{"cls": "java.io.Writer", "sig": "void write(char[])", "codes": ["C", "N"], "labels": [true, false], "cost": 0.007333999999999999}
+{"cls": "java.lang.Boolean", "sig": "boolean equals(java.lang.Object)", "codes": ["K", "N", "K", "N"], "labels": [false, false, false, false], "cost": 0.0076619999999999995}
+{"cls": "java.lang.Boolean", "sig": "java.lang.Boolean valueOf(boolean)", "codes": ["P"], "labels": [false], "cost": 0.007228}
+{"cls": "java.lang.CharSequence", "sig": "char charAt(int)", "codes": ["P", "N", "R"], "labels": [false, false, true], "cost": 0.007432}
+{"cls": "java.lang.Class", "sig": "java.lang.Class forName(java.lang.String,boolean,java.lang.ClassLoader)", "codes": ["P", "N", "K", "N", "P"], "labels": [false, false, false, false, false], "cost": 0.007944}
+{"cls": "java.lang.Class", "sig": "java.lang.Object newInstance()", "codes": ["P"], "labels": [false], "cost": 0.007192}
+{"cls": "java.lang.Enum", "sig": "java.lang.Enum valueOf(java.lang.Class,java.lang.String)", "codes": ["P", "P"], "labels": [false, false], "cost": 0.007414}
+{"cls": "java.lang.Object", "sig": "boolean equals(java.lang.Object)", "codes": ["K", "N", "K", "N"], "labels": [false, false, false, false], "cost": 0.007654}
+{"cls": "java.lang.Object", "sig": "void wait(long)", "codes": ["K"], "labels": [false], "cost": 0.007188}
+{"cls": "java.lang.RuntimeException", "sig": "void <init>(java.lang.String,java.lang.Throwable)", "codes": ["S", "N", "S"], "labels": [true, false, true], "cost": 0.00764}
+{"cls": "java.lang.String", "sig": "boolean endsWith(java.lang.String)", "codes": ["K", "N", "K"], "labels": [false, false, false], "cost": 0.007488}
+{"cls": "java.lang.String", "sig": "boolean equals(java.lang.Object)", "codes": ["K", "N", "K", "N"], "labels": [false, false, false, false], "cost": 0.00867}
+{"cls": "java.lang.String", "sig": "boolean equalsIgnoreCase(java.lang.String)", "codes": ["K", "N", "K"], "labels": [false, false, false], "cost": 0.0075120000000000004}
