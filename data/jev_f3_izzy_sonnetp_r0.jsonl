@@ -998,3 +998,253 @@
 {"cls": "androidx.compose.ui.window.AndroidPopup_androidKt", "sig": "void Popup(androidx.compose.ui.window.PopupPositionProvider,kotlin.jvm.functions.Function0,androidx.compose.ui.window.PopupProperties,kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int,int)", "p": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.042576}
 {"cls": "androidx.compose.ui.window.AndroidPopup_androidKt$$ExternalSyntheticLambda2", "sig": "void <init>(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,byte)", "p": [0.95, 0.03, 0.03, 0.03, 0.03, 0.95, 0.03, 0.03, 0.03, 0.03, 0.95, 0.03, 0.03, 0.03, 0.03, 0.95, 0.03, 0.03, 0.03, 0.03, 0.95, 0.03, 0.03, 0.03, 0.03, 0.3, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.036596}
 {"cls": "androidx.compose.ui.window.AndroidPopup_androidKt$Popup$2", "sig": "void <init>(androidx.activity.compose.ActivityResultLauncherHolder,androidx.activity.result.ActivityResultRegistry,java.lang.String,androidx.compose.ui.unit.DpKt,androidx.compose.runtime.MutableState)", "p": [0.9, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.03, 0.9, 0.03, 0.02, 0.02, 0.9, 0.02, 0.02, 0.02], "cost": 0.027389999999999998}
+{"cls": "androidx.compose.ui.window.AndroidPopup_androidKt$Popup$3", "sig": "void <init>(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,int)", "p": [0.9, 0.03, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.03, 0.85, 0.02, 0.02, 0.02, 0.02, 0.85, 0.02, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.036176}
+{"cls": "androidx.compose.ui.window.AndroidPopup_androidKt$Popup$7", "sig": "void <init>(androidx.compose.ui.window.PopupLayout,int)", "p": [0.95, 0.9, 0.03], "cost": 0.008218}
+{"cls": "androidx.compose.ui.window.AndroidPopup_androidKt$Popup$9", "sig": "void <init>(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,int,int,int)", "p": [0.85, 0.03, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.85, 0.03, 0.03, 0.05, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.030418}
+{"cls": "androidx.compose.ui.window.DialogProperties", "sig": "void <init>(boolean,boolean,int,boolean)", "p": [0.95, 0.95, 0.95, 0.95], "cost": 0.007194}
+{"cls": "androidx.compose.ui.window.PopupLayout", "sig": "boolean canCalculatePosition_delegate$lambda$0(androidx.compose.ui.window.PopupLayout)", "p": [0.05], "cost": 0.00681}
+{"cls": "androidx.compose.ui.window.PopupLayout", "sig": "boolean getCanCalculatePosition()", "p": [0.05], "cost": 0.006638000000000001}
+{"cls": "androidx.compose.ui.window.PopupLayout$Content$4", "sig": "void <init>(int,int,java.lang.Object)", "p": [0.95, 0.03, 0.95, 0.03, 0.95], "cost": 0.009368}
+{"cls": "androidx.concurrent.futures.CallbackToFutureAdapter$Completer", "sig": "boolean setException(java.lang.Throwable)", "p": [0.85, 0.9, 0.03, 0.03], "cost": 0.007254}
+{"cls": "androidx.coordinatorlayout.widget.CoordinatorLayout", "sig": "R.u0 getLastWindowInsets()", "p": [0.95], "cost": 0.006670000000000001}
+{"cls": "androidx.coordinatorlayout.widget.CoordinatorLayout", "sig": "hu1 getLastWindowInsets()", "p": [0.95], "cost": 0.006666}
+{"cls": "androidx.coordinatorlayout.widget.CoordinatorLayout", "sig": "java.util.ArrayList j(android.view.View)", "p": [0.1, 0.03, 0.85, 0.03], "cost": 0.011718}
+{"cls": "androidx.coordinatorlayout.widget.CoordinatorLayout", "sig": "kw1 getLastWindowInsets()", "p": [0.9], "cost": 0.006666}
+{"cls": "androidx.coordinatorlayout.widget.CoordinatorLayout", "sig": "void p(int,android.view.View)", "p": [0.1, 0.1, 0.55, 0.15], "cost": 0.015184}
+{"cls": "androidx.coordinatorlayout.widget.CoordinatorLayout", "sig": "void q(android.view.View,int,int,int)", "p": [0.05, 0.05, 0.55, 0.05, 0.55, 0.05, 0.55, 0.15], "cost": 0.038577999999999994}
+{"cls": "androidx.core.app.NotificationCompat$Action", "sig": "void <init>(int,java.lang.String,android.app.PendingIntent)", "p": [0.05, 0.02, 0.9, 0.02, 0.9], "cost": 0.0075060000000000005}
+{"cls": "androidx.core.app.NotificationCompat$Action", "sig": "void <init>(java.lang.String,android.app.PendingIntent)", "p": [0.95, 0.03, 0.03], "cost": 0.007134}
+{"cls": "androidx.core.app.NotificationCompat$Builder", "sig": "java.lang.CharSequence limitCharSequenceLength(java.lang.String)", "p": [0.97], "cost": 0.006714}
+{"cls": "androidx.core.app.NotificationCompat$Builder", "sig": "void addAction(androidx.core.app.NotificationCompat$Action)", "p": [0.95, 0.03], "cost": 0.0070019999999999995}
+{"cls": "androidx.core.app.NotificationCompat$Builder", "sig": "void setContentText(java.lang.String)", "p": [0.95], "cost": 0.006678000000000001}
+{"cls": "androidx.core.app.NotificationCompat$Builder", "sig": "void setLargeIcon(android.graphics.Bitmap)", "p": [0.95, 0.03], "cost": 0.006934}
+{"cls": "androidx.core.app.NotificationCompat$Builder", "sig": "void setStyle(androidx.core.provider.CallbackWrapper)", "p": [0.85, 0.1], "cost": 0.006993999999999999}
+{"cls": "androidx.core.app.NotificationCompat$Builder", "sig": "void setStyle(kotlin.text.MatcherMatchResult)", "p": [0.05, 0.3], "cost": 0.008522}
+{"cls": "androidx.core.app.NotificationManagerCompat", "sig": "void notify(java.lang.String,int,android.app.Notification)", "p": [0.03, 0.03, 0.02, 0.02, 0.03, 0.02], "cost": 0.0076419999999999995}
+{"cls": "androidx.core.app.ServiceCompat$Api29Impl", "sig": "void startForeground$1(android.app.Service,int,android.app.Notification,int)", "p": [0.03, 0.02, 0.02, 0.05, 0.02, 0.02], "cost": 0.007718}
+{"cls": "androidx.core.app.ServiceCompat$Api29Impl", "sig": "void startForeground(android.app.Service,int,android.app.Notification,int)", "p": [0.02, 0.02, 0.02, 0.05, 0.02, 0.02], "cost": 0.00771}
+{"cls": "androidx.core.app.j", "sig": "boolean a(android.app.ActivityManager)", "p": [0.05], "cost": 0.006642}
+{"cls": "androidx.core.content.ContextCompat$Api26Impl", "sig": "android.content.ComponentName startForegroundService(android.content.Context,android.content.Intent)", "p": [0.03, 0.03, 0.9, 0.03], "cost": 0.007318}
+{"cls": "androidx.core.content.FileProvider", "sig": "java.lang.String a(java.lang.String)", "p": [0.85], "cost": 0.006638000000000001}
+{"cls": "androidx.core.content.IntentCompat$Api33Impl", "sig": "java.lang.Object getParcelableExtra(android.content.Intent,java.lang.String,java.lang.Class)", "p": [0.95, 0.03, 0.02, 0.02, 0.02], "cost": 0.007522}
+{"cls": "androidx.core.graphics.Insets$Api29Impl", "sig": "android.graphics.ColorFilter createBlendModeColorFilter(int,java.lang.Object)", "p": [0.03, 0.02, 0.9], "cost": 0.007078}
+{"cls": "androidx.core.graphics.drawable.IconCompat", "sig": "android.graphics.Bitmap a(android.graphics.Bitmap)", "p": [0.95], "cost": 0.0067220000000000005}
+{"cls": "androidx.core.graphics.drawable.IconCompat", "sig": "android.graphics.Bitmap b(boolean,android.graphics.Bitmap)", "p": [0.02, 0.03, 0.95], "cost": 0.007102}
+{"cls": "androidx.core.graphics.drawable.IconCompat", "sig": "android.net.Uri b()", "p": [0.85], "cost": 0.006622}
+{"cls": "androidx.core.graphics.drawable.IconCompat", "sig": "android.net.Uri f()", "p": [0.85], "cost": 0.006622}
+{"cls": "androidx.core.graphics.drawable.IconCompat", "sig": "android.net.Uri getUri()", "p": [0.85], "cost": 0.0066300000000000005}
+{"cls": "androidx.core.graphics.drawable.IconCompat", "sig": "java.lang.String e()", "p": [0.85], "cost": 0.007128000000000001}
+{"cls": "androidx.core.location.LocationManagerCompat", "sig": "void registerLocationListenerTransport(android.location.LocationManager,androidx.core.location.LocationManagerCompat$LocationListenerTransport)", "p": [0.05, 0.12], "cost": 0.007234}
+{"cls": "androidx.core.location.LocationManagerCompat$LocationListenerKey", "sig": "void <init>(eu.darken.apl.common.location.LocationManager2$locationFlow$1$$ExternalSyntheticLambda0)", "p": [0.95], "cost": 0.0069900000000000006}
+{"cls": "androidx.core.location.LocationManagerCompat$LocationListenerTransport", "sig": "void <init>(androidx.core.location.LocationManagerCompat$LocationListenerKey,java.util.concurrent.ExecutorService)", "p": [0.95, 0.03, 0.1, 0.03], "cost": 0.00779}
+{"cls": "androidx.core.os.BuildCompat$Api30Impl", "sig": "android.graphics.drawable.Icon createWithAdaptiveBitmapContentUri(android.net.Uri)", "p": [0.95], "cost": 0.00677}
+{"cls": "androidx.core.os.BundleCompat", "sig": "androidx.concurrent.futures.CallbackToFutureAdapter$SafeFuture getFuture(androidx.concurrent.futures.CallbackToFutureAdapter$Resolver)", "p": [0.95], "cost": 0.006938000000000001}
+{"cls": "androidx.core.os.BundleCompat", "sig": "boolean isLeft(com.patrykandpatrick.vico.core.cartesian.axis.Axis$Position$Vertical$Start,com.patrykandpatrick.vico.core.cartesian.CartesianDrawingContextKt$CartesianDrawingContext$1)", "p": [0.08, 0.03, 0.08, 0.03], "cost": 0.013874000000000001}
+{"cls": "androidx.core.os.BundleCompat", "sig": "coil3.intercept.EngineInterceptor$ExecuteResult transform(coil3.intercept.EngineInterceptor$ExecuteResult,coil3.request.ImageRequest,coil3.request.Options,coil3.EventListener$Companion$NONE$1,okhttp3.ConnectionPool,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.9, 0.05, 0.05, 0.02, 0.02, 0.4, 0.1, 0.03, 0.03, 0.02, 0.02, 0.3, 0.05, 0.02, 0.02, 0.03, 0.03, 0.1, 0.05, 0.05, 0.05, 0.03, 0.03, 0.1, 0.03, 0.03, 0.03, 0.03, 0.03, 0.1, 0.05, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.06201}
+{"cls": "androidx.core.os.BundleCompat", "sig": "long IntOffset(int,int)", "p": [0.95, 0.95], "cost": 0.00675}
+{"cls": "androidx.core.os.BundleCompat", "sig": "void AnimatedVisibility(androidx.compose.foundation.layout.ColumnScope,boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransitionImpl,androidx.compose.animation.ExitTransitionImpl,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.3, 0.05, 0.05, 0.05, 0.05, 0.35, 0.05, 0.05, 0.05, 0.05, 0.35, 0.05, 0.05, 0.05, 0.05, 0.04, 0.03, 0.03, 0.03, 0.03, 0.03, 0.04, 0.03, 0.03, 0.03, 0.03, 0.04, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.064708}
+{"cls": "androidx.core.os.BundleCompat", "sig": "void AnimatedVisibility(androidx.compose.foundation.layout.RowScope,boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransitionImpl,androidx.compose.animation.ExitTransitionImpl,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.15, 0.03, 0.03, 0.03, 0.03, 0.15, 0.03, 0.03, 0.03, 0.03, 0.15, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.05, 0.03, 0.03, 0.03, 0.05, 0.03, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.06320400000000001}
+{"cls": "androidx.core.os.BundleCompat", "sig": "void AnimatedVisibility(boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransitionImpl,androidx.compose.animation.ExitTransitionImpl,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.1, 0.02, 0.02, 0.02, 0.03, 0.1, 0.03, 0.03, 0.03, 0.1, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.039866}
+{"cls": "androidx.core.os.BundleCompat", "sig": "void BackHandler(boolean,kotlin.jvm.functions.Function0,androidx.compose.runtime.ComposerImpl,int,int)", "p": [0.03, 0.04, 0.06, 0.03, 0.02, 0.03, 0.02, 0.03], "cost": 0.018516}
+{"cls": "androidx.core.os.BundleCompat", "sig": "void ErrorEventHandler(eu.darken.apl.common.uix.ViewModel4,androidx.compose.runtime.ComposerImpl,int)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.007718}
+{"cls": "androidx.core.os.BundleCompat", "sig": "void IconButton(kotlin.jvm.functions.Function0,androidx.compose.ui.Modifier,boolean,androidx.compose.material3.IconButtonColors,androidx.compose.foundation.interaction.MutableInteractionSourceImpl,kotlin.jvm.functions.Function2,androidx.compose.runtime.Composer,int,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.045274}
+{"cls": "androidx.core.os.BundleKt", "sig": "androidx.compose.runtime.MutableState collectAsStateWithLifecycle(kotlinx.coroutines.flow.StateFlow,androidx.compose.runtime.GapComposer)", "p": [0.95, 0.05, 0.03, 0.03], "cost": 0.00769}
+{"cls": "androidx.core.os.BundleKt", "sig": "androidx.compose.ui.graphics.painter.Painter painterResource(int,androidx.compose.runtime.ComposerImpl)", "p": [0.85, 0.05, 0.05], "cost": 0.009805999999999999}
+{"cls": "androidx.core.os.BundleKt", "sig": "androidx.compose.ui.unit.DensityWithConverter Density(android.content.Context)", "p": [0.08], "cost": 0.0067020000000000005}
+{"cls": "androidx.core.os.BundleKt", "sig": "coil3.network.NetworkResponse readFrom(okio.RealBufferedSource)", "p": [0.85], "cost": 0.006718}
+{"cls": "androidx.core.os.BundleKt", "sig": "java.lang.Object await(androidx.concurrent.futures.CallbackToFutureAdapter$SafeFuture,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.85, 0.55, 0.03, 0.03], "cost": 0.010516}
+{"cls": "androidx.core.os.BundleKt", "sig": "java.lang.Object performBlocking(androidx.room.RoomDatabase,boolean,boolean,kotlin.jvm.functions.Function1)", "p": [0.15, 0.7, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.85, 0.05], "cost": 0.027376000000000004}
+{"cls": "androidx.core.os.BundleKt", "sig": "java.lang.Object performInTransactionSuspending(androidx.room.RoomDatabase,kotlin.coroutines.Continuation,kotlin.jvm.functions.Function1)", "p": [0.15, 0.03, 0.3, 0.1, 0.02, 0.4, 0.85, 0.03, 0.05], "cost": 0.042221999999999996}
+{"cls": "androidx.core.os.BundleKt", "sig": "java.lang.Object performSuspending(androidx.room.RoomDatabase,boolean,boolean,kotlin.jvm.functions.Function1,kotlin.coroutines.Continuation)", "p": [0.65, 0.1, 0.55, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.85, 0.1, 0.6, 0.1, 0.03, 0.03], "cost": 0.035561999999999996}
+{"cls": "androidx.core.os.BundleKt", "sig": "java.lang.Object updateAll(dev.bg.octo.ui.widgets.tariff.TariffWidget,android.content.Context,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.1, 0.05, 0.2, 0.1, 0.05, 0.15, 0.15, 0.25, 0.2], "cost": 0.05801799999999999}
+{"cls": "androidx.core.os.BundleKt", "sig": "java.lang.String createUniqueRemoteUiName(int)", "p": [0.08], "cost": 0.006642}
+{"cls": "androidx.core.os.BundleKt", "sig": "kotlin.collections.builders.ListBuilder access$getMeasuredLabelValues(com.patrykandpatrick.vico.core.cartesian.data.CartesianChartRanges)", "p": [0.95], "cost": 0.008578}
+{"cls": "androidx.core.os.BundleKt", "sig": "kotlin.coroutines.CoroutineContext getCoroutineContext(androidx.room.RoomDatabase,boolean,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.05, 0.03, 0.03, 0.02, 0.02, 0.85, 0.02], "cost": 0.036662}
+{"cls": "androidx.core.os.BundleKt", "sig": "long DpSize-YgX7TsA(float,float)", "p": [0.95, 0.95], "cost": 0.006774}
+{"cls": "androidx.core.os.BundleKt", "sig": "long round-k-4lQ0M(long)", "p": [0.97], "cost": 0.006614}
+{"cls": "androidx.core.os.BundleKt", "sig": "long toSize-ozmzZPI(long)", "p": [0.97], "cost": 0.006618000000000001}
+{"cls": "androidx.core.os.BundleKt", "sig": "void NavDisplay(java.util.List,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.jvm.functions.Function0,java.util.List,androidx.navigation3.scene.SceneStrategy,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function2,coil3.disk.DiskLruCache$$ExternalSyntheticLambda0,androidx.compose.runtime.ComposerImpl,int)", "p": [0.02, 0.02, 0.02, 0.03, 0.02, 0.03, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.05, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.05, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.35, 0.35, 0.4, 0.15, 0.05, 0.03, 0.02, 0.02, 0.05, 0.03, 0.08, 0.08, 0.1, 0.05, 0.03, 0.03, 0.02, 0.02, 0.02, 0.03, 0.02, 0.04, 0.04, 0.02, 0.03, 0.03, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.02, 0.03, 0.03, 0.02, 0.04, 0.04, 0.04, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03], "cost": 0.149442}
+{"cls": "androidx.core.os.BundleKt", "sig": "void writeTo(coil3.network.NetworkResponse,okio.RealBufferedSink)", "p": [0.95, 0.03], "cost": 0.007045999999999999}
+{"cls": "androidx.core.os.HandlerCompat$Api28Impl", "sig": "java.lang.String getResPackage(java.lang.Object)", "p": [0.85], "cost": 0.006698}
+{"cls": "androidx.core.provider.CallbackWrapper", "sig": "void <init>(android.view.View)", "p": [0.85], "cost": 0.006658000000000001}
+{"cls": "androidx.core.provider.CallbackWrapper", "sig": "void <init>(int,java.lang.Object,java.lang.Object,boolean)", "p": [0.95, 0.03, 0.03, 0.95, 0.03, 0.95, 0.03, 0.95, 0.03, 0.03], "cost": 0.010176}
+{"cls": "androidx.core.provider.CallbackWrapper", "sig": "void access$2000(androidx.core.provider.CallbackWrapper,androidx.media3.exoplayer.CodecParameters)", "p": [0.1, 0.3], "cost": 0.012286}
+{"cls": "androidx.core.provider.CallbackWrapper", "sig": "void addEntryProvider(kotlin.reflect.KClass,kotlin.jvm.functions.Function1,java.util.Map,kotlin.jvm.functions.Function3)", "p": [0.05, 0.03, 0.55, 0.03, 0.05, 0.03, 0.55, 0.03, 0.03, 0.03, 0.03, 0.03, 0.05, 0.03, 0.03, 0.55, 0.03, 0.03, 0.08, 0.03], "cost": 0.029316000000000002}
+{"cls": "androidx.core.util.Consumer", "sig": "void accept(java.lang.Object)", "p": [0.03, 0.03], "cost": 0.0068379999999999995}
+{"cls": "androidx.core.util.g", "sig": "java.lang.Object f(java.lang.Object)", "p": [0.95], "cost": 0.0075239999999999994}
+{"cls": "androidx.core.view.DisplayCompat", "sig": "void setForegroundServiceBehavior(android.app.Notification$Builder,int)", "p": [0.05], "cost": 0.006738}
+{"cls": "androidx.core.view.WindowCompat", "sig": "int stateToInt(androidx.work.WorkInfo$State)", "p": [0.95], "cost": 0.0067020000000000005}
+{"cls": "androidx.core.view.WindowCompat", "sig": "java.util.ArrayList traceForGroup(androidx.compose.runtime.SlotReader,int,java.lang.Integer)", "p": [0.85, 0.55, 0.1, 0.5, 0.1], "cost": 0.01106}
+{"cls": "androidx.core.view.WindowCompat", "sig": "java.util.List toImmutableList(java.util.List)", "p": [0.95], "cost": 0.0066500000000000005}
+{"cls": "androidx.core.view.WindowCompat", "sig": "java.util.Map toImmutableMap(java.util.Map)", "p": [0.95], "cost": 0.006666}
+{"cls": "androidx.core.view.WindowCompat", "sig": "long insertAndReturnId(androidx.sqlite.SQLiteConnection,java.lang.Object)", "p": [0.05, 0.05, 0.05, 0.05, 0.08, 0.85, 0.05, 0.05, 0.05], "cost": 0.014732}
+{"cls": "androidx.core.view.WindowCompat", "sig": "void MetricLineChart-T042LqI(java.lang.String,java.util.List,long,androidx.compose.ui.Modifier,java.lang.String,androidx.compose.runtime.ComposerImpl,int,int)", "p": [0.03, 0.03, 0.3, 0.03, 0.3, 0.02, 0.02, 0.15, 0.02, 0.15, 0.03, 0.03, 0.3, 0.02, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03], "cost": 0.035234}
+{"cls": "androidx.core.view.WindowCompat", "sig": "void SettingsBaseItem(java.lang.String,java.lang.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.vector.ImageVector,androidx.compose.ui.graphics.painter.Painter,boolean,kotlin.jvm.functions.Function0,kotlin.jvm.functions.Function2,androidx.compose.runtime.ComposerImpl,int,int)", "p": [0.03, 0.02, 0.02, 0.04, 0.05, 0.03, 0.03, 0.02, 0.02, 0.04, 0.05, 0.03, 0.02, 0.02, 0.03, 0.03, 0.12, 0.02, 0.05, 0.02, 0.03, 0.12, 0.02, 0.03, 0.02, 0.03, 0.12, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.07166800000000001}
+{"cls": "androidx.core.view.WindowCompat", "sig": "void insert(androidx.sqlite.SQLiteConnection,java.lang.Iterable)", "p": [0.03, 0.03, 0.03, 0.8, 0.03, 0.03], "cost": 0.012908}
+{"cls": "androidx.core.view.WindowCompat", "sig": "void insert(androidx.sqlite.SQLiteConnection,java.lang.Object)", "p": [0.03, 0.05, 0.03, 0.1, 0.03, 0.03], "cost": 0.011337999999999999}
+{"cls": "androidx.core.view.WindowInsetsControllerCompat", "sig": "void <init>(android.view.Window,android.view.View)", "p": [0.08, 0.03, 0.08, 0.03], "cost": 0.007286}
+{"cls": "androidx.core.view.WindowInsetsControllerCompat$Impl26", "sig": "void <init>(android.view.Window,coil3.disk.RealDiskCache$RealEditor)", "p": [0.85, 0.03, 0.6, 0.03], "cost": 0.010086}
+{"cls": "androidx.core.view.WindowInsetsControllerCompat$Impl30", "sig": "void <init>(android.view.Window,coil3.disk.RealDiskCache$RealEditor)", "p": [0.9, 0.03, 0.6, 0.03], "cost": 0.012025999999999998}
+{"cls": "androidx.core.view.accessibility.AccessibilityNodeProviderCompat$AccessibilityNodeProviderApi26", "sig": "void <init>(qrcode.internals.Polynomial)", "p": [0.9], "cost": 0.008}
+{"cls": "androidx.core.view.insets.ProtectionLayout", "sig": "void <init>(android.content.Context,java.util.List)", "p": [0.85, 0.05, 0.9, 0.05], "cost": 0.010338}
+{"cls": "androidx.core.widget.NestedScrollView", "sig": "void scrollTo(int,int)", "p": [0.05, 0.05], "cost": 0.006802}
+{"cls": "androidx.core.widget.NestedScrollView", "sig": "void setOnScrollChangeListener(V.g)", "p": [0.05, 0.03], "cost": 0.006842}
+{"cls": "androidx.core.widget.NestedScrollView", "sig": "void u(int,int,boolean)", "p": [0.85, 0.85, 0.3], "cost": 0.007804}
+{"cls": "androidx.customview.widget.ViewDragHelper", "sig": "boolean continueSettling()", "p": [0.05], "cost": 0.006618000000000001}
+{"cls": "androidx.datastore.core.DataStoreImpl", "sig": "java.lang.Object access$handleUpdate(androidx.datastore.core.DataStoreImpl,androidx.datastore.core.Message$Update,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.08, 0.7, 0.05, 0.08, 0.7, 0.05, 0.05, 0.05, 0.05], "cost": 0.031177999999999997}
+{"cls": "androidx.datastore.core.DataStoreImpl", "sig": "java.lang.Object access$readDataOrHandleCorruption(androidx.datastore.core.DataStoreImpl,boolean,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.55, 0.2, 0.12, 0.08, 0.08, 0.35, 0.08], "cost": 0.059486}
+{"cls": "androidx.datastore.core.DataStoreImpl", "sig": "java.lang.Object readDataAndUpdateCache(boolean,kotlin.coroutines.Continuation)", "p": [0.05, 0.05, 0.05, 0.1, 0.1, 0.9, 0.55], "cost": 0.01609}
+{"cls": "androidx.datastore.core.DataStoreImpl$data$1", "sig": "java.lang.Object invoke(java.lang.Object,java.lang.Object)", "p": [0.15, 0.15, 0.05, 0.05, 0.05, 0.05, 0.15, 0.85, 0.05], "cost": 0.06025799999999999}
+{"cls": "androidx.datastore.core.DataStoreImpl$data$1", "sig": "void <init>(kotlinx.coroutines.CompletableDeferredImpl,kotlin.jvm.functions.Function2,kotlin.coroutines.Continuation)", "p": [0.92, 0.03, 0.03, 0.9, 0.03, 0.03, 0.8, 0.03, 0.03], "cost": 0.016986}
+{"cls": "androidx.datastore.core.DataStoreImpl$data$1$1", "sig": "void <init>(boolean,androidx.compose.runtime.MutableState,kotlin.coroutines.Continuation)", "p": [0.85, 0.02, 0.02, 0.85, 0.02, 0.6, 0.02], "cost": 0.011516}
+{"cls": "androidx.datastore.core.DataStoreImpl$data$1$1", "sig": "void <init>(java.lang.Object,kotlin.coroutines.Continuation,byte)", "p": [0.9, 0.03, 0.85, 0.03, 0.02, 0.02, 0.02], "cost": 0.012029999999999999}
+{"cls": "androidx.datastore.core.DataStoreImpl$data$1$3", "sig": "void <init>(java.lang.Object,java.lang.Object,kotlin.coroutines.Continuation,byte)", "p": [0.9, 0.03, 0.03, 0.9, 0.03, 0.03, 0.75, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02], "cost": 0.016426000000000003}
+{"cls": "androidx.datastore.core.DataStoreImpl$data$1$3", "sig": "void <init>(java.lang.Object,kotlin.coroutines.Continuation,byte)", "p": [0.9, 0.03, 0.85, 0.03, 0.05, 0.02, 0.02], "cost": 0.01303}
+{"cls": "androidx.datastore.core.DataStoreImpl$data$1$5", "sig": "void <init>(androidx.datastore.core.DataStoreImpl,kotlin.coroutines.Continuation)", "p": [0.95, 0.03, 0.9, 0.03], "cost": 0.009874}
+{"cls": "androidx.datastore.core.DataStoreImpl$data$1$invokeSuspend$$inlined$map$1$2", "sig": "void <init>(kotlinx.coroutines.flow.FlowCollector,byte)", "p": [0.95, 0.05, 0.03], "cost": 0.010948}
+{"cls": "androidx.datastore.core.DataStoreImpl$readState$2", "sig": "void <init>(androidx.datastore.core.DataStoreImpl,kotlin.coroutines.Continuation,byte)", "p": [0.95, 0.03, 0.9, 0.03, 0.1, 0.02, 0.02], "cost": 0.012576}
+{"cls": "androidx.datastore.core.DataStoreImpl$transformAndWrite$2", "sig": "java.lang.Object invoke(java.lang.Object)", "p": [0.85, 0.1, 0.15, 0.05], "cost": 0.012352}
+{"cls": "androidx.datastore.core.DataStoreImpl$writeActor$3", "sig": "void <init>(java.lang.Object,java.lang.Object,kotlin.coroutines.Continuation,byte)", "p": [0.85, 0.03, 0.03, 0.85, 0.03, 0.03, 0.55, 0.03, 0.03, 0.05, 0.02, 0.02, 0.02], "cost": 0.0153}
+{"cls": "androidx.datastore.core.DataStoreImpl$writeActor$3", "sig": "void <init>(java.lang.Object,kotlin.coroutines.Continuation,byte)", "p": [0.9, 0.03, 0.85, 0.03, 0.03, 0.02, 0.02], "cost": 0.011064000000000001}
+{"cls": "androidx.datastore.core.DataStoreInMemoryCache", "sig": "androidx.datastore.core.State getCurrentState()", "p": [0.95], "cost": 0.006670000000000001}
+{"cls": "androidx.datastore.core.FileReadScope$readData$2", "sig": "void <init>(com.pyamsoft.pydroid.util.AppDispatchers$Companion$create$1,kotlin.jvm.functions.Function0,kotlin.coroutines.Continuation)", "p": [0.9, 0.03, 0.03, 0.9, 0.03, 0.03, 0.85, 0.03, 0.03], "cost": 0.010488}
+{"cls": "androidx.datastore.core.Message$Update", "sig": "void <init>(kotlin.jvm.functions.Function2,kotlinx.coroutines.CompletableDeferredImpl,androidx.datastore.core.State,kotlin.coroutines.CoroutineContext)", "p": [0.9, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03], "cost": 0.012194}
+{"cls": "androidx.datastore.core.ReadException", "sig": "void <init>(int,java.lang.Throwable)", "p": [0.03, 0.02, 0.95], "cost": 0.007046}
+{"cls": "androidx.datastore.core.SimpleActor$$ExternalSyntheticLambda0", "sig": "void <init>(java.lang.Object,java.lang.Object,java.lang.Object,byte)", "p": [0.92, 0.03, 0.03, 0.92, 0.03, 0.03, 0.92, 0.03, 0.03, 0.05, 0.02, 0.02, 0.02], "cost": 0.013597999999999999}
+{"cls": "androidx.datastore.core.SimpleActor$offer$2", "sig": "void <init>(java.lang.Object,java.lang.Object,kotlin.coroutines.Continuation,byte)", "p": [0.85, 0.03, 0.03, 0.85, 0.03, 0.03, 0.55, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.016804}
+{"cls": "androidx.datastore.core.SimpleActor$offer$2", "sig": "void <init>(java.lang.Object,kotlin.coroutines.Continuation,byte)", "p": [0.9, 0.03, 0.85, 0.03, 0.05, 0.02, 0.02], "cost": 0.012428}
+{"cls": "androidx.datastore.core.SingleProcessCoordinator", "sig": "java.lang.Integer getVersion()", "p": [0.05], "cost": 0.006646}
+{"cls": "androidx.datastore.core.SingleProcessCoordinator", "sig": "void <init>(java.lang.String)", "p": [0.9], "cost": 0.0066820000000000004}
+{"cls": "androidx.datastore.core.State", "sig": "void <init>(int)", "p": [0.85], "cost": 0.006602}
+{"cls": "androidx.datastore.preferences.PreferenceDataStoreSingletonDelegate", "sig": "androidx.datastore.preferences.core.PreferenceDataStore getValue(android.content.Context,kotlin.reflect.KProperty)", "p": [0.3, 0.25, 0.02, 0.02, 0.02, 0.02, 0.85, 0.02, 0.02], "cost": 0.029254}
+{"cls": "androidx.datastore.preferences.PreferenceDataStoreSingletonDelegate", "sig": "androidx.datastore.preferences.core.PreferenceDataStore getValue(java.lang.Object,kotlin.reflect.KProperty)", "p": [0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.9, 0.03, 0.02], "cost": 0.013398}
+{"cls": "androidx.datastore.preferences.PreferenceDataStoreSingletonDelegate", "sig": "java.lang.Object getValue(java.lang.Object,kotlin.reflect.KProperty)", "p": [0.1, 0.07, 0.03, 0.05, 0.03, 0.03, 0.9, 0.05, 0.03], "cost": 0.015774}
+{"cls": "androidx.datastore.preferences.SharedPreferencesMigrationKt", "sig": "androidx.datastore.migrations.SharedPreferencesMigration SharedPreferencesMigration(kotlin.jvm.functions.Function0,java.util.Set)", "p": [0.85, 0.03, 0.85, 0.03], "cost": 0.009672}
+{"cls": "androidx.datastore.preferences.core.MutablePreferences", "sig": "java.lang.Object get(androidx.datastore.preferences.core.Preferences$Key)", "p": [0.95, 0.03, 0.1, 0.03], "cost": 0.00743}
+{"cls": "androidx.fragment.app.D", "sig": "boolean onMenuItemSelected(int,android.view.MenuItem)", "p": [0.05, 0.03, 0.03, 0.1, 0.05, 0.1, 0.05], "cost": 0.014266000000000001}
+{"cls": "androidx.fragment.app.D", "sig": "void onConfigurationChanged(android.content.res.Configuration)", "p": [0.05, 0.02], "cost": 0.006898}
+{"cls": "androidx.fragment.app.D", "sig": "void onCreate(android.os.Bundle)", "p": [0.7, 0.05], "cost": 0.006854}
+{"cls": "androidx.fragment.app.Fragment", "sig": "androidx.appcompat.app.AppCompatActivity getActivity()", "p": [0.05], "cost": 0.006662}
+{"cls": "androidx.fragment.app.Fragment$10", "sig": "void launch(java.lang.Object)", "p": [0.3, 0.05], "cost": 0.010004}
+{"cls": "androidx.fragment.app.FragmentActivity", "sig": "void runOnUiThread(java.lang.Runnable)", "p": [0.03, 0.03], "cost": 0.006902}
+{"cls": "androidx.fragment.app.FragmentContainerView", "sig": "void <init>(android.content.Context,android.util.AttributeSet,e0.N)", "p": [0.9, 0.02, 0.02, 0.85, 0.02, 0.02, 0.8, 0.02, 0.02], "cost": 0.012256}
+{"cls": "androidx.fragment.app.FragmentContainerView", "sig": "void <init>(android.content.Context,android.util.AttributeSet,v70)", "p": [0.9, 0.02, 0.02, 0.35, 0.02, 0.02, 0.05, 0.02, 0.02], "cost": 0.014938}
+{"cls": "androidx.fragment.app.FragmentManager$1", "sig": "void <init>(com.watea.radio_upnp.activity.MainActivity)", "p": [0.95], "cost": 0.006782000000000001}
+{"cls": "androidx.fragment.app.V", "sig": "java.lang.String a(int)", "p": [0.95], "cost": 0.00798}
+{"cls": "androidx.fragment.app.V", "sig": "void <init>(int)", "p": [0.05], "cost": 0.006602}
+{"cls": "androidx.fragment.app.a", "sig": "void <init>(xt0,sz0,h70)", "p": [0.9, 0.03, 0.03, 0.9, 0.03, 0.03, 0.9, 0.03, 0.03], "cost": 0.013160000000000002}
+{"cls": "androidx.fragment.app.a", "sig": "void <init>(xt0,sz0,h70,android.os.Bundle)", "p": [0.88, 0.03, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.85, 0.03, 0.03, 0.05, 0.9, 0.03, 0.03, 0.05], "cost": 0.04640999999999999}
+{"cls": "androidx.fragment.app.a", "sig": "void <init>(xt0,sz0,java.lang.ClassLoader,q70,android.os.Bundle)", "p": [0.85, 0.05, 0.05, 0.05, 0.05, 0.85, 0.05, 0.05, 0.05, 0.05, 0.6, 0.03, 0.03, 0.03, 0.03, 0.05, 0.03, 0.03, 0.03, 0.03, 0.85, 0.05, 0.05, 0.04, 0.04], "cost": 0.09884799999999999}
+{"cls": "androidx.fragment.app.b", "sig": "android.os.Bundle T()", "p": [0.9], "cost": 0.007664}
+{"cls": "androidx.fragment.app.b", "sig": "androidx.fragment.app.c a(i70)", "p": [0.55, 0.25, 0.35, 0.08], "cost": 0.020522}
+{"cls": "androidx.fragment.app.b", "sig": "androidx.fragment.app.c f(i70)", "p": [0.85, 0.15, 0.1, 0.08], "cost": 0.031352}
+{"cls": "androidx.fragment.app.b", "sig": "i70 A(int)", "p": [0.05, 0.03, 0.85], "cost": 0.01074}
+{"cls": "androidx.fragment.app.b", "sig": "i70 B(java.lang.String)", "p": [0.1, 0.03, 0.85], "cost": 0.011559999999999999}
+{"cls": "androidx.fragment.app.b", "sig": "t70 D()", "p": [0.6], "cost": 0.006574}
+{"cls": "androidx.fragment.app.b", "sig": "void u(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[])", "p": [0.05, 0.02, 0.85, 0.02, 0.02, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.1, 0.02, 0.9, 0.02], "cost": 0.0184}
+{"cls": "androidx.fragment.app.b", "sig": "void v(v70,boolean)", "p": [0.55, 0.25, 0.04, 0.08], "cost": 0.011874}
+{"cls": "androidx.fragment.app.b", "sig": "void y(ac,boolean)", "p": [0.15, 0.05, 0.05, 0.55], "cost": 0.014724}
+{"cls": "androidx.fragment.app.z", "sig": "java.lang.String getString(int)", "p": [0.05, 0.03, 0.08], "cost": 0.006906}
+{"cls": "androidx.glance.GlanceModifier", "sig": "androidx.glance.GlanceModifier then(androidx.glance.GlanceModifier)", "p": [0.08, 0.08, 0.95, 0.08], "cost": 0.007318}
+{"cls": "androidx.glance.appwidget.AppWidgetId", "sig": "void <init>(int)", "p": [0.95], "cost": 0.006634}
+{"cls": "androidx.glance.appwidget.GlanceAppWidgetManager", "sig": "java.io.Serializable getGlanceIds(java.lang.Class,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.3, 0.1, 0.05, 0.1, 0.05, 0.85, 0.3], "cost": 0.018636}
+{"cls": "androidx.glance.appwidget.GlanceAppWidgetManager", "sig": "void <init>(android.content.Context)", "p": [0.15], "cost": 0.006694}
+{"cls": "androidx.glance.appwidget.GlanceRemoteViewsService$GlanceRemoteViewsFactory", "sig": "java.lang.Object access$startSessionIfNeededAndWaitUntilReady(androidx.glance.appwidget.GlanceRemoteViewsService$GlanceRemoteViewsFactory,androidx.glance.appwidget.AppWidgetId,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.15, 0.03, 0.1, 0.35, 0.15, 0.08, 0.15, 0.05, 0.03], "cost": 0.039594}
+{"cls": "androidx.glance.appwidget.LayoutConfiguration$save$2", "sig": "void <init>(java.lang.Object,java.lang.Object,kotlin.coroutines.Continuation,int)", "p": [0.9, 0.03, 0.03, 0.85, 0.03, 0.03, 0.75, 0.02, 0.02, 0.25, 0.02, 0.02, 0.02], "cost": 0.01763}
+{"cls": "androidx.glance.appwidget.LayoutConfiguration$save$2", "sig": "void <init>(java.lang.Object,kotlin.coroutines.Continuation,int)", "p": [0.92, 0.03, 0.88, 0.03, 0.3, 0.02, 0.02], "cost": 0.029878000000000002}
+{"cls": "androidx.glance.session.InteractiveFrameClock$onNewAwaiters$2", "sig": "void <init>(long,kotlin.jvm.functions.Function0,androidx.compose.runtime.ParcelableSnapshotMutableLongState,kotlin.coroutines.Continuation)", "p": [0.9, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.9, 0.03, 0.03, 0.85, 0.03, 0.03], "cost": 0.013333999999999999}
+{"cls": "androidx.glance.session.SessionWorker$doWork$2$1", "sig": "java.lang.Object invoke(java.lang.Object)", "p": [0.15, 0.4, 0.1, 0.05], "cost": 0.015252000000000002}
+{"cls": "androidx.glance.session.TimerScopeKt$withTimer$2", "sig": "void <init>(java.lang.Object,java.lang.Object,kotlin.coroutines.Continuation,int)", "p": [0.85, 0.03, 0.03, 0.85, 0.03, 0.03, 0.85, 0.03, 0.03, 0.05, 0.02, 0.02, 0.02], "cost": 0.017236}
+{"cls": "androidx.glance.session.TimerScopeKt$withTimer$2$1", "sig": "void <init>(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.CoroutineScope,androidx.compose.material3.SnackbarHostState,android.content.Context,androidx.navigation.NavHostController,kotlin.coroutines.Continuation)", "p": [0.9, 0.03, 0.03, 0.03, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.03, 0.03], "cost": 0.043258}
+{"cls": "androidx.glance.state.GlanceState", "sig": "java.lang.Object updateValue(android.content.Context,androidx.glance.state.GlanceStateDefinition,java.lang.String,kotlin.jvm.functions.Function2,kotlin.coroutines.jvm.internal.ContinuationImpl)", "p": [0.1, 0.03, 0.03, 0.03, 0.05, 0.2, 0.03, 0.03, 0.03, 0.05, 0.08, 0.03, 0.03, 0.03, 0.03, 0.15, 0.85, 0.05, 0.03, 0.03, 0.25, 0.75, 0.05, 0.05, 0.05, 0.1, 0.05, 0.03, 0.03, 0.03, 0.1], "cost": 0.156036}
+{"cls": "androidx.glance.text.TextKt", "sig": "androidx.glance.GlanceModifier padding-3ABfNKs(androidx.glance.GlanceModifier,float)", "p": [0.95, 0.1, 0.03], "cost": 0.007138}
+{"cls": "androidx.glance.text.TextKt", "sig": "int getColumnIndexOrThrow(android.database.Cursor,java.lang.String)", "p": [0.03, 0.03, 0.03], "cost": 0.007082}
+{"cls": "androidx.glance.text.TextKt", "sig": "void Box(androidx.glance.GlanceModifier,androidx.glance.layout.Alignment,androidx.compose.runtime.GapComposer,int)", "p": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02], "cost": 0.009162}
+{"cls": "androidx.glance.text.TextKt", "sig": "void DialogHost(androidx.navigation.compose.DialogNavigator,androidx.compose.runtime.GapComposer,int)", "p": [0.03, 0.03, 0.02, 0.02], "cost": 0.007634}
+{"cls": "androidx.glance.text.TextKt", "sig": "void PopulateVisibleList(java.util.List,java.util.Collection,androidx.compose.runtime.GapComposer,int)", "p": [0.03, 0.02, 0.9, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02], "cost": 0.010506}
+{"cls": "androidx.lifecycle.A", "sig": "void <init>(androidx.lifecycle.C,e0.w,n0.k)", "p": [0.85, 0.03, 0.03, 0.85, 0.03, 0.03, 0.85, 0.03, 0.03], "cost": 0.010664}
+{"cls": "androidx.lifecycle.B", "sig": "boolean d(e0.w)", "p": [0.1, 0.5, 0.05, 0.05], "cost": 0.014782}
+{"cls": "androidx.lifecycle.B", "sig": "void <init>(androidx.lifecycle.C,androidx.lifecycle.D)", "p": [0.9, 0.03, 0.9, 0.03], "cost": 0.011132}
+{"cls": "androidx.lifecycle.DefaultLifecycleObserverAdapter", "sig": "void <init>(xt,lh0)", "p": [0.95, 0.03, 0.9, 0.03], "cost": 0.00852}
+{"cls": "androidx.lifecycle.HasDefaultViewModelProviderFactory", "sig": "androidx.lifecycle.ViewModelProvider$Factory getDefaultViewModelProviderFactory()", "p": [0.05], "cost": 0.006766}
+{"cls": "androidx.lifecycle.I", "sig": "java.lang.Object h(java.lang.Object,java.lang.Object)", "p": [0.15, 0.85, 0.02, 0.15, 0.85, 0.02, 0.55, 0.02, 0.02], "cost": 0.014755999999999998}
+{"cls": "androidx.lifecycle.I", "sig": "void <init>(f1.E,android.net.Uri,k2.d)", "p": [0.9, 0.03, 0.03, 0.9, 0.03, 0.03, 0.9, 0.03, 0.03], "cost": 0.009578}
+{"cls": "androidx.lifecycle.I", "sig": "void <init>(t0.E,int[],java.lang.String[],k2.d)", "p": [0.92, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.9, 0.03, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03], "cost": 0.015314}
+{"cls": "androidx.lifecycle.J", "sig": "void <init>(androidx.lifecycle.o,v2.m,F2.x,androidx.lifecycle.o,F2.h,O2.d,u2.p)", "p": [0.85, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.85, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.85, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.85, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.85, 0.03, 0.05, 0.05, 0.05, 0.05, 0.05, 0.85, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.85, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05], "cost": 0.07138}
+{"cls": "androidx.lifecycle.K", "sig": "byte[] n(long,i2.M)", "p": [0.85, 0.05, 0.1], "cost": 0.013784}
+{"cls": "androidx.lifecycle.K", "sig": "n2.A o(i2.z0)", "p": [0.85], "cost": 0.006614}
+{"cls": "androidx.lifecycle.L", "sig": "void a(androidx.lifecycle.S,y1.d,androidx.lifecycle.o)", "p": [0.85, 0.05, 0.05, 0.05, 0.03, 0.03], "cost": 0.016386}
+{"cls": "androidx.lifecycle.LifecycleCoroutineScopeImpl", "sig": "void <init>(androidx.lifecycle.a,jr)", "p": [0.9, 0.03, 0.9, 0.03], "cost": 0.008858}
+{"cls": "androidx.lifecycle.LifecycleOwnerKt", "sig": "androidx.lifecycle.LifecycleCoroutineScopeImpl getLifecycleScope(androidx.lifecycle.LifecycleOwner)", "p": [0.85], "cost": 0.006874000000000001}
+{"cls": "androidx.lifecycle.MediatorLiveData$Source", "sig": "void <init>(androidx.lifecycle.MutableLiveData,androidx.lifecycle.Transformations$sam$androidx_lifecycle_Observer$0)", "p": [0.85, 0.03, 0.85, 0.03], "cost": 0.01086}
+{"cls": "androidx.lifecycle.MutableLiveData", "sig": "void <init>(java.lang.Object)", "p": [0.97], "cost": 0.006674}
+{"cls": "androidx.lifecycle.MutableLiveData", "sig": "void observe(androidx.lifecycle.LifecycleOwner,my.noveldoksuha.coreui.BaseActivity$sam$androidx_lifecycle_Observer$0)", "p": [0.02, 0.02, 0.03, 0.02, 0.02, 0.95], "cost": 0.00855}
+{"cls": "androidx.lifecycle.MutableLiveData", "sig": "void observeForever(androidx.lifecycle.Observer)", "p": [0.03, 0.9], "cost": 0.006938}
+{"cls": "androidx.lifecycle.Q", "sig": "androidx.lifecycle.T f(androidx.lifecycle.b0)", "p": [0.85], "cost": 0.008162}
+{"cls": "androidx.lifecycle.Q", "sig": "androidx.lifecycle.q e(androidx.lifecycle.v)", "p": [0.75], "cost": 0.008454}
+{"cls": "androidx.lifecycle.Q", "sig": "j0.a g(androidx.lifecycle.W)", "p": [0.55], "cost": 0.011276}
+{"cls": "androidx.lifecycle.Q", "sig": "java.lang.Object h(androidx.lifecycle.v,u2.p,m2.g)", "p": [0.05, 0.05, 0.05, 0.85, 0.03, 0.2, 0.12, 0.03, 0.2], "cost": 0.06603}
+{"cls": "androidx.lifecycle.Q", "sig": "void a(androidx.lifecycle.W,z0.d,R.U)", "p": [0.05, 0.05, 0.08, 0.1, 0.05, 0.1], "cost": 0.03529}
+{"cls": "androidx.lifecycle.SavedStateHandleAttacher", "sig": "void <init>(lc1)", "p": [0.95], "cost": 0.006662}
+{"cls": "androidx.lifecycle.SavedStateHandleAttacher", "sig": "void <init>(u71)", "p": [0.95], "cost": 0.006654}
+{"cls": "androidx.lifecycle.Transformations$sam$androidx_lifecycle_Observer$0", "sig": "void <init>(androidx.room.CoroutinesRoom$Companion$execute$4$1)", "p": [0.95], "cost": 0.00689}
+{"cls": "androidx.lifecycle.U", "sig": "void <init>(android.app.Application,z0.e,android.os.Bundle)", "p": [0.9, 0.03, 0.03, 0.9, 0.03, 0.03, 0.9, 0.03, 0.03], "cost": 0.0104}
+{"cls": "androidx.lifecycle.ViewModelProvider", "sig": "androidx.lifecycle.ViewModel get(kotlin.reflect.KClass)", "p": [0.03, 0.02, 0.03, 0.02], "cost": 0.007306}
+{"cls": "androidx.lifecycle.ViewModelProvider", "sig": "void <init>(androidx.lifecycle.ViewModelStore,androidx.lifecycle.ViewModelProvider$Factory,androidx.lifecycle.viewmodel.CreationExtras)", "p": [0.95, 0.03, 0.03, 0.95, 0.03, 0.03, 0.95, 0.03, 0.03], "cost": 0.01021}
+{"cls": "androidx.lifecycle.W", "sig": "androidx.lifecycle.V getViewModelStore()", "p": [0.95], "cost": 0.0066300000000000005}
+{"cls": "androidx.lifecycle.Y", "sig": "androidx.lifecycle.W a(java.lang.Class)", "p": [0.1, 0.15, 0.55], "cost": 0.027028000000000003}
+{"cls": "androidx.lifecycle.Y", "sig": "androidx.lifecycle.W b(v2.d,i0.d)", "p": [0.05, 0.02, 0.02, 0.55, 0.05, 0.02, 0.35, 0.02, 0.05], "cost": 0.024732}
+{"cls": "androidx.lifecycle.Y", "sig": "androidx.lifecycle.W c(java.lang.Class,i0.d)", "p": [0.1, 0.03, 0.03, 0.55, 0.03, 0.3, 0.03], "cost": 0.026186}
+{"cls": "androidx.lifecycle.a", "sig": "void <init>(qn0)", "p": [0.95], "cost": 0.006618000000000001}
+{"cls": "androidx.lifecycle.a", "sig": "void a(pn0)", "p": [0.55, 0.15], "cost": 0.010262}
+{"cls": "androidx.lifecycle.a", "sig": "void c(ui0)", "p": [0.55, 0.1], "cost": 0.015222000000000001}
+{"cls": "androidx.lifecycle.a", "sig": "void d(in0)", "p": [0.55, 0.1], "cost": 0.010579999999999999}
+{"cls": "androidx.lifecycle.a", "sig": "void e(java.lang.Object)", "p": [0.15, 0.15], "cost": 0.01114}
+{"cls": "androidx.lifecycle.a", "sig": "void e(jn0)", "p": [0.55, 0.08], "cost": 0.012322}
+{"cls": "androidx.lifecycle.a", "sig": "void f(pn0)", "p": [0.55, 0.1], "cost": 0.012482}
+{"cls": "androidx.lifecycle.b", "sig": "void c(jp0)", "p": [0.75, 0.1], "cost": 0.009792}
+{"cls": "androidx.lifecycle.b", "sig": "void e(java.lang.Object)", "p": [0.05, 0.05], "cost": 0.01298}
+{"cls": "androidx.lifecycle.b0", "sig": "androidx.lifecycle.a0 e()", "p": [0.95], "cost": 0.007678000000000001}
+{"cls": "androidx.lifecycle.compose.LifecycleEffectKt$$ExternalSyntheticLambda1", "sig": "java.lang.Object invoke(java.lang.Object)", "p": [0.3, 0.08, 0.15, 0.05], "cost": 0.017752}
+{"cls": "androidx.lifecycle.compose.LifecycleEffectKt$$ExternalSyntheticLambda1", "sig": "void <init>(java.lang.Object,java.lang.Object,java.lang.Object,int)", "p": [0.92, 0.03, 0.03, 0.92, 0.03, 0.03, 0.92, 0.03, 0.03, 0.85, 0.02, 0.02, 0.02], "cost": 0.012416}
+{"cls": "androidx.lifecycle.f", "sig": "void a(androidx.lifecycle.v)", "p": [0.55, 0.05], "cost": 0.009388}
+{"cls": "androidx.lifecycle.f", "sig": "void i(androidx.lifecycle.v)", "p": [0.03, 0.03], "cost": 0.007918}
+{"cls": "androidx.lifecycle.f", "sig": "void z(androidx.lifecycle.v)", "p": [0.85, 0.05], "cost": 0.008968}
+{"cls": "androidx.lifecycle.k", "sig": "androidx.lifecycle.Y c()", "p": [0.85], "cost": 0.0094}
+{"cls": "androidx.lifecycle.k", "sig": "i0.d d()", "p": [0.85], "cost": 0.008418}
+{"cls": "androidx.lifecycle.v", "sig": "R.U f()", "p": [0.6], "cost": 0.006574}
+{"cls": "androidx.lifecycle.viewmodel.InitializerViewModelFactory", "sig": "void <init>(int,java.lang.Object)", "p": [0.03, 0.03, 0.9], "cost": 0.0070739999999999996}
+{"cls": "androidx.lifecycle.viewmodel.ViewModelInitializer", "sig": "void <init>(kotlin.reflect.KClass,androidx.work.Data$$ExternalSyntheticLambda0)", "p": [0.95, 0.03, 0.95, 0.03], "cost": 0.008526}
+{"cls": "androidx.lifecycle.viewmodel.compose.SavedStateHandleSaverKt$$ExternalSyntheticLambda0", "sig": "void <init>(androidx.compose.runtime.saveable.Saver,java.lang.Object,int)", "p": [0.9, 0.03, 0.9, 0.03, 0.55, 0.03, 0.03], "cost": 0.013476}
+{"cls": "androidx.lifecycle.viewmodel.navigation3.ViewModelStoreNavEntryDecorator$2$childViewModelStoreOwner$1$1", "sig": "void <init>(androidx.savedstate.SavedStateRegistryOwner,androidx.lifecycle.ViewModelStore)", "p": [0.9, 0.03, 0.9, 0.03], "cost": 0.010138000000000001}
+{"cls": "androidx.lifecycle.x", "sig": "void <init>(androidx.lifecycle.v)", "p": [0.85], "cost": 0.0066820000000000004}
+{"cls": "androidx.lifecycle.x", "sig": "void a(androidx.lifecycle.u)", "p": [0.3, 0.05], "cost": 0.010957999999999999}
+{"cls": "androidx.lifecycle.x", "sig": "void g(androidx.lifecycle.u)", "p": [0.3, 0.15], "cost": 0.026228}
+{"cls": "androidx.lifecycle.x", "sig": "void j(androidx.lifecycle.o)", "p": [0.75, 0.1], "cost": 0.010017999999999999}
+{"cls": "androidx.lifecycle.x", "sig": "void l(androidx.lifecycle.p)", "p": [0.55, 0.1], "cost": 0.013017999999999998}
+{"cls": "androidx.media.session.MediaButtonReceiver", "sig": "android.app.PendingIntent buildMediaButtonPendingIntent(android.content.Context,long)", "p": [0.05, 0.3, 0.03], "cost": 0.007062}
+{"cls": "androidx.media3.common.BasePlayer", "sig": "androidx.media3.common.MediaItem getCurrentMediaItem()", "p": [0.85], "cost": 0.006670000000000001}
+{"cls": "androidx.media3.common.Format", "sig": "androidx.media3.common.Format fromBundle(android.os.Bundle)", "p": [0.95], "cost": 0.0066820000000000004}
+{"cls": "androidx.media3.common.Format", "sig": "java.lang.String a(androidx.media3.common.Label)", "p": [0.85], "cost": 0.006670000000000001}
+{"cls": "androidx.media3.common.Label", "sig": "android.os.Bundle toBundle()", "p": [0.95], "cost": 0.006606000000000001}
+{"cls": "androidx.media3.common.Label", "sig": "androidx.media3.common.Label fromBundle(android.os.Bundle)", "p": [0.95], "cost": 0.0066820000000000004}
+{"cls": "androidx.media3.common.MediaItem$Builder", "sig": "androidx.media3.common.MediaItem$Builder setMediaId(java.lang.String)", "p": [0.05, 0.95, 0.9], "cost": 0.0070539999999999995}
+{"cls": "androidx.media3.common.MediaItem$Builder", "sig": "androidx.media3.common.MediaItem$Builder setUri(java.lang.String)", "p": [0.05, 0.95, 0.95], "cost": 0.007046}
+{"cls": "androidx.media3.common.MediaItem$SubtitleConfiguration", "sig": "android.os.Bundle toBundle()", "p": [0.95], "cost": 0.006662}
+{"cls": "androidx.media3.common.MediaItem$SubtitleConfiguration", "sig": "androidx.media3.common.MediaItem$SubtitleConfiguration fromBundle(android.os.Bundle)", "p": [0.95], "cost": 0.0067940000000000006}
+{"cls": "androidx.media3.common.Player", "sig": "boolean isPlaying()", "p": [0.03], "cost": 0.00659}
+{"cls": "androidx.media3.common.Player", "sig": "int getRepeatMode()", "p": [0.03], "cost": 0.00659}
+{"cls": "androidx.media3.common.Player", "sig": "long getBufferedPosition()", "p": [0.05], "cost": 0.006594}
+{"cls": "androidx.media3.common.Player", "sig": "long getCurrentPosition()", "p": [0.05], "cost": 0.006594}
+{"cls": "androidx.media3.common.Player", "sig": "long getDuration()", "p": [0.03], "cost": 0.0065780000000000005}
+{"cls": "androidx.media3.common.Player", "sig": "void seekTo(long)", "p": [0.05], "cost": 0.006606000000000001}
+{"cls": "androidx.media3.common.Player", "sig": "void setMediaItem(androidx.media3.common.MediaItem)", "p": [0.85, 0.03], "cost": 0.006934}
+{"cls": "androidx.media3.common.Player", "sig": "void setRepeatMode(int)", "p": [0.05], "cost": 0.006618000000000001}
+{"cls": "androidx.media3.common.Player", "sig": "void setShuffleModeEnabled(boolean)", "p": [0.05], "cost": 0.0066500000000000005}
+{"cls": "androidx.media3.common.StreamKey", "sig": "android.os.Bundle toBundle()", "p": [0.95], "cost": 0.006618000000000001}
+{"cls": "androidx.media3.common.StreamKey", "sig": "androidx.media3.common.StreamKey fromBundle(android.os.Bundle)", "p": [0.95], "cost": 0.006706}
+{"cls": "androidx.media3.common.Timeline", "sig": "int getIndexOfPeriod(java.lang.Object)", "p": [0.03, 0.03, 0.03, 0.03], "cost": 0.0071860000000000005}
+{"cls": "androidx.media3.common.Timeline$Period", "sig": "androidx.media3.common.Timeline$Period fromBundle(android.os.Bundle)", "p": [0.95], "cost": 0.0067220000000000005}
+{"cls": "androidx.media3.common.Timeline$Window", "sig": "androidx.media3.common.Timeline$Window fromBundle(android.os.Bundle)", "p": [0.95], "cost": 0.0067220000000000005}
+{"cls": "androidx.media3.common.TrackGroup", "sig": "android.os.Bundle toBundle()", "p": [0.97], "cost": 0.006622}
+{"cls": "androidx.media3.common.TrackGroup", "sig": "androidx.media3.common.TrackGroup fromBundle(android.os.Bundle)", "p": [0.95], "cost": 0.006714}
