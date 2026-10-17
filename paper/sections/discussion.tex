@@ -11,6 +11,7 @@ It bounds how often a clean verdict is wrong because of library flows, for whate
 Certifying a threshold for FlowDroid, however, needs more apps than we could analyze with it.
 Our receipts need only a stored flow graph, built once with every hole open, so pricing and certifying them takes minutes; inside FlowDroid, a receipt needs repeated full runs, one with FlowDroid's models, one with every unmodeled method opened, and reruns that confirm each cut.
 On equal budgets (Section~\ref{sec:rq5}), opening the holes costs FlowDroid 65 of 317 apps, while our graph contains every hole by construction.
+Opening only the unmodeled methods that appear in our graph, about 1,200 per app, does not close this gap: all 30 apps we retried still fail, 21 of them already in FlowDroid's run with its own models, which the scope does not change, and on 7 apps that finished before, the scoped run keeps 15 of the 27 added sinks, all confirmed by FlowDroid, and loses the other 12.
 We therefore use FlowDroid to validate receipts and our analysis to certify them; a cheaper way to open holes inside a precise analysis is future work.
 
 \paragraph{Other kinds of holes.}

@@ -50,7 +50,7 @@ A1-A5 are done (rubric relabeling, rubric key as main key, agreement numbers), a
 | # | Item | Why | Effort |
 | --- | --- | --- | --- |
 | B1 | DONE 2026-10-08: holes only where FlowDroid has no model (`fm-` mode), new example (`ContentResolver.insert` leak through unmodeled `ContentValues.put`) | removed the strawman objection | done |
-| B2 | IN PROGRESS: certify on FlowDroid itself. Step 1 (retry with 3300 s / 24 GB) running, mostly memory failures. Open: more small apps, tighter class mapping, or certify at alpha 0.1 on all completed apps (zero-loss apps included). See "Building on FlowDroid" in REVIEW_FIXES.md | removes "certified misses of a toy analysis" | server days; will most likely stay a validation |
+| B2 | DONE as a validation (2026-10-17): scoped probe (holes limited to our graph's, ~1,200 per app, 35 min / 16 GB) rescued 0 of 30 failed apps (21 fail already in FlowDroid's base run); on 7 earlier apps it keeps 15 of 27 added sinks, all confirmed. Sentence in discussion.tex; raw output server data/b2_probe.log + data/fd_receipts_scoped | removes "certified misses of a toy analysis" | not pursued further |
 | B3 | PART DONE 2026-10-09 (alarms per app in RQ2: median 13 -> 6, 81% -> 89% real). Open: triage time, shared checks. Show user value: false alarms per app before/after clearing, apps with no alarms left, receipt size of remaining alarms, shared checks across apps; optional timed triage sample | makes "40% of the hard slice" concrete | about a day; user study optional |
 
 ## F. Stronger results without bending the protocol (agreed 2026-10-12)
