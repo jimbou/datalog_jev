@@ -300,7 +300,7 @@ build; cores 8-11 stay free for the user's symex jobs, which are not pinned).
   fallback 50.6% (0 of 18), all 44.2%; alpha 0.1 (0.3) all 60.9% (0 of 83). Sonnet 5.5 (def3) 36.6% (0 of 83);
   classifier (b6) not certified on all 307 apps at once (as in F1); freq 10.6%. Paper: RQ5 table rows and paragraph,
   discussion. Cost: cloud labels $50.57, Sonnet 5.5 $48.21 (+148 methods on the server, $3.34, redundant), Jev $0.17,
-  GPT labels via Codex. OPEN: Sonnet 5 (sonnetp) prices, cloud job stalled at 500 of 2,648 (18:36 UTC); when done, copy
+  GPT labels via Codex. Sonnet 5 DONE 2026-10-17 (cloud $42.63): 10.4% full, 11.4% fallback, 0 apps wrong. Was open: Sonnet 5 (sonnetp) prices, cloud job stalled at 500 of 2,648 (18:36 UTC); when done, copy
   data/jev_f3_izzy_sonnetp_r0.jsonl to the server as data/jev_f3_izzy_sonnetp_r0_izzycloud.jsonl and rerun
   g4_eval.sh (merges only new methods; evaluating only sonnetp is enough).
 

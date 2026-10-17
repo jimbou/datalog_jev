@@ -317,8 +317,8 @@ Main corpus (held-out halves, reference) & 307 & 48.7\% (0.9\%) & 16.7\% (0.0\%)
 Large apps, full analysis after retry & 10 & 48.6\% (0 of 10) & 15.1\% (0 of 10)\\
 Large apps, bundled libraries as holes & 56 & 41.5\% (0 of 56) & 11.9\% (2 of 56)\\
 TaintBench malware & 23 & 31.8\% (0 of 23) & 22.9\% (0 of 23)\\
-IzzyOnDroid, full analysis & 65 & 43.7\% (0 of 65) & \todo{G4: Sonnet~5 prices in progress}\\
-IzzyOnDroid, bundled libraries as holes & 18 & 50.6\% (0 of 18) & \todo{G4}\\
+IzzyOnDroid, full analysis & 65 & 43.7\% (0 of 65) & 10.4\% (0 of 65)\\
+IzzyOnDroid, bundled libraries as holes & 18 & 50.6\% (0 of 18) & 11.4\% (0 of 18)\\
 Inter-component holes ($\alpha=0.1$, held-out halves) & 72 & 40.2\% (1.4\%) & --\\
 \bottomrule
 \end{tabular}
@@ -345,7 +345,7 @@ IzzyOnDroid distributes open-source apps that F-Droid does not build itself.
 We fixed the list before any run: every app in its index of 15 October 2026 that is not in F-Droid and meets the main corpus's criteria (Section~\ref{sec:setup}), 134 apps.
 The same pipeline builds 94 of them, 68 fully and 26 with bundled libraries as holes (the other 40 exceed the budget even then; these apps are larger than F-Droid's), and 83 have a hole-dependent verdict the key decides; the new apps add 2{,}648 unmodeled methods, labeled for the key exactly as in the main corpus.
 With the threshold certified on F-Droid, Jev clears 43.7\% of the leak-free verdicts in the fully built apps and 50.6\% in the fallback apps, with no wrong clearance in any of the 83 apps; at $\alpha=0.1$ (threshold 0.3) it clears 60.9\%, again with none.
-Sonnet~5.5 with the written definition clears 36.6\%, also without a wrong clearance.
+Sonnet~5 clears 10.5\% and Sonnet~5.5 with the written definition 36.6\%, both without a wrong clearance.
 Certifying on the pooled populations instead changes little: on the 390 F-Droid and IzzyOnDroid apps Jev clears 52.1\% of the hard slice with 1.7\% of held-out apps wrong, and 51.8\% (1.7\%) with the 66 rescued large apps added (456 apps).
 
 \emph{Other kinds of holes.}
