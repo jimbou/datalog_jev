@@ -288,6 +288,10 @@ FM_MODELS = {}  # (cls, sub) -> FlowDroid's labels per candidate flow, for the m
 ICC_PRICES, ICC_DEFAULT = {}, float(os.environ.get("ICC_DEFAULT", "0.5"))
 if os.environ.get("ICC_PRICES"):
     ICC_PRICES = {(d["app"], d["sub"]): d["p"] for d in map(json.loads, open(os.environ["ICC_PRICES"]))}
+# callback holes (F4a): prices per (app, "registration site -> method") from CB_PRICES; a candidate without one gets CB_DEFAULT
+CB_PRICES, CB_DEFAULT = {}, float(os.environ.get("CB_DEFAULT", "0.5"))
+if os.environ.get("CB_PRICES"):
+    CB_PRICES = {(d["app"], d["sub"]): d["p"] for d in map(json.loads, open(os.environ["CB_PRICES"]))}
 VERIFIED = set()
 if os.environ.get("VERIFY_FILE"):  # list of [cls, sub, atom index] whose truth (in the tested key) a checker has established
     VERIFIED = {(c, sub, int(k)) for c, sub, k in json.load(open(os.environ["VERIFY_FILE"]))}
@@ -303,8 +307,11 @@ def evaluate(path):
     cu, cm, ch, ck = g["cand_u"], g["cand_mid"], g["cand_hole"], g["cand_k"]
     code_u, code_v = g["code_u"], g["code_v"]
     icc = dict(zip(g["icc_sub"].tolist(), g["icc_label"].tolist())) if "icc_sub" in g.files else {}
+    cb = dict(zip(g["cb_sub"].tolist(), g["cb_label"].tolist())) if "cb_sub" in g.files else {}
     atoms = [[{"src": "intent", "tgt": "receiver", "label": {"yes": True, "no": False}.get(icc.get(keys[h][1]))}]
-             if keys[h][0] == "#icc" else holes.get(keys[h], {"atoms": []})["atoms"] for h in range(len(keys))]
+             if keys[h][0] == "#icc" else
+             [{"src": "ret", "tgt": "framework", "label": {"yes": True, "no": False}.get(cb.get(keys[h][1]))}]
+             if keys[h][0] == "#cb" else holes.get(keys[h], {"atoms": []})["atoms"] for h in range(len(keys))]
     label = np.array([atoms[h][k]["label"] if k < len(atoms[h]) else None for h, k in zip(ch, ck)], dtype=object)
     if k1:
         rate, seed = k1[:2]
@@ -333,7 +340,8 @@ def evaluate(path):
         p = np.ones(len(cu))
         caps_c = np.ones(len(cu), dtype=np.int64)
     else:
-        p = np.array([ICC_PRICES.get((app, keys[h][1]), ICC_DEFAULT) if keys[h][0] == "#icc" else prices[keys[h]][k]
+        p = np.array([ICC_PRICES.get((app, keys[h][1]), ICC_DEFAULT) if keys[h][0] == "#icc" else
+                      CB_PRICES.get((app, keys[h][1]), CB_DEFAULT) if keys[h][0] == "#cb" else prices[keys[h]][k]
                       for h, k in zip(ch, ck)], dtype=float)
         caps_c = np.maximum(1, np.ceil(p * SCALE)).astype(np.int64)
     us = np.concatenate([code_u, cu]).astype(np.int32)
@@ -417,7 +425,7 @@ def evaluate(path):
             cls, sub = keys[ch[j]]
             a = atoms[ch[j]][ck[j]]
             cut.append({"cls": cls, "sub": sub, "k": int(ck[j]), "src": a["src"], "tgt": a["tgt"],
-                        "label": a["label"], "source": "icc" if cls == "#icc" else holes[(cls, sub)]["source"], "p": float(p[j])})
+                        "label": a["label"], "source": "icc" if cls == "#icc" else "cb" if cls == "#cb" else holes[(cls, sub)]["source"], "p": float(p[j])})
         val = float(res.flow_value) if uniform else res.flow_value / SCALE
         recs.append(dict(info, bound=val, cut=cut))
     return app, recs

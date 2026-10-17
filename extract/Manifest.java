@@ -8,7 +8,8 @@ import soot.jimple.infoflow.android.manifest.ProcessManifest;
  * Dump the components of an APK's manifest for the inter-component holes (experiment 4).
  * Usage: java -cp <flowdroid jars> extract/Manifest.java APK OUT_DIR
  * Writes OUT_DIR/Component.facts (class TAB kind TAB exported) and OUT_DIR/IntentFilter.facts (class TAB action), where kind is
- * activity, service, receiver or provider (activity-alias counts as an activity of its target).
+ * activity, service, receiver or provider (activity-alias counts as an activity of its target), and OUT_DIR/TargetSdk.facts
+ * (the target SDK version, or the minimum when no target is given; empty when neither is).
  */
 public class Manifest {
     static String attr(AXmlNode n, String name) {
@@ -30,6 +31,11 @@ public class Manifest {
              PrintWriter comp = new PrintWriter(new FileWriter(new File(out, "Component.facts")));
              PrintWriter filt = new PrintWriter(new FileWriter(new File(out, "IntentFilter.facts")))) {
             String pkg = pm.getPackageName();
+            // callback holes (F4a): WebView exposes every public method of a JavaScript interface below API 17
+            int sdk = pm.getTargetSdkVersion() > 0 ? pm.getTargetSdkVersion() : pm.getMinSdkVersion();
+            try (PrintWriter ts = new PrintWriter(new FileWriter(new File(out, "TargetSdk.facts")))) {
+                if (sdk > 0) ts.println(sdk);
+            }
             for (AXmlNode app : pm.getManifest().getChildrenWithTag("application")) {
                 for (AXmlNode c : app.getChildren()) {
                     String tag = c.getTag();

@@ -55,6 +55,13 @@ public class Facts {
             boolean lib = exclude.stream().anyMatch(n::startsWith) && !(keep != null && !keep.isEmpty() && n.startsWith(keep));
             if (n.startsWith(prefix) && !lib) app.add(c);
         }
+        for (String r : new String[]{"MethodPublic", "MethodAnnot"}) OUT.computeIfAbsent(r, k -> {  // exist even if empty
+            try {
+                return new PrintWriter(Files.newBufferedWriter(outDir.resolve(k + ".facts")));
+            } catch (IOException e) {
+                throw new UncheckedIOException(e);
+            }
+        });
         for (SootClass c : app) {
             emit("Class", c.getName(), c.isInterface() ? "interface" : "class");
             if (c.hasSuperclass()) emit("Super", c.getName(), c.getSuperclass().getName());
@@ -62,6 +69,13 @@ public class Facts {
             for (SootMethod m : new ArrayList<>(c.getMethods())) {
                 emit("MethodDecl", c.getName(), m.getSubSignature(), m.getSignature(),
                      m.isStatic() ? "static" : "instance", m.isConcrete() ? "concrete" : "abstract");
+                // callback holes (F4a): which methods the framework may call on an object handed to it; WebView exposes
+                // public methods annotated @JavascriptInterface (all public methods before API 17)
+                if (m.isPublic()) emit("MethodPublic", m.getSignature());
+                soot.tagkit.Tag at = m.getTag("VisibilityAnnotationTag");
+                if (at instanceof soot.tagkit.VisibilityAnnotationTag)
+                    for (soot.tagkit.AnnotationTag an : ((soot.tagkit.VisibilityAnnotationTag) at).getAnnotations())
+                        emit("MethodAnnot", m.getSignature(), an.getType());
                 if (!m.isConcrete()) continue;
                 try {
                     method(m, m.retrieveActiveBody());

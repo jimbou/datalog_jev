@@ -242,6 +242,8 @@ def save_graph(out, app, kinds=None, n_sink_calls=0):
         sink_nodes=np.array([n for s in sites for n in sinks[s]], dtype=np.int32),
         icc_sub=np.array([r[0] for r in rows(out, "IccLabel")]), icc_label=np.array([r[1] for r in rows(out, "IccLabel")]),
         icc_info=json.dumps([r for r in rows(out, "IccInfo")]),
+        cb_sub=np.array([r[0] for r in rows(out, "CbLabel")]), cb_label=np.array([r[1] for r in rows(out, "CbLabel")]),
+        cb_info=json.dumps([r for r in rows(out, "CbInfo")]),
         stats=json.dumps(dict((k, int(v)) for k, v in rows(out, "Stats"))))
         fh.flush()
         os.fsync(fh.fileno())
@@ -263,7 +265,7 @@ def extract(apk, out, timeout=EXTRACT_TIMEOUT, app=""):
     else:
         extract.reason = "extract error (rc %d)" % p.returncode
     ok = p.returncode == 0 and os.path.exists(os.path.join(out, "Call.facts"))
-    if ok and "icc" in os.path.basename(TAINT_DL):  # components and intent filters for the inter-component holes
+    if ok and ("icc" in os.path.basename(TAINT_DL) or "cb" in os.path.basename(TAINT_DL)):  # manifest: inter-component holes, target SDK for callback holes
         cp = ":".join(glob.glob(os.path.join(ROOT, "tools/flowdroid/lib/*.jar")))
         subprocess.run(["java", "-cp", cp, os.path.join(ROOT, "extract/Manifest.java"), apk, out],
                        capture_output=True, text=True, timeout=EXTRACT_TIMEOUT)

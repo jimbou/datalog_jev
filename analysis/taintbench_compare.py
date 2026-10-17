@@ -12,6 +12,9 @@ matched, so "found" means our analysis reports a flow into a sink of that method
   needs holes    reachable only through holes: we give its smallest bound, and whether it is cleared at each DELTA
                  (a cleared documented leak is a wrong clearance by the benchmark's own truth)
   not reached    in scope, but no source reaches a sink of that method even with every hole open
+With CB_GRAPHS=<graphs dir> (graphs with callback holes, analysis/make_taint_cb.py), a documented flow whose sink is
+addJavascriptInterface(new X(...), ...) is matched at the registrations of class X in that method (from the graphs' cb_sub),
+not at every sink of the method; without a match it falls back to the method level.
 Transfer: share of TaintBench apps with at least one wrong clearance (by our answer key) at each DELTA, next to the
 F-Droid held-out rate.
 """
@@ -45,6 +48,14 @@ def main():
         if r["bound"] is not None and r["truth_lo"] == r["truth_hi"]:
             by_app[r["app"]].append((r["bound"], r["truth_lo"]))
     apps = {r for r, _, _ in by_method}
+    reg = collections.defaultdict(set)  # (app, site) -> simple names of the classes registered there (callback holes)
+    if os.environ.get("CB_GRAPHS"):
+        import numpy as np
+        for g in glob.glob(os.path.join(ROOT, os.environ["CB_GRAPHS"], "*.npz")):
+            z = np.load(g)
+            for s in (z["cb_sub"].tolist() if "cb_sub" in z.files else []):
+                site, m = s.split(" -> ", 1)
+                reg[(os.path.basename(g)[:-4], site)].add(re.match(r"<([^:]+):", m).group(1).split(".")[-1].split("$")[-1])
     cats = collections.Counter()
     cleared = collections.Counter()
     rows = []
@@ -64,6 +75,10 @@ def main():
                 cat = "out of scope (sink API not in list)"
             else:
                 recs = by_method.get((app, sk["className"], method_name(sk["methodName"])), [])
+                new = re.search(r"addJavascriptInterface\(\s*new\s+([\w.$]+)\s*\(", sk.get("statement", ""))
+                if reg and new and "addJavascriptInterface" in api:
+                    x = new.group(1).split(".")[-1]
+                    recs = [r for r in recs if x in reg.get((app, r["site"]), ())] or recs
                 if any(r["bound"] is None for r in recs):
                     cat = "reported without holes"
                 elif recs:
