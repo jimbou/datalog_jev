@@ -151,3 +151,27 @@ into a claude.ai/code session on repository jimbou/datalog_jev, branch main, ses
 >    (writes data/jev_f3_izzy_sonnetp_r0.jsonl, 1 sample, cap $15), monitored the same way.
 > 6. At the end report the three final lines (methods, cost), the `claude --version`, and confirm the last push
 >    (`git log origin/f3-cloud-izzy -1`).
+
+## Last-credit prompt (about $20 left, 2026-10-17): third labeler on the audited facts, then rescued-app prices
+
+(1) Sonnet 5.5 rubric labels (written definition, reason codes) for the 314 methods behind the key's 446 audited facts
+(`data/audit_methods.jsonl`, 1,572 candidate flows): a third labeler to compare with the key and with the person's
+source checks (key quality, next to G2). (2) With what is left, Sonnet 5.5 prices (1 sample; one sample is as good as
+three on the dev subset) for the smallest 3,524 of the 10,376 unpriced methods of the F1-rescued apps
+(`data/f1_s55_cloud.jsonl`); the server prices the other 6,852 with Claude Code (`data/f1_s55_server.jsonl`). Paste into a
+claude.ai/code session on repository jimbou/datalog_jev, branch main, session model Sonnet 5.5:
+
+> Last credit job for paper/CLOUD_CREDITS_PLAN.md ("Last-credit prompt"). Do only this; no paid APIs, no installs, never
+> push to main, never force-push, never print secret values.
+> 1. `git fetch origin main && git checkout -B last-cloud origin/main && wc -l data/audit_methods.jsonl data/f1_s55_cloud.jsonl`
+>    (expect 314 and 3524; stop and report if missing).
+> 2. Start in the background:
+>    `KIND=label nohup bash bench/cloud_price.sh claude-sonnet-5-5 rubric-sonnet55-audit audit_methods 1 10 last-cloud 50 4 > /tmp/cloud_audit.log 2>&1 &`
+>    (writes data/oracle-rubric-sonnet55-audit.jsonl, pushes to branch last-cloud every 50 methods, cap $10).
+> 3. Every 9 minutes (`sleep 540; tail -n 3 /tmp/cloud_audit.log`, nothing else) report the last CHUNK line; stop the job
+>    and report if most methods error or "PUSH FAILED" appears twice in a row.
+> 4. When it says DONE or CAP reached, start on the same branch:
+>    `nohup bash bench/cloud_price.sh claude-sonnet-5-5 sonnet55def1 f1_s55_cloud 1 9 last-cloud 250 6 > /tmp/cloud_f1.log 2>&1 &`
+>    (writes data/jev_f1_s55_cloud_sonnet55def1_r0.jsonl, 1 sample, cap $9), monitored the same way. If the credit runs
+>    out first, just report how far it got; the pushed file is enough.
+> 5. At the end report both final lines and confirm the last push (`git log origin/last-cloud -1`).
