@@ -297,3 +297,18 @@
 {"cls": "java.util.List", "sig": "java.lang.Object get(int)", "codes": ["P", "N", "R"], "labels": [false, false, true], "cost": 0.007412}
 {"cls": "java.util.Map", "sig": "boolean containsValue(java.lang.Object)", "codes": ["K", "N", "K", "N"], "labels": [false, false, false, false], "cost": 0.008931999999999999}
 {"cls": "java.util.Map", "sig": "java.lang.Object get(java.lang.Object)", "codes": ["P", "N", "R", "N"], "labels": [false, false, true, false], "cost": 0.007646}
+{"cls": "java.lang.StringBuilder", "sig": "java.lang.StringBuilder append(char[])", "codes": ["C", "C", "S", "N"], "labels": [true, true, true, false], "cost": 0.0036597}
+{"cls": "java.util.Map", "sig": "java.lang.Object put(java.lang.Object,java.lang.Object)", "codes": ["N", "S", "N", "C", "S", "N", "R", "N", "N"], "labels": [false, true, false, true, true, false, true, false, false], "cost": 0.008511999999999999}
+{"cls": "java.util.Set", "sig": "boolean add(java.lang.Object)", "codes": ["K", "S", "K", "N"], "labels": [false, true, false, false], "cost": 0.007646}
+{"cls": "java.util.Set", "sig": "boolean addAll(java.util.Collection)", "codes": ["K", "C", "K", "N"], "labels": [false, true, false, false], "cost": 0.007654}
+{"cls": "java.util.Set", "sig": "boolean contains(java.lang.Object)", "codes": ["K", "N", "K", "N"], "labels": [false, false, false, false], "cost": 0.00765}
+{"cls": "java.util.WeakHashMap", "sig": "java.lang.Object get(java.lang.Object)", "codes": ["P", "N", "R", "N"], "labels": [false, false, true, false], "cost": 0.007682}
+{"cls": "java.util.concurrent.atomic.AtomicReference", "sig": "void set(java.lang.Object)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007437999999999999}
+{"cls": "java.util.logging.LogRecord", "sig": "void setThrown(java.lang.Throwable)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.0074459999999999995}
+{"cls": "java.util.logging.Logger", "sig": "void log(java.util.logging.Level,java.lang.String,java.lang.Throwable)", "codes": ["K", "N", "H", "N", "N", "H", "N", "N", "N"], "labels": [false, false, false, false, false, false, false, false, false], "cost": 0.010698}
+{"cls": "java.util.regex.Pattern", "sig": "java.util.regex.Matcher matcher(java.lang.CharSequence)", "codes": ["S", "N", "S", "N"], "labels": [true, false, true, false], "cost": 0.007754}
+{"cls": "java.util.zip.ZipOutputStream", "sig": "void write(byte[],int,int)", "codes": ["C", "P", "N", "K", "N", "N"], "labels": [true, false, false, false, false, false], "cost": 0.007946}
+{"cls": "javax.crypto.Cipher", "sig": "void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)", "codes": ["K", "N", "N", "S", "N", "S", "N", "N", "N"], "labels": [false, false, false, true, false, true, false, false, false], "cost": 0.008839999999999999}
+{"cls": "org.json.JSONArray", "sig": "java.lang.String optString(int)", "codes": ["P", "N", "R"], "labels": [false, false, true], "cost": 0.007444}
+{"cls": "org.json.JSONObject", "sig": "org.json.JSONObject put(java.lang.String,java.lang.Object)", "codes": ["P", "P", "N", "N", "S", "S", "N"], "labels": [false, false, false, false, true, true, false], "cost": 0.008176000000000001}
+{"cls": "org.xmlpull.v1.XmlSerializer", "sig": "void setOutput(java.io.Writer)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.0074459999999999995}
