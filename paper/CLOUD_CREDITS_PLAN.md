@@ -185,7 +185,7 @@ model Sonnet 5.5:
 
 > Leftover credit job for paper/CLOUD_CREDITS_PLAN.md ("Leftover prompt"). Do only this; no paid APIs, no installs, never
 > push to main, never force-push, never print secret values.
-> 1. `git fetch origin main last-cloud && git checkout -B last-cloud origin/last-cloud && git merge --no-edit origin/main && wc -l data/f1_s55_rest2.jsonl`
+> 1. `git fetch origin main last-cloud && git checkout -B last-cloud origin/last-cloud && git merge --no-edit origin/main && git push origin last-cloud && wc -l data/f1_s55_rest2.jsonl`
 >    (expect 2274; stop and report if missing or if the merge conflicts).
 > 2. Start in the background:
 >    `nohup bash bench/cloud_price.sh claude-sonnet-5-5 sonnet55def1 f1_s55_rest2 1 5 last-cloud 100 6 > /tmp/cloud_rest2.log 2>&1 &`
@@ -194,3 +194,7 @@ model Sonnet 5.5:
 >    and report if most methods error or "PUSH FAILED" appears twice in a row.
 > 4. When it says DONE or CAP reached, or the credit runs out, report the final line and confirm the last push
 >    (`git log origin/last-cloud -1`).
+>
+> (Ran 2026-10-17: the first start failed because the merge was not pushed and `cloud_price.sh` resets to the remote
+> branch; the push is now in step 1. Result: 700 of 2,274 priced, $5.63, last-cloud e1fb6c2. The server's
+> f1_s55_rest2_rev was cut to the other 1,574.)
