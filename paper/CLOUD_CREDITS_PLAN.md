@@ -175,3 +175,22 @@ claude.ai/code session on repository jimbou/datalog_jev, branch main, session mo
 >    (writes data/jev_f1_s55_cloud_sonnet55def1_r0.jsonl, 1 sample, cap $9), monitored the same way. If the credit runs
 >    out first, just report how far it got; the pushed file is enough.
 > 5. At the end report both final lines and confirm the last push (`git log origin/last-cloud -1`).
+
+## Leftover prompt (about $6 left, 2026-10-17): rescued-app prices past the last-credit cap
+
+The 2,274 F1-rescued methods neither the cloud's $9 nor the server's share covered (`data/f1_s55_rest2.jsonl`, smallest
+first). The server prices the same file from the other end (`f1_s55_rest2_rev`, `bench/queues/f1_s55_rest.sh`); the merge
+drops duplicates, so overlap only wastes a little. Paste into a claude.ai/code session on jimbou/datalog_jev, session
+model Sonnet 5.5:
+
+> Leftover credit job for paper/CLOUD_CREDITS_PLAN.md ("Leftover prompt"). Do only this; no paid APIs, no installs, never
+> push to main, never force-push, never print secret values.
+> 1. `git fetch origin main last-cloud && git checkout -B last-cloud origin/last-cloud && git merge --no-edit origin/main && wc -l data/f1_s55_rest2.jsonl`
+>    (expect 2274; stop and report if missing or if the merge conflicts).
+> 2. Start in the background:
+>    `nohup bash bench/cloud_price.sh claude-sonnet-5-5 sonnet55def1 f1_s55_rest2 1 5 last-cloud 100 6 > /tmp/cloud_rest2.log 2>&1 &`
+>    (writes data/jev_f1_s55_rest2_sonnet55def1_r0.jsonl, 1 sample, pushes to branch last-cloud every 100 methods, cap $5).
+> 3. Every 9 minutes (`sleep 540; tail -n 3 /tmp/cloud_rest2.log`, nothing else) report the last CHUNK line; stop the job
+>    and report if most methods error or "PUSH FAILED" appears twice in a row.
+> 4. When it says DONE or CAP reached, or the credit runs out, report the final line and confirm the last push
+>    (`git log origin/last-cloud -1`).
