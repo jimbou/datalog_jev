@@ -262,7 +262,7 @@ Sonnet~5.5 asked with the written definition (three samples, the highest price k
 On the other 215 apps of the corpus it clears 42.8\% (1.4\% of apps wrong), less than Jev alone (49.5\%, 1.0\%): the development apps are harder for Jev (38.4\%), and the gain did not transfer, so Jev remains the default.
 This is the outcome the development subset exists to catch.
 Sonnet~5.5 with the definition is the strongest hosted pricer we tried, 2.6 times Sonnet~5 on all apps (43.2\% against 16.7\%) with no wrong clearance; like Sonnet~5 it is certified only at thresholds up to 0.03, so a looser $\alpha$ does not help it.
-After these results we also checked a single sample, which clears at least as much on the development apps (46.4\%): the highest of three samples only raises prices.
+After these results we also checked a single sample, which clears at least as much on the development apps (46.4\%) and on all apps (45.3\%, no wrong clearance): the highest of three samples only raises prices. We therefore priced the rescued apps' library methods with one sample.
 
 \emph{The number of calibration apps.}
 By Corollary~\ref{cor:n}, certifying $\alpha=0.05$ at $\varepsilon=0.1$ needs at least 45 programs; Figure~\ref{fig:learning} in the appendix shows that the measured clearance jumps from zero exactly there and grows slowly afterwards.
@@ -330,6 +330,7 @@ When memory runs out, our pipeline treats bundled libraries as holes (Section~\r
 The bundled-library holes, 10{,}163 methods from AndroidX, Kotlin, OkHttp and others, are code that no calibration app contained as holes, yet the threshold certified on the main corpus gives none of the 66 rescued apps a wrong clearance with Jev, and Jev clears 41.5\% of their leak-free verdicts (54.9\% without the 17 apps where R8 moved app code into library classes).
 Sonnet's two wrong clearances come from one bundled-library flow it prices at 0.02 (\texttt{AppCompatActivity.setContentView}); on these methods Jev prices absent flows far more confidently than on framework methods (82\% at most 0.05, against 35\%), and both pricers rank them about as well as framework methods (AUC 0.94 and 0.95).
 Re-certifying on all 373 apps changes Jev's result little (49.6\% cleared, 1.3\% of held-out apps wrong).
+Sonnet~5.5 with the written definition (one sample) also gives none of the 66 rescued apps a wrong clearance and clears 45.3\% of the leak-free verdicts in the fully built apps and 28.0\% in the fallback apps; on all 373 apps it clears 44.3\% with no held-out app wrong.
 FlowDroid given the same fallback finishes 14 more apps (331) and, on 103 apps with leaks, silently loses 23 of its 308 reported leaks (7.5\%); our fallback instead turns the excluded code into priced holes that the certified bound covers.
 
 \emph{Malware.}
@@ -345,8 +346,8 @@ IzzyOnDroid distributes open-source apps that F-Droid does not build itself.
 We fixed the list before any run: every app in its index of 15 October 2026 that is not in F-Droid and meets the main corpus's criteria (Section~\ref{sec:setup}), 134 apps.
 The same pipeline builds 94 of them, 68 fully and 26 with bundled libraries as holes (the other 40 exceed the budget even then; these apps are larger than F-Droid's), and 83 have a hole-dependent verdict the key decides; the new apps add 2{,}648 unmodeled methods, labeled for the key exactly as in the main corpus.
 With the threshold certified on F-Droid, Jev clears 43.7\% of the leak-free verdicts in the fully built apps and 50.6\% in the fallback apps, with no wrong clearance in any of the 83 apps; at $\alpha=0.1$ (threshold 0.3) it clears 60.9\%, again with none.
-Sonnet~5 clears 10.5\% and Sonnet~5.5 with the written definition 36.6\%, both without a wrong clearance.
-Certifying on the pooled populations instead changes little: on the 390 F-Droid and IzzyOnDroid apps Jev clears 52.1\% of the hard slice with 1.7\% of held-out apps wrong, and 51.8\% (1.7\%) with the 66 rescued large apps added (456 apps).
+Sonnet~5 clears 10.5\% and Sonnet~5.5 with the written definition 36.6\% (38.5\% with one sample), all without a wrong clearance.
+Certifying on the pooled populations instead changes little: on the 390 F-Droid and IzzyOnDroid apps Jev clears 52.1\% of the hard slice with 1.7\% of held-out apps wrong, and 51.8\% (1.7\%) with the 66 rescued large apps added (456 apps); Sonnet~5.5 (one sample) clears 43.9\% and 43.3\%, with no held-out app wrong.
 
 \emph{Other kinds of holes.}
 Receipts apply to any gap that can be written as a set of candidate edges.

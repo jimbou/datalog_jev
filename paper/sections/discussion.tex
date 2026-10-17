@@ -27,6 +27,7 @@ No key is ground truth.
 The main key contains language-model labels, K2 covers only part of the library, and the audit checks the facts behind accepted verdicts, not the rejected ones.
 We address this with keys built in different ways (Section~\ref{sec:rq2}), with a key built from the answers on which two model families agree, which match a person's source checks on 95\% of the checked facts, and with random label noise.
 A third labeler used in no key, Sonnet~5.5 with the written definition, agrees with the main key on 261 of the 266 audited facts where both key labelers agree (98\%), and with the person's source checks on 54 of 60 decided facts; all six disagreements are flows the person found and the model denies, the same direction as the key labelers' own misses (5 for Sonnet~5, 4 for GPT-6.1 on the same checks), so model labels lean towards missing flows rather than inventing them.
+Sonnet~5.5 as a pricer comes from the same model family as one key labeler, so its lack of wrong clearances may partly reflect shared blind spots; the key requires the agreement of a second family, and Jev, unrelated to either, shows the same transfer.
 \todo{G2: add the second rater's agreement once available.}
 
 \emph{Apps.}

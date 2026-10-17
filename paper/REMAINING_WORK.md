@@ -413,3 +413,9 @@ Pipeline from here; times are working time unless marked as server time.
 
 Must-do total: about 4-6 working days plus server time; with F2 and F3: about 2.5-3.5 weeks; F4 adds about a week.
 
+
+**Rescued-app Sonnet 5.5 DONE (2026-10-17).** sonnet55def1 (1 sample) on every population: cloud 1,950 + server 8,423
+rescued methods (1 unpriced) + 271 of 273 unmodeled graph methods outside every earlier Sonnet 5.5 set (f1_s55_gap;
+mostly IzzyOnDroid, they had been priced 0.5). Main 45.3% 0/307, rescued full 45.3% 0/10, fallback 28.0% 0/56,
+IzzyOnDroid 38.5% 0/83 (def3 36.6% lacks the gap prices), pools 373/390/456: 44.3/43.9/43.3%, 0 held-out wrong.
+Server: data/f1/s55_score.txt, s55_pools.txt, s55_eval.log. In eval.tex (RQ5, pricer variants) and threats (same-family caveat).

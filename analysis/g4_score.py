@@ -25,7 +25,7 @@ def load(p, suffixes):
 
 for alpha in (0.05, 0.1):
     print("alpha", alpha)
-    for p in ["choice-obj", "sonnetp", "sonnet55def3", "b6", "freq", "uniform"]:
+    for p in os.environ.get("PRICERS", "choice-obj,sonnetp,sonnet55def3,b6,freq,uniform").split(","):
         main, _ = load(p, [""])
         deltas = [0.5, 1, 2, 3, 4, 5] if p == "uniform" else DELTAS
         d = calibrate(sorted(main), main, alpha, 0.1, deltas)
