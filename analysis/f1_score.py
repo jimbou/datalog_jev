@@ -1,5 +1,6 @@
 """F1: score the rescued apps (data/android_fm-rk-<pricer>_f1[e_fb].jsonl) with the threshold certified on all main apps.
 Usage (on the server): f1_score.py APP1,APP2,...   (apps to drop from the fallback set, e.g. the 17 with R8-moved app code)
+PRICERS=a,b,... picks the pricers (default choice-obj,sonnetp,b6,freq,uniform).
 """
 import collections, json, os, sys
 sys.path.insert(0, os.path.expanduser("~/receipts/analysis"))
@@ -16,7 +17,7 @@ def load(p, suffix, skip=()):
     return by, und, tot
 for alpha in (0.05, 0.1):
     print("alpha", alpha)
-    for p in ["choice-obj", "sonnetp", "b6", "freq", "uniform"]:
+    for p in os.environ.get("PRICERS", "choice-obj,sonnetp,b6,freq,uniform").split(","):
         main, _, _ = load(p, "")
         deltas = [0.5, 1, 2, 3, 4, 5] if p == "uniform" else DELTAS
         d = calibrate(sorted(main), main, alpha, 0.1, deltas)
