@@ -148,3 +148,52 @@
 {"cls": "android.provider.MediaStore$Images$Thumbnails", "sig": "android.graphics.Bitmap getThumbnail(android.content.ContentResolver,long,int,android.graphics.BitmapFactory$Options)", "codes": ["R", "C", "P", "N", "P", "P", "N", "P", "K", "N"], "labels": [true, true, false, false, false, false, false, false, false, false], "cost": 0.012724}
 {"cls": "android.provider.MediaStore$Video$Thumbnails", "sig": "android.graphics.Bitmap getThumbnail(android.content.ContentResolver,long,int,android.graphics.BitmapFactory$Options)", "codes": ["C", "C", "P", "N", "N", "P", "N", "N", "K", "N"], "labels": [true, true, false, false, false, false, false, false, false, false], "cost": 0.013214}
 {"cls": "android.service.media.MediaBrowserService", "sig": "void setSessionToken(android.media.session.MediaSession$Token)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.0074979999999999995}
+{"cls": "android.text.StaticLayout", "sig": "void <init>(java.lang.CharSequence,android.text.TextPaint,int,android.text.Layout$Alignment,float,float,boolean)", "codes": ["S", "N", "N", "S", "N", "N", "S", "N", "N", "N", "S", "N", "N", "S", "N", "N", "N", "S", "N", "N", "N", "K", "N", "N", "N"], "labels": [true, false, false, true, false, false, true, false, false, false, true, false, false, true, false, false, false, true, false, false, false, false, false, false, false], "cost": 0.015012}
+{"cls": "android.text.StaticLayout$Builder", "sig": "android.text.StaticLayout$Builder setAlignment(android.text.Layout$Alignment)", "codes": ["N", "S", "C", "N"], "labels": [false, true, true, false], "cost": 0.009152}
+{"cls": "android.text.StaticLayout$Builder", "sig": "android.text.StaticLayout$Builder setTextDirection(android.text.TextDirectionHeuristic)", "codes": ["N", "S", "C", "N"], "labels": [false, true, true, false], "cost": 0.007854}
+{"cls": "android.text.TextPaint", "sig": "android.graphics.Typeface setTypeface(android.graphics.Typeface)", "codes": ["C", "S", "N", "N"], "labels": [true, true, false, false], "cost": 0.009104}
+{"cls": "android.text.format.Formatter", "sig": "java.lang.String formatFileSize(android.content.Context,long)", "codes": ["P", "C", "N"], "labels": [false, true, false], "cost": 0.0075120000000000004}
+{"cls": "android.util.Log", "sig": "int e(java.lang.String,java.lang.String,java.lang.Throwable)", "codes": ["N", "N", "N", "N", "N"], "labels": [false, false, false, false, false], "cost": 0.0079}
+{"cls": "android.util.Log", "sig": "int i(java.lang.String,java.lang.String,java.lang.Throwable)", "codes": ["N", "N", "N", "N", "N"], "labels": [false, false, false, false, false], "cost": 0.0079}
+{"cls": "android.util.Log", "sig": "int w(java.lang.String,java.lang.String,java.lang.Throwable)", "codes": ["N", "N", "N", "N", "N"], "labels": [false, false, false, false, false], "cost": 0.0079}
+{"cls": "android.util.Pair", "sig": "android.util.Pair create(java.lang.Object,java.lang.Object)", "codes": ["S", "N", "S", "N"], "labels": [true, false, true, false], "cost": 0.00775}
+{"cls": "android.util.SparseArray", "sig": "java.lang.Object get(int)", "codes": ["P", "N", "R"], "labels": [false, false, true], "cost": 0.007428000000000001}
+{"cls": "android.util.SparseArray", "sig": "java.lang.Object valueAt(int)", "codes": ["P", "N", "R"], "labels": [false, false, true], "cost": 0.00744}
+{"cls": "android.util.SparseArray", "sig": "void put(int,java.lang.Object)", "codes": ["S", "N", "S", "N"], "labels": [true, false, true, false], "cost": 0.007682}
+{"cls": "android.view.ContentInfo$Builder", "sig": "android.view.ContentInfo$Builder setLinkUri(android.net.Uri)", "codes": ["S", "S", "N", "N"], "labels": [true, true, false, false], "cost": 0.0020108}
+{"cls": "android.view.LayoutInflater", "sig": "android.view.View inflate(int,android.view.ViewGroup)", "codes": ["P", "N", "N", "S", "N", "C", "N"], "labels": [false, false, false, true, false, true, false], "cost": 0.00814}
+{"cls": "android.view.MenuItem", "sig": "android.view.MenuItem setIntent(android.content.Intent)", "codes": ["N", "S", "C", "N"], "labels": [false, true, true, false], "cost": 0.0004396}
+{"cls": "android.view.View", "sig": "boolean onKeyDown(int,android.view.KeyEvent)", "codes": ["K", "K", "N", "K", "K", "K", "N"], "labels": [false, false, false, false, false, false, false], "cost": 0.01145}
+{"cls": "android.view.View", "sig": "boolean onKeyUp(int,android.view.KeyEvent)", "codes": ["K", "K", "N", "K", "N", "K", "N"], "labels": [false, false, false, false, false, false, false], "cost": 0.01175}
+{"cls": "android.view.View", "sig": "boolean post(java.lang.Runnable)", "codes": ["N", "S", "K", "N"], "labels": [false, true, false, false], "cost": 0.007658}
+{"cls": "android.view.View", "sig": "void announceForAccessibility(java.lang.CharSequence)", "codes": ["N", "N"], "labels": [false, false], "cost": 0.00865}
+{"cls": "android.view.View", "sig": "void onDraw(android.graphics.Canvas)", "codes": ["H", "H"], "labels": [false, false], "cost": 0.007414}
+{"cls": "android.view.View", "sig": "void postOnAnimation(java.lang.Runnable)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007414}
+{"cls": "android.view.View", "sig": "void setImportantForAccessibility(int)", "codes": ["C"], "labels": [true], "cost": 0.007246}
+{"cls": "android.view.View", "sig": "void setOnClickListener(android.view.View$OnClickListener)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.00745}
+{"cls": "android.view.View", "sig": "void setVisibility(int)", "codes": ["C"], "labels": [true], "cost": 0.007176}
+{"cls": "android.view.View$AccessibilityDelegate", "sig": "void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)", "codes": ["N", "C", "N", "N", "N", "N"], "labels": [false, true, false, false, false, false], "cost": 0.010124000000000001}
+{"cls": "android.view.ViewGroup", "sig": "void addView(android.view.View)", "codes": ["S", "I"], "labels": [true, false], "cost": 0.007365999999999999}
+{"cls": "android.view.ViewGroup", "sig": "void removeView(android.view.View)", "codes": ["P", "I"], "labels": [false, false], "cost": 0.00737}
+{"cls": "android.view.ViewParent", "sig": "boolean onNestedFling(android.view.View,float,float,boolean)", "codes": ["N", "I", "N", "I", "N", "N", "I", "N", "K", "I", "N", "N", "N"], "labels": [false, false, false, false, false, false, false, false, false, false, false, false, false], "cost": 0.008879999999999999}
+{"cls": "android.view.ViewParent", "sig": "boolean onNestedPreFling(android.view.View,float,float)", "codes": ["K", "I", "K", "I", "N", "K", "I", "N", "K", "N"], "labels": [false, false, false, false, false, false, false, false, false, false], "cost": 0.008450000000000001}
+{"cls": "android.view.ViewParent", "sig": "void onNestedScroll(android.view.View,int,int,int,int)", "codes": ["I", "K", "N", "K", "N", "K", "N", "K", "N", "N"], "labels": [false, false, false, false, false, false, false, false, false, false], "cost": 0.01155}
+{"cls": "android.view.Window", "sig": "void setBackgroundDrawable(android.graphics.drawable.Drawable)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007489999999999999}
+{"cls": "android.view.accessibility.AccessibilityNodeInfo", "sig": "void setHintText(java.lang.CharSequence)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007477999999999999}
+{"cls": "android.view.accessibility.AccessibilityNodeInfo", "sig": "void setPaneTitle(java.lang.CharSequence)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007489999999999999}
+{"cls": "android.view.accessibility.AccessibilityNodeInfo", "sig": "void setText(java.lang.CharSequence)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007469999999999999}
+{"cls": "android.view.animation.AnimationUtils", "sig": "android.view.animation.Interpolator loadInterpolator(android.content.Context,int)", "codes": ["P", "P", "N"], "labels": [false, false, false], "cost": 0.007556}
+{"cls": "android.view.inputmethod.InputConnection", "sig": "boolean performEditorAction(int)", "codes": ["K", "K", "N"], "labels": [false, false, false], "cost": 0.007456}
+{"cls": "android.widget.ArrayAdapter", "sig": "int getPosition(java.lang.Object)", "codes": ["P", "N", "P", "N"], "labels": [false, false, false, false], "cost": 0.0076619999999999995}
+{"cls": "android.widget.ArrayAdapter", "sig": "void <init>(android.content.Context,int,java.lang.Object[])", "codes": ["S", "N", "K", "N", "N", "S", "N"], "labels": [true, false, false, false, false, true, false], "cost": 0.008268}
+{"cls": "android.widget.ArrayAdapter", "sig": "void <init>(android.content.Context,int,java.util.List)", "codes": ["S", "N", "K", "N", "N", "S", "N"], "labels": [true, false, false, false, false, true, false], "cost": 0.0082}
+{"cls": "android.widget.Button", "sig": "void setOnClickListener(android.view.View$OnClickListener)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007457999999999999}
+{"cls": "android.widget.CompoundButton", "sig": "void setOnCheckedChangeListener(android.widget.CompoundButton$OnCheckedChangeListener)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007626}
+{"cls": "android.widget.EditText", "sig": "void addTextChangedListener(android.text.TextWatcher)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007442}
+{"cls": "android.widget.EditText", "sig": "void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo)", "codes": ["N", "C"], "labels": [false, true], "cost": 0.00761}
+{"cls": "android.widget.EditText", "sig": "void setText(java.lang.CharSequence)", "codes": ["C", "N"], "labels": [true, false], "cost": 0.007417999999999999}
+{"cls": "android.widget.ImageView", "sig": "void setImageBitmap(android.graphics.Bitmap)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007454}
+{"cls": "android.widget.ImageView", "sig": "void setOnClickListener(android.view.View$OnClickListener)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.0074659999999999995}
+{"cls": "android.widget.ImageView", "sig": "void setTag(java.lang.Object)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.00739}
+{"cls": "android.widget.LinearLayout", "sig": "void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo)", "codes": ["N", "C"], "labels": [false, true], "cost": 0.0076219999999999994}
+{"cls": "android.widget.ListView", "sig": "void setAdapter(android.widget.ListAdapter)", "codes": ["S", "I"], "labels": [true, false], "cost": 0.007442}
