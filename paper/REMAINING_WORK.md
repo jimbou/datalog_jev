@@ -304,6 +304,15 @@ build; cores 8-11 stay free for the user's symex jobs, which are not pinned).
   data/jev_f3_izzy_sonnetp_r0.jsonl to the server as data/jev_f3_izzy_sonnetp_r0_izzycloud.jsonl and rerun
   g4_eval.sh (merges only new methods; evaluating only sonnetp is enough).
 
+- G4b (if AndroZoo does not reply): CIC-AndMal2017 benign Google Play apps (https://unb.ca/cic/datasets/andmal2017.html;
+  over 6,000 benign apps published 2015-2017; publicly available for researchers, citation Lashkari et al., ICCST 2018).
+  The user registered on 2026-10-17; download later: only Benign-APKs-2015/2016/2017.zip and their .md5 files (no
+  malware archives, no CSVs/PCAPs). Then: unpack into its own directory on the server (untrusted data), MD5 check, fix the
+  list before any build (main-corpus criteria, minus F-Droid and IzzyOnDroid packages, fixed seed), same pipeline with
+  fallback, labels and prices as for IzzyOnDroid, F-Droid threshold unchanged. Report as a third population, "Google Play
+  apps from 2015-2017". Checked and not chosen: AndroZooOpen (https://github.com/HumaniSELab/AndroZooOpen, MSR 2020):
+  45,000+ open-source repositories with metadata (on_fdroid, on_googleplay), no APKs, again open source.
+
 **Next server steps for G4 (IzzyOnDroid), after IZZY-DONE in `data/f3/f3_izzy.log`:**
 1. New hole methods: `GRAPHS_DIRS=data/graphs_izzy:data/graphs_izzy_fb LIB_PREFIXES=data/bundled_libs.txt python3
    probes/extend_holes_fw.py` (back up holes_android_fw.jsonl first).
