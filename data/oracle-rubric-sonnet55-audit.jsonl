@@ -248,3 +248,52 @@
 {"cls": "java.lang.String", "sig": "boolean endsWith(java.lang.String)", "codes": ["K", "N", "K"], "labels": [false, false, false], "cost": 0.007488}
 {"cls": "java.lang.String", "sig": "boolean equals(java.lang.Object)", "codes": ["K", "N", "K", "N"], "labels": [false, false, false, false], "cost": 0.00867}
 {"cls": "java.lang.String", "sig": "boolean equalsIgnoreCase(java.lang.String)", "codes": ["K", "N", "K"], "labels": [false, false, false], "cost": 0.0075120000000000004}
+{"cls": "java.lang.String", "sig": "byte[] getBytes(java.nio.charset.Charset)", "codes": ["P", "N", "C", "N"], "labels": [false, false, true, false], "cost": 0.00771}
+{"cls": "java.lang.String", "sig": "char charAt(int)", "codes": ["P", "N", "R"], "labels": [false, false, true], "cost": 0.0074}
+{"cls": "java.lang.String", "sig": "java.lang.String format(java.lang.String,java.lang.Object[])", "codes": ["C", "N", "C"], "labels": [true, false, true], "cost": 0.007564}
+{"cls": "java.lang.String", "sig": "java.lang.String replace(java.lang.CharSequence,java.lang.CharSequence)", "codes": ["K", "N", "N", "C", "N", "N", "C", "N", "N"], "labels": [false, false, false, true, false, false, true, false, false], "cost": 0.008639999999999998}
+{"cls": "java.lang.String", "sig": "void <init>(byte[],int,int,java.nio.charset.Charset)", "codes": ["C", "N", "K", "N", "N", "K", "N", "N", "P", "N"], "labels": [true, false, false, false, false, false, false, false, false, false], "cost": 0.008698000000000001}
+{"cls": "java.lang.String", "sig": "void <init>(byte[],java.nio.charset.Charset)", "codes": ["C", "N", "P", "N"], "labels": [true, false, false, false], "cost": 0.007782}
+{"cls": "java.lang.String", "sig": "void <init>(char[],int,int)", "codes": ["C", "K", "N", "K", "N"], "labels": [true, false, false, false, false], "cost": 0.007744000000000001}
+{"cls": "java.lang.String", "sig": "void getChars(int,int,char[],int)", "codes": ["N", "P", "N", "K", "N", "N", "P", "C"], "labels": [false, false, false, false, false, false, false, true], "cost": 0.010251999999999999}
+{"cls": "java.lang.StringBuffer", "sig": "java.lang.String substring(int,int)", "codes": ["K", "N", "K", "N", "C"], "labels": [false, false, false, false, true], "cost": 0.007691999999999999}
+{"cls": "java.lang.StringBuilder", "sig": "java.lang.StringBuilder append(java.lang.Object)", "codes": ["C", "C", "S", "N"], "labels": [true, true, true, false], "cost": 0.007682}
+{"cls": "java.lang.System", "sig": "void arraycopy(java.lang.Object,int,java.lang.Object,int,int)", "codes": ["C", "N", "P", "N", "N", "P", "N", "K"], "labels": [true, false, false, false, false, false, false, false], "cost": 0.008433999999999999}
+{"cls": "java.lang.reflect.Field", "sig": "int getInt(java.lang.Object)", "codes": ["R", "N", "P", "N"], "labels": [true, false, false, false], "cost": 0.00765}
+{"cls": "java.lang.reflect.Method", "sig": "java.lang.Object invoke(java.lang.Object,java.lang.Object[])", "codes": ["P", "I", "N", "C", "N", "N", "C", "N", "N"], "labels": [false, false, false, true, false, false, true, false, false], "cost": 0.00856}
+{"cls": "java.net.DatagramPacket", "sig": "void <init>(byte[],int,java.net.InetAddress,int)", "codes": ["S", "N", "K", "N", "N", "S", "N", "C", "N", "N"], "labels": [true, false, false, false, false, true, false, true, false, false], "cost": 0.00867}
+{"cls": "java.net.Socket", "sig": "void <init>(java.net.InetAddress,int)", "codes": ["S", "S", "N"], "labels": [true, true, false], "cost": 0.007548}
+{"cls": "java.net.Socket", "sig": "void connect(java.net.SocketAddress,int)", "codes": ["S", "K", "N", "N"], "labels": [true, false, false, false], "cost": 0.007726}
+{"cls": "java.nio.charset.Charset", "sig": "boolean equals(java.lang.Object)", "codes": ["K", "N", "K", "N"], "labels": [false, false, false, false], "cost": 0.007654}
+{"cls": "java.nio.charset.Charset", "sig": "java.nio.charset.Charset forName(java.lang.String)", "codes": ["P"], "labels": [false], "cost": 0.007244}
+{"cls": "java.nio.file.Paths", "sig": "java.nio.file.Path get(java.lang.String,java.lang.String[])", "codes": ["C", "N", "C"], "labels": [true, false, true], "cost": 0.00758}
+{"cls": "java.security.KeyStoreException", "sig": "void <init>(java.lang.String,java.lang.Throwable)", "codes": ["S", "N", "S"], "labels": [true, false, true], "cost": 0.007624000000000001}
+{"cls": "java.text.DateFormat", "sig": "java.lang.String format(java.util.Date)", "codes": ["C", "I", "C", "N"], "labels": [true, false, true, false], "cost": 0.007638}
+{"cls": "java.text.DateFormat", "sig": "void setTimeZone(java.util.TimeZone)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.0074259999999999994}
+{"cls": "java.text.SimpleDateFormat", "sig": "java.lang.String format(java.util.Date)", "codes": ["C", "I", "C", "N"], "labels": [true, false, true, false], "cost": 0.007654}
+{"cls": "java.text.SimpleDateFormat", "sig": "void setTimeZone(java.util.TimeZone)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007442}
+{"cls": "java.util.ArrayList", "sig": "boolean add(java.lang.Object)", "codes": ["N", "S", "N", "N"], "labels": [false, true, false, false], "cost": 0.0076419999999999995}
+{"cls": "java.util.ArrayList", "sig": "boolean remove(java.lang.Object)", "codes": ["K", "K", "K", "N"], "labels": [false, false, false, false], "cost": 0.007646}
+{"cls": "java.util.ArrayList", "sig": "java.lang.Object get(int)", "codes": ["P", "N", "R"], "labels": [false, false, true], "cost": 0.007428000000000001}
+{"cls": "java.util.ArrayList", "sig": "java.lang.Object[] toArray(java.lang.Object[])", "codes": ["S", "N", "C", "C"], "labels": [true, false, true, true], "cost": 0.007698}
+{"cls": "java.util.ArrayList", "sig": "void <init>(int)", "codes": ["K"], "labels": [false], "cost": 0.007184}
+{"cls": "java.util.Arrays", "sig": "boolean equals(byte[],byte[])", "codes": ["K", "N", "K", "N"], "labels": [false, false, false, false], "cost": 0.00763}
+{"cls": "java.util.Calendar", "sig": "void setTimeZone(java.util.TimeZone)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.007422}
+{"cls": "java.util.Collection", "sig": "boolean add(java.lang.Object)", "codes": ["K", "S", "N", "N"], "labels": [false, true, false, false], "cost": 0.007634}
+{"cls": "java.util.Deque", "sig": "void push(java.lang.Object)", "codes": ["S", "N"], "labels": [true, false], "cost": 0.0073739999999999995}
+{"cls": "java.util.HashMap", "sig": "boolean containsKey(java.lang.Object)", "codes": ["K", "N", "K", "N"], "labels": [false, false, false, false], "cost": 0.00765}
+{"cls": "java.util.HashMap", "sig": "java.lang.Object get(java.lang.Object)", "codes": ["P", "N", "R", "N"], "labels": [false, false, true, false], "cost": 0.007654}
+{"cls": "java.util.HashSet", "sig": "boolean remove(java.lang.Object)", "codes": ["K", "I", "K", "N"], "labels": [false, false, false, false], "cost": 0.0076419999999999995}
+{"cls": "java.util.LinkedHashMap", "sig": "java.lang.Object get(java.lang.Object)", "codes": ["P", "I", "R", "N"], "labels": [false, false, true, false], "cost": 0.00767}
+{"cls": "java.util.LinkedHashMap", "sig": "java.lang.Object remove(java.lang.Object)", "codes": ["P", "K", "R", "N"], "labels": [false, false, true, false], "cost": 0.007674}
+{"cls": "java.util.LinkedList", "sig": "boolean add(java.lang.Object)", "codes": ["K", "S", "N", "N"], "labels": [false, true, false, false], "cost": 0.0076419999999999995}
+{"cls": "java.util.LinkedList", "sig": "boolean contains(java.lang.Object)", "codes": ["K", "I", "K", "N"], "labels": [false, false, false, false], "cost": 0.007646}
+{"cls": "java.util.LinkedList", "sig": "int indexOf(java.lang.Object)", "codes": ["P", "N", "R", "N"], "labels": [false, false, true, false], "cost": 0.007646}
+{"cls": "java.util.LinkedList", "sig": "java.lang.Object get(int)", "codes": ["P", "N", "R"], "labels": [false, false, true], "cost": 0.007428000000000001}
+{"cls": "java.util.List", "sig": "boolean add(java.lang.Object)", "codes": ["K", "S", "N", "N"], "labels": [false, true, false, false], "cost": 0.007626}
+{"cls": "java.util.List", "sig": "boolean contains(java.lang.Object)", "codes": ["K", "N", "R", "N"], "labels": [false, false, true, false], "cost": 0.00763}
+{"cls": "java.util.List", "sig": "boolean remove(java.lang.Object)", "codes": ["K", "K", "K", "N"], "labels": [false, false, false, false], "cost": 0.00763}
+{"cls": "java.util.List", "sig": "int lastIndexOf(java.lang.Object)", "codes": ["P", "N", "R", "N"], "labels": [false, false, true, false], "cost": 0.0076419999999999995}
+{"cls": "java.util.List", "sig": "java.lang.Object get(int)", "codes": ["P", "N", "R"], "labels": [false, false, true], "cost": 0.007412}
+{"cls": "java.util.Map", "sig": "boolean containsValue(java.lang.Object)", "codes": ["K", "N", "K", "N"], "labels": [false, false, false, false], "cost": 0.008931999999999999}
+{"cls": "java.util.Map", "sig": "java.lang.Object get(java.lang.Object)", "codes": ["P", "N", "R", "N"], "labels": [false, false, true, false], "cost": 0.007646}
