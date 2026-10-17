@@ -35,13 +35,13 @@ Unlike a model taken as fact, its error rate is measured and bounded, and the bo
 Unlike a list of assumptions, each receipt carries a price, so the facts with the highest stakes can be checked first.
 The guarantee is stated per program, because a user reads one app's report; we show that controlling the error per verdict instead, with conformal selection, leaves wrong clearances in 17\% of the apps at a 5\% target and misses its own target.
 
-We evaluate the approach on 332 open-source Android apps from F-Droid and 33 malware apps from TaintBench~\cite{taintbench}, against eight answer keys and ten pricers, with the same protocol throughout: a threshold is certified on half of the apps and tested on the other half, 200 times.
+We evaluate the approach on 332 open-source Android apps from F-Droid, 94 from a second store, IzzyOnDroid, fixed before any run, and 33 malware apps from TaintBench~\cite{taintbench}, against eight answer keys and ten pricers, with the same protocol throughout: a threshold is certified on half of the apps and tested on the other half, 200 times.
 At $\alpha=0.05$, priced receipts clear 49\% of the false alarms that opening unmodeled methods adds, keep all but one of the 22{,}888 real leaks that FlowDroid's models miss, and give 0.9\% of held-out apps a wrong clearance; per app, the false alarms drop from a median of 13 to 6.
 The baselines fail in different ways: counting assumptions clears nothing, a language model taken as fact exceeds a 5\% error in half of its runs, and per-verdict selection misses its target.
 The guarantee holds under every key and pricer we tried, including keys with no language-model labels and keys with random noise.
 Ablations show what decides the cleared share: the unit of the guarantee, the pricer's behavior at the low end of its ranking rather than its average ranking quality, and the wording of the question.
 Receipts also make human checking efficient: checking 25 facts chosen from the receipts alone raises the cleared share from 49\% to 63\%, while 100 random facts add three points.
-Finally, a threshold certified on F-Droid apps holds unchanged on larger apps whose bundled libraries are treated as holes, and on malware.
+Finally, a threshold certified on F-Droid apps holds unchanged on larger apps whose bundled libraries are treated as holes, on malware, and on the second store, with no wrong clearance in any of these apps at a 5\% target with Jev's prices.
 
 In summary, the paper makes the following contributions:
 \begin{itemize}
