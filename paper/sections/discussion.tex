@@ -16,8 +16,8 @@ We therefore use FlowDroid to validate receipts and our analysis to certify them
 
 \paragraph{Other kinds of holes.}
 Library flows are one kind of gap in a soundy analysis.
-Receipts apply to any gap that can be written as a set of candidate edges, and Section~\ref{sec:rq5} shows this for inter-component communication.
-Callbacks and reflection, which account for all documented malware leaks our analysis reaches only through unmodeled code, are natural next candidates.
+Receipts apply to any gap that can be written as a set of candidate edges, and Section~\ref{sec:rq5} shows this for inter-component communication and for objects exposed to JavaScript.
+Other callbacks (listeners, overridden framework methods) and reflection are natural next candidates; reflection underlies two of the six documented malware leaks.
 
 \section{Threats to Validity}
 \label{sec:threats}

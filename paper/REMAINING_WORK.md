@@ -222,6 +222,13 @@ in the artifact, not the APKs (stores and AndroZoo forbid redistribution). Fallb
   (`WebView.addJavascriptInterface`, listeners) to the parameters and return values of its callback methods. Puts 3 of
   the 6 TaintBench leaks in scope. Decide whether callbacks join the flow definition or stay a separate hole type with its
   own key, as Intent holes are.
+  **DONE 2026-10-17 (separate hole type "#cb", WebView.addJavascriptInterface only; `make_taint_cb.py`,
+  `bench/queues/cb_build.sh`, results `data/cb/cb_results.txt` on the server).** TaintBench with its own list: the 3
+  callback leaks are reported (Sonnet 5 cb prices 0.92-0.95, bounds 1.9-3.9, key real); only repane #1 (ICC) stays
+  cleared; 0/24 apps wrong at the F-Droid thresholds. Benign: 34 F-Droid/IzzyOnDroid apps calling
+  addJavascriptInterface (JS sink added), 7 verdicts depend on cb edges, all real and reported; Jev 47.8% / Sonnet 5
+  14.9% cleared at the F-Droid thresholds, 0/32 wrong. Too few apps for LTT of their own (0.9^16 > 0.1). In RQ5, the
+  beyond table and Discussion. Listeners and other callbacks not done.
 - b. More malware with documented leaks: DroidBench 3.0 and ICC-Bench (small, documented, include callback and library
   cases), UBCBench, and malware families whose reports say what data they steal (AMD dataset family descriptions,
   MalGenome/Drebin). Samples without AndroZoo: MalwareBazaar (abuse.ch), VirusShare, Koodous (free accounts; family

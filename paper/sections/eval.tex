@@ -320,6 +320,7 @@ TaintBench malware & 23 & 31.8\% (0 of 23) & 22.9\% (0 of 23)\\
 IzzyOnDroid, full analysis & 65 & 43.7\% (0 of 65) & 10.4\% (0 of 65)\\
 IzzyOnDroid, bundled libraries as holes & 18 & 50.6\% (0 of 18) & 11.4\% (0 of 18)\\
 Inter-component holes ($\alpha=0.1$, held-out halves) & 72 & 40.2\% (1.4\%) & --\\
+Callback holes, apps with JavaScript interfaces & 32 & 47.8\% (0 of 32) & 14.9\% (0 of 32)\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -337,8 +338,8 @@ FlowDroid given the same fallback finishes 14 more apps (331) and, on 103 apps w
 TaintBench documents 203 leaks in 39 malware apps (Table~\ref{tab:taintbench} in the appendix).
 With FlowDroid's models, most documented leaks that our analysis reaches are reported directly (83), and only 6 need a flow of an unmodeled method.
 All 6 depend on behavior that our flow definition excludes and that the key therefore labels ``no'': three on a callback (\texttt{WebView.}\allowbreak\texttt{addJavascriptInterface}: the app registers an object whose methods return the device identifier, and JavaScript calls them), one on inter-component communication (\texttt{startActivity}) and two on reflection (\texttt{Method.invoke}).
-Four of them have cheap receipts and are cleared by every pricer, including counting; the two that pass through reflection have expensive receipts and are reported.
-The receipts show that the definition, not the prices, decides these clearances.
+Without further holes, four of them have cheap receipts and are cleared by every pricer, including counting; the two that pass through reflection have expensive receipts and are reported.
+The receipts show that the definition, not the prices, decides these clearances, and the callback holes below put the three callback leaks back in scope.
 Measured against our key, the threshold transfers: no malware app receives a wrong clearance with Jev or Sonnet, against 3 of 23 apps with counting.
 
 \emph{A second population.}
@@ -353,5 +354,15 @@ Certifying on the pooled populations instead changes little: on the 390 F-Droid 
 Receipts apply to any gap that can be written as a set of candidate edges.
 As a test, we added edges for inter-component communication, from each Intent an app sends to each component that could receive it, with a key from explicit targets and manifest filters.
 On 72 apps, 1{,}467 receipts contain such an edge, and the certified threshold clears 40.2\% of the hard slice at $\alpha=0.1$ with 1.4\% of apps wrong.
+Callbacks are a second test.
+When an app hands an object to \texttt{WebView.}\allowbreak\texttt{addJavascriptInterface}, JavaScript in the page can call the object's methods and read what they return.
+We added an edge from the return value of each method of the registered object to the object at the registration, with a key from Android's rule: the page can call a method annotated \texttt{@JavascriptInterface}, and any public method if the app targets an SDK below 17.
+Sonnet~5 prices these edges from what a reader of the code sees (the method's signature, annotations and visibility, and the target SDK), and both pricers' evaluations use these prices.
+With TaintBench's own sink list, which includes the registration, the three documented callback leaks now have receipts made of such edges, priced 0.92 to 0.95, with bounds of 1.9 to 3.9; both pricers report them and the key marks them as real.
+Of the six documented leaks, only the inter-component leak remains cleared, and no TaintBench app receives a wrong clearance at the F-Droid thresholds (0 of 24).
+As a benign population we took the 34 F-Droid and IzzyOnDroid apps of the main runs whose code calls \texttt{addJavascriptInterface} and added the registration as a sink.
+Seven verdicts in 7 apps depend on callback edges, flows from a source to a page that the analysis without these edges does not report at all; all 7 are real by the key and reported.
+At the thresholds certified on F-Droid, Jev clears 47.8\% of the leak-free hole-dependent verdicts in the 32 apps that have any, and Sonnet~5 14.9\%, with no wrong clearance (Table~\ref{tab:beyond}).
+Thirty-two apps are too few to certify a threshold of their own: a half split of 16 apps cannot reach significance 0.1 at $\varepsilon=0.1$ even with no wrong clearance.
 
-\answer{\textbf{RQ5:} A threshold certified on F-Droid apps gives no wrong clearance on 66 larger apps whose bundled libraries are holes, on 23 malware apps, or on 83 apps from a second store, and receipts extend to inter-component holes. Few documented malware leaks depend on unmodeled library flows; the six that do pass through callbacks, inter-component calls or reflection, which the flow definition excludes, and their receipts make this visible.}
+\answer{\textbf{RQ5:} A threshold certified on F-Droid apps gives no wrong clearance on 66 larger apps whose bundled libraries are holes, on 23 malware apps, or on 83 apps from a second store, and receipts extend to inter-component and callback holes. Few documented malware leaks depend on unmodeled library flows; the six that do pass through callbacks, inter-component calls or reflection, which the flow definition excludes, and their receipts make this visible. With callback holes, the three callback leaks are reported.}
