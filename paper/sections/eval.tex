@@ -57,12 +57,12 @@ Each experiment varies one factor of this configuration.
  & Method & $\alpha=0.05$ & $\alpha=0.10$\\
 \midrule
 Anchors & Sound (every unmodeled flow open) & 0\% (0\%) & 0\% (0\%)\\
- & Models only (clean verdicts trusted) & 100\% (\todo{share}) & 100\% (\todo{share})\\
+ & Models only (clean verdicts trusted) & 100\% (93\%) & 100\% (93\%)\\
 \midrule
 Baselines & Counting assumptions~\cite{bastani-oopsla15} & 0\% (0\%) & 0\% (0\%)\\
  & Jev taken as fact (price $\ge 0.5$) & 96.4\% (57\%) & 96.4\% (57\%)\\
  & GPT labels taken as fact & 99.6\% (3.3\%) & 99.6\% (3.3\%)\\
- & Uncalibrated bound, $\delta=\alpha$ (Jev) & 11.8\% (0\%) & \todo{x}\\
+ & Uncalibrated bound, $\delta=\alpha$ (Jev) & 11.8\% (0\%) & 25.2\% (0\%)\\
  & Conformal selection over verdicts & 74.8\% (17\%) & 79.6\% (37\%)\\
 \midrule
 Receipts & Frequency prior & 19.0\% (0.0\%) & 19.0\% (0.0\%)\\
@@ -82,6 +82,7 @@ Receipts & Frequency prior & 19.0\% (0.0\%) & 19.0\% (0.0\%)\\
 Table~\ref{tab:main} compares all methods under the default configuration, and Figure~\ref{fig:curve} shows the whole trade-off between clearing and wrong clearances.
 With Jev's prices, receipts clear 48.7\% of the hard slice at $\alpha=0.05$ while 0.9\% of held-out apps receive a wrong clearance, and 60.0\% at $\alpha=0.10$; at $\alpha=0.02$ they still clear 37.0\% (0.3\% of apps wrong).
 In every receipt row the observed error stays below $\alpha$, as Proposition~\ref{prop:ltt} predicts.
+Trusting FlowDroid's models alone, the usual practice, clears the whole hard slice but misses a real leak through an unmodeled method in 93\% of the apps.
 
 \emph{What the user sees.}
 At the threshold certified on all apps (0.2), opening unmodeled methods adds 28{,}206 decided alarms, of which 81\% are real leaks; clearing raises this share to 89\% and wrongly clears one real leak, so the analysis reports 22{,}887 of the 22{,}888 real leaks that FlowDroid's models miss (real on our flow graph, which is less precise than FlowDroid's; Section~\ref{sec:discussion}).
@@ -92,7 +93,7 @@ Receipts therefore halve the triage work rather than remove it; checking facts (
 Counting gives every receipt of size one the same bound, so the first threshold already clears every one-fact receipt, which puts a wrong clearance in 87\% of the apps, and the calibration refuses every threshold: prices are what make receipts usable.
 Taking a language model's yes/no answers as library models has one operating point whose error cannot be chosen: on the deletion keys it clears 80 to 90\% of the hard slice, but 3.5\% of the apps receive a wrong clearance on average and up to 7.7\% in some runs, above a 5\% target in 9 of 18 runs.
 On the main key the same baseline is worse with Jev's answers at 0.5: it clears 96.4\% of the hard slice but leaves a wrong clearance in 57\% of the apps, because Jev answers ``no'' to many methods that do propagate. GPT-6.1's rubric labels, read as models (``undecidable'' as no model, as FlowDroid treats a missing model), clear 99.6\% with 3.3\% of the apps wrong; this is flattering, since these labels are half of the main key, and still the error exceeds 5\% in 11 of the 200 held-out halves (95th percentile 5.2\%), with no knob to lower it.
-Using the bound directly as a probability is safe for Jev but clears only 11.8\%, because Jev's prices are conservative.
+Using the bound directly as a probability is safe for Jev but clears only 11.8\% (25.2\% at $\alpha=0.10$), because Jev's prices are conservative.
 Conformal selection clears the most, 74.8\%, but misses its own target, with 6.6\% of the cleared verdicts wrong at a 5\% target (18.0\% at 10\%), because verdicts in one app share facts and the apps are not alike; its wrong verdicts are spread over 53 of the 307 apps, so a user reading one app's report would see a wrong clearance in one app out of six.
 RQ3 returns to the unit of the guarantee.
 
